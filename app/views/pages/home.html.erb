@@ -1,13 +1,13 @@
 <h1>Search an amazing trip</h1>
 
 
-
 <div class="banner col-xs-12">
   <div class="banner-content">
      <div class="container">
        <div class="row">
          <div class="col-sm-12">
           <div class="search-form-box">
+
             <%=form_tag trips_path, :controller => 'trips', method: :get, id: "new_result" do %>
               <%= text_field_tag :city %>
               <div class="box-separator"></div>
@@ -40,25 +40,23 @@
   </div>
 </div>
 
-
-
 <%= content_for :after_js do %>
  <script>
     $(document).ready(function() {
-      $('#date_there').datepicker({
+      $('#starts_on').datepicker({
         todayHighlight: true,
         orientation: "bottom-left",
         autoclose: true,
         format: 'yyyy-mm-dd',
       });
-      $('#date_back').datepicker({
+      $('#returns_on').datepicker({
         todayHighlight: true,
         orientation: "bottom-left",
         autoclose: true,
         format: 'yyyy-mm-dd',
       }).on("show", function(e) {
-          var thereDate = $("#date_there").datepicker("getDate");
-          var backDate = $("#date_back").datepicker("getDate");
+          var thereDate = $("#starts_on").datepicker("getDate");
+          var backDate = $("#returns_on").datepicker("getDate");
 
           if (backDate == null) {
             $('#date_back').datepicker('update', thereDate);
