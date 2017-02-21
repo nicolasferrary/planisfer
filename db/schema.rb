@@ -10,9 +10,68 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20170221141049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "airports", force: :cascade do |t|
+    t.string   "name"
+    t.string   "iata"
+    t.integer  "city_id"
+    t.integer  "region_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_airports_on_city_id", using: :btree
+    t.index ["region_id"], name: "index_airports_on_region_id", using: :btree
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string   "name"
+    t.string   "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string   "name"
+    t.string   "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "round_trip_flights", force: :cascade do |t|
+    t.float    "price"
+    t.string   "flight1_origin_airport_iata"
+    t.string   "flight1_destination_airport_iata"
+    t.string   "flight2_origin_airport_iata"
+    t.string   "flight2_destination_airport_iata"
+    t.datetime "flight1_landing_at"
+    t.datetime "flight1_take_off_at"
+    t.datetime "flight2_take_off_at"
+    t.datetime "flight2_landing_at"
+    t.integer  "trip_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.index ["trip_id"], name: "index_round_trip_flights_on_trip_id", using: :btree
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.float    "price"
+    t.date     "starts_on"
+    t.date     "returns_on"
+    t.integer  "nb_travelers"
+    t.integer  "city_id"
+    t.integer  "region_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["city_id"], name: "index_trips_on_city_id", using: :btree
+    t.index ["region_id"], name: "index_trips_on_region_id", using: :btree
+  end
+
+  add_foreign_key "airports", "cities"
+  add_foreign_key "airports", "regions"
+  add_foreign_key "round_trip_flights", "trips"
+  add_foreign_key "trips", "cities"
+  add_foreign_key "trips", "regions"
 end
