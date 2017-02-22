@@ -7,10 +7,12 @@ module Avion
     # date should be a string in "YYYY-MM-DD" format
     def initialize(args = {})
       @city = args[:city] # airport code
-      @region = args[:region]
+      @region_airport1 = args[:region_airport1]
+      @region_airport2 = args[:region_airport2]
       @starts_on = args[:starts_on]
       @returns_on = args[:returns_on]
-      @trip_options = args[:trip_options]
+      @nb_solutions = args[:nb_solutions]
+      @nb_travelers = args[:nb_travelers]
       #  @nb_travelers = args[:nb_travelers]
       @api_key = args[:api_key]
     end
@@ -33,22 +35,22 @@ module Avion
       request_hash = {
         'request' =>
         { 'slice' => [
-          { 'origin' => @origin,
-            'destination' => @destination,
+          { 'origin' => @city,
+            'destination' => @region_airport1,
             'date' => @starts_on,
             'maxStops' => 0 },
-          { 'origin' => @destination,
-            'destination' => @origin,
+          { 'origin' => @region_airport2,
+            'destination' => @city,
             'date' => @returns_on,
             'maxStops' => 0 }
         ],
           'passengers' =>
-        { 'adultCount' => 1,
+        { 'adultCount' => @nb_travelers,
           'infantInLapCount' => 0,
           'infantInSeatCount' => 0,
           'childCount' => 0,
           'seniorCount' => 0 },
-          'solutions' => @trip_options,
+          'solutions' => @nb_solutions,
           'refundable' => false }
       }
       JSON.generate(request_hash)
