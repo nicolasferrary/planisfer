@@ -10,6 +10,7 @@ module Avion
       @starts_on = args[:starts_on]
       @returns_on = args[:returns_on]
       @nb_travelers = args[:nb_travelers]
+      @trip = args[:trip]
       # @cache_key_name = generate_cache_key_name
       # while in development
       # puts @cache_key_name
@@ -28,8 +29,8 @@ module Avion
       if search_params_make_sense
         json = Avion::QPXRequester.new(
           city: @city,
-          region_airport1: @region_airport1
-          region_airport2: @region_airport2
+          region_airport1: @region_airport1,
+          region_airport2: @region_airport2,
           starts_on: @starts_on,
           returns_on: @returns_on,
           nb_travelers: @nb_travelers,
@@ -50,7 +51,7 @@ module Avion
       # Pusher.trigger('qpx_updates', 'request_made', origin: @city,
       #                                               destination: @region,
       #                                               took_seconds: took_seconds)
-      @data = Json.parse(json)
+      @data = JSON.parse(json)
       trips = create_trips(@data['trips']['tripOption'])
 
       # $redis.set(@cache_key_name, Marshal.dump(output))
@@ -64,9 +65,9 @@ module Avion
 
     private
 
-    def create_trips(trips)
-      trips.map do |trip|
-        RoundTripFlight.new(trip)
+    def create_trips(options)
+      options.map do |option|
+        RoundTripFlight.create_flight(option, @trip)
       end
     end
 

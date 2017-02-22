@@ -21,8 +21,10 @@ class TripsController < ApplicationController
     starts_on = params[:starts_on]
     returns_on = params[:returns_on]
     nb_travelers = params[:nb_travelers]
-    region_iata_codes = ["AGP", "SVQ"]
+    region_iata_codes = ["AGP"]
     city_iata_code = "PAR"
+
+    @trip = Trip.new(starts_on: starts_on, returns_on: returns_on, nb_travelers: nb_travelers, region_id: 1, city_id: 1)
 
     # generate routes
     routes = Avion.generate_routes(city_iata_code, region_iata_codes)
@@ -90,7 +92,8 @@ class TripsController < ApplicationController
         region_airport2: route[2],
         starts_on: starts_on,
         returns_on: returns_on,
-        nb_travelers: nb_travelers
+        nb_travelers: nb_travelers,
+        trip: @trip
       }
       rtf.concat(Avion::SmartQPXAgent.new(options).obtain_offers)
     end
