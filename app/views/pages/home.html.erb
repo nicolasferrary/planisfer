@@ -8,11 +8,10 @@
      <div class="row">
        <div class="col-sm-12">
         <div class="search-form-box">
-
           <%=form_tag trips_path, :controller => 'trips', method: :get, id: "new_result" do %>
-          <%= text_field_tag :city %>
+          <%= select_tag :city, options_for_select(Constants::AIRPORTS.invert.sort), class: "origin-field text-center", prompt: "From", style: "border:none" %>
           <div class="box-separator"></div>
-          <%= text_field_tag  :region  %>
+          <%= select_tag  :region, options_for_select(Constants::REGIONS.invert.sort), class: "origin-field text-center", prompt: "To", style: "border:none" %>
           <div class="box-separator"></div>
           <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'datepicker text-center',style: "border: none" %>
           <div class="box-separator"></div>
@@ -31,47 +30,28 @@
 
 
 <%= content_for :after_js do %>
-  <script>
-    $(document).ready(function() {
-      $('#starts_on').datepicker({
-        todayHighlight: true,
-        orientation: "bottom-left",
-        autoclose: true,
-        format: 'yyyy-mm-dd',
-      });
-      $('#returns_on').datepicker({
-        todayHighlight: true,
-        orientation: "bottom-left",
-        autoclose: true,
-        format: 'yyyy-mm-dd',
-      }).on("show", function(e) {
-        var thereDate = $("#starts_on").datepicker("getDate");
-        var backDate = $("#returns_on").datepicker("getDate");
-
-        if (backDate == null) {
-          $('#date_back').datepicker('update', thereDate);
-        }
-      });
-
-      // initialize the apc library
-      // var apcm = new apc('multi', {key : "<%= ENV['AIRPORT_CODES_KEY'] %>", limit: 7});
-
-      // // handle successful response
-      // apcm.onSuccess = function (data) {
-      //     console.log(data);
-      // };
-
-      // // handle response error
-      // apcm.onError = function (data) {
-      //     console.log(data.message);
-      // };
-
-      // // trigger input from user
-      // // when 3 keyDown
-      // // get user input
-      // // makes the request to get the airport data
-      // apcm.request();
+<script>
+  $(document).ready(function() {
+    $('#starts_on').datepicker({
+      todayHighlight: true,
+      orientation: "bottom-left",
+      autoclose: true,
+      format: 'yyyy-mm-dd',
     });
-  </script>
+    $('#returns_on').datepicker({
+      todayHighlight: true,
+      orientation: "bottom-left",
+      autoclose: true,
+      format: 'yyyy-mm-dd',
+    }).on("show", function(e) {
+      var thereDate = $("#starts_on").datepicker("getDate");
+      var backDate = $("#returns_on").datepicker("getDate");
+
+      if (backDate == null) {
+        $('#date_back').datepicker('update', thereDate);
+      }
+    });
+  });
+</script>
 <% end %>
 
