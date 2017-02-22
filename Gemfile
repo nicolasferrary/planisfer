@@ -16,6 +16,7 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
 #Google Maps Dynamic + Autocomplete
+gem "geocoder"
 gem "coffee-rails"
 gem "gmaps4rails"
 

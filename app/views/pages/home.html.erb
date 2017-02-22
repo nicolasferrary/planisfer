@@ -52,8 +52,26 @@
           $('#date_back').datepicker('update', thereDate);
         }
       });
+
+      // initialize the apc library
+      // var apcm = new apc('multi', {key : "<%= ENV['AIRPORT_CODES_KEY'] %>", limit: 7});
+
+      // // handle successful response
+      // apcm.onSuccess = function (data) {
+      //     console.log(data);
+      // };
+
+      // // handle response error
+      // apcm.onError = function (data) {
+      //     console.log(data.message);
+      // };
+
+      // // trigger input from user
+      // // when 3 keyDown
+      // // get user input
+      // // makes the request to get the airport data
+      // apcm.request();
     });
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyBOY0dI5Vw7kMwcct3SfBKOO2DCB5pfzLM"></script>
 <% end %>
 
