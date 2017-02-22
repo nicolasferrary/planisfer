@@ -28,6 +28,9 @@ class TripsController < ApplicationController
 
     # generate routes
     routes = Avion.generate_routes(city_iata_code, region_iata_codes)
+    #only for debug. To be removed
+    @routes = routes
+
     # # Test all routes against cache
     # uncached_routes = Avion.compare_routes_against_cache(routes, starts_on, returns_on)
 
