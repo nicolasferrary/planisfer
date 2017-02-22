@@ -4,45 +4,34 @@
 
 <div class="banner col-xs-12">
   <div class="banner-content">
-     <div class="container">
-       <div class="row">
-         <div class="col-sm-12">
-          <div class="search-form-box">
+   <div class="container">
+     <div class="row">
+       <div class="col-sm-12">
+        <div class="search-form-box">
 
-            <%=form_tag trips_path, :controller => 'trips', method: :get, id: "new_result" do %>
-              <%= text_field_tag :city %>
-              <div class="box-separator"></div>
-              <%= text_field_tag  :region  %>
-              <div class="box-separator"></div>
-              <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'datepicker text-center',style: "border: none" %>
-              <div class="box-separator"></div>
-              <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => 'datepicker text-center', style: "border: none" %>
-          </div>
-          <div class="submit-button-div">
-            <%= submit_tag "Explore", class: "submit-button" %>
-            <%end%>
-            </div>
+          <%=form_tag trips_path, :controller => 'trips', method: :get, id: "new_result" do %>
+          <%= text_field_tag :city %>
+          <div class="box-separator"></div>
+          <%= text_field_tag  :region  %>
+          <div class="box-separator"></div>
+          <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'datepicker text-center',style: "border: none" %>
+          <div class="box-separator"></div>
+          <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => 'datepicker text-center', style: "border: none" %>
+        </div>
+        <div class="submit-button-div">
+          <%= submit_tag "Explore", class: "submit-button" %>
+          <%end%>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-<div class="footer text-center">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-4 col-xs-offset-4">
-      <div class="text-footer">
-      Made with <i class="fa fa-heart"></i> @LeWagon
-      </div>
-      </div>
-    </div>
-  </div>
 </div>
 
+
+
 <%= content_for :after_js do %>
- <script>
+  <script>
     $(document).ready(function() {
       $('#starts_on').datepicker({
         todayHighlight: true,
@@ -56,14 +45,15 @@
         autoclose: true,
         format: 'yyyy-mm-dd',
       }).on("show", function(e) {
-          var thereDate = $("#starts_on").datepicker("getDate");
-          var backDate = $("#returns_on").datepicker("getDate");
+        var thereDate = $("#starts_on").datepicker("getDate");
+        var backDate = $("#returns_on").datepicker("getDate");
 
-          if (backDate == null) {
-            $('#date_back').datepicker('update', thereDate);
-          }
+        if (backDate == null) {
+          $('#date_back').datepicker('update', thereDate);
+        }
       });
     });
   </script>
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyBOY0dI5Vw7kMwcct3SfBKOO2DCB5pfzLM"></script>
 <% end %>
 

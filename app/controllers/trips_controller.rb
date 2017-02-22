@@ -13,6 +13,18 @@ class TripsController < ApplicationController
   end
 
   def index
+    # Display a map
+
+    # @trips = Trip.where.not(latitude: nil, longitude: nil)
+
+    # @hash = Gmaps4rails.build_markers(@flats) do |trip, marker|
+    #   marker.lat trip.latitude
+    #   marker.lng trip.longitude
+    # end
+
+
+
+
     airports = Constants::AIRPORTS.keys
     starts_on = params[:starts_on]
     returns_on = params[:returns_on]

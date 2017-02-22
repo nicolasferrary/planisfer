@@ -15,6 +15,13 @@ gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
+#Google Maps Dynamic + Autocomplete
+gem "coffee-rails"
+gem "gmaps4rails"
+
+source 'https://rails-assets.org' do
+  gem "rails-assets-underscore"
+end
 
 source "https://rails-assets.org" do
   gem 'rails-assets-bootstrap-datepicker'
