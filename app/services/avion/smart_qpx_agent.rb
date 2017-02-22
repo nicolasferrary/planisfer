@@ -53,33 +53,13 @@ module Avion
       @data = Json.parse(json)
       trips = create_trips(@data['trips']['tripOption'])
 
-
-
-      # @rtf = JSON.parse(json)
-      rtf=[]
-      @rtf.each do {
-        # créer une instance de round_trip_flight
-        # mettre cette instance dans l'array rtf dans le controller
-      }
-      rtf
-
-      # comp_info = {
-      #   starts_on: @starts_on,
-      #   returns_on: @returns_on,
-      #   origin_a: @origin_a,
-      #   destination_city: @destination_city
-      # }
-
-      # comparator = Avion::QPXComparatorGranular.new(json_a, json_b, comp_info)
-      # output = comparator.compare
       # $redis.set(@cache_key_name, Marshal.dump(output))
 
       # # Notify we are ready to return request data
       # Pusher.trigger('qpx_updates', 'requests_completed', increment: 1,
       #                                                     roundtrips_analyzed: output.length)
 
-      # return an array of matched offers
-      output
+
     end
 
     private

@@ -1,4 +1,7 @@
-<%= @trip.price %>
-<%= @trip.starts_on %>
-<%= @trip.returns_on %>
-<%= @trip.city %>
+<%  @round_trip_flights_selection.each do |rtf| %>
+
+  <%= @rtf.price %>
+  <%= @rtf.starts_on %>
+  <%= @rtf.returns_on %>
+
+<% end %>
