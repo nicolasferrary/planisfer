@@ -1,46 +1,59 @@
 class TripsController < ApplicationController
 
-  def show
-    options = extract_options_from_stamp(params[:stamp])
+  # before_action :disable_browser_cache, only: :show
+  # before_action :assert_show_params, only: :show
+  # before_action :assert_index_params, only: :index
 
-    # All offers for one route sorted by price
-    @trips = Avion::SmartQPXAgent.new(options).obtain_offers.sort_by { |offer| offer.total }
-    @trip = @trips[params[:start].to_i]
 
-    # extract two arrays of roundtrips, one from each city to destination
-    # @trips_a = @trips.reduce([]) {|a, e| a << e.roundtrips.first }.uniq { |t| t.trip_id }
-    # @trip_a = @trips_a[params[:left].to_i] # set the first roundtrip from city A
-  end
+  # def show
+  #   options = extract_options_from_stamp(params[:stamp])
+
+  #   # All offers for one route sorted by price
+  #   @trips = Avion::SmartQPXAgent.new(options).obtain_offers.sort_by { |offer| offer.total }
+  #   @trip = @trips[params[:start].to_i]
+
+  #   # extract two arrays of roundtrips, one from each city to destination
+  #   # @trips_a = @trips.reduce([]) {|a, e| a << e.roundtrips.first }.uniq { |t| t.trip_id }
+  #   # @trip_a = @trips_a[params[:left].to_i] # set the first roundtrip from city A
+  # end
 
   def index
-    airports = Constants::AIRPORTS.keys
     starts_on = params[:starts_on]
     returns_on = params[:returns_on]
+    nb_travelers = params[:nb_travelers]
+    region_iata_codes = generate_iata_codes(params[:region])
+    city_iata_code = generate_iata_codes(params[:city])
 
     # generate routes
-    routes = Avion.generate_triple_routes(airports, params[:city])
-    # Test all routes against cache
-    uncached_routes = Avion.compare_routes_against_cache(routes, starts_on, returns_on)
+    routes = Avion.generate_routes(city_iata_code, region_iata_codes)
+    # # Test all routes against cache
+    # uncached_routes = Avion.compare_routes_against_cache(routes, starts_on, returns_on)
+
+    #For each route, send a request with 2 slices
+    @round_trip_flights = get_rtf_for_routes(routes, starts_on, returns_on, nb_travelers)
+    @round_trip_fight_selection = @round_trip_flights.first(4)
+
+
 
     # Do we have something that is not cached?
     if uncached_routes.empty?
       # This won't do any requests as we work with cache
-      @offers = get_offers_for_routes(routes, starts_on, returns_on)
-      # clone unfiltered results to check against later
-      @unfiltered_offers = @offers.clone
+      # @offers = get_offers_for_routes(routes, starts_on, returns_on)
+      # # clone unfiltered results to check against later
+      # @unfiltered_offers = @offers.clone
       # do filtering
-      apply_index_filters
+      # apply_index_filters
       # remove duplicate cities
-      @offers = @offers.uniq { |offer| offer.destination_city }
-      # and sort by total price
-      @offers = @offers.sort_by { |offer| offer.total }
+      # @offers = @offers.uniq { |offer| offer.destination_city }
+      # # and sort by total price
+      # @offers = @offers.sort_by { |offer| offer.total }
     else # we have to build a new cache
       # save url to redirect back from wait.html.erb via JS
       session[:url_for_wait] = request.original_url
       # render wait view without any routing
       render :wait
       # Send requests and build the cache in the background
-      QueryRoutesJob.perform_later(uncached_routes, starts_on, returns_on)
+      QueryRoutesJob.perform_later(uncached_routes, starts_on, returns_on, nb_travelers)
     end
     session[:search_url] = request.original_url
   end
@@ -58,6 +71,11 @@ class TripsController < ApplicationController
   private
 
 
+  def generate_iata_codes(geo)
+    iata_codes = []
+    #récupérer le code de Marion et Ludo
+  end
+
   def extract_options_from_stamp(stamp)
     from_stamp = params[:stamp].split('_')
     {
@@ -68,20 +86,20 @@ class TripsController < ApplicationController
     }
   end
 
-  def get_offers_for_routes(routes, starts_on, returns_on)
-    offers = []
-    # This won't do any API requests at all as we work only with cache
+  def get_rtf_for_routes(routes, starts_on, returns_on, nb_travelers)
+    rtf = []
     routes.each do |route|
       options = {
         city: route.first,
-        origin_b: route[1],
-        destination_city: route.last,
+        region_airport1: route[1],
+        region_airport2: route[2],
         starts_on: starts_on,
-        returns_on: returns_on
+        returns_on: returns_on,
+        nb_travelers: nb_travelers
       }
-      offers.concat(Avion::SmartQPXAgent.new(options).obtain_offers)
+      rtf.concat(Avion::SmartQPXAgent.new(options).obtain_offers)
     end
-    return offers
+    return rtf
   end
 
   def apply_index_filters

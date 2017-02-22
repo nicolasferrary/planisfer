@@ -5,9 +5,11 @@ module Avion
   class SmartQPXAgent
     def initialize(args = {})
       @city = args[:city]
-      @region = args[:region]
+      @region_airport1 = args[:region_airport1]
+      @region_airport2 = args[:region_airport2]
       @starts_on = args[:starts_on]
       @returns_on = args[:returns_on]
+      @nb_travelers = args[:nb_travelers]
       # @cache_key_name = generate_cache_key_name
       # while in development
       # puts @cache_key_name
@@ -23,58 +25,50 @@ module Avion
 
       # If not – run two requests one after another and try to combine them
       start = Time.now # debugging
-      # if search_params_make_sense(Constants::AIRPORTS)
-        json_a = Avion::QPXRequester.new(
-          origin: @city,
-          destination: @region,
+      if search_params_make_sense
+        json = Avion::QPXRequester.new(
+          city: @city,
+          region_airport1: @region_airport1
+          region_airport2: @region_airport2
           starts_on: @starts_on,
           returns_on: @returns_on,
-          trip_options: 5,
+          nb_travelers: @nb_travelers,
+          nb_solutions: 3,
           api_key: ENV['GOOGLE_QPX_API_KEY']
         ).make_request
         # DEBUG ONLY
         puts "#{@city} - #{@region} request made to QPX"
-      # else
-      #   raise 'Search params did not make sense'
-      # end
+      else
+        raise 'Search params did not make sense'
+      end
 
       finish = Time.now # debugging
       took_seconds = (finish - start).round(2)
 
       # Pub-sub part
       # Notify first request is made
-      Pusher.trigger('qpx_updates', 'request_made', origin: @city,
-                                                    destination: @region,
-                                                    took_seconds: took_seconds)
-
-      # start = Time.now # debugging
-      # if search_params_make_sense(Constants::AIRPORTS)
-      #   json_b = Avion::QPXRequester.new(
-      #     origin: @origin_b,
-      #     destination: @destination_city,
-      #     date_there: @date_there, date_back: @date_back,
-      #     trip_options: 5,
-      #     api_key: ENV['QPX_KEY']
-      #   ).make_request
-      #   # DEBUG ONLY
-      #   puts "#{@origin_b} - #{@destination_city} request made to QPX"
-      # else
-      #   raise 'Search params did not make sense'
-      # end
-      # finish = Time.now # debugging
-      # took_seconds = (finish - start).round(2)
-
-      # # Notify second request is made
-      # Pusher.trigger('qpx_updates', 'request_made', origin: @origin_b,
-      #                                               destination: @destination_city,
+      # Pusher.trigger('qpx_updates', 'request_made', origin: @city,
+      #                                               destination: @region,
       #                                               took_seconds: took_seconds)
+      @data = Json.parse(json)
+      trips = create_trips(@data['trips']['tripOption'])
 
-      comp_info = {
-        starts_on: @starts_on,
-        returns_on: @returns_on,
-        origin_a: @origin_a,
-        destination_city: @destination_city
+
+
+      # @rtf = JSON.parse(json)
+      rtf=[]
+      @rtf.each do {
+        # créer une instance de round_trip_flight
+        # mettre cette instance dans l'array rtf dans le controller
       }
+      rtf
+
+      # comp_info = {
+      #   starts_on: @starts_on,
+      #   returns_on: @returns_on,
+      #   origin_a: @origin_a,
+      #   destination_city: @destination_city
+      # }
 
       # comparator = Avion::QPXComparatorGranular.new(json_a, json_b, comp_info)
       # output = comparator.compare
@@ -88,12 +82,17 @@ module Avion
       output
     end
 
-    # private
+    private
 
-    # def search_params_make_sense(constants)
-    #   constants.keys.include?(@origin_a) && constants.keys.include?(@origin_b) &&
-    #     (Date.parse(@date_there) < Date.parse(@date_back))
-    # end
+    def create_trips(trips)
+      trips.map do |trip|
+        RoundTripFlight.new(trip)
+      end
+    end
+
+    def search_params_make_sense
+      (Date.parse(@starts_on) < Date.parse(@returns_on))
+    end
 
     # TODO: DRY with offers controller and check_against_cache
     # def generate_cache_key_name
