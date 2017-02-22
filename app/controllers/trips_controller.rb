@@ -1,16 +1,48 @@
 class TripsController < ApplicationController
-  def index
-  end
 
   def show
     options = extract_options_from_stamp(params[:stamp])
+
     # All offers for one route sorted by price
     @trips = Avion::SmartQPXAgent.new(options).obtain_offers.sort_by { |offer| offer.total }
     @trip = @trips[params[:start].to_i]
+
     # extract two arrays of roundtrips, one from each city to destination
     # @trips_a = @trips.reduce([]) {|a, e| a << e.roundtrips.first }.uniq { |t| t.trip_id }
     # @trip_a = @trips_a[params[:left].to_i] # set the first roundtrip from city A
+  end
 
+  def index
+    airports = Constants::AIRPORTS.keys
+    starts_on = params[:starts_on]
+    returns_on = params[:returns_on]
+
+    # generate routes
+    routes = Avion.generate_triple_routes(airports, params[:city])
+    # Test all routes against cache
+    uncached_routes = Avion.compare_routes_against_cache(routes, starts_on, returns_on)
+
+    # Do we have something that is not cached?
+    if uncached_routes.empty?
+      # This won't do any requests as we work with cache
+      @offers = get_offers_for_routes(routes, starts_on, returns_on)
+      # clone unfiltered results to check against later
+      @unfiltered_offers = @offers.clone
+      # do filtering
+      apply_index_filters
+      # remove duplicate cities
+      @offers = @offers.uniq { |offer| offer.destination_city }
+      # and sort by total price
+      @offers = @offers.sort_by { |offer| offer.total }
+    else # we have to build a new cache
+      # save url to redirect back from wait.html.erb via JS
+      session[:url_for_wait] = request.original_url
+      # render wait view without any routing
+      render :wait
+      # Send requests and build the cache in the background
+      QueryRoutesJob.perform_later(uncached_routes, starts_on, returns_on)
+    end
+    session[:search_url] = request.original_url
   end
 
   def update
@@ -35,70 +67,17 @@ class TripsController < ApplicationController
       returns_on: from_stamp.last
     }
   end
-end
 
-
-
-
-
-
-
-# Airport list: %w(PAR LON ROM MAD BER BRU VCE AMS LIS BCN MIL VIE)
-
-class OffersController < ApplicationController
-  skip_before_action :authenticate_user!
-  before_action :disable_browser_cache, only: :show
-  before_action :assert_show_params, only: :show
-  before_action :assert_index_params, only: :index
-
-
-
-
-  def index
-    airports = Constants::AIRPORTS.keys
-    date_there = params[:date_there]
-    date_back = params[:date_back]
-
-    # generate routes
-    routes = Avion.generate_triple_routes(airports, params[:origin_a], params[:origin_b])
-    # Test all routes against cache
-    uncached_routes = Avion.compare_routes_against_cache(routes, date_there, date_back)
-
-    # Do we have something that is not cached?
-    if uncached_routes.empty?
-      # This won't do any requests as we work with cache
-      @offers = get_offers_for_routes(routes, date_there, date_back)
-      # clone unfiltered results to check against later
-      @unfiltered_offers = @offers.clone
-      # do filtering
-      apply_index_filters
-      # remove duplicate cities
-      @offers = @offers.uniq { |offer| offer.destination_city }
-      # and sort by total price
-      @offers = @offers.sort_by { |offer| offer.total }
-    else # we have to build a new cache
-      # save url to redirect back from wait.html.erb via JS
-      session[:url_for_wait] = request.original_url
-      # render wait view without any routing
-      render :wait
-      # Send requests and build the cache in the background
-      QueryRoutesJob.perform_later(uncached_routes, date_there, date_back)
-    end
-    session[:search_url] = request.original_url
-  end
-
-  private
-
-  def get_offers_for_routes(routes, date_there, date_back)
+  def get_offers_for_routes(routes, starts_on, returns_on)
     offers = []
     # This won't do any API requests at all as we work only with cache
     routes.each do |route|
       options = {
-        origin_a: route.first,
+        city: route.first,
         origin_b: route[1],
         destination_city: route.last,
-        date_there: date_there,
-        date_back: date_back
+        starts_on: starts_on,
+        returns_on: returns_on
       }
       offers.concat(Avion::SmartQPXAgent.new(options).obtain_offers)
     end
@@ -107,7 +86,7 @@ class OffersController < ApplicationController
 
   def apply_index_filters
     # set filters
-    @filters = params.to_hash.slice("origin_a", "date_there", "date_back", "origin_b")
+    @filters = params.to_hash.slice("city", "starts_on", "returns_on", "origin_b")
 
     # filter by departure time if asked
     if params["departure_time_there"].present? && params["departure_time_there"] != ""
@@ -148,44 +127,18 @@ class OffersController < ApplicationController
     response.headers['Cache-Control'] = "no-cache, max-age=0, must-revalidate, no-store"
   end
 
-
-
-  # TODO: verify if date_there is not later than date_back
+  # TODO: verify if starts_on is not later than returns_on
   def params_fail?
-    params[:origin_a].blank? || params[:origin_b].blank? || params[:date_there].blank? || params[:date_back].blank?
-  end
-
-  def departure_time_choice
-    if params[:departure_time_there] == "earlybird"
-      return [5,8]
-    elsif params[:departure_time_there] == "morning"
-      return [8,12]
-    elsif params[:departure_time_there] == "afternoon"
-      return [12,18]
-    elsif params[:departure_time_there] == "afterwork"
-      return [18,24]
-    end
-  end
-
-  def arrival_time_choice
-    if params[:arrival_time_back] == "earlybird"
-      return [5,8]
-    elsif params[:arrival_time_back] == "morning"
-      return [8,12]
-    elsif params[:arrival_time_back] == "afternoon"
-      return [12,18]
-    elsif params[:arrival_time_back] == "evening"
-      return [18,24]
-    end
+    params[:city].blank? || params[:origin_b].blank? || params[:starts_on].blank? || params[:returns_on].blank?
   end
 
   def departure_range
-    departure_as_date = Time.new(Time.parse(params[:date_there]).to_a[5],Time.parse(params[:date_there]).to_a[4],Time.parse(params[:date_there]).to_a[3])
+    departure_as_date = Time.new(Time.parse(params[:starts_on]).to_a[5],Time.parse(params[:starts_on]).to_a[4],Time.parse(params[:starts_on]).to_a[3])
     (departure_as_date + departure_time_choice.first.hours .. departure_as_date + departure_time_choice.last.hours)
   end
 
   def arrival_range
-    arrival_as_date = Time.new(Time.parse(params[:date_back]).to_a[5],Time.parse(params[:date_back]).to_a[4],Time.parse(params[:date_back]).to_a[3])
+    arrival_as_date = Time.new(Time.parse(params[:returns_on]).to_a[5],Time.parse(params[:returns_on]).to_a[4],Time.parse(params[:returns_on]).to_a[3])
     (arrival_as_date + arrival_time_choice.first.hours .. arrival_as_date + arrival_time_choice.last.hours)
   end
 

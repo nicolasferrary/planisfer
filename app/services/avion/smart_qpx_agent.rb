@@ -4,8 +4,8 @@ module Avion
   # TODO: remove debugging puts
   class SmartQPXAgent
     def initialize(args = {})
-      @origin_a = args[:origin_a]
-      @destination_city = args[:destination_city]
+      @city = args[:city]
+      @region = args[:region]
       @starts_on = args[:starts_on]
       @returns_on = args[:returns_on]
       # @cache_key_name = generate_cache_key_name
@@ -25,15 +25,15 @@ module Avion
       start = Time.now # debugging
       # if search_params_make_sense(Constants::AIRPORTS)
         json_a = Avion::QPXRequester.new(
-          origin: @origin_a,
-          destination: @destination_city,
+          origin: @city,
+          destination: @region,
           starts_on: @starts_on,
           returns_on: @returns_on,
           trip_options: 5,
           api_key: ENV['GOOGLE_QPX_API_KEY']
         ).make_request
         # DEBUG ONLY
-        puts "#{@origin_a} - #{@destination_city} request made to QPX"
+        puts "#{@city} - #{@region} request made to QPX"
       # else
       #   raise 'Search params did not make sense'
       # end
@@ -43,8 +43,8 @@ module Avion
 
       # Pub-sub part
       # Notify first request is made
-      Pusher.trigger('qpx_updates', 'request_made', origin: @origin_a,
-                                                    destination: @destination_city,
+      Pusher.trigger('qpx_updates', 'request_made', origin: @city,
+                                                    destination: @region,
                                                     took_seconds: took_seconds)
 
       # start = Time.now # debugging

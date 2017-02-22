@@ -6,8 +6,8 @@ module Avion
   class QPXRequester
     # date should be a string in "YYYY-MM-DD" format
     def initialize(args = {})
-      @origin = args[:origin] # airport code
-      @destination = args[:destination]
+      @city = args[:city] # airport code
+      @region = args[:region]
       @starts_on = args[:starts_on]
       @returns_on = args[:returns_on]
       @trip_options = args[:trip_options]
