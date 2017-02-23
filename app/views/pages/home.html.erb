@@ -16,6 +16,9 @@
           <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'datepicker text-center',style: "border: none" %>
           <div class="box-separator"></div>
           <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => 'datepicker text-center', style: "border: none" %>
+          <div class="box-separator"></div>
+          <%= text_field_tag :nb_travelers, nil, placeholder: "Travelers", "class" => 'text-center', style: "border: none" %>
+       </div>
         </div>
         <div class="submit-button-div">
           <%= submit_tag "Explore", class: "submit-button" %>
