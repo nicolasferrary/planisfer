@@ -1,12 +1,13 @@
 <div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.3) 0%, rgba(0,36,61,0.4) 50%), url('');">
   <div class="banner-content">
+
    <h1>World is in your hands, now use it !</h1>
    <p>The new way to plan your next roadtrip</p>
 
 <div class="form-inline text-center">
   <%=form_tag trips_path, :controller => 'trips', method: :get, id: "new_result" do %>
   <%= select_tag :city, options_for_select(Constants::AIRPORTS.invert.sort), class: "form-control input-lg", prompt: "From", style: "border:none" %>
-  <%= select_tag  :region, options_for_select(Constants::REGIONS.invert.sort), class: "form-control input-lg", prompt: "To", style: "border:none" %>
+  <%= select_tag  :region, options_for_select(Constants::REGIONS.sort), class: "form-control input-lg", prompt: "To", style: "border:none" %>
   <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'datepicker text-center',style: "border: none" %>
   <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => 'datepicker text-center', style: "border: none" %>
   <%= select_tag :nb_travelers, options_for_select(Constants::TRAVELERS.invert.sort), class: "form-control input-lg", prompt: "Travelers", style: "border:none" %>

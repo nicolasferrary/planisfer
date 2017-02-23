@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170222224919) do
+ActiveRecord::Schema.define(version: 20170223140138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,10 @@ ActiveRecord::Schema.define(version: 20170222224919) do
     t.string   "currency"
     t.string   "carrier1"
     t.string   "carrier2"
+    t.float    "latitude_arrive"
+    t.float    "longitude_arrive"
+    t.float    "latitude_back"
+    t.float    "longitude_back"
   end
 
   create_table "trips", force: :cascade do |t|
@@ -67,6 +71,8 @@ ActiveRecord::Schema.define(version: 20170222224919) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "round_trip_flight_id"
+    t.float    "latitude"
+    t.float    "longitude"
     t.index ["city_id"], name: "index_trips_on_city_id", using: :btree
     t.index ["region_id"], name: "index_trips_on_region_id", using: :btree
     t.index ["round_trip_flight_id"], name: "index_trips_on_round_trip_flight_id", using: :btree
