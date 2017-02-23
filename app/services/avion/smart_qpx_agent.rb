@@ -5,6 +5,7 @@ module Avion
   class SmartQPXAgent
     def initialize(args = {})
       @city = args[:city]
+      @region = args[:region]
       @region_airport1 = args[:region_airport1]
       @region_airport2 = args[:region_airport2]
       @starts_on = args[:starts_on]
@@ -67,9 +68,9 @@ module Avion
     def create_rtf(options)
       rtfs = []
       options.each do |option|
-        rtf = RoundTripFlight.create_flight(option)
+        rtf = RoundTripFlight.create_flight(option, @region)
+        # coordinates = Geocoder.coordinates("IATA, REgion ou ville")
         rtfs << rtf
-        #ca renvoie True au lieu de renvoyer une instance de RoundTripFlight
       end
       rtfs
     end

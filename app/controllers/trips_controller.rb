@@ -37,9 +37,11 @@ class TripsController < ApplicationController
 
     #For each route, send a request with 2 slices
     @trips = get_trips_for_routes(routes, starts_on, returns_on, nb_travelers, city, region)
+            binding.pry
+    #@trips = Trip.all
     @trips_selection = @trips.first(4)
 
-
+    # On itère sur les trips
 
     # Do we have something that is not cached?
     # if uncached_routes.empty?
@@ -64,6 +66,7 @@ class TripsController < ApplicationController
     # session[:search_url] = request.original_url
 
     @trips = Trip.where.not(latitude: nil, longitude: nil)
+
 
     @hash = Gmaps4rails.build_markers(@trips) do |trip, marker|
       marker.lat trip.latitude
@@ -107,7 +110,8 @@ class TripsController < ApplicationController
         region_airport2: route[2],
         starts_on: starts_on,
         returns_on: returns_on,
-        nb_travelers: nb_travelers
+        nb_travelers: nb_travelers,
+        region: region
       }
       rtf = (Avion::SmartQPXAgent.new(options).obtain_offers)
       rtf.each do |rtf|
