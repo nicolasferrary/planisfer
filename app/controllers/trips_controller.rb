@@ -38,8 +38,10 @@ class TripsController < ApplicationController
     #For each route, send a request with 2 slices
     @trips = get_trips_for_routes(routes, starts_on, returns_on, nb_travelers, city, region)
     @trips_selection = @trips.first(4)
-
-
+    @trips_city = city
+    @trips_region = region
+    @starts_on = starts_on
+    @returns_on = returns_on
 
     # Do we have something that is not cached?
     # if uncached_routes.empty?

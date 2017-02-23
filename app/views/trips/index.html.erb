@@ -1,9 +1,39 @@
 
+<div class="recap-of search">
+<p>City you want to escape: <%= @trips_city %> Region you want to visit: <%= @trips_region%></p>
+<p>Departure on: <%=  @starts_on = starts_on%> Return on:<%= @returns_on = returns_on%></p>
+</div>
 
-<%  @trips_selection.each do |trip| %>
+<div class="container-fluid">
 
-  <%= trip.price %>
-  <%= trip.starts_on %>
-  <%= trip.returns_on %>
+  <div class="col-xs-12 col-sm-6">
+    <div class="row">
+      <% @trips_selection.each do |trip| %>
+        <div class="col-xs-12 col-sm-12">
+          <%= link_to trips_path(trip) do %>
+            <div class="cardContainer">
+              <div class="card">
+                <div class="card-description">
+                  <p><%= trip.price %></p>
+                  <p><%= trip.starts_on %></p>
+                  <p><%= trip.returns_on %></p>
+                </div>
+                <div class="card-price">
+                  <p><%= trip.price %></p>
+                </div> <!-- fin card-price -->
+              </div> <!-- fin card -->
+            </div> <!-- fin cardContainer -->
+          <% end %>
+        </div> <!-- fin de col -->
+      <% end %>
+    </div>  <!-- fin du row -->
+  </div> <!-- fin du col-sm-8 -->
 
-<% end %>
+  <div class="col-sm-5">
+    <div class="trips-map-wrapper">
+      <div id="trips-map" style="width: 100%; height: 400px;"></div>
+    </div>
+  </div>
+</div>
+
+
