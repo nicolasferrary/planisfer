@@ -24,14 +24,14 @@ class TripsController < ApplicationController
     @city = params[:city]
     @region = params[:region]
     #for test only. To be changed with constants
-    region_iata_codes = ["AGP", "SVQ"]
-    city_iata_code = "PAR"
+    @region_airports = Constants::REGIONS_AIRPORTS[@region]
+
 
     # generate routes
-    routes = Avion.generate_routes(city_iata_code, region_iata_codes)
+    routes = Avion.generate_routes(@city, @region_airports)
     #only for debug. To be removed
     @routes = routes
-    @regions_airports = Constants::REGIONS_AIRPORTS[@region]
+
 
     # # Test all routes against cache
     # uncached_routes = Avion.compare_routes_against_cache(routes, starts_on, returns_on)
@@ -234,7 +234,7 @@ class TripsController < ApplicationController
   def select_trips_with_airports(a,b)
    trips =[]
    @trips.each do |trip|
-     if trip.round_trip_flight.flight1_destination_airport_iata == @regions_airports[a] && trip.round_trip_flight.flight2_origin_airport_iata == @regions_airports[b]
+     if trip.round_trip_flight.flight1_destination_airport_iata == @region_airports[a] && trip.round_trip_flight.flight2_origin_airport_iata == @region_airports[b]
         trips << trip
      end
    end
