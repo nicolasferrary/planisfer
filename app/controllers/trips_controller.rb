@@ -62,6 +62,17 @@ class TripsController < ApplicationController
     #   QueryRoutesJob.perform_later(uncached_routes, starts_on, returns_on, nb_travelers)
     # # end
     # session[:search_url] = request.original_url
+
+    @trips = Trip.where.not(latitude: nil, longitude: nil)
+
+    @hash = Gmaps4rails.build_markers(@trips) do |trip, marker|
+      marker.lat trip.latitude
+      marker.lng trip.longitude
+      # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
+    end
+
+
+
   end
 
   def update

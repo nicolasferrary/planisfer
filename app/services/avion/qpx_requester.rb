@@ -22,7 +22,7 @@ module Avion
     def make_request
       url = 'https://www.googleapis.com/qpxExpress/v1/trips/search?key=' + @api_key
       request = compose_request
-      response = RestClient.post url, request, content_type: :json, accept: :json
+      response = RestClient.post(url, request, { content_type: :json, accept: :json })
       response.body
     end
 
