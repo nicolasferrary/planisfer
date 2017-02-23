@@ -37,6 +37,7 @@ module Avion
           nb_solutions: 3,
           api_key: ENV['GOOGLE_QPX_API_KEY']
         ).make_request
+
         # DEBUG ONLY
         puts "#{@city} - #{@region} request made to QPX"
       else
@@ -52,7 +53,14 @@ module Avion
       #                                               destination: @region,
       #                                               took_seconds: took_seconds)
       @data = JSON.parse(json)
-      @rtf = create_rtf(@data['trips']['tripOption'])
+
+      if !@data['trips']['tripOption'].nil?
+        rtf = create_rtf(@data['trips']['tripOption'])
+      else
+        rtf = []
+      end
+      @rtf = rtf
+
       # $redis.set(@cache_key_name, Marshal.dump(output))
 
       # # Notify we are ready to return request data

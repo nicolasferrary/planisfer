@@ -11,7 +11,7 @@
           <%=form_tag trips_path, :controller => 'trips', method: :get, id: "new_result" do %>
           <%= select_tag :city, options_for_select(Constants::AIRPORTS.invert.sort), class: "origin-field text-center", prompt: "From", style: "border:none" %>
           <div class="box-separator"></div>
-          <%= select_tag  :region, options_for_select(Constants::REGIONS.invert.sort), class: "origin-field text-center", prompt: "To", style: "border:none" %>
+          <%= select_tag  :region, options_for_select(Constants::REGIONS.sort), class: "origin-field text-center", prompt: "To", style: "border:none" %>
           <div class="box-separator"></div>
           <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'datepicker text-center',style: "border: none" %>
           <div class="box-separator"></div>
