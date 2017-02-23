@@ -26,6 +26,7 @@ class RoundTripFlight < ApplicationRecord
       round_trip_flight.carrier1 = extract_carrier(option, 0)
       round_trip_flight.carrier2 = extract_carrier(option, 1)
       round_trip_flight.save
+      round_trip_flight
     end
 
     def extract_currency(item)

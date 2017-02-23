@@ -1,0 +1,133 @@
+.search-form-box {
+  width: 90%;
+  background-color: white;
+  border-radius: 4px;
+  height: 60px;
+  margin-left: 52px;
+  margin-right: 22px;
+  color: rgb(201, 201, 201);
+  background-color: #FFFFFF;
+  font-family: "MuseoSansRounded";
+  box-shadow: 7px 9px 31px -13px rgba(0,0,0,0.75);
+}
+
+.box-separator {
+  width: 1.2px;
+  height: 30px;
+  background-color: #fc647a;
+  margin-top: 15px;
+}
+
+#city{
+  width: 33%;
+  height: 100%;
+  color: #484848;
+  font-family: "MuseoSansRounded";
+  border-radius: 10px;
+  background-color: white;
+
+}
+
+#region {
+  width: 33%;
+  border-radius: 10px;
+  color: #484848;
+  font-family: "MuseoSansRounded";
+  background-color: white;
+}
+
+.origin-field {
+   border-style: solid;
+  border-right-color: #ff0000;
+  &:focus {
+    outline: none;
+  }
+}
+
+#new_result {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  border-radius: 10px;
+}
+
+.datepicker{
+  flex-grow: 1;
+  display: flex;
+  color: #484848;
+  font-family: "MuseoSansRounded";
+    &:focus {
+    outline: none;
+  }
+}
+::-webkit-input-placeholder {
+  color: #484848;
+}
+
+
+.datepicker table tr td.today, .datepicker table tr td.active {
+  color: #FF2B67;
+}
+
+.datepicker table tr td.today:hover {
+  background-color: #ea2752;
+  color: white;
+}
+
+.datepicker table tr td.active:active,
+.datepicker table tr td.active.highlighted:active,
+.datepicker table tr td.active.active,
+.datepicker table tr td.active.highlighted.active {
+  background-color: #FF2B67;
+  color: white;
+}
+
+// .datepicker table tr td.active:hover, .datepicker table tr td.active.highlighted:hover, .datepicker table tr td.active.active, .datepicker table tr td.active.highlighted.active:hover {
+//   background-color: #ea2752;
+//   color: white;
+// }
+
+.datepicker table tr td.active:active:hover,
+.datepicker table tr td.active.highlighted:active:hover,
+.datepicker table tr td.active.active:hover,
+.datepicker table tr td.active.highlighted.active:hover,
+ {
+  background-color: #ea2752;
+  color: white;
+}
+
+.submit-button_div {
+  text-align: center;
+}
+
+.submit-button {
+width: 150px;
+border: none;
+padding: 0 20 10px;
+border-radius: 4px;
+line-height: 40px;
+color: white;
+font-size: 14px;
+border: 1.3px solid white;
+margin-top: 50px;
+background-color: #FD4251;
+margin-right: 10px;
+-webkit-transition: all 0.5s ease;
+transition: all 0.5s ease;
+font-family: "MuseoSansRounded";
+}
+
+.submit-button:hover {
+background-color: #ff3845;
+border-color: white;
+-webkit-transform:scale(1.1);
+transform:scale(1.1);
+}
+
+
+
+.datepicker table tr td.active:active:hover, .datepicker table tr td.active.highlighted:active:hover, .datepicker table tr td.active.active:hover, .datepicker table tr td.active.highlighted.active:hover, .datepicker table tr td.active:active:focus, .datepicker table tr td.active.highlighted:active:focus, .datepicker table tr td.active.active:focus, .datepicker table tr td.active.highlighted.active:focus, .datepicker table tr td.active:active.focus, .datepicker table tr td.active.highlighted:active.focus, .datepicker table tr td.active.active.focus, .datepicker table tr td.active.highlighted.active.focus {
+  background-color: #FF2B67;
+}

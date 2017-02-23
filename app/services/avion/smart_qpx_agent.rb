@@ -69,7 +69,6 @@ module Avion
       options.each do |option|
         rtf = RoundTripFlight.create_flight(option)
         rtfs << rtf
-        raise
         #ca renvoie True au lieu de renvoyer une instance de RoundTripFlight
       end
       rtfs
