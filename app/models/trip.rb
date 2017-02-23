@@ -12,7 +12,9 @@ class Trip < ApplicationRecord
   class << self
     def create(starts_on, returns_on, nb_travelers, city_id, region_id, round_trip_flight)
       trip = Trip.new(starts_on: starts_on, returns_on: returns_on, nb_travelers: nb_travelers, city_id: city_id, region_id: region_id, round_trip_flight: round_trip_flight)
+      trip.price = round_trip_flight.price
       trip.save
+      trip
     end
   end
 
