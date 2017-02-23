@@ -1,6 +1,9 @@
 <%  @trips_selection.each do |trip| %>
-  <%= trip.price %>
-  <%= trip.starts_on %>
-  <%= trip.returns_on %>
+  <p>1</p>
+  <p> <%= trip.price %> </p>
+  <p> <%= trip.starts_on %> </p>
+  <p> <%= trip.returns_on %> </p>
+  <p> <%= trip.round_trip_flight.flight1_destination_airport_iata %></p>
+  <p> <%= trip.round_trip_flight.flight2_origin_airport_iata %></p>
 
 <% end %>

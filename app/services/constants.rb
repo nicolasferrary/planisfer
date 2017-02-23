@@ -16,6 +16,23 @@ module Constants
   }
 
   REGIONS = {
+    "Andalucia" => "Andalucia",
+    "Puglia" =>  "Puglia",
+    "Tuscany" =>  "Tuscany",
+    "Catalonia" => "Catalonia",
+    "Lombardia" => "Lombardia",
+    "Greece" => "Greece",
+    "Portugal" => "Portugal",
+    "Croatia" => "Croatia",
+    "Scotland" => "Scotland",
+    "Benelux" => "Benelux",
+    "Ireland" => "Ireland",
+    "South of France" => "South of France",
+    "Central Europe" => "Central Europe",
+    "Baltic States" => "Baltic States",
+  }
+
+  REGIONS_AIRPORTS = {
     ["AGP", "SVQ", "XRY", "GRX"] => "Andalucia",
     ["BRI", "BDS"] =>  "Puglia",
     ["BLQ", "PSA", "FLR", "PMF"] =>  "Tuscany",
@@ -23,10 +40,10 @@ module Constants
     ["MIL", "TRN", "VRN", "GOA"] => "Lombardia",
     ["ATH", "HER", "JTR", "JMK", "CFU", "RHE"] => "Greece",
     ["LIS", "FAO", "OPO", "BJZ"] => "Portugal",
-    ["SPU", "DBV", "ZAG", "ZAD", "PUY", "RJK"] => "Croatie",
+    ["SPU", "DBV", "ZAG", "ZAD", "PUY", "RJK"] => "Croatia",
     ["EDI", "GLA", "ABZ"] => "Scotland",
-    ["BRU", "CRL", "LGG", "ANR", "AMS", "RTM", "EIN", "GRQ", "MST", "LUX"] => "BENELUX",
-    ["DUB", "SNN", "CFN", "ORK"] => "Irland",
+    ["BRU", "CRL", "LGG", "ANR", "AMS", "RTM", "EIN", "GRQ", "MST", "LUX"] => "Benelux",
+    ["DUB", "SNN", "CFN", "ORK"] => "Ireland",
     ["NCE", "MRS", "AVN", "TNL", "TLS", "BIQ", "MPL"] => "South of France",
     ["VIE", "BUD", "KRK", "ZAG", "LNZ", "BTS", "GRZ", "PRG"] => "Central Europe",
     ["TLL", "RIX", "VNO", "KUN", "PLQ"] => "Baltic States",
