@@ -1,48 +1,44 @@
-.search-form-box {
-  width: 90%;
-  background-color: white;
-  border-radius: 4px;
-  height: 60px;
-  margin-left: 52px;
-  margin-right: 22px;
-  color: rgb(201, 201, 201);
-  background-color: #FFFFFF;
-  font-family: "MuseoSansRounded";
-  box-shadow: 7px 9px 31px -13px rgba(0,0,0,0.75);
+.form-inline {
+  display: inline-block;
+  width: auto;
+  vertical-align: middle;
 }
 
-.box-separator {
-  width: 1.2px;
-  height: 30px;
-  background-color: #fc647a;
-  margin-top: 15px;
+.input-lg {
+  height: 46px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+  margin-right: 2px;
+}
+
+.select.input-lg {
+    height: 46px;
+    line-height: 46px;
+}
+
+.btn-danger {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
 }
 
 #city{
   width: 33%;
-  height: 100%;
   color: #484848;
-  font-family: "MuseoSansRounded";
   border-radius: 10px;
   background-color: white;
-
 }
 
 #region {
   width: 33%;
   border-radius: 10px;
   color: #484848;
-  font-family: "MuseoSansRounded";
   background-color: white;
 }
 
-.origin-field {
-   border-style: solid;
-  border-right-color: #ff0000;
-  &:focus {
-    outline: none;
-  }
-}
 
 #new_result {
   width: 100%;
@@ -57,7 +53,8 @@
   flex-grow: 1;
   display: flex;
   color: #484848;
-  font-family: "MuseoSansRounded";
+  margin-right: 4px;
+  margin-left: 4px;
     &:focus {
     outline: none;
   }
@@ -98,33 +95,6 @@
   color: white;
 }
 
-.submit-button_div {
-  text-align: center;
-}
-
-.submit-button {
-width: 150px;
-border: none;
-padding: 0 20 10px;
-border-radius: 4px;
-line-height: 40px;
-color: white;
-font-size: 14px;
-border: 1.3px solid white;
-margin-top: 50px;
-background-color: #FD4251;
-margin-right: 10px;
--webkit-transition: all 0.5s ease;
-transition: all 0.5s ease;
-font-family: "MuseoSansRounded";
-}
-
-.submit-button:hover {
-background-color: #ff3845;
-border-color: white;
--webkit-transform:scale(1.1);
-transform:scale(1.1);
-}
 
 
 
