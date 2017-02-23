@@ -15,6 +15,14 @@ module Constants
     "VIE" => "Vienna"
   }
 
+  TRAVELERS = {
+    "1" => "1 traveler",
+    "2" => "2 travelers",
+    "3" => "3 travelers",
+    "4" => "4 travelers",
+    "5" => "5 travelers",
+  }
+
   REGIONS = {
    "Andalucia" => "Andalucia",
    "Puglia" =>  "Puglia",
@@ -32,7 +40,9 @@ module Constants
    "Baltic States" => "Baltic States",
   }
 
- REGIONS_AIRPORTS = {
+
+
+  REGIONS_AIRPORTS = {
     "Andalucia" => ["AGP", "SVQ", "XRY", "GRX"],
     "Puglia" => ["BRI", "BDS"],
     "Tuscany" => ["BLQ", "PSA", "FLR", "PMF"],

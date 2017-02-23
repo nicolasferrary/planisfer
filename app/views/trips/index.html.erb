@@ -1,4 +1,5 @@
 
+
 <!-- We should find a way to only display the trips of the last search and not all the requests -->
 <div class="recap-of search">
   <p>City you want to escape: <%= @city %> Region you want to visit: <%= @region%></p>
@@ -219,10 +220,39 @@
         </div> <!-- fin de col -->
       <% end %>
     </div>  <!-- fin du row -->
-
+   
   </div>
-
+     <div class="col-sm-5">
+        <div>
+          <div id="map" style="width: 100%; height: 400px;"></div>
+        </div>
+      </div>
 
 </div>
 
+  
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+      var handler = Gmaps.build('Google');
+      handler.buildMap({
+        provider: {
+          scrollwheel: false,
+          zoomControl: false
+        },
+        internal: { id: 'map' } }, function() {
+        markers = handler.addMarkers(<%= raw @hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        if (markers.length == 0) {
+          handler.getMap().setZoom(2);
+        } else if (markers.length == 1) {
+          handler.getMap().setZoom(14);
+        }
+      });
+    });
+
+  <% end %>
+<% end %>
 

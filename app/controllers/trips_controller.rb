@@ -24,7 +24,7 @@ class TripsController < ApplicationController
     @city = params[:city]
     @region = params[:region]
     #for test only. To be changed with constants
-    region_iata_codes = ["AGP"]
+    region_iata_codes = ["AGP", "SVQ"]
     city_iata_code = "PAR"
 
     # generate routes
@@ -36,7 +36,8 @@ class TripsController < ApplicationController
     # uncached_routes = Avion.compare_routes_against_cache(routes, starts_on, returns_on)
 
     #For each route, send a request with 2 slices
-    @trips = Trip.all
+
+    @trips = get_trips_for_routes(routes, starts_on, returns_on, nb_travelers, city, region)
     @regions_airports = Constants::REGIONS_AIRPORTS[@region]
 
     # Here we define selections of trips that match f1 destination airport and f2 origin airport
@@ -56,11 +57,14 @@ class TripsController < ApplicationController
     @trips3_1 = select_trips_with_airports(3,1)
     @trips3_2 = select_trips_with_airports(3,2)
     @trips3_3 = select_trips_with_airports(3,3)
-    #commented to avoid API request
-    # @trips = get_trips_for_routes(routes, @starts_on, @returns_on, @nb_travelers, @city, @region)
+
+
+   
+
+
     @trips_selection = @trips.first(4)
 
-
+    # On itère sur les trips
 
     # Do we have something that is not cached?
     # if uncached_routes.empty?
@@ -83,6 +87,18 @@ class TripsController < ApplicationController
     #   QueryRoutesJob.perform_later(uncached_routes, starts_on, returns_on, nb_travelers)
     # # end
     # session[:search_url] = request.original_url
+
+    @trips = Trip.where.not(latitude: nil, longitude: nil)
+
+
+    @hash = Gmaps4rails.build_markers(@trips) do |trip, marker|
+      marker.lat trip.latitude
+      marker.lng trip.longitude
+      # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
+    end
+
+
+
   end
 
   def update
@@ -117,7 +133,8 @@ class TripsController < ApplicationController
         region_airport2: route[2],
         starts_on: starts_on,
         returns_on: returns_on,
-        nb_travelers: nb_travelers
+        nb_travelers: nb_travelers,
+        region: region
       }
       rtf = (Avion::SmartQPXAgent.new(options).obtain_offers)
       rtf.each do |rtf|
@@ -128,22 +145,22 @@ class TripsController < ApplicationController
     return trips
   end
 
-  # def apply_index_filters
-  #   # set filters
-  #   @filters = params.to_hash.slice("city", "starts_on", "returns_on", "origin_b")
+  def apply_airport_filters
+    # set filters
+    @filters = params.to_hash.slice("city", "region", "starts_on", "returns_on", "nb_travelers")
 
-  #   # filter by departure time if asked
-  #   if params["departure_time_there"].present? && params["departure_time_there"] != ""
-  #     @filters = @filters.merge(departure_time_there: params[:departure_time_there])
-  #     @offers = filter_by_departure_time(@offers)
-  #   end
+    # filter by airports if asked
+    if params["region_airport1"].present? && params["region_airport1"] != ""
+      @filters = @filters.merge("region_airport1" => params[:region_airport1])
+      @trips = filter_by_airport1(@trips, @filters)
+    end
 
-  #   #filter by arrival time if asked
-  #   if params["arrival_time_back"].present? && params["arrival_time_back"] != ""
-  #     @filters = @filters.merge(arrival_time_back: params[:arrival_time_back])
-  #     @offers = filter_by_arrival_time(@offers)
-  #   end
-  # end
+    if params["region_airport2"].present? && params["region_airport2"] != ""
+      @filters = @filters.merge("region_airport2" => params[:region_airport2])
+      @trips = filter_by_airport2(@trips, @filters)
+    end
+
+  end
 
   # def assert_show_params
   #   # safeguard agains random urls starting with offers/
@@ -186,11 +203,23 @@ class TripsController < ApplicationController
   #   (arrival_as_date + arrival_time_choice.first.hours .. arrival_as_date + arrival_time_choice.last.hours)
   # end
 
-  # def filter_by_departure_time(offers)
-  #   offers.select { |offer|
-  #     departure_range.include?(offer.roundtrips.first.departure_time_there) && departure_range.include?(offer.roundtrips.last.departure_time_there)
-  #   }
-  # end
+  def filter_by_airport1(trips, filters)
+    #trips is an array and filters is a hash
+    trips.select { |trip|
+      trip.round_trip_flight.flight1_destination_airport_iata == filters["region_airport1"]
+    }
+
+  end
+
+  def filter_by_airport2(trips, filters)
+    #trips is an array and filters is a hash
+    trips.select { |trip|
+      trip.round_trip_flight.flight2_origin_airport_iata == filters["region_airport2"]
+    }
+
+  end
+
+
 
   # def filter_by_arrival_time(offers)
   #   offers.select { |offer|

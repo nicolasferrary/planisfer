@@ -1,36 +1,119 @@
-
-<h1>Search an amazing trip</h1>
-
-
-<div class="banner col-xs-12">
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.3) 0%, rgba(0,36,61,0.4) 50%), url('');">
   <div class="banner-content">
-   <div class="container">
-     <div class="row">
-       <div class="col-sm-12">
-        <div class="search-form-box">
-          <%=form_tag trips_path, :controller => 'trips', method: :get, id: "new_result" do %>
-          <%= select_tag :city, options_for_select(Constants::AIRPORTS.invert.sort), class: "origin-field text-center", prompt: "From", style: "border:none" %>
-          <div class="box-separator"></div>
-          <%= select_tag  :region, options_for_select(Constants::REGIONS.invert.sort), class: "origin-field text-center", prompt: "To", style: "border:none" %>
-          <div class="box-separator"></div>
-          <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'datepicker text-center',style: "border: none" %>
-          <div class="box-separator"></div>
-          <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => 'datepicker text-center', style: "border: none" %>
-          <div class="box-separator"></div>
-          <%= text_field_tag :nb_travelers, nil, placeholder: "Travelers", "class" => 'text-center', style: "border: none" %>
-       </div>
-        </div>
-        <div class="submit-button-div">
-          <%= submit_tag "Explore", class: "submit-button" %>
-          <%end%>
-        </div>
-      </div>
+
+   <h1>World is in your hands, now use it !</h1>
+   <p>The new way to plan your next roadtrip</p>
+
+
+
+    <div class="form-inline text-center">
+      <%=form_tag trips_path, :controller => 'trips', method: :get, id: "new_result" do %>
+        <%= select_tag :city, options_for_select(Constants::AIRPORTS.invert.sort), class: "form-control input-lg", prompt: "From", style: "border:none" %>
+        <%= select_tag  :region, options_for_select(Constants::REGIONS.sort), class: "form-control input-lg", prompt: "To", style: "border:none" %>
+        <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'datepicker text-center',style: "border: none" %>
+        <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => 'datepicker text-center', style: "border: none" %>
+        <%= select_tag :nb_travelers, options_for_select(Constants::TRAVELERS.invert.sort), class: "form-control input-lg", prompt: "Travelers", style: "border:none" %>
+        <%= submit_tag "LET'S TRAVEL", class: "btn btn-danger" %>
+      <%end%>
     </div>
   </div>
 </div>
+
+<div class="trending">
+  <h1 class="banner2-title "><strong>Trendy destinations</strong></h1>
+  <div class="blocks clearfix">
+    <a class="block sm destination">
+      <%= image_tag "croatie.jpeg", class:"dest-image"%>
+      <span class="box">
+        <span class="text in-box">
+          <span class="primarytext">Croatia</span>
+        </span>
+      </span>
+    </a>
+    <a class="block lg destination">
+      <%= image_tag "greece.jpg", class:"dest-image"%>
+      <span class="box">
+        <span class="text in-box">
+          <span class="primarytext">Greece</span>
+        </span>
+      </span>
+    </a>
+    <a class="block sm destination">
+      <%= image_tag "france.jpg", class:"dest-image"%>
+      <span class="box">
+        <span class="text in-box">
+          <span class="primarytext">South of France</span>
+        </span>
+        <span class="subtext-box in-box">
+          <span class="subtext">Trip Planner</span>
+        </span>
+      </span>
+    </a>
+    <a class="block sm destination">
+      <%= image_tag "ecosse.jpeg", class:"dest-image"%>
+      <span class="box">
+        <span class="text in-box">
+          <span class="primarytext">Scotland</span>
+        </span>
+        <span class="subtext-box in-box">
+          <span class="subtext">Trip Planner</span>
+        </span>
+      </span>
+    </a>
+    <a class="block sm info">
+      <span class="box">
+        <span class="text in-box">
+          <span class="primarytext">Infinity</span>
+          <span class="subtext">of flights combo</span>
+        </span>
+      </span>
+    </a>
+    <a class="block lg destination">
+      <%= image_tag "florence.jpg", class:"dest-image"%>
+      <span class="box">
+        <span class="text in-box">
+          <span class="primarytext">Tuscany</span>
+        </span>
+      </span>
+    </a>
+    <a class="block sm destination">
+      <%= image_tag "andalousie.jpeg", class:"dest-image"%>
+      <span class="box">
+        <span class="text in-box">
+          <span class="primarytext">Andalucia</span>
+        </span>
+      </span>
+    </a>
+  </div>
 </div>
 
-
+<div class="banner-content text-center">
+  <h1 class="banner2-title"><strong>Why use Planisfer </strong></h1>
+</div>
+<hr>
+<div class="col-xs-12">
+  <div id="description-usp"></div>
+  <div class="container">
+    <div class="row">
+      <div class=" col-xs-12 col-md-4  text-center">
+       <%= image_tag "europe.png", class: "glasses-img" %>
+       <p id="usp-title"> <strong>Get inspiration</strong></p>
+       <p>to travel through Europe</p>
+     </div>
+     <div class=" col-xs-12 col-md-4  text-center">
+      <%= image_tag "flight.png", class: "glasses-img" %>
+      <p id="usp-title"><strong>Find the best flights</strong> </p>
+      <p>combo for your roadtrip</p>
+    </div>
+    <div class=" col-xs-12 col-md-4  text-center">
+     <%= image_tag "money.png", class: "glasses-img" %>
+     <p id="usp-title"><strong>Save money & time</strong> </p>
+     <p>with our flights comparator</p>
+   </div>
+ </div>
+</div>
+<hr>
+<div class="padded"></div>
 
 <%= content_for :after_js do %>
 <script>
