@@ -16,20 +16,37 @@ module Constants
   }
 
   REGIONS = {
-    ["AGP", "SVQ", "XRY", "GRX"] => "Andalucia",
-    ["BRI", "BDS"] =>  "Puglia",
-    ["BLQ", "PSA", "FLR", "PMF"] =>  "Tuscany",
-    ["BCN", "GRO", "ILD", "REU"] => "Catalonia",
-    ["MIL", "TRN", "VRN", "GOA"] => "Lombardia",
-    ["ATH", "HER", "JTR", "JMK", "CFU", "RHE"] => "Greece",
-    ["LIS", "FAO", "OPO", "BJZ"] => "Portugal",
-    ["SPU", "DBV", "ZAG", "ZAD", "PUY", "RJK"] => "Croatie",
-    ["EDI", "GLA", "ABZ"] => "Scotland",
-    ["BRU", "CRL", "LGG", "ANR", "AMS", "RTM", "EIN", "GRQ", "MST", "LUX"] => "BENELUX",
-    ["DUB", "SNN", "CFN", "ORK"] => "Irland",
-    ["NCE", "MRS", "AVN", "TNL", "TLS", "BIQ", "MPL"] => "South of France",
-    ["VIE", "BUD", "KRK", "ZAG", "LNZ", "BTS", "GRZ", "PRG"] => "Central Europe",
-    ["TLL", "RIX", "VNO", "KUN", "PLQ"] => "Baltic States",
+    "Andalucia" => "Andalucia",
+    "Puglia" =>  "Puglia",
+    "Tuscany" =>  "Tuscany",
+    "Catalonia" => "Catalonia",
+    "Lombardia" => "Lombardia",
+    "Greece" => "Greece",
+    "Portugal" => "Portugal",
+    "Croatia" => "Croatia",
+    "Scotland" => "Scotland",
+    "Benelux" => "Benelux",
+    "Ireland" => "Ireland",
+    "South of France" => "South of France",
+    "Central Europe" => "Central Europe",
+    "Baltic States" => "Baltic States",
+  }
+
+  REGIONS_AIRPORTS = {
+    "Andalucia" => ["AGP", "SVQ", "XRY", "GRX"],
+    "Puglia" => ["BRI", "BDS"],
+    "Tuscany" => ["BLQ", "PSA", "FLR", "PMF"],
+    "Catalonia" => ["BCN", "GRO", "ILD", "REU"],
+    "Lombardia" => ["MIL", "TRN", "VRN", "GOA"],
+    "Greece" => ["ATH", "HER", "JTR", "JMK", "CFU", "RHE"],
+    "Portugal" => ["LIS", "FAO", "OPO", "BJZ"],
+    "Croatie" => ["SPU", "DBV", "ZAG", "ZAD", "PUY", "RJK"] ,
+    "Scotland" => ["EDI", "GLA", "ABZ"],
+    "BENELUX" => ["BRU", "CRL", "LGG", "ANR", "AMS", "RTM", "EIN", "GRQ", "MST", "LUX"],
+    "Irland" => ["DUB", "SNN", "CFN", "ORK"],
+    "South of France" => ["NCE", "MRS", "AVN", "TNL", "TLS", "BIQ", "MPL"],
+    "Central Europe" => ["VIE", "BUD", "KRK", "ZAG", "LNZ", "BTS", "GRZ", "PRG"],
+    "Baltic States" => ["TLL", "RIX", "VNO", "KUN", "PLQ"],
   }
 
   AIRLINES = {
