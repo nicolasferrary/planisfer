@@ -21,10 +21,11 @@ class TripsController < ApplicationController
     starts_on = params[:starts_on]
     returns_on = params[:returns_on]
     nb_travelers = params[:nb_travelers]
+    city = params[:city]
+    region = params[:region]
+    #for test only. To be changed with constants
     region_iata_codes = ["AGP"]
     city_iata_code = "PAR"
-
-    @trip = Trip.new(starts_on: starts_on, returns_on: returns_on, nb_travelers: nb_travelers, region_id: 1, city_id: 1)
 
     # generate routes
     routes = Avion.generate_routes(city_iata_code, region_iata_codes)
@@ -35,8 +36,8 @@ class TripsController < ApplicationController
     # uncached_routes = Avion.compare_routes_against_cache(routes, starts_on, returns_on)
 
     #For each route, send a request with 2 slices
-    @round_trip_flights = get_rtf_for_routes(routes, starts_on, returns_on, nb_travelers)
-    @round_trip_flights_selection = @round_trip_flights.first(4)
+    @trips = get_trips_for_routes(routes, starts_on, returns_on, nb_travelers, city, region)
+    @trips_selection = @trips.first(4)
 
 
 
@@ -86,8 +87,8 @@ class TripsController < ApplicationController
   #   }
   # end
 
-  def get_rtf_for_routes(routes, starts_on, returns_on, nb_travelers)
-    rtf = []
+  def get_trips_for_routes(routes, starts_on, returns_on, nb_travelers, city, region)
+    trips = []
     routes.each do |route|
       options = {
         city: route.first,
@@ -95,12 +96,16 @@ class TripsController < ApplicationController
         region_airport2: route[2],
         starts_on: starts_on,
         returns_on: returns_on,
-        nb_travelers: nb_travelers,
-        trip: @trip
+        nb_travelers: nb_travelers
       }
-      rtf.concat(Avion::SmartQPXAgent.new(options).obtain_offers)
+      rtf = (Avion::SmartQPXAgent.new(options).obtain_offers)
+      rtf.each do |rtf|
+        trip = Trip.create(starts_on, returns_on, nb_travelers, city, region, rtf)
+        trip.save
+        trips << trip
+      end
     end
-    return rtf
+    return trips
   end
 
   # def apply_index_filters
