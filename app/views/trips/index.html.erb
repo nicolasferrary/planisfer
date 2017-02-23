@@ -1,33 +1,119 @@
 
-
+<!-- We should find a way to only display the trips of the last search and not all the requests -->
 <div class="recap-of search">
-  <p>City you want to escape: <%= @trips_city %> Region you want to visit: <%= @trips_region%></p>
-  <p>Departure on: <%=  @starts_on = starts_on%> Return on:<%= @returns_on = returns_on%></p>
+<!-- We should display here the informations we input in our search bar but currently problem to take only the information from ou request -->
+<p>City you want to escape: <%= @city %> Region you want to visit: <%= @region%></p>
+  <p>Departure on: <%=  @starts_on%> Return on:<%= @returns_on%></p>
 </div>
 
 <div class="container-fluid">
-
   <div class="col-xs-12 col-sm-6">
-    <div class="row">
-      <% @trips_selection.each do |trip| %>
-        <div class="col-xs-12 col-sm-12">
-          <%= link_to trips_path(trip) do %>
-            <div class="cardContainer">
-              <div class="card">
-                <div class="card-description">
-                  <p><%= trip.price %></p>
-                  <p><%= trip.starts_on %></p>
-                  <p><%= trip.returns_on %></p>
-                </div>
-                <div class="card-price">
-                  <p><%= trip.price %></p>
-                </div> <!-- fin card-price -->
-              </div> <!-- fin card -->
-            </div> <!-- fin cardContainer -->
-          <% end %>
-        </div> <!-- fin de col -->
-      <% end %>
-    </div>  <!-- fin du row -->
+    <div class="tabContainer">
+      <div class="row">
+        <% @region.each do |airport| %>
+          <div><%= airport %></div>
+        <% end %>
+      </div>
+      <% if @region.size > 0 do  %>
+        <div class="row">
+          <div><%= @region.airport[0] %></div>
+          <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[0]),flight2_origin_airport_iata(@region.airport[0])).first.price %>
+          </div>
+          <% if @region.size > 1 do  %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[1]),flight2_origin_airport_iata(@region.airport[0])).first.price %>
+            </div>
+          <% end  %>
+          <% if @region.size > 2 do  %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[2]),flight2_origin_airport_iata(@region.airport[0])).first.price %>
+            </div>
+          <% end  %>
+          <% if @region.size > 3 do  %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[3]),flight2_origin_airport_iata(@region.airport[0])).first.price %>
+            </div>
+          <% end  %>
+        </div>
+      <% end  %>
+      <% if @region.size > 1 do  %>
+        <div class="row">
+          <div><%= @region.airport[1] %></div>
+          <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[0]),flight2_origin_airport_iata(@region.airport[1])).first.price %>
+          </div>
+          <% if @region.size > 1 do  %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[1]),flight2_origin_airport_iata(@region.airport[1])).first.price %>
+            </div>
+          <% end  %>
+          <% if @region.size > 2 do  %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[2]),flight2_origin_airport_iata(@region.airport[1])).first.price %>
+            </div>
+          <% end  %>
+          <% if @region.size > 3 do  %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[3]),flight2_origin_airport_iata(@region.airport[1])).first.price %>
+            </div>
+          <% end  %>
+        </div>
+      <% end  %>
+      <% if @region.size > 2 do  %>
+        <div class="row">
+          <div><%= @region.airport[2] %></div>
+          <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[0]),flight2_origin_airport_iata(@region.airport[2])).first.price %>
+          </div>
+          <% if @region.size > 1 do  %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[1]),flight2_origin_airport_iata(@region.airport[2])).first.price %>
+            </div>
+          <% end  %>
+          <% if @region.size > 2 do  %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[2]),flight2_origin_airport_iata(@region.airport[2])).first.price %>
+            </div>
+          <% end  %>
+          <% if @region.size > 3 do  %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[3]),flight2_origin_airport_iata(@region.airport[2])).first.price %>
+            </div>
+          <% end  %>
+        </div>
+      <% end  %>
+      <% if @region.size > 3 do  %>
+        <div class="row">
+          <div><%= @region.airport[3] %></div>
+          <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[0]),flight2_origin_airport_iata(@region.airport[3])).first.price %>
+          </div>
+          <% if @region.size > 1 do  %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[1]),flight2_origin_airport_iata(@region.airport[3])).first.price %>
+            </div>
+          <% end  %>
+          <% if @region.size > 2 do  %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[2]),flight2_origin_airport_iata(@region.airport[3])).first.price %>
+            </div>
+          <% end  %>
+          <% if @region.size > 3 do  %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[3]),flight2_origin_airport_iata(@region.airport[3])).first.price %>
+            </div>
+          <% end  %>
+        </div>
+      <% end  %>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <div class="resultContainer">
+      <div class="row">
+        <% @trips_selection.each do |trip| %>
+          <div class="col-xs-12 col-sm-12">
+            <%= link_to trips_path(trip) do %>
+              <div class="cardContainer">
+                <div class="card">
+                  <div class="card-description">
+                    <p><%= trip.starts_on %></p>
+                    <p><%= trip.returns_on %></p>
+                  </div>
+                  <div class="card-price">
+                    <p><%= trip.price %></p>
+                  </div> <!-- fin card-price -->
+                </div> <!-- fin card -->
+              </div> <!-- fin cardContainer -->
+            <% end %>
+          </div> <!-- fin de col -->
+        <% end %>
+      </div>  <!-- fin du row -->
+    </div> <!-- fin du result container -->
   </div> <!-- fin du col-sm-8 -->
 
   <div class="col-sm-5">

@@ -18,11 +18,11 @@ class TripsController < ApplicationController
   # end
 
   def index
-    starts_on = params[:starts_on]
-    returns_on = params[:returns_on]
-    nb_travelers = params[:nb_travelers]
-    city = params[:city]
-    region = params[:region]
+    @starts_on = params[:starts_on]
+    @returns_on = params[:returns_on]
+    @nb_travelers = params[:nb_travelers]
+    @city = params[:city]
+    @region = params[:region]
     #for test only. To be changed with constants
     region_iata_codes = ["AGP"]
     city_iata_code = "PAR"
@@ -36,12 +36,10 @@ class TripsController < ApplicationController
     # uncached_routes = Avion.compare_routes_against_cache(routes, starts_on, returns_on)
 
     #For each route, send a request with 2 slices
-    @trips = get_trips_for_routes(routes, starts_on, returns_on, nb_travelers, city, region)
+    @trips = get_trips_for_routes(routes, @starts_on, @returns_on, @nb_travelers, @city, @region)
     @trips_selection = @trips.first(4)
-    @trips_city = city
-    @trips_region = region
-    @starts_on = starts_on
-    @returns_on = returns_on
+
+
 
     # Do we have something that is not cached?
     # if uncached_routes.empty?
