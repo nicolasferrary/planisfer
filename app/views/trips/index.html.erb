@@ -16,7 +16,7 @@
 
       <div class="row ">
         <div class="flexbox">
-          <div>ALL</div>
+          <div>All flights</div>
           <% @regions_airports.each do |airport| %>
             <div><%= airport %></div>
           <% end %>
@@ -27,7 +27,7 @@
         <div class="row ">
           <div class="flexbox">
             <div><%= @regions_airports[0] %></div>
-            <%= link_to trips_path do %>
+            <%= link_to trips_path(@filters.merge(region_airport1: @regions_airports[0]).merge(region_airport2: @regions_airports[0])) do %>
               <div>
                 <% if @trips0_0 == [] %>
                   <%= "-" %>
@@ -36,7 +36,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to trips_path do %>
+            <%= link_to trips_path(@filters.merge(region_airport1: @regions_airports[0]).merge(region_airport2: @regions_airports[1])) do %>
               <div>
                 <% if @trips0_1 == [] %>
                   <%= "-" %>
@@ -45,7 +45,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to trips_path do %>
+            <%= link_to trips_path(@filters.merge(region_airport1: @regions_airports[0]).merge(region_airport2: @regions_airports[2])) do %>
               <div>
                 <% if @trips0_2 == [] %>
                   <%= "-" %>
@@ -54,7 +54,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to trips_path do %>
+            <%= link_to trips_path(@filters.merge(region_airport1: @regions_airports[0]).merge(region_airport2: @regions_airports[3])) do %>
               <div>
                 <% if @trips0_3 == [] %>
                   <%= "-" %>
@@ -71,7 +71,7 @@
         <div class="row ">
           <div class="flexbox">
             <div><%= @regions_airports[1] %></div>
-            <%= link_to trips_path do %>
+            <%= link_to trips_path(@filters.merge(region_airport1: @regions_airports[1]).merge(region_airport2: @regions_airports[0])) do %>
               <div>
                 <% if @trips1_0 == [] %>
                   <%= "-" %>
@@ -80,7 +80,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to trips_path do %>
+            <%= link_to trips_path(@filters.merge(region_airport1: @regions_airports[1]).merge(region_airport2: @regions_airports[1])) do %>
               <div>
                 <% if @trips1_1 == [] %>
                   <%= "-" %>
@@ -89,7 +89,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to trips_path do %>
+            <%= link_to trips_path(@filters.merge(region_airport1: @regions_airports[1]).merge(region_airport2: @regions_airports[2])) do %>
               <div>
                 <% if @trips1_2 == [] %>
                   <%= "-" %>
@@ -98,7 +98,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to trips_path do %>
+            <%= link_to trips_path(@filters.merge(region_airport1: @regions_airports[1]).merge(region_airport2: @regions_airports[3])) do %>
               <div>
                 <% if @trips1_3 == [] %>
                   <%= "-" %>
@@ -115,7 +115,7 @@
         <div class="row ">
           <div class="flexbox">
             <div><%= @regions_airports[2] %></div>
-            <%= link_to trips_path do %>
+            <%= link_to trips_path(@filters.merge(region_airport1: @regions_airports[2]).merge(region_airport2: @regions_airports[0])) do %>
               <div>
                 <% if @trips2_0 == [] %>
                   <%= "-" %>
@@ -124,7 +124,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to trips_path do %>
+            <%= link_to trips_path(@filters.merge(region_airport1: @regions_airports[2]).merge(region_airport2: @regions_airports[1])) do %>
               <div>
                 <% if @trips2_1 == [] %>
                   <%= "-" %>
@@ -133,7 +133,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to trips_path do %>
+            <%= link_to trips_path(@filters.merge(region_airport1: @regions_airports[2]).merge(region_airport2: @regions_airports[2])) do %>
               <div>
                 <% if @trips2_2 == [] %>
                   <%= "-" %>
@@ -142,7 +142,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to trips_path do %>
+            <%= link_to trips_path(@filters.merge(region_airport1: @regions_airports[2]).merge(region_airport2: @regions_airports[3])) do %>
               <div>
                 <% if @trips2_3 == [] %>
                   <%= "-" %>
@@ -160,7 +160,7 @@
         <div class="row ">
           <div class="flexbox">
             <div><%= @regions_airports[3] %></div>
-            <%= link_to trips_path do %>
+            <%= link_to trips_path(@filters.merge(region_airport1: @regions_airports[3]).merge(region_airport2: @regions_airports[0])) do %>
               <div>
                 <% if @trips3_0 == [] %>
                   <%= "-" %>
@@ -169,7 +169,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to trips_path do %>
+            <%= link_to trips_path(@filters.merge(region_airport1: @regions_airports[3]).merge(region_airport2: @regions_airports[1])) do %>
               <div>
                 <% if @trips3_1 == [] %>
                   <%= "-" %>
@@ -178,7 +178,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to trips_path do %>
+            <%= link_to trips_path(@filters.merge(region_airport1: @regions_airports[3]).merge(region_airport2: @regions_airports[2])) do %>
               <div>
                 <% if @trips3_2 == [] %>
                   <%= "-" %>
@@ -187,7 +187,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to trips_path do %>
+            <%= link_to trips_path(@filters.merge(region_airport1: @regions_airports[3]).merge(region_airport2: @regions_airports[3])) do %>
               <div>
                 <% if @trips3_3 == [] %>
                   <%= "-" %>

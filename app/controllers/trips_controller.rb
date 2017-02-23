@@ -31,14 +31,19 @@ class TripsController < ApplicationController
     routes = Avion.generate_routes(city_iata_code, region_iata_codes)
     #only for debug. To be removed
     @routes = routes
+    @regions_airports = Constants::REGIONS_AIRPORTS[@region]
 
     # # Test all routes against cache
     # uncached_routes = Avion.compare_routes_against_cache(routes, starts_on, returns_on)
 
     #For each route, send a request with 2 slices
 
-    @trips = get_trips_for_routes(routes, @starts_on, @returns_on, @nb_travelers, @city, @region)
-    @regions_airports = Constants::REGIONS_AIRPORTS[@region]
+    @trips = Trip.all
+    apply_airport_filters
+    # @trips = get_trips_for_routes(routes, @starts_on, @returns_on, @nb_travelers, @city, @region)
+    @trips = @trips.sort_by { |trip| trip.price }
+
+    @trips_selection = @trips.first(4)
 
     # Here we define selections of trips that match f1 destination airport and f2 origin airport
     @trips0_0 = select_trips_with_airports(0,0)
@@ -59,10 +64,6 @@ class TripsController < ApplicationController
     @trips3_3 = select_trips_with_airports(3,3)
 
 
-
-
-
-    @trips_selection = @trips.first(4)
 
     # On itère sur les trips
 
