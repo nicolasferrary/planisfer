@@ -36,7 +36,9 @@ class TripsController < ApplicationController
     # uncached_routes = Avion.compare_routes_against_cache(routes, starts_on, returns_on)
 
     #For each route, send a request with 2 slices
-    @trips = get_trips_for_routes(routes, @starts_on, @returns_on, @nb_travelers, @city, @region)
+    @trips = Trip.all
+    #commented to avoid API request
+    # @trips = get_trips_for_routes(routes, @starts_on, @returns_on, @nb_travelers, @city, @region)
     @trips_selection = @trips.first(4)
 
 

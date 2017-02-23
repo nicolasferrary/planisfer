@@ -16,6 +16,23 @@ module Constants
   }
 
   REGIONS = {
+   "Andalucia" => "Andalucia",
+   "Puglia" =>  "Puglia",
+   "Tuscany" =>  "Tuscany",
+   "Catalonia" => "Catalonia",
+   "Lombardia" => "Lombardia",
+   "Greece" => "Greece",
+   "Portugal" => "Portugal",
+   "Croatia" => "Croatia",
+   "Scotland" => "Scotland",
+   "Benelux" => "Benelux",
+   "Ireland" => "Ireland",
+   "South of France" => "South of France",
+   "Central Europe" => "Central Europe",
+   "Baltic States" => "Baltic States",
+ }
+
+ REGIONS_AIRPORTS = {
     ["AGP", "SVQ", "XRY", "GRX"] => "Andalucia",
     ["BRI", "BDS"] =>  "Puglia",
     ["BLQ", "PSA", "FLR", "PMF"] =>  "Tuscany",
