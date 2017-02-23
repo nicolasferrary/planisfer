@@ -84,45 +84,6 @@ airport14.city = city1
 airport14.region = region6
 airport14.save
 
-
-
-trip1 = Trip.new(
-  starts_on: "Mon, 13 Mar 2017",
-  returns_on: "Fri, 24 Mar 2017",
-  nb_travelers: 2
-  )
-trip1.city = city1
-trip1.region = region1
-trip1.save!
-
-trip2 = Trip.new(
-  starts_on: "Tue, 14 Mar 2017",
-  returns_on: "Thu, 23 Mar 2017",
-  nb_travelers: 3
-  )
-trip2.city = city2
-trip2.region = region1
-trip2.save!
-
-trip3 = Trip.new(
-  starts_on: "Wed, 15 Mar 2017",
-  returns_on: "Sat, 25 Mar 2017",
-  nb_travelers: 1
-  )
-trip3.city = city2
-trip3.region = region2
-trip3.save!
-
-trip4 = Trip.new(
-  starts_on: "Fri, 17 Mar 2017",
-  returns_on: "Sun, 26 Mar 2017",
-  nb_travelers: 4
-  )
-trip4.city = city3
-trip4.region = region4
-trip4.save!
-
-
 round_trip_flight1 = RoundTripFlight.new(
   price: 90,
   flight1_origin_airport_iata: "CDG",
@@ -134,7 +95,6 @@ round_trip_flight1 = RoundTripFlight.new(
   flight2_take_off_at: "Fri, 24 Mar 2017 08:00:00 UTC",
   flight2_landing_at: "Fri, 24 Mar 2017 10:00:00 UTC"
   )
-round_trip_flight1.trip = trip1
 round_trip_flight1.save
 
 round_trip_flight2 = RoundTripFlight.new(
@@ -148,7 +108,6 @@ round_trip_flight2 = RoundTripFlight.new(
   flight2_take_off_at: "Fri, 24 Mar 2017 08:30:00 UTC",
   flight2_landing_at: "Fri, 24 Mar 2017 10:45:00 UTC"
   )
-round_trip_flight2.trip = trip1
 round_trip_flight2.save
 
 round_trip_flight3 = RoundTripFlight.new(
@@ -162,7 +121,6 @@ round_trip_flight3 = RoundTripFlight.new(
   flight2_take_off_at: "Fri, 24 Mar 2017 08:30:00 UTC",
   flight2_landing_at: "Fri, 24 Mar 2017 10:45:00 UTC"
   )
-round_trip_flight3.trip = trip1
 round_trip_flight3.save
 
 
@@ -177,7 +135,6 @@ round_trip_flight4 = RoundTripFlight.new(
   flight2_take_off_at: "Fri, 24 Mar 2017 06:30:00 UTC",
   flight2_landing_at: "Fri, 24 Mar 2017 10:48:00 UTC"
   )
-round_trip_flight4.trip = trip1
 round_trip_flight4.save
 
 round_trip_flight5 = RoundTripFlight.new(
@@ -191,7 +148,6 @@ round_trip_flight5 = RoundTripFlight.new(
   flight2_take_off_at: "Fri, 24 Mar 2017 06:30:00 UTC",
   flight2_landing_at: "Fri, 24 Mar 2017 10:48:00 UTC"
   )
-round_trip_flight5.trip = trip1
 round_trip_flight5.save
 
 round_trip_flight6 = RoundTripFlight.new(
@@ -205,7 +161,6 @@ round_trip_flight6 = RoundTripFlight.new(
   flight2_take_off_at: "Thu, 23 Mar 2017 08:00:00 UTC",
   flight2_landing_at: "Thu, 23 Mar 2017 10:00:00 UTC"
   )
-round_trip_flight6.trip = trip2
 round_trip_flight6.save
 
 round_trip_flight7 = RoundTripFlight.new(
@@ -219,7 +174,6 @@ round_trip_flight7 = RoundTripFlight.new(
   flight2_take_off_at: "Thu, 23 Mar 2017 08:30:00 UTC",
   flight2_landing_at: "Thu, 23 Mar 2017 10:45:00 UTC"
   )
-round_trip_flight7.trip = trip2
 round_trip_flight7.save
 
 round_trip_flight8 = RoundTripFlight.new(
@@ -233,7 +187,6 @@ round_trip_flight8 = RoundTripFlight.new(
   flight2_take_off_at: "Thu, 23 Mar 2017 08:30:00 UTC",
   flight2_landing_at: "Thu, 23 Mar 2017 10:45:00 UTC"
   )
-round_trip_flight8.trip = trip2
 round_trip_flight8.save
 
 
@@ -248,7 +201,6 @@ round_trip_flight9 = RoundTripFlight.new(
   flight2_take_off_at: "Thu, 23 Mar 2017 06:30:00 UTC",
   flight2_landing_at: "Thu, 23 Mar 2017 10:48:00 UTC"
   )
-round_trip_flight9.trip = trip2
 round_trip_flight9.save
 
 round_trip_flight10 = RoundTripFlight.new(
@@ -262,7 +214,6 @@ round_trip_flight10 = RoundTripFlight.new(
   flight2_take_off_at: "Thu, 23 Mar 2017 06:30:00 UTC",
   flight2_landing_at: "Thu, 23 Mar 2017 10:48:00 UTC"
   )
-round_trip_flight10.trip = trip2
 round_trip_flight10.save
 
 round_trip_flight11 = RoundTripFlight.new(
@@ -276,7 +227,6 @@ round_trip_flight11 = RoundTripFlight.new(
  flight2_take_off_at: "Sat, 25 Mar 2017 18:00:00 UTC",
  flight2_landing_at: "Sat, 25 Mar 2017 18:55:00 UTC"
  )
-round_trip_flight11.trip = trip3
 round_trip_flight11.save
 
 round_trip_flight12 = RoundTripFlight.new(
@@ -290,7 +240,6 @@ round_trip_flight12 = RoundTripFlight.new(
  flight2_take_off_at: "Sat, 25 Mar 2017 19:14:00 UTC",
  flight2_landing_at: "Sat, 25 Mar 2017 21:00:00 UTC"
  )
-round_trip_flight12.trip = trip3
 round_trip_flight12.save
 
 round_trip_flight13 = RoundTripFlight.new(
@@ -304,7 +253,6 @@ round_trip_flight13 = RoundTripFlight.new(
  flight2_take_off_at: "Sat, 25 Mar 2017 08:42:00 UTC",
  flight2_landing_at: "Sat, 25 Mar 2017 10:20:00 UTC"
  )
-round_trip_flight13.trip = trip3
 round_trip_flight13.save
 
 round_trip_flight14 = RoundTripFlight.new(
@@ -318,7 +266,6 @@ round_trip_flight14 = RoundTripFlight.new(
  flight2_take_off_at: "Sun, 26 Mar 2017 13:09:00 UTC",
  flight2_landing_at: "Sun, 26 Mar 2017 15:25:00 UTC"
  )
-round_trip_flight14.trip = trip4
 round_trip_flight14.save
 
 round_trip_flight15 = RoundTripFlight.new(
@@ -332,7 +279,6 @@ round_trip_flight15 = RoundTripFlight.new(
  flight2_take_off_at: "Sun, 26 Mar 2017 16:14:00 UTC",
  flight2_landing_at: "Sun, 26 Mar 2017 18:00:00 UTC"
  )
-round_trip_flight15.trip = trip4
 round_trip_flight15.save
 
 
@@ -347,7 +293,6 @@ round_trip_flight16 = RoundTripFlight.new(
  flight2_take_off_at: "Sun, 26 Mar 2017 18:42:00 UTC",
  flight2_landing_at: "Sun, 26 Mar 2017 20:20:00 UTC"
  )
-round_trip_flight16.trip = trip4
 round_trip_flight16.save
 
 
@@ -362,5 +307,48 @@ round_trip_flight17 = RoundTripFlight.new(
  flight2_take_off_at: "Sun, 26 Mar 2017 05:42:00 UTC",
  flight2_landing_at: "Sun, 26 Mar 2017 07:20:00 UTC"
  )
-round_trip_flight17.trip = trip4
 round_trip_flight17.save
+
+
+trip1 = Trip.new(
+  starts_on: "Mon, 13 Mar 2017",
+  returns_on: "Fri, 24 Mar 2017",
+  nb_travelers: 2
+  )
+trip1.city = city1
+trip1.region = region1
+trip1.round_trip_flight = round_trip_flight1
+trip1.save!
+
+trip2 = Trip.new(
+  starts_on: "Tue, 14 Mar 2017",
+  returns_on: "Thu, 23 Mar 2017",
+  nb_travelers: 3
+  )
+trip2.city = city2
+trip2.region = region1
+trip2.round_trip_flight = round_trip_flight7
+trip2.save!
+
+trip3 = Trip.new(
+  starts_on: "Wed, 15 Mar 2017",
+  returns_on: "Sat, 25 Mar 2017",
+  nb_travelers: 1
+  )
+trip3.city = city2
+trip3.region = region2
+trip3.round_trip_flight = round_trip_flight11
+trip3.save!
+
+trip4 = Trip.new(
+  starts_on: "Fri, 17 Mar 2017",
+  returns_on: "Sun, 26 Mar 2017",
+  nb_travelers: 4
+  )
+trip4.city = city3
+trip4.region = region4
+trip4.round_trip_flight = round_trip_flight16
+trip4.save!
+
+
+

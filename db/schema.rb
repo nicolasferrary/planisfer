@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170221141049) do
+ActiveRecord::Schema.define(version: 20170222224919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,10 +50,11 @@ ActiveRecord::Schema.define(version: 20170221141049) do
     t.datetime "flight1_take_off_at"
     t.datetime "flight2_take_off_at"
     t.datetime "flight2_landing_at"
-    t.integer  "trip_id"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.index ["trip_id"], name: "index_round_trip_flights_on_trip_id", using: :btree
+    t.string   "currency"
+    t.string   "carrier1"
+    t.string   "carrier2"
   end
 
   create_table "trips", force: :cascade do |t|
@@ -63,15 +64,17 @@ ActiveRecord::Schema.define(version: 20170221141049) do
     t.integer  "nb_travelers"
     t.integer  "city_id"
     t.integer  "region_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "round_trip_flight_id"
     t.index ["city_id"], name: "index_trips_on_city_id", using: :btree
     t.index ["region_id"], name: "index_trips_on_region_id", using: :btree
+    t.index ["round_trip_flight_id"], name: "index_trips_on_round_trip_flight_id", using: :btree
   end
 
   add_foreign_key "airports", "cities"
   add_foreign_key "airports", "regions"
-  add_foreign_key "round_trip_flights", "trips"
   add_foreign_key "trips", "cities"
   add_foreign_key "trips", "regions"
+  add_foreign_key "trips", "round_trip_flights"
 end
