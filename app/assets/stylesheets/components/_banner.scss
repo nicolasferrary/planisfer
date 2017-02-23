@@ -8,6 +8,8 @@
   justify-content: center;
   background: linear-gradient(to left, #FF5D3B, #FF2B67);
 }
+
+
 .banner h1 {
   text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
   font-size: 80px;
@@ -17,11 +19,10 @@
   letter-spacing: -4px;
   text-align: center;
   color: white;
-  @media only screen and (min-width: 200px) and (max-width: 700px ) {
   font-size: 40px;
   font-weight: 420;
   }
-}
+
 
 .banner p {
   font-size: 20px;
@@ -39,27 +40,9 @@
   padding-top: 3px;
 }
 
-.slogan1 {
-  margin-bottom: 20px;
-  margin-left: 40px;
-  @media only screen and (min-width: 200px) and (max-width: 700px ) {
-  margin-left: 20px;
-  }
-}
-
-.slogan2 {
-  margin-bottom: 20px;
-  margin-left: 40px;
-  @media only screen and (min-width: 200px) and (max-width: 700px ) {
-  margin-left: 20px;
-  }
-}
-
 .title-header {
   display: inline-block;
 }
-
-
 
 
 
@@ -79,39 +62,20 @@
   margin-bottom: 55px;
 }
 
-.row2 {
-  margin-top: 55px;
-   z-index: 1000000;
-
+.banner3 {
+  background-color: #FDFDFD;
+  padding-top: 78px;
+  padding-bottom: 78px;
+  padding-right: 51px;
+  padding-left: 50px;
+  box-shadow: 3px 3px 14px -13px rgba(0,0,0,0.75);
 }
-
-.glasses-img {
-  width: 200px;
-  margin-top: 45px;
-}
-
-.earth-img {
-  width: 150px;
-}
-
-.medal-img {
-  width: 200px;
-  margin-top: 50px
-}
-
 
 #usp-title {
   margin-top: 45px;
-  font-size: 25px;
+  font-size: 24px;
   font-weight: 300;
 
 }
 
-#usp-earth {
-  margin-top: 19px;
-  font-size: 25px;
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
 
-}
