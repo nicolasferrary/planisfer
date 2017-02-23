@@ -1,5 +1,5 @@
 class RoundTripFlight < ApplicationRecord
-  belongs_to :trip
+  has_many :trips, dependent: :destroy
   validates :price, presence: true
   validates :flight1_origin_airport_iata, presence: true
   validates :flight1_destination_airport_iata, presence: true
@@ -11,7 +11,7 @@ class RoundTripFlight < ApplicationRecord
   validates :flight2_landing_at, presence: true
 
   class << self
-    def create_flight(option, trip)
+    def create_flight(option)
       round_trip_flight = RoundTripFlight.new
       round_trip_flight.currency = extract_currency(option)
       round_trip_flight.price = extract_price(option)
@@ -25,7 +25,6 @@ class RoundTripFlight < ApplicationRecord
       round_trip_flight.flight2_landing_at = extract_landing_at(option, 1)
       round_trip_flight.carrier1 = extract_carrier(option, 0)
       round_trip_flight.carrier2 = extract_carrier(option, 1)
-      round_trip_flight.trip = trip
       round_trip_flight.save
     end
 

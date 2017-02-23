@@ -10,7 +10,6 @@ module Avion
       @starts_on = args[:starts_on]
       @returns_on = args[:returns_on]
       @nb_travelers = args[:nb_travelers]
-      @trip = args[:trip]
       # @cache_key_name = generate_cache_key_name
       # while in development
       # puts @cache_key_name
@@ -52,7 +51,7 @@ module Avion
       #                                               destination: @region,
       #                                               took_seconds: took_seconds)
       @data = JSON.parse(json)
-      rtf = create_trips(@data['trips']['tripOption'])
+      @trips = create_trips(@data['trips']['tripOption'])
       # $redis.set(@cache_key_name, Marshal.dump(output))
 
       # # Notify we are ready to return request data
@@ -64,12 +63,16 @@ module Avion
 
     private
 
-    # This method transforms an array of options from the API result into an array of instances of RoundTripFlight
+    # This method transforms an array of options from the API result into an array of trips
     def create_trips(options)
-      options.map do |option|
-        RoundTripFlight.create_flight(option, @trip)
+      trips = []
+      options.each do |option|
+        rtf = RoundTripFlight.create_flight(option)
         #ca renvoie True au lieu de renvoyer une instance de RoundTripFlight
+        trip = Trip.create(rtf, @city)
+        trips << trip
       end
+      trips
     end
 
     def search_params_make_sense
