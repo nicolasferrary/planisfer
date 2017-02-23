@@ -71,7 +71,8 @@ class TripsController < ApplicationController
   def create
   end
 
-  def destroy
+  def show
+    @trip = Trip.find(params[:id])
   end
 
 
