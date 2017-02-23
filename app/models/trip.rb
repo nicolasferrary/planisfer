@@ -2,6 +2,7 @@ class Trip < ApplicationRecord
  belongs_to :round_trip_flight
  belongs_to :city
  belongs_to :region
+ belongs_to :search
  validates :starts_on, presence: true
  validates :returns_on, presence: true
  validates :nb_travelers, presence: true

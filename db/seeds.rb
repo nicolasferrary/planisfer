@@ -309,6 +309,14 @@ round_trip_flight17 = RoundTripFlight.new(
  )
 round_trip_flight17.save
 
+search1 = Search.new(
+  starts_on: "Mon, 13 Mar 2017",
+  returns_on: "Fri, 24 Mar 2017",
+  nb_travelers: 2)
+search1.city = city1
+search1.region = region1
+search1.save!
+
 
 trip1 = Trip.new(
   starts_on: "Mon, 13 Mar 2017",
@@ -319,40 +327,46 @@ trip1.city = city1
 trip1.region = region1
 trip1.round_trip_flight = round_trip_flight1
 trip1.price = round_trip_flight1.price
+trip1.search = search1
 trip1.save!
 
 trip2 = Trip.new(
-  starts_on: "Tue, 14 Mar 2017",
-  returns_on: "Thu, 23 Mar 2017",
-  nb_travelers: 3
+  starts_on: "Tue, 13 Mar 2017",
+  returns_on: "Thu, 24 Mar 2017",
+  nb_travelers: 2
   )
 trip2.city = city2
 trip2.region = region1
 trip2.round_trip_flight = round_trip_flight7
 trip2.price = round_trip_flight7.price
+trip2.search = search1
 trip2.save!
 
 trip3 = Trip.new(
-  starts_on: "Wed, 15 Mar 2017",
-  returns_on: "Sat, 25 Mar 2017",
-  nb_travelers: 1
+  starts_on: "Wed, 13 Mar 2017",
+  returns_on: "Sat, 24 Mar 2017",
+  nb_travelers: 2
   )
 trip3.city = city2
 trip3.region = region2
 trip3.round_trip_flight = round_trip_flight11
 trip3.price = round_trip_flight11.price
+trip3.search = search1
 trip3.save!
 
 trip4 = Trip.new(
-  starts_on: "Fri, 17 Mar 2017",
-  returns_on: "Sun, 26 Mar 2017",
-  nb_travelers: 4
+  starts_on: "Fri, 13 Mar 2017",
+  returns_on: "Sun, 24 Mar 2017",
+  nb_travelers: 2
   )
 trip4.city = city3
 trip4.region = region4
 trip4.round_trip_flight = round_trip_flight16
 trip4.price = round_trip_flight16.price
+trip4.search = search1
 trip4.save!
+
+
 
 
 
