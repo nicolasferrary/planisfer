@@ -38,7 +38,6 @@ class TripsController < ApplicationController
     #For each route, send a request with 2 slices
 
     @trips = get_trips_for_routes(routes, starts_on, returns_on, nb_travelers, city, region)
-            binding.pry
     #@trips = Trip.all
     @trips_selection = @trips.first(4)
 

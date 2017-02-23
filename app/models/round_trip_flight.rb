@@ -14,16 +14,15 @@ class RoundTripFlight < ApplicationRecord
 
 
   def destination_airport_coordinates
-    results = Geocoder.search( "#{ flight1_destination_airport_iata } #{ region }")
-    # binding.pry
-    # self.latitude_arrive = # TO DO
-    # self.longitude_arrive = # TO DO
+    results = Geocoder.coordinates( "#{ flight1_destination_airport_iata } #{ region }")
+    self.latitude_arrive = results[0]
+    self.longitude_arrive = results[1]
   end
 
   def origin_airport_coordinates
-    results = Geocoder.search(" #{ flight2_origin_airport_iata } #{ region }")
-    # self.latitude_back = # TO DO
-    # self.longitude_back = # TO DO
+    results = Geocoder.coordinates(" #{ flight2_origin_airport_iata } #{ region }")
+    self.latitude_back = results[0]
+    self.longitude_back = results[1]
   end
 
   class << self

@@ -37,7 +37,7 @@ module Constants
     "Puglia" => ["BRI", "BDS"],
     "Tuscany" => ["BLQ", "PSA", "FLR", "PMF"],
     "Catalonia" => ["BCN", "GRO", "ILD", "REU"],
-    "Lombardia" => ["MIL", "TRN", "VRN", "GOA"] =>,
+    "Lombardia" => ["MIL", "TRN", "VRN", "GOA"],
     "Greece" => ["ATH", "HER", "JTR", "JMK", "CFU", "RHE"],
     "Portugal" => ["LIS", "FAO", "OPO", "BJZ"],
     "Croatie" => ["SPU", "DBV", "ZAG", "ZAD", "PUY", "RJK"] ,
