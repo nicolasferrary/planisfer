@@ -1,23 +1,236 @@
 
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-7">
-        <%  @trips_selection.each do |trip| %>
-          <%= trip.price %>
-          <%= trip.starts_on %>
-          <%= trip.returns_on %>
-        <% end %>
+
+<!-- We should find a way to only display the trips of the last search and not all the requests -->
+<div class="recap-of search">
+  <p>City you want to escape: <%= @city %> Region you want to visit: <%= @region%></p>
+  <p>Departure on: <%=  @starts_on%> Return on:<%= @returns_on%></p>
+</div>
+
+<div class="container-fluid">
+
+<!-- part with tab and the result -->
+  <div class="col-xs-12 col-sm-6">
+
+<!-- part with tab showing best results by airports -->
+    <div class="tabContainer">
+
+      <div class="row ">
+        <div class="flexbox">
+          <div>ALL</div>
+          <% @regions_airports.each do |airport| %>
+            <div><%= airport %></div>
+          <% end %>
+        </div>
       </div>
+
+      <% if @regions_airports.size > 0  %>
+        <div class="row ">
+          <div class="flexbox">
+            <div><%= @regions_airports[0] %></div>
+            <%= link_to trips_path do %>
+              <div>
+                <% if @trips0_0 == [] %>
+                  <%= "-" %>
+                <% else %>
+                  <%= @trips0_0.first.price.to_f %> €
+                <% end %>
+              </div>
+            <% end  %>
+            <%= link_to trips_path do %>
+              <div>
+                <% if @trips0_1 == [] %>
+                  <%= "-" %>
+                <% else %>
+                  <%= @trips0_1.first.price.to_f %> €
+                <% end %>
+              </div>
+            <% end  %>
+            <%= link_to trips_path do %>
+              <div>
+                <% if @trips0_2 == [] %>
+                  <%= "-" %>
+                <% else %>
+                  <%= @trips0_2.first.price.to_f %> €
+                <% end %>
+              </div>
+            <% end  %>
+            <%= link_to trips_path do %>
+              <div>
+                <% if @trips0_3 == [] %>
+                  <%= "-" %>
+                <% else %>
+                  <%= @trips0_3.first.price.to_f %> €
+                <% end %>
+              </div>
+            <% end  %>
+          </div>
+        </div>
+      <% end  %>
+
+      <% if @regions_airports.size > 1  %>
+        <div class="row ">
+          <div class="flexbox">
+            <div><%= @regions_airports[1] %></div>
+            <%= link_to trips_path do %>
+              <div>
+                <% if @trips1_0 == [] %>
+                  <%= "-" %>
+                <% else %>
+                  <%= @trips1_0.first.price.to_f %> €
+                <% end %>
+              </div>
+            <% end  %>
+            <%= link_to trips_path do %>
+              <div>
+                <% if @trips1_1 == [] %>
+                  <%= "-" %>
+                <% else %>
+                  <%= @trips1_1.first.price.to_f %> €
+                <% end %>
+              </div>
+            <% end  %>
+            <%= link_to trips_path do %>
+              <div>
+                <% if @trips1_2 == [] %>
+                  <%= "-" %>
+                <% else %>
+                  <%= @trips1_2.first.price.to_f %> €
+                <% end %>
+              </div>
+            <% end  %>
+            <%= link_to trips_path do %>
+              <div>
+                <% if @trips1_3 == [] %>
+                  <%= "-" %>
+                <% else %>
+                  <%= @trips1_3.first.price.to_f %> €
+                <% end %>
+              </div>
+            <% end  %>
+          </div>
+        </div>
+      <% end  %>
+
+      <% if @regions_airports.size > 2  %>
+        <div class="row ">
+          <div class="flexbox">
+            <div><%= @regions_airports[2] %></div>
+            <%= link_to trips_path do %>
+              <div>
+                <% if @trips2_0 == [] %>
+                  <%= "-" %>
+                <% else %>
+                  <%= @trips2_0.first.price.to_f %> €
+                <% end %>
+              </div>
+            <% end  %>
+            <%= link_to trips_path do %>
+              <div>
+                <% if @trips2_1 == [] %>
+                  <%= "-" %>
+                <% else %>
+                  <%= @trips2_1.first.price.to_f %> €
+                <% end %>
+              </div>
+            <% end  %>
+            <%= link_to trips_path do %>
+              <div>
+                <% if @trips2_2 == [] %>
+                  <%= "-" %>
+                <% else %>
+                  <%= @trips2_2.first.price.to_f %> €
+                <% end %>
+              </div>
+            <% end  %>
+            <%= link_to trips_path do %>
+              <div>
+                <% if @trips2_3 == [] %>
+                  <%= "-" %>
+                <% else %>
+                  <%= @trips2_3.first.price.to_f %> €
+                <% end %>
+              </div>
+            <% end  %>
+          </div>
+        </div>
+      <% end  %>
+
+
+      <% if @regions_airports.size > 3  %>
+        <div class="row ">
+          <div class="flexbox">
+            <div><%= @regions_airports[3] %></div>
+            <%= link_to trips_path do %>
+              <div>
+                <% if @trips3_0 == [] %>
+                  <%= "-" %>
+                <% else %>
+                  <%= @trips3_0.first.price.to_f %> €
+                <% end %>
+              </div>
+            <% end  %>
+            <%= link_to trips_path do %>
+              <div>
+                <% if @trips3_1 == [] %>
+                  <%= "-" %>
+                <% else %>
+                  <%= @trips3_1.first.price.to_f %> €
+                <% end %>
+              </div>
+            <% end  %>
+            <%= link_to trips_path do %>
+              <div>
+                <% if @trips3_2 == [] %>
+                  <%= "-" %>
+                <% else %>
+                  <%= @trips3_2.first.price.to_f %> €
+                <% end %>
+              </div>
+            <% end  %>
+            <%= link_to trips_path do %>
+              <div>
+                <% if @trips3_3 == [] %>
+                  <%= "-" %>
+                <% else %>
+                  <%= @trips3_3.first.price.to_f %> €
+                <% end %>
+              </div>
+            <% end  %>
+          </div>
+        </div>
+      <% end  %>
     </div>
 
+    The 4 cheapest results:
 
-      <div class="col-sm-5">
+    <div class="row">
+      <% @trips_selection.each do |trip| %>
+        <div class="col-xs-12 col-sm-12">
+          <%= link_to trip_path(trip) do %>
+            <div class="cardContainer flexbox">
+              <div class="card-description">
+                <p>Departure on <%= trip.round_trip_flight.flight1_take_off_at.strftime("%b %d") %> <%= trip.round_trip_flight.flight1_origin_airport_iata %>  <%= trip.round_trip_flight.flight1_take_off_at.strftime("%H:%M") %> => <%= trip.round_trip_flight.flight1_landing_at.strftime("%H:%M") %> <%= trip.round_trip_flight.flight1_destination_airport_iata %></p>
+                <p>Return on <%= trip.round_trip_flight.flight2_take_off_at.strftime("%b %d") %> <%= trip.round_trip_flight.flight2_origin_airport_iata %> <%= trip.round_trip_flight.flight2_take_off_at.strftime("%H:%M") %> => <%= trip.round_trip_flight.flight2_landing_at.strftime("%H:%M") %> <%= trip.round_trip_flight.flight2_destination_airport_iata %></p>
+              </div>
+              <div class="card-price ">
+                <h2> <%= trip.price %> €</h2>
+              </div> <!-- fin card-price -->
+            </div> <!-- fin cardContainer -->
+          <% end %>
+        </div> <!-- fin de col -->
+      <% end %>
+    </div>  <!-- fin du row -->
+   
+  </div>
+     <div class="col-sm-5">
         <div>
           <div id="map" style="width: 100%; height: 400px;"></div>
         </div>
       </div>
-  </div>
 
+</div>
+
+  
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
@@ -42,3 +255,4 @@
 
   <% end %>
 <% end %>
+
