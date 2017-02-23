@@ -37,6 +37,7 @@ class TripsController < ApplicationController
 
     #For each route, send a request with 2 slices
     @trips = Trip.all
+    @regions_airports = Constants::REGIONS_AIRPORTS[@region]
     #commented to avoid API request
     # @trips = get_trips_for_routes(routes, @starts_on, @returns_on, @nb_travelers, @city, @region)
     @trips_selection = @trips.first(4)

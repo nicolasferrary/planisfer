@@ -10,82 +10,83 @@
   <div class="col-xs-12 col-sm-6">
     <div class="tabContainer">
       <div class="row tab-line">
-        <% @region.each do |airport| %>
+        <div>ALL</div>
+        <% @regions_airports.each do |airport| %>
           <div><%= airport %></div>
         <% end %>
       </div>
-      <% if @region.size > 0  %>
+      <% if @regions_airports.size > 0  %>
         <div class="row tab-line">
-          <div><%= @region.airport[0] %></div>
-          <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[0]),flight2_origin_airport_iata(@region.airport[0])).first.price %>
+          <div><%= @regions_airports[0] %></div>
+          <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@regions_airports[0]),flight2_origin_airport_iata(@regions_airports[0])).first.price %>
           </div>
-          <% if @region.size > 1  %>
-            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[1]),flight2_origin_airport_iata(@region.airport[0])).first.price %>
+          <% if @regions_airports.size > 1  %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@regions_airports[1]),flight2_origin_airport_iata(@regions_airports[0])).first.price %>
             </div>
           <% end  %>
-          <% if @region.size > 2 %>
-            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[2]),flight2_origin_airport_iata(@region.airport[0])).first.price %>
+          <% if @regions_airports.size > 2 %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@regions_airports[2]),flight2_origin_airport_iata(@regions_airports[0])).first.price %>
             </div>
           <% end  %>
-          <% if @region.size > 3 %>
-            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[3]),flight2_origin_airport_iata(@region.airport[0])).first.price %>
+          <% if @regions_airports.size > 3 %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@regions_airports[3]),flight2_origin_airport_iata(@regions_airports[0])).first.price %>
             </div>
           <% end  %>
         </div>
       <% end  %>
-      <% if @region.size > 1 %>
+      <% if @regions_airports.size > 1 %>
         <div class="row tab-line">
           <div><%= @region.airport[1] %></div>
-          <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[0]),flight2_origin_airport_iata(@region.airport[1])).first.price %>
+          <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@regions_airports[0]),flight2_origin_airport_iata(@regions_airports[1])).first.price %>
           </div>
-          <% if @region.size > 1 %>
-            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[1]),flight2_origin_airport_iata(@region.airport[1])).first.price %>
+          <% if @regions_airports.size > 1 %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@regions_airports[1]),flight2_origin_airport_iata(@regions_airports[1])).first.price %>
             </div>
           <% end  %>
-          <% if @region.size > 2 %>
-            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[2]),flight2_origin_airport_iata(@region.airport[1])).first.price %>
+          <% if @regions_airports.size > 2 %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@regions_airports[2]),flight2_origin_airport_iata(@regions_airports[1])).first.price %>
             </div>
           <% end  %>
-          <% if @region.size > 3 %>
-            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[3]),flight2_origin_airport_iata(@region.airport[1])).first.price %>
+          <% if @regions_airports.size > 3 %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@regions_airports[3]),flight2_origin_airport_iata(@regions_airports[1])).first.price %>
             </div>
           <% end  %>
         </div>
       <% end  %>
-      <% if @region.size > 2 %>
+      <% if @regions_airports.size > 2 %>
         <div class="row tab-line">
           <div><%= @region.airport[2] %></div>
-          <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[0]),flight2_origin_airport_iata(@region.airport[2])).first.price %>
+          <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@regions_airports[0]),flight2_origin_airport_iata(@regions_airports[2])).first.price %>
           </div>
-          <% if @region.size > 1 %>
-            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[1]),flight2_origin_airport_iata(@region.airport[2])).first.price %>
+          <% if @regions_airports.size > 1 %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@regions_airports[1]),flight2_origin_airport_iata(@regions_airports[2])).first.price %>
             </div>
           <% end  %>
-          <% if @region.size > 2%>
-            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[2]),flight2_origin_airport_iata(@region.airport[2])).first.price %>
+          <% if @regions_airports.size > 2%>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@regions_airports[2]),flight2_origin_airport_iata(@regions_airports[2])).first.price %>
             </div>
           <% end  %>
-          <% if @region.size > 3 %>
-            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[3]),flight2_origin_airport_iata(@region.airport[2])).first.price %>
+          <% if @regions_airports.size > 3 %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@regions_airports[3]),flight2_origin_airport_iata(@regions_airports[2])).first.price %>
             </div>
           <% end  %>
         </div>
       <% end  %>
-      <% if @region.size > 3 %>
+      <% if @regions_airports.size > 3 %>
         <div class="row tab-line">
           <div><%= @region.airport[3] %></div>
-          <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[0]),flight2_origin_airport_iata(@region.airport[3])).first.price %>
+          <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@regions_airports[0]),flight2_origin_airport_iata(@regions_airports[3])).first.price %>
           </div>
-          <% if @region.size > 1 %>
-            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[1]),flight2_origin_airport_iata(@region.airport[3])).first.price %>
+          <% if @regions_airports.size > 1 %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@regions_airports[1]),flight2_origin_airport_iata(@regions_airports[3])).first.price %>
             </div>
           <% end  %>
-          <% if @region.size > 2 %>
-            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[2]),flight2_origin_airport_iata(@region.airport[3])).first.price %>
+          <% if @regions_airports.size > 2 %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@regions_airports.airport[2]),flight2_origin_airport_iata(@regions_airports.airport[3])).first.price %>
             </div>
           <% end  %>
-          <% if @region.size > 3 %>
-            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@region.airport[3]),flight2_origin_airport_iata(@region.airport[3])).first.price %>
+          <% if @regions_airports.size > 3 %>
+            <div><%= @trips.round_trip_flights.where(flight1_destination_airport_iata(@regions_airports.airport[3]),flight2_origin_airport_iata(@regions_airports.airport[3])).first.price %>
             </div>
           <% end  %>
         </div>
