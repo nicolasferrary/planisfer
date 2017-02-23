@@ -318,6 +318,7 @@ trip1 = Trip.new(
 trip1.city = city1
 trip1.region = region1
 trip1.round_trip_flight = round_trip_flight1
+trip1.price = round_trip_flight1.price
 trip1.save!
 
 trip2 = Trip.new(

@@ -38,6 +38,24 @@ class TripsController < ApplicationController
     #For each route, send a request with 2 slices
     @trips = Trip.all
     @regions_airports = Constants::REGIONS_AIRPORTS[@region]
+
+    # Here we define selections of trips that match f1 destination airport and f2 origin airport
+    @trips0_0 = select_trips_with_airports(0,0)
+    @trips0_1 = select_trips_with_airports(0,1)
+    @trips0_2 = select_trips_with_airports(0,2)
+    @trips0_3 = select_trips_with_airports(0,3)
+    @trips1_0 = select_trips_with_airports(1,0)
+    @trips1_1 = select_trips_with_airports(1,1)
+    @trips1_2 = select_trips_with_airports(1,2)
+    @trips1_3 = select_trips_with_airports(1,3)
+    @trips2_0 = select_trips_with_airports(2,0)
+    @trips2_1 = select_trips_with_airports(2,1)
+    @trips2_2 = select_trips_with_airports(2,2)
+    @trips2_3 = select_trips_with_airports(2,3)
+    @trips3_0 = select_trips_with_airports(3,0)
+    @trips3_1 = select_trips_with_airports(3,1)
+    @trips3_2 = select_trips_with_airports(3,2)
+    @trips3_3 = select_trips_with_airports(3,3)
     #commented to avoid API request
     # @trips = get_trips_for_routes(routes, @starts_on, @returns_on, @nb_travelers, @city, @region)
     @trips_selection = @trips.first(4)
@@ -179,6 +197,19 @@ class TripsController < ApplicationController
   #     arrival_range.include?(offer.roundtrips.first.arrival_time_back) && arrival_range.include?(offer.roundtrips.last.arrival_time_back)
   #   }
   # end
+
+
+
+  def select_trips_with_airports(a,b)
+   trips =[]
+   @trips.each do |trip|
+     if trip.round_trip_flight.flight1_destination_airport_iata == @regions_airports[a] && trip.round_trip_flight.flight2_origin_airport_iata == @regions_airports[b]
+        trips << trip
+     end
+   end
+   trips
+  end
+
 end
 
 
