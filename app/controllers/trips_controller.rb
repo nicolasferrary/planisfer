@@ -39,6 +39,7 @@ class TripsController < ApplicationController
     @trips = get_trips_for_routes(routes, starts_on, returns_on, nb_travelers, city, region)
     @trips_selection = @trips.first(4)
 
+    apply_index_filters
 
 
     # Do we have something that is not cached?
