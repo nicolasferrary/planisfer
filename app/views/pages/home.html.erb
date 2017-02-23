@@ -1,36 +1,139 @@
-
-<h1>Search an amazing trip</h1>
-
-
-<div class="banner col-xs-12">
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.3) 0%, rgba(0,36,61,0.4) 50%), url('');">
   <div class="banner-content">
-   <div class="container">
-     <div class="row">
-       <div class="col-sm-12">
-        <div class="search-form-box">
-          <%=form_tag trips_path, :controller => 'trips', method: :get, id: "new_result" do %>
-          <%= select_tag :city, options_for_select(Constants::AIRPORTS.invert.sort), class: "origin-field text-center", prompt: "From", style: "border:none" %>
-          <div class="box-separator"></div>
-          <%= select_tag  :region, options_for_select(Constants::REGIONS.invert.sort), class: "origin-field text-center", prompt: "To", style: "border:none" %>
-          <div class="box-separator"></div>
-          <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'datepicker text-center',style: "border: none" %>
-          <div class="box-separator"></div>
-          <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => 'datepicker text-center', style: "border: none" %>
-        </div>
-        <div class="submit-button-div">
-          <%= submit_tag "Explore", class: "submit-button" %>
-          <%end%>
-        </div>
-      </div>
-    </div>
+   <h1>Search an amazing trip</h1>
+   <p>The new way to plan your next roadtrip</p>
+
+   <div class="search-form-box">
+    <%=form_tag trips_path, :controller => 'trips', method: :get, id: "new_result" do %>
+    <%= select_tag :city, options_for_select(Constants::AIRPORTS.invert.sort), class: "origin-field text-center", prompt: "From", style: "border:none" %>
+    <div class="box-separator"></div>
+    <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'datepicker text-center',style: "border: none" %>
+    <div class="box-separator"></div>
+    <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => 'datepicker text-center', style: "border: none" %>
+    <div class="box-separator"></div>
+    <%= select_tag  :region, options_for_select(Constants::REGIONS.invert.sort), class: "origin-field text-center", prompt: "To", style: "border:none" %>
+  </div>
+  <div class="submit-button-div padded">
+    <%= submit_tag "Explore", class: "btn btn-warning lg" %>
+    <%end%>
   </div>
 </div>
 </div>
 
+<div class="trending">
+    <h1 class="banner2-title ">Trendy destinations</h1>
+<div class="blocks clearfix">
+    <a class="block sm destination"
+    href="/brazil/rio-de-janeiro/trip-planner-d311534597"
+    data-id="311534597"
+    data-name="Rio de Janeiro">
+    <span class="dest-image lazyload" data-url="https://s.inspirock.com/images/heroes/f/rio-de-janeiro-2.jpg" title="Rio de Janeiro Trip Planner"></span>
+    <span class="box">
+      <span class="text in-box">
+        <span class="primarytext">Andalucia</span>
+      </span>
+    </span>
+  </a>
+  <a class="block lg destination"
+  href="/spain/madrid/trip-planner-d57126901"
+  data-id="57126901"
+  data-name="Madrid">
+  <span class="dest-image lazyload" data-url="https://s.inspirock.com/images/heroes/f/madrid.jpg" title="Madrid Trip Planner"></span>
+  <span class="box">
+    <span class="text in-box">
+      <span class="primarytext">Greece</span>
+    </span>
+  </span>
+</a>
+<a class="block sm destination"
+href="/india/nashik/trip-planner-d611548923"
+data-id="611548923"
+data-name="Nashik">
+<span class="dest-image lazyload" data-url="https://inspirock.s3.amazonaws.com/ds10/photos/India/h/sula-vineyards-1137884748.jpg" title="Nashik Trip Planner"></span>
+<span class="box">
+  <span class="text in-box">
+    <span class="primarytext">Ireland</span>
+  </span>
+  <span class="subtext-box in-box">
+    <span class="subtext">Trip Planner</span>
+  </span>
+</span>
+</a>
+<a class="block sm destination"
+href="/south-korea/trip-planner-d311180817"
+data-id="311180817"
+data-name="South Korea">
+<span class="dest-image lazyload" data-url="https://s.inspirock.com/images/heroes/f/south-korea.jpg" title="South Korea Trip Planner"></span>
+<span class="box">
+  <span class="text in-box">
+    <span class="primarytext">South of France</span>
+  </span>
+  <span class="subtext-box in-box">
+    <span class="subtext">Trip Planner</span>
+  </span>
+</span>
+</a>
+<a class="block sm info" href="/recent-plans">
+  <span class="box">
+    <span class="text in-box">
+      <span class="primarytext">Infinity</span>
+      <span class="subtext">of flights combo</span>
+    </span>
+  </span>
+</a>
+<a class="block lg destination"
+href="/indonesia/bali/trip-planner-d311181957"
+data-id="311181957"
+data-name="Bali">
+<span class="dest-image lazyload" data-url="https://s.inspirock.com/images/heroes/f/bali-4.jpg" title="Bali Trip Planner"></span>
+<span class="box">
+  <span class="text in-box">
+    <span class="primarytext">Central Europe</span>
+  </span>
+</span>
+</a>
+<a class="block sm destination"
+href="/myanmar/trip-planner-d911180589"
+data-id="911180589"
+data-name="Myanmar">
+<span class="dest-image lazyload" data-url="https://s.inspirock.com/images/heroes/f/myanmar.jpg" title="Myanmar Trip Planner"></span>
+<span class="box">
+  <span class="text in-box">
+    <span class="primarytext">Tuscany</span>
+  </span>
+</span>
+</a>
+</div>
+</div>
 
 
-<%= content_for :after_js do %>
-<script>
+<div class="banner3 col-xs-12">
+  <div class="banner-content text-center">
+    <h1 class="banner2-title ">Why use Planisfer </h1>
+  </div>
+  <div id="description-usp"></div>
+  <div class="container">
+    <div class="row">
+      <div class=" col-xs-12 col-md-4  text-center">
+        <%= image_tag "computer.png", class: "glasses-img" %>
+        <p id="usp-earth">Find the best flights combo for your roadtrip</p>
+      </div>
+      <div class=" col-xs-12 col-md-4  text-center">
+       <%= image_tag "computer.png", class: "glasses-img" %>
+       <p id="usp-earth"> Get inspiration to travel through Europe</p>
+     </div>
+
+     <div class=" col-xs-12 col-md-4  text-center">
+       <%= image_tag "computer.png", class: "glasses-img" %>
+       <p id="usp-earth">Save money with our flights comparator</p>
+     </div>
+   </div>
+ </div>
+
+
+
+ <%= content_for :after_js do %>
+ <script>
   $(document).ready(function() {
     $('#starts_on').datepicker({
       todayHighlight: true,
