@@ -4,68 +4,54 @@
 
 <div class="banner col-xs-12">
   <div class="banner-content">
-     <div class="container">
-       <div class="row">
-         <div class="col-sm-12">
-          <div class="search-form-box">
-
-            <%=form_tag trips_path, :controller => 'trips', method: :get, id: "new_result" do %>
-              <%= text_field_tag :city %>
-              <div class="box-separator"></div>
-              <%= text_field_tag  :region  %>
-              <div class="box-separator"></div>
-              <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'datepicker text-center',style: "border: none" %>
-              <div class="box-separator"></div>
-              <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => 'datepicker text-center', style: "border: none" %>
-              <div class="box-separator"></div>
-              <%= text_field_tag :nb_travelers, nil, placeholder: "Number of travelers" %>
-          </div>
-          <div class="submit-button-div">
-            <%= submit_tag "Explore", class: "submit-button" %>
-            <%end%>
-            </div>
+   <div class="container">
+     <div class="row">
+       <div class="col-sm-12">
+        <div class="search-form-box">
+          <%=form_tag trips_path, :controller => 'trips', method: :get, id: "new_result" do %>
+          <%= select_tag :city, options_for_select(Constants::AIRPORTS.invert.sort), class: "origin-field text-center", prompt: "From", style: "border:none" %>
+          <div class="box-separator"></div>
+          <%= select_tag  :region, options_for_select(Constants::REGIONS.invert.sort), class: "origin-field text-center", prompt: "To", style: "border:none" %>
+          <div class="box-separator"></div>
+          <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'datepicker text-center',style: "border: none" %>
+          <div class="box-separator"></div>
+          <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => 'datepicker text-center', style: "border: none" %>
+        </div>
+        <div class="submit-button-div">
+          <%= submit_tag "Explore", class: "submit-button" %>
+          <%end%>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-<div class="footer text-center">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-4 col-xs-offset-4">
-      <div class="text-footer">
-      Made with <i class="fa fa-heart"></i> @LeWagon
-      </div>
-      </div>
-    </div>
-  </div>
 </div>
 
-<%= content_for :after_js do %>
- <script>
-    $(document).ready(function() {
-      $('#starts_on').datepicker({
-        todayHighlight: true,
-        orientation: "bottom-left",
-        autoclose: true,
-        format: 'yyyy-mm-dd',
-      });
-      $('#returns_on').datepicker({
-        todayHighlight: true,
-        orientation: "bottom-left",
-        autoclose: true,
-        format: 'yyyy-mm-dd',
-      }).on("show", function(e) {
-          var thereDate = $("#starts_on").datepicker("getDate");
-          var backDate = $("#returns_on").datepicker("getDate");
 
-          if (backDate == null) {
-            $('#date_back').datepicker('update', thereDate);
-          }
-      });
+
+<%= content_for :after_js do %>
+<script>
+  $(document).ready(function() {
+    $('#starts_on').datepicker({
+      todayHighlight: true,
+      orientation: "bottom-left",
+      autoclose: true,
+      format: 'yyyy-mm-dd',
     });
-  </script>
+    $('#returns_on').datepicker({
+      todayHighlight: true,
+      orientation: "bottom-left",
+      autoclose: true,
+      format: 'yyyy-mm-dd',
+    }).on("show", function(e) {
+      var thereDate = $("#starts_on").datepicker("getDate");
+      var backDate = $("#returns_on").datepicker("getDate");
+
+      if (backDate == null) {
+        $('#date_back').datepicker('update', thereDate);
+      }
+    });
+  });
+</script>
 <% end %>
 
