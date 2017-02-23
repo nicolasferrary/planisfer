@@ -51,7 +51,7 @@ module Avion
       #                                               destination: @region,
       #                                               took_seconds: took_seconds)
       @data = JSON.parse(json)
-      @trips = create_trips(@data['trips']['tripOption'])
+      @rtf = create_rtf(@data['trips']['tripOption'])
       # $redis.set(@cache_key_name, Marshal.dump(output))
 
       # # Notify we are ready to return request data
@@ -64,15 +64,15 @@ module Avion
     private
 
     # This method transforms an array of options from the API result into an array of trips
-    def create_trips(options)
-      trips = []
+    def create_rtf(options)
+      rtfs = []
       options.each do |option|
         rtf = RoundTripFlight.create_flight(option)
+        rtfs << rtf
+        raise
         #ca renvoie True au lieu de renvoyer une instance de RoundTripFlight
-        trip = Trip.create(rtf, @city)
-        trips << trip
       end
-      trips
+      rtfs
     end
 
     def search_params_make_sense
