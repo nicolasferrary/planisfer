@@ -37,7 +37,7 @@ class TripsController < ApplicationController
 
     #For each route, send a request with 2 slices
 
-    @trips = get_trips_for_routes(routes, starts_on, returns_on, nb_travelers, city, region)
+    @trips = get_trips_for_routes(routes, @starts_on, @returns_on, @nb_travelers, @city, @region)
     @regions_airports = Constants::REGIONS_AIRPORTS[@region]
 
     # Here we define selections of trips that match f1 destination airport and f2 origin airport
@@ -59,7 +59,7 @@ class TripsController < ApplicationController
     @trips3_3 = select_trips_with_airports(3,3)
 
 
-   
+
 
 
     @trips_selection = @trips.first(4)
