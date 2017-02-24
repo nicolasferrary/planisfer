@@ -18,84 +18,6 @@ class TripsController < ApplicationController
   # end
 
   def index
-    @starts_on = params[:starts_on]
-    @returns_on = params[:returns_on]
-    @nb_travelers = params[:nb_travelers]
-    @city = params[:city]
-    @region = params[:region]
-    #for test only. To be changed with constants
-    @region_airports = Constants::REGIONS_AIRPORTS[@region]
-
-
-    # generate routes
-    routes = Avion.generate_routes(@city, @region_airports)
-    #only for debug. To be removed
-    @routes = routes
-
-
-    # # Test all routes against cache
-    # uncached_routes = Avion.compare_routes_against_cache(routes, starts_on, returns_on)
-
-    #For each route, send a request with 2 slices
-
-    @trips = Trip.all
-    apply_airport_filters
-    # @trips = get_trips_for_routes(routes, @starts_on, @returns_on, @nb_travelers, @city, @region)
-    @trips = @trips.sort_by { |trip| trip.price }
-
-    @trips_selection = @trips.first(4)
-
-    # Here we define selections of trips that match f1 destination airport and f2 origin airport
-    @trips0_0 = select_trips_with_airports(0,0)
-    @trips0_1 = select_trips_with_airports(0,1)
-    @trips0_2 = select_trips_with_airports(0,2)
-    @trips0_3 = select_trips_with_airports(0,3)
-    @trips1_0 = select_trips_with_airports(1,0)
-    @trips1_1 = select_trips_with_airports(1,1)
-    @trips1_2 = select_trips_with_airports(1,2)
-    @trips1_3 = select_trips_with_airports(1,3)
-    @trips2_0 = select_trips_with_airports(2,0)
-    @trips2_1 = select_trips_with_airports(2,1)
-    @trips2_2 = select_trips_with_airports(2,2)
-    @trips2_3 = select_trips_with_airports(2,3)
-    @trips3_0 = select_trips_with_airports(3,0)
-    @trips3_1 = select_trips_with_airports(3,1)
-    @trips3_2 = select_trips_with_airports(3,2)
-    @trips3_3 = select_trips_with_airports(3,3)
-
-
-
-    # On itère sur les trips
-
-    # Do we have something that is not cached?
-    # if uncached_routes.empty?
-    #   # This won't do any requests as we work with cache
-    #   # @offers = get_offers_for_routes(routes, starts_on, returns_on)
-    #   # # clone unfiltered results to check against later
-    #   # @unfiltered_offers = @offers.clone
-    #   # do filtering
-    #   # apply_index_filters
-    #   # remove duplicate cities
-    #   # @offers = @offers.uniq { |offer| offer.destination_city }
-    #   # # and sort by total price
-    #   # @offers = @offers.sort_by { |offer| offer.total }
-    # else # we have to build a new cache
-    #   # save url to redirect back from wait.html.erb via JS
-    #   session[:url_for_wait] = request.original_url
-    #   # render wait view without any routing
-    #   render :wait
-    #   # Send requests and build the cache in the background
-    #   QueryRoutesJob.perform_later(uncached_routes, starts_on, returns_on, nb_travelers)
-    # # end
-    # session[:search_url] = request.original_url
-
-    @trips = Trip.where.not(latitude: nil, longitude: nil)
-
-
-    @hash = Gmaps4rails.build_markers(@trips) do |trip, marker|
-      marker.lat trip.latitude
-      marker.lng trip.longitude
-      # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
     end
 
 
@@ -205,21 +127,21 @@ class TripsController < ApplicationController
   #   (arrival_as_date + arrival_time_choice.first.hours .. arrival_as_date + arrival_time_choice.last.hours)
   # end
 
-  def filter_by_airport1(trips, filters)
-    #trips is an array and filters is a hash
-    trips.select { |trip|
-      trip.round_trip_flight.flight1_destination_airport_iata == filters["region_airport1"]
-    }
+  # def filter_by_airport1(trips, filters)
+  #   #trips is an array and filters is a hash
+  #   trips.select { |trip|
+  #     trip.round_trip_flight.flight1_destination_airport_iata == filters["region_airport1"]
+  #   }
 
-  end
+  # end
 
-  def filter_by_airport2(trips, filters)
-    #trips is an array and filters is a hash
-    trips.select { |trip|
-      trip.round_trip_flight.flight2_origin_airport_iata == filters["region_airport2"]
-    }
+  # def filter_by_airport2(trips, filters)
+  #   #trips is an array and filters is a hash
+  #   trips.select { |trip|
+  #     trip.round_trip_flight.flight2_origin_airport_iata == filters["region_airport2"]
+  #   }
 
-  end
+  # end
 
 
 
@@ -231,15 +153,15 @@ class TripsController < ApplicationController
 
 
 
-  def select_trips_with_airports(a,b)
-   trips =[]
-   @trips.each do |trip|
-     if trip.round_trip_flight.flight1_destination_airport_iata == @region_airports[a] && trip.round_trip_flight.flight2_origin_airport_iata == @region_airports[b]
-        trips << trip
-     end
-   end
-   trips
-  end
+  # def select_trips_with_airports(a,b)
+  #  trips =[]
+  #  @trips.each do |trip|
+  #    if trip.round_trip_flight.flight1_destination_airport_iata == @region_airports[a] && trip.round_trip_flight.flight2_origin_airport_iata == @region_airports[b]
+  #       trips << trip
+  #    end
+  #  end
+  #  trips
+  # end
 
 end
 
