@@ -11,7 +11,7 @@
   color: inherit;
 }
 
-.tablink {
+.tabLink {
   color: inherit;
   text-decoration: none;
 }
@@ -19,12 +19,13 @@
 .tabGrid:hover {
   opacity: 0.5;
   text-decoration: none;
+  color: $brand-color;
 }
 
-.tablink:hover{
+.tabLink:hover{
   opacity: 0.5;
   text-decoration: none;
-  color: inherit;
+  color: $brand-color;
 }
 
 .tabContainer {
@@ -35,7 +36,8 @@
 }
 
 .legendTabResult {
-  background-color: $my-ivory;
+  background-color: $brand-color;
+  color: white;
   height: 20px;
   width: 480px;
   margin-left: 70px;
@@ -44,13 +46,15 @@
 
 .legendReturn {
   position: absolute;
-  top: 89px;
-  left: -40px;
+  color: white;
+  top: 83px;
+  left: -45px;
 }
 
 .legendReturn p {
   transform: rotate(-90deg);
-  background-color: $my-ivory;
+  background-color: $brand-color;
+  color: white;
   margin-top: 3px;
 }
 
