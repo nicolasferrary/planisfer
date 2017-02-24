@@ -7,6 +7,7 @@
   align-items: center;
   justify-content: center;
   background: linear-gradient(to left, #FF5D3B, #FF2B67);
+  position: relative;
 }
 
 
@@ -18,7 +19,6 @@
   font-stretch: normal;
   letter-spacing: -4px;
   text-align: center;
-  color: white;
   font-size: 40px;
   font-weight: 420;
   }
@@ -78,4 +78,13 @@
 
 }
 
+.logo {
+  width: 120px;
+  position: absolute;
+  left: 30px;
+  top: 30px;
+}
 
+.button {
+  padding-top: 10px;
+}

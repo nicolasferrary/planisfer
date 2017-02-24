@@ -21,9 +21,6 @@ class TripsController < ApplicationController
     end
 
 
-
-  end
-
   def update
   end
 
