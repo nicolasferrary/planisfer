@@ -48,7 +48,7 @@
       <hr>
 
       <p id="good-style"><i class="fa fa-calendar-check-o" id="good-style" aria-hidden="true"></i>  But, snif, on <%= @trip.returns_on.strftime("%B %d")   %> </p>
-      <p><i class="fa fa-plane" id="good-style" aria-hidden="true"></i>  Don't forget to take your flight back from <%= Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata] %> <%= @trip.round_trip_flight.flight2_origin_airport_iata %> at <%= @trip.round_trip_flight.flight2_take_off_at.strftime("%H:%M") %> </p>
+      <p><i class="fa fa-plane" id="good-style" aria-hidden="true"></i>  Don't forget to take your flight back from <%= Constants::CITY_REGION[@trip.round_trip_flight.flight2_origin_airport_iata] %> <%= @trip.round_trip_flight.flight2_origin_airport_iata %> at <%= @trip.round_trip_flight.flight2_take_off_at.strftime("%H:%M") %> </p>
       <p> <i class="fa fa-flip-vertical fa-plane" id="good-style" aria-hidden="true"> </i> To be back in <%= @trip.city.name  %> <%= @trip.round_trip_flight.flight2_destination_airport_iata %> at <%= @trip.round_trip_flight.flight2_landing_at.strftime("%H:%M") %> </p> <hr>
       <p> <i class="fa fa-credit-card" id="good-style" aria-hidden="true"></i> For only <%= @trip.price %> EUR</p>
       <h4>What a Road Trip, man ! </h4>
