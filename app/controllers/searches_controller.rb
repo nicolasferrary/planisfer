@@ -16,9 +16,9 @@ class SearchesController < ApplicationController
     @nb_travelers = params[:nb_travelers]
     @city_name = params[:city]
     @region_name = params[:region]
+
     #for test only. To be changed with constants
     @region_airports = Constants::REGIONS_AIRPORTS[@region_name]
-
 
     # generate routes
     routes = Avion.generate_routes(@city_name, @region_airports)
