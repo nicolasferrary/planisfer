@@ -13,17 +13,17 @@ class RoundTripFlight < ApplicationRecord
   validates :flight2_landing_at, presence: true
 
 
-  def destination_airport_coordinates
-    results = Geocoder.coordinates( "#{ flight1_destination_airport_iata } #{ region.name }")
-    self.latitude_arrive = results[0]
-    self.longitude_arrive = results[1]
-  end
+  # def destination_airport_coordinates
+  #   results = Geocoder.coordinates( "#{ flight1_destination_airport_iata } #{ region.name }")
+  #   self.latitude_arrive = results[0]
+  #   self.longitude_arrive = results[1]
+  # end
 
-  def origin_airport_coordinates
-    results = Geocoder.coordinates(" #{ flight2_origin_airport_iata } #{ region.name }")
-    self.latitude_back = results[0]
-    self.longitude_back = results[1]
-  end
+  # def origin_airport_coordinates
+  #   results = Geocoder.coordinates(" #{ flight2_origin_airport_iata } #{ region.name }")
+  #   self.latitude_back = results[0]
+  #   self.longitude_back = results[1]
+  # end
 
   class << self
     def create_flight(option, region)
@@ -41,8 +41,8 @@ class RoundTripFlight < ApplicationRecord
       round_trip_flight.flight2_landing_at = extract_landing_at(option, 1)
       round_trip_flight.carrier1 = extract_carrier(option, 0)
       round_trip_flight.carrier2 = extract_carrier(option, 1)
-      round_trip_flight.destination_airport_coordinates
-      round_trip_flight.origin_airport_coordinates
+      # round_trip_flight.destination_airport_coordinates
+      # round_trip_flight.origin_airport_coordinates
       round_trip_flight.save
       round_trip_flight
     end

@@ -29,6 +29,7 @@ class TripsController < ApplicationController
 
   def show
     @trip = Trip.find(params[:id])
+    @search = @trip.search
   end
 
 
