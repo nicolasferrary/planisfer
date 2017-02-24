@@ -10,40 +10,15 @@
   position: relative;
 }
 
-
-.banner h1 {
-  text-shadow: 0px 1px rgba(0, 0, 0, 0.2);
-  font-size: 80px;
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  letter-spacing: -4px;
-  text-align: center;
-  font-size: 40px;
-  font-weight: 420;
-  }
-
-
-.banner p {
-  font-size: 20px;
-  font-weight: lighter;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 20px;
-}
-
 .banner-title {
-  display: inline-flex;
-  padding-left: 27px;
+  position: absolute;
+  left: 230px;
+  top: 240px;
 }
 .home-button {
   margin-top: 50px;
   padding-top: 3px;
 }
-
-.title-header {
-  display: inline-block;
-}
-
 
 
 .banner2 {
