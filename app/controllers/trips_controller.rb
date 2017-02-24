@@ -18,7 +18,6 @@ class TripsController < ApplicationController
   # end
 
   def index
-
     end
 
 
@@ -128,21 +127,21 @@ class TripsController < ApplicationController
   #   (arrival_as_date + arrival_time_choice.first.hours .. arrival_as_date + arrival_time_choice.last.hours)
   # end
 
-  def filter_by_airport1(trips, filters)
-    #trips is an array and filters is a hash
-    trips.select { |trip|
-      trip.round_trip_flight.flight1_destination_airport_iata == filters["region_airport1"]
-    }
+  # def filter_by_airport1(trips, filters)
+  #   #trips is an array and filters is a hash
+  #   trips.select { |trip|
+  #     trip.round_trip_flight.flight1_destination_airport_iata == filters["region_airport1"]
+  #   }
 
-  end
+  # end
 
-  def filter_by_airport2(trips, filters)
-    #trips is an array and filters is a hash
-    trips.select { |trip|
-      trip.round_trip_flight.flight2_origin_airport_iata == filters["region_airport2"]
-    }
+  # def filter_by_airport2(trips, filters)
+  #   #trips is an array and filters is a hash
+  #   trips.select { |trip|
+  #     trip.round_trip_flight.flight2_origin_airport_iata == filters["region_airport2"]
+  #   }
 
-  end
+  # end
 
 
 
@@ -154,15 +153,15 @@ class TripsController < ApplicationController
 
 
 
-  def select_trips_with_airports(a,b)
-   trips =[]
-   @trips.each do |trip|
-     if trip.round_trip_flight.flight1_destination_airport_iata == @region_airports[a] && trip.round_trip_flight.flight2_origin_airport_iata == @region_airports[b]
-        trips << trip
-     end
-   end
-   trips
-  end
+  # def select_trips_with_airports(a,b)
+  #  trips =[]
+  #  @trips.each do |trip|
+  #    if trip.round_trip_flight.flight1_destination_airport_iata == @region_airports[a] && trip.round_trip_flight.flight2_origin_airport_iata == @region_airports[b]
+  #       trips << trip
+  #    end
+  #  end
+  #  trips
+  # end
 
 end
 
