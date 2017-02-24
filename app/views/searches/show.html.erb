@@ -19,7 +19,7 @@
       <div class="row ">
         <div class="flexbox">
           <div>
-            <%=  link_to "All flights", searches_path(@search) %>l
+            <%=  link_to "All flights", search_path(@search) %>l
           </div>
           <% @region_airports.each do |airport| %>
             <div><%= airport %></div>
@@ -31,7 +31,7 @@
         <div class="row ">
           <div class="flexbox">
             <div><%= @region_airports[0] %></div>
-            <%= link_to search_path(@search) do %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[0])) do %>
               <div>
                 <% if @trips0_0 == [] %>
                   <%= "-" %>
@@ -40,7 +40,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to search_path(@search) do %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[1])) do %>
               <div>
                 <% if @trips0_1 == [] %>
                   <%= "-" %>
@@ -49,7 +49,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to search_path(@search) do %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[2])) do %>
               <div>
                 <% if @trips0_2 == [] %>
                   <%= "-" %>
@@ -58,7 +58,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to search_path(@search) do %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[3])) do %>
               <div>
                 <% if @trips0_3 == [] %>
                   <%= "-" %>
@@ -75,7 +75,7 @@
         <div class="row ">
           <div class="flexbox">
             <div><%= @region_airports[1] %></div>
-            <%= link_to search_path(@search) do %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[0])) do %>
               <div>
                 <% if @trips1_0 == [] %>
                   <%= "-" %>
@@ -84,7 +84,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to search_path(@search) do %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[1])) do %>
               <div>
                 <% if @trips1_1 == [] %>
                   <%= "-" %>
@@ -93,7 +93,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to search_path(@search) do %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[2])) do %>
               <div>
                 <% if @trips1_2 == [] %>
                   <%= "-" %>
@@ -102,7 +102,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to search_path(@search) do %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[3])) do %>
               <div>
                 <% if @trips1_3 == [] %>
                   <%= "-" %>
@@ -119,7 +119,7 @@
         <div class="row ">
           <div class="flexbox">
             <div><%= @region_airports[2] %></div>
-            <%= link_to search_path(@search) do %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[0])) do %>
               <div>
                 <% if @trips2_0 == [] %>
                   <%= "-" %>
@@ -128,7 +128,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to search_path(@search) do %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[1])) do %>
               <div>
                 <% if @trips2_1 == [] %>
                   <%= "-" %>
@@ -137,7 +137,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to search_path(@search) do %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[2])) do %>
               <div>
                 <% if @trips2_2 == [] %>
                   <%= "-" %>
@@ -146,7 +146,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to search_path(@search) do %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[3])) do %>
               <div>
                 <% if @trips2_3 == [] %>
                   <%= "-" %>
@@ -164,7 +164,7 @@
         <div class="row ">
           <div class="flexbox">
             <div><%= @region_airports[3] %></div>
-            <%= link_to search_path(@search) do %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[0])) do %>
               <div>
                 <% if @trips3_0 == [] %>
                   <%= "-" %>
@@ -173,7 +173,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to search_path(@search) do %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[1])) do %>
               <div>
                 <% if @trips3_1 == [] %>
                   <%= "-" %>
@@ -182,7 +182,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to search_path(@search) do %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[2])) do %>
               <div>
                 <% if @trips3_2 == [] %>
                   <%= "-" %>
@@ -191,7 +191,7 @@
                 <% end %>
               </div>
             <% end  %>
-            <%= link_to search_path(@search) do %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[3])) do %>
               <div>
                 <% if @trips3_3 == [] %>
                   <%= "-" %>
@@ -210,7 +210,7 @@
     <div class="row">
       <% @trips_selection.each do |trip| %>
         <div class="col-xs-12 col-sm-12">
-          <%= link_to trips_path do %>
+          <%= link_to root_path do %>
             <div class="cardContainer flexbox">
               <div class="card-description">
                 <p>Departure on <%= trip.round_trip_flight.flight1_take_off_at.strftime("%b %d") %> <%= trip.round_trip_flight.flight1_origin_airport_iata %>  <%= trip.round_trip_flight.flight1_take_off_at.strftime("%H:%M") %> => <%= trip.round_trip_flight.flight1_landing_at.strftime("%H:%M") %> <%= trip.round_trip_flight.flight1_destination_airport_iata %></p>
