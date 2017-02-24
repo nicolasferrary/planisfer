@@ -1,10 +1,23 @@
 .cardContainer {
-  height: 65px;
-  background-color: $my-light-blue;
+  height: 75px;
+  background-color: $my-ivory;
   color: black;
   position: relative;
   border-radius: 5px;
   margin-bottom: 20px;
   margin-top: 20px;
+  text-decoration: none;
+}
 
+.card-description {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.card-description p{
+  margin-top: 10px;
+}
+
+.cardContainer:hover{
+  opacity: 0.5;
 }

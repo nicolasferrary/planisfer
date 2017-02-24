@@ -1,6 +1,65 @@
 .flexbox {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
+
+.tabGrid {
+  width: 70px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tablink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tabGrid:hover {
+  opacity: 0.5;
+  text-decoration: none;
+}
+
+.tablink:hover{
+  opacity: 0.5;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tabContainer {
+  border: 1px solid #DBDBDB;
+  margin-bottom: 20px;
+  position: relative;
+  height: 180px;
+}
+
+.legendTabResult {
+  background-color: $my-ivory;
+  height: 20px;
+  width: 480px;
+  margin-left: 70px;
+  margin-right: 20px;
+}
+
+.legendReturn {
+  position: absolute;
+  top: 89px;
+  left: -40px;
+}
+
+.legendReturn p {
+  transform: rotate(-90deg);
+  background-color: $my-ivory;
+  margin-top: 3px;
+}
+
+.contentTab {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#titleShow {
+  background-color: $brand-color;
+}
