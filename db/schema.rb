@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223140138) do
+ActiveRecord::Schema.define(version: 20170224001823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,14 +28,12 @@ ActiveRecord::Schema.define(version: 20170223140138) do
 
   create_table "cities", force: :cascade do |t|
     t.string   "name"
-    t.string   "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "regions", force: :cascade do |t|
     t.string   "name"
-    t.string   "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -61,6 +59,16 @@ ActiveRecord::Schema.define(version: 20170223140138) do
     t.float    "longitude_back"
   end
 
+  create_table "searches", force: :cascade do |t|
+    t.string   "city"
+    t.string   "region"
+    t.date     "starts_on"
+    t.date     "returns_on"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "nb_travelers"
+  end
+
   create_table "trips", force: :cascade do |t|
     t.float    "price"
     t.date     "starts_on"
@@ -73,9 +81,11 @@ ActiveRecord::Schema.define(version: 20170223140138) do
     t.integer  "round_trip_flight_id"
     t.float    "latitude"
     t.float    "longitude"
+    t.integer  "search_id"
     t.index ["city_id"], name: "index_trips_on_city_id", using: :btree
     t.index ["region_id"], name: "index_trips_on_region_id", using: :btree
     t.index ["round_trip_flight_id"], name: "index_trips_on_round_trip_flight_id", using: :btree
+    t.index ["search_id"], name: "index_trips_on_search_id", using: :btree
   end
 
   add_foreign_key "airports", "cities"
@@ -83,4 +93,5 @@ ActiveRecord::Schema.define(version: 20170223140138) do
   add_foreign_key "trips", "cities"
   add_foreign_key "trips", "regions"
   add_foreign_key "trips", "round_trip_flights"
+  add_foreign_key "trips", "searches"
 end
