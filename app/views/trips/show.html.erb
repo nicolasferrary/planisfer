@@ -1,8 +1,8 @@
 <div class="big-wrapper">
 
   <div class="text-center">
-  <h1 class=""> <%= @trip.region.name %> ...  </h1>
-    <h2> ...lucky you !</h2>
+  <h2 class=""> <%= @trip.region.name %> ...  </h2>
+    <h4> ...lucky you !</h4>
   </div>
 
   <div class="container">
@@ -36,15 +36,20 @@
         <% end %>
       </p>
         <hr class="padding-hr">
-      <p id="good-style"><i class="fa fa-calendar-check-o" id="good-style" aria-hidden="true"></i> Yeah, on <%= @trip.starts_on.strftime("%B %d") %>  </p>
-      <p> <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> Your crazy trip will start from <%= @trip.city.name  %> <%= @trip.round_trip_flight.flight1_origin_airport_iata %> (so cool !) </p>
-      <p> <i class="fa fa-flip-vertical fa-plane" id="good-style" aria-hidden="true"> </i> You will land at...wait for it!... <%= @trip.round_trip_flight.flight1_destination_airport_iata %>  </p>
+      <p id="good-style"><i class="fa fa-calendar-check-o" id="good-style" aria-hidden="true"></i> Yeah, on <%= @trip.starts_on.strftime("%B %d") %> </p>
+      <p> <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> Your crazy trip will start from <%= @trip.city.name  %> <%= @trip.round_trip_flight.flight1_origin_airport_iata %> (so cool !) at <%= @trip.round_trip_flight.flight1_take_off_at.strftime("%H:%M") %> </p>
+      <p> <i class="fa fa-flip-vertical fa-plane" id="good-style" aria-hidden="true"> </i> You will land at...wait for it!... <%= Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata]  %>
+      <%= @trip.round_trip_flight.flight1_destination_airport_iata %> at <%= @trip.round_trip_flight.flight1_landing_at.strftime("%H:%M") %> </p>
+
+      <hr>
+
+      <p><i class="fa fa-car" id="good-style" aria-hidden="true"></i> You will have <%= (@trip.returns_on - @trip.starts_on).to_i %> days to enjoy <%= @trip.region.name %> </p>
 
       <hr>
 
       <p id="good-style"><i class="fa fa-calendar-check-o" id="good-style" aria-hidden="true"></i>  But, snif, on <%= @trip.returns_on.strftime("%B %d")   %> </p>
-      <p><i class="fa fa-plane" id="good-style" aria-hidden="true"></i>  Don't forget to take your flight back from <%=  %> <%= @trip.round_trip_flight.flight2_origin_airport_iata %> </p>
-      <p> <i class="fa fa-flip-vertical fa-plane" id="good-style" aria-hidden="true"> </i> And be back to <%= @trip.city.name  %> <%= @trip.round_trip_flight.flight2_destination_airport_iata %></p> <hr>
+      <p><i class="fa fa-plane" id="good-style" aria-hidden="true"></i>  Don't forget to take your flight back from <%= Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata] %> <%= @trip.round_trip_flight.flight2_origin_airport_iata %> at <%= @trip.round_trip_flight.flight2_take_off_at.strftime("%H:%M") %> </p>
+      <p> <i class="fa fa-flip-vertical fa-plane" id="good-style" aria-hidden="true"> </i> To be back in <%= @trip.city.name  %> <%= @trip.round_trip_flight.flight2_destination_airport_iata %> at <%= @trip.round_trip_flight.flight2_landing_at.strftime("%H:%M") %> </p> <hr>
       <p> <i class="fa fa-credit-card" id="good-style" aria-hidden="true"></i> For only <%= @trip.price %> EUR</p>
       <h4>What a Road Trip, man ! </h4>
     </div>
