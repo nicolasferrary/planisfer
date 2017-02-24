@@ -118,18 +118,17 @@ module Constants
     "Tuscany" => ["BLQ", "PSA", "FLR", "PMF"],
     "Catalonia" => ["BCN", "GRO", "ILD", "REU"],
     "Lombardia" => ["MIL", "TRN", "VRN", "GOA"],
-    "Greece" => ["ATH", "HER", "JTR", "JMK", "CFU"],
+    "Greece" => ["ATH", "HER", "JTR", "JMK"],
     "Portugal" => ["LIS", "FAO", "OPO", "BJZ"],
-    "Croatie" => ["SPU", "DBV", "ZAG", "ZAD", "PUY", "RJK"] ,
+    "Croatie" => ["SPU", "DBV", "ZAG", "ZAD"] ,
     "Scotland" => ["EDI", "GLA", "ABZ"],
-    "BENELUX" => ["BRU", "CRL", "LGG", "ANR", "AMS", "RTM", "EIN", "GRQ", "MST", "LUX"],
+    "BENELUX" => ["BRU", "CRL", "AMS", "LUX"],
     "Irland" => ["DUB", "SNN", "CFN", "ORK"],
 
-    "South-of-France" => ["NCE", "MRS", "AVN", "TNL", "TLS", "BIQ", "MPL"],
-    # "Central EU" => ["VIE", "BUD", "KRK", "ZAG", "LNZ", "BTS", "GRZ", "PRG"],
-    "Central-EU" => ["VIE", "BUD"],
+    "South-of-France" => ["NCE", "MRS", "TLS", "BIQ"],
+    "Central EU" => ["VIE", "BUD", "KRK", "PRG"],
 
-    "Baltic States" => ["TLL", "RIX", "VNO", "KUN", "PLQ"],
+    "Baltic States" => ["TLL", "RIX", "VNO", "KUN"],
   }
 
   AIRLINES = {
