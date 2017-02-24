@@ -134,7 +134,7 @@ class SearchesController < ApplicationController
 
   def apply_airport_filters
     # set filters
-    @filters = params.to_hash.slice("city", "region", "starts_on", "returns_on", "nb_travelers")
+    @filters = {}
 
     # filter by airports if asked
     if params["region_airport1"].present? && params["region_airport1"] != ""

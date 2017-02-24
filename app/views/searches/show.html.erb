@@ -19,7 +19,7 @@
       <div class="row ">
         <div class="flexbox">
           <div>
-            <%=  link_to "All flights", trips_path(params.to_hash.slice("city", "region", "starts_on", "returns_on", "nb_travelers")) %>l
+            <%=  link_to "All flights", searches_path(@search) %>l
           </div>
           <% @region_airports.each do |airport| %>
             <div><%= airport %></div>
