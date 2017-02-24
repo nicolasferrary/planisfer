@@ -7,10 +7,14 @@
 
 }
 
+#good-style {
+  color: $brand-color;
+}
 
 .card-show {
-  border: 1px solid pink;
+  border: 1px solid $brand-color;
   border-radius: 5px;
   margin-top: 20px;
   padding-top: 10px;
 }
+

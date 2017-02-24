@@ -1,8 +1,8 @@
 <div class="big-wrapper">
 
   <div class="text-center">
-  <h1 class=""> <%= @trip.region.name %> ! Lucky you </h1>
-    <h2>You'll be there anytime soon !</h2>
+  <h1 class=""> <%= @trip.region.name %> ...  </h1>
+    <h2> ...lucky you !</h2>
   </div>
 
   <div class="container">
@@ -14,36 +14,45 @@
           <div id="slider">
             <a href="#" class="control_next">>></a>
             <a href="#" class="control_prev"><</a>
-        <ul>
-          <li><%= image_tag "greece.jpg"%></li>
-          <li><%= image_tag "andalousie.jpeg"%></li>
-          <li><%= image_tag "croatie.jpeg"%></li>
-          <li><%= image_tag "france.jpg"%></li>
-        </ul>
+            <ul>
+              <li><%= image_tag "central_europe/prague3.jpg"%></li>
+              <li><%= image_tag "central_europe/church.jpg"%></li>
+              <li><%= image_tag "central_europe/prague4.jpg"%></li>
+            </ul>
+          </div> <br>
+          <div class="text-center">
+            <%= link_to "Back to the other flights", search_path, class: "btn btn-primary" %>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
   <div class="col-md-6">
     <div class="card-show text-center">
-      <p> You're about to book your road-trip to <%= @trip.region.name %>. <br>
-       Obviously, you will be
+       <p><i class="fa fa-id-card-o" id="good-style" aria-hidden="true"></i> Obviously, you will be
         <% if @trip.nb_travelers == 1 %>
         solo
         <% else  %>
-        <%=  @trip.nb_travelers %> passengers
+       <%=  @trip.nb_travelers %> passengers
         <% end %>
       </p>
-      <p> Your crazy trip will start from <%= @trip.city.name  %> on <%= @trip.starts_on.strftime("%B %d")  %> </p> <br>
-      <p> You will land at <%=  %> <%=  %> minutes laters (so cool !) at <%=  %> </p> <br>
-      <p> Enjoy your road trip to <%= @trip.region.name %> during <%=  %> days </p> <br>
-      <p> But, snif, on <%= @trip.returns_on.strftime("%B %d")   %> don't forget to take your flight back from <%=  %> at <%=  %> </p> <br>
-      <p> And be back home at <%= @trip.city.name  %></p> <br>
-      <p> For only <%=  %></p>
-      <h4>What a Road Trip, man ! </h4>
+        <hr class="padding-hr">
+      <p id="good-style"><i class="fa fa-calendar-check-o" id="good-style" aria-hidden="true"></i> Yeah, on <%= @trip.starts_on.strftime("%B %d") %>  </p>
+      <p> <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> Your crazy trip will start from <%= @trip.city.name  %> <%= @trip.round_trip_flight.flight1_origin_airport_iata %> (so cool !) </p>
+      <p> <i class="fa fa-flip-vertical fa-plane" id="good-style" aria-hidden="true"> </i> You will land at...wait for it!... <%= @trip.round_trip_flight.flight1_destination_airport_iata %>  </p>
 
+      <hr>
+
+      <p id="good-style"><i class="fa fa-calendar-check-o" id="good-style" aria-hidden="true"></i>  But, snif, on <%= @trip.returns_on.strftime("%B %d")   %> </p>
+      <p><i class="fa fa-plane" id="good-style" aria-hidden="true"></i>  Don't forget to take your flight back from <%=  %> <%= @trip.round_trip_flight.flight2_origin_airport_iata %> </p>
+      <p> <i class="fa fa-flip-vertical fa-plane" id="good-style" aria-hidden="true"> </i> And be back to <%= @trip.city.name  %> <%= @trip.round_trip_flight.flight2_destination_airport_iata %></p> <hr>
+      <p> <i class="fa fa-credit-card" id="good-style" aria-hidden="true"></i> For only <%= @trip.price %> EUR</p>
+      <h4>What a Road Trip, man ! </h4>
     </div>
-  </div>
+
+      <div class="text-center button-padded">
+        <div class="btn btn-success text-center">BOOK </div>
+      </div>
+    </div>
 
 
 
