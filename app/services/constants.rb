@@ -129,8 +129,7 @@ module Constants
     "BENELUX" => ["BRU", "CRL", "AMS", "LUX"],
     "Irland" => ["DUB", "SNN", "CFN", "ORK"],
     "South-of-France" => ["NCE", "MRS", "TLS", "BIQ"],
-    "Central-EU" => ["VIE", "BUD"],
-    # "Central-EU" => ["VIE", "BUD", "KRK", "PRG"],
+    "Central-EU" => ["VIE", "BUD", "KRK", "PRG"],
     "Baltic States" => ["TLL", "RIX", "VNO", "KUN"],
   }
 

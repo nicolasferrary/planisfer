@@ -219,7 +219,7 @@
         <div class="row">
           <% @trips_selection.each do |trip| %>
             <div class="col-xs-12 col-sm-12">
-              <%= link_to root_path, class: "tabLink" do %>
+              <%= link_to trip_path(trip), class: "tabLink" do %>
                 <!-- <div class="flexbox"> -->
                   <div class="cardContainer flexbox">
                     <div class="card-description">
@@ -240,7 +240,7 @@
     </div>
        <div class="col-sm-6">
           <div>
-            <div id="map" style="width: 100%; height: 400px;"></div>
+            <div style="width: 100%; height: 400px;"> <%= image_tag "CEE_map.jpg" %> </div>
           </div>
         </div>
 
