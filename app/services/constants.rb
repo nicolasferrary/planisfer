@@ -106,8 +106,8 @@ module Constants
    "Scotland" => "Scotland",
    "Benelux" => "Benelux",
    "Ireland" => "Ireland",
-   "South of France" => "South of France",
-   "Central Europe" => "Central Europe",
+   "South-of-France" => "South-of-France",
+   "Central-EU" => "Central-EU",
    "Baltic States" => "Baltic States",
   }
 
@@ -125,9 +125,11 @@ module Constants
     "Scotland" => ["EDI", "GLA", "ABZ"],
     "BENELUX" => ["BRU", "CRL", "LGG", "ANR", "AMS", "RTM", "EIN", "GRQ", "MST", "LUX"],
     "Irland" => ["DUB", "SNN", "CFN", "ORK"],
-    "South of France" => ["NCE", "MRS", "AVN", "TLN", "TLS", "BIQ", "MPL"],
-    # "Central Europe" => ["VIE", "BUD", "KRK", "ZAG", "LNZ", "BTS", "GRZ", "PRG"],
-    "Central Europe" => ["VIE", "BUD"],
+
+    "South-of-France" => ["NCE", "MRS", "AVN", "TNL", "TLS", "BIQ", "MPL"],
+    # "Central EU" => ["VIE", "BUD", "KRK", "ZAG", "LNZ", "BTS", "GRZ", "PRG"],
+    "Central-EU" => ["VIE", "BUD"],
+
     "Baltic States" => ["TLL", "RIX", "VNO", "KUN", "PLQ"],
   }
 
