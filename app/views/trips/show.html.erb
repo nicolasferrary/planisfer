@@ -1,14 +1,77 @@
-<h1>You are about to onboard for a wonderful trip to <%= @trip.region.name %>. You are almost there !</h1>
-<div class = "container">
-  <div class = "row">
-    <div class = "col-md-4">
+<div class="text-center">
+  <h1 class=""> <%= @trip.region.name %></h1>
+  <h2>You'll be there anytime soon !</h2>
+  <h3>Lucky you</h3>
+</div>
 
-    </div>
+<div id="wrapper text-center">
+  <div id="slider">
+<!--     <a href="#" class="control_next">>></a>
+    <a href="#" class="control_prev"><</a> -->
+    <ul>
+      <li><%= image_tag "greece.jpg"%></li>
+      <li><%= image_tag "andalousie.jpeg"%></li>
+      <li><%= image_tag "croatie.jpeg"%></li>
+      <li><%= image_tag "france.jpg"%></li>
+    </ul>
+  </div>
 
-    <div class = "col-md-8">
-
-    </div>
-
+  <div class="slider_option">
+    <input type="checkbox" id="checkbox">
+    <label for="checkbox">Autoplay Slider</label>
   </div>
 </div>
 
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+
+  jQuery(document).ready(function ($) {
+
+  $('#checkbox').change(function(){
+    setInterval(function () {
+        moveRight();
+    }, 3000);
+  });
+
+  var slideCount = $('#slider ul li').length;
+  var slideWidth = $('#slider ul li').width();
+  var slideHeight = $('#slider ul li').height();
+  var sliderUlWidth = slideCount * slideWidth;
+
+  $('#slider').css({ width: slideWidth, height: slideHeight });
+
+  $('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
+
+    $('#slider ul li:last-child').prependTo('#slider ul');
+
+    function moveLeft() {
+        $('#slider ul').animate({
+            left: + slideWidth
+        }, 200, function () {
+            $('#slider ul li:last-child').prependTo('#slider ul');
+            $('#slider ul').css('left', '');
+        });
+    };
+
+    function moveRight() {
+        $('#slider ul').animate({
+            left: - slideWidth
+        }, 200, function () {
+            $('#slider ul li:first-child').appendTo('#slider ul');
+            $('#slider ul').css('left', '');
+        });
+    };
+
+    $('a.control_prev').click(function () {
+        moveLeft();
+    });
+
+    $('a.control_next').click(function () {
+        moveRight();
+    });
+
+});
+
+<% end %>
+<% end %>

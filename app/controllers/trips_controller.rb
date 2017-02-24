@@ -46,22 +46,22 @@ class TripsController < ApplicationController
     @trips_selection = @trips.first(4)
 
     # Here we define selections of trips that match f1 destination airport and f2 origin airport
-    @trips0_0 = select_trips_with_airports(0,0)
-    @trips0_1 = select_trips_with_airports(0,1)
-    @trips0_2 = select_trips_with_airports(0,2)
-    @trips0_3 = select_trips_with_airports(0,3)
-    @trips1_0 = select_trips_with_airports(1,0)
-    @trips1_1 = select_trips_with_airports(1,1)
-    @trips1_2 = select_trips_with_airports(1,2)
-    @trips1_3 = select_trips_with_airports(1,3)
-    @trips2_0 = select_trips_with_airports(2,0)
-    @trips2_1 = select_trips_with_airports(2,1)
-    @trips2_2 = select_trips_with_airports(2,2)
-    @trips2_3 = select_trips_with_airports(2,3)
-    @trips3_0 = select_trips_with_airports(3,0)
-    @trips3_1 = select_trips_with_airports(3,1)
-    @trips3_2 = select_trips_with_airports(3,2)
-    @trips3_3 = select_trips_with_airports(3,3)
+    # @trips0_0 = select_trips_with_airports(0,0)
+    # @trips0_1 = select_trips_with_airports(0,1)
+    # @trips0_2 = select_trips_with_airports(0,2)
+    # @trips0_3 = select_trips_with_airports(0,3)
+    # @trips1_0 = select_trips_with_airports(1,0)
+    # @trips1_1 = select_trips_with_airports(1,1)
+    # @trips1_2 = select_trips_with_airports(1,2)
+    # @trips1_3 = select_trips_with_airports(1,3)
+    # @trips2_0 = select_trips_with_airports(2,0)
+    # @trips2_1 = select_trips_with_airports(2,1)
+    # @trips2_2 = select_trips_with_airports(2,2)
+    # @trips2_3 = select_trips_with_airports(2,3)
+    # @trips3_0 = select_trips_with_airports(3,0)
+    # @trips3_1 = select_trips_with_airports(3,1)
+    # @trips3_2 = select_trips_with_airports(3,2)
+    # @trips3_3 = select_trips_with_airports(3,3)
 
 
 
@@ -205,21 +205,21 @@ class TripsController < ApplicationController
   #   (arrival_as_date + arrival_time_choice.first.hours .. arrival_as_date + arrival_time_choice.last.hours)
   # end
 
-  def filter_by_airport1(trips, filters)
-    #trips is an array and filters is a hash
-    trips.select { |trip|
-      trip.round_trip_flight.flight1_destination_airport_iata == filters["region_airport1"]
-    }
+  # def filter_by_airport1(trips, filters)
+  #   #trips is an array and filters is a hash
+  #   trips.select { |trip|
+  #     trip.round_trip_flight.flight1_destination_airport_iata == filters["region_airport1"]
+  #   }
 
-  end
+  # end
 
-  def filter_by_airport2(trips, filters)
-    #trips is an array and filters is a hash
-    trips.select { |trip|
-      trip.round_trip_flight.flight2_origin_airport_iata == filters["region_airport2"]
-    }
+  # def filter_by_airport2(trips, filters)
+  #   #trips is an array and filters is a hash
+  #   trips.select { |trip|
+  #     trip.round_trip_flight.flight2_origin_airport_iata == filters["region_airport2"]
+  #   }
 
-  end
+  # end
 
 
 
@@ -231,15 +231,15 @@ class TripsController < ApplicationController
 
 
 
-  def select_trips_with_airports(a,b)
-   trips =[]
-   @trips.each do |trip|
-     if trip.round_trip_flight.flight1_destination_airport_iata == @region_airports[a] && trip.round_trip_flight.flight2_origin_airport_iata == @region_airports[b]
-        trips << trip
-     end
-   end
-   trips
-  end
+  # def select_trips_with_airports(a,b)
+  #  trips =[]
+  #  @trips.each do |trip|
+  #    if trip.round_trip_flight.flight1_destination_airport_iata == @region_airports[a] && trip.round_trip_flight.flight2_origin_airport_iata == @region_airports[b]
+  #       trips << trip
+  #    end
+  #  end
+  #  trips
+  # end
 
 end
 
