@@ -18,7 +18,9 @@ class TripsController < ApplicationController
   # end
 
   def index
+
   end
+
 
   def update
   end
