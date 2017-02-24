@@ -18,7 +18,8 @@ class TripsController < ApplicationController
   # end
 
   def index
-    end
+
+  end
 
 
 
