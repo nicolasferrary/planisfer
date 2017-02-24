@@ -18,7 +18,7 @@ class SearchesController < ApplicationController
     @region_name = params[:region]
     #for test only. To be changed with constants
     @region_airports = Constants::REGIONS_AIRPORTS[@region_name]
-
+    @city_real_name = Constants::CITY_REGION[@city_name]
 
     # generate routes
     routes = Avion.generate_routes(@city_name, @region_airports)
@@ -75,6 +75,9 @@ class SearchesController < ApplicationController
     @region = @search.region
     @region_airports = Constants::REGIONS_AIRPORTS[@region]
     apply_airport_filters
+    @city_name = @search.city
+    @city_real_name = Constants::CITY_REGION[@city_name]
+
     @trips = @trips.sort_by { |trip| trip.price }
 
     @trips_selection = @trips.first(4)
