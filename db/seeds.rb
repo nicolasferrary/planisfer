@@ -13,19 +13,19 @@ Airport.destroy_all
 City.destroy_all
 
 
-city1 = City.create!(name:"Paris", country: "France")
-city2 = City.create!(name:"London", country: "UK")
-city3 = City.create!(name:"Barcelona", country: "Spain")
-city4 = City.create!(name:"Milan", country: "Italy")
+city1 = City.create!(name:"Paris")
+city2 = City.create!(name:"London")
+city3 = City.create!(name:"Barcelona")
+city4 = City.create!(name:"Milan")
 
 
-region1 = Region.create!(name: "Andalucia", country: "Spain")
-region2 = Region.create!(name: "Puglia", country: "Italy")
-region3 = Region.create!(name: "Ile de France", country: "France")
-region4 = Region.create!(name: "Tuscany", country: "Italy")
-region5 = Region.create!(name: "Great-London", country: "UK")
-region6 = Region.create!(name: "Catalonia", country: "Spain")
-region7 = Region.create!(name: "Lombardia", country: "Italy")
+region1 = Region.create!(name: "Andalucia")
+region2 = Region.create!(name: "Puglia")
+region3 = Region.create!(name: "Ile de France")
+region4 = Region.create!(name: "Tuscany")
+region5 = Region.create!(name: "Great-London")
+region6 = Region.create!(name: "Catalonia")
+region7 = Region.create!(name: "Lombardia")
 
 airport1 = Airport.new(name: "CDG", iata: "CDG")
 airport1.city = city1
