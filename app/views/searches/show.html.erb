@@ -210,7 +210,7 @@
     <div class="row">
       <% @trips_selection.each do |trip| %>
         <div class="col-xs-12 col-sm-12">
-          <%= link_to root_path do %>
+          <%= link_to trip_path(trip) do %>
             <div class="cardContainer flexbox">
               <div class="card-description">
                 <p>Departure on <%= trip.round_trip_flight.flight1_take_off_at.strftime("%b %d") %> <%= trip.round_trip_flight.flight1_origin_airport_iata %>  <%= trip.round_trip_flight.flight1_take_off_at.strftime("%H:%M") %> => <%= trip.round_trip_flight.flight1_landing_at.strftime("%H:%M") %> <%= trip.round_trip_flight.flight1_destination_airport_iata %></p>
