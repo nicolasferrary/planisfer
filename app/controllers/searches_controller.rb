@@ -77,6 +77,8 @@ class SearchesController < ApplicationController
     apply_airport_filters
     @city_name = @search.city
     @city_real_name = Constants::CITY_REGION[@city_name]
+    @starts_on = @search.starts_on
+    @returns_on = @search.returns_on
 
     @trips = @trips.sort_by { |trip| trip.price }
 
