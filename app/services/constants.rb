@@ -114,7 +114,8 @@ module Constants
 
   REGIONS_AIRPORTS = {
     "Andalucia" => ["AGP", "SVQ", "XRY", "GRX"],
-    "Puglia" => ["BRI", "BDS"],
+    "Puglia" => ["BRI"],
+    # "Puglia" => ["BRI", "BDS"],
     "Tuscany" => ["BLQ", "PSA", "FLR", "PMF"],
     "Catalonia" => ["BCN", "GRO", "ILD", "REU"],
     "Lombardia" => ["MIL", "TRN", "VRN", "GOA"],
