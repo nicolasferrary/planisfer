@@ -16,6 +16,7 @@ module Constants
   }
 
   CITY_REGION = {
+    "PAR" => "Paris",
     "AGP" => "Malaga",
     "SVQ" => "Sevilla",
     "XRY" => "Jerez",
@@ -134,6 +135,7 @@ module Constants
   }
 
   CITY_REGION = {
+   "PAR" => "Paris",
    "AGP" => "Malaga",
    "SVQ" => "Sevilla",
    "XRY" => "Jerez",
