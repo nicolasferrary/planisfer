@@ -87,7 +87,13 @@ class SearchesController < ApplicationController
     @trips = @trips.sort_by { |trip| trip.price }
 
     @trips_selection = @trips.first(4)
+
     @trip_cheapest_price = @trips_selection.first.price.round
+
+    @round_trips = @trips_selection.map(&:round_trip_flight)
+    # declenche le geocode sur ces objets
+    @round_trips.map(&:destination_airport_coordinates).map(&:origin_airport_coordinates)
+
 
     # Here we define selections of trips that match f1 destination airport and f2 origin airport
     @trips0_0 = select_trips_with_airports(0,0)
@@ -107,15 +113,25 @@ class SearchesController < ApplicationController
     @trips3_2 = select_trips_with_airports(3,2)
     @trips3_3 = select_trips_with_airports(3,3)
 
-    @trips = Trip.where.not(latitude: nil, longitude: nil)
 
+    # GEOCODING
 
-    @hash = Gmaps4rails.build_markers(@trips) do |trip, marker|
-      marker.lat trip.latitude
-      marker.lng trip.longitude
+    @hash_arrive = Gmaps4rails.build_markers(@round_trips) do |trip, marker|
+      marker.lat trip.latitude_arrive
+      marker.lng trip.longitude_arrive
       # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
     end
+  end
 
+  def refresh_map
+    # récupérer le round_trip
+    @round_trip_flight = RoundTripFlight.find(params[:round_trip_flight_id])
+    # construire les markers
+    respond_to do |format|
+      format.html
+      format.js
+    end
+    # renvoyer la map
   end
 
   private
