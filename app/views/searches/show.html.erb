@@ -7,6 +7,158 @@
   </div>
 </div>
 
+<div class="filters">
+  <ul class="list-inline text-center">
+    <li>
+      <h3><i class="fa fa-plane"></i> Take-off time from <%= @city_real_name %> </h3>
+    </li>
+
+    <li>
+      <div class="text-center links-box">
+          <h3> after >> </h3>
+        <div class="option <%= 'active' if params['f1_min_take_off'] == "" %>">
+          <%= link_to "-", search_path(@search, @filters.merge('f1_min_take_off' => "")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f1_min_take_off'] == "8AM" %>">
+          <%= link_to "8AM", search_path(@search, @filters.merge('f1_min_take_off' => "8am")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f1_min_take_off'] == "10AM" %>">
+          <%= link_to "10AM", search_path(@search, @filters.merge('f1_min_take_off' => "10am")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f1_min_take_off'] == "2PM" %>">
+          <%= link_to "2PM", search_path(@search, @filters.merge('f1_min_take_off' => "2pm")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f1_min_take_off'] == "6PM" %>">
+          <%= link_to "6PM", search_path(@search, @filters.merge('f1_min_take_off' => "6pm")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f1_min_take_off'] == "8PM" %>">
+          <%= link_to "8PM", search_path(@search, @filters.merge('f1_min_take_off' => "8pm")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="filters">
+  <ul class="list-inline text-center">
+    <li>
+      <h3><i class="fa fa-plane"></i> Landing time in <%= @region %> </h3>
+    </li>
+
+    <li>
+      <div class="text-center links-box">
+          <h3> before << </h3>
+        <div class="option <%= 'active' if params['f1_max_landing'] == "" %>">
+          <%= link_to "-", search_path(@search, @filters.merge('f1_max_landing' => "")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f1_max_landing'] == "8AM" %>">
+          <%= link_to "8AM", search_path(@search, @filters.merge('f1_max_landing' => "8am")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f1_max_landing'] == "10AM" %>">
+          <%= link_to "10AM", search_path(@search, @filters.merge('f1_max_landing' => "10am")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f1_max_landing'] == "2PM" %>">
+          <%= link_to "2PM", search_path(@search, @filters.merge('f1_max_landing' => "2pm")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f1_max_landing'] == "6PM" %>">
+          <%= link_to "6PM", search_path(@search, @filters.merge('f1_max_landing' => "6pm")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f1_max_landing'] == "8PM" %>">
+          <%= link_to "8PM", search_path(@search, @filters.merge('f1_max_landing' => "8pm")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="filters">
+  <ul class="list-inline text-center">
+    <li>
+      <h3><i class="fa fa-plane"></i> Take-off time from <%= @region %> </h3>
+    </li>
+
+    <li>
+      <div class="text-center links-box">
+          <h3> after >> </h3>
+        <div class="option <%= 'active' if params['f2_min_take_off'] == "" %>">
+          <%= link_to "-", search_path(@search, @filters.merge('f2_min_take_off' => "")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f2_min_take_off'] == "8AM" %>">
+          <%= link_to "8AM", search_path(@search, @filters.merge('f2_min_take_off' => "8am")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f2_min_take_off'] == "10AM" %>">
+          <%= link_to "10AM", search_path(@search, @filters.merge('f2_min_take_off' => "10am")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f2_min_take_off'] == "2PM" %>">
+          <%= link_to "2PM", search_path(@search, @filters.merge('f2_min_take_off' => "2pm")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f2_min_take_off'] == "6PM" %>">
+          <%= link_to "6PM", search_path(@search, @filters.merge('f2_min_take_off' => "6pm")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f2_min_take_off'] == "8PM" %>">
+          <%= link_to "8PM", search_path(@search, @filters.merge('f2_min_take_off' => "8pm")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="filters">
+  <ul class="list-inline text-center">
+    <li>
+      <h3><i class="fa fa-plane"></i> Landing time in <%= @city_real_name %> </h3>
+    </li>
+
+    <li>
+      <div class="text-center links-box">
+          <h3> before << </h3>
+        <div class="option <%= 'active' if params['f2_max_landing'] == "" %>">
+          <%= link_to "-", search_path(@search, @filters.merge('f2_max_landing' => "")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f2_max_landing'] == "8AM" %>">
+          <%= link_to "8AM", search_path(@search, @filters.merge('f2_max_landing' => "8am")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f2_max_landing'] == "10AM" %>">
+          <%= link_to "10AM", search_path(@search, @filters.merge('f2_max_landing' => "10am")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f2_max_landing'] == "2PM" %>">
+          <%= link_to "2PM", search_path(@search, @filters.merge('f2_max_landing' => "2pm")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f2_max_landing'] == "6PM" %>">
+          <%= link_to "6PM", search_path(@search, @filters.merge('f2_max_landing' => "6pm")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+        <div class="option <%= 'active' if params['f2_max_landing'] == "8PM" %>">
+          <%= link_to "8PM", search_path(@search, @filters.merge('f2_max_landing' => "8pm")) , class: "radio-btn"%>
+          <i class="fa fa-circle" aria-hidden="true"></i>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
   <div class="container-fluid">
     <!-- part with tab and the result -->
     <div class="col-xs-12 col-sm-6">
@@ -37,7 +189,7 @@
             <div class="row">
               <div class="flexbox">
                 <div class="tabGrid"><%= @region_airports[0] %></div>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[0])), class: "tabLink" do %>
+                <%= link_to search_path(@search, @filters.merge("region_airport1" => @region_airports[0]).merge("region_airport2" => @region_airports[0])), class: "tabLink" do %>
                   <div class="tabGrid">
                     <% if @trips0_0 == [] %>
                       <%= "-" %>
@@ -46,7 +198,7 @@
                     <% end %>
                   </div>
                 <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[1])), class: "tabLink" do %>
+                <%= link_to search_path(@search, @filters.merge("region_airport1" => @region_airports[0]).merge("region_airport2" => @region_airports[1])), class: "tabLink" do %>
                   <div class="tabGrid">
                     <% if @trips0_1 == [] %>
                       <%= "-" %>
@@ -55,7 +207,7 @@
                     <% end %>
                   </div>
                 <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[2])), class: "tabLink" do %>
+                <%= link_to search_path(@search, @filters.merge("region_airport1" => @region_airports[0]).merge("region_airport2" => @region_airports[2])), class: "tabLink" do %>
                   <div class="tabGrid">
                     <% if @trips0_2 == [] %>
                       <%= "-" %>
@@ -64,7 +216,7 @@
                     <% end %>
                   </div>
                 <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[3])), class: "tabLink" do %>
+                <%= link_to search_path(@search, @filters.merge("region_airport1" => @region_airports[0]).merge("region_airport2" => @region_airports[3])), class: "tabLink" do %>
                   <div class="tabGrid">
                     <% if @trips0_3 == [] %>
                       <%= "-" %>
@@ -81,7 +233,7 @@
             <div class="row ">
               <div class="flexbox">
                 <div class="tabGrid"><%= @region_airports[1] %></div>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[0])), class: "tabLink" do %>
+                <%= link_to search_path(@search, @filters.merge("region_airport1" => @region_airports[1]).merge("region_airport2" => @region_airports[0])), class: "tabLink" do %>
                   <div class="tabGrid">
                     <% if @trips1_0 == [] %>
                       <%= "-" %>
@@ -90,7 +242,7 @@
                     <% end %>
                   </div>
                 <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[1])), class: "tabLink" do %>
+                <%= link_to search_path(@search, @filters.merge("region_airport1" => @region_airports[1]).merge("region_airport2" => @region_airports[1])), class: "tabLink" do %>
                   <div class="tabGrid">
                     <% if @trips1_1 == [] %>
                       <%= "-" %>
@@ -99,7 +251,7 @@
                     <% end %>
                   </div>
                 <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[2])), class: "tabLink" do %>
+                <%= link_to search_path(@search, @filters.merge("region_airport1" => @region_airports[1]).merge("region_airport2" => @region_airports[2])), class: "tabLink" do %>
                   <div class="tabGrid">
                     <% if @trips1_2 == [] %>
                       <%= "-" %>
@@ -108,7 +260,7 @@
                     <% end %>
                   </div>
                 <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[3])), class: "tabLink" do %>
+                <%= link_to search_path(@search, @filters.merge("region_airport1" => @region_airports[1]).merge("region_airport2" => @region_airports[3])), class: "tabLink" do %>
                   <div class="tabGrid">
                     <% if @trips1_3 == [] %>
                       <%= "-" %>
@@ -125,7 +277,7 @@
             <div class="row ">
               <div class="flexbox">
                 <div class="tabGrid"><%= @region_airports[2] %></div>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[0])), class: "tabLink" do %>
+                <%= link_to search_path(@search, @filters.merge("region_airport1" => @region_airports[2]).merge("region_airport2" => @region_airports[0])), class: "tabLink" do %>
                   <div class="tabGrid">
                     <% if @trips2_0 == [] %>
                       <%= "-" %>
@@ -134,7 +286,7 @@
                     <% end %>
                   </div>
                 <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[1])), class: "tabLink" do %>
+                <%= link_to search_path(@search, @filters.merge("region_airport1" => @region_airports[2]).merge("region_airport2" => @region_airports[1])), class: "tabLink" do %>
                   <div class="tabGrid">
                     <% if @trips2_1 == [] %>
                       <%= "-" %>
@@ -143,7 +295,7 @@
                     <% end %>
                   </div>
                 <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[2])), class: "tabLink" do %>
+                <%= link_to search_path(@search, @filters.merge("region_airport1" => @region_airports[2]).merge("region_airport2" => @region_airports[2])), class: "tabLink" do %>
                   <div class="tabGrid">
                     <% if @trips2_2 == [] %>
                       <%= "-" %>
@@ -152,7 +304,7 @@
                     <% end %>
                   </div>
                 <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[3])), class: "tabLink" do %>
+                <%= link_to search_path(@search, @filters.merge("region_airport1" => @region_airports[2]).merge("region_airport2" => @region_airports[3])), class: "tabLink" do %>
                   <div class="tabGrid">
                     <% if @trips2_3 == [] %>
                       <%= "-" %>
@@ -170,7 +322,7 @@
             <div class="row ">
               <div class="flexbox">
                 <div class="tabGrid"><%= @region_airports[3] %></div>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[0])), class: "tabLink" do %>
+                <%= link_to search_path(@search, @filters.merge("region_airport1" => @region_airports[3]).merge("region_airport2" => @region_airports[0])), class: "tabLink" do %>
                   <div class="tabGrid">
                     <% if @trips3_0 == [] %>
                       <%= "-" %>
@@ -179,7 +331,7 @@
                     <% end %>
                   </div>
                 <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[1])), class: "tabLink" do %>
+                <%= link_to search_path(@search, @filters.merge("region_airport1" => @region_airports[3]).merge("region_airport2" => @region_airports[1])), class: "tabLink" do %>
                   <div class="tabGrid">
                     <% if @trips3_1 == [] %>
                       <%= "-" %>
@@ -188,7 +340,7 @@
                     <% end %>
                   </div>
                 <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[2])), class: "tabLink" do %>
+                <%= link_to search_path(@search, @filters.merge("region_airport1" => @region_airports[3]).merge("region_airport2" => @region_airports[2])), class: "tabLink" do %>
                   <div class="tabGrid">
                     <% if @trips3_2 == [] %>
                       <%= "-" %>
@@ -197,7 +349,7 @@
                     <% end %>
                   </div>
                 <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[3])), class: "tabLink" do %>
+                <%= link_to search_path(@search, @filters.merge("region_airport1" => @region_airports[3]).merge("region_airport2" => @region_airports[3])), class: "tabLink" do %>
                   <div class="tabGrid">
                     <% if @trips3_3 == [] %>
                       <%= "-" %>
