@@ -1,3 +1,13 @@
+   <!--  facebook share -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <div class="big-wrapper">
 
   <div class="text-center">
@@ -24,17 +34,12 @@
             <%= link_to "Back to the other flights", search_path(@search), class: "btn btn-primary" %>
           </div>
 
-         <!--  facebook share -->
-          <div id="fb-root"></div>
-          <script>(function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1186058951480215";
-          fjs.parentNode.insertBefore(js, fjs);
-          }(document, 'script', 'facebook-jssdk'));</script>
-        <!--  facebook share -->
+
+         <!--  <div class="fb-send" data-href="http://localhost:3000/trips/84"></div> -->
+
           <div class="fb-send" data-href="<%= request.original_url %>"></div>
+
+          <div class="fb-send" data-href="https://developers.facebook.com/docs/plugins/"></div>
 
         </div>
       </div>
