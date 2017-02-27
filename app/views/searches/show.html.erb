@@ -2,7 +2,7 @@
 <div class="wrapper">
   <div class="container">
     <div class="recap-of-search">
-      <h3>You are flying from Paris to <%= @region%> | Departure on: <%= @starts_on %> | Return on:<%= @returns_on%></h3>
+      <h3>You are flying from <%= @city_real_name%> to <%= @region%> | Departure on: <%= @starts_on %> | Return on:<%= @returns_on%></h3>
     </div>
   </div>
 </div>
@@ -11,9 +11,11 @@
     <!-- part with tab and the result -->
     <div class="col-xs-12 col-sm-6">
       <!-- part with tab showing best results by airports -->
+
+      <h3 id="title-tab">Choose your landing and returning airport </h3>
       <div class="tabContainer">
-        <div class="legendReturn">
-          <p><i class="fa fa-plane fa-rotate-180" aria-hidden="true"></i> Arrival airport</p>
+        <div class="legend-arrival">
+          <p class="text-center"><i class="fa fa-plane fa-rotate-180" aria-hidden="true"></i> Arrival airport</p>
         </div>
         <div class="contentTab">
           <div class="row">
@@ -25,7 +27,7 @@
           </div>
           <div class="row">
             <div class="flexbox">
-              <div class="tabGrid">
+              <div class="tabGrid" id="all-flights">
                 <%= link_to "All flights", search_path(@search), class: "tabLink"%>
               </div>
               <% @region_airports.each do |airport| %>
@@ -219,7 +221,7 @@
         <div class="row">
           <% @trips_selection.each do |trip| %>
             <div class="col-xs-12 col-sm-12">
-              <%= link_to trip_path(trip), class: "tabLink" do %>
+              <%= link_to round_trip_flight_refresh_map_path(trip.round_trip_flight), remote: true, class: "tabLink result-card" do %>
                 <!-- <div class="flexbox"> -->
                   <div class="cardContainer flexbox">
                     <div class="card-description">
@@ -237,38 +239,41 @@
         </div>  <!-- fin du row -->
       </div> <!-- fin du displaytrips -->
 
+    <div class="col-sm-6">
+      <div>
+        <div id="map", style="width: 100%; height: 600px;"></div>
+      </div>
     </div>
-       <div class="col-sm-6">
-          <div>
-            <div style="width: 100%; height: 400px;"> <%= image_tag "CEE_map.jpg" %> </div>
-          </div>
-        </div>
-
   </div>
+
 <!-- </div> -->
 
 
   <% content_for(:after_js) do %>
-    <%= javascript_tag do %>
-      $(document).ready(function() {
-        var handler = Gmaps.build('Google');
-        handler.buildMap({
-          provider: {
-            scrollwheel: false,
-            zoomControl: false
-          },
-          internal: { id: 'map' } }, function() {
-          markers = handler.addMarkers(<%= raw @hash.to_json %>);
-          handler.bounds.extendWith(markers);
-          handler.fitMapToBounds();
-          if (markers.length == 0) {
-            handler.getMap().setZoom(2);
-          } else if (markers.length == 1) {
-            handler.getMap().setZoom(14);
-          }
-        });
-      });
 
-    <% end %>
+    <script>
+      $(document).ready(function() {
+
+          var handler = Gmaps.build('Google');
+          handler.buildMap({
+            provider: {
+              scrollwheel: false
+            },
+            internal: { id: 'map' } }, function() {
+            markers = handler.addMarkers(<%= raw @hash_arrive.to_json %>);
+            markers = handler.addMarkers(<%= raw @hash_back.to_json %>);
+            handler.bounds.extendWith(markers);
+            handler.fitMapToBounds();
+            if (markers.length == 0) {
+              handler.getMap().setZoom(6);
+            } else if (markers.length == 1) {
+              handler.getMap().setZoom(15);
+            }
+          });
+
+        });
+    </script>
+
   <% end %>
+
 
