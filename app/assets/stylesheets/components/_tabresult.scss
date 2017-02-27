@@ -34,9 +34,9 @@
   background-color: $brand-color;
   color: white;
   height: 20px;
-  width: 480px;
-  margin-left: 60px;
-  margin-right: 20px;
+  width: 450px;
+  margin-left: 99px;
+  margin-right: 16px;
 }
 
 .legend-arrival {
@@ -66,13 +66,16 @@
 
 #title-tab {
   margin-top: 0px;
+  margin-bottom: 3px;
 }
 
 #all-flights {
 
-  color: $brand-color;
+
+  color: $green;
 }
 
 .cheapest-option {
-  background-color: pink;
+  background-color: $green;
+  color: white;
 }
