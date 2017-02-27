@@ -1,11 +1,19 @@
-<!-- We should find a way to only display the trips of the last search and not all the requests -->
-<div class="wrapper">
-  <div class="container">
+
+ <div class="wrapper">
+  <!-- <div class="container"> -->
     <div class="recap-of-search">
-      <h3>You are flying from <%= @city_real_name%> to <%= @region%> | Departure on: <%= @starts_on %> | Return on:<%= @returns_on%></h3>
+      <div class="logo-head">
+        <%= link_to root_path, class: "navbar-wagon-brand" do %>
+          <%= image_tag "logo.png", class: "logo-nav" %>
+        <% end %>
+      </div>
+      <div class="text-head">
+        <h3>You are flying from <%= @city_real_name%> to <%= @region%> | Departure on: <%= @starts_on %> | Return on: <%= @returns_on%></h3>
+      </div>
     </div>
-  </div>
+  <!-- </div> -->
 </div>
+
 
   <div class="container-fluid">
     <!-- part with tab and the result -->
@@ -223,14 +231,19 @@
             <div class="col-xs-12 col-sm-12">
               <%= link_to trip_path(trip), class: "tabLink" do %>
                 <!-- <div class="flexbox"> -->
-                  <div class="cardContainer flexbox">
+                  <div class="cardContainer ">
                     <div class="card-description">
-                      <p> Flying away: <i class="fa fa-plane" aria-hidden="true"></i> <%= trip.round_trip_flight.flight1_take_off_at.strftime("%b %d") %> | <%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %> <%= trip.round_trip_flight.flight1_origin_airport_iata %> => <i class="fa fa-plane fa-flip-vertical" aria-hidden="true"></i> <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %> <%= trip.round_trip_flight.flight1_destination_airport_iata %></p>
-                      <p> Flying back: <i class="fa fa-plane" aria-hidden="true"></i> <%= trip.round_trip_flight.flight2_take_off_at.strftime("%b %d") %> | <%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %> <%= trip.round_trip_flight.flight2_origin_airport_iata %> => <i class="fa fa-plane fa-flip-vertical" aria-hidden="true"></i> <%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %> <%= trip.round_trip_flight.flight2_destination_airport_iata %></p>
+                      <p> Flying away: <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> <%= trip.round_trip_flight.flight1_take_off_at.strftime("%b %d") %> | <%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %> <%= trip.round_trip_flight.flight1_origin_airport_iata %> => <i class="fa fa-plane fa-flip-vertical" id="good-style" aria-hidden="true"></i> <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %> <%= trip.round_trip_flight.flight1_destination_airport_iata %></p>
+                      <p> Flying back: <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> <%= trip.round_trip_flight.flight2_take_off_at.strftime("%b %d") %> | <%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %> <%= trip.round_trip_flight.flight2_origin_airport_iata %> => <i class="fa fa-plane fa-flip-vertical" id="good-style" aria-hidden="true"></i> <%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %> <%= trip.round_trip_flight.flight2_destination_airport_iata %></p>
                     </div>
-                    <div class="card-price ">
-                      <h2> <%= trip.price.round %> €</h2>
-                    </div> <!-- fin card-price -->
+                    <div class="price-action">
+                      <div class="call-action">
+                        <%= submit_tag "SELECT", class: "bouton-action" %>
+                      </div>
+                      <div class="card-price ">
+                        <p> <%= trip.price.round %> €</p>
+                      </div> <!-- fin card-price -->
+                    </div>
                   </div>
                 <!-- </div> --> <!-- fin cardContainer -->
               <% end %>
@@ -241,8 +254,12 @@
 
       </div>
         <div class="col-sm-6">
+       <!--    <div class="search-result ">
+            <p>You are looking to flight from <%= @city_real_name%> to <%= @region%> </p>
+            <p>Departure on: <%= @starts_on %> | Return on: <%= @returns_on%></p>
+          </div> -->
           <div>
-            <div style="width: 100%; height: 400px;"> <%= image_tag "CEE_map.jpg" %> </div>
+            <div style="width: 100%; height: 480px;"> <%= image_tag "CEE_map.jpg" %> </div>
           </div>
         </div>
       </div>
