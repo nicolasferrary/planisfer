@@ -7,157 +7,187 @@
   </div>
 </div>
 
-<div class="filters">
-  <ul class="list-inline text-center">
-    <li>
-      <h3><i class="fa fa-plane"></i> Take-off time from <%= @city_real_name %> </h3>
-    </li>
+<div class= "container">
+  <div class = "row">
+    <div class = "col-md-6">
+      <p class = "text-center" > Flight to <%= @region %></p>
+    </div>
+    <div class = "col-md-6">
+      <p class = "text-center" > Flight from <%= @region %></p>
+    </div>
+  </div>
 
-    <li>
-      <div class="text-center links-box">
-          <h3> after >> </h3>
-        <div class="option <%= 'active' if params['f1_min_take_off'] == "" %>">
-          <%= link_to "-", search_path(@search, @filters.merge('f1_min_take_off' => "")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f1_min_take_off'] == "8AM" %>">
-          <%= link_to "8AM", search_path(@search, @filters.merge('f1_min_take_off' => "8am")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f1_min_take_off'] == "10AM" %>">
-          <%= link_to "10AM", search_path(@search, @filters.merge('f1_min_take_off' => "10am")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f1_min_take_off'] == "2PM" %>">
-          <%= link_to "2PM", search_path(@search, @filters.merge('f1_min_take_off' => "2pm")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f1_min_take_off'] == "6PM" %>">
-          <%= link_to "6PM", search_path(@search, @filters.merge('f1_min_take_off' => "6pm")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f1_min_take_off'] == "8PM" %>">
-          <%= link_to "8PM", search_path(@search, @filters.merge('f1_min_take_off' => "8pm")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
+  <div class = "row">
+    <div class = "col-md-6">
+      <div class="filters">
+        <ul class="list-inline text-center">
+          <li>
+            <h3><i class="fa fa-plane"></i> Take-off time from <%= @city_real_name %> after >> </h3>
+          </li>
+
+          <li>
+            <div class="text-center links-box">
+              <div class="option <%= 'active' if params['f1_min_take_off'] == "" || params['f1_min_take_off'].nil? %>">
+                <%= link_to "flexible", search_path(@search, @filters.merge('f1_min_take_off' => "")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+
+              <div class="option <%= 'active' if params['f1_min_take_off'] == "8am" %>">
+                <%= link_to "8AM", search_path(@search, @filters.merge('f1_min_take_off' => "8am")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f1_min_take_off'] == "10am" %>">
+                <%= link_to "10AM", search_path(@search, @filters.merge('f1_min_take_off' => "10am")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f1_min_take_off'] == "2pm" %>">
+                <%= link_to "2PM", search_path(@search, @filters.merge('f1_min_take_off' => "2pm")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f1_min_take_off'] == "6pm" %>">
+                <%= link_to "6PM", search_path(@search, @filters.merge('f1_min_take_off' => "6pm")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f1_min_take_off'] == "8pm" %>">
+                <%= link_to "8PM", search_path(@search, @filters.merge('f1_min_take_off' => "8pm")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
-    </li>
-  </ul>
+    </div>
+
+
+    <div class = "col-md-6">
+       <div class="filters">
+        <ul class="list-inline text-center">
+          <li>
+            <h3><i class="fa fa-plane"></i> Take-off time from <%= @region %> after >> </h3>
+          </li>
+
+          <li>
+            <div class="text-center links-box">
+              <div class="option <%= 'active' if params['f2_min_take_off'] == "" || params['f2_min_take_off'].nil?%>">
+                <%= link_to "flexible", search_path(@search, @filters.merge('f2_min_take_off' => "")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f2_min_take_off'] == "8am" %>">
+                <%= link_to "8AM", search_path(@search, @filters.merge('f2_min_take_off' => "8am")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f2_min_take_off'] == "10am" %>">
+                <%= link_to "10AM", search_path(@search, @filters.merge('f2_min_take_off' => "10am")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f2_min_take_off'] == "2pm" %>">
+                <%= link_to "2PM", search_path(@search, @filters.merge('f2_min_take_off' => "2pm")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f2_min_take_off'] == "6pm" %>">
+                <%= link_to "6PM", search_path(@search, @filters.merge('f2_min_take_off' => "6pm")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f2_min_take_off'] == "8pm" %>">
+                <%= link_to "8PM", search_path(@search, @filters.merge('f2_min_take_off' => "8pm")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class = "row">
+    <div class = "col-md-6">
+      <div class="filters">
+        <ul class="list-inline text-center">
+          <li>
+            <h3><i class="fa fa-plane"></i> Landing time in <%= @region %> before << </h3>
+          </li>
+
+          <li>
+            <div class="text-center links-box">
+              <div class="option <%= 'active' if params['f1_max_landing'] == "" || params['f1_max_landing'].nil? %>">
+                <%= link_to "flexible", search_path(@search, @filters.merge('f1_max_landing' => "")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f1_max_landing'] == "8am" %>">
+                <%= link_to "8AM", search_path(@search, @filters.merge('f1_max_landing' => "8am")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f1_max_landing'] == "10am" %>">
+                <%= link_to "10AM", search_path(@search, @filters.merge('f1_max_landing' => "10am")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f1_max_landing'] == "2pm" %>">
+                <%= link_to "2PM", search_path(@search, @filters.merge('f1_max_landing' => "2pm")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f1_max_landing'] == "6pm" %>">
+                <%= link_to "6PM", search_path(@search, @filters.merge('f1_max_landing' => "6pm")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f1_max_landing'] == "8pm" %>">
+                <%= link_to "8PM", search_path(@search, @filters.merge('f1_max_landing' => "8pm")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class = "col-md-6">
+      <div class="filters">
+        <ul class="list-inline text-center">
+          <li>
+            <h3><i class="fa fa-plane"></i> Landing time in <%= @city_real_name %> before << </h3>
+          </li>
+
+          <li>
+            <div class="text-center links-box">
+              <div class="option <%= 'active' if params['f2_max_landing'] == "" || params['f2_max_landing'].nil? %>">
+                <%= link_to "flexible", search_path(@search, @filters.merge('f2_max_landing' => "")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f2_max_landing'] == "8am" %>">
+                <%= link_to "8AM", search_path(@search, @filters.merge('f2_max_landing' => "8am")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f2_max_landing'] == "10am" %>">
+                <%= link_to "10AM", search_path(@search, @filters.merge('f2_max_landing' => "10am")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f2_max_landing'] == "2pm" %>">
+                <%= link_to "2PM", search_path(@search, @filters.merge('f2_max_landing' => "2pm")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f2_max_landing'] == "6pm" %>">
+                <%= link_to "6PM", search_path(@search, @filters.merge('f2_max_landing' => "6pm")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+              <div class="option <%= 'active' if params['f2_max_landing'] == "8pm" %>">
+                <%= link_to "8PM", search_path(@search, @filters.merge('f2_max_landing' => "8pm")) , class: "radio-btn"%>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </div>
+
+  </div>
+
 </div>
 
-<div class="filters">
-  <ul class="list-inline text-center">
-    <li>
-      <h3><i class="fa fa-plane"></i> Landing time in <%= @region %> </h3>
-    </li>
 
-    <li>
-      <div class="text-center links-box">
-          <h3> before << </h3>
-        <div class="option <%= 'active' if params['f1_max_landing'] == "" %>">
-          <%= link_to "-", search_path(@search, @filters.merge('f1_max_landing' => "")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f1_max_landing'] == "8AM" %>">
-          <%= link_to "8AM", search_path(@search, @filters.merge('f1_max_landing' => "8am")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f1_max_landing'] == "10AM" %>">
-          <%= link_to "10AM", search_path(@search, @filters.merge('f1_max_landing' => "10am")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f1_max_landing'] == "2PM" %>">
-          <%= link_to "2PM", search_path(@search, @filters.merge('f1_max_landing' => "2pm")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f1_max_landing'] == "6PM" %>">
-          <%= link_to "6PM", search_path(@search, @filters.merge('f1_max_landing' => "6pm")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f1_max_landing'] == "8PM" %>">
-          <%= link_to "8PM", search_path(@search, @filters.merge('f1_max_landing' => "8pm")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-      </div>
-    </li>
-  </ul>
-</div>
 
-<div class="filters">
-  <ul class="list-inline text-center">
-    <li>
-      <h3><i class="fa fa-plane"></i> Take-off time from <%= @region %> </h3>
-    </li>
 
-    <li>
-      <div class="text-center links-box">
-          <h3> after >> </h3>
-        <div class="option <%= 'active' if params['f2_min_take_off'] == "" %>">
-          <%= link_to "-", search_path(@search, @filters.merge('f2_min_take_off' => "")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f2_min_take_off'] == "8AM" %>">
-          <%= link_to "8AM", search_path(@search, @filters.merge('f2_min_take_off' => "8am")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f2_min_take_off'] == "10AM" %>">
-          <%= link_to "10AM", search_path(@search, @filters.merge('f2_min_take_off' => "10am")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f2_min_take_off'] == "2PM" %>">
-          <%= link_to "2PM", search_path(@search, @filters.merge('f2_min_take_off' => "2pm")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f2_min_take_off'] == "6PM" %>">
-          <%= link_to "6PM", search_path(@search, @filters.merge('f2_min_take_off' => "6pm")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f2_min_take_off'] == "8PM" %>">
-          <%= link_to "8PM", search_path(@search, @filters.merge('f2_min_take_off' => "8pm")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-      </div>
-    </li>
-  </ul>
-</div>
 
-<div class="filters">
-  <ul class="list-inline text-center">
-    <li>
-      <h3><i class="fa fa-plane"></i> Landing time in <%= @city_real_name %> </h3>
-    </li>
 
-    <li>
-      <div class="text-center links-box">
-          <h3> before << </h3>
-        <div class="option <%= 'active' if params['f2_max_landing'] == "" %>">
-          <%= link_to "-", search_path(@search, @filters.merge('f2_max_landing' => "")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f2_max_landing'] == "8AM" %>">
-          <%= link_to "8AM", search_path(@search, @filters.merge('f2_max_landing' => "8am")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f2_max_landing'] == "10AM" %>">
-          <%= link_to "10AM", search_path(@search, @filters.merge('f2_max_landing' => "10am")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f2_max_landing'] == "2PM" %>">
-          <%= link_to "2PM", search_path(@search, @filters.merge('f2_max_landing' => "2pm")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f2_max_landing'] == "6PM" %>">
-          <%= link_to "6PM", search_path(@search, @filters.merge('f2_max_landing' => "6pm")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-        <div class="option <%= 'active' if params['f2_max_landing'] == "8PM" %>">
-          <%= link_to "8PM", search_path(@search, @filters.merge('f2_max_landing' => "8pm")) , class: "radio-btn"%>
-          <i class="fa fa-circle" aria-hidden="true"></i>
-        </div>
-      </div>
-    </li>
-  </ul>
-</div>
 
   <div class="container-fluid">
     <!-- part with tab and the result -->
