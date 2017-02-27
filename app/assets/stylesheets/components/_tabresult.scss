@@ -16,11 +16,6 @@
   text-decoration: none;
 }
 
-.tabGrid:hover {
-  opacity: 0.5;
-  text-decoration: none;
-  color: $brand-color;
-}
 
 .tabLink:hover{
   opacity: 0.5;
@@ -76,4 +71,8 @@
 #all-flights {
 
   color: $brand-color;
+}
+
+.cheapest-option {
+  background-color: pink;
 }
