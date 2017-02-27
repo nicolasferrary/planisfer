@@ -87,9 +87,13 @@ class SearchesController < ApplicationController
     @trips = @trips.sort_by { |trip| trip.price }
 
     @trips_selection = @trips.first(4)
+
+    @trip_cheapest_price = @trips_selection.first.price.round
+
     @round_trips = @trips_selection.map(&:round_trip_flight)
     # declenche le geocode sur ces objets
     @round_trips.map(&:destination_airport_coordinates).map(&:origin_airport_coordinates)
+
 
     # Here we define selections of trips that match f1 destination airport and f2 origin airport
     @trips0_0 = select_trips_with_airports(0,0)
