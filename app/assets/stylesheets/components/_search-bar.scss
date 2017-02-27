@@ -1,13 +1,19 @@
 .form-post {
-  background: white;
+  background: rgb(250, 250, 250);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 6 1px 4px rgba(0,0,0,0.2);
+  box-shadow: 6px 1px 4px rgba(0,0,0,0.2);
   border: white 1px solid;
   position: absolute;
   right: 40px;
   top: 100px;
   opacity: 0.9;
+  width: 30%;
+  h3 {
+  color: black;
+  font-size: 17px;
+  font-weight: bolder;
+  }
 }
 
 .row {
@@ -15,12 +21,12 @@
 }
 
 .form-post h1 {
-    text-align: center;
-    font-weight: bolder;
-    font-size: 25px;
-    color: black;
-    margin-bottom: 50px;
-    margin-top: 0;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 25px;
+  color: black;
+  margin-bottom: 25px;
+
 }
 
 .input-lg {
@@ -48,14 +54,12 @@
   color: #484848;
   border-radius: 10px;
   background-color: white;
-  margin-bottom: 21px;
 }
 
 #region {
   border-radius: 10px;
   color: #484848;
   background-color: white;
-  margin-bottom: 21px;
 }
 
 
@@ -67,31 +71,16 @@
   border-radius: 10px;
 }
 
-.fa-male {
-  display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size: inherit;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  color: black;
-}
-
-
-.fa-lg {
-  font-size: 1.73333333em;
-  line-height: 1.75em;
-  vertical-align: -12%;
-}
 
 .btn-big {
   width: 100%;
 }
+
 .datepicker{
   display: flex;
   color: #484848;
-  margin-left: 73px;
   margin-top: 23px;
-  margin-bottom: 19px;
+  margin-bottom: 5px;
     &:focus {
     outline: none;
   }
