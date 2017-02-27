@@ -1,0 +1,20 @@
+var handler = Gmaps.build('Google', { markers: { clusterer: undefined }});
+handler.buildMap({
+  provider: {
+    scrollwheel: false
+  },
+  internal: { id: 'map' } }, function(){
+  markers = handler.addMarkers([
+    {
+      "lat": <%=  @round_trip_flight.latitude_arrive %>,
+      "lng": <%=  @round_trip_flight.longitude_arrive  %>,
+    },
+    {
+      "lat": <%=  @round_trip_flight.latitude_back %>,
+      "lng": <%=  @round_trip_flight.longitude_back %>,
+    },
+  ]);
+  handler.bounds.extendWith(markers);
+  handler.fitMapToBounds();
+});
+
