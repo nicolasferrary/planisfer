@@ -2,6 +2,7 @@
 @import "config/variables";
 @import "config/bootstrap_variables";
 @import "bootstrap-datepicker";
+@import "seiyria-bootstrap-slider";
 
 // External libraries
 @import "bootstrap-sprockets";
@@ -9,9 +10,11 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+
 // Your CSS
 @import "layout/index";
 @import "components/index";
 @import "pages/index";
 @import "vendor/index";
+
 

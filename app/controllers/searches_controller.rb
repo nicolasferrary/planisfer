@@ -6,10 +6,6 @@ class SearchesController < ApplicationController
     @search.save
     @city = City.create(params[:city])
     @region = Region.create(params[:region])
-
-
-
-
     #Lancer les requetes API et tout le code qui va avec.
     @starts_on = params[:starts_on]
     @returns_on = params[:returns_on]
@@ -74,6 +70,43 @@ class SearchesController < ApplicationController
 
   def show
     @search = Search.find(params[:id])
+
+    unless params[:flight1_range].blank?
+      @flight1_range_low = params[:flight1_range].split(",").first
+      @flight1_range_high = params[:flight1_range].split(",")[1]
+      @flight1_range = @flight1_range_low + "," + @flight1_range_high
+
+      if @flight1_range_low.to_f < 12
+        @f1_min_time = @flight1_range_low + "am"
+      else
+        @f1_min_time = @flight1_range_low + "pm"
+      end
+
+      if @flight1_range_high.to_f < 12
+        @f1_max_time = @flight1_range_high + "am"
+      else
+        @f1_max_time = @flight1_range_high + "pm"
+      end
+    end
+
+    unless params[:flight2_range].blank?
+      @flight2_range_low = params[:flight2_range].split(",").first
+      @flight2_range_high = params[:flight2_range].split(",")[1]
+      @flight2_range = @flight2_range_low + "," + @flight2_range_high
+
+      if @flight2_range_low.to_f < 12
+        @f2_min_time = @flight2_range_low + "am"
+      else
+        @f2_min_time = @flight2_range_low + "pm"
+      end
+
+      if @flight2_range_high.to_f < 12
+        @f2_max_time = @flight2_range_high + "am"
+      else
+        @f2_max_time = @flight2_range_high + "pm"
+      end
+    end
+
     @trips = @search.trips
     @region = @search.region
     @region_airports = Constants::REGIONS_AIRPORTS[@region]
@@ -121,6 +154,7 @@ class SearchesController < ApplicationController
       # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
     end
   end
+
 
   def refresh_map
     # récupérer le round_trip
@@ -172,25 +206,14 @@ class SearchesController < ApplicationController
       @trips = filter_by_airport2(@trips, @filters)
     end
 
-    if params["f1_min_take_off"].present? && params["f1_min_take_off"] != ""
-      @filters = @filters.merge("f1_min_take_off" => params[:f1_min_take_off])
+    if params["flight1_range"].present? && params["flight1_range"] != ""
+      @filters = @filters.merge("f1_min_take_off" => @f1_min_time).merge("f1_max_take_off" => @f1_max_time)
       @trips = filter_by_f1_takeoff(@trips, @filters)
     end
 
-    #filter by arrival time if asked
-    if params["f1_max_landing"].present? && params["f1_max_landing"] != ""
-      @filters = @filters.merge("f1_max_landing" => params[:f1_max_landing])
-      @trips = filter_by_f1_landing(@trips, @filters)
-    end
-
-    if params["f2_min_take_off"].present? && params["f2_min_take_off"] != ""
-      @filters = @filters.merge("f2_min_take_off" => params[:f2_min_take_off])
+    if params["flight2_range"].present? && params["flight2_range"] != ""
+      @filters = @filters.merge("f2_min_take_off" => @f2_min_time).merge("f2_max_take_off" => @f2_max_time)
       @trips = filter_by_f2_takeoff(@trips, @filters)
-    end
-
-    if params["f2_max_landing"].present? && params["f2_max_landing"] != ""
-      @filters = @filters.merge("f2_max_landing" => params[:f2_max_landing])
-      @trips = filter_by_f2_landing(@trips, @filters)
     end
 
   end
@@ -251,25 +274,17 @@ class SearchesController < ApplicationController
 
   def filter_by_f1_takeoff(trips, filters)
     trips.select { |trip|
-      trip.round_trip_flight.flight1_take_off_at.hour >= Time.parse(filters["f1_min_take_off"]).hour if filters.has_key?("f1_min_take_off")
-    }
-  end
-
-  def filter_by_f1_landing(trips, filters)
-    trips.select { |trip|
-      trip.round_trip_flight.flight1_landing_at.hour <= Time.parse(filters["f1_max_landing"]).hour if filters.has_key?("f1_max_landing")
+      (trip.round_trip_flight.flight1_take_off_at.hour >= Time.parse(filters["f1_min_take_off"]).hour) &&
+      (trip.round_trip_flight.flight1_take_off_at.hour <= Time.parse(filters["f1_max_take_off"]).hour)
     }
   end
 
   def filter_by_f2_takeoff(trips, filters)
     trips.select { |trip|
-      trip.round_trip_flight.flight2_take_off_at.hour >= Time.parse(filters["f2_min_take_off"]).hour if filters.has_key?("f2_min_take_off")
+      trip.round_trip_flight.flight2_take_off_at.hour >= Time.parse(filters["f2_min_take_off"]).hour
     }
-  end
-
-  def filter_by_f2_landing(trips, filters)
     trips.select { |trip|
-      trip.round_trip_flight.flight2_landing_at.hour <= Time.parse(filters["f2_max_landing"]).hour if filters.has_key?("f2_max_landing")
+      trip.round_trip_flight.flight2_take_off_at.hour <= Time.parse(filters["f2_max_take_off"]).hour
     }
   end
 
