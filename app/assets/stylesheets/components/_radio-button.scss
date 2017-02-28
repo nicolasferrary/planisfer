@@ -1,0 +1,96 @@
+
+.filters {
+  margin-bottom: 50px;
+  text-align: center;
+  margin-left: -42px;
+  h3 {
+    font-size: 15px;
+  }
+}
+
+
+.links-box {
+  border-bottom: 2px solid #FF2B67;
+  position: relative;
+
+  display: flex;
+}
+
+
+.option {
+  .fa-circle {
+    position: absolute;
+
+    color: transparent;
+    cursor: pointer;
+      top: 32px;
+      left: 15px;
+    @media only screen and (min-width: 0px) and (max-width: $screen-xs){
+      top: 65px;
+      left: 12px;
+    }
+  }
+  &.active > .fa-circle {
+      color: #FF2B67;
+    }
+}
+.option {
+  display: flex;
+  flex-direction: column;
+  margin-top: 6px;
+  margin: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.longer-option {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  margin: 10px;
+  position: relative;
+  cursor: pointer;
+  .fa-circle {
+    position: absolute;
+      top: 32px;
+      left: 33px;
+    @media only screen and (min-width: 0px) and (max-width: $screen-xs){
+      top: 65px;
+      left: 21px;
+    }
+    color: transparent;
+    cursor: pointer;
+  }
+  &.active > .fa-circle {
+      color: #FF2B67;
+    }
+}
+
+.radio-btn {
+  color: #484848;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: lighter;
+  margin-top: 9px;
+  &.active {
+  background-color: #FF5C3C;
+  }
+  &:hover {
+    text-decoration: none;
+    color: white;
+    background-color: #FF2C66;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
