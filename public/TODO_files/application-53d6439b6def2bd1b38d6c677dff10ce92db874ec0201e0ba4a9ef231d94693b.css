@@ -9632,14 +9632,15 @@ button.close {
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: black;
 }
 
 /* makes the font 33% larger relative to the icon container */
 /* line 5, /usr/local/Cellar/rbenv/1.1.0/versions/2.3.3/lib/ruby/gems/2.3.0/gems/font-awesome-sass-4.7.0/assets/stylesheets/font-awesome/_larger.scss */
 .fa-lg {
   font-size: 1.33333333em;
-  line-height: 0.75em;
-  vertical-align: -15%;
+  line-height: 1.75em;
+  vertical-align: -12%;
 }
 
 /* line 10, /usr/local/Cellar/rbenv/1.1.0/versions/2.3.3/lib/ruby/gems/2.3.0/gems/font-awesome-sass-4.7.0/assets/stylesheets/font-awesome/_larger.scss */

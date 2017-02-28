@@ -14,12 +14,22 @@
   position: absolute;
   left: 230px;
   top: 240px;
+  h1 {
+  font-weight: bolder;
+  }
 }
 .home-button {
   margin-top: 50px;
   padding-top: 3px;
 }
 
+.arrow-img {
+  width: 30px;
+  position: absolute;
+  margin-left: -20px;
+  margin-top: 18em;
+  color: white;
+}
 
 .banner2 {
   height: 100vh;

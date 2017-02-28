@@ -1,16 +1,20 @@
 .cardContainer {
   height: 75px;
-  background-color: $my-ivory;
+  // background-color: $my-ivory;
   color: black;
-  position: relative;
+  // position: relative;
   border-radius: 5px;
   margin-bottom: 20px;
   text-decoration: none;
+  border: 1px solid $brand-color;
+  box-shadow: 2px 2px 2px $brand-color;
 }
 
 .card-description {
-  margin-bottom: 20px;
-  margin-top: 20px;
+  // margin-bottom: 20px;
+  // margin-top: 20px;
+  position: absolute;
+  left: 45px;
 }
 
 .card-description p{
@@ -19,4 +23,33 @@
 
 .cardContainer:hover{
   opacity: 0.5;
+  // height: 80px;
+  // width: 600px;
+}
+
+.bouton-action {
+  background-color: $green;
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 14px;
+  border-style: none;
+}
+
+// .price-action {
+//   position: relative;
+//   width: 60px;
+// }
+
+.call-action {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+}
+
+.card-price {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  font-size: 20px;
 }

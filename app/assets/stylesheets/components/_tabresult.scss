@@ -16,11 +16,6 @@
   text-decoration: none;
 }
 
-.tabGrid:hover {
-  opacity: 0.5;
-  text-decoration: none;
-  color: $brand-color;
-}
 
 .tabLink:hover{
   opacity: 0.5;
@@ -39,19 +34,20 @@
   background-color: $brand-color;
   color: white;
   height: 20px;
-  width: 480px;
-  margin-left: 70px;
-  margin-right: 20px;
+  width: 450px;
+  margin-left: 99px;
+  margin-right: 16px;
 }
 
-.legendReturn {
+.legend-arrival {
   position: absolute;
   color: white;
   top: 83px;
   left: -45px;
+  width: 134px;
 }
 
-.legendReturn p {
+.legend-arrival p {
   transform: rotate(-90deg);
   background-color: $brand-color;
   color: white;
@@ -66,4 +62,25 @@
 
 #titleShow {
   background-color: $brand-color;
+  margin-top: 16px;
+}
+
+#titleShow h3{
+  margin-top: 16px;
+}
+
+#title-tab {
+  margin-top: 0px;
+  margin-bottom: 3px;
+}
+
+#all-flights {
+
+
+  color: $green;
+}
+
+.cheapest-option {
+  background-color: $green;
+  color: white;
 }
