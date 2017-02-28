@@ -115,16 +115,24 @@ class SearchesController < ApplicationController
 
     # GEOCODING
 
-    @first_result = [
+    if @round_trips.first.latitude_arrive == @round_trips.first.latitude_back
+       @first_result = [
       {
         lat: @round_trips.first.latitude_arrive,
         lng: @round_trips.first.longitude_arrive,
-      },
-      {
-        lat: @round_trips.first.latitude_back,
-        lng: @round_trips.first.longitude_back,
-      }
-    ]
+      }]
+    else
+      @first_result = [
+        {
+          lat: @round_trips.first.latitude_arrive,
+          lng: @round_trips.first.longitude_arrive,
+        },
+        {
+          lat: @round_trips.first.latitude_back,
+          lng: @round_trips.first.longitude_back,
+        }
+      ]
+    end
 
     # @hash = Gmaps4rails.build_markers(@first_result).each do |trip, marker|
     #   marker.lat trip.
@@ -145,8 +153,8 @@ class SearchesController < ApplicationController
 
     if longitude_arrive == longitude_back && latitude_arrive == latitude_back
       render json: [{
-          lat: latitude_arrive,
-          lng: longitude_arrive
+          lat: @round_trip_flight.latitude_arrive,
+          lng: @round_trip_flight.longitude_arrive
         }].to_json
     else
       render json: [{

@@ -461,7 +461,9 @@
 
             },
             internal: { id: 'map' } }, function() {
-            markers = handler.addMarkers(<%= raw @first_result.to_json %>);
+            markers = handler.addMarkers( <%= raw @first_result.to_json %>
+
+              );
 
             handler.bounds.extendWith(markers);
             handler.fitMapToBounds();
