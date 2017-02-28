@@ -1,6 +1,7 @@
 
 
-<div class= "container-fluid">
+
+<div class= "container-fluid page-result">
   <div class = "row">
     <div class = "col-md-6">
       <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region %> </strong> on <strong> <%= @starts_on.strftime("%B %e") %> </strong> </h5>
@@ -51,7 +52,7 @@
 </div>
 
 
-  <div class="container-fluid">
+  <div class="container-fluid page-result">
     <!-- part with tab and the result -->
     <div class="col-xs-12 col-md-6">
       <!-- part with tab showing best results by airports -->
@@ -63,7 +64,7 @@
         </div>
         <div class="contentTab">
           <div class="row">
-            <div class="flexbox">
+            <div class="flexbox legend-top-tab">
               <div class="legendTabResult text-center">
                 <p><i class="fa fa-plane" aria-hidden="true"></i> Return airport</p>
               </div>
@@ -272,14 +273,23 @@
         </div> <!-- <div class="contentTab"> -->
       </div> <!-- <div class="tabContainer"> -->
 
+      <%= link_to search_path(@search), class: "box-select-all-flights" do%>
+        <div class=" text-center" id="all-flights">
+          <strong>See all flights</strong>
+        </div>
+      <% end  %>
+
       <div class="displayTrips">
 
         <div id="TitleShow"><h3>The best deals:</h3></div>
 
         <div class="row">
           <% @trips_selection.each do |trip| %>
+
+
             <div class="col-xs-12 col-sm-12">
               <%= link_to trip_path(trip), class: "tabLink result-card", data: { round_trip_flight_id: trip.round_trip_flight.id } do %>
+
                 <!-- <div class="flexbox"> -->
                   <div class="cardContainer ">
                     <div class="card-description">
@@ -290,9 +300,7 @@
 
                     </div>
                     <div class="price-action">
-                      <div class="call-action">
-                        <%= submit_tag "SELECT", class: "bouton-action" %>
-                      </div>
+
                       <div class="card-price ">
                         <p> <%= trip.price.round %> €</p>
                       </div> <!-- fin card-price -->
@@ -300,7 +308,7 @@
                   </div>
                 <!-- </div> --> <!-- fin cardContainer -->
               <% end %>
-            </div> <!-- fin de col -->
+           <!--  </div>  --><!-- fin de col -->
           <% end %>
         </div>  <!-- fin du row -->
       </div> <!-- fin du displaytrips -->
