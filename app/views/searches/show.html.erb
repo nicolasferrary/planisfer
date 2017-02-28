@@ -417,7 +417,7 @@
         <div class="row">
           <% @trips_selection.each do |trip| %>
             <div class="col-xs-12 col-sm-12">
-              <%= link_to round_trip_flight_refresh_map_path(trip.round_trip_flight), remote: true, class: "tabLink result-card" do %>
+              <%= link_to trip_path(trip), class: "tabLink result-card", data: { round_trip_flight_id: trip.round_trip_flight.id } do %>
                 <!-- <div class="flexbox"> -->
                   <div class="cardContainer ">
                     <div class="card-description">
@@ -461,27 +461,49 @@
 
     <script>
       $(document).ready(function() {
-
           var handler = Gmaps.build('Google');
           handler.buildMap({
             provider: {
-              scrollwheel: false
+              scrollwheel: false,
+              styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
+
             },
             internal: { id: 'map' } }, function() {
-            markers = handler.addMarkers(<%= raw @hash_arrive.to_json %>);
-            markers = handler.addMarkers(<%= raw @hash_back.to_json %>);
+            markers = handler.addMarkers( <%= raw @first_result.to_json %>
+
+              );
+
             handler.bounds.extendWith(markers);
             handler.fitMapToBounds();
-            if (markers.length == 0) {
-              handler.getMap().setZoom(6);
-            } else if (markers.length == 1) {
-              handler.getMap().setZoom(15);
-            }
-          });
+            handler.getMap().setZoom(5);
 
+          });
+          $('.result-card').mouseenter('click', function(e) {
+            e.preventDefault();
+            var roundTripFlightId = $(this).data('round-trip-flight-id');
+            $.ajax({
+              type: "GET",
+              url: '/round_trip_flights/' + roundTripFlightId + '/refresh_map',
+              dataType: "json",
+              success: function(result){
+                for (var i = 0; i < markers.length; i++) {
+                  markers[i].setMap(null);
+                  handler.removeMarkers(markers);
+                }
+                markers = [];
+                markers = handler.addMarkers(result);
+                handler.bounds.extendWith(markers);
+              }
+            })
+            handler.fitMapToBounds();
+            handler.getMap().setZoom(5);
+          })
         });
     </script>
 
   <% end %>
+
+
+
 
 
