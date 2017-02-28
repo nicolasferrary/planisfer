@@ -1,0 +1,20 @@
+<div class="modal fade" id="book_modal" tabindex="-1" role="dialog" aria-labelledby="<%= modal_name %>">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">You are almost there</h4>
+      </div>
+      <div class="modal-body">
+        <%# FLIGHT INFO HERE %>
+        <h2 style= "font-weight: lighter; color: #264E86" class = "modal_padding">Thank you for using Planisfer</h2>
+        <p style="color: rgba(0,0,0,0.7); font-weight: lighter;">Have you ever selected the best flights for your road trip so fast? Awesome, isn't it? <p class = "modal_padding" style="color: rgba(0,0,0,0.7); font-weight: lighter;">
+        We are glad we helped you prepare your next trip in Europe. You can now <strong> book </strong> the flights you selected <strong> with company airlines websites or a travel agency </strong>. You can use Expedia for instance.</p>
+        <div class="text-center" style="padding: 10px;">
+        <%= link_to "Take me to Expedia website", "https://www.expedia.com", class: "btn btn-primary modal_padding", style: "margin-top: 0", target: "_blank" %>
+        </div>
+        <p style="color: rgba(0,0,0,0.7); font-weight: lighter;">Have a good trip and we hope to see you again soon!</p>
+      </div>
+    </div>
+  </div>
+</div>
