@@ -415,7 +415,7 @@
         <div class="row">
           <% @trips_selection.each do |trip| %>
             <div class="col-xs-12 col-sm-12">
-              <%= link_to round_trip_flight_refresh_map_path(trip.round_trip_flight), remote: true, class: "tabLink result-card" do %>
+              <%= link_to "#", class: "tabLink result-card", data: { round_trip_flight_id: trip.round_trip_flight.id } do %>
                 <!-- <div class="flexbox"> -->
                   <div class="cardContainer ">
                     <div class="card-description">
@@ -453,7 +453,6 @@
 
     <script>
       $(document).ready(function() {
-
           var handler = Gmaps.build('Google');
           handler.buildMap({
             provider: {
@@ -461,7 +460,7 @@
             },
             internal: { id: 'map' } }, function() {
             markers = handler.addMarkers(<%= raw @hash_arrive.to_json %>);
-            markers = handler.addMarkers(<%= raw @hash_back.to_json %>);
+
             handler.bounds.extendWith(markers);
             handler.fitMapToBounds();
             if (markers.length == 0) {
@@ -470,7 +469,26 @@
               handler.getMap().setZoom(15);
             }
           });
-
+          $('.result-card').on('click', function(e) {
+            e.preventDefault();
+            var roundTripFlightId = $(this).data('round-trip-flight-id');
+            $.ajax({
+              type: "GET",
+              url: '/round_trip_flights/' + roundTripFlightId + '/refresh_map',
+              dataType: "json",
+              success: function(result){
+                for (var i = 0; i < markers.length; i++) {
+                  markers[i].setMap(null);
+                  handler.removeMarkers(markers);
+                }
+                markers = [];
+                markers = handler.addMarkers(result);
+                handler.bounds.extendWith(markers);
+              }
+            })
+            handler.fitMapToBounds();
+            handler.getMap().setZoom(5);
+          })
         });
     </script>
 

@@ -125,12 +125,15 @@ class SearchesController < ApplicationController
   def refresh_map
     # récupérer le round_trip
     @round_trip_flight = RoundTripFlight.find(params[:round_trip_flight_id])
-    # construire les markers
-    respond_to do |format|
-      format.html
-      format.js
-    end
-    # renvoyer la map
+    # renvoyer les coordonnées des marqueurs à afficher
+    render json: [{
+                    lat: @round_trip_flight.latitude_arrive,
+                    lng: @round_trip_flight.longitude_arrive,
+                  },
+                  {
+                    lat: @round_trip_flight.latitude_back,
+                    lng: @round_trip_flight.longitude_back,
+                  }].to_json
   end
 
   private
