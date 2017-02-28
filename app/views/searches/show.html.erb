@@ -285,9 +285,6 @@
 
         <div class="row">
           <% @trips_selection.each do |trip| %>
-
-
-            <div class="col-xs-12 col-sm-12">
               <%= link_to trip_path(trip), class: "tabLink result-card", data: { round_trip_flight_id: trip.round_trip_flight.id } do %>
 
                 <!-- <div class="flexbox"> -->
