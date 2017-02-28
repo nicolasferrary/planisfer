@@ -1,39 +1,50 @@
 <div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.4) 0%, rgba(0,36,61,0.5) 50%), url('<%= image_path('background.jpg') %>');">
   <div class="banner-content">
-  <%= link_to root_path do %>
-     <%= image_tag "logo.png", class:"logo"%>
-  <% end %>
-  <div class="banner-title">
-   <h1>Roadtrips in Europe</h1>
-   <h3>Find the best way to discover new regions</h3>
-  </div>
+    <%= link_to root_path do %>
+    <%= image_tag "logo.png", class:"logo"%>
+    <% end %>
+    <div class="banner-title">
+     <h1>Roadtrips in Europe</h1>
+     <h3>Find the best way to discover new regions</h3>
+   </div>
 
    <div class="form-post text-center">
     <h1>Search flights</h1>
     <%=form_tag searches_path, :controller => 'searches', method: :post, id: "new_result" do %>
     <div class="row">
       <div class="col-xs-6">
-        <%= select_tag :city, options_for_select(Constants::AIRPORTS.invert.sort), class: "input-lg", prompt: "From" %>
+        <%= select_tag :city, options_for_select(Constants::AIRPORTS.invert.sort), class: "input-lg form-control", prompt: "From" %>
       </div>
       <div class="col-xs-6">
-        <%= select_tag  :region, options_for_select(Constants::REGIONS.sort), class: "input-lg", prompt: "To" %>
+        <%= select_tag  :region, options_for_select(Constants::REGIONS.sort), class: "input-lg form-control", prompt: "To" %>
       </div>
-      <div class="form-group">
-    <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'input-lg datepicker text-center'%>
-    <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => ' input-lg datepicker text-center' %>
-    <i class="fa fa-male fa-lg" aria-hidden="true"></i>
-    <%= select_tag :nb_travelers, options_for_select(Constants::TRAVELERS.invert.sort), class: "input-lg", prompt: "Travelers" %>
-    <hr>
-    <%= submit_tag "LET'S TRAVEL", class: "btn btn-danger btn-big" %>
+      <div class="col-xs-12">
+        <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'input-lg form-control datepicker text-center'%>
+        <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => ' input-lg form-control datepicker text-center' %>
+
+        <h3>Number of travelers</h3>
+        <div class="group" data-toggle="buttons">>
+          <% Constants::TRAVELERS.each do |number, text| %>
+          <label class="btn btn-default">
+            <input type="radio" name="nb_travelers" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
+          </label>
+          <% end %>
+        </div>
+        <%= submit_tag "LET'S TRAVEL", class: "btn btn-danger btn-big" %>
+      </div>
+      <%end%>
     </div>
-    <%end%>
   </div>
+  <div class="text-center">
+    <a href="#trendy">
+      <%= image_tag "arrow.png", class: "floating arrow-img" %>
+    </a>
   </div>
 </div>
 </div>
 
 
-<div class="trending">
+<div class="trending" id="trendy">
   <h1 class="banner2-title "><strong>Trendy destinations</strong></h1>
   <div class="blocks clearfix">
     <a class="block sm destination">
@@ -69,7 +80,7 @@
       </span>
     </a>
     <a class="block sm destination">
-    <%= image_tag "bridge.jpg", class:"dest-image"%>
+      <%= image_tag "bridge.jpg", class:"dest-image"%>
       <span class="box">
         <span class="text in-box">
           <span class="primarytext">Central-EU</span>
@@ -126,9 +137,9 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-4 col-xs-offset-4">
-      <div class="text-footer">
-      Made with <i class="fa fa-heart"></i> @LeWagon
-      </div>
+        <div class="text-footer">
+          Made with <i class="fa fa-heart"></i> @LeWagon
+        </div>
       </div>
     </div>
   </div>
@@ -161,6 +172,7 @@
       $("#region").val(region);
       $("body").animate({ scrollTop: 0}, "slow");
     });
+
   });
 </script>
 <% end %>
