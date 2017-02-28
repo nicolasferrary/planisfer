@@ -281,9 +281,9 @@ class SearchesController < ApplicationController
     @trips.each do |trip|
       if trip.round_trip_flight.flight1_destination_airport_iata == @region_airports[a] && trip.round_trip_flight.flight2_origin_airport_iata == @region_airports[b]
         trips << trip
+      end
     end
     trips
-    end
   end
 
 end

@@ -75,12 +75,25 @@
 }
 
 #all-flights {
-
-
-  color: $green;
+  background-color: $brand-color;
+  color: white;
 }
 
+#all-flights:hover {
+  opacity: 0.5;
+  text-decoration: none;
+}
+.box-select-all-flights {
+  text-decoration: none;
+}
+
+.box-select-all-flights:hover {
+  text-decoration: none;
+}
+
+
 .cheapest-option {
+  opacity: 0.8;
   background-color: $green;
   color: white;
 }

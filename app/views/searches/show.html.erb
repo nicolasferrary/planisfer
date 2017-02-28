@@ -209,18 +209,20 @@
           </div>
           <div class="row">
             <div class="flexbox">
-              <div class="tabGrid" id="all-flights">
-                <strong><%= link_to "All flights", search_path(@search), class: "tabLink"%></strong>
-              </div>
+              <%= link_to search_path(@search), class: "box-select-all-flights" do%>
+                <div class="tabGrid text-center" id="all-flights">
+                  <strong>See all flights</strong>
+                </div>
+              <% end  %>
               <% @region_airports.each do |airport| %>
-                <div class="tabGrid text-center"><%= Constants::CITY_REGION[airport] %></div>
+                <div class="tabGrid text-center"><strong><%= Constants::CITY_REGION[airport] %></strong></div>
               <% end %>
             </div>
           </div>
           <% if @region_airports.size > 0 %>
             <div class="row">
               <div class="flexbox">
-                <div class="tabGrid "><%= Constants::CITY_REGION[@region_airports[0]] %></div>
+                <div class="tabGrid "><strong><%= Constants::CITY_REGION[@region_airports[0]] %></strong></div>
                 <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[0])), class: "tabLink" do %>
                   <div class="tabGrid <%= 'cheapest-option' if @trips0_0 != [] && @trips0_0.first.price.to_f.round == @trip_cheapest_price %> text-center">
 
@@ -270,7 +272,7 @@
           <% if @region_airports.size > 1  %>
             <div class="row ">
               <div class="flexbox">
-                <div class="tabGrid "><%= Constants::CITY_REGION[@region_airports[1]] %></div>
+                <div class="tabGrid "><strong><%= Constants::CITY_REGION[@region_airports[1]] %></strong></div>
                 <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[0])), class: "tabLink" do %>
                   <div class="tabGrid <%= 'cheapest-option' if @trips1_0 != [] && @trips1_0.first.price.to_f.round == @trip_cheapest_price %> text-center">
 
@@ -319,7 +321,7 @@
           <% if @region_airports.size > 2  %>
             <div class="row ">
               <div class="flexbox">
-                <div class="tabGrid "><%= Constants::CITY_REGION[@region_airports[2]] %></div>
+                <div class="tabGrid "><strong><%= Constants::CITY_REGION[@region_airports[2]] %></strong></div>
                 <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[0])), class: "tabLink" do %>
                   <div class="tabGrid <%= 'cheapest-option' if @trips2_0 != [] && @trips2_0.first.price.to_f.round == @trip_cheapest_price %> text-center">
 
@@ -365,7 +367,7 @@
           <% if @region_airports.size > 3  %>
             <div class="row ">
               <div class="flexbox">
-                <div class="tabGrid "><%= Constants::CITY_REGION[@region_airports[3]] %></div>
+                <div class="tabGrid "><strong><%= Constants::CITY_REGION[@region_airports[3]] %></strong></div>
                 <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[0])), class: "tabLink" do %>
                   <div class="tabGrid <%= 'cheapest-option' if @trips3_0 != [] && @trips3_0.first.price.to_f.round == @trip_cheapest_price %> text-center">
                     <% if @trips3_0 == [] %>
@@ -419,8 +421,11 @@
                 <!-- <div class="flexbox"> -->
                   <div class="cardContainer ">
                     <div class="card-description">
-                      <p> <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> <%= trip.round_trip_flight.flight1_take_off_at.strftime("%b %d") %> | <%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %> <%= trip.round_trip_flight.flight1_origin_airport_iata %> => <i class="fa fa-plane fa-flip-vertical" id="good-style" aria-hidden="true"></i> <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %> <%= trip.round_trip_flight.flight1_destination_airport_iata %></p>
-                      <p> <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> <%= trip.round_trip_flight.flight2_take_off_at.strftime("%b %d") %> | <%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %> <%= trip.round_trip_flight.flight2_origin_airport_iata %> => <i class="fa fa-plane fa-flip-vertical" id="good-style" aria-hidden="true"></i> <%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %> <%= trip.round_trip_flight.flight2_destination_airport_iata %></p>
+
+                      <p> <%= trip.round_trip_flight.flight1_take_off_at.strftime("%b %d") %> |  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i>  <%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %>  <%= trip.round_trip_flight.flight1_origin_airport_iata %>  <i class="fa fa-long-arrow-right" aria-hidden="true"></i>  <i class="fa fa-plane fa-flip-vertical" id="good-style" aria-hidden="true"></i>  <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %>  <%= trip.round_trip_flight.flight1_destination_airport_iata %> <i class="fa fa-clock-o" id="good-style" aria-hidden="true"></i> <%= ((trip.round_trip_flight.flight1_landing_at - trip.round_trip_flight.flight1_take_off_at) / 60).floor%> MIN</p>
+
+                      <p> <%= trip.round_trip_flight.flight2_take_off_at.strftime("%b %d") %> |  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i>  <%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %>  <%= trip.round_trip_flight.flight2_origin_airport_iata %>  <i class="fa fa-long-arrow-right" aria-hidden="true"></i>  <i class="fa fa-plane fa-flip-vertical" id="good-style" aria-hidden="true"></i>  <%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %>  <%= trip.round_trip_flight.flight2_destination_airport_iata %> <i class="fa fa-clock-o" id="good-style" aria-hidden="true"></i> <%= ((trip.round_trip_flight.flight2_landing_at - trip.round_trip_flight.flight2_take_off_at) / 60).floor%> MIN</p>
+
                     </div>
                     <div class="price-action">
                       <div class="call-action">
