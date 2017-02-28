@@ -1,3 +1,9 @@
+
+
+.page-result{
+  background: #eee !important;
+}
+
 .flexbox {
   display: flex;
   align-items: center;
@@ -24,10 +30,11 @@
 }
 
 .tabContainer {
-  border: 1px solid #DBDBDB;
+  // border: 1px solid #DBDBDB;
   margin-bottom: 20px;
   position: relative;
   height: 180px;
+  background-color: white;
 }
 
 .legendTabResult {
