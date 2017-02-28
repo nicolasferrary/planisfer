@@ -73,7 +73,11 @@ fjs.parentNode.insertBefore(js, fjs);
     </div>
 
       <div class="text-center button-padded">
-        <div class="btn btn-success text-center">BOOK </div>
+        <button class="btn btn-success text-center" data-toggle="modal" data-target="#book_modal">BOOK</button>
+      </div>
+
+      <%= render 'book_modal', modal_name: "book_modal" %>
+
       </div>
     </div>
 

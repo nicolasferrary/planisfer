@@ -120,11 +120,13 @@ class SearchesController < ApplicationController
 
     @trips_selection = @trips.first(4)
 
-    @trip_cheapest_price = @trips_selection.first.price.round
+    if @trips_selection != []
+      @trip_cheapest_price = @trips_selection.first.price.round
+    end
 
     @round_trips = @trips_selection.map(&:round_trip_flight)
     # declenche le geocode sur ces objets
-    @round_trips.map(&:destination_airport_coordinates).map(&:origin_airport_coordinates)
+    #@round_trips.map(&:destination_airport_coordinates).map(&:origin_airport_coordinates)
 
 
     # Here we define selections of trips that match f1 destination airport and f2 origin airport
@@ -148,23 +150,58 @@ class SearchesController < ApplicationController
 
     # GEOCODING
 
-    @hash_arrive = Gmaps4rails.build_markers(@round_trips) do |trip, marker|
-      marker.lat trip.latitude_arrive
-      marker.lng trip.longitude_arrive
-      # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
+    if @round_trips.first.latitude_arrive == @round_trips.first.latitude_back
+       @first_result = [
+      {
+        lat: @round_trips.first.latitude_arrive,
+        lng: @round_trips.first.longitude_arrive,
+      }]
+    else
+      @first_result = [
+        {
+          lat: @round_trips.first.latitude_arrive,
+          lng: @round_trips.first.longitude_arrive,
+        },
+        {
+          lat: @round_trips.first.latitude_back,
+          lng: @round_trips.first.longitude_back,
+        }
+      ]
     end
+
+    # @hash = Gmaps4rails.build_markers(@first_result).each do |trip, marker|
+    #   marker.lat trip.
+    #   marker.lng trip.
+    #   # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
+    # end
+
   end
 
 
   def refresh_map
     # récupérer le round_trip
     @round_trip_flight = RoundTripFlight.find(params[:round_trip_flight_id])
-    # construire les markers
-    respond_to do |format|
-      format.html
-      format.js
+    # renvoyer les coordonnées des marqueurs à afficher
+    latitude_arrive = @round_trip_flight.latitude_arrive
+    longitude_arrive = @round_trip_flight.longitude_arrive
+    latitude_back = @round_trip_flight.latitude_back
+    longitude_back = @round_trip_flight.longitude_back
+
+    if longitude_arrive == longitude_back && latitude_arrive == latitude_back
+      render json: [{
+          lat: @round_trip_flight.latitude_arrive,
+          lng: @round_trip_flight.longitude_arrive
+        }].to_json
+    else
+      render json: [{
+                    lat: @round_trip_flight.latitude_arrive,
+                    lng: @round_trip_flight.longitude_arrive,
+                  },
+                  {
+                    lat: @round_trip_flight.latitude_back,
+                    lng: @round_trip_flight.longitude_back,
+                  }].to_json
     end
-    # renvoyer la map
   end
 
   private
@@ -294,9 +331,9 @@ class SearchesController < ApplicationController
     @trips.each do |trip|
       if trip.round_trip_flight.flight1_destination_airport_iata == @region_airports[a] && trip.round_trip_flight.flight2_origin_airport_iata == @region_airports[b]
         trips << trip
+      end
     end
     trips
-    end
   end
 
 end
