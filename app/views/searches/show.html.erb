@@ -7,7 +7,7 @@
   </div>
 </div>
 
-<div class= "container">
+<div class= "container-fluid">
   <div class = "row">
     <div class = "col-md-6">
       <p class = "text-center" > Flight to <%= @region %></p>
@@ -63,10 +63,6 @@
        <div class="filters">
         <ul class="list-inline text-center">
           <li>
-            <h3><i class="fa fa-plane"></i> Take-off time from <%= @region %> after >> </h3>
-          </li>
-
-          <li>
             <div class="text-center links-box">
               <div class="option <%= 'active' if params['f2_min_take_off'] == "" || params['f2_min_take_off'].nil?%>">
                 <%= link_to "flexible", search_path(@search, @filters.merge('f2_min_take_off' => "")) , class: "radio-btn"%>
@@ -94,6 +90,9 @@
               </div>
             </div>
           </li>
+           <li>
+            <h3> << Take-off time from <%= @region %> after <i class="fa fa-plane"></i> </h3>
+          </li>
         </ul>
       </div>
     </div>
@@ -104,7 +103,7 @@
       <div class="filters">
         <ul class="list-inline text-center">
           <li>
-            <h3><i class="fa fa-plane"></i> Landing time in <%= @region %> before << </h3>
+            <h3><i class="fa fa-plane"></i> Landing time in <%= @region %> before >> </h3>
           </li>
 
           <li>
@@ -143,10 +142,6 @@
       <div class="filters">
         <ul class="list-inline text-center">
           <li>
-            <h3><i class="fa fa-plane"></i> Landing time in <%= @city_real_name %> before << </h3>
-          </li>
-
-          <li>
             <div class="text-center links-box">
               <div class="option <%= 'active' if params['f2_max_landing'] == "" || params['f2_max_landing'].nil? %>">
                 <%= link_to "flexible", search_path(@search, @filters.merge('f2_max_landing' => "")) , class: "radio-btn"%>
@@ -173,6 +168,9 @@
                 <i class="fa fa-circle" aria-hidden="true"></i>
               </div>
             </div>
+          </li>
+          <li>
+            <h3> << Landing time in <%= @city_real_name %> before <i class="fa fa-plane"></i> </h3>
           </li>
         </ul>
       </div>
