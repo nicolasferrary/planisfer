@@ -87,7 +87,9 @@ class SearchesController < ApplicationController
 
     @trips_selection = @trips.first(4)
 
-    @trip_cheapest_price = @trips_selection.first.price.round
+    if @trips_selection != []
+      @trip_cheapest_price = @trips_selection.first.price.round
+    end
 
     @round_trips = @trips_selection.map(&:round_trip_flight)
     # declenche le geocode sur ces objets
