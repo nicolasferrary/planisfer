@@ -91,7 +91,7 @@ class SearchesController < ApplicationController
 
     @round_trips = @trips_selection.map(&:round_trip_flight)
     # declenche le geocode sur ces objets
-    @round_trips.map(&:destination_airport_coordinates).map(&:origin_airport_coordinates)
+    #@round_trips.map(&:destination_airport_coordinates).map(&:origin_airport_coordinates)
 
 
     # Here we define selections of trips that match f1 destination airport and f2 origin airport
@@ -115,18 +115,41 @@ class SearchesController < ApplicationController
 
     # GEOCODING
 
-    @hash_arrive = Gmaps4rails.build_markers(@round_trips) do |trip, marker|
-      marker.lat trip.latitude_arrive
-      marker.lng trip.longitude_arrive
-      # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
-    end
+    @first_result = [
+      {
+        lat: @round_trips.first.latitude_arrive,
+        lng: @round_trips.first.longitude_arrive,
+      },
+      {
+        lat: @round_trips.first.latitude_back,
+        lng: @round_trips.first.longitude_back,
+      }
+    ]
+
+    # @hash = Gmaps4rails.build_markers(@first_result).each do |trip, marker|
+    #   marker.lat trip.
+    #   marker.lng trip.
+    #   # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
+    # end
+
   end
 
   def refresh_map
     # récupérer le round_trip
     @round_trip_flight = RoundTripFlight.find(params[:round_trip_flight_id])
     # renvoyer les coordonnées des marqueurs à afficher
-    render json: [{
+    latitude_arrive = @round_trip_flight.latitude_arrive
+    longitude_arrive = @round_trip_flight.longitude_arrive
+    latitude_back = @round_trip_flight.latitude_back
+    longitude_back = @round_trip_flight.longitude_back
+
+    if longitude_arrive == longitude_back && latitude_arrive == latitude_back
+      render json: [{
+          lat: latitude_arrive,
+          lng: longitude_arrive
+        }].to_json
+    else
+      render json: [{
                     lat: @round_trip_flight.latitude_arrive,
                     lng: @round_trip_flight.longitude_arrive,
                   },
@@ -134,6 +157,7 @@ class SearchesController < ApplicationController
                     lat: @round_trip_flight.latitude_back,
                     lng: @round_trip_flight.longitude_back,
                   }].to_json
+    end
   end
 
   private
