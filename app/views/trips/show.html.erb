@@ -1,142 +1,255 @@
    <!--  facebook share -->
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-var js, fjs = d.getElementsByTagName(s)[0];
-if (d.getElementById(id)) return;
-js = d.createElement(s); js.id = id;
-js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
-fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
-<div class="big-wrapper">
-
-  <div class="text-center">
-  <h2 class=""> <%= @trip.region.name %> ...  </h2>
-    <h4> ...lucky you !</h4>
-  </div>
-
-  <div class="container">
+<div class="banner-tickets">
+   <!-- # boarding pass -->
+   <div class="container padded">
+     <div id="fb-root"></div>
+     <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 
     <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <div class="boardingPass-1">
+          <header class="boardingPass-header">
+            <div class="row">
+              <h3 class="boardingPass-airline text-center">Flying Away</h3>
+            </div>
+          </header>
+          <main class="boardingPass-main text-center">
+            <div class="row">
+              <section class="boardingPass-departur col-xs-4">
+                <span class="section-label"><%= @trip.city.name %></span>
+                <span class="boardingPass-departur-IATA"><%= @trip.round_trip_flight.flight1_origin_airport_iata %></span>
+              </section>
 
-      <div class="col-md-6">
-        <div id="wrapper text-center">
-          <div id="slider">
-            <a href="#" class="control_next">>></a>
-            <a href="#" class="control_prev"><</a>
-            <ul>
-              <li><%= image_tag "central_europe/prague3.jpg"%></li>
-              <li><%= image_tag "central_europe/church.jpg"%></li>
-              <li><%= image_tag "central_europe/prague4.jpg"%></li>
-            </ul>
-          </div> <br>
-          <div class="text-center">
-            <%= link_to "Back to the other flights", search_path(@search), class: "btn btn-primary" %>
+              <section class="boardingPass-transport boardingPass-icon col-xs-4">
+               <i class="fa fa-fighter-jet fa-4x" aria-hidden="true"></i>
+             </section>
+
+             <section class="boardingPass-arrival col-xs-4">
+              <span class="section-label"><%= Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata]  %></span>
+              <span class="boardingPass-arrival-IATA"><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span>
+            </section>
           </div>
 
+          <hr class="hr--invisible" />
 
-         <!--  <div class="fb-send" data-href="http://localhost:3000/trips/84"></div> -->
+          <div class="row">
+            <section class="boardingPass-icon col-xs-4">
+              <i class="fa fa-plane material-icons fa-2x" aria-hidden="true"></i>
+            </section>
 
-          <div class="fb-send" data-href="<%= request.original_url %>"></div>
 
-          <div class="fb-send" data-href="https://developers.facebook.com/docs/plugins/"></div>
+            <section class="boardingPass-date col-xs-4">
+              <span class="section-label">Date</span>
+              <span><%= @trip.starts_on.strftime("%B %d") %></span>
+            </section>
 
+            <section class="boardingPass-terminal col-xs-4">
+              <span class="section-label">Year</span>
+              <span>2017</span>
+            </section>
+          </div>
+
+          <hr />
+
+          <div class="row">
+            <section class="boardingPass-icon col-xs-4">
+              <i class="fa fa-clock-o material-icons fa-2x" aria-hidden="true"></i>
+            </section>
+
+            <section class="boardingPass-departurTime col-xs-4">
+              <span class="section-label">Departur</span>
+              <span><%= @trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %></span>
+            </section>
+
+            <section class="boardingPass-arrivalTime col-xs-4">
+              <span class="section-label">Arrival</span>
+              <span><%= @trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %></span>
+            </section>
+
+
+          </div>
+
+          <hr />
+
+          <div class="row">
+            <section class="boardingPass-icon col-xs-4">
+              <i class="fa fa-user-circle-o material-icons fa-2x" aria-hidden="true"></i>
+            </section>
+
+            <section class="boardingPass-passenger col-xs-4">
+              <span class="section-label">Passengers</span>
+              <span><%= @trip.nb_travelers%></span>
+            </section>
+
+            <section class="boardingPass-duration col-xs-4">
+              <span class="section-label">Duration</span>
+              <span><%=((@trip.round_trip_flight.flight1_landing_at - @trip.round_trip_flight.flight1_take_off_at)/60).floor%> min</span>
+            </section>
+          </div>
+        </main>
+
+          <footer class="boardingPass-footer">
+          </footer>
+          <footer class="boardingPass-header">
+          </footer>
         </div>
       </div>
 
-  <div class="col-md-6">
-    <div class="card-show text-center">
-       <p><i class="fa fa-id-card-o" id="good-style" aria-hidden="true"></i> Obviously, you will be
-        <% if @trip.nb_travelers == 1 %>
-        solo
-        <% else  %>
-       <%=  @trip.nb_travelers %> passengers
-        <% end %>
-      </p>
-        <hr class="padding-hr">
-      <p id="good-style"><i class="fa fa-calendar-check-o" id="good-style" aria-hidden="true"></i> Yeah, on <%= @trip.starts_on.strftime("%B %d") %> </p>
-      <p> <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> Your crazy trip will start from <%= @trip.city.name  %> <%= @trip.round_trip_flight.flight1_origin_airport_iata %> (so cool !) at <%= @trip.round_trip_flight.flight1_take_off_at.strftime("%H:%M") %> </p>
-      <p> <i class="fa fa-flip-vertical fa-plane" id="good-style" aria-hidden="true"> </i> You will land at...wait for it!... <%= Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata]  %>
-      <%= @trip.round_trip_flight.flight1_destination_airport_iata %> at <%= @trip.round_trip_flight.flight1_landing_at.strftime("%H:%M") %> </p>
+      <div class="col-xs-12 col-sm-4">
+        <div class="boardingPass-2">
+          <header class="boardingPass-header">
+            <div class="row">
+              <h3 class="boardingPass-airline text-center">Flying Back</h3>
+            </div>
+          </header>
 
-      <hr>
+          <main class="boardingPass-main text-center">
+            <div class="row">
+              <section class="boardingPass-departur col-xs-4">
+                <span class="section-label"><%= @trip.city.name %></span>
+                <span class="boardingPass-departur-IATA"><%= @trip.round_trip_flight.flight1_origin_airport_iata %></span>
+              </section>
 
-      <p><i class="fa fa-car" id="good-style" aria-hidden="true"></i> You will have <%= (@trip.returns_on - @trip.starts_on).to_i %> days to enjoy <%= @trip.region.name %> </p>
+              <section class="boardingPass-transport boardingPass-icon col-xs-4">
+               <i class="fa fa-fighter-jet fa-4x" aria-hidden="true"></i>
+             </section>
 
-      <hr>
+             <section class="boardingPass-arrival col-xs-4">
+              <span class="section-label"><%= Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata]  %></span>
+              <span class="boardingPass-arrival-IATA"><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span>
+            </section>
+          </div>
 
-      <p id="good-style"><i class="fa fa-calendar-check-o" id="good-style" aria-hidden="true"></i>  But, snif, on <%= @trip.returns_on.strftime("%B %d")   %> </p>
-      <p><i class="fa fa-plane" id="good-style" aria-hidden="true"></i>  Don't forget to take your flight back from <%= Constants::CITY_REGION[@trip.round_trip_flight.flight2_origin_airport_iata] %> <%= @trip.round_trip_flight.flight2_origin_airport_iata %> at <%= @trip.round_trip_flight.flight2_take_off_at.strftime("%H:%M") %> </p>
-      <p> <i class="fa fa-flip-vertical fa-plane" id="good-style" aria-hidden="true"> </i> To be back in <%= @trip.city.name  %> <%= @trip.round_trip_flight.flight2_destination_airport_iata %> at <%= @trip.round_trip_flight.flight2_landing_at.strftime("%H:%M") %> </p> <hr>
-      <p> <i class="fa fa-credit-card" id="good-style" aria-hidden="true"></i> For only <%= @trip.price %> EUR</p>
-      <h4>What a Road Trip, man ! </h4>
+          <hr class="hr--invisible" />
+       </div>
     </div>
 
-      <div class="text-center button-padded">
-        <button class="btn btn-success text-center" data-toggle="modal" data-target="#book_modal">BOOK</button>
-      </div>
+          <div class="row">
+            <section class="boardingPass-icon col-xs-4">
+              <i class="fa fa-plane material-icons fa-2x" aria-hidden="true"></i>
+            </section>
 
-      <%= render 'book_modal', modal_name: "book_modal" %>
 
+            <section class="boardingPass-date col-xs-4">
+              <span class="section-label">Date</span>
+              <span><%= @trip.starts_on.strftime("%B %d") %></span>
+            </section>
+
+            <section class="boardingPass-terminal col-xs-4">
+              <span class="section-label">Year</span>
+              <span>2017</span>
+            </section>
+
+          </div>
+
+          <hr />
+
+          <div class="row">
+            <section class="boardingPass-icon col-xs-4">
+              <i class="fa fa-clock-o material-icons fa-2x" aria-hidden="true"></i>
+            </section>
+
+            <section class="boardingPass-departurTime col-xs-4">
+              <span class="section-label">Departur</span>
+              <span><%= @trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %></span>
+            </section>
+
+            <section class="boardingPass-arrivalTime col-xs-4">
+              <span class="section-label">Arrival</span>
+              <span><%= @trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %></span>
+            </section>
+
+
+          </div>
+
+          <hr />
+
+          <div class="row">
+            <section class="boardingPass-icon col-xs-4">
+              <i class="fa fa-user-circle-o material-icons fa-2x" aria-hidden="true"></i>
+            </section>
+
+            <section class="boardingPass-passenger col-xs-4">
+              <span class="section-label">Passengers</span>
+              <span><%= @trip.nb_travelers%></span>
+            </section>
+
+            <section class="boardingPass-duration col-xs-4">
+              <span class="section-label">Duration</span>
+              <span><%=((@trip.round_trip_flight.flight1_landing_at - @trip.round_trip_flight.flight1_take_off_at)/60).floor%> min</span>
+            </section>
+          </div>
+        </main>
+
+        <footer class="boardingPass-footer">
+        </footer>
+
+        <footer class="boardingPass-header">
+        </footer>
       </div>
     </div>
 
+    <div class="col-xs-12 col-sm-4">
+      <div class="boardingPass-3">
+        <header class="boardingPass-header-2">
+          <div class="row">
+            <h3 class="boardingPass-airline text-center">Are you ready ?</h3>
+          </div>
+        </header>
 
+        <main class="boardingPass-main-3 text-center">
+          <div class="row">
+          </div>
+
+          <hr class="hr--invisible" />
+
+
+          <div class="row">
+
+            <section class="boardingPass-departurTime col-xs-6">
+              <span class="section-label">Number of Days</span>
+              <span><%= (@trip.returns_on - @trip.starts_on).to_i %></span>
+            </section>
+
+            <section class="boardingPass-arrivalTime col-xs-6">
+              <span class="section-label">Region</span>
+              <span><%= @trip.region.name %></span>
+            </section>
+          </div>
+          <hr />
+
+          <div class="row">
+            <section class="boardingPass-date col-xs-12">
+              <span class="section-label">Total Price</span>
+              <span><%= @trip.price.round%> EUR</span>
+            </section>
+          </div>
+
+          <div class="row">
+            <div class="text-center button-padded">
+              <button class="btn btn-success text-center" data-toggle="modal" data-target="#book_modal">BOOK</button>
+            </div>
+            <%= render 'book_modal', modal_name: "book_modal" %>
+          </div>
+        </main>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="fb-send" data-href="<%= request.original_url %>"></div>
+
+<div class="fb-send" data-href="https://developers.facebook.com/docs/plugins/"></div>
 
 </div>
 
-</div>
-
-</div>
-
-<% content_for(:after_js) do %>
-<%= javascript_tag do %>
-
-jQuery(document).ready(function ($) {
-
-setInterval(function () {
-moveRight();
-}, 2500);
-
-
-var slideCount = $('#slider ul li').length;
-var slideWidth = $('#slider ul li').width();
-var slideHeight = $('#slider ul li').height();
-var sliderUlWidth = slideCount * slideWidth;
-
-$('#slider').css({ width: slideWidth, height: slideHeight });
-
-$('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
-
-$('#slider ul li:last-child').prependTo('#slider ul');
-
-function moveLeft() {
-$('#slider ul').animate({
-left: + slideWidth
-}, 200, function () {
-$('#slider ul li:last-child').prependTo('#slider ul');
-$('#slider ul').css('left', '');
-});
-};
-
-function moveRight() {
-$('#slider ul').animate({
-left: - slideWidth
-}, 200, function () {
-$('#slider ul li:first-child').appendTo('#slider ul');
-$('#slider ul').css('left', '');
-});
-};
-
-$('a.control_prev').click(function () {
-moveLeft();
-});
-
-$('a.control_next').click(function () {
-moveRight();
-});
-
-});
-
-<% end %>
-<% end %>
