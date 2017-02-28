@@ -37,6 +37,13 @@
   background-color: white;
 }
 
+.legend-top-tab {
+  background-color: $brand-color;
+  color: white;
+  // position: absolute;
+  // top: 0px;
+  // right: 0px;
+}
 .legendTabResult {
   background-color: $brand-color;
   color: white;
@@ -47,17 +54,21 @@
 }
 
 .legend-arrival {
+  transform: rotate(-90deg);
   position: absolute;
   color: white;
-  top: 83px;
-  left: -45px;
-  width: 134px;
+  top: 69px;
+  left: -71px;
+  width: 30%;
+  height: 43px;
+  margin-left: 3px;
+  background-color: $brand-color;
 }
 
 .legend-arrival p {
-  transform: rotate(-90deg);
-  background-color: $brand-color;
-  color: white;
+  // transform: rotate(-90deg);
+  // background-color: $brand-color;
+  // color: white;
   margin-top: 3px;
 }
 
