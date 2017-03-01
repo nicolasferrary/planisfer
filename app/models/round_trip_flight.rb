@@ -48,7 +48,6 @@ class RoundTripFlight < ApplicationRecord
       round_trip_flight.carrier2 = extract_carrier(option, 1)
       round_trip_flight.f1_number = round_trip_flight.carrier1 + extract_flight_number(option, 0)
       round_trip_flight.f2_number = round_trip_flight.carrier2 + extract_flight_number(option, 1)
-      raise
       round_trip_flight.destination_airport_coordinates
       round_trip_flight.origin_airport_coordinates
       round_trip_flight.save
