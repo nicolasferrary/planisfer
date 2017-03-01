@@ -1,6 +1,6 @@
 class SearchesController < ApplicationController
-  def create
 
+  def create
 #@search =Search.new avec tout ce qu'on a récupéré en params
     @search = Search.new(city: params[:city], region: params[:region], starts_on: params[:starts_on], returns_on: params[:returns_on], nb_travelers: params[:nb_travelers])
     @search.save
@@ -18,64 +18,43 @@ class SearchesController < ApplicationController
 
     @city_real_name = Constants::CITY_REGION[@city_name]
 
-
-
     # generate routes
     routes = Avion.generate_routes(@city_name, @region_airports)
-    #only for debug. To be removed
+
     @routes = routes
-
-
-    # # Test all routes against cache
-    # uncached_routes = Avion.compare_routes_against_cache(routes, starts_on, returns_on)
-
-    #For each route, send a request with 2 slices
-
 
     @trips = get_trips_for_routes(routes, @starts_on, @returns_on, @nb_travelers, @city, @region, @search)
 
-
-
-
-    # On itère sur les trips
-
-    # Do we have something that is not cached?
-    # if uncached_routes.empty?
-    #   # This won't do any requests as we work with cache
-    #   # @offers = get_offers_for_routes(routes, starts_on, returns_on)
-    #   # # clone unfiltered results to check against later
-    #   # @unfiltered_offers = @offers.clone
-    #   # do filtering
-    #   # apply_index_filters
-    #   # remove duplicate cities
-    #   # @offers = @offers.uniq { |offer| offer.destination_city }
-    #   # # and sort by total price
-    #   # @offers = @offers.sort_by { |offer| offer.total }
-    # else # we have to build a new cache
-    #   # save url to redirect back from wait.html.erb via JS
-    #   session[:url_for_wait] = request.original_url
-    #   # render wait view without any routing
-    #   render :wait
-    #   # Send requests and build the cache in the background
-    #   QueryRoutesJob.perform_later(uncached_routes, starts_on, returns_on, nb_travelers)
-    # # end
-    # session[:search_url] = request.original_url
-
-
-
-    #On renvoie vers la méthode show de Search
     redirect_to search_path(@search)
 
   end
 
   def show
     @search = Search.find(params[:id])
+    @region = @search.region
+    @region_airports = Constants::REGIONS_AIRPORTS[@region]
+    @selected_airports = @region_airports
+    #array de code iatas
+    @selected_cities = []
+    @region_airports.each do |airport|
+      @selected_cities << Constants::CITY_REGION[airport]
+    end
+
+    unless params["selected-cities"] == nil
+      @selected_airports = []
+      @selected_cities = params["selected-cities"].split(",")
+      @selected_cities.each do |city|
+        airport = Constants::CITY_REGION.invert[city]
+        @selected_airports << airport
+      end
+    end
 
     if params[:flight1_range].blank?
       @flight1_range = "0,23"
     else
       @flight1_range = params[:flight1_range]
     end
+
     @flight1_range_low = @flight1_range.split(",").first
     @flight1_range_high = @flight1_range.split(",")[1]
     @flight1_range = @flight1_range_low + "," + @flight1_range_high
@@ -115,8 +94,6 @@ class SearchesController < ApplicationController
 
 
     @trips = @search.trips
-    @region = @search.region
-    @region_airports = Constants::REGIONS_AIRPORTS[@region]
     @region_airport1 = params[:region_airport1] || ""
     @region_airport2 = params[:region_airport2] || ""
 
@@ -264,6 +241,11 @@ class SearchesController < ApplicationController
       @trips = filter_by_f2_takeoff(@trips)
     end
 
+    if params["selected_cities"].present? && params["selected_cities"] != ""
+      @filters = @filters.merge("selected_airports" => @selected_airports)
+      @trips = filter_by_selected_airports(@trips)
+    end
+
   end
 
   # def assert_show_params
@@ -331,6 +313,13 @@ class SearchesController < ApplicationController
     trips.select { |trip|
       trip.round_trip_flight.flight2_take_off_at.localtime.hour >= Time.parse(@f2_min_time).hour &&
       trip.round_trip_flight.flight2_take_off_at.localtime.hour < Time.parse(@f2_max_time).hour
+    }
+  end
+
+  def filter_by_selected_airports(trips)
+    trips.select { |trip|
+      @selected_airports.include?(trip.round_trip_flight.flight1_destination_airport_iata) &&
+      @selected_airports.include?(trip.round_trip_flight.flight2_origin_airport_iata)
     }
   end
 

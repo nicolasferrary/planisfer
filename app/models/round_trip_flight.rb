@@ -11,7 +11,8 @@ class RoundTripFlight < ApplicationRecord
   validates :flight1_landing_at, presence: true
   validates :flight2_take_off_at, presence: true
   validates :flight2_landing_at, presence: true
-
+  validates :f1_number, presence: true
+  validates :f2_number, presence: true
 
   def destination_airport_coordinates
     results = Geocoder.coordinates( "#{ flight1_destination_airport_iata } airport")
@@ -45,6 +46,9 @@ class RoundTripFlight < ApplicationRecord
       round_trip_flight.flight2_landing_at = extract_landing_at(option, 1)
       round_trip_flight.carrier1 = extract_carrier(option, 0)
       round_trip_flight.carrier2 = extract_carrier(option, 1)
+      round_trip_flight.f1_number = round_trip_flight.carrier1 + extract_flight_number(option, 0)
+      round_trip_flight.f2_number = round_trip_flight.carrier2 + extract_flight_number(option, 1)
+      raise
       round_trip_flight.destination_airport_coordinates
       round_trip_flight.origin_airport_coordinates
       round_trip_flight.save
@@ -78,5 +82,10 @@ class RoundTripFlight < ApplicationRecord
     def extract_carrier(item, slice)
       item['slice'][slice]['segment'].first['flight']['carrier']
     end
+
+    def extract_flight_number(item, slice)
+      item['slice'][slice]['segment'].first['flight']['number']
+    end
+
   end
 end
