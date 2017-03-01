@@ -1,6 +1,14 @@
+
+
 .filter-box {
   border-right: 1px solid #DBDBDB;
 }
+
+.filter-apply {
+  border-bottom: 1px solid #DBDBDB;
+  margin-bottom: 50px;
+}
+
 
 .filter-line {
   padding-bottom: 20px;
@@ -25,16 +33,24 @@
   text-align: center;
 }
 
+
+.filtered-city{
+  width: 120px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background-color: $brand-primary;
+  color:white;
+  font-size: 17px;
+  opacity: 0.5;
+}
+
 .city-selected{
   border: 1px solid #fff;
   border-radius: 5px;
-  background-color: orange;
+  background-color: $brand-primary;
+  color:white;
+  opacity:1;
 }
-
-.btn-cities{
-  width: 120px;
-  background-color: $brand-info;
-  color : black;
-  border: none;
-  font-size: 17px;
+.city-selected:hover{
+  opacity: 0.5;
 }

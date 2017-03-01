@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20170301160201) do
 
   # These are extensions that must be enabled in order to support this database
@@ -58,10 +57,10 @@ ActiveRecord::Schema.define(version: 20170301160201) do
     t.float    "longitude_arrive"
     t.float    "latitude_back"
     t.float    "longitude_back"
-    t.float    "latitude_home"
-    t.float    "longitude_home"
     t.string   "f1_number"
     t.string   "f2_number"
+    t.float    "latitude_home"
+    t.float    "longitude_home"
   end
 
   create_table "searches", force: :cascade do |t|

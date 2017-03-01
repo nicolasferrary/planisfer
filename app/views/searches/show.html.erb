@@ -4,10 +4,7 @@
 </div>
 
 <div class= "container-fluid page-result">
-
-
   <%=form_tag search_path(@search), method: :get do %>
-
     <div class="row">
       <div class="col-md-3">
         <div class = "filter-box">
@@ -48,10 +45,10 @@
         <div class = "text-center ">
           <h5 class = "text-center" > We have selected the <strong> following cities</strong> in <%= @region %>.</h5>
           <h5 class = "text-center" >Feel free to change our selection</h5>
-          <div class = "btn btn-primary btn-cities" data-city="<%=  Constants::CITY_REGION[@region_airports[0]]%>"><%= Constants::CITY_REGION[@region_airports[0]] %></div>
-          <div class = "btn btn-primary btn-cities" data-city="<%=Constants::CITY_REGION[@region_airports[1]]%>"><%= Constants::CITY_REGION[@region_airports[1]] %></div>
-          <div class = "btn btn-primary btn-cities" data-city="<%=Constants::CITY_REGION[@region_airports[2]]%>" ><%= Constants::CITY_REGION[@region_airports[2]] %></div>
-          <div class = "btn btn-primary btn-cities" data-city="<%=Constants::CITY_REGION[@region_airports[3]]%>" ><%= Constants::CITY_REGION[@region_airports[3]] %></div>
+          <div class = "btn btn-primary filtered-city" data-city="<%=  Constants::CITY_REGION[@region_airports[0]]%>"><%= Constants::CITY_REGION[@region_airports[0]] %></div>
+          <div class = "btn btn-primary filtered-city" data-city="<%=Constants::CITY_REGION[@region_airports[1]]%>"><%= Constants::CITY_REGION[@region_airports[1]] %></div>
+          <div class = "btn btn-primary filtered-city" data-city="<%=Constants::CITY_REGION[@region_airports[2]]%>" ><%= Constants::CITY_REGION[@region_airports[2]] %></div>
+          <div class = "btn btn-primary filtered-city" data-city="<%=Constants::CITY_REGION[@region_airports[3]]%>" ><%= Constants::CITY_REGION[@region_airports[3]] %></div>
         </div>
       </div>
 
@@ -59,9 +56,9 @@
 
 
     <div class="row">
-      <div class ="text-center">
+      <div class ="text-center filter-apply">
         <%= hidden_field_tag 'selected-cities' %>
-        <%= submit_tag "Apply", class: "btn btn-primary" %>
+        <%= submit_tag "Apply", class: "btn btn-success" %>
       </div>
     </div>
   <% end %>
@@ -339,7 +336,7 @@
                 <% end  %>
               </div>
             </div>
-          <% end  %>
+          <% end %>
         </div> <!-- <div class="contentTab"> -->
       </div> <!-- <div class="tabContainer"> -->
 
@@ -360,7 +357,30 @@
 
 <!-- </div> -->
 
-  <% content_for(:after_js) do %>
+<% content_for(:after_js) do %>
+
+    <script>
+      $(document).ready(function() {
+        $('.filtered-city').on('click', function(event) {
+          $(this).toggleClass('city-selected');
+          update_form_selected_cities();
+        });
+        $(".filtered-city").removeClass("city-selected");
+        <% @selected_cities.each do |city| %>
+          $(".filtered-city[data-city=<%= city %>]").addClass("city-selected");
+        <% end %>
+      });
+
+      function update_form_selected_cities() {
+        var selected_cities = "";
+        $(".city-selected").each(function( index ) {
+          selected_cities = selected_cities + $(this).text(). + ",";
+        });
+        selected_cities = selected_cities.slice(0,-1); //remove last coma
+        $('#selected-cities').attr('value', selected_cities);
+        }
+
+    </script>
 
     <script>
       $(document).ready(function() {
@@ -422,29 +442,14 @@
 
     </script>
 
-    <script>
-      $(document).ready(function() {
-        $('.btn-cities').on('click', function() {
-          $(this).toggleClass('city-selected');
-          update_form_selected_cities();
-        });
-      });
-
-      <% @selected_cities.each do |airport| %>
-        $(".btn-cities[data-city=<%= airport %>]").addClass("city-selected");
-      <% end %>
-
-      function update_form_selected_cities() {
-        var selected_cities = "";
-        $(".city-selected").each(function( index ) {
-          selected_cities = selected_cities + $(this).text(). + ",";
-        });
-        selected_cities = selected_cities.slice(0,-1); //remove last coma
-        $('#selected-cities').attr('value', selected_cities);
-      }
-    </script>
 
   <% end %>
+
+
+
+
+
+
 
 
 

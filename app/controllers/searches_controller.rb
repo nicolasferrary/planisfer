@@ -40,13 +40,19 @@ class SearchesController < ApplicationController
       @selected_cities << Constants::CITY_REGION[airport]
     end
 
-    unless params["selected-cities"] == nil
-      @selected_airports = []
+    params["selected-cities"] == nil if params["selected-cities"] == ""
+
+    if params["selected-cities"] == nil || params["selected-cities"] == ""
+      @selected_cities = @selected_cities
+    else
       @selected_cities = params["selected-cities"].split(",")
-      @selected_cities.each do |city|
-        airport = Constants::CITY_REGION.invert[city]
-        @selected_airports << airport
-      end
+    end
+
+    @selected_airports = []
+
+    @selected_cities.each do |city|
+      airport = Constants::CITY_REGION.invert[city]
+      @selected_airports << airport
     end
 
     if params[:flight1_range].blank?
