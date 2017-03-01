@@ -32,7 +32,7 @@
           </label>
           <% end %>
         </div>
-        <%= submit_tag "LET'S TRAVEL", class: "btn btn-danger btn-big" %>
+        <%= submit_tag "LET'S TRAVEL", class: "btn btn-danger btn-big", 'data-toggle' => "wait_modal", 'data-target' => '#wait_modal' %>
       </div>
       <%end%>
     </div>
@@ -177,7 +177,9 @@
       $("#region").val(region);
       $("body").animate({ scrollTop: 0}, "slow");
     });
-
+    $("#wait_modal").click(function(){
+        $('_wait_modal').modal('show');
+    });
   });
 </script>
 
