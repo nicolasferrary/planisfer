@@ -30,6 +30,14 @@ class RoundTripFlight < ApplicationRecord
     self
   end
 
+  def home_airport_coordinates
+    results = Geocoder.coordinates(" #{ flight1_origin_airport_iata } airport")
+    self.latitude_home = results[0]
+    self.longitude_home = results[1]
+    self.save
+    self
+  end
+
   class << self
     def create_flight(option, region)
       round_trip_flight = RoundTripFlight.new
@@ -50,6 +58,7 @@ class RoundTripFlight < ApplicationRecord
       round_trip_flight.f2_number = round_trip_flight.carrier2 + extract_flight_number(option, 1)
       round_trip_flight.destination_airport_coordinates
       round_trip_flight.origin_airport_coordinates
+      round_trip_flight.home_airport_coordinates
       round_trip_flight.save
       round_trip_flight
     end

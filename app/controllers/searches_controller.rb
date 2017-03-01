@@ -141,18 +141,31 @@ class SearchesController < ApplicationController
     if @round_trips.first.latitude_arrive == @round_trips.first.latitude_back
        @first_result = [
       {
+        lat: @round_trips.first.latitude_home,
+        lng: @round_trips.first.longitude_home,
+        infowindow: @round_trips.first.flight1_origin_airport_iata
+      },
+      {
         lat: @round_trips.first.latitude_arrive,
         lng: @round_trips.first.longitude_arrive,
+        infowindow: @round_trips.first.flight1_destination_airport_iata
       }]
     else
       @first_result = [
         {
+          lat: @round_trips.first.latitude_home,
+          lng: @round_trips.first.longitude_home,
+          infowindow: @round_trips.first.flight1_origin_airport_iata
+        },
+        {
           lat: @round_trips.first.latitude_arrive,
           lng: @round_trips.first.longitude_arrive,
+          infowindow: @round_trips.first.flight1_destination_airport_iata
         },
         {
           lat: @round_trips.first.latitude_back,
           lng: @round_trips.first.longitude_back,
+          infowindow: @round_trips.first.flight2_origin_airport_iata
         }
       ]
     end
@@ -176,19 +189,34 @@ class SearchesController < ApplicationController
     longitude_back = @round_trip_flight.longitude_back
 
     if longitude_arrive == longitude_back && latitude_arrive == latitude_back
-      render json: [{
+      render json: [
+        {
+          lat: @round_trip_flight.latitude_home,
+          lng: @round_trip_flight.longitude_home,
+          infowindow: @round_trip_flight.flight1_origin_airport_iata
+        },
+        {
           lat: @round_trip_flight.latitude_arrive,
-          lng: @round_trip_flight.longitude_arrive
+          lng: @round_trip_flight.longitude_arrive,
+          infowindow: @round_trip_flight.flight1_destination_airport_iata
         }].to_json
     else
-      render json: [{
-                    lat: @round_trip_flight.latitude_arrive,
-                    lng: @round_trip_flight.longitude_arrive,
-                  },
-                  {
-                    lat: @round_trip_flight.latitude_back,
-                    lng: @round_trip_flight.longitude_back,
-                  }].to_json
+      render json: [
+          {
+            lat: @round_trip_flight.latitude_home,
+            lng: @round_trip_flight.longitude_home,
+            infowindow: @round_trip_flight.flight1_origin_airport_iata
+          },
+          {
+            lat: @round_trip_flight.latitude_arrive,
+            lng: @round_trip_flight.longitude_arrive,
+            infowindow: @round_trip_flight.flight1_destination_airport_iata
+          },
+          {
+            lat: @round_trip_flight.latitude_back,
+            lng: @round_trip_flight.longitude_back,
+            infowindow: @round_trip_flight.flight2_origin_airport_iata
+          }].to_json
     end
   end
 
