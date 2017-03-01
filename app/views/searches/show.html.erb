@@ -1,5 +1,4 @@
-
-
+<!-- CODE DES FILTRES -->
 
 <div class= "container-fluid page-result">
   <div class = "row">
@@ -27,7 +26,7 @@
                 <%= hidden_field_tag :region_airport1 , @region_airport1 || nil %>
                 <%= hidden_field_tag :region_airport2 , @region_airport2 || nil %>
 
-              <%= submit_tag "Update times", class: "btn btn-primary" %>
+              <%= submit_tag "Apply", class: "btn btn-primary" %>
             <% end %>
           </li>
         </ul>
@@ -48,7 +47,7 @@
                 <%= hidden_field_tag :flight1_range , @flight1_range %>
                 <%= hidden_field_tag :region_airport1 , @region_airport1 || nil %>
                 <%= hidden_field_tag :region_airport2 , @region_airport2 || nil %>
-              <%= submit_tag "Update times", class: "btn btn-primary" %>
+              <%= submit_tag "Apply", class: "btn btn-primary" %>
             <% end %>
           </li>
         </ul>
@@ -58,32 +57,46 @@
 
 </div>
 
+<!-- CODE DU TABLEAU -->
 
   <div class="container-fluid page-result">
     <!-- part with tab and the result -->
     <div class="col-xs-12 col-md-6">
       <!-- part with tab showing best results by airports -->
 
-      <h3 id="title-tab" class="text-center">Choose the airports you land in and return from </h3>
+      <!--  <h3 id="title-tab" class="text-center">Choose </h3> -->
       <div class="tabContainer">
+
+        <!-- BARRE DE GAUCHE -->
         <div class="legend-arrival">
-          <p class="text-center"><i class="fa fa-plane fa-rotate-180" aria-hidden="true"></i> Arrival airport</p>
+          <p class="text-center"><i class="fa fa-plane fa-rotate-180" aria-hidden="true"></i> You'll arrive... </p>
         </div>
+
+        <!-- BARRE DU HAUT -->
+
+        <div class="flexbox legend-top-tab">
+
+          <div class="legendTabResult text-center">
+            <p><i class="fa fa-plane" aria-hidden="true"></i> You'll leave from... </p>
+          </div>
+        </div>
+
+        <!-- TABLEAU DE RESULTATS -->
         <div class="contentTab">
           <div class="row">
-            <div class="flexbox legend-top-tab">
-              <div class="legendTabResult text-center">
-                <p><i class="fa fa-plane" aria-hidden="true"></i> Return airport</p>
-              </div>
-            </div>
+          <!-- GARDER DIV VIDE POUR GARDER LA STRUCTURE DU TABLEAU -->
           </div>
-          <div class="row">
+
+         <div class="row">
             <div class="flexbox">
-              <%= link_to search_path(@search), class: "box-select-all-flights" do%>
-                <div class="tabGrid text-center" id="all-flights">
-                  <strong>See all flights</strong>
-                </div>
-              <% end  %>
+              <%#= link_to search_path(@search), class: "box-select-all-flights" do%>
+
+              <!-- GARDE LA STRUCTURE DU TABLEAU -->
+              <div class="tabGrid text-center">
+              </div>
+              <%# end  %>
+
+
               <% @region_airports.each do |airport| %>
                 <div class="tabGrid text-center"><strong><%= Constants::CITY_REGION[airport] %></strong></div>
               <% end %>
@@ -298,9 +311,9 @@
                   <div class="cardContainer ">
                     <div class="card-description">
 
-                      <p> <%= trip.round_trip_flight.flight1_take_off_at.strftime("%b %d") %> |  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i>  <%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %>  <%= trip.round_trip_flight.flight1_origin_airport_iata %>  <i class="fa fa-long-arrow-right" aria-hidden="true"></i>  <i class="fa fa-plane fa-flip-vertical" id="good-style" aria-hidden="true"></i>  <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %>  <%= trip.round_trip_flight.flight1_destination_airport_iata %> <i class="fa fa-clock-o" id="good-style" aria-hidden="true"></i> <%= ((trip.round_trip_flight.flight1_landing_at - trip.round_trip_flight.flight1_take_off_at) / 60).floor%> MIN</p>
+                      <p>  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> &nbsp; &nbsp; &nbsp; <%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight1_origin_airport_iata %> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <span class="info-label-go"> <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight1_destination_airport_iata %> &nbsp; </span></p>
 
-                      <p> <%= trip.round_trip_flight.flight2_take_off_at.strftime("%b %d") %> |  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i>  <%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %>  <%= trip.round_trip_flight.flight2_origin_airport_iata %>  <i class="fa fa-long-arrow-right" aria-hidden="true"></i>  <i class="fa fa-plane fa-flip-vertical" id="good-style" aria-hidden="true"></i>  <%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %>  <%= trip.round_trip_flight.flight2_destination_airport_iata %> <i class="fa fa-clock-o" id="good-style" aria-hidden="true"></i> <%= ((trip.round_trip_flight.flight2_landing_at - trip.round_trip_flight.flight2_take_off_at) / 60).floor%> MIN</p>
+                      <p>  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> &nbsp; &nbsp; &nbsp; <span class="info-label-back"><%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight2_destination_airport_iata %> &nbsp; </p>
 
                     </div>
                     <div class="price-action">
@@ -336,16 +349,17 @@
     <script>
       $(document).ready(function() {
           var handler = Gmaps.build('Google');
+
           handler.buildMap({
             provider: {
               scrollwheel: false,
-              styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}]
+              styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":""},{"visibility":"on"}]}]
 
             },
             internal: { id: 'map' } }, function() {
             markers = handler.addMarkers( <%= raw @first_result.to_json %>
-
               );
+
 
             handler.bounds.extendWith(markers);
             handler.fitMapToBounds();

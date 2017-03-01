@@ -1,7 +1,7 @@
 
 
 .page-result{
-  background: #eee !important;
+  background: #FAFAFA !important;
 }
 
 .flexbox {
@@ -12,9 +12,11 @@
 
 
 .tabGrid {
-  width: 70px;
+  width: 100px;
   text-decoration: none;
   color: inherit;
+  padding-bottom: 5px;
+
 }
 
 .tabLink {
@@ -34,35 +36,35 @@
   margin-bottom: 20px;
   position: relative;
   height: 180px;
-  background-color: white;
+  // background-color: white;
+  // border-radius: 3px;
 }
 
 .legend-top-tab {
-  background-color: $brand-color;
-  color: white;
+  color: $brand-color;
+  border-top: 1px solid $brand-color;
+  padding-top: 10px;
   // position: absolute;
   // top: 0px;
   // right: 0px;
 }
 .legendTabResult {
-  background-color: $brand-color;
-  color: white;
   height: 20px;
   width: 450px;
   margin-left: 99px;
   margin-right: 16px;
+  color: $brand-color;
 }
 
 .legend-arrival {
   transform: rotate(-90deg);
   position: absolute;
-  color: white;
+  color: $brand-color;
   top: 69px;
   left: -71px;
   width: 30%;
   height: 43px;
   margin-left: 3px;
-  background-color: $brand-color;
 }
 
 .legend-arrival p {
@@ -74,9 +76,15 @@
 
 .contentTab {
   position: absolute;
-  top: 10px;
+  top: 30px;
   right: 10px;
-}
+  background-color: white;
+  font-size: 15px;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px #c7c7c7;
+  padding-left: 30px;
+  }
 
 #titleShow {
   background-color: $brand-color;
@@ -114,4 +122,14 @@
   opacity: 0.8;
   background-color: $green;
   color: white;
+}
+
+.info-label-go {
+  font-weight: bolder;
+  color: $brand-color;
+}
+
+.info-label-back {
+  font-weight: bolder;
+  color: $orange;
 }

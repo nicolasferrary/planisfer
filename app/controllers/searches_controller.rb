@@ -164,11 +164,19 @@ class SearchesController < ApplicationController
     if @round_trips.first.latitude_arrive == @round_trips.first.latitude_back
        @first_result = [
       {
+        lat: @round_trips.first.latitude_home,
+        lng: @round_trips.first.longitude_home,
+      },
+      {
         lat: @round_trips.first.latitude_arrive,
         lng: @round_trips.first.longitude_arrive,
       }]
     else
       @first_result = [
+        {
+          lat: @round_trips.first.latitude_home,
+          lng: @round_trips.first.longitude_home,
+        },
         {
           lat: @round_trips.first.latitude_arrive,
           lng: @round_trips.first.longitude_arrive,
