@@ -20,6 +20,7 @@ module Constants
     "FCO" => "Roma",
     "NAP" => "Napoli",
     "VCE" => "Venice",
+    "GOA" => "Genoa",
     "CPH" => "Copenhagen",
     "OSL" => "Oslo",
     "ARN" => "Stockholm",
@@ -28,6 +29,7 @@ module Constants
     "FRA" => "Frankfurt",
     "MUC" => "Munich",
     "HAM" => "Hamburg",
+    "WAW" => "Warsaw"
     "AGP" => "Malaga",
     "SVQ" => "Sevilla",
     "XRY" => "Jerez",
@@ -129,7 +131,7 @@ module Constants
   REGIONS_AIRPORTS = {
     "Andalucia" => ["AGP", "SVQ", "XRY", "GRX"],
     "South-of-Italy" => ["FCO", "NAP", "BRI", "BDS"],
-    "Tuscany" => ["BLQ", "PSA", "FLR", "PMF"],
+    "Tuscany" => ["BLQ", "PSA", "FLR", "GOA"],
     # "Catalonia" => ["BCN", "GRO", "ILD", "REU"],
     "Catalonia" => ["BCN"],
     "North-of-Italy" => ["MXP", "VCE", "TRN", "VRN"],
@@ -137,7 +139,7 @@ module Constants
     "Portugal" => ["LIS", "FAO", "OPO", "BJZ"],
     "Croatie" => ["SPU", "DBV", "ZAG", "ZAD"] ,
     "South-of-France" => ["NCE", "MRS", "TLS", "BIQ"],
-    "Central-EU" => ["VIE", "BUD", "KRK", "PRG"],
+    "Central-EU" => ["VIE", "BUD", "WAW", "PRG"],
     "Baltic States" => ["TLL", "RIX", "VNO", "KUN"],
     "Scandinavia" => ["CPH", "OSL", "ARN", "HEL"],
     "Germany" => ["TXL", "FRA", "MUC", "HAM"],
