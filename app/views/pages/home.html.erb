@@ -32,11 +32,16 @@
           </label>
           <% end %>
         </div>
-        <%= submit_tag "LET'S TRAVEL", class: "btn btn-danger btn-big", 'data-toggle' => "wait_modal", 'data-target' => '#wait_modal' %>
+        <%= submit_tag "LET'S TRAVEL", class: "btn btn-danger btn-big", 'data-toggle' => "modal", 'data-target' => '#wait_modal' %>
       </div>
       <%end%>
     </div>
   </div>
+
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#wait_modal">
+  Launch demo modal
+</button>
+
   <div class="text-center">
     <a href="#trendy-destination">
       <%= image_tag "arrow.png", class: "floating arrow-img" %>
@@ -44,6 +49,8 @@
   </div>
 </div>
 </div>
+
+<%= render 'wait_modal', modal_name: "wait_modal" %>
 
 
 <div class="trending" id="trendy-destination">
@@ -149,7 +156,6 @@
  -->
 
 
-
 <%= content_for :after_js do %>
 <script>
   $(document).ready(function() {
@@ -177,11 +183,9 @@
       $("#region").val(region);
       $("body").animate({ scrollTop: 0}, "slow");
     });
-    $("#wait_modal").click(function(){
-        $('_wait_modal').modal('show');
-    });
   });
 </script>
+
 
 
 <% end %>
