@@ -1,69 +1,589 @@
-// (Opinionated BEM: blockName-elementName--modifier)
-
-// /* Colors */
-$color-primary: blue;
-$color-highlight: #f03f55;
-$color-white: #fff;
-$color-black: #222;
-
-$color-text: #444;
-$color-text-secondary: lighten($color-text, 30%);
-
-
 .banner-tickets {
   text-align: center;
-  height: 100vh;
+  height: calc(100vh - 80px);
   background-size: cover !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to left, $my-blue, $my-petrol-blue);
+  background: #fafafa;
+  position: relative;
 }
-// /* Page */
-// html {
-//   min-height: 100%;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   font-family: 'Open Sans', sans-serif;
-//   font-size: 14px;
-//   color: $color-text;
-//   background: linear-gradient(60deg,
-//     darken($color-primary, 10%),
-// //     lighten($color-primary, 10%)
-// //   );
-// // }
 
-// body {
-//   line-height: 1.5;
-// }
+.flight-ticket-button  {
+    position: absolute;
+    bottom: 50px;
+    width: 86%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-hr {
+.box{
+  position: absolute;
+  top: calc(50% - 125px);
+  top: -webkit-calc(40% - 125px);
+  left: calc(25% - 300px);
+  // left: -webkit-calc(50% - 300px);
+  -webkit-transform: scale(1);
+}
+
+
+.box-1{
+  position: absolute;
+  top: calc(93% - 125px);
+  top: -webkit-calc(40% - 125px);
+  left: calc(41% - 300px);
+  left: -webkit-calc(75% - 300px);
+  -webkit-transform: scale(1);
+}
+
+.clip {
+  width: 20px;
+  height: 50px;
+  border: solid 3px #666;
+  border-width: 3px 3px 0 0;
+  margin: auto;
+  border-radius: 1000px 1000px 00;
+  position: absolute;
+  left: 109px;
+  box-sizing: border-box;
+  top: -35px;
+}
+
+.clip:before {
+  content: '';
+  position: absolute;
+  border: solid 3px #666;
+  border-radius: 1000px 1000px 0 0;
+  border-width: 3px 0 0 3px;
+  top: -3px;
+  right: 0;
   width: 100%;
-  margin: 1.5em 0;
-  border: 0;
-  border-bottom: 1px dashed #ccc;
+  height: 150%;
+  display: block;
+  box-sizing: border-box;
+  z-index: -2;
 }
 
-.hr--invisible {
-  border-bottom-color: transparent;
+.clip:after {
+  content: '';
+  position: absolute;
+  border: solid 3px #666;
+  border-radius: 0 0 1000px 1000px;
+  border-width: 0 3px 3px;
+  top: 40%;
+  right: -3px;
+  width: 80%;
+  height: 140%;
+  display: block;
+  box-sizing: border-box;
+  z-index: 1;
+}
+.ticket{
+  width: 600px;
+  height: 250px;
+  background: $my-petrol-blue;
+  border-radius: 3px;
+  box-shadow: 0 0 70px #aaa;
+}
+
+.ticket-1{
+  width: 600px;
+  height: 250px;
+  background: $my-petrol-blue;
+  border-radius: 3px;
+  box-shadow: 0 0 70px #aaa;
+}
+
+.left{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: absolute;
+  top: 0px;
+  left: -5px;
+}
+
+.left li{
+  width: 0px;
+  height: 0px;
+}
+
+.left li:nth-child(-n+2){
+  margin-top: 8px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid $brand-color;
+}
+
+.left li:nth-child(3),
+.left li:nth-child(6){
+  margin-top: 8px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid #EEEEEE;
+}
+
+.left li:nth-child(4){
+  margin-top: 8px;
+  margin-left: 2px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid #EEEEEE;
+}
+
+.left li:nth-child(5){
+  margin-top: 8px;
+  margin-left: -1px;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 6px solid #EEEEEE;
+}
+
+.left li:nth-child(7),
+.left li:nth-child(9),
+.left li:nth-child(11),
+.left li:nth-child(12){
+  margin-top: 7px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid #E5E5E5;
+}
+
+.left li:nth-child(8){
+  margin-top: 7px;
+  margin-left: 2px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid #E5E5E5;
+}
+
+.left li:nth-child(10){
+  margin-top: 7px;
+  margin-left: 1px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid #E5E5E5;
+}
+
+.left li:nth-child(13){
+  margin-top: 7px;
+  margin-left: 2px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid $brand-color;
+}
+
+.left li:nth-child(14){
+  margin-top: 7px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid $brand-color;
+}
+
+.right{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: absolute;
+  top: 0px;
+  right: -6px;
+}
+
+.right li:nth-child(-n+2){
+  margin-top: 8px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid $brand-color;
+}
+
+.right li:nth-child(3),
+.right li:nth-child(4),
+.right li:nth-child(6){
+  margin-top: 8px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #EEEEEE;
+}
+
+.right li:nth-child(5){
+  margin-top: 8px;
+  margin-left: -2px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #EEEEEE;
+}
+
+.right li:nth-child(8),
+.right li:nth-child(9),
+.right li:nth-child(11){
+  margin-top: 7px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #E5E5E5;
+}
+
+.right li:nth-child(7){
+  margin-top: 7px;
+  margin-left: -3px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #E5E5E5;
+}
+
+.right li:nth-child(10){
+  margin-top: 7px;
+  margin-left: -2px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #E5E5E5;
+}
+
+.right li:nth-child(12){
+  margin-top: 7px;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 6px solid #E5E5E5;
+}
+
+.right li:nth-child(13),
+.right li:nth-child(14){
+  margin-top: 7px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid $brand-color;
+}
+
+.ticket:after{
+  content: '';
+  position: absolute;
+  right: 200px;
+  top: 0px;
+  width: 2px;
+  height: 250px;
+  box-shadow: inset 0 0 0 #Ffffff,
+    inset 0 -10px 0 #999999,
+    inset 0 -20px 0 #E5E5E5,
+    inset 0 -30px 0 #999999,
+    inset 0 -40px 0 #E5E5E5,
+    inset 0 -50px 0 #999999,
+    inset 0 -60px 0 #E5E5E5,
+    inset 0 -70px 0 #999999,
+    inset 0 -80px 0 #E5E5E5,
+    inset 0 -90px 0 #999999,
+    inset 0 -100px 0 #E5E5E5,
+    inset 0 -110px 0 #999999,
+    inset 0 -120px 0 #E5E5E5,
+    inset 0 -130px 0 #999999,
+    inset 0 -140px 0 #E5E5E5,
+    inset 0 -150px 0 #B0B0B0,
+    inset 0 -160px 0 #EEEEEE,
+    inset 0 -170px 0 #B0B0B0,
+    inset 0 -180px 0 #EEEEEE,
+    inset 0 -190px 0 #B0B0B0,
+    inset 0 -200px 0 #EEEEEE,
+    inset 0 -210px 0 #B0B0B0,
+    inset 0 -220px 0 #EEEEEE,
+    inset 0 -230px 0 #999999,
+    inset 0 -240px 0 #EEEEEE,
+    inset 0 -250px 0 #999999;
+}
+
+.ticket-1:after{
+  content: '';
+  position: absolute;
+  right: 200px;
+  top: 0px;
+  width: 2px;
+  height: 250px;
+  box-shadow: inset 0 0 0 #Ffffff,
+    inset 0 -10px 0 #999999,
+    inset 0 -20px 0 #E5E5E5,
+    inset 0 -30px 0 #999999,
+    inset 0 -40px 0 #E5E5E5,
+    inset 0 -50px 0 #999999,
+    inset 0 -60px 0 #E5E5E5,
+    inset 0 -70px 0 #999999,
+    inset 0 -80px 0 #E5E5E5,
+    inset 0 -90px 0 #999999,
+    inset 0 -100px 0 #E5E5E5,
+    inset 0 -110px 0 #999999,
+    inset 0 -120px 0 #E5E5E5,
+    inset 0 -130px 0 #999999,
+    inset 0 -140px 0 #E5E5E5,
+    inset 0 -150px 0 #B0B0B0,
+    inset 0 -160px 0 #EEEEEE,
+    inset 0 -170px 0 #B0B0B0,
+    inset 0 -180px 0 #EEEEEE,
+    inset 0 -190px 0 #B0B0B0,
+    inset 0 -200px 0 #EEEEEE,
+    inset 0 -210px 0 #B0B0B0,
+    inset 0 -220px 0 #E5E5E5,
+    inset 0 -230px 0 #999999,
+    inset 0 -240px 0 #E5E5E5,
+    inset 0 -250px 0 #999999;
+}
+
+.content{
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  height: 170px;
+  background: #eee;
+}
+
+.airline{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-family: Arial;
+  font-size: 20px;
+  color: white;
+}
+
+.boarding{
+  position: absolute;
+  top: 10px;
+  right: 247px;
+  font-family: Arial;
+  font-size: 18px;
+  color: rgba(255,255,255,0.6);
+}
+
+.jfk{
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-family: Arial;
+  font-size: 38px;
+  color: #222;
+}
+
+.sfo{
+  position: absolute;
+  top: 10px;
+  left: 180px;
+  font-family: Arial;
+  font-size: 38px;
+  color: #222;
+}
+
+.plane{
+  position: absolute;
+  left: 116px;
+  top: 0px;
+}
+
+.sub-content{
+  background: #e5e5e5;
+  width: 100%;
+  height: 106px;
+  position: absolute;
+  top: 70px;
+}
+
+.watermark{
+  position: absolute;
+  left: 5px;
+  top: -10px;
+  font-family: Arial;
+  font-size: 110px;
+  font-weight: bold;
+  color: rgba(255,255,255,0.2);
+}
+
+.name{
+  position: absolute;
+  top: 10px;
+  left: 17px;
+  font-family: Arial Narrow, Arial;
+  font-weight: bold;
+  font-size: 14px;
+  color: #999;
+}
+
+.name span{
+  color: #555;
+  font-size: 17px;
+}
+
+.flight{
+  position: absolute;
+  top: 10px;
+  left: 180px;
+  font-family: Arial Narrow, Arial;
+  font-weight: bold;
+  font-size: 14px;
+  color: #999;
+}
+
+.flight span{
+  color: #555;
+  font-size: 17px;
+}
+
+.gate{
+  position: absolute;
+  top: 10px;
+  left: 156px;
+  font-family: Arial Narrow, Arial;
+  font-weight: bold;
+  font-size: 14px;
+  color: #999;
+}
+
+.gate span{
+  color: #555;
+  font-size: 17px;
 }
 
 
-/* Boarding Pass */
-.boardingPass-1 {
-  width: 362px;
-  border-radius: 4px;
-  margin: 0 auto;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, .3);
-
+.seat{
+  position: absolute;
+  top: 10px;
+  left: 300px;
+  font-family: Arial Narrow, Arial;
+  font-weight: bold;
+  font-size: 14px;
+  color: #999;
 }
 
-.boardingPass-2 {
-  width: 362px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, .3);
-  border-radius: 4px;
-  margin: 0 auto;
+.seat span{
+  color: #555;
+  font-size: 17px;
+}
+
+.boardingtime{
+  position: absolute;
+  top: 60px;
+  left: 25px;
+  font-family: Arial Narrow, Arial;
+  font-weight: bold;
+  font-size: 14px;
+  color: #999;
+}
+
+.boardingtime span{
+  color: #555;
+  font-size: 17px;
+}
+
+.boardingtime-2{
+  position: absolute;
+  top: 60px;
+  left: 164px;
+  font-family: Arial Narrow, Arial;
+  font-weight: bold;
+  font-size: 14px;
+  color: #999;
+}
+
+.boardingtime-2 span{
+  color: #555;
+  font-size: 17px;
+}
+
+.barcode{
+  position: absolute;
+  left: 8px;
+  bottom: 6px;
+  height: 30px;
+  width: 90px;
+  background: #222;
+  box-shadow: inset 0 1px 0 #FFB300, inset -2px 0 0 #FFB300,
+    inset -4px 0 0 #222,
+    inset -5px 0 0 #FFB300,
+    inset -6px 0 0 #222,
+    inset -9px 0 0 #FFB300,
+    inset -12px 0 0 #222,
+    inset -13px 0 0 #FFB300,
+    inset -14px 0 0 #222,
+    inset -15px 0 0 #FFB300,
+    inset -16px 0 0 #222,
+    inset -17px 0 0 #FFB300,
+    inset -19px 0 0 #222,
+    inset -20px 0 0 #FFB300,
+    inset -23px 0 0 #222,
+    inset -25px 0 0 #FFB300,
+    inset -26px 0 0 #222,
+    inset -26px 0 0 #FFB300,
+    inset -27px 0 0 #222,
+    inset -30px 0 0 #FFB300,
+    inset -31px 0 0 #222,
+    inset -33px 0 0 #FFB300,
+    inset -35px 0 0 #222,
+    inset -37px 0 0 #FFB300,
+    inset -40px 0 0 #222,
+    inset -43px 0 0 #FFB300,
+    inset -44px 0 0 #222,
+    inset -45px 0 0 #FFB300,
+    inset -46px 0 0 #222,
+    inset -48px 0 0 #FFB300,
+    inset -49px 0 0 #222,
+    inset -50px 0 0 #FFB300,
+    inset -52px 0 0 #222,
+    inset -54px 0 0 #FFB300,
+    inset -55px 0 0 #222,
+    inset -57px 0 0 #FFB300,
+    inset -59px 0 0 #222,
+    inset -61px 0 0 #FFB300,
+    inset -64px 0 0 #222,
+    inset -66px 0 0 #FFB300,
+    inset -67px 0 0 #222,
+    inset -68px 0 0 #FFB300,
+    inset -69px 0 0 #222,
+    inset -71px 0 0 #FFB300,
+    inset -72px 0 0 #222,
+    inset -73px 0 0 #FFB300,
+    inset -75px 0 0 #222,
+    inset -77px 0 0 #FFB300,
+    inset -80px 0 0 #222,
+    inset -82px 0 0 #FFB300,
+    inset -83px 0 0 #222,
+    inset -84px 0 0 #FFB300,
+    inset -86px 0 0 #222,
+    inset -88px 0 0 #FFB300,
+    inset -89px 0 0 #222,
+    inset -90px 0 0 #FFB300;
+}
+
+.slip{
+  left: 455px;
+}
+
+.nameslip{
+  top: 32px;
+  left: 502px;
+}
+
+.flightslip{
+  left: 419px;
+  top: 32px;
+}
+
+.seatslip{
+  left: 540px;
+}
+
+.jfkslip{
+  font-size: 30px;
+  top: 20px;
+  left: 410px;
+}
+
+.sfoslip{
+  font-size: 30px;
+  top: 20px;
+  left: 530px;
+}
+
+.planeslip{
+  top: 10px;
+  left: 484px;
+}
+
+.airlineslip{
+  left: 455px;
 }
 
 .boardingPass-3 {
@@ -72,103 +592,49 @@ hr {
   border-radius: 4px;
   margin: 68px auto;
   margin-left: 74px;
+  position: absolute;
+  top: 85px;
+  left: 312px;
+  background: white;
 }
 
-/* Section */
-/** Label **/
 .section-label {
   display: block;
   text-transform: uppercase;
   font-size: .8rem;
-  color: $color-text-secondary;
+  color: black;
 }
 
-/** Icon **/
-.boardingPass-icon {
-  flex-grow: .5;
-  color: $my-petrol-blue;
-}
+// .book {
+//   color: black;
+//   position: absolute;
+//   left: 620px;
+//   top: 5px;
+// }
+
+// .share {
+//   position: absolute;
+//   right: 20px;
+//   bottom: 45px;
+// }
 
 
-/* Header */
-.boardingPass-header {
-  padding: .5em 2em;
-  border-radius: inherit;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-  color: rgb(150,150,150);
-  background: linear-gradient(-8deg,
-    darken(rgb(150,150,150), 10%),
-    lighten(rgb(150,150,150), 10%)
-  );
-}
-
-.boardingPass-header-2 {
-  padding: .5em 2em;
-  border-radius: inherit;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-  background-color: rgb(80, 80,80);
-}
-
-
-.boardingPass-airline {
-  margin: 0;
+.back {
   color: white;
+  text-decoration: underline;
+  &:hover {
+    font-weight: bolder;
+    color: white;
+  }
 }
 
-
-.boardingPass-flight-label {
-  color: $color-text;
-}
-
-/* Main */
-
-.boardingPass-main {
-  padding: 2em;
-  background: $color-white;
-}
-
-.boardingPass-main-3 {
-  padding: 0em;
-  background: $color-white;
-}
-
-.boardingPass-departur-IATA,
-.boardingPass-arrival-IATA {
-  display: inline-block;
-  line-height: 1;
-  font-size: 4rem;
-}
-
-.boardingPass-transport {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: $my-petrol-blue;
-}
-
-
-/* Footer */
-.boardingPass-footer {
-  padding: 0 2em 2em;
-  background: $color-white;
-  border-radius: inherit;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-}
-
-.boardingPass-qrCode {
-  height: 40px;
-  width: 100%;
-  background: repeating-linear-gradient(to right,
-    $color-black, $color-black 2%,
-    transparent 2.01%, transparent 3%,
-    $color-black 3.01%, $color-black 4%,
-    transparent 4.01%, transparent 6%,
-    $color-black 6.01%, $color-black 7%,
-    transparent 7.01%, transparent 8%,
-    $color-black 8.01%, $color-black 10%,
-    transparent 10.01%, transparent 11%
-  );
+.flight-ticket-title {
+  padding: 15px 0;
+  background: #333333;
+  h1 {
+    margin-top: 0;
+    font-size: 28px;
+    color: white;
+    margin-bottom: 10px;
+  }
 }
