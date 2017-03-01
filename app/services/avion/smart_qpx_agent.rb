@@ -34,7 +34,7 @@ module Avion
           starts_on: @starts_on,
           returns_on: @returns_on,
           nb_travelers: @nb_travelers,
-          nb_solutions: 3,
+          nb_solutions: 10,
           api_key: ENV['GOOGLE_QPX_API_KEY']
         ).make_request
 
