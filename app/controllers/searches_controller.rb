@@ -1,7 +1,6 @@
 class SearchesController < ApplicationController
 
   def create
-
 #@search =Search.new avec tout ce qu'on a récupéré en params
     @search = Search.new(city: params[:city], region: params[:region], starts_on: params[:starts_on], returns_on: params[:returns_on], nb_travelers: params[:nb_travelers])
     @search.save

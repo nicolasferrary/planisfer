@@ -1,0 +1,32 @@
+
+.loader {
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 1.6s infinite linear;
+  -moz-animation: spin 1.6s infinite linear;
+  display: block;
+  margin: 0 auto;
+}
+
+.trail {
+  fill: rgba( 255, 255, 255, 0.1 );
+  /* fill: none; */
+}
+
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate( 360deg );
+  }
+  100% {
+    -moz-transform: rotate( 0deg );
+  }
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate( 0deg );
+  }
+  100% {
+    -webkit-transform: rotate( 360deg );
+  }
+}
