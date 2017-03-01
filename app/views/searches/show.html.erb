@@ -1,3 +1,7 @@
+<div class="flight-ticket-title text-center">
+  <h1 class="">The best flights to <%= @region%></h1>
+</div>
+
 
 <div class= "container-fluid page-result">
 
@@ -41,7 +45,8 @@
 
       <div class="col-md-6">
         <div class = "text-center ">
-          <h5 class = "text-center" > Modify <strong> airports </strong> for your trip <strong> </h5>
+          <h5 class = "text-center" > We have selected the <strong> following cities</strong> in <%= @region %>.</h5>
+          <h5 class = "text-center" >Feel free to change our selection</h5>
           <div class = "btn btn-primary btn-cities" data-city="<%=  Constants::CITY_REGION[@region_airports[0]]%>"><%= Constants::CITY_REGION[@region_airports[0]] %></div>
           <div class = "btn btn-primary btn-cities" data-city="<%=Constants::CITY_REGION[@region_airports[1]]%>"><%= Constants::CITY_REGION[@region_airports[1]] %></div>
           <div class = "btn btn-primary btn-cities" data-city="<%=Constants::CITY_REGION[@region_airports[2]]%>" ><%= Constants::CITY_REGION[@region_airports[2]] %></div>
