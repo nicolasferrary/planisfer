@@ -63,6 +63,46 @@
     <!-- part with tab and the result -->
     <div class="col-xs-12 col-md-6">
       <!-- part with tab showing best results by airports -->
+      <div class="displayTrips">
+
+        <div id="TitleShow"><h3>The best deals:</h3></div>
+
+        <div class="row">
+          <% @trips_selection.each do |trip| %>
+              <%= link_to trip_path(trip), class: "tabLink result-card", data: { round_trip_flight_id: trip.round_trip_flight.id } do %>
+
+                <!-- <div class="flexbox"> -->
+                  <div class="cardContainer ">
+                    <div class="card-description">
+
+                      <p>  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> &nbsp; &nbsp; &nbsp; <%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight1_origin_airport_iata %> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <span class="info-label-go"> <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight1_destination_airport_iata %> &nbsp; </span></p>
+
+                      <p>  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> &nbsp; &nbsp; &nbsp; <span class="info-label-back"><%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight2_destination_airport_iata %> &nbsp; </p>
+
+                    </div>
+
+
+
+
+                    <div class="price-action">
+
+                      <div class="card-price ">
+                        <p> <%= trip.price.round %> €</p>
+                      </div> <!-- fin card-price -->
+                    </div>
+                  </div>
+                <!-- </div> --> <!-- fin cardContainer -->
+              <% end %>
+           <!--  </div>  --><!-- fin de col -->
+          <% end %>
+
+        <%= link_to search_path(@search), class: "box-select-all-flights" do%>
+          <div class=" text-center" id="all-flights">
+            <strong>See all flights</strong>
+          </div>
+        <% end  %>
+        </div>  <!-- fin du row -->
+      </div> <!-- fin du displaytrips -->
 
       <!--  <h3 id="title-tab" class="text-center">Choose </h3> -->
       <div class="tabContainer">
@@ -293,42 +333,9 @@
         </div> <!-- <div class="contentTab"> -->
       </div> <!-- <div class="tabContainer"> -->
 
-      <%= link_to search_path(@search), class: "box-select-all-flights" do%>
-        <div class=" text-center" id="all-flights">
-          <strong>See all flights</strong>
-        </div>
-      <% end  %>
 
-      <div class="displayTrips">
 
-        <div id="TitleShow"><h3>The best deals:</h3></div>
 
-        <div class="row">
-          <% @trips_selection.each do |trip| %>
-              <%= link_to trip_path(trip), class: "tabLink result-card", data: { round_trip_flight_id: trip.round_trip_flight.id } do %>
-
-                <!-- <div class="flexbox"> -->
-                  <div class="cardContainer ">
-                    <div class="card-description">
-
-                      <p>  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> &nbsp; &nbsp; &nbsp; <%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight1_origin_airport_iata %> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <span class="info-label-go"> <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight1_destination_airport_iata %> &nbsp; </span></p>
-
-                      <p>  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> &nbsp; &nbsp; &nbsp; <span class="info-label-back"><%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight2_destination_airport_iata %> &nbsp; </p>
-
-                    </div>
-                    <div class="price-action">
-
-                      <div class="card-price ">
-                        <p> <%= trip.price.round %> €</p>
-                      </div> <!-- fin card-price -->
-                    </div>
-                  </div>
-                <!-- </div> --> <!-- fin cardContainer -->
-              <% end %>
-           <!--  </div>  --><!-- fin de col -->
-          <% end %>
-        </div>  <!-- fin du row -->
-      </div> <!-- fin du displaytrips -->
     </div>
 
 
@@ -353,18 +360,25 @@
           handler.buildMap({
             provider: {
               scrollwheel: false,
-              styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":""},{"visibility":"on"}]}]
+              styles: [
+                {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},
+                {"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},
+                {"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},
+                {"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},
+                {"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},
+                {"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},
+                {"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},
+                {"featureType":"water","elementType":"all","stylers":[{"color":""},{"visibility":"on"}]}
+              ]
 
             },
             internal: { id: 'map' } }, function() {
-            markers = handler.addMarkers( <%= raw @first_result.to_json %>
-              );
-
-
+            markers = handler.addMarkers( <%= raw @first_result.to_json %> );
             handler.bounds.extendWith(markers);
             handler.fitMapToBounds();
 
             handler.getMap().setZoom(5);
+            displayMarkers(markers)
 
           });
           $('.result-card').mouseenter('click', function(e) {
@@ -382,11 +396,19 @@
                 markers = [];
                 markers = handler.addMarkers(result);
                 handler.bounds.extendWith(markers);
+                displayMarkers(markers);
               }
             })
             handler.fitMapToBounds();
             handler.getMap().setZoom(5);
           })
+
+          function displayMarkers(markers){
+            _.each(markers, function(marker){
+              google.maps.event.trigger(marker.getServiceObject(), 'click', {});
+              google.maps.event.clearListeners(marker.getServiceObject(), 'click');
+            });
+          }
         });
 
 
