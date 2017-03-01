@@ -32,11 +32,13 @@
           </label>
           <% end %>
         </div>
-        <%= submit_tag "LET'S TRAVEL", class: "btn btn-danger btn-big" %>
+        <%= submit_tag "LET'S TRAVEL", class: "btn btn-danger btn-big", 'data-toggle' => "modal", 'data-target' => '#wait_modal' %>
       </div>
       <%end%>
     </div>
   </div>
+
+
   <div class="text-center">
     <a href="#trendy-destination">
       <%= image_tag "arrow.png", class: "floating arrow-img" %>
@@ -44,6 +46,8 @@
   </div>
 </div>
 </div>
+
+<%= render 'wait_modal', modal_name: "wait_modal" %>
 
 
 <div class="trending" id="trendy-destination">
@@ -66,10 +70,10 @@
       </span>
     </a>
     <a class="block sm destination">
-      <%= image_tag "ecosse.jpg", class:"dest-image"%>
+      <%= image_tag "scandinavia.jpg", class:"dest-image"%>
       <span class="box">
         <span class="text in-box">
-          <span class="primarytext">Scotland</span>
+          <span class="primarytext">Scandinavia</span>
         </span>
       </span>
     </a>
@@ -111,8 +115,10 @@
 <div class="banner-content text-center">
   <h1 class="banner2-title"><strong>Why use Planisfer </strong></h1>
 </div>
-<hr>
 <div class="col-xs-12">
+  <hr>
+</div>
+<div class="">
   <div id="description-usp"></div>
   <div class="container">
     <div class="row">
@@ -133,7 +139,6 @@
    </div>
  </div>
 </div>
-<hr>
 
 <div class="footer text-center">
   <div class="container">
@@ -146,9 +151,6 @@
     </div>
   </div>
 </div>
- -->
-
-
 
 <%= content_for :after_js do %>
 <script>
@@ -169,7 +171,7 @@
       var backDate = $("#returns_on").datepicker("getDate");
 
       if (backDate == null) {
-        $('#date_back').datepicker('update', thereDate);
+        $('#returns_on').datepicker('update', thereDate);
       }
     });
     $(".box").click(function() {
@@ -177,10 +179,12 @@
       $("#region").val(region);
       $("body").animate({ scrollTop: 0}, "slow");
     });
-
   });
 </script>
 
 
+
 <% end %>
+
+
 

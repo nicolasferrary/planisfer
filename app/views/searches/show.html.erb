@@ -1,60 +1,70 @@
-<!-- CODE DES FILTRES -->
+
+<div class="flight-ticket-title text-center">
+  <h1 class="">The best flights to <%= @region%></h1>
+</div>
 
 <div class= "container-fluid page-result">
-  <div class = "row">
-    <div class = "col-md-6">
-      <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region %> </strong> on <strong> <%= @starts_on.strftime("%B %e") %> </strong> </h5>
+
+
+  <%=form_tag search_path(@search), method: :get do %>
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class = "filter-box">
+          <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region %> </strong> on <strong> <%= @starts_on.strftime("%B %e") %> </strong> </h5>
+          <div class="filters">
+            <ul class="list-inline text-center">
+              <li>
+                <h3><i class="fa fa-plane"></i> Take-off time</h3>
+              </li>
+              <li>
+                  <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider",
+                    data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "0,23" }]", "slider-min" => 0, "slider-max" => 23 } %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class = "filter-box">
+          <h5 class = "text-center" > From <strong> <%= @region %> </strong> to <strong> <%= @city_real_name %> </strong> on <strong> <%= @returns_on.strftime("%B %e") %> </strong> </h5>
+          <div class="filters">
+            <ul class="list-inline text-center">
+              <li>
+                <h3><i class="fa fa-plane"></i> Take_off time</h3>
+              </li>
+
+              <li>
+                <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider",
+                    data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 0, "slider-max" => 23 } %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class = "text-center ">
+          <h5 class = "text-center" > We have selected the <strong> following cities</strong> in <%= @region %>.</h5>
+          <h5 class = "text-center" >Feel free to change our selection</h5>
+          <div class = "btn btn-primary btn-cities" data-city="<%=  Constants::CITY_REGION[@region_airports[0]]%>"><%= Constants::CITY_REGION[@region_airports[0]] %></div>
+          <div class = "btn btn-primary btn-cities" data-city="<%=Constants::CITY_REGION[@region_airports[1]]%>"><%= Constants::CITY_REGION[@region_airports[1]] %></div>
+          <div class = "btn btn-primary btn-cities" data-city="<%=Constants::CITY_REGION[@region_airports[2]]%>" ><%= Constants::CITY_REGION[@region_airports[2]] %></div>
+          <div class = "btn btn-primary btn-cities" data-city="<%=Constants::CITY_REGION[@region_airports[3]]%>" ><%= Constants::CITY_REGION[@region_airports[3]] %></div>
+        </div>
+      </div>
+
     </div>
-    <div class = "col-md-6">
-      <h5 class = "text-center" > From <strong> <%= @region %> </strong> to <strong> <%= @city_real_name %> </strong> on <strong> <%= @returns_on.strftime("%B %e") %> </strong> </h5>
-    </div>
-  </div>
 
-  <div class = "row">
-    <div class = "col-md-6">
-      <div class="filters">
-        <ul class="list-inline text-center">
-          <li>
-            <h3><i class="fa fa-plane"></i> Take-off time</h3>
-          </li>
 
-          <li>
-            <%=form_tag search_path(@search), method: :get do %>
-              <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider",
-                data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "0,23" }]", "slider-min" => 0, "slider-max" => 23 } %>
-                <%= hidden_field_tag :flight2_range , @flight2_range %>
-                <%= hidden_field_tag :region_airport1 , @region_airport1 || nil %>
-                <%= hidden_field_tag :region_airport2 , @region_airport2 || nil %>
-
-              <%= submit_tag "Apply", class: "btn btn-primary" %>
-            <% end %>
-          </li>
-        </ul>
+    <div class="row">
+      <div class ="text-center">
+        <%= hidden_field_tag 'selected-cities' %>
+        <%= submit_tag "Apply", class: "btn btn-primary" %>
       </div>
     </div>
-
-    <div class = "col-md-6">
-      <div class="filters">
-        <ul class="list-inline text-center">
-          <li>
-            <h3><i class="fa fa-plane"></i> Take_off time</h3>
-          </li>
-
-          <li>
-            <%=form_tag search_path(@search), method: :get do %>
-              <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider",
-                data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 0, "slider-max" => 23 } %>
-                <%= hidden_field_tag :flight1_range , @flight1_range %>
-                <%= hidden_field_tag :region_airport1 , @region_airport1 || nil %>
-                <%= hidden_field_tag :region_airport2 , @region_airport2 || nil %>
-              <%= submit_tag "Apply", class: "btn btn-primary" %>
-            <% end %>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
+  <% end %>
 </div>
 
 <!-- CODE DU TABLEAU -->
@@ -350,7 +360,6 @@
 
 <!-- </div> -->
 
-
   <% content_for(:after_js) do %>
 
     <script>
@@ -411,7 +420,28 @@
           }
         });
 
+    </script>
 
+    <script>
+      $(document).ready(function() {
+        $('.btn-cities').on('click', function() {
+          $(this).toggleClass('city-selected');
+          update_form_selected_cities();
+        });
+      });
+
+      <% @selected_cities.each do |airport| %>
+        $(".btn-cities[data-city=<%= airport %>]").addClass("city-selected");
+      <% end %>
+
+      function update_form_selected_cities() {
+        var selected_cities = "";
+        $(".city-selected").each(function( index ) {
+          selected_cities = selected_cities + $(this).text(). + ",";
+        });
+        selected_cities = selected_cities.slice(0,-1); //remove last coma
+        $('#selected-cities').attr('value', selected_cities);
+      }
     </script>
 
   <% end %>

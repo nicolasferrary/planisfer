@@ -1,255 +1,159 @@
-   <!--  facebook share -->
 
+<div class="flight-ticket-title text-center">
+  <h1 class="">Your tickets to <%= @trip.region.name %></h1>
+  <%= link_to "> Back to all flights", search_path(@search), class: "back" %>
+</div>
 <div class="banner-tickets">
-   <!-- # boarding pass -->
-   <div class="container padded">
-     <div id="fb-root"></div>
-     <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+  <div class="banner-tickets-content">
+<h2><%= @trip.price.round%>€</h2>
+     <div class="container">
+       <div id="fb-root"></div>
+       <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
 
-    <div class="row">
-      <div class="col-xs-12 col-sm-4">
-        <div class="boardingPass-1">
-          <header class="boardingPass-header">
-            <div class="row">
-              <h3 class="boardingPass-airline text-center">Flying Away</h3>
+      <div class="ticket-box">
+       <!--  <div class="clip"></div> -->
+  <!--       <ul class="left">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+
+        <ul class="right">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul> -->
+
+        <div class="ticket">
+          <span class="airline"><%= Constants::AIRLINES[@trip.round_trip_flight.carrier1] %></span>
+          <span class="airline airlineslip"><%= @trip.round_trip_flight.carrier1 %></span>
+          <span class="boarding">Flying Away to <%= @trip.region.name %></span>
+          <div class="content">
+            <span class="jfk"><%= @trip.round_trip_flight.flight1_origin_airport_iata %></span>
+            <span class="plane"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="60" width="60" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
+            <span class="sfo"><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span>
+
+            <span class="jfk jfkslip"><%= @trip.round_trip_flight.flight1_origin_airport_iata %></span>
+            <span class="plane planeslip"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="50" width="50" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
+            <span class="sfo sfoslip"><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span>
+            <div class="sub-content">
+              <span class="name">DATE<br><span><%= @trip.starts_on.strftime("%B %d") %></span></span>
+              <span class="gate">DEPARTUR<br><span><%= @trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %></span></span>
+              <span class="seat">ARRIVAL<br><span><%= @trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %></span></span>
+              <span class="name"><br><span><%= @trip.starts_on.strftime("%B %d") %></span></span>
+              <span class="boardingtime">FROM<br><span><%= @trip.city.name %></span></span>
+              <span class="boardingtime-2">TO<br><span><%= Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata]  %></span></span>
+
+              <span class="flight flightslip">FLIGHT N&deg;<br><span>X3-65C3</span></span>
+              <span class="name nameslip">PASSENGERS<br><span><%= @trip.nb_travelers%></span></span>
             </div>
-          </header>
-          <main class="boardingPass-main text-center">
-            <div class="row">
-              <section class="boardingPass-departur col-xs-4">
-                <span class="section-label"><%= @trip.city.name %></span>
-                <span class="boardingPass-departur-IATA"><%= @trip.round_trip_flight.flight1_origin_airport_iata %></span>
-              </section>
-
-              <section class="boardingPass-transport boardingPass-icon col-xs-4">
-               <i class="fa fa-fighter-jet fa-4x" aria-hidden="true"></i>
-             </section>
-
-             <section class="boardingPass-arrival col-xs-4">
-              <span class="section-label"><%= Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata]  %></span>
-              <span class="boardingPass-arrival-IATA"><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span>
-            </section>
           </div>
-
-          <hr class="hr--invisible" />
-
-          <div class="row">
-            <section class="boardingPass-icon col-xs-4">
-              <i class="fa fa-plane material-icons fa-2x" aria-hidden="true"></i>
-            </section>
-
-
-            <section class="boardingPass-date col-xs-4">
-              <span class="section-label">Date</span>
-              <span><%= @trip.starts_on.strftime("%B %d") %></span>
-            </section>
-
-            <section class="boardingPass-terminal col-xs-4">
-              <span class="section-label">Year</span>
-              <span>2017</span>
-            </section>
-          </div>
-
-          <hr />
-
-          <div class="row">
-            <section class="boardingPass-icon col-xs-4">
-              <i class="fa fa-clock-o material-icons fa-2x" aria-hidden="true"></i>
-            </section>
-
-            <section class="boardingPass-departurTime col-xs-4">
-              <span class="section-label">Departur</span>
-              <span><%= @trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %></span>
-            </section>
-
-            <section class="boardingPass-arrivalTime col-xs-4">
-              <span class="section-label">Arrival</span>
-              <span><%= @trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %></span>
-            </section>
-
-
-          </div>
-
-          <hr />
-
-          <div class="row">
-            <section class="boardingPass-icon col-xs-4">
-              <i class="fa fa-user-circle-o material-icons fa-2x" aria-hidden="true"></i>
-            </section>
-
-            <section class="boardingPass-passenger col-xs-4">
-              <span class="section-label">Passengers</span>
-              <span><%= @trip.nb_travelers%></span>
-            </section>
-
-            <section class="boardingPass-duration col-xs-4">
-              <span class="section-label">Duration</span>
-              <span><%=((@trip.round_trip_flight.flight1_landing_at - @trip.round_trip_flight.flight1_take_off_at)/60).floor%> min</span>
-            </section>
-          </div>
-        </main>
-
-          <footer class="boardingPass-footer">
-          </footer>
-          <footer class="boardingPass-header">
-          </footer>
         </div>
       </div>
 
-      <div class="col-xs-12 col-sm-4">
-        <div class="boardingPass-2">
-          <header class="boardingPass-header">
-            <div class="row">
-              <h3 class="boardingPass-airline text-center">Flying Back</h3>
+
+      <div class="ticket-box-1">
+        <!-- <div class="clip"></div> -->
+  <!--       <ul class="left">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+
+        <ul class="right">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul> -->
+
+        <div class="ticket-1">
+          <span class="airline"><%= Constants::AIRLINES[@trip.round_trip_flight.carrier2] %></span>
+          <span class="airline airlineslip"><%= @trip.round_trip_flight.carrier2 %></span>
+          <span class="boarding">Flying Back from <%= @trip.region.name %></span>
+          <div class="content">
+            <span class="jfk"><%= @trip.round_trip_flight.flight2_origin_airport_iata %></span>
+            <span class="plane"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="60" width="60" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
+            <span class="sfo"><%= @trip.round_trip_flight.flight2_destination_airport_iata %></span>
+
+            <span class="jfk jfkslip"><%= @trip.round_trip_flight.flight2_origin_airport_iata %></span>
+            <span class="plane planeslip"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="50" width="50" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
+            <span class="sfo sfoslip"><%= @trip.round_trip_flight.flight2_destination_airport_iata %></span>
+            <div class="sub-content">
+              <span class="name">DATE<br><span><%= @trip.returns_on.strftime("%B %d") %></span></span>
+              <span class="gate">DEPARTUR<br><span><%= @trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %></span></span>
+              <span class="seat">ARRIVAL<br><span><%= @trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %></span></span>
+              <span class="boardingtime">FROM<br><span><%= Constants::CITY_REGION[@trip.round_trip_flight.flight2_origin_airport_iata] %></span></span>
+              <span class="boardingtime-2">TO<br><span><%= @trip.city.name %></span></span>
+              <span class="flight flightslip">FLIGHT N&deg;<br><span>X3-65C3</span></span>
+              <span class="name nameslip">PASSENGERS<br><span><%= @trip.nb_travelers%></span></span>
             </div>
-          </header>
-
-          <main class="boardingPass-main text-center">
-            <div class="row">
-              <section class="boardingPass-departur col-xs-4">
-                <span class="section-label"><%= @trip.city.name %></span>
-                <span class="boardingPass-departur-IATA"><%= @trip.round_trip_flight.flight1_origin_airport_iata %></span>
-              </section>
-
-              <section class="boardingPass-transport boardingPass-icon col-xs-4">
-               <i class="fa fa-fighter-jet fa-4x" aria-hidden="true"></i>
-             </section>
-
-             <section class="boardingPass-arrival col-xs-4">
-              <span class="section-label"><%= Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata]  %></span>
-              <span class="boardingPass-arrival-IATA"><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span>
-            </section>
           </div>
-
-          <hr class="hr--invisible" />
-       </div>
-    </div>
-
-          <div class="row">
-            <section class="boardingPass-icon col-xs-4">
-              <i class="fa fa-plane material-icons fa-2x" aria-hidden="true"></i>
-            </section>
-
-
-            <section class="boardingPass-date col-xs-4">
-              <span class="section-label">Date</span>
-              <span><%= @trip.starts_on.strftime("%B %d") %></span>
-            </section>
-
-            <section class="boardingPass-terminal col-xs-4">
-              <span class="section-label">Year</span>
-              <span>2017</span>
-            </section>
-
-          </div>
-
-          <hr />
-
-          <div class="row">
-            <section class="boardingPass-icon col-xs-4">
-              <i class="fa fa-clock-o material-icons fa-2x" aria-hidden="true"></i>
-            </section>
-
-            <section class="boardingPass-departurTime col-xs-4">
-              <span class="section-label">Departur</span>
-              <span><%= @trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %></span>
-            </section>
-
-            <section class="boardingPass-arrivalTime col-xs-4">
-              <span class="section-label">Arrival</span>
-              <span><%= @trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %></span>
-            </section>
-
-
-          </div>
-
-          <hr />
-
-          <div class="row">
-            <section class="boardingPass-icon col-xs-4">
-              <i class="fa fa-user-circle-o material-icons fa-2x" aria-hidden="true"></i>
-            </section>
-
-            <section class="boardingPass-passenger col-xs-4">
-              <span class="section-label">Passengers</span>
-              <span><%= @trip.nb_travelers%></span>
-            </section>
-
-            <section class="boardingPass-duration col-xs-4">
-              <span class="section-label">Duration</span>
-              <span><%=((@trip.round_trip_flight.flight1_landing_at - @trip.round_trip_flight.flight1_take_off_at)/60).floor%> min</span>
-            </section>
-          </div>
-        </main>
-
-        <footer class="boardingPass-footer">
-        </footer>
-
-        <footer class="boardingPass-header">
-        </footer>
+        </div>
       </div>
     </div>
 
-    <div class="col-xs-12 col-sm-4">
-      <div class="boardingPass-3">
-        <header class="boardingPass-header-2">
-          <div class="row">
-            <h3 class="boardingPass-airline text-center">Are you ready ?</h3>
-          </div>
-        </header>
-
-        <main class="boardingPass-main-3 text-center">
-          <div class="row">
-          </div>
-
-          <hr class="hr--invisible" />
-
-
-          <div class="row">
-
-            <section class="boardingPass-departurTime col-xs-6">
-              <span class="section-label">Number of Days</span>
-              <span><%= (@trip.returns_on - @trip.starts_on).to_i %></span>
-            </section>
-
-            <section class="boardingPass-arrivalTime col-xs-6">
-              <span class="section-label">Region</span>
-              <span><%= @trip.region.name %></span>
-            </section>
-          </div>
-          <hr />
-
-          <div class="row">
-            <section class="boardingPass-date col-xs-12">
-              <span class="section-label">Total Price</span>
-              <span><%= @trip.price.round%> EUR</span>
-            </section>
-          </div>
-
-          <div class="row">
-            <div class="text-center button-padded">
-              <button class="btn btn-success text-center" data-toggle="modal" data-target="#book_modal">BOOK</button>
-            </div>
-            <%= render 'book_modal', modal_name: "book_modal" %>
-          </div>
-        </main>
-
-
+    <div class="flight-ticket-button">
+      <div class="book">
+        <%= render 'book_modal', modal_name: "book_modal" %>
+        <button class="btn btn-warning btn-lg text-center" data-toggle="modal" data-target="#book_modal">BOOK</button>
+      </div>
+      <div class="share text-center">
+        <div class="btn btn-primary btn-lg" data-href="<%= request.original_url %>"></i><i class="fa fa-facebook"></i> Share </div>
       </div>
     </div>
+
   </div>
-</div>
-</div>
-
-<div class="fb-send" data-href="<%= request.original_url %>"></div>
-
-<div class="fb-send" data-href="https://developers.facebook.com/docs/plugins/"></div>
 
 </div>
+
 
