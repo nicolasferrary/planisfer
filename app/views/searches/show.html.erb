@@ -1,388 +1,390 @@
 
 <div class="flight-ticket-title text-center">
-  <h1 class="">The best flights to <%= @region%></h1>
+  <h1 class="">Your research for <%= @region%></h1>
 </div>
 
 <div class= "container-fluid page-result">
   <%=form_tag search_path(@search), method: :get do %>
-    <div class="row">
-      <div class="col-md-3">
-        <div class = "filter-box">
-          <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region %> </strong> on <strong> <%= @starts_on.strftime("%B %e") %> </strong> </h5>
-          <div class="filters">
-            <ul class="list-inline text-center">
-              <li>
-                <h3><i class="fa fa-plane"></i> Take-off time</h3>
-              </li>
-              <li>
-                  <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider",
-                    data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "0,23" }]", "slider-min" => 0, "slider-max" => 23 } %>
-              </li>
-            </ul>
-          </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class = "filter-box">
+        <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region %> </strong> on <strong> <%= @starts_on.strftime("%B %e") %> </strong> </h5>
+        <div class="filters">
+          <ul class="list-inline text-center">
+            <li>
+              <h3><i class="fa fa-plane"></i> Take-off time</h3>
+            </li>
+            <li>
+              <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider",
+              data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "0,23" }]", "slider-min" => 0, "slider-max" => 23 } %>
+            </li>
+          </ul>
         </div>
       </div>
-
-      <div class="col-md-3">
-        <div class = "filter-box">
-          <h5 class = "text-center" > From <strong> <%= @region %> </strong> to <strong> <%= @city_real_name %> </strong> on <strong> <%= @returns_on.strftime("%B %e") %> </strong> </h5>
-          <div class="filters">
-            <ul class="list-inline text-center">
-              <li>
-                <h3><i class="fa fa-plane"></i> Take_off time</h3>
-              </li>
-
-              <li>
-                <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider",
-                    data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 0, "slider-max" => 23 } %>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class = "text-center ">
-          <h5 class = "text-center" > We have selected the <strong> following cities</strong> in <%= @region %>.</h5>
-          <h5 class = "text-center" >Feel free to change our selection</h5>
-          <div class = "btn btn-primary filtered-city city-selected" data-city="<%=  Constants::CITY_REGION[@region_airports[0]]%>"><%= Constants::CITY_REGION[@region_airports[0]] %></div>
-          <div class = "btn btn-primary filtered-city city-selected" data-city="<%=Constants::CITY_REGION[@region_airports[1]]%>"><%= Constants::CITY_REGION[@region_airports[1]] %></div>
-          <div class = "btn btn-primary filtered-city city-selected" data-city="<%=Constants::CITY_REGION[@region_airports[2]]%>" ><%= Constants::CITY_REGION[@region_airports[2]] %></div>
-          <div class = "btn btn-primary filtered-city city-selected" data-city="<%=Constants::CITY_REGION[@region_airports[3]]%>" ><%= Constants::CITY_REGION[@region_airports[3]] %></div>
-        </div>
-      </div>
-
     </div>
 
+    <div class="col-md-3">
+      <div class = "filter-box">
+        <h5 class = "text-center" > From <strong> <%= @region %> </strong> to <strong> <%= @city_real_name %> </strong> on <strong> <%= @returns_on.strftime("%B %e") %> </strong> </h5>
+        <div class="filters">
+          <ul class="list-inline text-center">
+            <li>
+              <h3><i class="fa fa-plane"></i> Take_off time</h3>
+            </li>
 
-    <div class="row">
-      <div class ="text-center filter-apply">
-        <%= hidden_field_tag 'selected-cities' %>
-        <%= submit_tag "Apply", class: "btn btn-success" %>
+            <li>
+              <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider",
+              data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 0, "slider-max" => 23 } %>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
+
+    <div class="col-md-6">
+      <div class = "text-center ">
+        <h5 class = "text-center" > We have selected the <strong> following cities</strong> in <%= @region %>.</h5>
+        <h5 class = "text-center" >Feel free to change our selection</h5>
+        <div class = "btn btn-primary filtered-city city-selected" data-city="<%=  Constants::CITY_REGION[@region_airports[0]]%>"><%= Constants::CITY_REGION[@region_airports[0]] %></div>
+        <div class = "btn btn-primary filtered-city city-selected" data-city="<%=Constants::CITY_REGION[@region_airports[1]]%>"><%= Constants::CITY_REGION[@region_airports[1]] %></div>
+        <div class = "btn btn-primary filtered-city city-selected" data-city="<%=Constants::CITY_REGION[@region_airports[2]]%>" ><%= Constants::CITY_REGION[@region_airports[2]] %></div>
+        <div class = "btn btn-primary filtered-city city-selected" data-city="<%=Constants::CITY_REGION[@region_airports[3]]%>" ><%= Constants::CITY_REGION[@region_airports[3]] %></div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="row">
+    <div class ="text-center filter-apply">
+      <%= hidden_field_tag 'selected-cities' %>
+      <%= submit_tag "Apply", class: "btn btn-success" %>
+    </div>
+  </div>
   <% end %>
 </div>
 
 <!-- CODE DU TABLEAU -->
 
-  <div class="container-fluid page-result">
-    <!-- part with tab and the result -->
-    <div class="col-xs-12 col-md-6">
-      <!-- part with tab showing best results by airports -->
-      <div class="displayTrips">
+<div class="col-xs-12">
+  <hr>
+</div>
+<div class="container-fluid page-result">
+  <!-- part with tab and the result -->
+  <div class="col-xs-12 col-md-6">
+    <!-- part with tab showing best results by airports -->
+    <div class="displayTrips">
+    <div class="titleShow text-center"><h3><strong>THE BEST DEALS</strong></h3></div>
+      <hr>
+      <div class="row">
+        <% @trips_selection.each do |trip| %>
+        <%= link_to trip_path(trip), class: "tabLink result-card", data: { round_trip_flight_id: trip.round_trip_flight.id } do %>
 
-        <div id="TitleShow"><h3>The best deals:</h3></div>
+        <!-- <div class="flexbox"> -->
+        <div class="cardContainer ">
+          <div class="card-description">
 
-        <div class="row">
-          <% @trips_selection.each do |trip| %>
-              <%= link_to trip_path(trip), class: "tabLink result-card", data: { round_trip_flight_id: trip.round_trip_flight.id } do %>
+            <p>  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> &nbsp; &nbsp; &nbsp; <%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight1_origin_airport_iata %> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <span class="info-label-go"> <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight1_destination_airport_iata %> &nbsp; </span></p>
 
-                <!-- <div class="flexbox"> -->
-                  <div class="cardContainer ">
-                    <div class="card-description">
+            <p>  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> &nbsp; &nbsp; &nbsp; <span class="info-label-back"><%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight2_destination_airport_iata %> &nbsp; </p>
 
-                      <p>  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> &nbsp; &nbsp; &nbsp; <%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight1_origin_airport_iata %> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <span class="info-label-go"> <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight1_destination_airport_iata %> &nbsp; </span></p>
-
-                      <p>  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> &nbsp; &nbsp; &nbsp; <span class="info-label-back"><%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight2_destination_airport_iata %> &nbsp; </p>
-
-                    </div>
+          </div>
 
 
 
 
-                    <div class="price-action">
+          <div class="price-action">
 
-                      <div class="card-price ">
-                        <p> <%= trip.price.round %> €</p>
-                      </div> <!-- fin card-price -->
-                    </div>
-                  </div>
-                <!-- </div> --> <!-- fin cardContainer -->
-              <% end %>
-           <!--  </div>  --><!-- fin de col -->
-          <% end %>
+            <div class="card-price ">
+              <p> <%= trip.price.round %> €</p>
+            </div> <!-- fin card-price -->
+          </div>
+        </div>
+        <!-- </div> --> <!-- fin cardContainer -->
+        <% end %>
+        <!--  </div>  --><!-- fin de col -->
+        <% end %>
 
         <%= link_to search_path(@search), class: "box-select-all-flights" do%>
-          <div class=" text-center" id="all-flights">
-            <strong>See all flights</strong>
-          </div>
+        <div class=" text-center" id="all-flights">
+          <strong>See all flights</strong>
+        </div>
         <% end  %>
-        </div>  <!-- fin du row -->
-      </div> <!-- fin du displaytrips -->
+      </div>  <!-- fin du row -->
+    </div> <!-- fin du displaytrips -->
 
-      <!--  <h3 id="title-tab" class="text-center">Choose </h3> -->
-      <div class="tabContainer">
+    <!--  <h3 id="title-tab" class="text-center">Choose </h3> -->
+    <div class="tabContainer">
 
-        <!-- BARRE DE GAUCHE -->
-        <div class="legend-arrival">
-          <p class="text-center"><i class="fa fa-plane fa-rotate-180" aria-hidden="true"></i> You'll arrive... </p>
+      <!-- BARRE DE GAUCHE -->
+      <div class="legend-arrival">
+        <p class="text-center"><i class="fa fa-plane fa-rotate-180" aria-hidden="true"></i> You'll arrive... </p>
+      </div>
+
+      <!-- BARRE DU HAUT -->
+
+      <div class="flexbox legend-top-tab">
+
+        <div class="legendTabResult text-center">
+          <p><i class="fa fa-plane" aria-hidden="true"></i> You'll leave from... </p>
         </div>
+      </div>
 
-        <!-- BARRE DU HAUT -->
-
-        <div class="flexbox legend-top-tab">
-
-          <div class="legendTabResult text-center">
-            <p><i class="fa fa-plane" aria-hidden="true"></i> You'll leave from... </p>
-          </div>
-        </div>
-
-        <!-- TABLEAU DE RESULTATS -->
-        <div class="contentTab">
-          <div class="row">
+      <!-- TABLEAU DE RESULTATS -->
+      <div class="contentTab">
+        <div class="row">
           <!-- GARDER DIV VIDE POUR GARDER LA STRUCTURE DU TABLEAU -->
+        </div>
+
+        <div class="row">
+          <div class="flexbox">
+            <%#= link_to search_path(@search), class: "box-select-all-flights" do%>
+
+            <!-- GARDE LA STRUCTURE DU TABLEAU -->
+            <div class="tabGrid text-center">
+            </div>
+            <%# end  %>
+
+
+            <% @region_airports.each do |airport| %>
+            <div class="tabGrid text-center"><strong><%= Constants::CITY_REGION[airport] %></strong></div>
+            <% end %>
           </div>
+        </div>
+        <% if @region_airports.size > 0 %>
+        <div class="row">
+          <div class="flexbox">
+            <div class="tabGrid "><strong><%= Constants::CITY_REGION[@region_airports[0]] %></strong></div>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[0])), class: "tabLink" do %>
+            <div class="tabGrid <%= 'cheapest-option' if @trips0_0 != [] && @trips0_0.first.price.to_f.round == @trip_cheapest_price %> text-center">
 
-         <div class="row">
-            <div class="flexbox">
-              <%#= link_to search_path(@search), class: "box-select-all-flights" do%>
-
-              <!-- GARDE LA STRUCTURE DU TABLEAU -->
-              <div class="tabGrid text-center">
-              </div>
-              <%# end  %>
-
-
-              <% @region_airports.each do |airport| %>
-                <div class="tabGrid text-center"><strong><%= Constants::CITY_REGION[airport] %></strong></div>
+              <% if @trips0_0 == [] %>
+              <%= "-" %>
+              <% else %>
+              <%= @trips0_0.first.price.to_f.round %> €
               <% end %>
             </div>
+            <% end  %>
+
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[1])), class: "tabLink" do %>
+            <div class="tabGrid <%= 'cheapest-option' if @trips0_1 != [] && @trips0_1.first.price.to_f.round == @trip_cheapest_price %> text-center">
+
+              <% if @trips0_1 == [] %>
+              <%= "-" %>
+              <% else %>
+              <%= @trips0_1.first.price.to_f.round %> €
+              <% end %>
+            </div>
+            <% end  %>
+
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[2])), class: "tabLink" do %>
+            <div class="tabGrid <%= 'cheapest-option' if @trips0_2 != [] && @trips0_2.first.price.to_f.round == @trip_cheapest_price %> text-center">
+
+              <% if @trips0_2 == [] %>
+              <%= "-" %>
+              <% else %>
+              <%= @trips0_2.first.price.to_f.round %> €
+              <% end %>
+            </div>
+            <% end  %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[3])), class: "tabLink" do %>
+            <div class="tabGrid <%= 'cheapest-option' if @trips0_3 != [] && @trips0_3.first.price.to_f.round == @trip_cheapest_price %> text-center">
+
+              <% if @trips0_3 == [] %>
+              <%= "-" %>
+              <% else %>
+              <%= @trips0_3.first.price.to_f.round %> €
+              <% end %>
+            </div>
+            <% end  %>
           </div>
-          <% if @region_airports.size > 0 %>
-            <div class="row">
-              <div class="flexbox">
-                <div class="tabGrid "><strong><%= Constants::CITY_REGION[@region_airports[0]] %></strong></div>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[0])), class: "tabLink" do %>
-                  <div class="tabGrid <%= 'cheapest-option' if @trips0_0 != [] && @trips0_0.first.price.to_f.round == @trip_cheapest_price %> text-center">
+        </div>
+        <% end  %>
 
-                    <% if @trips0_0 == [] %>
-                      <%= "-" %>
-                    <% else %>
-                      <%= @trips0_0.first.price.to_f.round %> €
-                    <% end %>
-                  </div>
-                <% end  %>
+        <% if @region_airports.size > 1  %>
+        <div class="row ">
+          <div class="flexbox">
+            <div class="tabGrid "><strong><%= Constants::CITY_REGION[@region_airports[1]] %></strong></div>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[0])), class: "tabLink" do %>
+            <div class="tabGrid <%= 'cheapest-option' if @trips1_0 != [] && @trips1_0.first.price.to_f.round == @trip_cheapest_price %> text-center">
 
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[1])), class: "tabLink" do %>
-                  <div class="tabGrid <%= 'cheapest-option' if @trips0_1 != [] && @trips0_1.first.price.to_f.round == @trip_cheapest_price %> text-center">
-
-                    <% if @trips0_1 == [] %>
-                      <%= "-" %>
-                    <% else %>
-                      <%= @trips0_1.first.price.to_f.round %> €
-                    <% end %>
-                  </div>
-                <% end  %>
-
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[2])), class: "tabLink" do %>
-                  <div class="tabGrid <%= 'cheapest-option' if @trips0_2 != [] && @trips0_2.first.price.to_f.round == @trip_cheapest_price %> text-center">
-
-                    <% if @trips0_2 == [] %>
-                      <%= "-" %>
-                    <% else %>
-                      <%= @trips0_2.first.price.to_f.round %> €
-                    <% end %>
-                  </div>
-                <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[0]).merge(region_airport2: @region_airports[3])), class: "tabLink" do %>
-                  <div class="tabGrid <%= 'cheapest-option' if @trips0_3 != [] && @trips0_3.first.price.to_f.round == @trip_cheapest_price %> text-center">
-
-                    <% if @trips0_3 == [] %>
-                      <%= "-" %>
-                    <% else %>
-                      <%= @trips0_3.first.price.to_f.round %> €
-                    <% end %>
-                  </div>
-                <% end  %>
-              </div>
+              <% if @trips1_0 == [] %>
+              <%= "-" %>
+              <% else %>
+              <%= @trips1_0.first.price.to_f.round %> €
+              <% end %>
             </div>
-          <% end  %>
+            <% end  %>
 
-          <% if @region_airports.size > 1  %>
-            <div class="row ">
-              <div class="flexbox">
-                <div class="tabGrid "><strong><%= Constants::CITY_REGION[@region_airports[1]] %></strong></div>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[0])), class: "tabLink" do %>
-                  <div class="tabGrid <%= 'cheapest-option' if @trips1_0 != [] && @trips1_0.first.price.to_f.round == @trip_cheapest_price %> text-center">
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[1])), class: "tabLink" do %>
+            <div class="tabGrid <%= 'cheapest-option' if @trips1_1 != [] && @trips1_1.first.price.to_f.round == @trip_cheapest_price %> text-center">
 
-                    <% if @trips1_0 == [] %>
-                      <%= "-" %>
-                    <% else %>
-                      <%= @trips1_0.first.price.to_f.round %> €
-                    <% end %>
-                  </div>
-                <% end  %>
-
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[1])), class: "tabLink" do %>
-                  <div class="tabGrid <%= 'cheapest-option' if @trips1_1 != [] && @trips1_1.first.price.to_f.round == @trip_cheapest_price %> text-center">
-
-                    <% if @trips1_1 == [] %>
-                      <%= "-" %>
-                    <% else %>
-                      <%= @trips1_1.first.price.to_f.round %> €
-                    <% end %>
-                  </div>
-                <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[2])), class: "tabLink" do %>
-                  <div class="tabGrid <%= 'cheapest-option' if @trips1_2 != [] && @trips1_2.first.price.to_f.round == @trip_cheapest_price %> text-center">
-
-                    <% if @trips1_2 == [] %>
-                      <%= "-" %>
-                    <% else %>
-                      <%= @trips1_2.first.price.to_f.round %> €
-                    <% end %>
-                  </div>
-                <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[3])), class: "tabLink" do %>
-                  <div class="tabGrid <%= 'cheapest-option' if @trips1_3 != [] && @trips1_3.first.price.to_f.round == @trip_cheapest_price %> text-center">
-
-                    <% if @trips1_3 == [] %>
-                      <%= "-" %>
-                    <% else %>
-                      <%= @trips1_3.first.price.to_f.round %> €
-                    <% end %>
-                  </div>
-                <% end  %>
-              </div>
+              <% if @trips1_1 == [] %>
+              <%= "-" %>
+              <% else %>
+              <%= @trips1_1.first.price.to_f.round %> €
+              <% end %>
             </div>
-          <% end  %>
+            <% end  %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[2])), class: "tabLink" do %>
+            <div class="tabGrid <%= 'cheapest-option' if @trips1_2 != [] && @trips1_2.first.price.to_f.round == @trip_cheapest_price %> text-center">
 
-          <% if @region_airports.size > 2  %>
-            <div class="row ">
-              <div class="flexbox">
-                <div class="tabGrid "><strong><%= Constants::CITY_REGION[@region_airports[2]] %></strong></div>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[0])), class: "tabLink" do %>
-                  <div class="tabGrid <%= 'cheapest-option' if @trips2_0 != [] && @trips2_0.first.price.to_f.round == @trip_cheapest_price %> text-center">
-
-                    <% if @trips2_0 == [] %>
-                      <%= "-" %>
-                    <% else %>
-                      <%= @trips2_0.first.price.to_f.round %> €
-                    <% end %>
-                  </div>
-                <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[1])), class: "tabLink" do %>
-                  <div class="tabGrid <%= 'cheapest-option' if @trips2_1 != [] && @trips2_1.first.price.to_f.round == @trip_cheapest_price %> text-center">
-                    <% if @trips2_1 == [] %>
-                      <%= "-" %>
-                    <% else %>
-                      <%= @trips2_1.first.price.to_f.round %> €
-                    <% end %>
-                  </div>
-                <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[2])), class: "tabLink" do %>
-                  <div class="tabGrid <%= 'cheapest-option' if @trips2_2 != [] && @trips2_2.first.price.to_f.round == @trip_cheapest_price %> text-center">
-                    <% if @trips2_2 == [] %>
-                      <%= "-" %>
-                    <% else %>
-                      <%= @trips2_2.first.price.to_f.round %> €
-                    <% end %>
-                  </div>
-                <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[3])), class: "tabLink" do %>
-                  <div class="tabGrid <%= 'cheapest-option' if @trips2_3 != [] && @trips2_3.first.price.to_f.round == @trip_cheapest_price %> text-center">
-                    <% if @trips2_3 == [] %>
-                      <%= "-" %>
-                    <% else %>
-                      <%= @trips2_3.first.price.to_f.round %> €
-                    <% end %>
-                  </div>
-                <% end  %>
-              </div>
+              <% if @trips1_2 == [] %>
+              <%= "-" %>
+              <% else %>
+              <%= @trips1_2.first.price.to_f.round %> €
+              <% end %>
             </div>
-          <% end  %>
+            <% end  %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[1]).merge(region_airport2: @region_airports[3])), class: "tabLink" do %>
+            <div class="tabGrid <%= 'cheapest-option' if @trips1_3 != [] && @trips1_3.first.price.to_f.round == @trip_cheapest_price %> text-center">
 
-
-          <% if @region_airports.size > 3  %>
-            <div class="row ">
-              <div class="flexbox">
-                <div class="tabGrid "><strong><%= Constants::CITY_REGION[@region_airports[3]] %></strong></div>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[0])), class: "tabLink" do %>
-                  <div class="tabGrid <%= 'cheapest-option' if @trips3_0 != [] && @trips3_0.first.price.to_f.round == @trip_cheapest_price %> text-center">
-                    <% if @trips3_0 == [] %>
-                      <%= "-" %>
-                    <% else %>
-                      <%= @trips3_0.first.price.to_f.round %> €
-                    <% end %>
-                  </div>
-                <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[1])), class: "tabLink " do %>
-                  <div class="tabGrid <%= 'cheapest-option' if @trips3_1 != [] && @trips3_1.first.price.to_f.round == @trip_cheapest_price %> text-center">
-                    <% if @trips3_1 == [] %>
-                      <%= "-" %>
-                    <% else %>
-                      <%= @trips3_1.first.price.to_f.round %> €
-                    <% end %>
-                  </div>
-                <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[2])), class: "tabLink" do %>
-                  <div class="tabGrid <%= 'cheapest-option' if @trips3_2 != [] && @trips3_2.first.price.to_f.round == @trip_cheapest_price %> text-center">
-                    <% if @trips3_2 == [] %>
-                      <%= "-" %>
-                    <% else %>
-                      <%= @trips3_2.first.price.to_f.round %> €
-                    <% end %>
-                  </div>
-                <% end  %>
-                <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[3])), class: "tabLink" do %>
-                  <div class="tabGrid <%= 'cheapest-option' if @trips3_3 != [] && @trips3_3.first.price.to_f.round == @trip_cheapest_price %> text-center">
-                    <% if @trips3_3 == [] %>
-                      <%= "-" %>
-                    <% else %>
-                      <%= @trips3_3.first.price.to_f.round %> €
-                    <% end %>
-                  </div>
-                <% end  %>
-              </div>
+              <% if @trips1_3 == [] %>
+              <%= "-" %>
+              <% else %>
+              <%= @trips1_3.first.price.to_f.round %> €
+              <% end %>
             </div>
-          <% end %>
-        </div> <!-- <div class="contentTab"> -->
-      </div> <!-- <div class="tabContainer"> -->
+            <% end  %>
+          </div>
+        </div>
+        <% end  %>
+
+        <% if @region_airports.size > 2  %>
+        <div class="row ">
+          <div class="flexbox">
+            <div class="tabGrid "><strong><%= Constants::CITY_REGION[@region_airports[2]] %></strong></div>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[0])), class: "tabLink" do %>
+            <div class="tabGrid <%= 'cheapest-option' if @trips2_0 != [] && @trips2_0.first.price.to_f.round == @trip_cheapest_price %> text-center">
+
+              <% if @trips2_0 == [] %>
+              <%= "-" %>
+              <% else %>
+              <%= @trips2_0.first.price.to_f.round %> €
+              <% end %>
+            </div>
+            <% end  %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[1])), class: "tabLink" do %>
+            <div class="tabGrid <%= 'cheapest-option' if @trips2_1 != [] && @trips2_1.first.price.to_f.round == @trip_cheapest_price %> text-center">
+              <% if @trips2_1 == [] %>
+              <%= "-" %>
+              <% else %>
+              <%= @trips2_1.first.price.to_f.round %> €
+              <% end %>
+            </div>
+            <% end  %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[2])), class: "tabLink" do %>
+            <div class="tabGrid <%= 'cheapest-option' if @trips2_2 != [] && @trips2_2.first.price.to_f.round == @trip_cheapest_price %> text-center">
+              <% if @trips2_2 == [] %>
+              <%= "-" %>
+              <% else %>
+              <%= @trips2_2.first.price.to_f.round %> €
+              <% end %>
+            </div>
+            <% end  %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[2]).merge(region_airport2: @region_airports[3])), class: "tabLink" do %>
+            <div class="tabGrid <%= 'cheapest-option' if @trips2_3 != [] && @trips2_3.first.price.to_f.round == @trip_cheapest_price %> text-center">
+              <% if @trips2_3 == [] %>
+              <%= "-" %>
+              <% else %>
+              <%= @trips2_3.first.price.to_f.round %> €
+              <% end %>
+            </div>
+            <% end  %>
+          </div>
+        </div>
+        <% end  %>
+
+
+        <% if @region_airports.size > 3  %>
+        <div class="row ">
+          <div class="flexbox">
+            <div class="tabGrid "><strong><%= Constants::CITY_REGION[@region_airports[3]] %></strong></div>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[0])), class: "tabLink" do %>
+            <div class="tabGrid <%= 'cheapest-option' if @trips3_0 != [] && @trips3_0.first.price.to_f.round == @trip_cheapest_price %> text-center">
+              <% if @trips3_0 == [] %>
+              <%= "-" %>
+              <% else %>
+              <%= @trips3_0.first.price.to_f.round %> €
+              <% end %>
+            </div>
+            <% end  %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[1])), class: "tabLink " do %>
+            <div class="tabGrid <%= 'cheapest-option' if @trips3_1 != [] && @trips3_1.first.price.to_f.round == @trip_cheapest_price %> text-center">
+              <% if @trips3_1 == [] %>
+              <%= "-" %>
+              <% else %>
+              <%= @trips3_1.first.price.to_f.round %> €
+              <% end %>
+            </div>
+            <% end  %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[2])), class: "tabLink" do %>
+            <div class="tabGrid <%= 'cheapest-option' if @trips3_2 != [] && @trips3_2.first.price.to_f.round == @trip_cheapest_price %> text-center">
+              <% if @trips3_2 == [] %>
+              <%= "-" %>
+              <% else %>
+              <%= @trips3_2.first.price.to_f.round %> €
+              <% end %>
+            </div>
+            <% end  %>
+            <%= link_to search_path(@search, @filters.merge(region_airport1: @region_airports[3]).merge(region_airport2: @region_airports[3])), class: "tabLink" do %>
+            <div class="tabGrid <%= 'cheapest-option' if @trips3_3 != [] && @trips3_3.first.price.to_f.round == @trip_cheapest_price %> text-center">
+              <% if @trips3_3 == [] %>
+              <%= "-" %>
+              <% else %>
+              <%= @trips3_3.first.price.to_f.round %> €
+              <% end %>
+            </div>
+            <% end  %>
+          </div>
+        </div>
+        <% end %>
+      </div> <!-- <div class="contentTab"> -->
+    </div> <!-- <div class="tabContainer"> -->
 
 
 
 
-    </div>
+  </div>
 
 
 
-    <div class="col-xs-12 col-md-6">
-      <div>
-        <div id="map", style="width: 100%; height: 600px;"></div>
-      </div>
+  <div class="col-xs-12 col-md-6">
+    <div>
+      <div id="map", style="width: 100%; height: 600px;"></div>
     </div>
   </div>
+</div>
 
 
 </div>
 
 <% content_for(:after_js) do %>
-  <script>
-    $(document).ready(function() {
-      var handler = Gmaps.build('Google');
-      handler.buildMap({
-        provider: {
-          scrollwheel: false,
-          styles: [
-            {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},
-            {"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},
-            {"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},
-            {"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},
-            {"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},
-            {"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},
-            {"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},
-            {"featureType":"water","elementType":"all","stylers":[{"color":""},{"visibility":"on"}]}
-          ]
-        },
-        internal: { id: 'map' } }, function() {
-          markers = handler.addMarkers( <%= raw @first_result.to_json %> );
-          handler.bounds.extendWith(markers);
-          handler.fitMapToBounds();
+<script>
+  $(document).ready(function() {
+    var handler = Gmaps.build('Google');
+    handler.buildMap({
+      provider: {
+        scrollwheel: false,
+        styles: [
+        {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},
+        {"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},
+        {"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},
+        {"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},
+        {"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},
+        {"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},
+        {"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},
+        {"featureType":"water","elementType":"all","stylers":[{"color":""},{"visibility":"on"}]}
+        ]
+      },
+      internal: { id: 'map' } }, function() {
+        markers = handler.addMarkers( <%= raw @first_result.to_json %> );
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
 
-          handler.getMap().setZoom(5);
-          displayMarkers(markers)
-        });
+        handler.getMap().setZoom(5);
+        displayMarkers(markers)
+      });
     // fin de la map
 
     $('.result-card').mouseenter('click', function(e) {
@@ -414,29 +416,29 @@
       });
     }
   });
-  </script>
+</script>
 
-  <script>
-    $(document).ready(function() {
-      $('.filtered-city').on('click', function(event) {
-        $(this).toggleClass('city-selected');
-        update_form_selected_cities();
-      });
-      $(".filtered-city").removeClass("city-selected");
-      <% @selected_cities.each do |city| %>
-        $(".filtered-city[data-city=<%= city %>]").addClass("city-selected");
-      <% end %>
+<script>
+  $(document).ready(function() {
+    $('.filtered-city').on('click', function(event) {
+      $(this).toggleClass('city-selected');
+      update_form_selected_cities();
     });
-    function update_form_selected_cities() {
-      var selected_cities = "";
-      $(".city-selected").each(function( index ) {
-        selected_cities = selected_cities + $(this).text() + ",";
-      });
+    $(".filtered-city").removeClass("city-selected");
+    <% @selected_cities.each do |city| %>
+    $(".filtered-city[data-city=<%= city %>]").addClass("city-selected");
+    <% end %>
+  });
+  function update_form_selected_cities() {
+    var selected_cities = "";
+    $(".city-selected").each(function( index ) {
+      selected_cities = selected_cities + $(this).text() + ",";
+    });
       selected_cities = selected_cities.slice(0,-1); //remove last coma
       $('#selected-cities').attr('value', selected_cities);
-      }
+    }
   </script>
-<% end %>
+  <% end %>
 
 
 
