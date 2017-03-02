@@ -11,43 +11,45 @@
   <% end  %>
 </div>
 
+<!-- ouverture filters -->
 <div class= "container-fluid page-result" id="filters" style="display:<%= @status %>;">
   <%=form_tag search_path(@search), method: :get do %>
-  <div class="row">
-    <div class="col-md-3">
-      <div class = "filter-box">
-        <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region %> </strong> on <strong> <%= @starts_on.strftime("%B %e") %> </strong> </h5>
-        <div class="filters">
-          <ul class="list-inline text-center">
-            <li>
-              <h3><i class="fa fa-plane"></i> Take-off time</h3>
-            </li>
-            <li>
-              <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider",
-              data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "0,23" }]", "slider-min" => 0, "slider-max" => 23 } %>
-            </li>
-          </ul>
+  <!-- ouverture row -->
+    <div class="row">
+      <div class="col-md-3">
+        <div class = "filter-box">
+          <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region %> </strong> on <strong> <%= @starts_on.strftime("%B %e") %> </strong> </h5>
+          <div class="filters">
+            <ul class="list-inline text-center">
+              <li>
+                <h3><i class="fa fa-plane"></i> Take-off time</h3>
+              </li>
+              <li>
+                <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider",
+                data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "0,23" }]", "slider-min" => 0, "slider-max" => 23 } %>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-md-3">
-      <div class = "filter-box">
-        <h5 class = "text-center" > From <strong> <%= @region %> </strong> to <strong> <%= @city_real_name %> </strong> on <strong> <%= @returns_on.strftime("%B %e") %> </strong> </h5>
-        <div class="filters">
-          <ul class="list-inline text-center">
-            <li>
-              <h3><i class="fa fa-plane"></i> Take_off time</h3>
-            </li>
+      <div class="col-md-3">
+        <div class = "filter-box">
+          <h5 class = "text-center" > From <strong> <%= @region %> </strong> to <strong> <%= @city_real_name %> </strong> on <strong> <%= @returns_on.strftime("%B %e") %> </strong> </h5>
+          <div class="filters">
+            <ul class="list-inline text-center">
+              <li>
+                <h3><i class="fa fa-plane"></i> Take_off time</h3>
+              </li>
 
-            <li>
-              <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider",
-              data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 0, "slider-max" => 23 } %>
-            </li>
-          </ul>
+              <li>
+                <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider",
+                data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 0, "slider-max" => 23 } %>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
 
 
       <div class="col-md-6">
@@ -61,20 +63,17 @@
           <div class = "btn btn-primary filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[3])%>" data-city="<%=Constants::CITY_REGION[@region_airports[3]]%>" ><%= Constants::CITY_REGION[@region_airports[3]] %></div>
         </div>
       </div>
-    </div>
 
-  </div>
+  <!--  fermeture row -->
+    </div>
 
     <div class="row">
       <div class ="text-center filter-apply">
         <%= hidden_field_tag 'selected-cities', params['selected-cities']%>
-     <!--   On veut transporter l'information pour que l'id"filters" garde le style="display:block" -->
-
 
         <%= submit_tag "Apply", class: "btn btn-success" %>
       </div>
     </div>
-  </div>
   <% end %>
 </div>
 
@@ -130,7 +129,7 @@
     </div> <!-- fin du displaytrips -->
 
     <!--  <h3 id="title-tab" class="text-center">Choose </h3> -->
-    <div class="tabContainer">
+    <div class="tabContainer" id="tab-flights" style="display:none;">
 
       <!-- BARRE DE GAUCHE -->
       <div class="legend-arrival">
@@ -140,9 +139,7 @@
       <!-- BARRE DU HAUT -->
 
 
-      <!--  <h3 id="title-tab" class="text-center">Choose </h3> -->
-      <div class="tabContainer" id="tab-flights" style="display:none;">
-
+      <div class = "flexbox legend-top-tab">
         <div class="legendTabResult text-center">
           <p><i class="fa fa-plane" aria-hidden="true"></i> You'll leave from... </p>
         </div>
