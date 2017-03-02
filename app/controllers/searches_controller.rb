@@ -382,9 +382,9 @@ class SearchesController < ApplicationController
 
   def passagers(nb_travelers)
     if nb_travelers.to_i == 1
-      return "1 traveler"
+      return "1 TRAVELER"
     else
-      return "#{nb_travelers} travelers"
+      return "#{nb_travelers} TRAVELERS"
     end
   end
 
