@@ -34,12 +34,14 @@ class SearchesController < ApplicationController
     @region = @search.region
     @region_airports = Constants::REGIONS_AIRPORTS[@region]
     @selected_airports = @region_airports
+    @nb_travelers = @search.nb_travelers
+    @passagers_title = passagers(@nb_travelers)
     #array de code iatas
     @selected_cities = []
     @region_airports.each do |airport|
       @selected_cities << Constants::CITY_REGION[airport]
     end
-
+    @status = "none"
     params["selected-cities"] == nil if params["selected-cities"] == ""
 
     if params["selected-cities"] == nil || params["selected-cities"] == ""
@@ -256,33 +258,38 @@ class SearchesController < ApplicationController
   def apply_index_filters
     # set filters
     @filters = {}
-
+    # @status = "block"
 
     # filter by airports if asked
     if params["region_airport1"].present? && params["region_airport1"] != ""
       @filters = @filters.merge("region_airport1" => params[:region_airport1])
       @trips = filter_by_airport1(@trips, @filters)
+      @status = "block"
     end
 
     if params["region_airport2"].present? && params["region_airport2"] != ""
       @filters = @filters.merge("region_airport2" => params[:region_airport2])
       @trips = filter_by_airport2(@trips, @filters)
+      @status = "block"
     end
 
     if params["flight1_range"].present? && params["flight1_range"] != ""
       @filters = @filters.merge("flight1_range" => @flight1_range)
       @trips = filter_by_f1_takeoff(@trips)
+      @status = "block"
     end
 
     if params["flight2_range"].present? && params["flight2_range"] != ""
       @filters = @filters.merge("flight2_range" => @flight2_range)
       @trips = filter_by_f2_takeoff(@trips)
+      @status = "block"
     end
 
     if params["selected-cities"].present? && params["selected-cities"] != ""
       @filters = @filters.merge("selected_airports" => @selected_airports)
 
       @trips = filter_by_selected_airports(@trips)
+      @status = "block"
     end
 
   end
@@ -371,6 +378,14 @@ class SearchesController < ApplicationController
       end
     end
     trips
+  end
+
+  def passagers(nb_travelers)
+    if nb_travelers.to_i == 1
+      return "1 traveler"
+    else
+      return "#{nb_travelers} travelers"
+    end
   end
 
 end

@@ -11,7 +11,7 @@
   <% end  %>
 </div>
 
-<div class= "container-fluid page-result" id="filters" style="display:none;">
+<div class= "container-fluid page-result" id="filters" style="display:<%= @status %>;">
   <%=form_tag search_path(@search), method: :get do %>
     <div class="row">
       <div class="col-md-3">
@@ -37,7 +37,7 @@
           <div class="filters">
             <ul class="list-inline text-center">
               <li>
-                <h3><i class="fa fa-plane"></i> Take_off time</h3>
+                <h3><i class="fa fa-plane"></i> Take-off time</h3>
               </li>
 
               <li>
@@ -67,6 +67,9 @@
     <div class="row">
       <div class ="text-center filter-apply">
         <%= hidden_field_tag 'selected-cities', params['selected-cities']%>
+     <!--   On veut transporter l'information pour que l'id"filters" garde le style="display:block" -->
+
+
         <%= submit_tag "Apply", class: "btn btn-success" %>
       </div>
     </div>
@@ -81,7 +84,7 @@
       <!-- part with tab showing best results by airports -->
       <div class="displayTrips">
 
-        <div id="TitleShow"><h3>The best deals:</h3></div>
+        <div id="TitleShow"><h3>The best deals for <%= @passagers_title %> :</h3></div>
 
         <div class="row">
           <% @trips_selection.each do |trip| %>
