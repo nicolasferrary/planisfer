@@ -93,13 +93,14 @@
   padding-left: 30px;
   }
 
-#titleShow {
-  background-color: $brand-color;
+.titleShow {
   margin-bottom: 16px;
+  margin-top: -20px;
 }
 
-#titleShow h3{
-  margin-bottom: 16px;
+.titleShow h3{
+  font-size: 22px;
+  color: #333333;
 }
 
 #title-tab {

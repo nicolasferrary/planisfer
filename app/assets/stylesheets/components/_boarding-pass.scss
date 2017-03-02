@@ -5,24 +5,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fafafa;
+  background: white;
   position: relative;
 }
 
-.flight-ticket-button  {
-    position: absolute;
-    bottom: 50px;
-    width: 86%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+// .flight-ticket-button  {
+//     position: absolute;
+//     bottom: 50px;
+//     width: 86%;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+// }
 
 .ticket-box{
   position: absolute;
-  top: calc(50% - 125px);
-  top: -webkit-calc(40% - 125px);
-  left: calc(25% - 300px);
+  top: calc(27% - 125px);
+  top: -webkit-calc(27% - 125px);
+  left: calc(36% - 300px);
   // left: -webkit-calc(50% - 300px);
   -webkit-transform: scale(1);
 }
@@ -31,9 +31,9 @@
 .ticket-box-1{
   position: absolute;
   top: calc(93% - 125px);
-  top: -webkit-calc(40% - 125px);
+  top: -webkit-calc(73% - 125px);
   left: calc(41% - 300px);
-  left: -webkit-calc(75% - 300px);
+  left: -webkit-calc(36% - 300px);
   -webkit-transform: scale(1);
 }
 
@@ -82,7 +82,7 @@
 .ticket{
   width: 600px;
   height: 250px;
-  background: $my-petrol-blue;
+  background: $brand-color;
   border-radius: 3px;
   box-shadow: 0 0 70px #aaa;
 }
@@ -90,7 +90,7 @@
 .ticket-1{
   width: 600px;
   height: 250px;
-  background: $my-petrol-blue;
+  background: $orange;
   border-radius: 3px;
   box-shadow: 0 0 70px #aaa;
 }
@@ -344,7 +344,7 @@
 .boarding{
   position: absolute;
   top: 10px;
-  right: 247px;
+  right: 220px;
   font-family: Arial;
   font-size: 18px;
   color: rgba(255,255,255,0.6);
@@ -353,7 +353,7 @@
 .jfk{
   position: absolute;
   top: 10px;
-  left: 20px;
+  left: 52px;
   font-family: Arial;
   font-size: 38px;
   color: #222;
@@ -362,7 +362,7 @@
 .sfo{
   position: absolute;
   top: 10px;
-  left: 180px;
+  left: 258px;
   font-family: Arial;
   font-size: 38px;
   color: #222;
@@ -370,8 +370,15 @@
 
 .plane{
   position: absolute;
-  left: 116px;
+  left: 173px;
   top: 0px;
+}
+
+
+.plane-1{
+  position: absolute;
+  left: 479px;
+  top: -57px;
 }
 
 .sub-content{
@@ -456,7 +463,7 @@
 .boardingtime{
   position: absolute;
   top: 60px;
-  left: 25px;
+  left: 30px;
   font-family: Arial Narrow, Arial;
   font-weight: bold;
   font-size: 14px;
@@ -464,6 +471,21 @@
 }
 
 .boardingtime span{
+  color: #555;
+  font-size: 17px;
+}
+
+.boardingtime-1{
+  position: absolute;
+  top: 60px;
+  left: 18px;
+  font-family: Arial Narrow, Arial;
+  font-weight: bold;
+  font-size: 14px;
+  color: #999;
+}
+
+.boardingtime-1 span{
   color: #555;
   font-size: 17px;
 }
@@ -479,6 +501,21 @@
 }
 
 .boardingtime-2 span{
+  color: #555;
+  font-size: 17px;
+}
+
+.boardingtime-3{
+  position: absolute;
+  top: 60px;
+  left: 177px;
+  font-family: Arial Narrow, Arial;
+  font-weight: bold;
+  font-size: 14px;
+  color: #999;
+}
+
+.boardingtime-3 span{
   color: #555;
   font-size: 17px;
 }
@@ -552,13 +589,13 @@
 }
 
 .nameslip{
-  top: 32px;
-  left: 502px;
+  top: 10px;
+  left: 455px;
 }
 
 .flightslip{
-  left: 419px;
-  top: 32px;
+  left: 457px;
+  top: 60px;
 }
 
 .seatslip{
@@ -622,6 +659,7 @@
 .back {
   color: white;
   text-decoration: underline;
+  text-transform: capitalize;
   &:hover {
     font-weight: bolder;
     color: white;
@@ -631,11 +669,53 @@
 .flight-ticket-title {
   padding: 15px 0;
   background: #333333;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
+  text-transform: uppercase;
   h1 {
     margin-top: 0;
-    font-size: 28px;
+    font-size: 26px;
     color: white;
     margin-bottom: 10px;
   }
+}
+
+.booking {
+    background: #f5f5f5;
+    color: #484242;
+    border-radius: 8px;
+    position: absolute;
+    right: 155px;
+    padding: 10px 50px 0px 50px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+
+}
+
+#booking-title {
+  padding-top: 12px;
+}
+
+#booking-title {
+  padding-top: 12px;
+  h4 {
+    font-family: Montserrat;
+    font-size: 27px;
+    font-weight: bolder;
+  }
+  p {
+    font-size: 12px;
+  }
+}
+
+#hr-title {
+  border: grey 0.1px solid;
+}
+
+.btn-green {
+  background: #333333;
+  color: white;
+}
+
+.btn-green:hover {
+  background: grey;
+  color: white;
 }
