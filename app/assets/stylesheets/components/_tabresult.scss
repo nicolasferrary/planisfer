@@ -7,7 +7,7 @@
 }
 
 .page-result{
-  background: #FAFAFA !important;
+  background: #F5F5F5 !important;
 
 }
 
@@ -33,7 +33,6 @@
 
 
 .tabLink:hover{
-  opacity: 0.5;
   text-decoration: none;
   color: $brand-color;
 }
@@ -93,6 +92,10 @@
   padding-left: 30px;
   }
 
+.cardContainer:hover {
+  border: 2px solid black;
+}
+
 #titleShow {
   background-color: $brand-color;
   margin-bottom: 16px;
@@ -123,9 +126,9 @@ a.box-select-all-flights {
 }
 
 #more-flights:hover {
-  opacity: 0.5;
   text-decoration: none;
 }
+
 .box-select-all-flights {
   text-decoration: none;
 }
@@ -153,4 +156,22 @@ a.box-select-all-flights {
 
 .flight-label {
   color: #bfbfbf;
+}
+
+.card-description {
+  display: flex;
+  flex: 1;
+  &-item {
+    flex: 0 0 20%;
+    &:nth-child(2) {
+      flex: 0 0 25%;
+    }
+    span.hours {
+      margin-right: 5px;
+    }
+    i {
+      margin-right: 10px;
+    }
+  }
+
 }
