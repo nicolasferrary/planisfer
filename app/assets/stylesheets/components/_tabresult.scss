@@ -1,4 +1,10 @@
+.arrow-img-filter {
+  width: 13px;
+}
 
+.arrow-img-blue {
+  width: 12px;
+}
 
 .page-result{
   background: #FAFAFA !important;
@@ -101,12 +107,22 @@
   margin-bottom: 3px;
 }
 
-#all-flights {
-  background-color: $brand-color;
-  color: white;
+#more-flights {
+  color: $brand-color;
+  text-decoration: none;
 }
 
-#all-flights:hover {
+a.box-select-all-flights {
+  text-decoration: none;
+}
+
+#more-flights p{
+  color: $brand-color;
+  text-decoration: none;
+  margin: 0 0 5px;
+}
+
+#more-flights:hover {
   opacity: 0.5;
   text-decoration: none;
 }

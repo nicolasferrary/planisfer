@@ -2,8 +2,16 @@
 <div class="flight-ticket-title text-center">
   <h1 class="">The best flights to <%= @region%></h1>
 </div>
-
 <div class= "container-fluid page-result">
+  <%= link_to "javascript:showhide('filters')", class: "box-select-all-flights" do%>
+    <div class="btn btn-success text-center" id="all-filters">
+      <strong>Apply filters </strong>
+      <%= image_tag "arrow.png", class: "floating arrow-img-filter" %>
+    </div>
+  <% end  %>
+</div>
+
+<div class= "container-fluid page-result" id="filters" style="display:none;">
   <%=form_tag search_path(@search), method: :get do %>
     <div class="row">
       <div class="col-md-3">
@@ -105,16 +113,16 @@
            <!--  </div>  --><!-- fin de col -->
           <% end %>
 
-        <%= link_to search_path(@search), class: "box-select-all-flights" do%>
-          <div class=" text-center" id="all-flights">
-            <strong>See all flights</strong>
+        <%= link_to "javascript:showhide('tab-flights')", class: "box-select-all-flights" do%>
+          <div class=" text-center" id="more-flights">
+            <p><strong>See more flights</strong> <%= image_tag "arrow_blue.png", class: "floating arrow-img-blue" %></p>
           </div>
         <% end  %>
         </div>  <!-- fin du row -->
       </div> <!-- fin du displaytrips -->
 
       <!--  <h3 id="title-tab" class="text-center">Choose </h3> -->
-      <div class="tabContainer">
+      <div class="tabContainer" id="tab-flights" style="display:none;">
 
         <!-- BARRE DE GAUCHE -->
         <div class="legend-arrival">
@@ -466,6 +474,16 @@
       $('#selected-cities').val(selected_cities);
       }
   </script>
+  <script>
+    function showhide(id) {
+      var e = document.getElementById(id);
+      e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+    }
+    // $( "#more-flights" ).click(function() {
+    //   $( "#tab-flights" ).slideDown( "slow");
+    // });
+  </script>
+
 <% end %>
 
 
