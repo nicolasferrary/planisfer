@@ -23,11 +23,6 @@
   margin-top: 10px;
 }
 
-.cardContainer:hover{
-  opacity: 0.5;
-  // height: 80px;
-  // width: 600px;
-}
 
 .bouton-action {
   background-color: $green;
@@ -59,6 +54,7 @@
   right: 0px;
   font-size: 17px;
   border-radius: 0;
+
 }
 
 .card-price p{

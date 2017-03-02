@@ -121,6 +121,7 @@ class SearchesController < ApplicationController
     end
 
     @round_trips = @trips_selection.map(&:round_trip_flight)
+
     # declenche le geocode sur ces objets
     #@round_trips.map(&:destination_airport_coordinates).map(&:origin_airport_coordinates)
 
@@ -382,9 +383,9 @@ class SearchesController < ApplicationController
 
   def passagers(nb_travelers)
     if nb_travelers.to_i == 1
-      return "1 traveler"
+      return "1 TRAVELER"
     else
-      return "#{nb_travelers} travelers"
+      return "#{nb_travelers} TRAVELERS"
     end
   end
 
