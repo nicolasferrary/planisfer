@@ -275,8 +275,9 @@ class SearchesController < ApplicationController
       @trips = filter_by_f2_takeoff(@trips)
     end
 
-    if params["selected_cities"].present? && params["selected_cities"] != ""
+    if params["selected-cities"].present? && params["selected-cities"] != ""
       @filters = @filters.merge("selected_airports" => @selected_airports)
+
       @trips = filter_by_selected_airports(@trips)
     end
 
