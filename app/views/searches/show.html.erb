@@ -44,11 +44,12 @@
       <div class="col-md-6">
         <div class = "text-center ">
           <h5 class = "text-center" > We have selected the <strong> following cities</strong> in <%= @region %>.</h5>
-          <h5 class = "text-center" >Feel free to change our selection</h5>
-          <div class = "btn btn-primary filtered-city city-selected" data-city="<%=  Constants::CITY_REGION[@region_airports[0]]%>"><%= Constants::CITY_REGION[@region_airports[0]] %></div>
-          <div class = "btn btn-primary filtered-city city-selected" data-city="<%=Constants::CITY_REGION[@region_airports[1]]%>"><%= Constants::CITY_REGION[@region_airports[1]] %></div>
-          <div class = "btn btn-primary filtered-city city-selected" data-city="<%=Constants::CITY_REGION[@region_airports[2]]%>" ><%= Constants::CITY_REGION[@region_airports[2]] %></div>
-          <div class = "btn btn-primary filtered-city city-selected" data-city="<%=Constants::CITY_REGION[@region_airports[3]]%>" ><%= Constants::CITY_REGION[@region_airports[3]] %></div>
+          <h5 class = "text-center" >Feel free to modify our selection</h5>
+          <div class = "btn btn-primary filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[0])%>" data-city="<%=  Constants::CITY_REGION[@region_airports[0]]%>"><%= Constants::CITY_REGION[@region_airports[0]] %></div>
+
+          <div class = "btn btn-primary filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[1])%>" data-city="<%=Constants::CITY_REGION[@region_airports[1]]%>"><%= Constants::CITY_REGION[@region_airports[1]] %></div>
+          <div class = "btn btn-primary filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[2])%>" data-city="<%=Constants::CITY_REGION[@region_airports[2]]%>" ><%= Constants::CITY_REGION[@region_airports[2]] %></div>
+          <div class = "btn btn-primary filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[3])%>" data-city="<%=Constants::CITY_REGION[@region_airports[3]]%>" ><%= Constants::CITY_REGION[@region_airports[3]] %></div>
         </div>
       </div>
 
@@ -57,7 +58,7 @@
 
     <div class="row">
       <div class ="text-center filter-apply">
-        <%= hidden_field_tag 'selected-cities' %>
+        <%= hidden_field_tag 'selected-cities', params['selected-cities']%>
         <%= submit_tag "Apply", class: "btn btn-success" %>
       </div>
     </div>
@@ -433,7 +434,7 @@
         selected_cities = selected_cities + $(this).text() + ",";
       });
       selected_cities = selected_cities.slice(0,-1); //remove last coma
-      $('#selected-cities').attr('value', selected_cities);
+      $('#selected-cities').val(selected_cities);
       }
   </script>
 <% end %>

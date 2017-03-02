@@ -29,7 +29,7 @@ module Constants
     "FRA" => "Frankfurt",
     "MUC" => "Munich",
     "HAM" => "Hamburg",
-    "WAW" => "Warsaw"
+    "WAW" => "Warsaw",
     "AGP" => "Malaga",
     "SVQ" => "Sevilla",
     "XRY" => "Jerez",
@@ -137,7 +137,7 @@ module Constants
     "North-of-Italy" => ["MXP", "VCE", "TRN", "VRN"],
     "Greece" => ["ATH", "HER", "JTR", "JMK"],
     "Portugal" => ["LIS", "FAO", "OPO", "BJZ"],
-    "Croatie" => ["SPU", "DBV", "ZAG", "ZAD"] ,
+    "Croatia" => ["SPU", "DBV", "ZAG", "ZAD"] ,
     "South-of-France" => ["NCE", "MRS", "TLS", "BIQ"],
     "Central-EU" => ["VIE", "BUD", "WAW", "PRG"],
     "Baltic States" => ["TLL", "RIX", "VNO", "KUN"],
