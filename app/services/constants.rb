@@ -278,7 +278,7 @@ module Constants
   '5K'=>  'Hi Fly',
   'HX'=>  'Hong Kong Airlines',
   'UO'=>  'Hong Kong Express Airways',
-  'IB'=>  'IBERIA',
+  'IB'=>  'Iberia',
   'FI'=>  'Icelandair',
   '7i'=>  'InselAir',
   '4O'=>  'Interjet',

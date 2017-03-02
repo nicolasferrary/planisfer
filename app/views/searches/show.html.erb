@@ -83,9 +83,10 @@
                   <div class="cardContainer ">
                     <div class="card-description">
 
-                      <p>  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> &nbsp; &nbsp; &nbsp; <%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight1_origin_airport_iata %> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <span class="info-label-go"> <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight1_destination_airport_iata %> &nbsp; </span></p>
+                      <p> &nbsp; &nbsp; <%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight1_origin_airport_iata %> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <span class="info-label-go">
+                       <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight1_destination_airport_iata %> &nbsp; &nbsp; &nbsp; </span> <span class="flight-label"> <%= Constants::AIRLINES[trip.round_trip_flight.carrier1]  %> </span></p>
 
-                      <p>  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> &nbsp; &nbsp; &nbsp; <span class="info-label-back"><%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight2_destination_airport_iata %> &nbsp; </p>
+                      <p> &nbsp; &nbsp; <span class="info-label-back"><%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight2_destination_airport_iata %> &nbsp; &nbsp; &nbsp; <span class="flight-label"> <%= Constants::AIRLINES[trip.round_trip_flight.carrier1]  %>  </span></p>
 
                     </div>
 
@@ -384,37 +385,65 @@
           handler.getMap().setZoom(5);
           displayMarkers(markers)
         });
-    // fin de la map
 
-    $('.result-card').mouseenter('click', function(e) {
-      e.preventDefault();
-      var roundTripFlightId = $(this).data('round-trip-flight-id');
-      $.ajax({
-        type: "GET",
-        url: '/round_trip_flights/' + roundTripFlightId + '/refresh_map',
-        dataType: "json",
-        success: function(result){
-          for (var i = 0; i < markers.length; i++) {
-            markers[i].setMap(null);
-            handler.removeMarkers(markers);
-          }
-          markers = [];
-          markers = handler.addMarkers(result);
+
+  <script>
+    $(document).ready(function() {
+        var handler = Gmaps.build('Google');
+
+        handler.buildMap({
+          provider: {
+            scrollwheel: false,
+            styles: [
+              {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},
+              {"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},
+              {"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},
+              {"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},
+              {"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},
+              {"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},
+              {"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},
+              {"featureType":"water","elementType":"all","stylers":[{"color":""},{"visibility":"on"}]}
+            ]
+
+          },
+          internal: { id: 'map' } }, function() {
+          markers = handler.addMarkers( <%= raw @first_result.to_json %> );
           handler.bounds.extendWith(markers);
-          displayMarkers(markers);
-        }
-      })
-      handler.fitMapToBounds();
-      handler.getMap().setZoom(5);
-    })
+          handler.fitMapToBounds();
 
-    function displayMarkers(markers){
-      _.each(markers, function(marker){
-        google.maps.event.trigger(marker.getServiceObject(), 'click', {});
-        google.maps.event.clearListeners(marker.getServiceObject(), 'click');
+          handler.getMap().setZoom(5);
+          // displayMarkers(markers)
+        });
+        $('.result-card').mouseenter('click', function(e) {
+          e.preventDefault();
+          var roundTripFlightId = $(this).data('round-trip-flight-id');
+          $.ajax({
+            type: "GET",
+            url: '/round_trip_flights/' + roundTripFlightId + '/refresh_map',
+            dataType: "json",
+            success: function(result){
+              for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+                handler.removeMarkers(markers);
+              }
+              markers = [];
+              markers = handler.addMarkers(result);
+              handler.bounds.extendWith(markers);
+              // displayMarkers(markers);
+            }
+          })
+          handler.fitMapToBounds();
+          handler.getMap().setZoom(5);
+        })
+
+        // function displayMarkers(markers){
+        //   _.each(markers, function(marker){
+        //     google.maps.event.trigger(marker.getServiceObject(), 'click', {});
+        //     google.maps.event.clearListeners(marker.getServiceObject(), 'click');
+        //   });
+        // }
       });
-    }
-  });
+
   </script>
 
   <script>
@@ -438,6 +467,7 @@
       }
   </script>
 <% end %>
+
 
 
 
