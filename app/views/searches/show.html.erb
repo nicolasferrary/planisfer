@@ -374,7 +374,7 @@
       function update_form_selected_cities() {
         var selected_cities = "";
         $(".city-selected").each(function( index ) {
-          selected_cities = selected_cities + $(this).text(). + ",";
+          selected_cities = selected_cities + $(this).text() + ",";
         });
         selected_cities = selected_cities.slice(0,-1); //remove last coma
         $('#selected-cities').attr('value', selected_cities);
