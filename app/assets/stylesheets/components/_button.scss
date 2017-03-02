@@ -8,3 +8,45 @@
   font-weight: bold;
   margin: 9px;
 }
+
+.btn-brand {
+  border-radius: 0;
+  border: none;
+  background: $brand-color;
+  padding: 15px 40px;
+  color: white;
+}
+
+.btn-big {
+  width: 100%;
+}
+
+.btn-tag {
+  border-radius: 50px;
+  border: 1px solid $secondary-color;
+  padding: 10px 18px;
+  color: $secondary-color;
+  cursor: pointer;
+}
+
+
+.btn-circle {
+  color: $gray !important;
+  border: 1px solid $gray !important;
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  &:hover {
+    border: 1px solid $brand-color !important;
+    color: $brand-color !important;
+  }
+  &.active {
+    background-color: $brand-color;
+    color: white !important;
+    border: 1px solid $brand-color !important;
+  }
+}

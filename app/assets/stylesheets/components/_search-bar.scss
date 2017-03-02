@@ -1,13 +1,13 @@
 .form-post {
   background: rgb(250, 250, 250);
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 0px;
   box-shadow: 6px 1px 4px rgba(0,0,0,0.2);
   border: white 1px solid;
   position: absolute;
   right: 40px;
   top: 100px;
-  opacity: 0.9;
+  opacity: 1;
   width: 33%;
   h3 {
   color: black;
@@ -69,11 +69,6 @@
   flex-direction: row;
   flex-wrap: nowrap;
   border-radius: 10px;
-}
-
-
-.btn-big {
-  width: 100%;
 }
 
 .datepicker{

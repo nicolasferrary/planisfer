@@ -7,8 +7,8 @@
 }
 
 .page-result{
-  background: #F5F5F5 !important;
-
+  background: #F5F5F5;
+  padding-top: 30px;
 }
 
 .flexbox {
@@ -98,7 +98,10 @@
 // }
 
 .cardContainer.selected {
-  border: 1px solid black;
+  box-shadow: 1px 1px 1px #5d5d5d;
+  .card-price {
+    background-color: $brand-color;
+  }
 }
 
 

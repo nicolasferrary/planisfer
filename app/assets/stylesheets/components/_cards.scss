@@ -46,16 +46,15 @@
 }
 
 .card-price {
-  background: #44d6b2;
+  background: $secondary-color;
   padding: 6px 18px;
   color: white;
   position: absolute;
   top: 9px;
   right: 0px;
   font-size: 17px;
-  // border-radius: 4px;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-radius: 0;
+
 }
 
 .card-price p{

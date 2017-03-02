@@ -25,14 +25,17 @@
         <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => ' input-lg form-control datepicker text-center' %>
 
         <h3>Number of travelers</h3>
-        <div class="group" data-toggle="buttons">>
-          <% Constants::TRAVELERS.each do |number, text| %>
-          <label class="btn btn-default">
-            <input type="radio" name="nb_travelers" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
-          </label>
-          <% end %>
+        <div class="group" data-toggle="buttons">
+          <div class="travelers-btn-container">
+            <% Constants::TRAVELERS.each do |number, text| %>
+
+              <label class="btn btn-circle">
+                <input type="radio" name="nb_travelers" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
+              </label>
+            <% end %>
+          </div>
         </div>
-        <%= submit_tag "LET'S TRAVEL", class: "btn btn-danger btn-big", 'data-toggle' => "modal", 'data-target' => '#wait_modal' %>
+        <%= submit_tag "LET'S TRAVEL", class: "btn-brand btn-big", 'data-toggle' => "modal", 'data-target' => '#wait_modal' %>
       </div>
       <%end%>
     </div>

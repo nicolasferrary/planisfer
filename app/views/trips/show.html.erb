@@ -1,5 +1,10 @@
 
 <div class="flight-ticket-title text-center">
+    <div class="banner-content">
+    <%= link_to root_path do %>
+    <%= image_tag "logo.png", class:"logo-1"%>
+    <% end %>
+  </div>
   <h1 class="">Your tickets to <%= @trip.region.name %></h1>
   <%= link_to "> Back to all flights", search_path(@search), class: "back" %>
 </div>
@@ -138,6 +143,9 @@
       </div>
     </div>
 
+      <div class="share text-center">
+        <div class="fb-send" data-href="<%= request.original_url %>"></div>
+      </div>
   </div>
 
   <div class="booking text-center">
@@ -155,10 +163,7 @@
     <div class="flight-ticket-button">
       <div class="book">
         <%= render 'book_modal', modal_name: "book_modal" %>
-        <button class="btn btn-green btn-lg text-center" data-toggle="modal" data-target="#book_modal">BOOK</button>
-      </div>
-      <div class="share text-center">
-        <div class="fb-send" data-href="<%= request.original_url %>"></div>
+        <button class="btn-brand" data-toggle="modal" data-target="#book_modal">BOOK</button>
       </div>
     </div>
   </div>
