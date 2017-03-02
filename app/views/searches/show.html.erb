@@ -2,8 +2,16 @@
 <div class="flight-ticket-title text-center">
   <h1 class="">Your research for <%= @region%></h1>
 </div>
-
 <div class= "container-fluid page-result">
+  <%= link_to "javascript:showhide('filters')", class: "box-select-all-flights" do%>
+    <div class="btn btn-success text-center" id="all-filters">
+      <strong>Apply filters </strong>
+      <%= image_tag "arrow.png", class: "floating arrow-img-filter" %>
+    </div>
+  <% end  %>
+</div>
+
+<div class= "container-fluid page-result" id="filters" style="display:<%= @status %>;">
   <%=form_tag search_path(@search), method: :get do %>
   <div class="row">
     <div class="col-md-3">
@@ -41,24 +49,30 @@
       </div>
     </div>
 
-    <div class="col-md-6">
-      <div class = "text-center ">
-        <h5 class = "text-center" > We have selected the <strong> following cities</strong> in <%= @region %>.</h5>
-        <h5 class = "text-center" >Feel free to change our selection</h5>
-        <div class = "btn btn-primary filtered-city city-selected" data-city="<%=  Constants::CITY_REGION[@region_airports[0]]%>"><%= Constants::CITY_REGION[@region_airports[0]] %></div>
-        <div class = "btn btn-primary filtered-city city-selected" data-city="<%=Constants::CITY_REGION[@region_airports[1]]%>"><%= Constants::CITY_REGION[@region_airports[1]] %></div>
-        <div class = "btn btn-primary filtered-city city-selected" data-city="<%=Constants::CITY_REGION[@region_airports[2]]%>" ><%= Constants::CITY_REGION[@region_airports[2]] %></div>
-        <div class = "btn btn-primary filtered-city city-selected" data-city="<%=Constants::CITY_REGION[@region_airports[3]]%>" ><%= Constants::CITY_REGION[@region_airports[3]] %></div>
+
+      <div class="col-md-6">
+        <div class = "text-center ">
+          <h5 class = "text-center" > We have selected the <strong> following cities</strong> in <%= @region %>.</h5>
+          <h5 class = "text-center" >Feel free to modify our selection</h5>
+          <div class = "btn btn-primary filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[0])%>" data-city="<%=  Constants::CITY_REGION[@region_airports[0]]%>"><%= Constants::CITY_REGION[@region_airports[0]] %></div>
+
+          <div class = "btn btn-primary filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[1])%>" data-city="<%=Constants::CITY_REGION[@region_airports[1]]%>"><%= Constants::CITY_REGION[@region_airports[1]] %></div>
+          <div class = "btn btn-primary filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[2])%>" data-city="<%=Constants::CITY_REGION[@region_airports[2]]%>" ><%= Constants::CITY_REGION[@region_airports[2]] %></div>
+          <div class = "btn btn-primary filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[3])%>" data-city="<%=Constants::CITY_REGION[@region_airports[3]]%>" ><%= Constants::CITY_REGION[@region_airports[3]] %></div>
+        </div>
       </div>
     </div>
 
   </div>
 
+    <div class="row">
+      <div class ="text-center filter-apply">
+        <%= hidden_field_tag 'selected-cities', params['selected-cities']%>
+     <!--   On veut transporter l'information pour que l'id"filters" garde le style="display:block" -->
 
-  <div class="row">
-    <div class ="text-center filter-apply">
-      <%= hidden_field_tag 'selected-cities' %>
-      <%= submit_tag "Apply", class: "btn btn-success" %>
+
+        <%= submit_tag "Apply", class: "btn btn-success" %>
+      </div>
     </div>
   </div>
   <% end %>
@@ -74,7 +88,7 @@
   <div class="col-xs-12 col-md-6">
     <!-- part with tab showing best results by airports -->
     <div class="displayTrips">
-    <div class="titleShow text-center"><h3><strong>THE BEST DEALS</strong></h3></div>
+    <div class="titleShow text-center"><h3><strong>THE BEST DEALS for <%= @passagers_title %> </strong></h3></div>
       <hr>
       <div class="row">
         <% @trips_selection.each do |trip| %>
@@ -84,9 +98,11 @@
         <div class="cardContainer ">
           <div class="card-description">
 
-            <p>  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> &nbsp; &nbsp; &nbsp; <%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight1_origin_airport_iata %> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <span class="info-label-go"> <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight1_destination_airport_iata %> &nbsp; </span></p>
 
-            <p>  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> &nbsp; &nbsp; &nbsp; <span class="info-label-back"><%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight2_destination_airport_iata %> &nbsp; </p>
+                      <p> &nbsp; &nbsp; <%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight1_origin_airport_iata %> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <span class="info-label-go">
+                       <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight1_destination_airport_iata %> &nbsp; &nbsp; &nbsp; </span> <span class="flight-label"> <%= Constants::AIRLINES[trip.round_trip_flight.carrier1]  %> </span></p>
+
+                      <p> &nbsp; &nbsp; <span class="info-label-back"><%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight2_destination_airport_iata %> &nbsp; &nbsp; &nbsp; <span class="flight-label"> <%= Constants::AIRLINES[trip.round_trip_flight.carrier1]  %>  </span></p>
 
           </div>
 
@@ -105,10 +121,10 @@
         <!--  </div>  --><!-- fin de col -->
         <% end %>
 
-        <%= link_to search_path(@search), class: "box-select-all-flights" do%>
-        <div class=" text-center" id="all-flights">
-          <strong>See all flights</strong>
-        </div>
+        <%= link_to "javascript:showhide('tab-flights')", class: "box-select-all-flights" do%>
+          <div class=" text-center" id="more-flights">
+            <p><strong>See more flights</strong> <%= image_tag "arrow_blue.png", class: "floating arrow-img-blue" %></p>
+          </div>
         <% end  %>
       </div>  <!-- fin du row -->
     </div> <!-- fin du displaytrips -->
@@ -123,7 +139,9 @@
 
       <!-- BARRE DU HAUT -->
 
-      <div class="flexbox legend-top-tab">
+
+      <!--  <h3 id="title-tab" class="text-center">Choose </h3> -->
+      <div class="tabContainer" id="tab-flights" style="display:none;">
 
         <div class="legendTabResult text-center">
           <p><i class="fa fa-plane" aria-hidden="true"></i> You'll leave from... </p>
@@ -360,63 +378,66 @@
 </div>
 
 <% content_for(:after_js) do %>
-<script>
-  $(document).ready(function() {
-    var handler = Gmaps.build('Google');
-    handler.buildMap({
-      provider: {
-        scrollwheel: false,
-        styles: [
-        {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},
-        {"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},
-        {"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},
-        {"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},
-        {"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},
-        {"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},
-        {"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},
-        {"featureType":"water","elementType":"all","stylers":[{"color":""},{"visibility":"on"}]}
-        ]
-      },
-      internal: { id: 'map' } }, function() {
-        markers = handler.addMarkers( <%= raw @first_result.to_json %> );
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
 
-        handler.getMap().setZoom(5);
-        displayMarkers(markers)
-      });
-    // fin de la map
 
-    $('.result-card').mouseenter('click', function(e) {
-      e.preventDefault();
-      var roundTripFlightId = $(this).data('round-trip-flight-id');
-      $.ajax({
-        type: "GET",
-        url: '/round_trip_flights/' + roundTripFlightId + '/refresh_map',
-        dataType: "json",
-        success: function(result){
-          for (var i = 0; i < markers.length; i++) {
-            markers[i].setMap(null);
-            handler.removeMarkers(markers);
-          }
-          markers = [];
-          markers = handler.addMarkers(result);
+  <script>
+    $(document).ready(function() {
+        var handler = Gmaps.build('Google');
+
+        handler.buildMap({
+          provider: {
+            scrollwheel: false,
+            styles: [
+              {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},
+              {"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},
+              {"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},
+              {"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},
+              {"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},
+              {"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},
+              {"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},
+              {"featureType":"water","elementType":"all","stylers":[{"color":""},{"visibility":"on"}]}
+            ]
+
+          },
+          internal: { id: 'map' } }, function() {
+          markers = handler.addMarkers( <%= raw @first_result.to_json %> );
           handler.bounds.extendWith(markers);
-          displayMarkers(markers);
-        }
-      })
-      handler.fitMapToBounds();
-      handler.getMap().setZoom(5);
-    })
+          handler.fitMapToBounds();
 
-    function displayMarkers(markers){
-      _.each(markers, function(marker){
-        google.maps.event.trigger(marker.getServiceObject(), 'click', {});
-        google.maps.event.clearListeners(marker.getServiceObject(), 'click');
+          handler.getMap().setZoom(5);
+          // displayMarkers(markers)
+        });
+        $('.result-card').mouseenter('click', function(e) {
+          e.preventDefault();
+          var roundTripFlightId = $(this).data('round-trip-flight-id');
+          $.ajax({
+            type: "GET",
+            url: '/round_trip_flights/' + roundTripFlightId + '/refresh_map',
+            dataType: "json",
+            success: function(result){
+              for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+                handler.removeMarkers(markers);
+              }
+              markers = [];
+              markers = handler.addMarkers(result);
+              handler.bounds.extendWith(markers);
+              // displayMarkers(markers);
+            }
+          })
+          handler.fitMapToBounds();
+          handler.getMap().setZoom(5);
+        })
+
+        // function displayMarkers(markers){
+        //   _.each(markers, function(marker){
+        //     google.maps.event.trigger(marker.getServiceObject(), 'click', {});
+        //     google.maps.event.clearListeners(marker.getServiceObject(), 'click');
+        //   });
+        // }
       });
-    }
-  });
-</script>
+
+  </script>
 
 <script>
   $(document).ready(function() {
@@ -435,10 +456,21 @@
       selected_cities = selected_cities + $(this).text() + ",";
     });
       selected_cities = selected_cities.slice(0,-1); //remove last coma
-      $('#selected-cities').attr('value', selected_cities);
-    }
+      $('#selected-cities').val(selected_cities);
+      }
   </script>
-  <% end %>
+  <script>
+    function showhide(id) {
+      var e = document.getElementById(id);
+      e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+    }
+    // $( "#more-flights" ).click(function() {
+    //   $( "#tab-flights" ).slideDown( "slow");
+    // });
+  </script>
+
+<% end %>
+
 
 
 
