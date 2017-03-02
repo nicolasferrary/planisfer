@@ -119,6 +119,7 @@ class SearchesController < ApplicationController
     end
 
     @round_trips = @trips_selection.map(&:round_trip_flight)
+
     # declenche le geocode sur ces objets
     #@round_trips.map(&:destination_airport_coordinates).map(&:origin_airport_coordinates)
 

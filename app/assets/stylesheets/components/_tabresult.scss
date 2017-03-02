@@ -92,8 +92,12 @@
   padding-left: 30px;
   }
 
-.cardContainer:hover {
-  border: 2px solid black;
+// .cardContainer:hover {
+//   border: 2px solid black;
+// }
+
+.cardContainer.selected {
+  border: 1px solid black;
 }
 
 #titleShow {

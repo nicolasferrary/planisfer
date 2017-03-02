@@ -84,11 +84,11 @@
         <div id="TitleShow"><h3>The best deals:</h3></div>
 
         <div class="row">
-          <% @trips_selection.each do |trip| %>
+          <% @trips_selection.each_with_index do |trip, index| %>
               <%= link_to trip_path(trip), class: "tabLink result-card", data: { round_trip_flight_id: trip.round_trip_flight.id } do %>
 
                 <!-- <div class="flexbox"> -->
-                  <div class="cardContainer ">
+                  <div class="cardContainer <%= 'selected' if index == 0 %>">
                     <div class="card-description">
                       <div class="card-description-item">
                         <p> <span class="hours"><%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %></span><span class="airport"> <%= trip.round_trip_flight.flight1_origin_airport_iata %></span>
@@ -398,7 +398,7 @@
   <script>
     $(document).ready(function() {
         var handler = Gmaps.build('Google');
-
+        // var polylines = <%= raw polyline_structure(@round_trips.first) %>;
         handler.buildMap({
           provider: {
             scrollwheel: false,
@@ -410,21 +410,32 @@
               {"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},
               {"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},
               {"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},
-              {"featureType":"water","elementType":"all","stylers":[{"color":""},{"visibility":"on"}]}
+              {"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
             ]
 
           },
           internal: { id: 'map' } }, function() {
           markers = handler.addMarkers( <%= raw @first_result.to_json %> );
           handler.bounds.extendWith(markers);
-          handler.fitMapToBounds();
 
           handler.getMap().setZoom(5);
+
+          // polylines
+          // handler.addPolylines(polylines); // and not addPolylines
+          // handler.bounds.extend(polylines[0]);
+          // handler.bounds.extend(polylines[ polylines.length - 1]);
+
+          handler.fitMapToBounds();
           // displayMarkers(markers)
         });
         $('.result-card').mouseenter('click', function(e) {
           e.preventDefault();
+          $('.cardContainer.selected').removeClass('selected');
+          $(this).children('.cardContainer').addClass('selected');
           var roundTripFlightId = $(this).data('round-trip-flight-id');
+
+          // Polylines
+
           $.ajax({
             type: "GET",
             url: '/round_trip_flights/' + roundTripFlightId + '/refresh_map',
@@ -437,6 +448,12 @@
               markers = [];
               markers = handler.addMarkers(result);
               handler.bounds.extendWith(markers);
+
+              // Polylines
+              // handler.addPolylines(polylines); // and not addPolylines
+              // handler.bounds.extend(polylines[0]);
+              // handler.bounds.extend(polylines[ polylines.length - 1]);
+
               // displayMarkers(markers);
             }
           })
