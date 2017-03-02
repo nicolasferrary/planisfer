@@ -149,38 +149,37 @@ class SearchesController < ApplicationController
       {
         lat: @round_trips.first.latitude_home,
         lng: @round_trips.first.longitude_home,
-        infowindow: @round_trips.first.flight1_origin_airport_iata
+        infowindow: @round_trips.first.flight1_origin_airport_iata,
+        picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
       },
       {
         lat: @round_trips.first.latitude_arrive,
         lng: @round_trips.first.longitude_arrive,
-        infowindow: @round_trips.first.flight1_destination_airport_iata
+        infowindow: @round_trips.first.flight1_destination_airport_iata,
+        picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
       }]
     else
       @first_result = [
         {
           lat: @round_trips.first.latitude_home,
           lng: @round_trips.first.longitude_home,
-          infowindow: @round_trips.first.flight1_origin_airport_iata
+          infowindow: @round_trips.first.flight1_origin_airport_iata,
+          picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
         },
         {
           lat: @round_trips.first.latitude_arrive,
           lng: @round_trips.first.longitude_arrive,
-          infowindow: @round_trips.first.flight1_destination_airport_iata
+          infowindow: @round_trips.first.flight1_destination_airport_iata,
+          picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
         },
         {
           lat: @round_trips.first.latitude_back,
           lng: @round_trips.first.longitude_back,
-          infowindow: @round_trips.first.flight2_origin_airport_iata
+          infowindow: @round_trips.first.flight2_origin_airport_iata,
+          picture: { url: view_context.image_url("orange.svg"), width: 40, height: 40 }
         }
       ]
     end
-
-    # @hash = Gmaps4rails.build_markers(@first_result).each do |trip, marker|
-    #   marker.lat trip.
-    #   marker.lng trip.
-    #   # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
-    # end
 
   end
 
@@ -199,29 +198,34 @@ class SearchesController < ApplicationController
         {
           lat: @round_trip_flight.latitude_home,
           lng: @round_trip_flight.longitude_home,
-          infowindow: @round_trip_flight.flight1_origin_airport_iata
+          infowindow: @round_trip_flight.flight1_origin_airport_iata,
+          picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
         },
         {
           lat: @round_trip_flight.latitude_arrive,
           lng: @round_trip_flight.longitude_arrive,
-          infowindow: @round_trip_flight.flight1_destination_airport_iata
+          infowindow: @round_trip_flight.flight1_destination_airport_iata,
+          picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
         }].to_json
     else
       render json: [
           {
             lat: @round_trip_flight.latitude_home,
             lng: @round_trip_flight.longitude_home,
-            infowindow: @round_trip_flight.flight1_origin_airport_iata
+            infowindow: @round_trip_flight.flight1_origin_airport_iata,
+            picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
           },
           {
             lat: @round_trip_flight.latitude_arrive,
             lng: @round_trip_flight.longitude_arrive,
-            infowindow: @round_trip_flight.flight1_destination_airport_iata
+            infowindow: @round_trip_flight.flight1_destination_airport_iata,
+            picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
           },
           {
             lat: @round_trip_flight.latitude_back,
             lng: @round_trip_flight.longitude_back,
-            infowindow: @round_trip_flight.flight2_origin_airport_iata
+            infowindow: @round_trip_flight.flight2_origin_airport_iata,
+            picture: { url: view_context.image_url("orange.svg"), width: 40, height: 40 }
           }].to_json
     end
   end

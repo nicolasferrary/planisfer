@@ -82,9 +82,10 @@
                   <div class="cardContainer ">
                     <div class="card-description">
 
-                      <p>  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> &nbsp; &nbsp; &nbsp; <%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight1_origin_airport_iata %> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <span class="info-label-go"> <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight1_destination_airport_iata %> &nbsp; </span></p>
+                      <p> &nbsp; &nbsp; <%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight1_origin_airport_iata %> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <span class="info-label-go">
+                       <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight1_destination_airport_iata %> &nbsp; &nbsp; &nbsp; </span> <span class="flight-label"> <%= Constants::AIRLINES[trip.round_trip_flight.carrier1]  %> </span></p>
 
-                      <p>  <i class="fa fa-plane" id="good-style" aria-hidden="true"></i> &nbsp; &nbsp; &nbsp; <span class="info-label-back"><%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight2_destination_airport_iata %> &nbsp; </p>
+                      <p> &nbsp; &nbsp; <span class="info-label-back"><%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %> &nbsp;  <%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> &nbsp; &nbsp; <i class="fa fa-long-arrow-right" aria-hidden="true"></i> &nbsp; <%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %> &nbsp; <%= trip.round_trip_flight.flight2_destination_airport_iata %> &nbsp; &nbsp; &nbsp; <span class="flight-label"> <%= Constants::AIRLINES[trip.round_trip_flight.carrier1]  %>  </span></p>
 
                     </div>
 
@@ -374,7 +375,7 @@
       function update_form_selected_cities() {
         var selected_cities = "";
         $(".city-selected").each(function( index ) {
-          selected_cities = selected_cities + $(this).text(). + ",";
+          selected_cities = selected_cities + $(this).text() + ",";
         });
         selected_cities = selected_cities.slice(0,-1); //remove last coma
         $('#selected-cities').attr('value', selected_cities);
@@ -407,8 +408,7 @@
             handler.fitMapToBounds();
 
             handler.getMap().setZoom(5);
-            displayMarkers(markers)
-
+            // displayMarkers(markers)
           });
           $('.result-card').mouseenter('click', function(e) {
             e.preventDefault();
@@ -425,19 +425,19 @@
                 markers = [];
                 markers = handler.addMarkers(result);
                 handler.bounds.extendWith(markers);
-                displayMarkers(markers);
+                // displayMarkers(markers);
               }
             })
             handler.fitMapToBounds();
             handler.getMap().setZoom(5);
           })
 
-          function displayMarkers(markers){
-            _.each(markers, function(marker){
-              google.maps.event.trigger(marker.getServiceObject(), 'click', {});
-              google.maps.event.clearListeners(marker.getServiceObject(), 'click');
-            });
-          }
+          // function displayMarkers(markers){
+          //   _.each(markers, function(marker){
+          //     google.maps.event.trigger(marker.getServiceObject(), 'click', {});
+          //     google.maps.event.clearListeners(marker.getServiceObject(), 'click');
+          //   });
+          // }
         });
 
     </script>
