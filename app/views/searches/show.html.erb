@@ -100,8 +100,9 @@
       <!-- part with tab showing best results by airports -->
       <div class="displayTrips">
 
-        <div id="TitleShow"><h3>THE BEST DEALS FOR <%= @passagers_title %></h3></div>
-
+        <div id="TitleShow"><h3>THE BEST DEALS FOR <%= @passagers_title %></h3>
+          <p>From <strong><%= @starts_on.strftime("%B %e") %></strong> - To <strong><%= @returns_on.strftime("%B %e") %></strong></p>
+        </div>
         <div class="row">
           <% @trips_selection.each_with_index do |trip, index| %>
               <%= link_to trip_path(trip), class: "tabLink result-card", data: { round_trip_flight_id: trip.round_trip_flight.id } do %>
