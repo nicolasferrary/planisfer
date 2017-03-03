@@ -132,7 +132,7 @@ module Constants
     "Andalucia" => ["AGP", "SVQ", "XRY", "GRX"],
     "South-of-Italy" => ["FCO", "NAP", "BRI", "BDS"],
     "Tuscany" => ["BLQ", "PSA", "FLR", "GOA"],
-    "Catalonia" => ["BCN", "GRO", "ILD", "REU"],
+    "Catalonia" => ["BCN"],
     "North-of-Italy" => ["MXP", "VCE", "TRN", "FLR"],
     "Greece" => ["ATH", "HER", "JTR", "JMK"],
     "Portugal" => ["LIS", "FAO", "OPO", "BJZ"],

@@ -86,17 +86,20 @@ hr.vertical-divider {
 
 .filtered-city{
   width: 120px;
-  // border: 1px solid #fff;
+  border: 1px solid $brand-primary;
   // border-radius: 5px;
   // background-color: $brand-primary;
-  // color:white;
+  color:$brand-primary;
   // font-size: 17px;
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .city-selected{
   opacity:1;
+  background-color: $brand-primary;
+  color: white;
+  border: none;
 }
 .city-selected:hover{
-  opacity: 0.5;
+  opacity: 0.6;
 }
