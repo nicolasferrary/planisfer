@@ -10,14 +10,16 @@
 <div>
   <%= link_to "javascript:showhide('filters')", class: "box-select-all-flights" do%>
     <div class="text-center" id="all-filters">
-      <strong>Apply filters </strong>
-      <%= image_tag "arrow.png", class: "floating arrow-img-filter" %>
+      <p class="<%= 'hidden' if @status == 'block' %>" id="see-filters"><strong>See filters</strong> <%= image_tag "arrow.png", class: "floating arrow-img-filter" %></p>
+      <p class="<%= 'hidden' if @status == 'none' %>" id="hide-filters"><strong>Hide filters</strong><%= image_tag "arrow_up.png", class: "floating arrow-img-filter" %></p>
+<!--       <strong>See filters </strong>
+        <%#= image_tag "arrow.png", class: "floating arrow-img-filter" %> -->
     </div>
   <% end  %>
 </div>
 
 <!-- ouverture filters -->
-<div class= "page-result" id="filters" style="display:<%= @status %>;">
+<div class= "page-result <%= 'not-displayed' if @status == 'none' %>" id="filters">
   <%=form_tag search_path(@search), method: :get do %>
   <!-- ouverture row -->
     <div class="container-fluid">
@@ -90,7 +92,7 @@
       <div class ="text-center filter-apply">
         <%= hidden_field_tag 'selected-cities', params['selected-cities']%>
 
-        <%= submit_tag "Apply", class: "btn-brand" %>
+        <%= submit_tag "Apply filters", class: "btn-brand" %>
       </div>
     </div>
   <% end %>
@@ -106,39 +108,42 @@
       <!-- part with tab showing best results by airports -->
       <div class="displayTrips">
 
-        <div id="TitleShow"><h3>THE BEST DEALS FOR <%= @passagers_title %></h3></div>
 
-        <div class="row">
+        <div id="TitleShow"><h3>THE BEST DEALS FOR <%= @passagers_title %></h3>
+          <p>From <strong><%= @starts_on.strftime("%B %e") %></strong> - To <strong><%= @returns_on.strftime("%B %e") %></strong></p>
+        </div>
+        <div class="row" id="see-flights">
+
           <% @trips_selection.each_with_index do |trip, index| %>
               <%= link_to trip_path(trip), class: "tabLink result-card", data: { round_trip_flight_id: trip.round_trip_flight.id } do %>
 
                 <!-- <div class="flexbox"> -->
-                  <div class="cardContainer <%= 'selected' if index == 0 %>">
+                  <div class="cardContainer <%= 'selected' if index == 0 %> <%= 'hidden the-hidden-results' if index > 3 %>" >
                     <div class="card-description">
                       <div class="card-description-item">
-                        <p> <span class="hours"><%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %></span><span class="airport"> <%= trip.round_trip_flight.flight1_origin_airport_iata %></span>
+                        <p> <span class="hours"><%= trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %></span> <span class="airport"> <%= @city_real_name%> <span class="light-data"> <%= trip.round_trip_flight.flight1_origin_airport_iata %></span></span>
                         </p>
                         <p>
-                          <span class="info-label-back"><span class="hours"><%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %></span> <span class="airport"><%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> </span>
+                          <span class="info-label-back"><span class="hours"><%= trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %></span> <span class="airport"> <%= Constants::CITY_REGION[trip.round_trip_flight.flight2_origin_airport_iata] %><span class="light-data"> <%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> </span> </span>
                         </p>
                       </div>
                       <div class="card-description-item">
                         <p>
                           <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                          <span class="info-label-go"> <span class="hours"> <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %> </span> <span class="airport"> <%= trip.round_trip_flight.flight1_destination_airport_iata %> </span> </span>
+                          <span class="info-label-go"> <span class="hours"> <%= trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %> </span> <span class="airport"><%= Constants::CITY_REGION[trip.round_trip_flight.flight1_destination_airport_iata]  %> <span class="light-data"><%= trip.round_trip_flight.flight1_destination_airport_iata %></span> </span> </span>
                         </p>
 
                         <p>
                           <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                          <span class="hours"><%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %> </span> <span class="airport"><%= trip.round_trip_flight.flight2_destination_airport_iata %></span>
+                          <span class="hours"><%= trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %> </span> <span class="airport"> <%= @city_real_name%> <span class="light-data"> <%= trip.round_trip_flight.flight2_destination_airport_iata %> </span> </span>
                         </p>
                       </div>
                       <div class="card-description-item">
                         <p>
-                          <span class="flight-label"> <%= Constants::AIRLINES[trip.round_trip_flight.carrier1]  %> </span>
+                          <span class="light-data"> <span class="flight-label"> <%= Constants::AIRLINES[trip.round_trip_flight.carrier1]  %> </span> </span>
                         </p>
                         <p>
-                          <span class="flight-label"> <%= Constants::AIRLINES[trip.round_trip_flight.carrier1]  %>  </span>
+                          <span class="light-data"> <span class="flight-label"> <%= Constants::AIRLINES[trip.round_trip_flight.carrier2]  %> </span> </span>
                         </p>
                       </div>
 
@@ -166,11 +171,12 @@
         <!--  </div>  --><!-- fin de col -->
         <% end %>
 
-        <%= link_to "javascript:showhide('tab-flights')", class: "box-select-all-flights" do%>
+      <!--   <%#= link_to "javascript:showhide('tab-flights')", class: "box-select-all-flights" do%> -->
           <div class=" text-center" id="more-flights">
-            <p><strong>See more flights</strong></p>
+            <p id="see-more-flights"><strong>See more flights</strong></p>
+            <p class="hidden" id="hide-more-flights"><strong>See less flights</strong></p>
           </div>
-        <% end  %>
+    <!--     <%# end  %> -->
       </div>  <!-- fin du row -->
     </div> <!-- fin du displaytrips -->
 
@@ -522,8 +528,25 @@
   <script>
     function showhide(id) {
       var e = document.getElementById(id);
-      e.style.display = (e.style.display == 'block') ? 'none' : 'block';
-    }
+      if ($('#' + e.id).hasClass('not-displayed')) {
+        $('#' + e.id).slideDown('slow');
+        $('#' + e.id).removeClass('not-displayed')
+        $("#see-filters").addClass("hidden");
+        $("#hide-filters").removeClass("hidden");
+      } else {
+        $('#' + e.id).slideUp('slow');
+        $('#' + e.id).addClass('not-displayed')
+        $("#see-filters").removeClass("hidden");
+        $("#hide-filters").addClass("hidden");
+      };
+    };
+    
+    $("#more-flights").click(function() {
+      $("#see-more-flights").toggleClass("hidden");
+      $("#hide-more-flights").toggleClass("hidden");
+      $(".the-hidden-results").toggleClass("hidden");
+    });
+
 
     $('#flight1_range, #flight2_range').slider({
   formatter: function(value) {
@@ -539,10 +562,8 @@
   }
 });
 
-    // $( "#more-flights" ).click(function() {
-    //   $( "#tab-flights" ).slideDown( "slow");
-    // });
   </script>
+
 
 <% end %>
 
