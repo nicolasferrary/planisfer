@@ -27,7 +27,7 @@
         <div class="filter-slider">
           <div class="filter-slider-item">
             <div class = "filter-box">
-              <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region %> </strong> on <strong> <%= @starts_on.strftime("%B %e") %> </strong> </h5>
+              <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region %> </strong></h5>
               <div class="filters">
                 <ul class="text-center">
                   <li>
@@ -44,7 +44,7 @@
 
           <div class="filter-slider-item">
             <div class = "filter-box">
-              <h5 class = "text-center" > From <strong> <%= @region %> </strong> to <strong> <%= @city_real_name %> </strong> on <strong> <%= @returns_on.strftime("%B %e") %> </strong> </h5>
+              <h5 class = "text-center" > From <strong> <%= @region %> </strong> to <strong> <%= @city_real_name %></strong></h5>
               <div class="filters">
                 <ul class="text-center">
                   <li>
@@ -66,11 +66,11 @@
         <div class="filter-buttons">
           <div class = "text-center ">
             <% if @selected_cities.count == 4 %>
-              <h5 class = "text-center" > Click to <strong> remove </strong> some cities.</h5>
+              <h5 class = "text-center" > Click to <strong> remove </strong> some cities</h5>
             <% elsif @selected_cities.count == 0 %>
-              <h5 class = "text-center" > Click to <strong> add </strong> some cities.</h5>
+              <h5 class = "text-center" > Click to <strong> add </strong> some cities</h5>
             <% else %>
-              <h5 class = "text-center" > Click to <strong> add </strong> or <strong> remove </strong> some cities.</h5>
+              <h5 class = "text-center" > Click to <strong> add </strong> or <strong> remove </strong> some cities</h5>
             <% end %>
 
             <div class="city-tags">
