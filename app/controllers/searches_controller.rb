@@ -41,7 +41,10 @@ class SearchesController < ApplicationController
     @region_airports.each do |airport|
       @selected_cities << Constants::CITY_REGION[airport]
     end
+    #it's to hide or show the filters
     @status = "none"
+
+
     params["selected-cities"] == nil if params["selected-cities"] == ""
 
     if params["selected-cities"] == nil || params["selected-cities"] == ""
@@ -114,7 +117,7 @@ class SearchesController < ApplicationController
 
     @trips = @trips.sort_by { |trip| trip.price }
 
-    @trips_selection = @trips.first(4)
+    @trips_selection = @trips.first(10)
 
     if @trips_selection != []
       @trip_cheapest_price = @trips_selection.first.price.round

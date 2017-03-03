@@ -185,5 +185,12 @@ a.box-select-all-flights {
       margin-right: 10px;
     }
   }
+}
 
+#more-flights {
+  cursor: pointer;
+}
+
+.not-displayed {
+  display: none;
 }
