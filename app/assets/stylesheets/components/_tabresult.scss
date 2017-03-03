@@ -158,7 +158,7 @@ a.box-select-all-flights {
 
 .info-label-go {
   font-weight: bolder;
-  color: $brand-color;
+  color: #0185B5;
 }
 
 .info-label-back {
@@ -174,9 +174,9 @@ a.box-select-all-flights {
   display: flex;
   flex: 1;
   &-item {
-    flex: 0 0 20%;
+    flex: 0 0 35%;
     &:nth-child(2) {
-      flex: 0 0 25%;
+      flex: 0 0 35%;
     }
     span.hours {
       margin-right: 5px;
@@ -186,4 +186,10 @@ a.box-select-all-flights {
     }
   }
 
+}
+
+
+.light-data {
+  font-size: 13px;
+  font-weight: light;
 }
