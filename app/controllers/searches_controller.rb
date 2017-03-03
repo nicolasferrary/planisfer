@@ -25,6 +25,7 @@ class SearchesController < ApplicationController
 
     @trips = get_trips_for_routes(routes, @starts_on, @returns_on, @nb_travelers, @city, @region, @search)
 
+
     redirect_to search_path(@search)
 
   end
@@ -187,6 +188,10 @@ class SearchesController < ApplicationController
       ]
     end
 
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
   end
 
 
