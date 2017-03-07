@@ -160,12 +160,8 @@
     <p>PRICE / <%= @trip.nb_travelers%> TRAVELERS</p>
   </div>
     <h4><%= @trip.price.round%>€</h4>
-    <div class="flight-ticket-button">
-      <div class="book">
-        <%= render 'book_modal', modal_name: "book_modal" %>
-        <button class="btn-brand" data-toggle="modal" data-target="#book_modal">BOOK</button>
-      </div>
-    </div>
+    <%= render 'book_modal', modal_name: "book_modal" %>
+    <button class="btn-brand" data-toggle="modal" data-target="#book_modal">BOOK</button>
   </div>
 
 </div>

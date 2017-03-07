@@ -12,38 +12,10 @@
   position: relative;
 }
 
-.card-description {
-  // margin-bottom: 20px;
-  // margin-top: 20px;
-  // position: absolute;
-  // left: 45px;
-}
-
 .card-description p{
   margin-top: 10px;
 }
 
-
-.bouton-action {
-  background-color: $green;
-  color: white;
-  padding: 5px;
-  border-radius: 4px;
-  font-size: 14px;
-  border-style: none;
-}
-
-// .price-action {
-//   position: relative;
-//   width: 60px;
-// }
-
-.call-action {
-  opacity: 0.8;
-  position: absolute;
-  bottom: 5px;
-  right: 20px;
-}
 
 .card-price {
   background: $secondary-color;

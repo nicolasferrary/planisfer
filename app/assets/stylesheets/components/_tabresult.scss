@@ -2,9 +2,6 @@
   width: 13px;
 }
 
-.arrow-img-blue {
-  width: 12px;
-}
 
 .page-result{
   background: #F5F5F5;
@@ -18,14 +15,6 @@
 }
 
 
-.tabGrid {
-  width: 100px;
-  text-decoration: none;
-  color: inherit;
-  padding-bottom: 5px;
-
-}
-
 .tabLink {
   color: inherit;
   text-decoration: none;
@@ -38,64 +27,11 @@
 }
 
 .tabContainer {
-  // border: 1px solid #DBDBDB;
   margin-bottom: 20px;
   position: relative;
   height: 180px;
-  // background-color: white;
-  // border-radius: 3px;
 }
 
-.legend-top-tab {
-  color: $brand-color;
-  border-top: 1px solid $brand-color;
-  padding-top: 10px;
-  // position: absolute;
-  // top: 0px;
-  // right: 0px;
-}
-.legendTabResult {
-  height: 20px;
-  width: 450px;
-  margin-left: 99px;
-  margin-right: 16px;
-  color: $brand-color;
-}
-
-.legend-arrival {
-  transform: rotate(-90deg);
-  position: absolute;
-  color: $brand-color;
-  top: 69px;
-  left: -71px;
-  width: 30%;
-  height: 43px;
-  margin-left: 3px;
-}
-
-.legend-arrival p {
-  // transform: rotate(-90deg);
-  // background-color: $brand-color;
-  // color: white;
-  margin-top: 3px;
-}
-
-.contentTab {
-  position: absolute;
-  top: 33px;
-  right: 10px;
-  background-color: white;
-  font-size: 15px;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 1px 1px 1px #c7c7c7;
-  padding-left: 30px;
-  }
-
-
-// .cardContainer:hover {
-//   border: 2px solid black;
-// }
 
 .cardContainer.selected {
   box-shadow: 1px 1px 1px #5d5d5d;
@@ -117,14 +53,11 @@
   color: #333333;
 }
 
-#title-tab {
-  margin-top: 0px;
-  margin-bottom: 3px;
-}
 
 #more-flights {
   color: $brand-color;
   text-decoration: none;
+  cursor: pointer;
 }
 
 a.box-select-all-flights {
@@ -149,12 +82,6 @@ a.box-select-all-flights {
   text-decoration: none;
 }
 
-
-.cheapest-option {
-  opacity: 0.8;
-  background-color: $green;
-  color: white;
-}
 
 .info-label-go {
   font-weight: bolder;
@@ -187,9 +114,6 @@ a.box-select-all-flights {
   }
 }
 
-#more-flights {
-  cursor: pointer;
-}
 
 .not-displayed {
   display: none;

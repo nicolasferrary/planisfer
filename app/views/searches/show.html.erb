@@ -25,38 +25,34 @@
     <div class="container-fluid">
       <div class="filter-container">
         <div class="filter-slider">
-          <div class="filter-slider-item">
-            <div class = "filter-box">
-              <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region %> </strong></h5>
-              <div class="filters">
-                <ul class="text-center">
-                  <li>
-                    <h3><i class="fa fa-plane"></i> Take-off time</h3>
-                  </li>
-                  <li>
-                    <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider submit-on-change",
-                    data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "0,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
-                  </li>
-                </ul>
-              </div>
+          <div>
+            <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region %> </strong></h5>
+            <div class="filters">
+              <ul class="text-center">
+                <li>
+                  <h3><i class="fa fa-plane"></i> Take-off time</h3>
+                </li>
+                <li>
+                  <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider submit-on-change",
+                  data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "0,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
+                </li>
+              </ul>
             </div>
           </div>
 
-          <div class="filter-slider-item">
-            <div class = "filter-box">
-              <h5 class = "text-center" > From <strong> <%= @region %> </strong> to <strong> <%= @city_real_name %></strong></h5>
-              <div class="filters">
-                <ul class="text-center">
-                  <li>
-                    <h3><i class="fa fa-plane"></i> Take-off time</h3>
-                  </li>
+          <div>
+            <h5 class = "text-center" > From <strong> <%= @region %> </strong> to <strong> <%= @city_real_name %></strong></h5>
+            <div class="filters">
+              <ul class="text-center">
+                <li>
+                  <h3><i class="fa fa-plane"></i> Take-off time</h3>
+                </li>
 
-                  <li>
-                    <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider submit-on-change",
-                    data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
-                  </li>
-                </ul>
-              </div>
+                <li>
+                  <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider submit-on-change",
+                  data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

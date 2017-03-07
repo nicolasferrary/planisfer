@@ -5,9 +5,4 @@ class RoundTripFlightController < ApplicationController
   def destroy
   end
 
-
-  private
-
-
-
 end

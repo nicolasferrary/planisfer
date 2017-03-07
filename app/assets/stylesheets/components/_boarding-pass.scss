@@ -1,3 +1,4 @@
+
 .banner-tickets {
   text-align: center;
   height: calc(100vh - 80px);
@@ -10,30 +11,21 @@
 }
 
 
+
 .logo-1 {
   width: 54px;
   position: absolute;
   left: 40px;
   top: 17px;
 }
-// .flight-ticket-button  {
-//     position: absolute;
-//     bottom: 50px;
-//     width: 86%;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-// }
 
 .ticket-box{
   position: absolute;
   top: calc(27% - 125px);
   top: -webkit-calc(27% - 125px);
   left: calc(36% - 300px);
-  // left: -webkit-calc(50% - 300px);
   -webkit-transform: scale(0.9);
 }
-
 
 .ticket-box-1{
   position: absolute;
@@ -44,48 +36,8 @@
   -webkit-transform: scale(0.9);
 }
 
-.clip {
-  width: 20px;
-  height: 50px;
-  border: solid 3px #666;
-  border-width: 3px 3px 0 0;
-  margin: auto;
-  border-radius: 1000px 1000px 00;
-  position: absolute;
-  left: 109px;
-  box-sizing: border-box;
-  top: -35px;
-}
 
-.clip:before {
-  content: '';
-  position: absolute;
-  border: solid 3px #666;
-  border-radius: 1000px 1000px 0 0;
-  border-width: 3px 0 0 3px;
-  top: -3px;
-  right: 0;
-  width: 100%;
-  height: 150%;
-  display: block;
-  box-sizing: border-box;
-  z-index: -2;
-}
 
-.clip:after {
-  content: '';
-  position: absolute;
-  border: solid 3px #666;
-  border-radius: 0 0 1000px 1000px;
-  border-width: 0 3px 3px;
-  top: 40%;
-  right: -3px;
-  width: 80%;
-  height: 140%;
-  display: block;
-  box-sizing: border-box;
-  z-index: 1;
-}
 .ticket{
   width: 600px;
   height: 250px;
@@ -102,164 +54,6 @@
   box-shadow: 0 0 70px #aaa;
 }
 
-.left{
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  position: absolute;
-  top: 0px;
-  left: -5px;
-}
-
-.left li{
-  width: 0px;
-  height: 0px;
-}
-
-.left li:nth-child(-n+2){
-  margin-top: 8px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-right: 5px solid $brand-color;
-}
-
-.left li:nth-child(3),
-.left li:nth-child(6){
-  margin-top: 8px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-right: 5px solid #EEEEEE;
-}
-
-.left li:nth-child(4){
-  margin-top: 8px;
-  margin-left: 2px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-right: 5px solid #EEEEEE;
-}
-
-.left li:nth-child(5){
-  margin-top: 8px;
-  margin-left: -1px;
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
-  border-right: 6px solid #EEEEEE;
-}
-
-.left li:nth-child(7),
-.left li:nth-child(9),
-.left li:nth-child(11),
-.left li:nth-child(12){
-  margin-top: 7px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-right: 5px solid #E5E5E5;
-}
-
-.left li:nth-child(8){
-  margin-top: 7px;
-  margin-left: 2px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-right: 5px solid #E5E5E5;
-}
-
-.left li:nth-child(10){
-  margin-top: 7px;
-  margin-left: 1px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-right: 5px solid #E5E5E5;
-}
-
-.left li:nth-child(13){
-  margin-top: 7px;
-  margin-left: 2px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-right: 5px solid $brand-color;
-}
-
-.left li:nth-child(14){
-  margin-top: 7px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-right: 5px solid $brand-color;
-}
-
-.right{
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  position: absolute;
-  top: 0px;
-  right: -6px;
-}
-
-.right li:nth-child(-n+2){
-  margin-top: 8px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 5px solid $brand-color;
-}
-
-.right li:nth-child(3),
-.right li:nth-child(4),
-.right li:nth-child(6){
-  margin-top: 8px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 5px solid #EEEEEE;
-}
-
-.right li:nth-child(5){
-  margin-top: 8px;
-  margin-left: -2px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 5px solid #EEEEEE;
-}
-
-.right li:nth-child(8),
-.right li:nth-child(9),
-.right li:nth-child(11){
-  margin-top: 7px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 5px solid #E5E5E5;
-}
-
-.right li:nth-child(7){
-  margin-top: 7px;
-  margin-left: -3px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 5px solid #E5E5E5;
-}
-
-.right li:nth-child(10){
-  margin-top: 7px;
-  margin-left: -2px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 5px solid #E5E5E5;
-}
-
-.right li:nth-child(12){
-  margin-top: 7px;
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
-  border-left: 6px solid #E5E5E5;
-}
-
-.right li:nth-child(13),
-.right li:nth-child(14){
-  margin-top: 7px;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 5px solid $brand-color;
-}
 
 .ticket:after{
   content: '';
@@ -348,6 +142,7 @@
   color: white;
 }
 
+
 .boarding{
   position: absolute;
   top: 10px;
@@ -381,12 +176,12 @@
   top: 0px;
 }
 
-
 .plane-1{
   position: absolute;
   left: 479px;
   top: -57px;
 }
+
 
 .sub-content{
   background: #e5e5e5;
@@ -396,15 +191,6 @@
   top: 70px;
 }
 
-.watermark{
-  position: absolute;
-  left: 5px;
-  top: -10px;
-  font-family: Arial;
-  font-size: 110px;
-  font-weight: bold;
-  color: rgba(255,255,255,0.2);
-}
 
 .name{
   position: absolute;
@@ -420,6 +206,7 @@
   color: #555;
   font-size: 17px;
 }
+
 
 .flight{
   position: absolute;
@@ -450,7 +237,6 @@
   color: #555;
   font-size: 17px;
 }
-
 
 .seat{
   position: absolute;
@@ -527,69 +313,7 @@
   font-size: 17px;
 }
 
-.barcode{
-  position: absolute;
-  left: 8px;
-  bottom: 6px;
-  height: 30px;
-  width: 90px;
-  background: #222;
-  box-shadow: inset 0 1px 0 #FFB300, inset -2px 0 0 #FFB300,
-    inset -4px 0 0 #222,
-    inset -5px 0 0 #FFB300,
-    inset -6px 0 0 #222,
-    inset -9px 0 0 #FFB300,
-    inset -12px 0 0 #222,
-    inset -13px 0 0 #FFB300,
-    inset -14px 0 0 #222,
-    inset -15px 0 0 #FFB300,
-    inset -16px 0 0 #222,
-    inset -17px 0 0 #FFB300,
-    inset -19px 0 0 #222,
-    inset -20px 0 0 #FFB300,
-    inset -23px 0 0 #222,
-    inset -25px 0 0 #FFB300,
-    inset -26px 0 0 #222,
-    inset -26px 0 0 #FFB300,
-    inset -27px 0 0 #222,
-    inset -30px 0 0 #FFB300,
-    inset -31px 0 0 #222,
-    inset -33px 0 0 #FFB300,
-    inset -35px 0 0 #222,
-    inset -37px 0 0 #FFB300,
-    inset -40px 0 0 #222,
-    inset -43px 0 0 #FFB300,
-    inset -44px 0 0 #222,
-    inset -45px 0 0 #FFB300,
-    inset -46px 0 0 #222,
-    inset -48px 0 0 #FFB300,
-    inset -49px 0 0 #222,
-    inset -50px 0 0 #FFB300,
-    inset -52px 0 0 #222,
-    inset -54px 0 0 #FFB300,
-    inset -55px 0 0 #222,
-    inset -57px 0 0 #FFB300,
-    inset -59px 0 0 #222,
-    inset -61px 0 0 #FFB300,
-    inset -64px 0 0 #222,
-    inset -66px 0 0 #FFB300,
-    inset -67px 0 0 #222,
-    inset -68px 0 0 #FFB300,
-    inset -69px 0 0 #222,
-    inset -71px 0 0 #FFB300,
-    inset -72px 0 0 #222,
-    inset -73px 0 0 #FFB300,
-    inset -75px 0 0 #222,
-    inset -77px 0 0 #FFB300,
-    inset -80px 0 0 #222,
-    inset -82px 0 0 #FFB300,
-    inset -83px 0 0 #222,
-    inset -84px 0 0 #FFB300,
-    inset -86px 0 0 #222,
-    inset -88px 0 0 #FFB300,
-    inset -89px 0 0 #222,
-    inset -90px 0 0 #FFB300;
-}
+
 
 .slip{
   left: 455px;
@@ -605,56 +329,11 @@
   top: 60px;
 }
 
-.seatslip{
-  left: 540px;
-}
-
-.jfkslip{
-  font-size: 30px;
-  top: 20px;
-  left: 410px;
-}
-
-.sfoslip{
-  font-size: 30px;
-  top: 20px;
-  left: 530px;
-}
-
-.planeslip{
-  top: 10px;
-  left: 484px;
-}
 
 .airlineslip{
   left: 455px;
 }
 
-.boardingPass-3 {
-  width: 288px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, .3);
-  border-radius: 4px;
-  margin: 68px auto;
-  margin-left: 74px;
-  position: absolute;
-  top: 85px;
-  left: 312px;
-  background: white;
-}
-
-.section-label {
-  display: block;
-  text-transform: uppercase;
-  font-size: .8rem;
-  color: black;
-}
-
-// .book {
-//   color: black;
-//   position: absolute;
-//   left: 620px;
-//   top: 5px;
-// }
 
 .share {
   position: absolute;
@@ -672,6 +351,9 @@
     color: white;
   }
 }
+
+
+
 
 .flight-ticket-title {
   padding: 15px 0;
@@ -698,6 +380,7 @@
     margin-bottom: 10px;
   }
 }
+
 .booking {
     background: #f5f5f5;
     color: #484242;
@@ -713,10 +396,6 @@
 
 #booking-title {
   padding-top: 12px;
-}
-
-#booking-title {
-  padding-top: 12px;
   h4 {
     font-family: Montserrat;
     font-size: 27px;
@@ -727,16 +406,8 @@
   }
 }
 
+
 #hr-title {
   border: grey 0.1px solid;
 }
 
-.btn-green {
-  background: #333333;
-  color: white;
-}
-
-.btn-green:hover {
-  background: grey;
-  color: white;
-}
