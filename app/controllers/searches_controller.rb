@@ -3,7 +3,12 @@ class SearchesController < ApplicationController
   def create
 #@search =Search.new avec tout ce qu'on a récupéré en params
     @search = Search.new(city: params[:city], region: params[:region], starts_on: params[:starts_on], returns_on: params[:returns_on], nb_travelers: params[:nb_travelers])
-    @search.save
+
+    unless @search.save
+      flash[:search_error] = "Please fill empty fields"
+      return redirect_to root_path
+    end
+
     @city = City.create(params[:city])
     @region = Region.create(params[:region])
     #Lancer les requetes API et tout le code qui va avec.
