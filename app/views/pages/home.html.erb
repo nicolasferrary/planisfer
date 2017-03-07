@@ -23,7 +23,11 @@
 
 
    <div class="form-post text-center">
-    <h1>Search flights</h1>
+    <h1>Book your flights</h1>
+    <!-- message d'erreur à mettre en couleur -->
+    <% if flash[:search_error] %>
+      <p class="red-message"><%= flash[:search_error] %></p>
+    <% end %>
     <%=form_tag searches_path, :controller => 'searches', method: :post, id: "new_result" do %>
     <div class="row">
       <div class="col-xs-6">
@@ -47,16 +51,16 @@
             <% end %>
           </div>
         </div>
-        <%= submit_tag "LET'S TRAVEL", class: "btn-brand btn-big", 'data-toggle' => "modal", 'data-target' => '#wait_modal' %>
+        <%= submit_tag "SEARCH", class: "btn-brand btn-big", 'data-toggle' => "modal", 'data-target' => '#wait_modal' %>
       </div>
       <%end%>
     </div>
   </div>
 
+
         </div> <!-- fin du col -->
     </div><!--  fin du row -->
   </div> <!-- fin du container  -->
-
 
   <div class="text-center">
     <a href="#trendy-destination">
@@ -170,7 +174,7 @@
     </div>
   </div>
 </div>
-
+</div>
 <%= content_for :after_js do %>
 <script>
   $(document).ready(function() {

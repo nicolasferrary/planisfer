@@ -31,7 +31,7 @@
   top: -webkit-calc(27% - 125px);
   left: calc(36% - 300px);
   // left: -webkit-calc(50% - 300px);
-  -webkit-transform: scale(1);
+  -webkit-transform: scale(0.9);
 }
 
 
@@ -41,7 +41,7 @@
   top: -webkit-calc(73% - 125px);
   left: calc(41% - 300px);
   left: -webkit-calc(36% - 300px);
-  -webkit-transform: scale(1);
+  -webkit-transform: scale(0.9);
 }
 
 .clip {
@@ -658,8 +658,8 @@
 
 .share {
   position: absolute;
-  right: 470px;
-  bottom: 268px;
+  left: 10px;
+  top: 6px;
 }
 
 
@@ -675,7 +675,7 @@
 
 .flight-ticket-title {
   padding: 15px 0;
-  background: #333333;
+  background: $secondary-color;
   margin-bottom: 0px;
   text-transform: uppercase;
   h1 {
@@ -688,7 +688,7 @@
 
 .flight-ticket-title-1 {
   padding: 25px 0;
-  background: #333333;
+  background: $secondary-color;
   margin-bottom: 0px;
   text-transform: uppercase;
   h1 {

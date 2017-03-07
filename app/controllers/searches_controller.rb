@@ -3,7 +3,12 @@ class SearchesController < ApplicationController
   def create
 #@search =Search.new avec tout ce qu'on a récupéré en params
     @search = Search.new(city: params[:city], region: params[:region], starts_on: params[:starts_on], returns_on: params[:returns_on], nb_travelers: params[:nb_travelers])
-    @search.save
+
+    unless @search.save
+      flash[:search_error] = "Please fill empty fields"
+      return redirect_to root_path
+    end
+
     @city = City.create(params[:city])
     @region = Region.create(params[:region])
     #Lancer les requetes API et tout le code qui va avec.
@@ -25,6 +30,7 @@ class SearchesController < ApplicationController
 
     @trips = get_trips_for_routes(routes, @starts_on, @returns_on, @nb_travelers, @city, @region, @search)
 
+
     redirect_to search_path(@search)
 
   end
@@ -41,7 +47,10 @@ class SearchesController < ApplicationController
     @region_airports.each do |airport|
       @selected_cities << Constants::CITY_REGION[airport]
     end
+    #it's to hide or show the filters
     @status = "none"
+
+
     params["selected-cities"] == nil if params["selected-cities"] == ""
 
     if params["selected-cities"] == nil || params["selected-cities"] == ""
@@ -114,7 +123,7 @@ class SearchesController < ApplicationController
 
     @trips = @trips.sort_by { |trip| trip.price }
 
-    @trips_selection = @trips.first(4)
+    @trips_selection = @trips.first(10)
 
     if @trips_selection != []
       @trip_cheapest_price = @trips_selection.first.price.round
@@ -184,6 +193,10 @@ class SearchesController < ApplicationController
       ]
     end
 
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
   end
 
 
