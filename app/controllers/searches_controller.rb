@@ -5,12 +5,12 @@ class SearchesController < ApplicationController
     @search.save
     @city = City.create(params[:city])
     @city_name = params[:city]
-    @region_airports = params[:region]
     @region = Region.create(params[:region])
+    @region_name = params[:region]
     @starts_on = params[:starts_on]
     @returns_on = params[:returns_on]
     @nb_travelers = params[:nb_travelers]
-
+    @region_airports = Constants::REGIONS_AIRPORTS[@region_name]
 
     # generate routes
     @routes = Avion.generate_routes(@city_name, @region_airports)
