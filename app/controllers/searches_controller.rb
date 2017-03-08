@@ -1,33 +1,21 @@
 class SearchesController < ApplicationController
 
   def create
-#@search =Search.new avec tout ce qu'on a récupéré en params
     @search = Search.new(city: params[:city], region: params[:region], starts_on: params[:starts_on], returns_on: params[:returns_on], nb_travelers: params[:nb_travelers])
     @search.save
     @city = City.create(params[:city])
     @region = Region.create(params[:region])
-    #Lancer les requetes API et tout le code qui va avec.
     @starts_on = params[:starts_on]
     @returns_on = params[:returns_on]
     @nb_travelers = params[:nb_travelers]
-    @city_name = params[:city]
-    @region_name = params[:region]
 
-
-    @region_airports = Constants::REGIONS_AIRPORTS[@region_name]
-
-    @city_real_name = Constants::CITY_REGION[@city_name]
 
     # generate routes
-    routes = Avion.generate_routes(@city_name, @region_airports)
-
-    @routes = routes
-
-    @trips = get_trips_for_routes(routes, @starts_on, @returns_on, @nb_travelers, @city, @region, @search)
-
+    @routes = Avion.generate_routes(@city_name, @region_airports)
+    # Launch APi requests and gather trips
+    @trips = get_trips_for_routes(@routes, @starts_on, @returns_on, @nb_travelers, @city, @region, @search)
 
     redirect_to search_path(@search)
-
   end
 
   def show
@@ -36,121 +24,54 @@ class SearchesController < ApplicationController
     @region_airports = Constants::REGIONS_AIRPORTS[@region]
     @selected_airports = @region_airports
     @nb_travelers = @search.nb_travelers
-    @passagers_title = passagers(@nb_travelers)
-    #array de code iatas
+    @passengers_title = passengers(@nb_travelers)
+    @city_name = @search.city
+    @city_real_name = Constants::AIRPORTS[@city_name]
+    @starts_on = @search.starts_on
+    @returns_on = @search.returns_on
+
+    #To hide or show the filters
+    @status = "none"
+
+    # Initialize selected cities for filters
     @selected_cities = []
     @region_airports.each do |airport|
       @selected_cities << Constants::CITY_REGION[airport]
     end
-    #it's to hide or show the filters
-    @status = "none"
 
-
+    # Attribute selected cities in params to @selected cities
     params["selected-cities"] == nil if params["selected-cities"] == ""
-
     if params["selected-cities"] == nil || params["selected-cities"] == ""
       @selected_cities = @selected_cities
     else
       @selected_cities = params["selected-cities"].split(",")
     end
 
+    # Define selected airports based on selected cities
     @selected_airports = []
-
     @selected_cities.each do |city|
       airport = Constants::CITY_REGION.invert[city]
       @selected_airports << airport
     end
 
-    if params[:flight1_range].blank?
-      @flight1_range = "0,23"
-    else
-      @flight1_range = params[:flight1_range]
-    end
-
-    @flight1_range_low = @flight1_range.split(",").first
-    @flight1_range_high = @flight1_range.split(",")[1]
-    @flight1_range = @flight1_range_low + "," + @flight1_range_high
-
-    if @flight1_range_low.to_f < 12
-      @f1_min_time = @flight1_range_low + "am"
-    else
-      @f1_min_time = (@flight1_range_low.to_i - 12).to_s + "pm"
-    end
-
-    if @flight1_range_high.to_f < 12
-      @f1_max_time = @flight1_range_high + "am"
-    else
-      @f1_max_time = (@flight1_range_high.to_i - 12).to_s + "pm"
-    end
-
-    if params[:flight2_range].blank?
-      @flight2_range = "0,23"
-    else
-      @flight2_range = params[:flight2_range]
-    end
-    @flight2_range_low = @flight2_range.split(",").first
-    @flight2_range_high = @flight2_range.split(",")[1]
-    @flight2_range = @flight2_range_low + "," + @flight2_range_high
-
-    if @flight2_range_low.to_f < 12
-      @f2_min_time = @flight2_range_low + "am"
-    else
-      @f2_min_time = (@flight2_range_low.to_i - 12).to_s + "pm"
-    end
-
-    if @flight2_range_high.to_f < 12
-      @f2_max_time = @flight2_range_high + "am"
-    else
-      @f2_max_time = (@flight2_range_high.to_i - 12).to_s + "pm"
-    end
-
+    # Define min and max times based on filters
+    @f1_min_time = set_range(params[:flight1_range])[0]
+    @f1_max_time = set_range(params[:flight1_range])[1]
+    @f2_min_time = set_range(params[:flight2_range])[0]
+    @f2_max_time = set_range(params[:flight2_range])[1]
 
     @trips = @search.trips
-    @region_airport1 = params[:region_airport1] || ""
-    @region_airport2 = params[:region_airport2] || ""
-
     apply_index_filters
-
-    @city_name = @search.city
-    @city_real_name = Constants::AIRPORTS[@city_name]
-    @starts_on = @search.starts_on
-    @returns_on = @search.returns_on
 
     @trips = @trips.sort_by { |trip| trip.price }
 
     @trips_selection = @trips.first(10)
 
-    if @trips_selection != []
-      @trip_cheapest_price = @trips_selection.first.price.round
-    end
-
     @round_trips = @trips_selection.map(&:round_trip_flight)
-
     # declenche le geocode sur ces objets
     #@round_trips.map(&:destination_airport_coordinates).map(&:origin_airport_coordinates)
 
-
-    # Here we define selections of trips that match f1 destination airport and f2 origin airport
-    @trips0_0 = select_trips_with_airports(0,0)
-    @trips0_1 = select_trips_with_airports(0,1)
-    @trips0_2 = select_trips_with_airports(0,2)
-    @trips0_3 = select_trips_with_airports(0,3)
-    @trips1_0 = select_trips_with_airports(1,0)
-    @trips1_1 = select_trips_with_airports(1,1)
-    @trips1_2 = select_trips_with_airports(1,2)
-    @trips1_3 = select_trips_with_airports(1,3)
-    @trips2_0 = select_trips_with_airports(2,0)
-    @trips2_1 = select_trips_with_airports(2,1)
-    @trips2_2 = select_trips_with_airports(2,2)
-    @trips2_3 = select_trips_with_airports(2,3)
-    @trips3_0 = select_trips_with_airports(3,0)
-    @trips3_1 = select_trips_with_airports(3,1)
-    @trips3_2 = select_trips_with_airports(3,2)
-    @trips3_3 = select_trips_with_airports(3,3)
-
-
     # GEOCODING
-
     if @round_trips.first.latitude_arrive == @round_trips.first.latitude_back
        @first_result = [
       {
@@ -192,6 +113,30 @@ class SearchesController < ApplicationController
       format.html {}
       format.js {}
     end
+  end
+
+  def set_range(range)
+    if range.blank?
+      flight_range = "4,23"
+    else
+      flight_range = range
+    end
+
+    flight_range_low = flight_range.split(",").first
+    flight_range_high = flight_range.split(",")[1]
+
+    if flight_range_low.to_f < 12
+      min_time = flight_range_low + "am"
+    else
+      min_time = (flight_range_low.to_i - 12).to_s + "pm"
+    end
+
+    if flight_range_high.to_f < 12
+      max_time = flight_range_high + "am"
+    else
+      max_time = (flight_range_high.to_i - 12).to_s + "pm"
+    end
+    [min_time, max_time]
   end
 
 
@@ -267,20 +212,6 @@ class SearchesController < ApplicationController
   def apply_index_filters
     # set filters
     @filters = {}
-    # @status = "block"
-
-    # filter by airports if asked
-    if params["region_airport1"].present? && params["region_airport1"] != ""
-      @filters = @filters.merge("region_airport1" => params[:region_airport1])
-      @trips = filter_by_airport1(@trips, @filters)
-      @status = "block"
-    end
-
-    if params["region_airport2"].present? && params["region_airport2"] != ""
-      @filters = @filters.merge("region_airport2" => params[:region_airport2])
-      @trips = filter_by_airport2(@trips, @filters)
-      @status = "block"
-    end
 
     if params["flight1_range"].present? && params["flight1_range"] != ""
       @filters = @filters.merge("flight1_range" => @flight1_range)
@@ -296,66 +227,10 @@ class SearchesController < ApplicationController
 
     if params["selected-cities"].present? && params["selected-cities"] != ""
       @filters = @filters.merge("selected_airports" => @selected_airports)
-
       @trips = filter_by_selected_airports(@trips)
       @status = "block"
     end
-
   end
-
-  # def assert_show_params
-  #   # safeguard agains random urls starting with offers/
-  #   unless params[:stamp] =~ /\w{3}_\w{3}_\w{3}_\d{4}-\d{2}-\d{2}_\d{4}-\d{2}-\d{2}/
-  #     redirect_to root_path
-  #     return
-  #   end
-  #   # Don't bother making requests if corresponding stamp not found in cache
-  #   if $redis.get(params[:stamp]).nil?
-  #     redirect_to root_path
-  #     return
-  #   end
-  # end
-
-  # def assert_index_params
-  #   # if there are no query params in URL or they don't make sense - send user to home page
-  #   if URI(request.original_url).query.blank? || params_fail?
-  #     redirect_to root_path
-  #     return
-  #   end
-  # end
-
-  # def disable_browser_cache
-  #   # do not cache the page to avoid caching waiting animation
-  #   response.headers['Cache-Control'] = "no-cache, max-age=0, must-revalidate, no-store"
-  # end
-
-  # TODO: verify if starts_on is not later than returns_on
-  # def params_fail?
-  #   params[:city].blank? || params[:origin_b].blank? || params[:starts_on].blank? || params[:returns_on].blank?
-  # end
-
-  # def departure_range
-  #   departure_as_date = Time.new(Time.parse(params[:starts_on]).to_a[5],Time.parse(params[:starts_on]).to_a[4],Time.parse(params[:starts_on]).to_a[3])
-  #   (departure_as_date + departure_time_choice.first.hours .. departure_as_date + departure_time_choice.last.hours)
-  # end
-
-  # def arrival_range
-  #   arrival_as_date = Time.new(Time.parse(params[:returns_on]).to_a[5],Time.parse(params[:returns_on]).to_a[4],Time.parse(params[:returns_on]).to_a[3])
-  #   (arrival_as_date + arrival_time_choice.first.hours .. arrival_as_date + arrival_time_choice.last.hours)
-  # end
-
-  def filter_by_airport1(trips, filters)
-    trips.select { |trip|
-      trip.round_trip_flight.flight1_destination_airport_iata == filters["region_airport1"]
-    }
-  end
-
-  def filter_by_airport2(trips, filters)
-    trips.select { |trip|
-      trip.round_trip_flight.flight2_origin_airport_iata == filters["region_airport2"]
-    }
-  end
-
 
   def filter_by_f1_takeoff(trips)
     trips.select { |trip|
@@ -378,18 +253,7 @@ class SearchesController < ApplicationController
     }
   end
 
-
-  def select_trips_with_airports(a,b)
-    trips =[]
-    @trips.each do |trip|
-      if trip.round_trip_flight.flight1_destination_airport_iata == @region_airports[a] && trip.round_trip_flight.flight2_origin_airport_iata == @region_airports[b]
-        trips << trip
-      end
-    end
-    trips
-  end
-
-  def passagers(nb_travelers)
+  def passengers(nb_travelers)
     if nb_travelers.to_i == 1
       return "1 TRAVELER"
     else

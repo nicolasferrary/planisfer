@@ -7,13 +7,12 @@
   </div>
   <h1 class="">Your research for <%= @region%></h1>
 </div>
+
 <div>
   <%= link_to "javascript:showhide('filters')", class: "box-select-all-flights" do%>
     <div class="text-center" id="all-filters">
       <p class="<%= 'hidden' if @status == 'block' %>" id="see-filters"><strong>See filters</strong> <%= image_tag "arrow.png", class: "floating arrow-img-filter" %></p>
       <p class="<%= 'hidden' if @status == 'none' %>" id="hide-filters"><strong>Hide filters</strong><%= image_tag "arrow_up.png", class: "floating arrow-img-filter" %></p>
-<!--       <strong>See filters </strong>
-        <%#= image_tag "arrow.png", class: "floating arrow-img-filter" %> -->
     </div>
   <% end  %>
 </div>
@@ -34,7 +33,7 @@
                 </li>
                 <li>
                   <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider submit-on-change",
-                  data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "0,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
+                  data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
                 </li>
               </ul>
             </div>
@@ -79,7 +78,6 @@
           </div>
         </div>
 
-
     <!--  fermeture row -->
       </div>
     </div>
@@ -93,7 +91,7 @@
   <% end %>
 </div>
 
-  <!-- CODE DU TABLEAU -->
+  <!-- Price lists and map-->
   <div id="page-result-container">
     <%= render "results" %>
   </div>
