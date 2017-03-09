@@ -40,3 +40,34 @@
 .red-message {
   color: red;
 }
+
+.background-work {
+  background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%);
+  background: url('../images/background.jpg')
+}
+
+.padding-off {
+  padding-right: 0;
+}
+
+// Background-image
+
+// style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%),  %>');"
+
+// Large, medium and small devices
+@media (min-width: 750px) {
+
+.background-work {
+        background: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('background.jpg');
+    }
+
+}
+
+// Portrait phones and smaller
+@media (max-width: 749px) {
+
+          .background-work {
+        background-image: none;
+    }
+
+}
