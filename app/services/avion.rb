@@ -12,10 +12,5 @@ module Avion
 
   end
 
-  # def self.compare_routes_against_cache(routes, date_there, date_back)
-  #   routes.reject do |route|
-  #     alphabetical = [route.first, route[1]].sort
-  #     $redis.exists("#{alphabetical.first}_#{alphabetical.last}_#{route.last}_#{date_there}_#{date_back}")
-  #   end
-  # end
+
 end

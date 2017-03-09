@@ -4,7 +4,6 @@ module Avion
   # Has a method #make_request that sends a request to QPX and gets a response
   # in original JSON
   class QPXRequester
-    # date should be a string in "YYYY-MM-DD" format
     def initialize(args = {})
       @city = args[:city] # airport code
       @region_airport1 = args[:region_airport1]
@@ -12,14 +11,14 @@ module Avion
       @starts_on = args[:starts_on]
       @returns_on = args[:returns_on]
       @nb_travelers = args[:nb_travelers]
+
       @market = "FR"
       @currency = "EUR"
       @locale = "en-GB"
+
       @api_key = args[:api_key]
     end
 
-    # TODO: Account for 400
-    # RestClient::BadRequest: 400 Bad Request
     def make_request
       GET http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/@market/@currency/@locale/@city/@region_airport1/@starts_on/@returns_on?apiKey=@api_key HTTP/1.1
       Host: api.skyscanner.net

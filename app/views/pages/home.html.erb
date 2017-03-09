@@ -4,8 +4,9 @@
 
   <div class="banner-content">
     <%= link_to root_path do %>
-    <%= image_tag "logo.png", class:"logo"%>
+      <%= image_tag "logo.png", class:"logo"%>
     <% end %>
+
 
     <div class="container">
       <div class="row">
@@ -56,8 +57,8 @@
                   </div> <!-- fin de group -->
                   <%= submit_tag "SEARCH", class: "btn-brand btn-big", 'data-toggle' => "modal", 'data-target' => '#wait_modal' %>
                 </div> <!-- fin du col -->
-              </div> <!-- fin du row -->
-            <%end%>
+              <%end%>
+            </div> <!-- fin du row -->
           </div> <!-- fin du form-post -->
         </div> <!-- fin du col -->
       </div><!--  fin du row -->
@@ -66,6 +67,7 @@
 
   </div> <!-- fin de banner-content -->
 </div> <!-- fin de banner -->
+
 
 <%= render 'wait_modal', modal_name: "wait_modal" %>
 
@@ -139,39 +141,44 @@
   <hr>
 </div>
 <div class="">
-  <div id="description-usp"></div>
+  <div id="description-usp">
+  </div>
+
   <div class="container">
     <div class="row">
       <div class=" col-xs-12 col-md-4  text-center">
        <%= image_tag "europe.png", class: "glasses-img" %>
        <p id="usp-title"> <strong>Get inspiration</strong></p>
        <p>to travel through Europe</p>
+      </div>
+       <div class=" col-xs-12 col-md-4  text-center">
+        <%= image_tag "flight.png", class: "glasses-img" %>
+        <p id="usp-title"><strong>Find the best flights</strong> </p>
+        <p>combo for your roadtrip</p>
+      </div>
+      <div class=" col-xs-12 col-md-4  text-center">
+       <%= image_tag "money.png", class: "glasses-img" %>
+       <p id="usp-title"><strong>Save money & time</strong> </p>
+       <p>with our flights comparator</p>
      </div>
-     <div class=" col-xs-12 col-md-4  text-center">
-      <%= image_tag "flight.png", class: "glasses-img" %>
-      <p id="usp-title"><strong>Find the best flights</strong> </p>
-      <p>combo for your roadtrip</p>
     </div>
-    <div class=" col-xs-12 col-md-4  text-center">
-     <%= image_tag "money.png", class: "glasses-img" %>
-     <p id="usp-title"><strong>Save money & time</strong> </p>
-     <p>with our flights comparator</p>
-   </div>
- </div>
-</div>
+  </div>
 
-<div class="footer text-center">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-4 col-xs-offset-4">
-        <div class="text-footer">
-          Made with <i class="fa fa-heart"></i> @LeWagon
+  <div class="footer text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-4 col-xs-offset-4">
+          <div class="text-footer">
+            Made with <i class="fa fa-heart"></i> @LeWagon
+          </div>
         </div>
       </div>
     </div>
   </div>
+
 </div>
-</div>
+
+
 <%= content_for :after_js do %>
 <script>
   $(document).ready(function() {
@@ -201,8 +208,6 @@
     });
   });
 </script>
-
-
 
 <% end %>
 
