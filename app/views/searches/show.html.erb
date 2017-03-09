@@ -21,10 +21,16 @@
 <div class= "page-result <%= 'not-displayed' if @status == 'none' %>" id="filters">
   <%=form_tag search_path(@search), method: :get, remote: true, id: "searchForm" do %>
   <!-- ouverture row -->
+
+
     <div class="container-fluid">
+
       <div class="filter-container">
+
         <div class="filter-slider">
+
           <div>
+
             <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region %> </strong></h5>
             <div class="filters">
               <ul class="text-center">
@@ -56,7 +62,9 @@
           </div>
         </div>
 
+
         <hr class="vertical-divider">
+
 
         <div class="filter-buttons">
           <div class = "text-center ">
@@ -76,11 +84,12 @@
               <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[3])%>" data-city="<%=Constants::CITY_REGION[@region_airports[3]]%>" ><%= Constants::CITY_REGION[@region_airports[3]] %></div>
             </div>
           </div>
-        </div>
+        </div> <!-- fin filter-buttons -->
 
     <!--  fermeture row -->
       </div>
     </div>
+
 
     <div class="row">
       <div class ="text-center filter-apply">
