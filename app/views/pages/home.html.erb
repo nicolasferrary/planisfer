@@ -7,58 +7,63 @@
       <%= image_tag "logo.png", class:"logo"%>
     <% end %>
 
-      <div class="container">
-    <div class="row">
-
-    <div class="col-xs-12 col-sm-8">
-
-    <div class="banner-title">
-     <h1>Roadtrips in Europe</h1>
-     <h3>Find the best way to discover new regions</h3>
-    </div>
 
 
-    <div class="form-post text-center">
-      <h1>Book your flights</h1>
-      <% if flash[:search_error] %>
-        <p class="red-message"><%= flash[:search_error] %></p>
-      <% end %>
-      <%=form_tag searches_path, :controller => 'searches', method: :post, id: "new_result" do %>
 
-        <div class="row">
-          <div class="col-xs-6">
-            <%= select_tag :city, options_for_select(Constants::AIRPORTS.invert.sort), class: "input-lg form-control", prompt: "From" %>
+
+          <div class="banner-title">
+           <h1>Roadtrips in Europe</h1>
+           <h3>Find the best way to discover new regions</h3>
           </div>
-          <div class="col-xs-6">
-            <%= select_tag  :region, options_for_select(Constants::REGIONS.sort), class: "input-lg form-control", prompt: "To" %>
-          </div>
-          <div class="col-xs-12">
-            <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'input-lg form-control datepicker text-center'%>
-            <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => ' input-lg form-control datepicker text-center' %>
 
-            <h3>Number of travelers</h3>
-            <div class="group" data-toggle="buttons">
-              <div class="travelers-btn-container">
-                <% Constants::TRAVELERS.each do |number, text| %>
 
-                  <label class="btn btn-circle">
-                    <input type="radio" name="nb_travelers" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
-                  </label>
-                <% end %>
-              </div>
+
+
+
+          <div class="form-post text-center">
+            <h1>Book your flights</h1>
+            <% if flash[:search_error] %>
+              <p class="red-message"><%= flash[:search_error] %></p>
+            <% end %>
+            <%=form_tag searches_path, :controller => 'searches', method: :post, id: "new_result" do %>
+
+              <div class="row">
+                <div class="col-xs-6">
+                  <%= select_tag :city, options_for_select(Constants::AIRPORTS.invert.sort), class: "input-lg form-control", prompt: "From" %>
+                </div>
+                <div class="col-xs-6">
+                  <%= select_tag  :region, options_for_select(Constants::REGIONS.sort), class: "input-lg form-control", prompt: "To" %>
+                </div>
+                <div class="col-xs-12">
+                  <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'input-lg form-control datepicker text-center'%>
+                  <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => ' input-lg form-control datepicker text-center' %>
+
+                  <h3>Number of travelers</h3>
+                  <div class="group" data-toggle="buttons">
+                    <div class="travelers-btn-container">
+                      <% Constants::TRAVELERS.each do |number, text| %>
+
+                        <label class="btn btn-circle">
+                          <input type="radio" name="nb_travelers" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
+                        </label>
+                      <% end %>
+                    </div>
+                  </div>
+                  <%= submit_tag "SEARCH", class: "btn-brand btn-big", 'data-toggle' => "modal", 'data-target' => '#wait_modal' %>
+                </div>
+              <%end%>
             </div>
-            <%= submit_tag "SEARCH", class: "btn-brand btn-big", 'data-toggle' => "modal", 'data-target' => '#wait_modal' %>
-          </div>
-        </div>
 
-      <%end%>
-    </div>
+          </div>
+
+
 
     <div class="text-center">
       <a href="#trendy-destination">
         <%= image_tag "arrow.png", class: "floating arrow-img" %>
       </a>
     </div>
+
   </div>
 </div>
 
