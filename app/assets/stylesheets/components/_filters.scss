@@ -1,8 +1,22 @@
+
+
 #all-filters {
   background: #00CECB;
   color: white;
   padding: 10px 0 1px 0;
 }
+
+
+
+.filters {
+  text-align: center;
+  h3 {
+    font-size: 15px;
+  }
+}
+
+
+
 
 #filters {
   background: white;
@@ -12,6 +26,7 @@
 .filter-apply {
   margin-top: 30px;
 }
+
 
 .city-tags {
   display:flex;
@@ -50,38 +65,6 @@ hr.vertical-divider {
   padding-left: 0;
 }
 
-// .filter-box {
-//   border-right: 1px solid #DBDBDB;
-// }
-
-// .filter-apply {
-//   // border-bottom: 1px solid #DBDBDB;
-// //   margin-bottom: 50px;
-// // }
-
-
-.filter-line {
-  padding-bottom: 20px;
-}
-
-
-
-
-.cities-selector-index{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-  margin-left: 10px;
-  color: #fff;
-}
-
-
-.cities-selector-index > p {
-  position: absolute;
-  top: 100px;
-  text-align: center;
-}
 
 
 .filtered-city{
