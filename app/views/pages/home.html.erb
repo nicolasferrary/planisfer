@@ -68,10 +68,16 @@
 
     <%= render 'wait_modal', modal_name: "wait_modal" %>
 
-    <div class="col-xs-12">
+    <div class="col-xs-12 ">
       <div class="trending" id="trendy-destination">
         <h1 class="banner2-title "><strong>Trendy destinations</strong></h1>
-        <div class="blocks clearfix">
+
+        <div class="blocks">
+          <div class="row">
+            <div class="col-xs-12">
+
+            </div> <!-- fin du xs-12 -->
+          </div>
           <a class="block sm destination">
             <%= image_tag "croatie.jpg", class:"dest-image"%>
             <span class="box">
@@ -128,7 +134,8 @@
               </span>
             </span>
           </a>
-        </div> <!-- fin du block clearfix -->
+
+        </div> <!-- fin du blocks -->
       </div> <!-- fin du trending -->
     </div> <!-- fin du 2e col-xs-12 principal -->
 
