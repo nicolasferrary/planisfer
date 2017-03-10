@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170301160201) do
+ActiveRecord::Schema.define(version: 20170310211355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,32 @@ ActiveRecord::Schema.define(version: 20170301160201) do
     t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_airports_on_city_id", using: :btree
     t.index ["region_id"], name: "index_airports_on_region_id", using: :btree
+  end
+
+  create_table "car_rentals", force: :cascade do |t|
+    t.float    "price"
+    t.string   "currency"
+    t.string   "pick_up_location"
+    t.string   "drop_off_location"
+    t.datetime "pick_up_date_time"
+    t.datetime "drop_off_date_time"
+    t.integer  "driver_age"
+    t.string   "company"
+    t.integer  "car_id"
+    t.string   "deep_link_url"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["car_id"], name: "index_car_rentals_on_car_id", using: :btree
+  end
+
+  create_table "cars", force: :cascade do |t|
+    t.string   "name"
+    t.string   "type"
+    t.integer  "doors"
+    t.integer  "seats"
+    t.string   "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cities", force: :cascade do |t|
@@ -88,6 +114,8 @@ ActiveRecord::Schema.define(version: 20170301160201) do
     t.float    "latitude"
     t.float    "longitude"
     t.integer  "search_id"
+    t.integer  "car_rental_id"
+    t.index ["car_rental_id"], name: "index_trips_on_car_rental_id", using: :btree
     t.index ["city_id"], name: "index_trips_on_city_id", using: :btree
     t.index ["region_id"], name: "index_trips_on_region_id", using: :btree
     t.index ["round_trip_flight_id"], name: "index_trips_on_round_trip_flight_id", using: :btree
@@ -96,6 +124,8 @@ ActiveRecord::Schema.define(version: 20170301160201) do
 
   add_foreign_key "airports", "cities"
   add_foreign_key "airports", "regions"
+  add_foreign_key "car_rentals", "cars"
+  add_foreign_key "trips", "car_rentals"
   add_foreign_key "trips", "cities"
   add_foreign_key "trips", "regions"
   add_foreign_key "trips", "round_trip_flights"
