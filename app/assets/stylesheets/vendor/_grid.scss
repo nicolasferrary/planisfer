@@ -12,9 +12,9 @@
   color:#fff
 }
 
-.block.lg{
-  width:660px
-}
+// .block.lg{
+//   width:660px
+// }
 
 .block .box{
   display:-webkit-box;
@@ -59,20 +59,6 @@
   -webkit-transition:transform .4s ease;
   transition:transform .4s ease
 }
-
-.block .dest-image:after{
-  content:"";
-  position:absolute;
-  left:0;
-  top:0;
-  right:0;
-  bottom:0;
-  background:#000;
-  opacity:.25;
-  -webkit-transition:opacity .4s ease;
-  transition:opacity .4s ease
-}
-
 
 // Presence of text
 .block .text{
@@ -134,15 +120,15 @@
 }
 
 .trending{
-  width:1000px;
+  width:80%;
   margin:auto;
   padding:27px 0 41px;
 }
 
-
-.blocks{
-  margin:5px 0 0 -20px
-}
+// Remove blocks to have all blocks in line on the left
+// .blocks{
+//   margin:5px 0 0 -20px
+// }
 
 
 
