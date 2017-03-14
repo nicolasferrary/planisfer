@@ -80,7 +80,7 @@
             <div class="col-xs-12">
               <div class="row">
                 <div class="col-xs-4">
-                  <a class="block sm destination">
+                  <a class="block sm destination" data-toggle="modal" data-target=".bs-example-modal-lg">
                     <%= image_tag "croatie.jpg", class:"dest-image"%>
                     <span class="box">
                       <span class="text in-box">
@@ -144,10 +144,10 @@
             </span>
           </a>
           <a class="block sm destination">
-            <%= image_tag "andalousie.jpg", class:"dest-image"%>
+            <%= image_tag "test.jpg", class:"dest-image"%>
             <span class="box">
               <span class="text in-box">
-                <span class="primarytext">Andalucia</span>
+                <span class="primarytext">Ireland</span>
               </span>
             </span>
           </a>
@@ -157,6 +157,30 @@
     </div> <!-- fin du 2e col-xs-12 principal -->
 
     <hr>
+
+    <!-- MODAL FOR EACH DESTINATION -->
+
+      <!-- Croatia -->
+      <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title text-center" id="myModalLabel">Discover Croatia</h4>
+            </div>
+            <div class="modal-body">
+              <p>Tradition, histoire, héritage, paysages à couper le souffle et les habitants les plus sympathiques que vous pourrez rencontrer. Voilà le meilleur de l’Irlande ! </p>
+              <%= render 'slider' %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    <!-- END OF MODAL FOR EACH DESTINATION -->
+
+
+
 
     <div class="col-xs-12 padding-off">
       <div class="banner-content text-center">
@@ -265,7 +289,7 @@
     $(".box").click(function() {
       var region = $(this).text().replace(/\s/g,'');
       $("#region").val(region);
-      $("body").animate({ scrollTop: 0}, "slow");
+      // $("body").animate({ scrollTop: 0}, "slow");
     });
   });
 </script>
