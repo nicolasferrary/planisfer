@@ -2,6 +2,7 @@ require 'rest-client'
 
 module Car_rental
   class CarRentalRequester
+
     def initialize(args = {})
       @pick_up_place = args[:pick_up_place],
       @drop_off_place = args[:drop_off_place],
@@ -16,37 +17,20 @@ module Car_rental
     end
 
     def make_request
-      GET http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/@market/@currency/@locale/@city/@region_airport1/@starts_on/@returns_on?apiKey=@api_key HTTP/1.1
+    #create the session
+      url = "http://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/" + @market + "/" + @currency + "/" + @locale + "/" + @pick_up_place + "/" + @drop_off_place + "/" + @pick_up_date_time + "/" + @drop_off_date_time + "/" + @driver_age + "/" + "?apiKey=" + @api_key + "&userip=" + @user_ip
+      response = RestClient.get url, {accept: :json, content_type: "application/x-www-form-urlencoded"}
+
+      response_url = "http://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/eyJvIjpbImRhdGFhcGkiLCJHQiIsImVuLUdCIiwiR0JQIiwiRURJIiwiMjAxNy0wNy0wMVQxMDowMDowMCIsIjIwMTctMDctMDdUMTc6MDA6MDAiLCJFREkiLDM1LCIxMjcuMC4wLjEiXSwibiI6LTI1OTAzfQ2"
+      # (C'est un exemple ici. Il faudra voir comment la récupérer depuis la post request. D'après la doc, elle est dans le "location header")
+
+    # poll the results
+    # La doc n'est pas très claire mais semble dire que la création de session entraine directement le premier poll. tbc
+      polling _url = respone_url + '?apiKey=' + @api_key
+      response = RestClient.get polling_url, {accept: :json}
+      response.body
     end
 
-    private
-
-    # def compose_request
-    #   # HERE IS A QPX ACCEPTED REQUEST FORM
-    #   # ONLY CHANGE IT TO MAKE MORE VALUES DYNAMIC
-    #   # WITHOUT BREAKING THE STRUCTURE!
-    #   request_hash = {
-    #     'request' =>
-    #     { 'slice' => [
-    #       { 'origin' => @city,
-    #         'destination' => @region_airport1,
-    #         'date' => @starts_on,
-    #         'maxStops' => 0 },
-    #       { 'origin' => @region_airport2,
-    #         'destination' => @city,
-    #         'date' => @returns_on,
-    #         'maxStops' => 0 }
-    #     ],
-    #       'passengers' =>
-    #     { 'adultCount' => @nb_travelers,
-    #       'infantInLapCount' => 0,
-    #       'infantInSeatCount' => 0,
-    #       'childCount' => 0,
-    #       'seniorCount' => 0 },
-    #       'solutions' => @nb_solutions,
-    #       'refundable' => false }
-    #   }
-    #   JSON.generate(request_hash)
-    # end
   end
 end
+

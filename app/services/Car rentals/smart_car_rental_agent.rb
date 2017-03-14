@@ -37,8 +37,8 @@ module Car_rental
 
     def create_car_rentals(rentals)
       car_rentals = []
-      rentals.each do |rental|
-        car_rental = CarRental.create(rental)
+      rentals.each do |rental_data|
+        car_rental = CarRental.create(rental_data, @pick_up_date_time, @drop_off_date_time, @driver_age, @car)
         car_rentals << car_rental
       end
 
