@@ -4,8 +4,11 @@ class CarRentalsController < ApplicationController
   def index
 
     @trip = Trip.find (params[:trip_id])
+    @user_ip = request.remote_ip
+    @currency = 'EUR'
     # Lancer les requetes
     @car_rentals = get_car_rentals_for_trip(@trip)
+
 
     # Pour chaque résultat de la requete, rediriger vers und fonction create dans le model
     # Ne pas oublier de lier à car
@@ -21,6 +24,8 @@ class CarRentalsController < ApplicationController
         pick_up_date_time: trip.round_trip_flight.flight1_landing_at,
         drop_off_date_time: trip.round_trip_flight.flight2_take_off_at - 60*60,
         driver_age: 30,
+        currency: @currency,
+        user_ip: @user_ip,
       }
       car_rentals = (Car_rental::SmartAgent.new(options).obtain_rentals)
       car_rentals.each do |car_rental|

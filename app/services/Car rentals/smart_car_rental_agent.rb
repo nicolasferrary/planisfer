@@ -7,6 +7,8 @@ module Car_rental
       @pick_up_date_time = args[:pick_up_date_time]
       @drop_off_date_time = args [:drop_off_date_time]
       @driver_age = args[:driver_age]
+      @user_ip = args[:user_ip]
+      @currency = args [:currency]
     end
 
     def obtain_offers
@@ -15,8 +17,10 @@ module Car_rental
           drop_off_place: @drop_off_place,
           pick_up_date_time: @pick_up_date_time,
           drop_off_date_time: @drop_off_date_time,
-          driver_age: @driver_age
-          api_key: ENV['SKYSCANNER_API_KEY']
+          driver_age: @driver_age,
+          api_key: ENV['SKYSCANNER_API_KEY'],
+          user_ip: @user_ip,
+          currency: @currency
         ).make_request
 
       @data = JSON.parse(json)
