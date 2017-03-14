@@ -23,6 +23,10 @@ class CarRentalsController < ApplicationController
         driver_age: 30,
       }
       car_rentals = (Car_rental::SmartAgent.new(options).obtain_rentals)
+      car_rentals.each do |car_rental|
+        trip.car_rental = car_rental
+      end
+      return car_rentals
   end
 
 end

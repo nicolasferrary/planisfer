@@ -21,20 +21,25 @@ module Car_rental
 
       @data = JSON.parse(json)
 
-      if !@data['trips']['tripOption'].nil?
-        rtf = create_rtf(@data['trips']['tripOption'])
+      if !@data['cars'].nil?
+        car_rentals = create_car_rentals(@data['cars'])
       else
-        rtf = []
+        car_rentals = []
       end
-      @rtf = rtf
+      @car_rentals = car_rentals
     end
 
     private
 
-    def create_car_rental
+    def create_car_rentals(rentals)
+      car_rentals = []
+      rentals.each do |rental|
+        car_rental = CarRental.create(rental)
+        car_rentals << car_rental
+      end
+
     end
 
   end
-
 
 end
