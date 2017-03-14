@@ -10,9 +10,9 @@ class CarRentalsController < ApplicationController
     @car_rentals = get_car_rentals_for_trip(@trip)
 
 
-    # Pour chaque résultat de la requete, rediriger vers und fonction create dans le model
+    # Pour chaque résultat de la requete, rediriger vers une fonction create dans le model
     # Ne pas oublier de lier à car
-    # ne pas oublier de lier trips à la car rental sélectionnée
+    # ne pas oublier de lier trips à la car rental sélectionnée - OK
   end
 
   private

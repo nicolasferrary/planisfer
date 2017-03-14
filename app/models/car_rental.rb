@@ -3,7 +3,6 @@ class CarRental < ApplicationRecord
   has_many :trips
 
 
-
   class << self
     def create(data, rental_data, pick_up_date_time, drop_off_date_time, driver_age, car)
       car_rental = CarRental.new
