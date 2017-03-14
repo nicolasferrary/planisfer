@@ -79,7 +79,10 @@
   </div>
 
 <div>
-  <%= link_to "Choose your car", car_rentals_path %>
+  <%= form_tag car_rentals_path, method: :index do %>
+    <%= hidden_field_tag 'trip_id', @trip.id %>
+    <%= submit_tag 'Choose a car', class: 'btn btn-primary' %>
+  <% end %>
 </div>
 
   <div class="share text-center">

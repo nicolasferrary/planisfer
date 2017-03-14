@@ -2,16 +2,18 @@ class CarRentalsController < ApplicationController
 
 
   def index
-
-    @trip = Trip.find (params[:trip_id])
+    raise
+    @trip = Trip.find(params[:trip_id])
     @user_ip = request.remote_ip
     @currency = 'EUR'
     # Lancer les requetes
     @car_rentals = get_car_rentals_for_trip(@trip)
+    @car_rentals.sort_by { |car_rental| car_rental.price }
+    @car_selection = @car_rentals.first(4)
 
 
-    # Pour chaque résultat de la requete, rediriger vers une fonction create dans le model
-    # Ne pas oublier de lier à car
+    # Pour chaque résultat de la requete, rediriger vers une fonction create dans le model _ OK
+    # Ne pas oublier de lier à car _ OK
     # ne pas oublier de lier trips à la car rental sélectionnée - OK
   end
 
