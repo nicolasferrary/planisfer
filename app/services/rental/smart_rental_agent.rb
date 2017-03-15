@@ -18,7 +18,7 @@ module Rental
           pick_up_date_time: @pick_up_date_time,
           drop_off_date_time: @drop_off_date_time,
           driver_age: @driver_age,
-          api_key: ENV['SKYSCANNER_API_KEY'],
+          api_key: ENV['SKYSCANNER_CAR_API_KEY'],
           user_ip: @user_ip,
           currency: @currency
         ).make_request

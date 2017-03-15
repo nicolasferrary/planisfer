@@ -16,11 +16,14 @@ class Car < ApplicationRecord
 
     def extract_type(data, rental_data)
       class_id = rental_data['car_class_id']
-      type = data['car_classes'].select { |class|
-        class['id'] == class_id
-      }
-      type.first['name']
+      data['car_classes'].first['id']
+      # data['car_classes'].select { |class|
+      #   class['id'] == class_id
+      # }
+      # type.first['name']
+      raise
     end
 
 
+  end
 end

@@ -4,7 +4,7 @@ class CarRental < ApplicationRecord
 
 
   class << self
-    def create(data, rental_data, pick_up_date_time, drop_off_date_time, driver_age, car)
+    def create(data, rental_data, pick_up_date_time, drop_off_date_time, driver_age)
       car_rental = CarRental.new
       car_rental.price = extract_price(rental_data)
       car_rental.currency = extract_currency(data)
@@ -34,7 +34,7 @@ class CarRental < ApplicationRecord
     end
 
     def extract_drop_off_address(rental_data)
-      rental_data['location']['drop_off']['address']
+      rental_data['location']['drop_off']['address'] unless rental_data['location']['drop_off'].nil?
     end
 
     def extract_company(rental_data)
