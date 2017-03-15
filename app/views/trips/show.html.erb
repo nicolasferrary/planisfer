@@ -79,10 +79,8 @@
   </div>
 
 <div>
-  <%= form_tag car_rentals_path, method: :index do %>
-    <%= hidden_field_tag 'trip_id', @trip.id %>
-    <%= submit_tag 'Choose a car', class: 'btn btn-primary' %>
-  <% end %>
+
+  <%= link_to "Choose a car", car_rentals_path(:trip_id => @trip.id), class: 'btn btn-primary'%>
 </div>
 
   <div class="share text-center">

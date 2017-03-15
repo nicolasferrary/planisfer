@@ -1,6 +1,6 @@
-module Car_rental
+module Rental
 
-  class SmartCarRentalAgent
+  class SmartRentalAgent
     def initialize(args = {})
       @pick_up_place = args[:pick_up_place]
       @drop_off_place = args[:drop_off_place]
@@ -11,8 +11,8 @@ module Car_rental
       @currency = args [:currency]
     end
 
-    def obtain_offers
-      json = Car_rental::CarRentalRequester.new(
+    def obtain_rentals
+      json = Rental::RentalRequester.new(
           pick_up_place: @pick_up_place,
           drop_off_place: @drop_off_place,
           pick_up_date_time: @pick_up_date_time,

@@ -1,8 +1,6 @@
 class CarRentalsController < ApplicationController
 
-
   def index
-    raise
     @trip = Trip.find(params[:trip_id])
     @user_ip = request.remote_ip
     @currency = 'EUR'
@@ -29,7 +27,7 @@ class CarRentalsController < ApplicationController
         currency: @currency,
         user_ip: @user_ip,
       }
-      car_rentals = (Car_rental::SmartAgent.new(options).obtain_rentals)
+      car_rentals = (Rental::SmartRentalAgent.new(options).obtain_rentals)
       car_rentals.each do |car_rental|
         trip.car_rental = car_rental
       end
@@ -38,14 +36,3 @@ class CarRentalsController < ApplicationController
 
 end
 
-
-t.float    "price"
-    t.string   "currency"
-    t.string   "pick_up_location"
-    t.string   "drop_off_location"
-    t.datetime "pick_up_date_time"
-    t.datetime "drop_off_date_time"
-    t.integer  "driver_age"
-    t.string   "company"
-    t.integer  "car_id"
-    t.string   "deep_link_url"
