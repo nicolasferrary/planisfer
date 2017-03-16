@@ -1,18 +1,16 @@
+require 'ipaddr'
+
 class CarRentalsController < ApplicationController
 
   def index
     @trip = Trip.find(params[:trip_id])
-    @user_ip = request.remote_ip
+    @user_ip = "127.0.0.1" # Localhost IPv4 address. Il faudra récupérer l'adresse IPv4 de l'utilisateur
+    # @user_ip = request.remote_ip
     @currency = 'EUR'
     # Lancer les requetes
     @car_rentals = get_car_rentals_for_trip(@trip)
-    @car_rentals.sort_by { |car_rental| car_rental.price }
+    @car_rentals = @car_rentals.sort_by { |car_rental| car_rental.price }
     @car_selection = @car_rentals.first(4)
-
-
-    # Pour chaque résultat de la requete, rediriger vers une fonction create dans le model _ OK
-    # Ne pas oublier de lier à car _ OK
-    # ne pas oublier de lier trips à la car rental sélectionnée - OK
   end
 
   private
