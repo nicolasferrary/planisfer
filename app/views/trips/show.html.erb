@@ -78,10 +78,10 @@
 
   </div>
 
-<div>
+  <div>
 
-  <%= link_to "Choose a car", car_rentals_path(:trip_id => @trip.id), class: 'btn btn-primary'%>
-</div>
+    <%= link_to "Choose a car", car_rentals_path(:trip_id => @trip.id), class: 'btn btn-primary'%>
+  </div>
 
   <div class="share text-center">
     <div class="fb-send" data-href="<%= request.original_url %>">
