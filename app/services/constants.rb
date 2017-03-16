@@ -1,5 +1,95 @@
 module Constants
 
+  DESTINATIONS = {
+    "croatia" => {
+        "title" => "Discover Croatia",
+        "text" => "Welcome in Croatia",
+        "image_1" => "croatia/dubrovnik.jpg",
+        "image_2" => "croatia/plitvice.jpg",
+        "image_3" => "croatia/zagreb.jpg",
+        "image_4" => "croatia/zagreb.jpg",
+        "image_5" => "croatia/zagreb.jpg",
+        "image_6" => "croatia/zagreb.jpg",
+                  },
+
+    "greece" => {
+        "title" => "Discover Greece",
+        "text" => "Welcome in Greece",
+        "image_1" => "",
+        "image_2" => "",
+        "image_3" => "",
+        "image_4" => "",
+        "image_5" => "",
+        "image_6" => "",
+                  },
+
+    "scandinavia" => {
+        "title" => "Discover Scandinavia",
+        "text" => "Welcome in Scandinavia",
+        "image_1" => "",
+        "image_2" => "",
+        "image_3" => "",
+        "image_4" => "",
+        "image_5" => "",
+        "image_6" => "",
+                  },
+
+    "south-of-france" => {
+        "title" => "Discover South of France",
+        "text" => "Welcome in South of France",
+        "image_1" => "",
+        "image_2" => "",
+        "image_3" => "",
+        "image_4" => "",
+        "image_5" => "",
+        "image_6" => "",
+                  },
+
+    "central_eu" => {
+        "title" => "Discover Central Europe",
+        "text" => "Welcome in Central Europe",
+        "image_1" => "",
+        "image_2" => "",
+        "image_3" => "",
+        "image_4" => "",
+        "image_5" => "",
+        "image_6" => "",
+                  },
+
+    "tuscany" => {
+        "title" => "Discover Tuscany",
+        "text" => "Welcome in Tuscany",
+        "image_1" => "",
+        "image_2" => "",
+        "image_3" => "",
+        "image_4" => "",
+        "image_5" => "",
+        "image_6" => "",
+                  },
+
+    "andalucia" => {
+        "title" => "Discover Andalucia",
+        "text" => "Welcome in Andalucia",
+        "image_1" => "",
+        "image_2" => "",
+        "image_3" => "",
+        "image_4" => "",
+        "image_5" => "",
+        "image_6" => "",
+                  },
+
+    "ireland" => {
+        "title" => "Discover Ireland",
+        "text" => "Welcome in Ireland",
+        "image_1" => "ireland/dublin.jpg",
+        "image_2" => "ireland/connemara.jpg",
+        "image_3" => "ireland/kerry.jpg",
+        "image_4" => "ireland/kilkenny.jpg",
+        "image_5" => "ireland/moher.jpg",
+        "image_6" => "ireland/cork.jpg",
+                  },
+  }
+
   AIRPORTS = {
     "PAR" => "Paris",
     "LON" => "London",
@@ -124,6 +214,7 @@ module Constants
    "Baltic States" => "Baltic States",
    "Scandinavia" => "Scandinavia",
    "Germany" => "Germany",
+   "Croatia" => "Croatia",
   }
 
 
@@ -667,4 +758,7 @@ module Constants
 #     "XP"=>"http://www.xtraairways.com/",
 #     "IY"=>"http://www.yemenia.com/"
 #   }
+
+
+
 end
