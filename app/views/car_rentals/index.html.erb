@@ -1,4 +1,4 @@
-<% @car_rental.each do %>
-  <%= car_rental.car.name %>
-  <%= car_rental.price %>
+<% @car_selection.each do |rental| %>
+  <%= rental.car.name %>
+  <%= rental.price %>
 <% end  %>

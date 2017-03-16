@@ -41,7 +41,7 @@ module Rental
         car_rental = CarRental.create(data, rental_data, @pick_up_date_time, @drop_off_date_time, @driver_age)
         car_rentals << car_rental
       end
-
+      car_rentals
     end
 
   end

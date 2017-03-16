@@ -28,9 +28,6 @@ class CarRentalsController < ApplicationController
         user_ip: @user_ip,
       }
       car_rentals = (Rental::SmartRentalAgent.new(options).obtain_rentals)
-      car_rentals.each do |car_rental|
-        trip.car_rental = car_rental
-      end
       return car_rentals
   end
 
