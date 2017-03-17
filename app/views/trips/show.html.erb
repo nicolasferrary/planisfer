@@ -102,7 +102,7 @@
       <p>PRICE / <%= @trip.nb_travelers%> TRAVELERS</p>
     </div>
     <h4><%= @trip.price.round%>€</h4>
-    <%= render 'book_modal', modal_name: "book_modal" %>
+    <%= render 'shared/book_modal', modal_name: "book_modal" %>
     <button class="btn-brand" data-toggle="modal" data-target="#book_modal">BOOK</button>
   </div>
 

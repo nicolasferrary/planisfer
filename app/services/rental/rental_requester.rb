@@ -19,7 +19,7 @@ module Rental
     def make_request
     #create the session
       url = "http://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/" + @market + "/" + @currency + "/" + @locale + "/" + @pick_up_place + "/" + @drop_off_place + "/" + @pick_up_date_time.strftime("%FT%R") + "/" + @drop_off_date_time.strftime("%FT%R") + "/" + @driver_age.to_s + "/" + "?apiKey=" + @api_key + "&userip=" + @user_ip
-      # response = RestClient.get url, {accept: :json, content_type: "application/x-www-form-urlencoded"}
+      response = RestClient.get url, {accept: :json, content_type: "application/x-www-form-urlencoded"}
       # Je recois une 403 alors que ma clé semble être active
 
       response_url = "http://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/eyJvIjpbImRhdGFhcGkiLCJHQiIsImVuLUdCIiwiR0JQIiwiRURJIiwiMjAxNy0wNy0wMVQxMDowMDowMCIsIjIwMTctMDctMDdUMTc6MDA6MDAiLCJFREkiLDM1LCIxMjcuMC4wLjEiXSwibiI6LTI1OTAzfQ2"

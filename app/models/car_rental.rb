@@ -30,7 +30,7 @@ class CarRental < ApplicationRecord
     end
 
     def extract_pick_up_address(rental_data)
-      rental_data['location']['pick_up']['address']
+      rental_data['location']['pick_up']['address'] unless (rental_data['location'].nil? || rental_data['location'] == {})
     end
 
     def extract_drop_off_address(rental_data)

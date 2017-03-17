@@ -1,11 +1,14 @@
-require 'ipaddr'
+require "net/http"
 
 class CarRentalsController < ApplicationController
 
   def index
     @trip = Trip.find(params[:trip_id])
     @search = @trip.search
-    @user_ip = "127.0.0.1" # Localhost IPv4 address. Il faudra récupérer l'adresse IPv4 de l'utilisateur
+
+    @user_ip = Net::HTTP.get(URI("https://api.ipify.org"))
+    # IPv4 address.
+    # Otherwise, in dev, you can use Localhost v4 address @user_ip = "127.0.0.1"
     # @user_ip = request.remote_ip
     @currency = 'EUR'
     # Lancer les requetes

@@ -1,97 +1,226 @@
+<% @car_selection.each do |rental| %>
+  <%= rental.car.name %>
+  <%= rental.price %>
+<% end  %>
+
+<% # bandeau du haut %>
+
 <div class="flight-ticket-title text-center">
     <div class="banner-content">
     <%= link_to root_path do %>
     <%= image_tag "logo.png", class:"logo-1"%>
     <% end %>
   </div>
-  <h1 class="">Select a car%></h1>
+  <h1 class="">Select a car></h1>
   <%= link_to "> Back to all flights", search_path(@search), class: "back" %>
 </div>
 
+<% # Fin du bandeau du haut %>
 
-
-
-
-<% @car_selection.each do |rental| %>
-  <%= rental.car.name %>
-  <%= rental.price %>
-<% end  %>
-
-
-<div class="booking text-center">
-  <h3>Your roadtrip in <%= @trip.region.name %></h3>
-  <hr id="hr-title">
-  <div>
-
-    <div class="banner-tickets">
-
-      <div class="banner-tickets-content">
-
-       <div class="container">
-        <div class="ticket-box">
-
-          <div class="ticket">
-            <span class="airline"><%= Constants::AIRLINES[@trip.round_trip_flight.carrier1] %></span>
-            <span class="airline airlineslip"><%= @trip.round_trip_flight.f1_number %></span>
-            <span class="boarding">Flying Away</span>
-            <div class="content">
-              <span class="jfk"><%= @trip.round_trip_flight.flight1_origin_airport_iata %></span>
-              <span class="plane"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="60" width="60" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
-              <span class="sfo"><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span>
-
-              <div class="sub-content">
-                <span class="name">DATE<br><span><%= @trip.starts_on.strftime("%B %d") %></span></span>
-                <span class="gate">DEPARTURE<br><span><%= @trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %></span></span>
-                <span class="seat">ARRIVAL<br><span><%= @trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %></span></span>
-                <span class="name"><br><span><%= @trip.starts_on.strftime("%B %d") %></span></span>
-                <span class="boardingtime">FROM<br><span><%=Constants::AIRPORTS[@search.city] %> </span></span>
-                <span class="boardingtime-2">TO<br><span><%= Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata]  %></span></span>
-
-                <span class="flight flightslip">DESTINATION<br><span><%= @trip.region.name %></span></span>
-                <span class="name nameslip">PASSENGERS<br><span><%= @trip.nb_travelers%></span></span>
-                <span class="plane-1"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="45" width="45" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
+<div class="container">
+  <div class="row">
+    <% # Début case bootstrap cards %>
+    <div class="col-xs-12 col-sm-6">
+      <% # Début Cards %>
+      <div class="container">
+        <% #Début de la 1ere row %>
+        <div class="row">
+          <% # Début de la première card %>
+          <div class="col-xs-12 col-sm-6">
+            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
+              <div class="card-category">Popular</div>
+              <div class="card-description">
+                <h2>Some stuff</h2>
+                <p>Very cool stuff, useful and smart</p>
               </div>
+              <img class="card-user avatar" src="user.jpg">
+              <a class="card-link" href="#" ></a>
             </div>
           </div>
-        </div>
-
-
-        <div class="ticket-box-1">
-
-          <div class="ticket-1">
-            <span class="airline"><%= Constants::AIRLINES[@trip.round_trip_flight.carrier2] %></span>
-            <span class="airline airlineslip"><%= @trip.round_trip_flight.f2_number %></span>
-            <span class="boarding">Flying Back</span>
-            <div class="content">
-              <span class="jfk"><%= @trip.round_trip_flight.flight2_origin_airport_iata %></span>
-              <span class="plane"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="60" width="60" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
-              <span class="sfo"><%= @trip.round_trip_flight.flight2_destination_airport_iata %></span>
-
-              <div class="sub-content">
-                <span class="name">DATE<br><span><%= @trip.returns_on.strftime("%B %d") %></span></span>
-                <span class="gate">DEPARTURE<br><span><%= @trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %></span></span>
-                <span class="seat">ARRIVAL<br><span><%= @trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %></span></span>
-                <span class="boardingtime-1">FROM<br><span><%= Constants::CITY_REGION[@trip.round_trip_flight.flight2_origin_airport_iata] %></span></span>
-                <span class="boardingtime-3">TO<br><span><%=Constants::AIRPORTS[@search.city] %></span></span>
-                <span class="flight flightslip">ORIGIN<br><span><%= @trip.region.name %></span></span>
-                <span class="name nameslip">PASSENGERS<br><span><%= @trip.nb_travelers%></span></span>
-                <span class="plane-1"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="45" width="45" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
+          <% # Fin de la première card %>
+          <% # début de la 2eme card %>
+          <div class="col-xs-12 col-sm-6">
+            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
+              <div class="card-category">Popular</div>
+              <div class="card-description">
+                <h2>Some stuff</h2>
+                <p>Very cool stuff, useful and smart</p>
               </div>
+              <img class="card-user avatar" src="user.jpg">
+              <a class="card-link" href="#" ></a>
             </div>
           </div>
+          <% # fin de la 2eme card %>
         </div>
+        <% # Fin de la 1ere row %>
+        <% # Début de la 2eme row %>
+        <div class="row">
+          <% # Début de la 3e card %>
+          <div class="col-xs-12 col-sm-6">
+            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
+              <div class="card-category">Popular</div>
+              <div class="card-description">
+                <h2>Some stuff</h2>
+                <p>Very cool stuff, useful and smart</p>
+              </div>
+              <img class="card-user avatar" src="user.jpg">
+              <a class="card-link" href="#" ></a>
+            </div>
+          </div>
+          <% # Fin de la 3e card %>
+          <% # Début de la 4e card %>
+          <div class="col-xs-12 col-sm-6">
+            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
+              <div class="card-category">Popular</div>
+              <div class="card-description">
+                <h2>Some stuff</h2>
+                <p>Very cool stuff, useful and smart</p>
+              </div>
+              <img class="card-user avatar" src="user.jpg">
+              <a class="card-link" href="#" ></a>
+            </div>
+          </div>
+          <% # Fin de la 4e card %>
+        </div>
+        <% # Fin de la 2eme row %>
+        <% # Début de la 3e row %>
+        <div class="row">
+          <% # Début de la 5e card %>
+          <div class="col-xs-12 col-sm-6">
+            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
+              <div class="card-category">Popular</div>
+              <div class="card-description">
+                <h2>Some stuff</h2>
+                <p>Very cool stuff, useful and smart</p>
+              </div>
+              <img class="card-user avatar" src="user.jpg">
+              <a class="card-link" href="#" ></a>
+            </div>
+          </div>
+          <% # Fin de la 5e card %>
+          <% # Début de la 6e card %>
+          <div class="col-xs-12 col-sm-6">
+            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
+              <div class="card-category">Popular</div>
+              <div class="card-description">
+                <h2>Some stuff</h2>
+                <p>Very cool stuff, useful and smart</p>
+              </div>
+              <img class="card-user avatar" src="user.jpg">
+              <a class="card-link" href="#" ></a>
+            </div>
+          </div>
+          <% # Fin de la 6e card %>
+        </div>
+        <% # Fin de la 3eme row %>
+      </div>
+      <% # Fin Cards %>
+    </div>
+    <% # Fin de la case bootstrap pour les cards %>
+
+
+    <% # Début case bootstrap Carnet de voyage %>
+    <div class="col-xs-12 col-sm-6">
+      <% # Début du carnet de voyage %>
+      <div class="booking text-center">
+        <h3>Your roadtrip in <%= @trip.region.name %></h3>
+        <hr id="hr-title">
+        <% # Début banner tickets %>
+        <div class="banner-tickets">
+          <% # Début banner ticket contents %>
+          <div class="banner-tickets-content">
+            <% # Début container %>
+            <div class="container">
+              <% # Début ticket box %>
+              <div class="ticket-box">
+                 <% # Début ticket %>
+                <div class="ticket">
+                  <span class="airline"><%= Constants::AIRLINES[@trip.round_trip_flight.carrier1] %></span>
+                  <span class="airline airlineslip"><%= @trip.round_trip_flight.f1_number %></span>
+                  <span class="boarding">Flying Away</span>
+                   <% # Début content %>
+                  <div class="content">
+                    <span class="jfk"><%= @trip.round_trip_flight.flight1_origin_airport_iata %></span>
+                    <span class="plane"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="60" width="60" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
+                    <span class="sfo"><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span>
+                    <% # Début sub content %>
+                    <div class="sub-content">
+                      <span class="name">DATE<br><span><%= @trip.starts_on.strftime("%B %d") %></span></span>
+                      <span class="gate">DEPARTURE<br><span><%= @trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %></span></span>
+                      <span class="seat">ARRIVAL<br><span><%= @trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %></span></span>
+                      <span class="name"><br><span><%= @trip.starts_on.strftime("%B %d") %></span></span>
+                      <span class="boardingtime">FROM<br><span><%=Constants::AIRPORTS[@search.city] %> </span></span>
+                      <span class="boardingtime-2">TO<br><span><%= Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata]  %></span></span>
+
+                      <span class="flight flightslip">DESTINATION<br><span><%= @trip.region.name %></span></span>
+                      <span class="name nameslip">PASSENGERS<br><span><%= @trip.nb_travelers%></span></span>
+                      <span class="plane-1"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="45" width="45" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
+                    </div>
+                    <% # Fin sub content %>
+                  </div>
+                  <% # Fin content %>
+                </div>
+                <% # Fin ticket %>
+              </div>
+              <% # Fin ticket box %>
+
+              <% # Début ticket box 1%>
+              <div class="ticket-box-1">
+                <% # Début ticket 1%>
+                <div class="ticket-1">
+                  <span class="airline"><%= Constants::AIRLINES[@trip.round_trip_flight.carrier2] %></span>
+                  <span class="airline airlineslip"><%= @trip.round_trip_flight.f2_number %></span>
+                  <span class="boarding">Flying Back</span>
+                  <% # Début content %>
+                  <div class="content">
+                    <span class="jfk"><%= @trip.round_trip_flight.flight2_origin_airport_iata %></span>
+                    <span class="plane"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="60" width="60" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
+                    <span class="sfo"><%= @trip.round_trip_flight.flight2_destination_airport_iata %></span>
+                    <% # Début sub content%>
+                    <div class="sub-content">
+                      <span class="name">DATE<br><span><%= @trip.returns_on.strftime("%B %d") %></span></span>
+                      <span class="gate">DEPARTURE<br><span><%= @trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %></span></span>
+                      <span class="seat">ARRIVAL<br><span><%= @trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %></span></span>
+                      <span class="boardingtime-1">FROM<br><span><%= Constants::CITY_REGION[@trip.round_trip_flight.flight2_origin_airport_iata] %></span></span>
+                      <span class="boardingtime-3">TO<br><span><%=Constants::AIRPORTS[@search.city] %></span></span>
+                      <span class="flight flightslip">ORIGIN<br><span><%= @trip.region.name %></span></span>
+                      <span class="name nameslip">PASSENGERS<br><span><%= @trip.nb_travelers%></span></span>
+                      <span class="plane-1"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="45" width="45" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
+                    </div>
+                    <% # Fin sub content%>
+                  </div>
+                  <% # Fin content %>
+                </div>
+                <% # Fin ticket 1%>
+              </div>
+              <% # Fin ticket box 1%>
+
+            </div>
+            <% # Fin container%>
+          </div>
+          <% # Fin banner ticket contents %>
+        </div>
+        <% # Fin banner tickets %>
+
+        <% # Début partie price et booking %>
+        <div>
+          <div id="booking-title">
+            <p>PRICE / <%= @trip.nb_travelers%> TRAVELERS</p>
+          </div>
+          <h4><%= @trip.price.round%>€</h4>
+          <%= render 'shared/book_modal', modal_name: "book_modal" %>
+          <button class="btn-brand" data-toggle="modal" data-target="#book_modal">BOOK</button>
+        </div>
+        <% # Fin partie price et booking %>
 
       </div>
+      <% # Fin du Carnet de voyage %>
     </div>
-  </div>
+    <% #Fin case bootstrap Carnet de voyage  %>
 
-  <div>
-    <div id="booking-title">
-      <p>PRICE / <%= @trip.nb_travelers%> TRAVELERS</p>
-    </div>
-    <h4><%= @trip.price.round%>€</h4>
-    <%=# render 'book_modal', modal_name: "book_modal" %>
-    <button class="btn-brand" data-toggle="modal" data-target="#book_modal">BOOK</button>
   </div>
+  <% # Find de la row %>
 
 </div>
+<% # Find du container %>
+
