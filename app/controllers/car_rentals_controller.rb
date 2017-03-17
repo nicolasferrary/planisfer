@@ -13,8 +13,9 @@ class CarRentalsController < ApplicationController
     @currency = 'EUR'
     # Lancer les requetes
     @car_rentals = get_car_rentals_for_trip(@trip)
-    @car_rentals = @car_rentals.sort_by { |car_rental| car_rental.price }
-    @car_selection = @car_rentals.first(4)
+    # @car_rentals is an array of instances of car_rentals
+    @car_selection = get_best_car_per_category(@car_rentals)
+    # @car_selection is a hash of instances of car_rentals (1 instance per car category)
   end
 
   private
@@ -31,6 +32,26 @@ class CarRentalsController < ApplicationController
       }
       car_rentals = (Rental::SmartRentalAgent.new(options).obtain_rentals)
       return car_rentals
+  end
+
+  def get_best_car_per_category(rentals)
+    best_cars = {}
+    mini_cars = rentals.select {|rental| rental.car.category == "Mini"}
+    sorted_mini_cars = mini_cars.sort_by { |rental| rental.price }
+    best_mini_car = sorted_mini_cars.first
+    best_cars[:mini] = get_best_car(rentals, "Mini")
+    best_cars[:economy] = get_best_car(rentals, "Economy")
+    best_cars[:compact] = get_best_car(rentals, "Compact")
+    best_cars[:standard] = get_best_car(rentals, "Standard")
+    best_cars[:fullsize] = get_best_car(rentals, "Fullsize")
+    best_cars[:premium] = get_best_car(rentals, "Premium/Luxury")
+    best_cars
+  end
+
+  def get_best_car(rentals, category)
+    cars = rentals.select {|rental| rental.car.category == category}
+    sorted_cars = cars.sort_by { |rental| rental.price }
+    best_car = sorted_cars.first
   end
 
 end

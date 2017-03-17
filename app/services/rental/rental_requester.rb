@@ -32,6 +32,7 @@ module Rental
       response.body
     end
 
+
   end
 end
 
