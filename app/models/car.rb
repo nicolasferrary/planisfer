@@ -19,7 +19,7 @@ class Car < ApplicationRecord
       category = data['car_classes'].select { |car_class|
         car_class['id'] == id
       }
-      if category = []
+      if category == []
         "unknown"
       else
         category.first['name']

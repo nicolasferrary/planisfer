@@ -11,6 +11,7 @@ RoundTripFlight.destroy_all
 Region.destroy_all
 Airport.destroy_all
 City.destroy_all
+CarRental.destroy_all
 
 
 city1 = City.create!(name:"Paris")
@@ -93,9 +94,11 @@ round_trip_flight1 = RoundTripFlight.new(
   flight1_take_off_at: "Mon, 13 Mar 2017 00:00:00 UTC",
   flight1_landing_at: "Mon, 13 Mar 2017 02:00:00 UTC",
   flight2_take_off_at: "Fri, 24 Mar 2017 08:00:00 UTC",
-  flight2_landing_at: "Fri, 24 Mar 2017 10:00:00 UTC"
+  flight2_landing_at: "Fri, 24 Mar 2017 10:00:00 UTC",
+  f1_number: "123456",
+  f2_number: "654321"
   )
-round_trip_flight1.save
+round_trip_flight1.save!
 
 round_trip_flight2 = RoundTripFlight.new(
   price: 100,
@@ -106,9 +109,11 @@ round_trip_flight2 = RoundTripFlight.new(
   flight1_take_off_at: "Mon, 13 Mar 2017 00:30:00 UTC",
   flight1_landing_at: "Mon, 13 Mar 2017 02:00:00 UTC",
   flight2_take_off_at: "Fri, 24 Mar 2017 08:30:00 UTC",
-  flight2_landing_at: "Fri, 24 Mar 2017 10:45:00 UTC"
+  flight2_landing_at: "Fri, 24 Mar 2017 10:45:00 UTC",
+  f1_number: "123456",
+  f2_number: "654321"
   )
-round_trip_flight2.save
+round_trip_flight2.save!
 
 round_trip_flight3 = RoundTripFlight.new(
   price: 120,
@@ -119,9 +124,11 @@ round_trip_flight3 = RoundTripFlight.new(
   flight1_take_off_at: "Mon, 13 Mar 2017 00:30:00 UTC",
   flight1_landing_at: "Mon, 13 Mar 2017 02:00:00 UTC",
   flight2_take_off_at: "Fri, 24 Mar 2017 08:30:00 UTC",
-  flight2_landing_at: "Fri, 24 Mar 2017 10:45:00 UTC"
+  flight2_landing_at: "Fri, 24 Mar 2017 10:45:00 UTC",
+  f1_number: "123456",
+  f2_number: "654321"
   )
-round_trip_flight3.save
+round_trip_flight3.save!
 
 
 round_trip_flight4 = RoundTripFlight.new(
@@ -133,9 +140,11 @@ round_trip_flight4 = RoundTripFlight.new(
   flight1_take_off_at: "Mon, 13 Mar 2017 03:34:00 UTC",
   flight1_landing_at: "Mon, 13 Mar 2017 02:00:00 UTC",
   flight2_take_off_at: "Fri, 24 Mar 2017 06:30:00 UTC",
-  flight2_landing_at: "Fri, 24 Mar 2017 10:48:00 UTC"
+  flight2_landing_at: "Fri, 24 Mar 2017 10:48:00 UTC",
+  f1_number: "123456",
+  f2_number: "654321"
   )
-round_trip_flight4.save
+round_trip_flight4.save!
 
 round_trip_flight5 = RoundTripFlight.new(
   price: 148,
@@ -146,9 +155,11 @@ round_trip_flight5 = RoundTripFlight.new(
   flight1_take_off_at: "Mon, 13 Mar 2017 03:34:00 UTC",
   flight1_landing_at: "Mon, 13 Mar 2017 02:00:00 UTC",
   flight2_take_off_at: "Fri, 24 Mar 2017 06:30:00 UTC",
-  flight2_landing_at: "Fri, 24 Mar 2017 10:48:00 UTC"
+  flight2_landing_at: "Fri, 24 Mar 2017 10:48:00 UTC",
+  f1_number: "123456",
+  f2_number: "654321"
   )
-round_trip_flight5.save
+round_trip_flight5.save!
 
 round_trip_flight6 = RoundTripFlight.new(
   price: 90,
@@ -159,9 +170,11 @@ round_trip_flight6 = RoundTripFlight.new(
   flight1_take_off_at: "Tue, 14 Mar 2017 00:00:00 UTC",
   flight1_landing_at: "Tue, 14 Mar 2017 02:00:00 UTC",
   flight2_take_off_at: "Thu, 23 Mar 2017 08:00:00 UTC",
-  flight2_landing_at: "Thu, 23 Mar 2017 10:00:00 UTC"
+  flight2_landing_at: "Thu, 23 Mar 2017 10:00:00 UTC",
+  f1_number: "123456",
+  f2_number: "654321"
   )
-round_trip_flight6.save
+round_trip_flight6.save!
 
 round_trip_flight7 = RoundTripFlight.new(
   price: 100,
@@ -172,9 +185,11 @@ round_trip_flight7 = RoundTripFlight.new(
   flight1_take_off_at: "Tue, 14 Mar 2017 00:30:00 UTC",
   flight1_landing_at: "Tue, 14 Mar 2017 02:00:00 UTC",
   flight2_take_off_at: "Thu, 23 Mar 2017 08:30:00 UTC",
-  flight2_landing_at: "Thu, 23 Mar 2017 10:45:00 UTC"
+  flight2_landing_at: "Thu, 23 Mar 2017 10:45:00 UTC",
+  f1_number: "123456",
+  f2_number: "654321"
   )
-round_trip_flight7.save
+round_trip_flight7.save!
 
 round_trip_flight8 = RoundTripFlight.new(
   price: 120,
@@ -185,9 +200,11 @@ round_trip_flight8 = RoundTripFlight.new(
  flight1_take_off_at: "Tue, 14 Mar 2017 00:30:00 UTC",
   flight1_landing_at: "Tue, 14 Mar 2017 02:00:00 UTC",
   flight2_take_off_at: "Thu, 23 Mar 2017 08:30:00 UTC",
-  flight2_landing_at: "Thu, 23 Mar 2017 10:45:00 UTC"
+  flight2_landing_at: "Thu, 23 Mar 2017 10:45:00 UTC",
+  f1_number: "123456",
+  f2_number: "654321"
   )
-round_trip_flight8.save
+round_trip_flight8.save!
 
 
 round_trip_flight9 = RoundTripFlight.new(
@@ -199,9 +216,11 @@ round_trip_flight9 = RoundTripFlight.new(
   flight1_take_off_at: "Tue, 14 Mar 2017 03:34:00 UTC",
   flight1_landing_at: "Tue, 14 Mar 2017 02:00:00 UTC",
   flight2_take_off_at: "Thu, 23 Mar 2017 06:30:00 UTC",
-  flight2_landing_at: "Thu, 23 Mar 2017 10:48:00 UTC"
+  flight2_landing_at: "Thu, 23 Mar 2017 10:48:00 UTC",
+  f1_number: "123456",
+  f2_number: "654321"
   )
-round_trip_flight9.save
+round_trip_flight9.save!
 
 round_trip_flight10 = RoundTripFlight.new(
   price: 148,
@@ -212,9 +231,11 @@ round_trip_flight10 = RoundTripFlight.new(
   flight1_take_off_at: "Tue, 14 Mar 2017 03:34:00 UTC",
   flight1_landing_at: "Tue, 14 Mar 2017 02:00:00 UTC",
   flight2_take_off_at: "Thu, 23 Mar 2017 06:30:00 UTC",
-  flight2_landing_at: "Thu, 23 Mar 2017 10:48:00 UTC"
+  flight2_landing_at: "Thu, 23 Mar 2017 10:48:00 UTC",
+  f1_number: "123456",
+  f2_number: "654321"
   )
-round_trip_flight10.save
+round_trip_flight10.save!
 
 round_trip_flight11 = RoundTripFlight.new(
  price: 123,
@@ -225,9 +246,11 @@ round_trip_flight11 = RoundTripFlight.new(
  flight1_take_off_at: "Wed, 15 Mar 2017 10:10:00 UTC",
  flight1_landing_at: "Wed, 15 Mar 2017 12:00:00 UTC",
  flight2_take_off_at: "Sat, 25 Mar 2017 18:00:00 UTC",
- flight2_landing_at: "Sat, 25 Mar 2017 18:55:00 UTC"
+ flight2_landing_at: "Sat, 25 Mar 2017 18:55:00 UTC",
+ f1_number: "123456",
+ f2_number: "654321"
  )
-round_trip_flight11.save
+round_trip_flight11.save!
 
 round_trip_flight12 = RoundTripFlight.new(
  price: 75,
@@ -238,9 +261,11 @@ round_trip_flight12 = RoundTripFlight.new(
  flight1_take_off_at: "Wed, 15 Mar 2017 12:00:00 UTC",
  flight1_landing_at: "Wed, 15 Mar 2017 14:32:00 UTC",
  flight2_take_off_at: "Sat, 25 Mar 2017 19:14:00 UTC",
- flight2_landing_at: "Sat, 25 Mar 2017 21:00:00 UTC"
+ flight2_landing_at: "Sat, 25 Mar 2017 21:00:00 UTC",
+ f1_number: "123456",
+ f2_number: "654321"
  )
-round_trip_flight12.save
+round_trip_flight12.save!
 
 round_trip_flight13 = RoundTripFlight.new(
  price: 88,
@@ -251,9 +276,11 @@ round_trip_flight13 = RoundTripFlight.new(
  flight1_take_off_at: "Wed, 15 Mar 2017 06:53:00 UTC",
  flight1_landing_at: "Wed, 15 Mar 2017 09:00:00 UTC",
  flight2_take_off_at: "Sat, 25 Mar 2017 08:42:00 UTC",
- flight2_landing_at: "Sat, 25 Mar 2017 10:20:00 UTC"
+ flight2_landing_at: "Sat, 25 Mar 2017 10:20:00 UTC",
+ f1_number: "123456",
+ f2_number: "654321"
  )
-round_trip_flight13.save
+round_trip_flight13.save!
 
 round_trip_flight14 = RoundTripFlight.new(
  price: 97,
@@ -264,9 +291,11 @@ round_trip_flight14 = RoundTripFlight.new(
  flight1_take_off_at: "Fri, 17 Mar 2017 14:19:00 UTC",
  flight1_landing_at: "Fri, 17 Mar 2017 16:06:00 UTC",
  flight2_take_off_at: "Sun, 26 Mar 2017 13:09:00 UTC",
- flight2_landing_at: "Sun, 26 Mar 2017 15:25:00 UTC"
+ flight2_landing_at: "Sun, 26 Mar 2017 15:25:00 UTC",
+ f1_number: "123456",
+ f2_number: "654321"
  )
-round_trip_flight14.save
+round_trip_flight14.save!
 
 round_trip_flight15 = RoundTripFlight.new(
  price: 112,
@@ -277,9 +306,11 @@ round_trip_flight15 = RoundTripFlight.new(
  flight1_take_off_at: "Fri, 17 Mar 2017 11:00:00 UTC",
  flight1_landing_at: "Fri, 17 Mar 2017 12:56:00 UTC",
  flight2_take_off_at: "Sun, 26 Mar 2017 16:14:00 UTC",
- flight2_landing_at: "Sun, 26 Mar 2017 18:00:00 UTC"
+ flight2_landing_at: "Sun, 26 Mar 2017 18:00:00 UTC",
+ f1_number: "123456",
+ f2_number: "654321"
  )
-round_trip_flight15.save
+round_trip_flight15.save!
 
 
 round_trip_flight16 = RoundTripFlight.new(
@@ -291,9 +322,11 @@ round_trip_flight16 = RoundTripFlight.new(
  flight1_take_off_at: "Fri, 17 Mar 2017 16:50:00 UTC",
  flight1_landing_at: "Fri, 17 Mar 2017 19:11:00 UTC",
  flight2_take_off_at: "Sun, 26 Mar 2017 18:42:00 UTC",
- flight2_landing_at: "Sun, 26 Mar 2017 20:20:00 UTC"
+ flight2_landing_at: "Sun, 26 Mar 2017 20:20:00 UTC",
+ f1_number: "123456",
+ f2_number: "654321"
  )
-round_trip_flight16.save
+round_trip_flight16.save!
 
 
 round_trip_flight17 = RoundTripFlight.new(
@@ -305,9 +338,11 @@ round_trip_flight17 = RoundTripFlight.new(
  flight1_take_off_at: "Fri, 17 Mar 2017 09:53:00 UTC",
  flight1_landing_at: "Fri, 17 Mar 2017 11:00:00 UTC",
  flight2_take_off_at: "Sun, 26 Mar 2017 05:42:00 UTC",
- flight2_landing_at: "Sun, 26 Mar 2017 07:20:00 UTC"
+ flight2_landing_at: "Sun, 26 Mar 2017 07:20:00 UTC",
+ f1_number: "123456",
+ f2_number: "654321"
  )
-round_trip_flight17.save
+round_trip_flight17.save!
 
 search1 = Search.new(
   starts_on: "Mon, 13 Mar 2017",
@@ -317,6 +352,106 @@ search1.city = city1
 search1.region = region1
 search1.save!
 
+
+car1 = Car.new
+car1.name = "Mini Cooper or similar"
+car1.category = "Mini"
+car1.doors = 3
+car1.seats = 4
+car1.image_url = "assets/images/minicooper.png"
+car1.save!
+
+car_rental1 = CarRental.new
+car_rental1.price = 128
+car_rental1.currency = "EUR"
+car_rental1.pick_up_location = "Car rental office Edimburgh airport"
+car_rental1.drop_off_location = "Car rental office London airport"
+car_rental1.pick_up_date_time = "2017-04-07 07:40:00"
+car_rental1.drop_off_date_time = "2017-04-21 16:55:00"
+car_rental1.driver_age = 30
+car_rental1.company = "Easycar"
+car_rental1.car = car1
+car_rental1.save!
+
+car2 = Car.new
+car2.name = "Renault Twingo or similar"
+car2.category = "Economy"
+car2.doors = 3
+car2.seats = 5
+car2.image_url = "assets/images/twingo.jpg"
+car2.save
+
+car_rental2 = CarRental.new
+car_rental2.price = 135
+car_rental2.currency = "EUR"
+car_rental2.pick_up_location = "Car rental office Edimburgh airport"
+car_rental2.drop_off_location = "Car rental office London airport"
+car_rental2.pick_up_date_time = "2017-04-07 07:40:00"
+car_rental2.drop_off_date_time = "2017-04-21 16:55:00"
+car_rental2.driver_age = 30
+car_rental2.company = "Easycar"
+car_rental2.car = car2
+car_rental2.save!
+
+car3 = Car.new
+car3.name = "Peugeot 206 or similar"
+car3.category = "Compact"
+car3.doors = 5
+car3.seats = 5
+car3.image_url = "assets/images/P206.jpg"
+car3.save
+
+car_rental3 = CarRental.new
+car_rental3.price = 160
+car_rental3.currency = "EUR"
+car_rental3.pick_up_location = "Car rental office Edimburgh airport"
+car_rental3.drop_off_location = "Car rental office London airport"
+car_rental3.pick_up_date_time = "2017-04-07 07:40:00"
+car_rental3.drop_off_date_time = "2017-04-21 16:55:00"
+car_rental3.driver_age = 30
+car_rental3.company = "Easycar"
+car_rental3.car = car3
+car_rental3.save!
+
+car5 = Car.new
+car5.name = "Renault Espace or similar"
+car5.category = "Fullsize"
+car5.doors = 5
+car5.seats = 7
+car5.image_url = "assets/images/espace.jpg"
+car5.save
+
+car_rental5 = CarRental.new
+car_rental5.price = 220
+car_rental5.currency = "EUR"
+car_rental5.pick_up_location = "Car rental office Edimburgh airport"
+car_rental5.drop_off_location = "Car rental office London airport"
+car_rental5.pick_up_date_time = "2017-04-07 07:40:00"
+car_rental5.drop_off_date_time = "2017-04-21 16:55:00"
+car_rental5.driver_age = 30
+car_rental5.company = "Easycar"
+car_rental5.car = car5
+car_rental5.save!
+
+car6 = Car.new
+car6.name = "Porsche Caiman or similar"
+car6.category = "Premium"
+car6.doors = 3
+car6.seats = 5
+car6.image_url = "assets/images/porschecaiman.jpg"
+car6.save
+
+car_rental6 = CarRental.new
+car_rental6.price = 987
+car_rental6.currency = "EUR"
+car_rental6.pick_up_location = "Car rental office Edimburgh airport"
+car_rental6.drop_off_location = "Car rental office London airport"
+car_rental6.pick_up_date_time = "2017-04-07 07:40:00"
+car_rental6.drop_off_date_time = "2017-04-21 16:55:00"
+car_rental6.driver_age = 30
+car_rental6.company = "Easycar"
+car_rental6.car = car6
+car_rental6.save!
 
 trip1 = Trip.new(
   starts_on: "Mon, 13 Mar 2017",
@@ -328,6 +463,7 @@ trip1.region = region1
 trip1.round_trip_flight = round_trip_flight1
 trip1.price = round_trip_flight1.price
 trip1.search = search1
+trip1.car_rental = car_rental1
 trip1.save!
 
 trip2 = Trip.new(
@@ -340,6 +476,7 @@ trip2.region = region1
 trip2.round_trip_flight = round_trip_flight7
 trip2.price = round_trip_flight7.price
 trip2.search = search1
+trip2.car_rental = car_rental2
 trip2.save!
 
 trip3 = Trip.new(
@@ -352,6 +489,7 @@ trip3.region = region2
 trip3.round_trip_flight = round_trip_flight11
 trip3.price = round_trip_flight11.price
 trip3.search = search1
+trip3.car_rental = car_rental3
 trip3.save!
 
 trip4 = Trip.new(
@@ -364,9 +502,6 @@ trip4.region = region4
 trip4.round_trip_flight = round_trip_flight16
 trip4.price = round_trip_flight16.price
 trip4.search = search1
+trip4.car_rental = car_rental5
 trip4.save!
-
-
-
-
 

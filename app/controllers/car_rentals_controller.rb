@@ -12,10 +12,23 @@ class CarRentalsController < ApplicationController
     # @user_ip = request.remote_ip
     @currency = 'EUR'
     # Lancer les requetes
-    @car_rentals = get_car_rentals_for_trip(@trip)
+    # Commenté pour les test de l'index
+    # @car_rentals = get_car_rentals_for_trip(@trip)
     # @car_rentals is an array of instances of car_rentals
-    @car_selection = get_best_car_per_category(@car_rentals)
+    # Commenté pour les test de l'index
+    # @car_selection = get_best_car_per_category(@car_rentals)
     # @car_selection is a hash of instances of car_rentals (1 instance per car category)
+
+    # This is just for test
+     @car_selection = {
+      :mini => CarRental.all[0],
+      :economy => CarRental.all[1],
+      :compact => CarRental.all[2],
+      :standard => nil,
+      :fullsize => CarRental.all[3],
+      :premium => CarRental.all[4]
+    }
+
   end
 
   private
