@@ -358,7 +358,7 @@ car1.name = "Mini Cooper or similar"
 car1.category = "Mini"
 car1.doors = 3
 car1.seats = 4
-car1.image_url = "assets/images/minicooper.png"
+car1.image_url = "minicooper.png"
 car1.save!
 
 car_rental1 = CarRental.new
@@ -378,7 +378,7 @@ car2.name = "Renault Twingo or similar"
 car2.category = "Economy"
 car2.doors = 3
 car2.seats = 5
-car2.image_url = "assets/images/twingo.jpg"
+car2.image_url = "twingo.jpg"
 car2.save
 
 car_rental2 = CarRental.new
@@ -418,7 +418,7 @@ car5.name = "Renault Espace or similar"
 car5.category = "Fullsize"
 car5.doors = 5
 car5.seats = 7
-car5.image_url = "assets/images/espace.jpg"
+car5.image_url = "espace.jpg"
 car5.save
 
 car_rental5 = CarRental.new
@@ -438,7 +438,7 @@ car6.name = "Porsche Caiman or similar"
 car6.category = "Premium"
 car6.doors = 3
 car6.seats = 5
-car6.image_url = "assets/images/porschecaiman.jpg"
+car6.image_url = "porschecaiman.jpg"
 car6.save
 
 car_rental6 = CarRental.new

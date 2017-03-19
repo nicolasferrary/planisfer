@@ -37,7 +37,7 @@
         <div class="row">
           <% # Début de la première card %>
           <div class="col-xs-12 col-sm-6">
-            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
+            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= image_path @car_selection[:mini].car.image_url %>'');">
               <div class="card-category">Popular</div>
               <div class="card-description">
                 <h2>Some stuff</h2>
