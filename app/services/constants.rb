@@ -23,9 +23,9 @@ module Constants
         "image_6" => "",
                   },
 
-    "scandinavia" => {
-        "title" => "Discover Scandinavia",
-        "text" => "Welcome in Scandinavia",
+    "romania" => {
+        "title" => "Discover Romania",
+        "text" => "Welcome in Romania",
         "image_1" => "",
         "image_2" => "",
         "image_3" => "",
