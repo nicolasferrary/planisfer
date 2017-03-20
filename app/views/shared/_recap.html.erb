@@ -1,93 +1,140 @@
-<% # Début du carnet de voyage %>
-      <div class="recap-box text-center">
-        <h3>Your roadtrip in <%= @trip.region.name %></h3>
-        <hr id="hr-title">
-        <% # Début banner tickets %>
-        <div class="banner-tickets">
-          <% # Début banner ticket contents %>
-          <div class="banner-tickets-content">
-            <% # Début container %>
-            <div class="container">
-              <% # Début ticket box %>
-              <div class="ticket-box">
-                 <% # Début ticket %>
-                <div class="ticket">
-                  <span class="airline"><%= Constants::AIRLINES[@trip.round_trip_flight.carrier1] %></span>
-                  <span class="airline airlineslip"><%= @trip.round_trip_flight.f1_number %></span>
-                  <span class="boarding">Flying Away</span>
-                   <% # Début content %>
-                  <div class="content">
-                    <span class="jfk"><%= @trip.round_trip_flight.flight1_origin_airport_iata %></span>
-                    <span class="plane"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="60" width="60" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
-                    <span class="sfo"><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span>
-                    <% # Début sub content %>
-                    <div class="sub-content">
-                      <span class="name">DATE<br><span><%= @trip.starts_on.strftime("%B %d") %></span></span>
-                      <span class="gate">DEPARTURE<br><span><%= @trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %></span></span>
-                      <span class="seat">ARRIVAL<br><span><%= @trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %></span></span>
-                      <span class="name"><br><span><%= @trip.starts_on.strftime("%B %d") %></span></span>
-                      <span class="boardingtime">FROM<br><span><%=Constants::AIRPORTS[@search.city] %> </span></span>
-                      <span class="boardingtime-2">TO<br><span><%= Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata]  %></span></span>
+<% # Beg of row 1 %>
+<div class = "recap-box">
+  <div class = "row">
+    <div class = "col-xs-12">
+      <h3 class="text-center">Your roadtrip in <%= @trip.region.name %></h3>
+      <hr id="hr-title">
+    </div>
+  </div>
+  <% # End of row 1 %>
 
-                      <span class="flight flightslip">DESTINATION<br><span><%= @trip.region.name %></span></span>
-                      <span class="name nameslip">PASSENGERS<br><span><%= @trip.nb_travelers%></span></span>
-                      <span class="plane-1"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="45" width="45" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
-                    </div>
-                    <% # Fin sub content %>
-                  </div>
-                  <% # Fin content %>
-                </div>
-                <% # Fin ticket %>
-              </div>
-              <% # Fin ticket box %>
-
-              <% # Début ticket box 1%>
-              <div class="ticket-box-1">
-                <% # Début ticket 1%>
-                <div class="ticket-1">
-                  <span class="airline"><%= Constants::AIRLINES[@trip.round_trip_flight.carrier2] %></span>
-                  <span class="airline airlineslip"><%= @trip.round_trip_flight.f2_number %></span>
-                  <span class="boarding">Flying Back</span>
-                  <% # Début content %>
-                  <div class="content">
-                    <span class="jfk"><%= @trip.round_trip_flight.flight2_origin_airport_iata %></span>
-                    <span class="plane"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="60" width="60" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
-                    <span class="sfo"><%= @trip.round_trip_flight.flight2_destination_airport_iata %></span>
-                    <% # Début sub content%>
-                    <div class="sub-content">
-                      <span class="name">DATE<br><span><%= @trip.returns_on.strftime("%B %d") %></span></span>
-                      <span class="gate">DEPARTURE<br><span><%= @trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %></span></span>
-                      <span class="seat">ARRIVAL<br><span><%= @trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %></span></span>
-                      <span class="boardingtime-1">FROM<br><span><%= Constants::CITY_REGION[@trip.round_trip_flight.flight2_origin_airport_iata] %></span></span>
-                      <span class="boardingtime-3">TO<br><span><%=Constants::AIRPORTS[@search.city] %></span></span>
-                      <span class="flight flightslip">ORIGIN<br><span><%= @trip.region.name %></span></span>
-                      <span class="name nameslip">PASSENGERS<br><span><%= @trip.nb_travelers%></span></span>
-                      <span class="plane-1"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="45" width="45" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
-                    </div>
-                    <% # Fin sub content%>
-                  </div>
-                  <% # Fin content %>
-                </div>
-                <% # Fin ticket 1%>
-              </div>
-              <% # Fin ticket box 1%>
-            </div>
-            <% # Fin container%>
-          </div>
-          <% # Fin banner ticket contents %>
-        </div>
-        <% # Fin banner tickets %>
-
-        <% # Début partie price et booking %>
-        <div>
-          <div id="booking-title">
-            <p>PRICE / <%= @trip.nb_travelers%> TRAVELERS</p>
-          </div>
-          <h4><%= @trip.price.round%>€</h4>
-          <%= render 'shared/book_modal', modal_name: "book_modal" %>
-          <button class="btn-brand" data-toggle="modal" data-target="#book_modal">BOOK</button>
-        </div>
-        <% # Fin partie price et booking %>
-
+  <% # Beg of row 3 %>
+  <div class = "row">
+    <% #Beg of icon bootstrap col %>
+    <div class = "col-sm-2">
+      <%= image_tag "flight.png", height: "30px", width: "auto" %>
+    </div>
+    <% #End of icon bootstrap col %>
+    <% #Beg of content bootstrap col %>
+    <div class = "col-sm-10">
+      <div class = "date">
+        <%= @trip.starts_on.strftime("%B %d")%>
       </div>
-      <% # Fin du Carnet de voyage %>
+      <div class = "origin-and-destination">
+        <span> <%= @trip.city.name %></span> <span class = "light-data">to </span><span><%= Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata] %></span>
+      </div>
+      <div class = "times">
+        <span><%= @trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %></span>
+      </div>
+      <div class = "carrier">
+        <%= Constants::AIRLINES[@trip.round_trip_flight.carrier1] %>
+      </div>
+      <hr id="hr-content">
+    </div>
+    <% #End of content bootstrap col %>
+  </div>
+  <% # End of row 3 %>
+  <% # Beg of row 4 %>
+  <div class = "row">
+    <% #Beg of icon bootstrap col %>
+    <div class = "col-sm-2">
+
+    </div>
+    <% #End of icon bootstrap col %>
+    <% #Beg of content bootstrap col %>
+    <div class = "col-sm-10">
+      <div class = "date">
+        <%= @trip.returns_on.strftime("%B %d")%>
+      </div>
+      <div class = "origin-and-destination">
+        <span> <%= Constants::CITY_REGION[@trip.round_trip_flight.flight2_origin_airport_iata] %> </span> <span class = "light-data">to </span><span> <%= @trip.city.name %></span>
+      </div>
+      <div class = "times">
+        <span><%= @trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %></span>
+      </div>
+      <div class = "carrier">
+        <%= Constants::AIRLINES[@trip.round_trip_flight.carrier2] %>
+      </div>
+      <hr id="hr-title">
+    </div>
+    <% #End of content bootstrap col %>
+  </div>
+  <% # End of row 4 %>
+
+  <% # Beg of row 10 %>
+  <div class = "row">
+    <% #Beg of icon bootstrap col %>
+    <div class = "col-sm-2">
+
+    </div>
+    <% #End of icon bootstrap col %>
+    <% #Beg of content bootstrap col %>
+    <div class = "col-sm-10">
+
+    </div>
+    <% #End of content bootstrap col %>
+  </div>
+  <% # End of row 10 %>
+
+  <% # Beg of row 5 %>
+  <div class = "row">
+    <% #Beg of icon bootstrap col %>
+    <% # Il faudra mettre un if else avec la photo de la voiture choisie %>
+    <div class = "col-sm-2">
+        <%= image_tag "car.png", width: "30px", height: "auto", class: "car" %>
+    </div>
+    <% #End of icon bootstrap col %>
+    <% #Beg of content bootstrap col %>
+    <div class = "col-sm-10">
+      <% # Il faudra mettre un if else avec les infos de la voiture choisie %>
+       <%= link_to "Select your car" %>
+       <hr id="hr-title">
+    </div>
+    <% #End of content bootstrap col %>
+  </div>
+  <% # End of row 5 %>
+
+  <% # Beg of row 6 %>
+  <div class = "row">
+    <% #Beg of icon bootstrap col %>
+    <div class = "col-sm-2">
+      <%= image_tag "Itinerary.png", width: "30px", height: "auto", class: "car" %>
+    </div>
+    <% #End of icon bootstrap col %>
+    <% #Beg of content bootstrap col %>
+    <div class = "col-sm-10">
+      <%= link_to "Prepare your itinerary" %>
+    </div>
+    <% #End of content bootstrap col %>
+  </div>
+  <% # End of row 6 %>
+
+  <% # Beg of row 7 %>
+  <div class = "row">
+    <% #Beg of price recap bootstrap col %>
+    <div class = "col-xs-12">
+      <hr id="hr-title">
+      <div id="booking-title">
+        <p class = "text-center">PRICE / <%= @trip.nb_travelers%> TRAVELERS</p>
+        <h4 class = "text-center"><%= @trip.price.round%>€</h4>
+      </div>
+    </div>
+    <% #End of price recap bootstrap col %>
+  </div>
+  <% # End of row 7 %>
+
+
+  <% # Beg of row 9 %>
+  <div class = "row">
+    <% #Beg of booking button bootstrap col %>
+    <div class = "col-sm-12">
+      <div class = text-center>
+        <%= render 'shared/book_modal', modal_name: "book_modal" %>
+        <button class="btn-brand" data-toggle="modal" data-target="#book_modal">BOOK</button>
+      </div>
+    </div>
+    <% #End of booking button bootstrap col %>
+  </div>
+  <% # End of row 9 %>
+
+</div>

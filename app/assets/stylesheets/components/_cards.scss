@@ -42,10 +42,9 @@
 
 .card {
   height: 175px;
-  background-size: cover !important;
   position: relative;
   margin-bottom: 20px;
-  color: black;
+  color: #333333;
   border-radius: 5px;
   text-decoration: none;
   box-shadow: 1px 1px 1px #c7c7c7;
@@ -53,7 +52,11 @@
   padding: 15px;
   display: flex;
   align-items: center;
-  position: relative;
+  justify-content: space-around;
+}
+
+.card-image{
+  position: absolute;
 }
 
 .card.selected {
@@ -64,24 +67,20 @@
 }
 
 
-.card-user {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-}
-.card-category {
+.card-name {
   position: absolute;
   top: 10px;
   left: 10px;
   font-size: 16px;
 }
 
-.card-description {
+.card-category {
   position: absolute;
   bottom: -5px;
   left: 10px;
+  color: $orange;
 }
-.card-description p {
+.card-category p {
   font-size: 10px;
   }
 

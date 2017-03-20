@@ -96,7 +96,9 @@ round_trip_flight1 = RoundTripFlight.new(
   flight2_take_off_at: "Fri, 24 Mar 2017 08:00:00 UTC",
   flight2_landing_at: "Fri, 24 Mar 2017 10:00:00 UTC",
   f1_number: "123456",
-  f2_number: "654321"
+  f2_number: "654321",
+  carrier1: "IB",
+  carrier2: "AF"
   )
 round_trip_flight1.save!
 
@@ -111,7 +113,9 @@ round_trip_flight2 = RoundTripFlight.new(
   flight2_take_off_at: "Fri, 24 Mar 2017 08:30:00 UTC",
   flight2_landing_at: "Fri, 24 Mar 2017 10:45:00 UTC",
   f1_number: "123456",
-  f2_number: "654321"
+  f2_number: "654321",
+  carrier1: "IB",
+  carrier2: "AF"
   )
 round_trip_flight2.save!
 
@@ -126,7 +130,9 @@ round_trip_flight3 = RoundTripFlight.new(
   flight2_take_off_at: "Fri, 24 Mar 2017 08:30:00 UTC",
   flight2_landing_at: "Fri, 24 Mar 2017 10:45:00 UTC",
   f1_number: "123456",
-  f2_number: "654321"
+  f2_number: "654321",
+  carrier1: "IB",
+  carrier2: "AF"
   )
 round_trip_flight3.save!
 
@@ -142,7 +148,9 @@ round_trip_flight4 = RoundTripFlight.new(
   flight2_take_off_at: "Fri, 24 Mar 2017 06:30:00 UTC",
   flight2_landing_at: "Fri, 24 Mar 2017 10:48:00 UTC",
   f1_number: "123456",
-  f2_number: "654321"
+  f2_number: "654321",
+  carrier1: "IB",
+  carrier2: "AF"
   )
 round_trip_flight4.save!
 
@@ -157,7 +165,9 @@ round_trip_flight5 = RoundTripFlight.new(
   flight2_take_off_at: "Fri, 24 Mar 2017 06:30:00 UTC",
   flight2_landing_at: "Fri, 24 Mar 2017 10:48:00 UTC",
   f1_number: "123456",
-  f2_number: "654321"
+  f2_number: "654321",
+  carrier1: "IB",
+  carrier2: "AF"
   )
 round_trip_flight5.save!
 
@@ -172,7 +182,9 @@ round_trip_flight6 = RoundTripFlight.new(
   flight2_take_off_at: "Thu, 23 Mar 2017 08:00:00 UTC",
   flight2_landing_at: "Thu, 23 Mar 2017 10:00:00 UTC",
   f1_number: "123456",
-  f2_number: "654321"
+  f2_number: "654321",
+  carrier1: "IB",
+  carrier2: "AF"
   )
 round_trip_flight6.save!
 
@@ -187,7 +199,9 @@ round_trip_flight7 = RoundTripFlight.new(
   flight2_take_off_at: "Thu, 23 Mar 2017 08:30:00 UTC",
   flight2_landing_at: "Thu, 23 Mar 2017 10:45:00 UTC",
   f1_number: "123456",
-  f2_number: "654321"
+  f2_number: "654321",
+  carrier1: "IB",
+  carrier2: "AF"
   )
 round_trip_flight7.save!
 
@@ -202,7 +216,9 @@ round_trip_flight8 = RoundTripFlight.new(
   flight2_take_off_at: "Thu, 23 Mar 2017 08:30:00 UTC",
   flight2_landing_at: "Thu, 23 Mar 2017 10:45:00 UTC",
   f1_number: "123456",
-  f2_number: "654321"
+  f2_number: "654321",
+  carrier1: "IB",
+  carrier2: "AF"
   )
 round_trip_flight8.save!
 
@@ -218,7 +234,9 @@ round_trip_flight9 = RoundTripFlight.new(
   flight2_take_off_at: "Thu, 23 Mar 2017 06:30:00 UTC",
   flight2_landing_at: "Thu, 23 Mar 2017 10:48:00 UTC",
   f1_number: "123456",
-  f2_number: "654321"
+  f2_number: "654321",
+  carrier1: "IB",
+  carrier2: "AF"
   )
 round_trip_flight9.save!
 
@@ -233,7 +251,9 @@ round_trip_flight10 = RoundTripFlight.new(
   flight2_take_off_at: "Thu, 23 Mar 2017 06:30:00 UTC",
   flight2_landing_at: "Thu, 23 Mar 2017 10:48:00 UTC",
   f1_number: "123456",
-  f2_number: "654321"
+  f2_number: "654321",
+  carrier1: "IB",
+  carrier2: "AF"
   )
 round_trip_flight10.save!
 
@@ -248,7 +268,9 @@ round_trip_flight11 = RoundTripFlight.new(
  flight2_take_off_at: "Sat, 25 Mar 2017 18:00:00 UTC",
  flight2_landing_at: "Sat, 25 Mar 2017 18:55:00 UTC",
  f1_number: "123456",
- f2_number: "654321"
+ f2_number: "654321",
+ carrier1: "IB",
+ carrier2: "AF"
  )
 round_trip_flight11.save!
 
@@ -263,7 +285,9 @@ round_trip_flight12 = RoundTripFlight.new(
  flight2_take_off_at: "Sat, 25 Mar 2017 19:14:00 UTC",
  flight2_landing_at: "Sat, 25 Mar 2017 21:00:00 UTC",
  f1_number: "123456",
- f2_number: "654321"
+ f2_number: "654321",
+ carrier1: "IB",
+ carrier2: "AF"
  )
 round_trip_flight12.save!
 
@@ -278,7 +302,9 @@ round_trip_flight13 = RoundTripFlight.new(
  flight2_take_off_at: "Sat, 25 Mar 2017 08:42:00 UTC",
  flight2_landing_at: "Sat, 25 Mar 2017 10:20:00 UTC",
  f1_number: "123456",
- f2_number: "654321"
+ f2_number: "654321",
+ carrier1: "IB",
+ carrier2: "AF"
  )
 round_trip_flight13.save!
 
@@ -293,7 +319,9 @@ round_trip_flight14 = RoundTripFlight.new(
  flight2_take_off_at: "Sun, 26 Mar 2017 13:09:00 UTC",
  flight2_landing_at: "Sun, 26 Mar 2017 15:25:00 UTC",
  f1_number: "123456",
- f2_number: "654321"
+ f2_number: "654321",
+ carrier1: "IB",
+ carrier2: "AF"
  )
 round_trip_flight14.save!
 
@@ -308,7 +336,9 @@ round_trip_flight15 = RoundTripFlight.new(
  flight2_take_off_at: "Sun, 26 Mar 2017 16:14:00 UTC",
  flight2_landing_at: "Sun, 26 Mar 2017 18:00:00 UTC",
  f1_number: "123456",
- f2_number: "654321"
+ f2_number: "654321",
+ carrier1: "IB",
+ carrier2: "AF"
  )
 round_trip_flight15.save!
 
@@ -324,7 +354,9 @@ round_trip_flight16 = RoundTripFlight.new(
  flight2_take_off_at: "Sun, 26 Mar 2017 18:42:00 UTC",
  flight2_landing_at: "Sun, 26 Mar 2017 20:20:00 UTC",
  f1_number: "123456",
- f2_number: "654321"
+ f2_number: "654321",
+ carrier1: "IB",
+ carrier2: "AF"
  )
 round_trip_flight16.save!
 
@@ -340,7 +372,9 @@ round_trip_flight17 = RoundTripFlight.new(
  flight2_take_off_at: "Sun, 26 Mar 2017 05:42:00 UTC",
  flight2_landing_at: "Sun, 26 Mar 2017 07:20:00 UTC",
  f1_number: "123456",
- f2_number: "654321"
+ f2_number: "654321",
+ carrier1: "IB",
+ carrier2: "AF"
  )
 round_trip_flight17.save!
 
@@ -434,11 +468,11 @@ car_rental5.car = car5
 car_rental5.save!
 
 car6 = Car.new
-car6.name = "Porsche Caiman"
+car6.name = "Porsche cayman"
 car6.category = "Premium"
 car6.doors = 3
 car6.seats = 5
-car6.image_url = "porschecaiman.jpg"
+car6.image_url = "porschecayman.jpg"
 car6.save
 
 car_rental6 = CarRental.new

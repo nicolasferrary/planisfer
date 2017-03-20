@@ -71,6 +71,10 @@
   color: #484848;
 }
 
+car.datepicker{
+  margin_top: 0px;
+}
+
 
 .datepicker table tr td.today, .datepicker table tr td.active {
   color: #FF2B67;
@@ -108,4 +112,29 @@
 
 .datepicker table tr td.active:active:hover, .datepicker table tr td.active.highlighted:active:hover, .datepicker table tr td.active.active:hover, .datepicker table tr td.active.highlighted.active:hover, .datepicker table tr td.active:active:focus, .datepicker table tr td.active.highlighted:active:focus, .datepicker table tr td.active.active:focus, .datepicker table tr td.active.highlighted.active:focus, .datepicker table tr td.active:active.focus, .datepicker table tr td.active.highlighted:active.focus, .datepicker table tr td.active.active.focus, .datepicker table tr td.active.highlighted.active.focus {
   background-color: #FF2B67;
+}
+
+
+
+
+.car-form{
+  height: "auto";
+  position: relative;
+  margin-bottom: 20px;
+  color: #333333;
+  border-radius: 5px;
+  text-decoration: none;
+  background: white;
+  padding: 15px;
+  justify-content: space-around;
+  border: 1px solid #dce3e6;
+}
+
+.car-form-text{
+  font-size: 15px;
+}
+
+.driver {
+  margin-bottom: -5px;
+  margin-top: 10px;
 }
