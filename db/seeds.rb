@@ -354,7 +354,7 @@ search1.save!
 
 
 car1 = Car.new
-car1.name = "Mini Cooper or similar"
+car1.name = "Mini Cooper"
 car1.category = "Mini"
 car1.doors = 3
 car1.seats = 4
@@ -374,7 +374,7 @@ car_rental1.car = car1
 car_rental1.save!
 
 car2 = Car.new
-car2.name = "Renault Twingo or similar"
+car2.name = "Renault Twingo"
 car2.category = "Economy"
 car2.doors = 3
 car2.seats = 5
@@ -394,11 +394,11 @@ car_rental2.car = car2
 car_rental2.save!
 
 car3 = Car.new
-car3.name = "Peugeot 206 or similar"
+car3.name = "Peugeot 206"
 car3.category = "Compact"
 car3.doors = 5
 car3.seats = 5
-car3.image_url = "assets/images/P206.jpg"
+car3.image_url = "P206.jpg"
 car3.save
 
 car_rental3 = CarRental.new
@@ -414,7 +414,7 @@ car_rental3.car = car3
 car_rental3.save!
 
 car5 = Car.new
-car5.name = "Renault Espace or similar"
+car5.name = "Renault Espace"
 car5.category = "Fullsize"
 car5.doors = 5
 car5.seats = 7
@@ -434,7 +434,7 @@ car_rental5.car = car5
 car_rental5.save!
 
 car6 = Car.new
-car6.name = "Porsche Caiman or similar"
+car6.name = "Porsche Caiman"
 car6.category = "Premium"
 car6.doors = 3
 car6.seats = 5

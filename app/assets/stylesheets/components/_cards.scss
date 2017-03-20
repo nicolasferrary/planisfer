@@ -30,7 +30,6 @@
   right: 0px;
   font-size: 17px;
   border-radius: 0;
-
 }
 
 .card-price p{
@@ -48,6 +47,15 @@
   position: relative;
   margin-bottom: 20px;
 }
+
+.card.selected {
+  box-shadow: 1px 1px 1px #5d5d5d;
+  .card-price {
+    background-color: $brand-color;
+  }
+}
+
+
 .card-user {
   position: absolute;
   right: 10px;
@@ -57,20 +65,35 @@
   position: absolute;
   top: 10px;
   left: 10px;
-  font-size: 10px;
-  text-transform: uppercase;
+  font-size: 20px;
 }
+
 .card-description {
   position: absolute;
-  bottom: 10px;
+  bottom: -5px;
   left: 10px;
-}
-.card-description h2 {
-  font-size: 24px;
 }
 .card-description p {
   font-size: 13px;
   }
+
+.card-infos span{
+  font-size: 10px;
+}
+
+.door-infos{
+  position: absolute;
+  bottom: 25px;
+  right : 5px;
+}
+
+.seats-infos{
+  position: absolute;
+  bottom: 5px;
+  right : 5px;
+}
+
+
 .card-link {
   position: absolute;
   top: 0;

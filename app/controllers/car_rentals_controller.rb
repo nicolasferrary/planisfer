@@ -20,7 +20,7 @@ class CarRentalsController < ApplicationController
     # @car_selection is a hash of instances of car_rentals (1 instance per car category)
 
     # This is just for test
-     @car_selection = {
+    @car_selection = {
       :mini => CarRental.all[0],
       :economy => CarRental.all[1],
       :compact => CarRental.all[2],
@@ -28,7 +28,7 @@ class CarRentalsController < ApplicationController
       :fullsize => CarRental.all[3],
       :premium => CarRental.all[4]
     }
-
+     @car_rentals = @car_selection
   end
 
   private
