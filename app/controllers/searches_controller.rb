@@ -26,6 +26,7 @@ class SearchesController < ApplicationController
 
   def show
     @search = Search.find(params[:id])
+    @trips = @search.trips
     @region = @search.region
     @region_airports = Constants::REGIONS_AIRPORTS[@region]
     @selected_airports = @region_airports
@@ -66,7 +67,6 @@ class SearchesController < ApplicationController
     @f2_min_time = set_range(params[:flight2_range])[0]
     @f2_max_time = set_range(params[:flight2_range])[1]
 
-    @trips = @search.trips
     apply_index_filters
 
     @trips = @trips.sort_by { |trip| trip.price }
