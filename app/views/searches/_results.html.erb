@@ -9,7 +9,7 @@
       </div>
       <div class="row" id="see-flights">
         <% @trips_selection.each_with_index do |trip, index| %>
-          <%= link_to trip_path(trip), class: "tabLink result-card", data: { round_trip_flight_id: trip.round_trip_flight.id } do %>
+          <%= link_to car_rentals_path(:trip_id => @trip.id), class: 'btn btn-primary' do %>
             <div class="cardContainer <%= 'selected' if index == 0 %> <%= 'hidden the-hidden-results' if index > 3 %>" >
               <div class="card-description">
                 <div class="card-description-item">

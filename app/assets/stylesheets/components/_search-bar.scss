@@ -126,15 +126,40 @@ car.datepicker{
   text-decoration: none;
   background: white;
   padding: 15px;
-  justify-content: space-around;
+  padding-bottom: 5px;
   border: 1px solid #dce3e6;
+  h5 {
+    margin-top: 0px;
+  }
 }
 
-.car-form-text{
-  font-size: 15px;
+.car-form-row{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .driver {
-  margin-bottom: -5px;
-  margin-top: 10px;
+  margin-bottom: -10px;
+  margin-top: 15px;
+}
+
+.car-form-text.selected {
+  border: 1px solid $brand-color;
+}
+
+.car-form-item{
+  height: 40px;
+  padding: 10px 16px;
+  line-height: 1.33;
+  border-radius: 6px;
+  color: #484848;
+  font-size: 13px;
+  border: 1px solid #e5e5e5;
+}
+
+.age-checkbox{
+  color: $orange;
+  margin-left: 5px;
+
 }

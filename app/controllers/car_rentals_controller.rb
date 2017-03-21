@@ -5,7 +5,9 @@ class CarRentalsController < ApplicationController
   def index
     @trip = Trip.find(params[:trip_id])
     @search = @trip.search
-
+    @region = @trip.region
+    @region_airports_iata = Constants::REGIONS_AIRPORTS[@region.name]
+    @region_airports = @region_airports_iata.map { |airport_iata| Constants::CITY_REGION[airport_iata]}
     @user_ip = Net::HTTP.get(URI("https://api.ipify.org"))
     # IPv4 address.
     # Otherwise, in dev, you can use Localhost v4 address @user_ip = "127.0.0.1"
@@ -15,20 +17,23 @@ class CarRentalsController < ApplicationController
     # Commenté pour les test de l'index
     # @car_rentals = get_car_rentals_for_trip(@trip)
     # @car_rentals is an array of instances of car_rentals
+
+    # This is just for test
+    @car_rentals = [CarRental.all[0], CarRental.all[1], CarRental.all[2], CarRental.all[3], CarRental.all[4]]
     # Commenté pour les test de l'index
-    # @car_selection = get_best_car_per_category(@car_rentals)
+    @category_index = {
+      :mini => 0,
+      :economy => 0,
+      :compact => 0,
+      :standard => 0,
+      :fullsize => 0,
+      :premium => 0,
+    }
+    @car_selection = get_best_cars_per_category(@car_rentals, @category_index)
     # @car_selection is a hash of instances of car_rentals (1 instance per car category)
 
     # This is just for test
-    @car_selection = {
-      :mini => CarRental.all[0],
-      :economy => CarRental.all[1],
-      :compact => CarRental.all[2],
-      :standard => nil,
-      :fullsize => CarRental.all[3],
-      :premium => CarRental.all[4]
-    }
-     @car_rentals = @car_selection
+     @times = ["6 AM", "7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM", "10 PM" ]
   end
 
   private
@@ -47,24 +52,21 @@ class CarRentalsController < ApplicationController
       return car_rentals
   end
 
-  def get_best_car_per_category(rentals)
+  def get_best_cars_per_category(rentals, category_index)
     best_cars = {}
-    mini_cars = rentals.select {|rental| rental.car.category == "Mini"}
-    sorted_mini_cars = mini_cars.sort_by { |rental| rental.price }
-    best_mini_car = sorted_mini_cars.first
-    best_cars[:mini] = get_best_car(rentals, "Mini")
-    best_cars[:economy] = get_best_car(rentals, "Economy")
-    best_cars[:compact] = get_best_car(rentals, "Compact")
-    best_cars[:standard] = get_best_car(rentals, "Standard")
-    best_cars[:fullsize] = get_best_car(rentals, "Fullsize")
-    best_cars[:premium] = get_best_car(rentals, "Premium/Luxury")
+    best_cars[:mini] = get_best_car(rentals, "Mini", category_index[:mini])
+    best_cars[:economy] = get_best_car(rentals, "Economy", category_index[:economy])
+    best_cars[:compact] = get_best_car(rentals, "Compact", category_index[:compact])
+    best_cars[:standard] = get_best_car(rentals, "Standard", category_index[:standard])
+    best_cars[:fullsize] = get_best_car(rentals, "Fullsize", category_index[:fullsize])
+    best_cars[:premium] = get_best_car(rentals, "Premium", category_index[:premium])
     best_cars
   end
 
-  def get_best_car(rentals, category)
+  def get_best_car(rentals, category, index)
     cars = rentals.select {|rental| rental.car.category == category}
     sorted_cars = cars.sort_by { |rental| rental.price }
-    best_car = sorted_cars.first
+    best_car = sorted_cars[index]
   end
 
 end

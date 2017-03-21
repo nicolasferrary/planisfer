@@ -23,47 +23,52 @@
         <div class = "row">
           <div class = col-xs-12>
             <div class = "car-form">
+            <div class= "row">
+              <div class = "col-xs-12">
+                <h5> Your car rental details </h5>
+              </div>
+            </div>
               <%# Beginning 1st row form %>
               <div class = "row">
-                <div class = "col-md-1">
-                  <span class = "light-data">From</span>
-                  <%#mettre les icones de trainline %>
-                </div>
-                <div class = "col-md-4">
-                  <%= text_field_tag :starts_on, Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata], placeholder: "Pick-up-location", "class" => 'input-lg form-control car-form-text'%>
-                </div>
-                <div class = "col-md-4">
-                  <%= text_field_tag :starts_on, @trip.starts_on.strftime("%B %e"), placeholder: "Pick-up-date", "class" => 'input-lg form-control car-datepicker car-form-text'%>
-                </div>
-                <div class = "col-md-3">
-                  <%= select_tag :pick_up_time, options_for_select(@trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M")), class: "input-lg form-control car-form-text", prompt: "Pick-up time" %>
+                <div class = "car-form-row">
+                  <div class = "col-md-1">
+                    <%= image_tag "car.png", width: "30px", height: "auto", class: "car" %>
+                  </div>
+                  <div class = "col-md-4">
+                    <%= select_tag :pick_up_location, options_for_select(@region_airports, Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata]), class: "form-control car-form-item", prompt: "Airports where you can pick-up a car" %>
+                  </div>
+                  <div class = "col-md-4">
+                    <%= text_field_tag :pick_up_date, @trip.starts_on.strftime("%B %e"), placeholder: "Pick-up-date", "class" => 'form-control car-datepicker car-form-item'%>
+                  </div>
+                  <div class = "col-md-3">
+                    <%= select_tag :pick_up_time, options_for_select(@times, @trip.round_trip_flight.flight1_landing_at.localtime.strftime("%l %p").strip), class: "form-control car-form-item" %>
+                  </div>
                 </div>
               </div>
               <%# End 1st row form %>
               <%# Beginning 2nd row form %>
               <div class = "row">
-                <div class = "col-md-1">
-                  <span class = "light-data">To</span>
-                  <%#mettre les icones de trainline %>
-                </div>
-                <div class = "col-md-4">
-                  <%= text_field_tag :starts_on, Constants::CITY_REGION[@trip.round_trip_flight.flight2_origin_airport_iata], placeholder: "Pick-up-location", "class" => 'input-lg form-control car-form-text'%>
+                <div class = "car-form-row">
+                  <div class = "col-md-1">
+                    <%= image_tag "flipped-car.png", width: "30px", height: "auto", class: "car" %>
+                  </div>
+                  <div class = "col-md-4">
+                    <%= select_tag :drop_off_location, options_for_select(@region_airports, Constants::CITY_REGION[@trip.round_trip_flight.flight2_origin_airport_iata]), class: "form-control car-form-item", prompt: "Airports where you can drop-off a car" %>
+                  </div>
+                  <div class = "col-md-4">
+                    <%= text_field_tag :drop_off_date, @trip.returns_on.strftime("%B %e"), placeholder: "Pick-up-date", "class" => 'form-control car-datepicker car-form-item'%>
 
-                </div>
-                <div class = "col-md-4">
-                  <%= text_field_tag :starts_on, @trip.returns_on.strftime("%B %e"), placeholder: "Pick-up-date", "class" => 'input-lg form-control car-datepicker car-form-text'%>
-
-                </div>
-                <div class = "col-md-3">
-                  <%= select_tag :pick_up_time, options_for_select(@trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M")), class: "input-lg form-control car-form-text", prompt: "Pick-up time" %>
-
+                  </div>
+                  <div class = "col-md-3">
+                    <%= select_tag :drop_off_time, options_for_select(@times, @trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%l %p").strip), class: "form-control car-form-item" %>
+                  </div>
                 </div>
               </div>
               <%# End 2nd row form %>
               <%# Beginning 3rd row form %>
               <div class = "row">
                 <div class = "col-xs-12">
-                <span class= "light-data driver"> Driver is > 25 years old </span> <span> <%= check_box_tag :age, 1, {:checked => "checked"}  %> </span>
+                <span class= "light-data driver"> Driver is > 25 years old </span> <span> <%= check_box_tag :age, 1, {:checked => "checked"}, class: "age-checkbox"  %> </span>
             </div>
               </div>
               <%# End 3rd row form %>
@@ -260,11 +265,38 @@
 
   <script>
     $(document).ready(function() {
+
       $('.card').mouseenter('click', function(e) {
         e.preventDefault();
         $('.card.selected').removeClass('selected');
         $(this).addClass('selected');
       })
+
+      $('.car-form-text').mouseenter('click', function(e) {
+        e.preventDefault();
+        $('.car-form-text.selected').removeClass('selected');
+        $(this).addClass('selected');
+      })
+
+    });
+
+
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      $('#pick_up_date').datepicker({
+        todayHighlight: true,
+        orientation: "bottom-left",
+        autoclose: true,
+        format: 'MM dd',
+      });
+      $('#drop_off_date').datepicker({
+        todayHighlight: true,
+        orientation: "bottom-left",
+        autoclose: true,
+        format: 'MM dd',
+      });
     });
   </script>
 
