@@ -1,23 +1,23 @@
-// .slider .slider-selection {
-//   background: $secondary-color;
-// }
+.slider .slider-selection {
+  background: $secondary-color;
+}
 
-// .slider {
-//   margin-left: 20px;
-//   margin-right: 20px;
-// }
+.slider {
+  margin-left: 20px;
+  margin-right: 20px;
+}
 
-// .slider.slider-horizontal .slider-track {
-//   height: 4px;
-// }
+.slider.slider-horizontal .slider-track {
+  height: 4px;
+}
 
-// .slider.slider-horizontal .slider-selection, .slider.slider-horizontal .slider-track-low, .slider.slider-horizontal .slider-track-high {
-//   height: 4px;
-// }
+.slider.slider-horizontal .slider-selection, .slider.slider-horizontal .slider-track-low, .slider.slider-horizontal .slider-track-high {
+  height: 4px;
+}
 
-// .slider-handle {
-//   top: -3px;
-//   border: 2px solid $secondary-color;
-//   background: white;
-//   background-image: none;
-// }
+.slider-handle {
+  top: -3px;
+  border: 2px solid $secondary-color;
+  background: white;
+  background-image: none;
+}
