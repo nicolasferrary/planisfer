@@ -21,7 +21,6 @@ class SearchesController < ApplicationController
     @routes = Avion.generate_routes(@city_name, @region_airports)
     # Launch APi requests and gather trips
     @trips = get_trips_for_routes(@routes, @starts_on, @returns_on, @nb_travelers, @city, @region, @search)
-
     redirect_to search_path(@search)
   end
 
