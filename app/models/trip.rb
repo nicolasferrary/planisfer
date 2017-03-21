@@ -1,6 +1,6 @@
 class Trip < ApplicationRecord
  belongs_to :round_trip_flight
- # belongs_to :car_rental
+ belongs_to :car_rental
  belongs_to :city
  belongs_to :region
  belongs_to :search
@@ -20,6 +20,7 @@ class Trip < ApplicationRecord
       trip.city = city
       trip.region = region
       trip.price = round_trip_flight.price
+      trip.car_rental = CarRental.new()
       trip.save
       trip
     end
