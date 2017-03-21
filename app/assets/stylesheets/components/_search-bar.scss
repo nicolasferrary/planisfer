@@ -71,6 +71,10 @@
   color: #484848;
 }
 
+car.datepicker{
+  margin_top: 0px;
+}
+
 
 .datepicker table tr td.today, .datepicker table tr td.active {
   color: #FF2B67;
@@ -108,4 +112,54 @@
 
 .datepicker table tr td.active:active:hover, .datepicker table tr td.active.highlighted:active:hover, .datepicker table tr td.active.active:hover, .datepicker table tr td.active.highlighted.active:hover, .datepicker table tr td.active:active:focus, .datepicker table tr td.active.highlighted:active:focus, .datepicker table tr td.active.active:focus, .datepicker table tr td.active.highlighted.active:focus, .datepicker table tr td.active:active.focus, .datepicker table tr td.active.highlighted:active.focus, .datepicker table tr td.active.active.focus, .datepicker table tr td.active.highlighted.active.focus {
   background-color: #FF2B67;
+}
+
+
+
+
+.car-form{
+  height: "auto";
+  position: relative;
+  margin-bottom: 20px;
+  color: #333333;
+  border-radius: 5px;
+  text-decoration: none;
+  background: white;
+  padding: 15px;
+  padding-bottom: 5px;
+  border: 1px solid #dce3e6;
+  h5 {
+    margin-top: 0px;
+  }
+}
+
+.car-form-row{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.driver {
+  margin-bottom: -10px;
+  margin-top: 15px;
+}
+
+.car-form-text.selected {
+  border: 1px solid $brand-color;
+}
+
+.car-form-item{
+  height: 40px;
+  padding: 10px 16px;
+  line-height: 1.33;
+  border-radius: 6px;
+  color: #484848;
+  font-size: 13px;
+  border: 1px solid #e5e5e5;
+}
+
+.age-checkbox{
+  color: $orange;
+  margin-left: 5px;
+
 }

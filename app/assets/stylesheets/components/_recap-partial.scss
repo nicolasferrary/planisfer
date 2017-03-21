@@ -1,0 +1,51 @@
+.recap-box {
+    background: #f5f5f5;
+    color: #484242;
+    padding: 30px 40px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    h3 {
+      margin-top: 0;
+    }
+
+}
+
+.recap-box:hover{
+      background: white;
+      box-shadow: 1px 1px 1px #5d5d5d;
+    }
+
+.carrier{
+  font-size: 10px;
+  margin-top: 10px;
+}
+
+.origin-and-destination{
+  display: flex;
+  justify-content : space-between;
+  align-items: center;
+}
+
+.times{
+  display: flex;
+  justify-content : space-between;
+}
+
+.car{
+  opacity: 0.6;
+}
+
+.itinerary {
+  opacity: 0.6;
+}
+
+#hr-content {
+  border: grey 0.1px solid;
+  opacity: 0.5;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 90%;
+}
+
+.date{
+  color: $orange;
+}

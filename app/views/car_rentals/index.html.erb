@@ -1,0 +1,303 @@
+
+<% # bandeau du haut %>
+
+<div class="flight-ticket-title text-center">
+    <div class="banner-content">
+    <%= link_to root_path do %>
+    <%= image_tag "logo.png", class:"logo-1"%>
+    <% end %>
+  </div>
+  <h1 class="">Select a car</h1>
+  <%= link_to "> Back to all flights", search_path(@search), class: "back" %>
+</div>
+
+<% # Fin du bandeau du haut %>
+<% # début du wrapper %>
+<div class = "card-wrapper">
+  <% # début du container %>
+  <div class="container">
+    <div class="row">
+      <% # Début case bootstrap formulaire et cards %>
+      <div class="col-xs-12 col-sm-8">
+        <% #Début de la row de formulaire %>
+        <div class = "row">
+          <div class = col-xs-12>
+            <div class = "car-form">
+            <div class= "row">
+              <div class = "col-xs-12">
+                <h5> Your car rental details </h5>
+              </div>
+            </div>
+              <%# Beginning 1st row form %>
+              <div class = "row">
+                <div class = "car-form-row">
+                  <div class = "col-md-1">
+                    <%= image_tag "car.png", width: "30px", height: "auto", class: "car" %>
+                  </div>
+                  <div class = "col-md-4">
+                    <%= select_tag :pick_up_location, options_for_select(@region_airports, Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata]), class: "form-control car-form-item", prompt: "Airports where you can pick-up a car" %>
+                  </div>
+                  <div class = "col-md-4">
+                    <%= text_field_tag :pick_up_date, @trip.starts_on.strftime("%B %e"), placeholder: "Pick-up-date", "class" => 'form-control car-datepicker car-form-item'%>
+                  </div>
+                  <div class = "col-md-3">
+                    <%= select_tag :pick_up_time, options_for_select(@times, @trip.round_trip_flight.flight1_landing_at.localtime.strftime("%l %p").strip), class: "form-control car-form-item" %>
+                  </div>
+                </div>
+              </div>
+              <%# End 1st row form %>
+              <%# Beginning 2nd row form %>
+              <div class = "row">
+                <div class = "car-form-row">
+                  <div class = "col-md-1">
+                    <%= image_tag "flipped-car.png", width: "30px", height: "auto", class: "car" %>
+                  </div>
+                  <div class = "col-md-4">
+                    <%= select_tag :drop_off_location, options_for_select(@region_airports, Constants::CITY_REGION[@trip.round_trip_flight.flight2_origin_airport_iata]), class: "form-control car-form-item", prompt: "Airports where you can drop-off a car" %>
+                  </div>
+                  <div class = "col-md-4">
+                    <%= text_field_tag :drop_off_date, @trip.returns_on.strftime("%B %e"), placeholder: "Pick-up-date", "class" => 'form-control car-datepicker car-form-item'%>
+
+                  </div>
+                  <div class = "col-md-3">
+                    <%= select_tag :drop_off_time, options_for_select(@times, @trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%l %p").strip), class: "form-control car-form-item" %>
+                  </div>
+                </div>
+              </div>
+              <%# End 2nd row form %>
+              <%# Beginning 3rd row form %>
+              <div class = "row">
+                <div class = "col-xs-12">
+                <span class= "light-data driver"> Driver is > 25 years old </span> <span> <%= check_box_tag :age, 1, {:checked => "checked"}, class: "age-checkbox"  %> </span>
+            </div>
+              </div>
+              <%# End 3rd row form %>
+            </div>
+          </div>
+        </div>
+        <% #Fin de la row de formulaire %>
+        <% #Début row titre cards %>
+        <div id="TitleShow">
+          <h3>THE BEST CARS PER CATEGORY </h3>
+        </div>
+        <% #Fin row titre cards %>
+        <% #Début de la 1ere row de cards%>
+        <div class="row">
+          <% # Début de la première card %>
+          <% if @car_selection[:mini] %>
+            <div class="col-xs-12 col-sm-6">
+              <div class="card selected">
+                <%= image_tag @car_selection[:mini].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                <div class="card-name"> <%= @car_selection[:mini].car.name %><span class="light-data"> or similar </span>
+                </div>
+                <div class = "card-price">
+                  <p> <%= @car_selection[:mini].price.round %> €</p>
+                </div>
+                <div class="card-category">
+                  <p><%= @car_selection[:mini].car.category %></p>
+                </div>
+                <div class = "card-infos">
+                  <div class = "door-infos">
+                    <%= image_tag "door.png", class: "door-icon" %> <span><%= @car_selection[:mini].car.doors %> doors </span>
+                  </div>
+                  <div class = "seats-infos">
+                    <%= image_tag "Seats.png", class: "seats-icon" %> <span><%= @car_selection[:mini].car.seats %> seats </span>
+                  </div>
+                </div>
+                <a class="card-link" href="#" ></a>
+              </div>
+            </div>
+          <% end %>
+          <% # Fin de la première card %>
+          <% # début de la 2eme card %>
+          <% if @car_selection[:economy] %>
+            <div class="col-xs-12 col-sm-6">
+              <div class="card">
+                <%= image_tag @car_selection[:economy].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                <div class="card-name"> <%= @car_selection[:economy].car.name %><span class="light-data"> or similar </span>
+                </div>
+                <div class = "card-price">
+                  <p> <%= @car_selection[:economy].price.round %> €</p>
+                </div>
+                <div class="card-category">
+                  <p><%= @car_selection[:economy].car.category %></p>
+                </div>
+                <div class = "card-infos">
+                  <div class = "door-infos">
+                    <%= image_tag "door.png", class: "door-icon" %> <span><%= @car_selection[:economy].car.doors %> doors </span>
+                  </div>
+                  <div class = "seats-infos">
+                    <%= image_tag "Seats.png", class: "seats-icon" %> <span><%= @car_selection[:economy].car.seats %> seats </span>
+                  </div>
+                </div>
+                <a class="card-link" href="#" ></a>
+              </div>
+            </div>
+          <% end %>
+          <% # fin de la 2eme card %>
+          <% # Début de la 3e card %>
+          <% if @car_selection[:compact] %>
+            <div class="col-xs-12 col-sm-6">
+              <div class="card">
+                <%= image_tag @car_selection[:compact].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                <div class="card-name"> <%= @car_selection[:compact].car.name %><span class="light-data"> or similar </span>
+                </div>
+                <div class = "card-price">
+                  <p> <%= @car_selection[:compact].price.round %> €</p>
+                </div>
+                <div class="card-category">
+                  <p><%= @car_selection[:compact].car.category %></p>
+                </div>
+                <div class = "card-infos">
+                  <div class = "door-infos">
+                    <%= image_tag "door.png", class: "door-icon" %> <span><%= @car_selection[:compact].car.doors %> doors </span>
+                  </div>
+                  <div class = "seats-infos">
+                    <%= image_tag "Seats.png", class: "seats-icon" %> <span><%= @car_selection[:compact].car.seats %> seats </span>
+                  </div>
+                </div>
+                <a class="card-link" href="#" ></a>
+              </div>
+            </div>
+          <% end %>
+          <% # Fin de la 3e card %>
+          <% # Début de la 4e card %>
+          <% if @car_selection[:standard] %>
+            <div class="col-xs-12 col-sm-6">
+              <div class="card">
+                <%= image_tag @car_selection[:standard].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                <div class="card-name"> <%= @car_selection[:standard].car.name %><span class="light-data"> or similar </span>
+                </div>
+                <div class = "card-price">
+                  <p> <%= @car_selection[:standard].price.round %> €</p>
+                </div>
+                <div class="card-category">
+                  <p><%= @car_selection[:standard].car.category %></p>
+                </div>
+                <div class = "card-infos">
+                  <div class = "door-infos">
+                    <%= image_tag "door.png", class: "door-icon" %> <span><%= @car_selection[:standard].car.doors %> doors </span>
+                  </div>
+                  <div class = "seats-infos">
+                    <%= image_tag "Seats.png", class: "seats-icon" %> <span><%= @car_selection[:standard].car.seats %> seats </span>
+                  </div>
+                </div>
+                <a class="card-link" href="#" ></a>
+              </div>
+            </div>
+          <% end %>
+          <% # Fin de la 4e card %>
+          <% # Début de la 5e card %>
+          <% if @car_selection[:fullsize] %>
+            <div class="col-xs-12 col-sm-6">
+              <div class="card">
+                <%= image_tag @car_selection[:fullsize].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                <div class="card-name"> <%= @car_selection[:fullsize].car.name %><span class="light-data"> or similar </span>
+                </div>
+                <div class = "card-price">
+                  <p> <%= @car_selection[:fullsize].price.round %> €</p>
+                </div>
+                <div class="card-category">
+                  <p><%= @car_selection[:fullsize].car.category %></p>
+                </div>
+                <div class = "card-infos">
+                  <div class = "door-infos">
+                    <%= image_tag "door.png", class: "door-icon" %> <span><%= @car_selection[:fullsize].car.doors %> doors </span>
+                  </div>
+                  <div class = "seats-infos">
+                    <%= image_tag "Seats.png", class: "seats-icon" %> <span><%= @car_selection[:fullsize].car.seats %> seats </span>
+                  </div>
+                </div>
+                <a class="card-link" href="#" ></a>
+              </div>
+            </div>
+          <% end %>
+          <% # Fin de la 5e card %>
+          <% # Début de la 6e card %>
+          <% if @car_selection[:premium] %>
+            <div class="col-xs-12 col-sm-6">
+              <div class="card">
+                <%= image_tag @car_selection[:premium].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                <div class="card-name"> <%= @car_selection[:premium].car.name %><span class="light-data"> or similar </span>
+                </div>
+                <div class = "card-price">
+                  <p> <%= @car_selection[:premium].price.round %> €</p>
+                </div>
+                <div class="card-category">
+                  <p><%= @car_selection[:premium].car.category %></p>
+                </div>
+                <div class = "card-infos">
+                  <div class = "door-infos">
+                    <%= image_tag "door.png", class: "door-icon" %> <span><%= @car_selection[:premium].car.doors %> doors </span>
+                  </div>
+                  <div class = "seats-infos">
+                    <%= image_tag "Seats.png", class: "seats-icon" %> <span><%= @car_selection[:premium].car.seats %> seats </span>
+                  </div>
+                </div>
+                <a class="card-link" href="#" ></a>
+              </div>
+            </div>
+          <% end %>
+          <% # Fin de la 6e card %>
+        </div>
+        <% # Fin de la row de cards%>
+      </div>
+      <% # Fin de la case bootstrap pour les formulaires et cards %>
+
+
+      <% # Début case bootstrap Carnet de voyage %>
+      <div class="col-xs-12 col-sm-4">
+        <%= render "shared/recap" %>
+      </div>
+      <% #Fin case bootstrap Carnet de voyage  %>
+
+    </div>
+    <% # Find de la row %>
+
+  </div>
+  <% # Find du container %>
+</div>
+ <% # Find du wrapper %>
+
+
+
+<% content_for(:after_js) do %>
+
+  <script>
+    $(document).ready(function() {
+
+      $('.card').mouseenter('click', function(e) {
+        e.preventDefault();
+        $('.card.selected').removeClass('selected');
+        $(this).addClass('selected');
+      })
+
+      $('.car-form-text').mouseenter('click', function(e) {
+        e.preventDefault();
+        $('.car-form-text.selected').removeClass('selected');
+        $(this).addClass('selected');
+      })
+
+    });
+
+
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      $('#pick_up_date').datepicker({
+        todayHighlight: true,
+        orientation: "bottom-left",
+        autoclose: true,
+        format: 'MM dd',
+      });
+      $('#drop_off_date').datepicker({
+        todayHighlight: true,
+        orientation: "bottom-left",
+        autoclose: true,
+        format: 'MM dd',
+      });
+    });
+  </script>
+
+<% end %>

@@ -510,6 +510,7 @@ module Constants
   '4U'=> 'Germanwings'
   }
 
+
 #   AIRLINE_WEBSITES = {
 #     "JP"=>"http://www.adria.si/",
 #     "RE"=>"http://www.aerarann.com/",

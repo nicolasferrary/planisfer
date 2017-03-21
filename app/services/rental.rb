@@ -1,0 +1,2 @@
+module Rental
+end

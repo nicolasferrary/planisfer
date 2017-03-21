@@ -1,3 +1,8 @@
+.card-wrapper{
+  padding: 30px;
+  background-color: #F5F5F5;
+}
+
 .cardContainer {
   height: 75px;
   color: black;
@@ -26,9 +31,84 @@
   right: 0px;
   font-size: 17px;
   border-radius: 0;
-
 }
 
 .card-price p{
   margin-bottom: 0px;
 }
+
+
+// Le Wagon UI cards
+
+.card {
+  height: 175px;
+  position: relative;
+  margin-bottom: 20px;
+  color: #333333;
+  border-radius: 5px;
+  text-decoration: none;
+  box-shadow: 1px 1px 1px #c7c7c7;
+  background: white;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.card-image{
+  position: absolute;
+}
+
+.card.selected {
+  box-shadow: 1px 1px 1px #5d5d5d;
+  .card-price {
+    background-color: $brand-color;
+  }
+}
+
+
+.card-name {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 16px;
+}
+
+.card-category {
+  position: absolute;
+  bottom: -5px;
+  left: 10px;
+  color: $orange;
+}
+.card-category p {
+  font-size: 10px;
+  }
+
+.card-infos span{
+  font-size: 10px;
+}
+
+.door-infos{
+  position: absolute;
+  bottom: 25px;
+  right : 5px;
+}
+
+.seats-infos{
+  position: absolute;
+  bottom: 5px;
+  right : 5px;
+}
+
+
+.card-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index:2;
+  background: black;
+  opacity: 0;
+}
+

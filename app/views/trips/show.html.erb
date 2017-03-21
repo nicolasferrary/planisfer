@@ -78,6 +78,11 @@
 
   </div>
 
+  <div>
+
+    <%= link_to "Choose a car", car_rentals_path(:trip_id => @trip.id), class: 'btn btn-primary'%>
+  </div>
+
   <div class="share text-center">
     <div class="fb-send" data-href="<%= request.original_url %>">
     </div>
@@ -97,7 +102,7 @@
       <p>PRICE / <%= @trip.nb_travelers%> TRAVELERS</p>
     </div>
     <h4><%= @trip.price.round%>€</h4>
-    <%= render 'book_modal', modal_name: "book_modal" %>
+    <%= render 'shared/book_modal', modal_name: "book_modal" %>
     <button class="btn-brand" data-toggle="modal" data-target="#book_modal">BOOK</button>
   </div>
 
