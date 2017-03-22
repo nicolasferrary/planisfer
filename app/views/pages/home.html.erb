@@ -9,18 +9,15 @@
           <div class="container">
             <div class="row">
               <div class="col-xs-12 col-md-8">
-
                 <div class="banner-title">
                  <h1>Roadtrips in Europe</h1>
                  <h3>Find the best way to discover new regions</h3>
                 </div>
-
                 <div class="text-center">
                   <a href="#trendy-destination">
                     <%= image_tag "arrow.png", class: "floating arrow-img" %>
                   </a>
                 </div>
-
               </div> <!-- fin du col-xs-12 col-md-8 -->
 
 
@@ -71,7 +68,7 @@
     <%= render 'wait_modal', modal_name: "wait_modal" %>
 
 
-      <div class="col-xs-12 ">
+      <div class="col-md-9">
         <div class="trending" id="trendy-destination">
           <h1 class="banner2-title "><strong>Trendy destinations</strong></h1>
 
@@ -113,26 +110,26 @@
             </a>
 
             <a class="block sm destination" data-toggle="modal" data-target="#modal_5">
-              <%= image_tag "bridge.jpg", class:"dest-image"%>
+              <%= image_tag "corsica.jpg", class:"dest-image"%>
               <span class="box">
                 <span class="text in-box">
-                  <span class="primarytext">Central-EU</span>
+                  <span class="primarytext">Corsica</span>
                 </span>
               </span>
             </a>
             <a class="block lg destination" data-toggle="modal" data-target="#modal_6">
-              <%= image_tag "florence.jpg", class:"dest-image"%>
+              <%= image_tag "portugal.jpg", class:"dest-image"%>
               <span class="box">
                 <span class="text in-box">
-                  <span class="primarytext">Tuscany</span>
+                  <span class="primarytext">Portugal</span>
                 </span>
               </span>
             </a>
             <a class="block sm destination" data-toggle="modal" data-target="#modal_7">
-              <%= image_tag "andalousie.jpg", class:"dest-image"%>
+              <%= image_tag "scotland.jpg", class:"dest-image"%>
               <span class="box">
                 <span class="text in-box">
-                  <span class="primarytext">Andalucia</span>
+                  <span class="primarytext">Scotland</span>
                 </span>
               </span>
             </a>
@@ -148,6 +145,8 @@
           </div> <!-- fin du blocks -->
         </div> <!-- fin du trending -->
       </div> <!-- fin du 2e col-xs-12 principal -->
+      <div class="col-md-3">
+      </div>
 
       <hr>
 
@@ -179,19 +178,19 @@
 
       <%# PART 5 %>
       <%= render 'slider',
-      this_city: "central_eu",
+      this_city: "corsica",
       modal_name: 'modal_5' %>
       <%# END OF PART 5 %>
 
       <%# PART 6 %>
       <%= render 'slider',
-      this_city: "tuscany",
+      this_city: "portugal",
       modal_name: 'modal_6' %>
       <%# END OF PART 6 %>
 
       <%# PART 7 %>
       <%= render 'slider',
-      this_city: "andalucia",
+      this_city: "scotland",
       modal_name: 'modal_7' %>
       <%# END OF PART 7 %>
 
