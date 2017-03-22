@@ -27,7 +27,6 @@ module Rental
       polling_url = "http://partners.api.skyscanner.net" + response.headers[:location].gsub(/&deltaExclude.*/,"")
       response = RestClient.get polling_url, {accept: :json}
       response.body
-      raise
     end
 
 

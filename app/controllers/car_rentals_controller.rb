@@ -55,9 +55,9 @@ class CarRentalsController < ApplicationController
     best_cars[:mini] = get_best_car(rentals, "Mini", category_index[:mini])
     best_cars[:economy] = get_best_car(rentals, "Economy", category_index[:economy])
     best_cars[:compact] = get_best_car(rentals, "Compact", category_index[:compact])
-    best_cars[:standard] = get_best_car(rentals, "Standard", category_index[:standard])
+    best_cars[:standard] = get_best_car(rentals, "Intermediate/Standard", category_index[:standard])
     best_cars[:fullsize] = get_best_car(rentals, "Fullsize", category_index[:fullsize])
-    best_cars[:premium] = get_best_car(rentals, "Premium", category_index[:premium])
+    best_cars[:premium] = get_best_car(rentals, "Premium/Luxury", category_index[:premium])
     best_cars
   end
 

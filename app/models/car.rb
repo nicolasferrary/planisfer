@@ -9,7 +9,7 @@ class Car < ApplicationRecord
       car.category = extract_category(data, rental_data)
       car.doors = rental_data['doors']
       car.seats = rental_data['seats']
-      # car.image_url = rental_data['image_id']['url']
+      car.image_url = extract_image_url(data, rental_data)
       car.save
       car
     end
@@ -32,6 +32,14 @@ class Car < ApplicationRecord
       else
         rental_data['vehicle'].gsub(" or similar", "")
       end
+    end
+
+    def extract_image_url(data, rental_data)
+      image_id = rental_data['image_id']
+      image_urls = data['images'].select{ |image|
+        image['id'] == image_id
+      }
+      image_url = image_urls.first['url'] unless image_urls == []
     end
 
   end
