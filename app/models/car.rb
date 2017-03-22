@@ -5,7 +5,7 @@ class Car < ApplicationRecord
   class << self
     def create(data, rental_data)
       car = Car.new
-      car.name = rental_data['vehicle'].gsub(" or similar", "")
+      car.name = extract_name(rental_data)
       car.category = extract_category(data, rental_data)
       car.doors = rental_data['doors']
       car.seats = rental_data['seats']
@@ -25,5 +25,14 @@ class Car < ApplicationRecord
         category.first['name']
       end
     end
+
+    def extract_name(rental_data)
+      if rental_data['vehicle'] == nil
+        "Unknown car"
+      else
+        rental_data['vehicle'].gsub(" or similar", "")
+      end
+    end
+
   end
 end
