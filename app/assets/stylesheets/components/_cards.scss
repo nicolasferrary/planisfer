@@ -113,3 +113,15 @@
   opacity: 0;
 }
 
+.more-photos{
+  position: absolute;
+  right: 40px;
+  z-index: 3;
+}
+
+.clickable-arrow{
+  height: 20px;
+  width: auto;
+  opacity: 0.5;
+}
+
