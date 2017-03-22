@@ -12,6 +12,7 @@ Region.destroy_all
 Airport.destroy_all
 City.destroy_all
 CarRental.destroy_all
+Car.destroy_all
 
 
 city1 = City.create!(name:"Paris")

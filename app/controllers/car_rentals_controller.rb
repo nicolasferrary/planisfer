@@ -11,16 +11,14 @@ class CarRentalsController < ApplicationController
     @user_ip = Net::HTTP.get(URI("https://api.ipify.org"))
     # IPv4 address.
     # Otherwise, in dev, you can use Localhost v4 address @user_ip = "127.0.0.1"
-    # @user_ip = request.remote_ip
     @currency = 'EUR'
-    # Lancer les requetes
-    # Commenté pour les test de l'index
-    # @car_rentals = get_car_rentals_for_trip(@trip)
-    # @car_rentals is an array of instances of car_rentals
 
-    # This is just for test
-    @car_rentals = [CarRental.all[0], CarRental.all[1], CarRental.all[2], CarRental.all[3], CarRental.all[4]]
-    # Commenté pour les test de l'index
+    # Lancer les requetes
+    # Comment if you want to test with a seed
+    @car_rentals = get_car_rentals_for_trip(@trip)
+    # @car_rentals is an array of instances of car_rentals
+    # Uncomment if you want to test with a seed
+    # @car_rentals = [CarRental.all[0], CarRental.all[1], CarRental.all[2], CarRental.all[3], CarRental.all[4]]
     @category_index = {
       :mini => 0,
       :economy => 0,

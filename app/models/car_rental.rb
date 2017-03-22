@@ -43,11 +43,12 @@ class CarRental < ApplicationRecord
 
     def extract_car(data, rental_data)
     #if car already exists in database
-      if !Car.find_by_name(rental_data['vehicle']).nil?
-        Car.find_by_name(rental_data['vehicle'])
+      if !rental_data['vehicle'].nil? && !Car.find_by_name(rental_data['vehicle'].gsub(" or similar", "")).nil?
+        Car.find_by_name(rental_data['vehicle'].gsub(" or similar", ""))
       else
         Car.create(data, rental_data)
       end
+
     end
 
     def extract_deep_link_url(rental_data)

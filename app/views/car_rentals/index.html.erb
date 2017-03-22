@@ -87,8 +87,10 @@
           <% if @car_selection[:mini] %>
             <div class="col-xs-12 col-sm-6">
               <div class="card selected">
-                <%= image_tag @car_selection[:mini].car.image_url, height: 130, width: "auto", class: "card-image" %>
-                <div class="card-name"> <%= @car_selection[:mini].car.name %><span class="light-data"> or similar </span>
+                <% if !@car_selection[:mini].car.image_url.nil? %>
+                  <%= image_tag @car_selection[:mini].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                  <% end %>
+                <div class="card-name"> <%= @car_selection[:mini].car.name %><span class="light-data"> or similar </span> <span> <%=  @car_selection[:mini].pick_up_location  %></span> <span> <%= @car_selection[:mini].drop_off_location  %></span>
                 </div>
                 <div class = "card-price">
                   <p> <%= @car_selection[:mini].price.round %> €</p>
@@ -113,7 +115,9 @@
           <% if @car_selection[:economy] %>
             <div class="col-xs-12 col-sm-6">
               <div class="card">
-                <%= image_tag @car_selection[:economy].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                <% if !@car_selection[:economy].car.image_url.nil? %>
+                  <%= image_tag @car_selection[:economy].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                <% end %>
                 <div class="card-name"> <%= @car_selection[:economy].car.name %><span class="light-data"> or similar </span>
                 </div>
                 <div class = "card-price">
@@ -139,7 +143,9 @@
           <% if @car_selection[:compact] %>
             <div class="col-xs-12 col-sm-6">
               <div class="card">
-                <%= image_tag @car_selection[:compact].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                <% if !@car_selection[:compact].car.image_url.nil? %>
+                  <%= image_tag @car_selection[:compact].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                <% end %>
                 <div class="card-name"> <%= @car_selection[:compact].car.name %><span class="light-data"> or similar </span>
                 </div>
                 <div class = "card-price">
@@ -165,7 +171,9 @@
           <% if @car_selection[:standard] %>
             <div class="col-xs-12 col-sm-6">
               <div class="card">
-                <%= image_tag @car_selection[:standard].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                <% if !@car_selection[:standard].car.image_url.nil? %>
+                  <%= image_tag @car_selection[:standard].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                <% end %>
                 <div class="card-name"> <%= @car_selection[:standard].car.name %><span class="light-data"> or similar </span>
                 </div>
                 <div class = "card-price">
@@ -191,7 +199,9 @@
           <% if @car_selection[:fullsize] %>
             <div class="col-xs-12 col-sm-6">
               <div class="card">
-                <%= image_tag @car_selection[:fullsize].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                <% if !@car_selection[:fullsize].car.image_url.nil? %>
+                  <%= image_tag @car_selection[:fullsize].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                <% end %>
                 <div class="card-name"> <%= @car_selection[:fullsize].car.name %><span class="light-data"> or similar </span>
                 </div>
                 <div class = "card-price">
@@ -217,7 +227,9 @@
           <% if @car_selection[:premium] %>
             <div class="col-xs-12 col-sm-6">
               <div class="card">
-                <%= image_tag @car_selection[:premium].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                <% if !@car_selection[:premium].car.image_url.nil? %>
+                  <%= image_tag @car_selection[:premium].car.image_url, height: 130, width: "auto", class: "card-image" %>
+                <% end %>
                 <div class="card-name"> <%= @car_selection[:premium].car.name %><span class="light-data"> or similar </span>
                 </div>
                 <div class = "card-price">
