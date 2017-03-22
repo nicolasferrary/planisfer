@@ -90,7 +90,7 @@
                 <% if !@car_selection[:mini].car.image_url.nil? %>
                   <%= image_tag @car_selection[:mini].car.image_url, height: 130, width: "auto", class: "card-image" %>
                   <% end %>
-                <div class="card-name"> <%= @car_selection[:mini].car.name %><span class="light-data"> or similar </span>
+                <div class="card-name"> <%= @car_selection[:mini].car.name %><span class="light-data"> or similar </span> <span> <%=  @car_selection[:mini].pick_up_location  %></span> <span> <%= @car_selection[:mini].drop_off_location  %></span>
                 </div>
                 <div class = "card-price">
                   <p> <%= @car_selection[:mini].price.round %> €</p>
