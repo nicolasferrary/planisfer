@@ -450,7 +450,7 @@ car_rental3.save!
 
 car5 = Car.new
 car5.name = "Renault Espace"
-car5.category = "Fullsize"
+car5.category = "Mini"
 car5.doors = 5
 car5.seats = 7
 car5.image_url = "espace.jpg"
@@ -470,7 +470,7 @@ car_rental5.save!
 
 car6 = Car.new
 car6.name = "Porsche cayman"
-car6.category = "Premium"
+car6.category = "Mini"
 car6.doors = 3
 car6.seats = 5
 car6.image_url = "porschecayman.jpg"

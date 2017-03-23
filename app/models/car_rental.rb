@@ -1,10 +1,11 @@
 class CarRental < ApplicationRecord
   belongs_to :car
   has_many :trips
+  belongs_to :selection
 
 
   class << self
-    def create(data, rental_data, pick_up_date_time, drop_off_date_time, driver_age)
+    def create(data, rental_data, pick_up_date_time, drop_off_date_time, driver_age, selection)
       car_rental = CarRental.new
       car_rental.price = extract_price(rental_data)
       car_rental.currency = extract_currency(data)
@@ -16,6 +17,7 @@ class CarRental < ApplicationRecord
       car_rental.company = extract_company(rental_data)
       car_rental.car = extract_car(data, rental_data)
       car_rental.deep_link_url = extract_deep_link_url(rental_data)
+      car_rental.selection = selection
       car_rental.save
       car_rental
     end

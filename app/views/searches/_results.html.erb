@@ -9,7 +9,7 @@
       </div>
       <div class="row" id="see-flights">
         <% @trips_selection.each_with_index do |trip, index| %>
-          <%= link_to car_rentals_path(:trip_id => trip.id), class: 'tabLink result-card' do %>
+          <%= link_to selections_path(:trip_id => trip.id), class: 'tabLink result-card', method: :post, data: {round_trip_flight_id: trip.round_trip_flight.id} do %>
             <div class="cardContainer <%= 'selected' if index == 0 %> <%= 'hidden the-hidden-results' if index > 3 %>" >
               <div class="card-description">
                 <div class="card-description-item">
