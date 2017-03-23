@@ -95,8 +95,11 @@
                 <div class = "card-price">
                   <p> <%= @car_selection[:mini].price.round %> €</p>
                 </div>
-                <%= link_to car_rentals_path(:trip_id => @trip.id, :mini_index => @next_photos[:mini]), class: "more-photos" do %>
+                <%= link_to car_rentals_path(:trip_id => @trip.id, :mini_index => @photo_params[:next_mini]), class: "more-photos" do %>
                   <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
+                <% end %>
+                <%= link_to car_rentals_path(:trip_id => @trip.id, :mini_index => @photo_params[:previous_mini]), class: "previous-photos" do %>
+                  <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
                 <% end %>
                 <div class="card-category">
                   <p><%= @car_selection[:mini].car.category %></p>
@@ -126,8 +129,11 @@
                 <div class = "card-price">
                   <p> <%= @car_selection[:economy].price.round %> €</p>
                 </div>
-                <%= link_to car_rentals_path(:trip_id => @trip.id, :economy_index => @next_photos[:economy]), class: "more-photos" do %>
+                <%= link_to car_rentals_path(:trip_id => @trip.id, :economy_index => @photo_params[:next_economy]), class: "more-photos" do %>
                   <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
+                <% end %>
+                <%= link_to car_rentals_path(:trip_id => @trip.id, :economy_index => @photo_params[:previous_economy]), class: "previous-photos" do %>
+                  <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
                 <% end %>
                 <div class="card-category">
                   <p><%= @car_selection[:economy].car.category %></p>
@@ -157,8 +163,11 @@
                 <div class = "card-price">
                   <p> <%= @car_selection[:compact].price.round %> €</p>
                 </div>
-                <%= link_to car_rentals_path(:trip_id => @trip.id, :compact_index => @next_photos[:compact]), class: "more-photos" do %>
+                <%= link_to car_rentals_path(:trip_id => @trip.id, :compact_index => @photo_params[:next_compact]), class: "more-photos" do %>
                   <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
+                <% end %>
+                <%= link_to car_rentals_path(:trip_id => @trip.id, :compact_index => @photo_params[:previous_compact]), class: "previous-photos" do %>
+                  <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
                 <% end %>
                 <div class="card-category">
                   <p><%= @car_selection[:compact].car.category %></p>
@@ -188,8 +197,11 @@
                 <div class = "card-price">
                   <p> <%= @car_selection[:standard].price.round %> €</p>
                 </div>
-                <%= link_to car_rentals_path(:trip_id => @trip.id, :standard_index => @next_photos[:standard]), class: "more-photos" do %>
+                <%= link_to car_rentals_path(:trip_id => @trip.id, :standard_index => @photo_params[:next_standard]), class: "more-photos" do %>
                   <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
+                <% end %>
+                <%= link_to car_rentals_path(:trip_id => @trip.id, :standard_index => @photo_params[:previous_standard]), class: "previous-photos" do %>
+                  <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
                 <% end %>
                 <div class="card-category">
                   <p><%= @car_selection[:standard].car.category %></p>
@@ -219,8 +231,11 @@
                 <div class = "card-price">
                   <p> <%= @car_selection[:fullsize].price.round %> €</p>
                 </div>
-                <%= link_to car_rentals_path(:trip_id => @trip.id, :fullsize_index => @next_photos[:fullsize]), class: "more-photos" do %>
+                <%= link_to car_rentals_path(:trip_id => @trip.id, :fullsize_index => @photo_params[:next_fullsize]), class: "more-photos" do %>
                   <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
+                <% end %>
+                <%= link_to car_rentals_path(:trip_id => @trip.id, :fullsize_index => @photo_params[:previous_fullsize]), class: "previous-photos" do %>
+                  <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
                 <% end %>
                 <div class="card-category">
                   <p><%= @car_selection[:fullsize].car.category %></p>
@@ -250,8 +265,11 @@
                 <div class = "card-price">
                   <p> <%= @car_selection[:premium].price.round %> €</p>
                 </div>
-                <%= link_to car_rentals_path(:trip_id => @trip.id, :premium_index => @next_photos[:premium]), class: "more-photos" do %>
+                <%= link_to car_rentals_path(:trip_id => @trip.id, :premium_index => @photo_params[:next_premium]), class: "more-photos" do %>
                   <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
+                <% end %>
+                <%= link_to car_rentals_path(:trip_id => @trip.id, :premium_index => @photo_params[:previous_premium]), class: "previous-photos" do %>
+                  <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
                 <% end %>
                 <div class="card-category">
                   <p><%= @car_selection[:premium].car.category %></p>

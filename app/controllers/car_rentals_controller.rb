@@ -15,16 +15,16 @@ class CarRentalsController < ApplicationController
 
     # Lancer les requetes
     # Comment if you want to test with a seed
-    @car_rentals = get_car_rentals_for_trip(@trip)
+    # @car_rentals = get_car_rentals_for_trip(@trip)
     # @car_rentals is an array of instances of car_rentals
     # Uncomment if you want to test with a seed
-    # @car_rentals = [CarRental.all[0], CarRental.all[1], CarRental.all[2], CarRental.all[3], CarRental.all[4]]
+    @car_rentals = [CarRental.all[0], CarRental.all[1], CarRental.all[2], CarRental.all[3], CarRental.all[4]]
     @car_selection = get_best_cars_per_category(@car_rentals)
     # @car_selection is a hash of instances of car_rentals (1 instance per car category)
 
     # This is just for test
     @times = ["6 AM", "7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM", "10 PM" ]
-    @next_photos = define_next_photo_params(@car_rentals)
+    @photo_params = surounding_params(@car_rentals)
   end
 
   private
@@ -72,53 +72,87 @@ class CarRentalsController < ApplicationController
     }
   end
 
-  def define_next_photo_params(car_rentals)
+  def surounding_params(car_rentals)
     mini_max_param = [4, number_rentals(car_rentals, "Mini")-1].min
     economy_max_param = [4, number_rentals(car_rentals, "Economy")-1].min
     compact_max_param = [4, number_rentals(car_rentals, "Compact")-1].min
     standard_max_param = [4, number_rentals(car_rentals, "Intermediate/Standard")-1].min
     fullsize_max_param = [4, number_rentals(car_rentals, "Fullsize")-1].min
     premium_max_param = [4, number_rentals(car_rentals, "Premium/Luxury")-1].min
-    next_photo_params = {}
+
+    photo_params = {}
+
+    # define next params
     if params[:mini_index].to_i == mini_max_param
-      next_photo_params[:mini] = 0
+      photo_params[:next_mini] = 0
     else
-      next_photo_params[:mini] = params[:mini_index].to_i + 1
+      photo_params[:next_mini] = params[:mini_index].to_i + 1
     end
     if params[:economy_index].to_i == economy_max_param
-      next_photo_params[:economy] = 0
+      photo_params[:next_economy] = 0
     else
-      next_photo_params[:economy] = params[:economy_index].to_i + 1
+      photo_params[:next_economy] = params[:economy_index].to_i + 1
     end
     if params[:compact_index].to_i == compact_max_param
-      next_photo_params[:compact] = 0
+      photo_params[:next_compact] = 0
     else
-      next_photo_params[:compact] = params[:compact_index].to_i + 1
+      photo_params[:next_compact] = params[:compact_index].to_i + 1
     end
      if params[:standard_index].to_i == standard_max_param
-      next_photo_params[:standard] = 0
+      photo_params[:next_standard] = 0
     else
-      next_photo_params[:standard] = params[:standard_index].to_i + 1
+      photo_params[:next_standard] = params[:standard_index].to_i + 1
     end
      if params[:fullsize_index].to_i == fullsize_max_param
-      next_photo_params[:fullsize] = 0
+      photo_params[:next_fullsize] = 0
     else
-      next_photo_params[:fullsize] = params[:fullsize_index].to_i + 1
+      photo_params[:next_fullsize] = params[:fullsize_index].to_i + 1
     end
      if params[:premium_index].to_i == premium_max_param
-      next_photo_params[:premium] = 0
+      photo_params[:next_premium] = 0
     else
-      next_photo_params[:premium] = params[:premium_index].to_i + 1
+      photo_params[:next_premium] = params[:premium_index].to_i + 1
     end
 
-    next_photo_params
+    # define previous params
+    if params[:mini_index].to_i == 0 || nil
+      photo_params[:previous_mini] = mini_max_param
+    else
+      photo_params[:previous_mini] = params[:mini_index].to_i - 1
+    end
+    if params[:economy_index].to_i == 0 || nil
+      photo_params[:previous_economy] = economy_max_param
+    else
+      photo_params[:previous_economy] = params[:economy_index].to_i - 1
+    end
+    if params[:compact_index].to_i == 0 || nil
+      photo_params[:previous_compact] = compact_max_param
+    else
+      photo_params[:previous_compact] = params[:compact_index].to_i - 1
+    end
+    if params[:standard_index].to_i == 0 || nil
+      photo_params[:previous_standard] = standard_max_param
+    else
+      photo_params[:previous_standard] = params[:standard_index].to_i - 1
+    end
+    if params[:fullsize_index].to_i == 0 || nil
+      photo_params[:previous_fullsize] = fullsize_max_param
+    else
+      photo_params[:previous_fullsize] = params[:fullsize_index].to_i - 1
+    end
+    if params[:premium_index].to_i == 0 || nil
+      photo_params[:previous_premium] = premium_max_param
+    else
+      photo_params[:previous_premium] = params[:premium_index].to_i - 1
+    end
+
+    photo_params
   end
 
   def number_rentals(rentals, category)
     category_rentals = rentals.select {|rental| rental.car.category == category}
     category_rentals.count
   end
-
 
 end
 
