@@ -22,7 +22,7 @@ module Rental
       response = RestClient.get url, {accept: :json, content_type: "application/x-www-form-urlencoded"}
 
       # poll the results
-      sleep 3
+      sleep 10
       response.headers[:location]
       polling_url = "http://partners.api.skyscanner.net" + response.headers[:location].gsub(/&deltaExclude.*/,"")
       response = RestClient.get polling_url, {accept: :json}

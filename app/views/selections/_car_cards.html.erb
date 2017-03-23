@@ -1,0 +1,211 @@
+<% #Début de la row de cards%>
+<div class="row">
+  <% # Début de la première card %>
+  <div id = "mini">
+    <% if @car_selection[:mini][@mini_index] %>
+      <div class="col-xs-12 col-sm-6">
+        <div class="card selected">
+          <% if !@car_selection[:mini][@mini_index].car.image_url.nil? %>
+            <%= image_tag @car_selection[:mini][@mini_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
+            <% end %>
+          <div class="card-name"> <%= @car_selection[:mini][@mini_index].car.name %><span class="light-data"> or similar </span>
+          </div>
+          <div class = "card-price">
+            <p> <%= @car_selection[:mini][@mini_index].price.round %> €</p>
+          </div>
+          <%= link_to selection_path(@selection, :trip_id => @trip.id, :mini_index => @photo_params[:next_mini]), class: "more-photos" do %>
+            <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
+          <% end %>
+          <%= link_to selection_path(@selection, :trip_id => @trip.id, :mini_index => @photo_params[:previous_mini]), class: "previous-photos" do %>
+            <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
+          <% end %>
+          <div class="card-category">
+            <p><%= @car_selection[:mini][@mini_index].car.category %></p>
+          </div>
+          <div class = "card-infos">
+            <div class = "door-infos">
+              <%= image_tag "door.png", class: "door-icon" %> <span><%= @car_selection[:mini][@mini_index].car.doors %> doors </span>
+            </div>
+            <div class = "seats-infos">
+              <%= image_tag "Seats.png", class: "seats-icon" %> <span><%= @car_selection[:mini][@mini_index].car.seats %> seats </span>
+            </div>
+          </div>
+          <a class="card-link" href="#" ></a>
+        </div>
+      </div>
+    <% end %>
+  <% # Fin de la première card %>
+  </div>
+  <% # début de la 2eme card %>
+  <% if @car_selection[:economy][@economy_index] %>
+    <div class="col-xs-12 col-sm-6">
+      <div class="card">
+        <% if !@car_selection[:economy][@economy_index].car.image_url.nil? %>
+          <%= image_tag @car_selection[:economy][@economy_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
+        <% end %>
+        <div class="card-name"> <%= @car_selection[:economy][@economy_index].car.name %><span class="light-data"> or similar </span>
+        </div>
+        <div class = "card-price">
+          <p> <%= @car_selection[:economy][@economy_index].price.round %> €</p>
+        </div>
+        <%= link_to selection_path(@selection, :trip_id => @trip.id, :economy_index => @photo_params[:next_economy]), class: "more-photos" do %>
+          <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
+        <% end %>
+        <%= link_to selection_path(@selection, :trip_id => @trip.id, :economy_index => @photo_params[:previous_economy]), class: "previous-photos" do %>
+          <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
+        <% end %>
+        <div class="card-category">
+          <p><%= @car_selection[:economy][@economy_index].car.category %></p>
+        </div>
+        <div class = "card-infos">
+          <div class = "door-infos">
+            <%= image_tag "door.png", class: "door-icon" %> <span><%= @car_selection[:economy][@economy_index].car.doors %> doors </span>
+          </div>
+          <div class = "seats-infos">
+            <%= image_tag "Seats.png", class: "seats-icon" %> <span><%= @car_selection[:economy][@economy_index].car.seats %> seats </span>
+          </div>
+        </div>
+        <a class="card-link" href="#" ></a>
+      </div>
+    </div>
+  <% end %>
+  <% # fin de la 2eme card %>
+  <% # Début de la 3e card %>
+  <% if @car_selection[:compact][@compact_index] %>
+    <div class="col-xs-12 col-sm-6">
+      <div class="card">
+        <% if !@car_selection[:compact][@compact_index].car.image_url.nil? %>
+          <%= image_tag @car_selection[:compact][@compact_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
+        <% end %>
+        <div class="card-name"> <%= @car_selection[:compact][@compact_index].car.name %><span class="light-data"> or similar </span>
+        </div>
+        <div class = "card-price">
+          <p> <%= @car_selection[:compact][@compact_index].price.round %> €</p>
+        </div>
+        <%= link_to selection_path(@selection, :trip_id => @trip.id, :compact_index => @photo_params[:next_compact]), class: "more-photos" do %>
+          <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
+        <% end %>
+        <%= link_to selection_path(@selection, :trip_id => @trip.id, :compact_index => @photo_params[:previous_compact]), class: "previous-photos" do %>
+          <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
+        <% end %>
+        <div class="card-category">
+          <p><%= @car_selection[:compact][@compact_index].car.category %></p>
+        </div>
+        <div class = "card-infos">
+          <div class = "door-infos">
+            <%= image_tag "door.png", class: "door-icon" %> <span><%= @car_selection[:compact][@compact_index].car.doors %> doors </span>
+          </div>
+          <div class = "seats-infos">
+            <%= image_tag "Seats.png", class: "seats-icon" %> <span><%= @car_selection[:compact][@compact_index].car.seats %> seats </span>
+          </div>
+        </div>
+        <a class="card-link" href="#" ></a>
+      </div>
+    </div>
+  <% end %>
+  <% # Fin de la 3e card %>
+  <% # Début de la 4e card %>
+  <% if @car_selection[:standard][@standard_index] %>
+    <div class="col-xs-12 col-sm-6">
+      <div class="card">
+        <% if !@car_selection[:standard][@standard_index].car.image_url.nil? %>
+          <%= image_tag @car_selection[:standard][@standard_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
+        <% end %>
+        <div class="card-name"> <%= @car_selection[:standard][@standard_index].car.name %><span class="light-data"> or similar </span>
+        </div>
+        <div class = "card-price">
+          <p> <%= @car_selection[:standard][@standard_index].price.round %> €</p>
+        </div>
+        <%= link_to selection_path(@selection, :trip_id => @trip.id, :compact_index => @photo_params[:next_compact]), class: "more-photos" do %>
+          <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
+        <% end %>
+        <%= link_to selection_path(@selection, :trip_id => @trip.id, :standard_index => @photo_params[:previous_standard]), class: "previous-photos" do %>
+          <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
+        <% end %>
+        <div class="card-category">
+          <p><%= @car_selection[:standard][@standard_index].car.category %></p>
+        </div>
+        <div class = "card-infos">
+          <div class = "door-infos">
+            <%= image_tag "door.png", class: "door-icon" %> <span><%= @car_selection[:standard][@standard_index].car.doors %> doors </span>
+          </div>
+          <div class = "seats-infos">
+            <%= image_tag "Seats.png", class: "seats-icon" %> <span><%= @car_selection[:standard][@standard_index].car.seats %> seats </span>
+          </div>
+        </div>
+        <a class="card-link" href="#" ></a>
+      </div>
+    </div>
+  <% end %>
+  <% # Fin de la 4e card %>
+  <% # Début de la 5e card %>
+  <% if @car_selection[:fullsize][@fullsize_index] %>
+    <div class="col-xs-12 col-sm-6">
+      <div class="card">
+        <% if !@car_selection[:fullsize][@fullsize_index].car.image_url.nil? %>
+          <%= image_tag @car_selection[:fullsize][@fullsize_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
+        <% end %>
+        <div class="card-name"> <%= @car_selection[:fullsize][@fullsize_index].car.name %><span class="light-data"> or similar </span>
+        </div>
+        <div class = "card-price">
+          <p> <%= @car_selection[:fullsize][@fullsize_index].price.round %> €</p>
+        </div>
+        <%= link_to selection_path(@selection, :trip_id => @trip.id, :fullsize_index => @photo_params[:next_fullsize]), class: "more-photos" do %>
+          <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
+        <% end %>
+        <%= link_to selection_path(@selection, :trip_id => @trip.id, :fullsize_index => @photo_params[:previous_fullsize]), class: "previous-photos" do %>
+          <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
+        <% end %>
+        <div class="card-category">
+          <p><%= @car_selection[:fullsize][@fullsize_index].car.category %></p>
+        </div>
+        <div class = "card-infos">
+          <div class = "door-infos">
+            <%= image_tag "door.png", class: "door-icon" %> <span><%= @car_selection[:fullsize][@fullsize_index].car.doors %> doors </span>
+          </div>
+          <div class = "seats-infos">
+            <%= image_tag "Seats.png", class: "seats-icon" %> <span><%= @car_selection[:fullsize][@fullsize_index].car.seats %> seats </span>
+          </div>
+        </div>
+        <a class="card-link" href="#" ></a>
+      </div>
+    </div>
+  <% end %>
+  <% # Fin de la 5e card %>
+  <% # Début de la 6e card %>
+  <% if @car_selection[:premium][@premium_index] %>
+    <div class="col-xs-12 col-sm-6">
+      <div class="card">
+        <% if !@car_selection[:premium][@premium_index].car.image_url.nil? %>
+          <%= image_tag @car_selection[:premium][@premium_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
+        <% end %>
+        <div class="card-name"> <%= @car_selection[:premium][@premium_index].car.name %><span class="light-data"> or similar </span>
+        </div>
+        <div class = "card-price">
+          <p> <%= @car_selection[:premium][@premium_index].price.round %> €</p>
+        </div>
+        <%= link_to selection_path(@selection, :trip_id => @trip.id, :premium_index => @photo_params[:next_premium]), class: "more-photos" do %>
+          <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
+        <% end %>
+        <%= link_to selection_path(@selection, :trip_id => @trip.id, :premium_index => @photo_params[:previous_premium]), class: "previous-photos" do %>
+          <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
+        <% end %>
+        <div class="card-category">
+          <p><%= @car_selection[:premium][@premium_index].car.category %></p>
+        </div>
+        <div class = "card-infos">
+          <div class = "door-infos">
+            <%= image_tag "door.png", class: "door-icon" %> <span><%= @car_selection[:premium][@premium_index].car.doors %> doors </span>
+          </div>
+          <div class = "seats-infos">
+            <%= image_tag "Seats.png", class: "seats-icon" %> <span><%= @car_selection[:premium][@premium_index].car.seats %> seats </span>
+          </div>
+        </div>
+        <a class="card-link" href="#" ></a>
+      </div>
+    </div>
+  <% end %>
+  <% # Fin de la 6e card %>
+</div>
+<% # Fin de la row de cards%>
+
