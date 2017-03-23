@@ -143,7 +143,7 @@
         handler.bounds.extendWith(markers);
         handler.getMap().setZoom(5);
         handler.fitMapToBounds();
-        // displayMarkers(markers)
+
       });
       $('.result-card').mouseenter('click', function(e) {
         e.preventDefault();
@@ -160,20 +160,25 @@
               markers[i].setMap(null);
               handler.removeMarkers(markers);
             }
-            markers = [];
-            markers = handler.addMarkers(result);
-            handler.bounds.extendWith(markers);
+          markers = [];
+          markers = handler.addMarkers(result);
+
+
           }
         })
-        handler.fitMapToBounds();
+        handler.bounds.extendWith(markers);
         handler.getMap().setZoom(5);
+        handler.fitMapToBounds();
       })
+    });
+
       $("#more-flights").click(function() {
         $("#see-more-flights").toggleClass("hidden");
         $("#hide-more-flights").toggleClass("hidden");
         $(".the-hidden-results").toggleClass("hidden");
       });
-    });
+
+
   </script>
 
 <script>

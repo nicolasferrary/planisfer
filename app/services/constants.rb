@@ -1,7 +1,7 @@
 module Constants
 
   DESTINATIONS = {
-    "croatia" => {
+    "Croatia" => {
         "title" => "Discover Croatia",
         "text" => "Welcome in Croatia",
         "image_1" => "croatia/krka.jpg",
@@ -12,7 +12,7 @@ module Constants
         "image_6" => "croatia/dubrovnik.jpg",
                   },
 
-    "greece" => {
+    "Greece" => {
         "title" => "Discover Greece",
         "text" => "Welcome in Greece",
         "image_1" => "greece/athenes.jpg",
@@ -21,9 +21,15 @@ module Constants
         "image_4" => "greece/meteora.jpg",
         "image_5" => "greece/thessalonique.jpg",
         "image_6" => "greece/zagoria.jpg",
+        "highlight_1" => "Athènes, Grèce",
+        "highlight_2" => "Cordu, Grèce",
+        "highlight_3" => "Delphes, Grèce",
+        "highlight_4" => "Thessalonique, Grèce",
+        "highlight_5" => "Peloponnèse, Grèce",
+        "highlight_6" => "Les Météores, Grèce",
                   },
 
-    "romania" => {
+    "Romania" => {
         "title" => "Discover Romania",
         "text" => "Welcome in Romania",
         "image_1" => "romania/bucegi.jpg",
@@ -34,7 +40,7 @@ module Constants
         "image_6" => "romania/sinaia.jpg",
                   },
 
-    "south-of-france" => {
+    "South-of-france" => {
         "title" => "Discover South of France",
         "text" => "Welcome in South of France",
         "image_1" => "south-of-france/aix.jpg",
@@ -45,9 +51,9 @@ module Constants
         "image_6" => "south-of-france/saint-tropez.jpg",
                   },
 
-    "corsica" => {
-        "title" => "Discover Central Europe",
-        "text" => "Welcome in Central Europe",
+    "Corsica" => {
+        "title" => "Discover Corsica",
+        "text" => "Welcome in Corsica",
         "image_1" => "corsica/bonifacio.jpg",
         "image_2" => "corsica/calvi.jpg",
         "image_3" => "corsica/bastia.jpg",
@@ -56,7 +62,7 @@ module Constants
         "image_6" => "corsica/lavezzi.jpg",
                   },
 
-    "portugal" => {
+    "Portugal" => {
         "title" => "Discover Portugal",
         "text" => "Welcome in Portugal",
         "image_1" => "portugal/algarve.jpg",
@@ -65,9 +71,15 @@ module Constants
         "image_4" => "portugal/fatima.jpg",
         "image_5" => "portugal/lisboa.jpg",
         "image_6" => "portugal/porto.jpg",
+        "highlight_1" => "Algarve, Portugal",
+        "highlight_2" => "Lisbonne, Portugal",
+        "highlight_3" => "Sintra, Portugal",
+        "highlight_4" => "Porto, Portugal",
+        "highlight_5" => "Fatima, Portugal",
+        "highlight_6" => "Faro, Portugal",
                   },
 
-    "scotland" => {
+    "Scotland" => {
         "title" => "Discover Scotland",
         "text" => "Welcome in Scotland",
         "image_1" => "scotland/beef.jpg",
@@ -78,7 +90,7 @@ module Constants
         "image_6" => "scotland/skye.jpg",
                   },
 
-    "ireland" => {
+    "Ireland" => {
         "title" => "Discover Ireland",
         "text" => "Welcome in Ireland",
         "image_1" => "ireland/dublin.jpg",
