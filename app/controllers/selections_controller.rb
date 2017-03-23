@@ -32,7 +32,6 @@ class SelectionsController < ApplicationController
     @region = @trip.region
     @region_airports_iata = Constants::REGIONS_AIRPORTS[@region.name]
     @region_airports = @region_airports_iata.map { |airport_iata| Constants::CITY_REGION[airport_iata]}
-
     @car_selection = get_best_cars_per_category(@car_rentals)
     set_indexes
     # @car_selection is a hash of arrays of instances of car_rentals (up to 5 instances per car category)
@@ -60,7 +59,7 @@ class SelectionsController < ApplicationController
         currency: @currency,
         user_ip: @user_ip,
       }
-      car_rentals = (Rental::SmartRentalAgent.new(options, selection).obtain_rentals)
+    car_rentals = (Rental::SmartRentalAgent.new(options, selection).obtain_rentals)
   end
 
   def get_best_cars_per_category(rentals)
