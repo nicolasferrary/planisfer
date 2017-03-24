@@ -85,10 +85,10 @@ ActiveRecord::Schema.define(version: 20170323152037) do
     t.float    "longitude_arrive"
     t.float    "latitude_back"
     t.float    "longitude_back"
-    t.string   "f1_number"
-    t.string   "f2_number"
     t.float    "latitude_home"
     t.float    "longitude_home"
+    t.string   "f1_number"
+    t.string   "f2_number"
   end
 
   create_table "searches", force: :cascade do |t|
