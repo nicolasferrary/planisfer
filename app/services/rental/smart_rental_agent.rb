@@ -1,7 +1,7 @@
 module Rental
 
   class SmartRentalAgent
-    def initialize(args = {}, selection)
+    def initialize(args = {})
       @pick_up_place = args[:pick_up_place]
       @drop_off_place = args[:drop_off_place]
       @pick_up_date_time = args[:pick_up_date_time]
@@ -9,7 +9,6 @@ module Rental
       @driver_age = args[:driver_age]
       @user_ip = args[:user_ip]
       @currency = args [:currency]
-      @selection = selection
     end
 
     def obtain_rentals
@@ -39,7 +38,7 @@ module Rental
     def create_car_rentals(data, rentals)
       car_rentals = []
       rentals.each do |rental_data|
-        car_rental = CarRental.create(data, rental_data, @pick_up_date_time, @drop_off_date_time, @driver_age, @selection)
+        car_rental = CarRental.create(data, rental_data, @pick_up_date_time, @drop_off_date_time, @driver_age)
         car_rentals << car_rental
       end
       car_rentals

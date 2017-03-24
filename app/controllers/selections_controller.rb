@@ -17,8 +17,21 @@ class SelectionsController < ApplicationController
 
     # Lancer les requetes
     # Comment if you want to test with a seed
-    get_car_rentals_for_trip(@trip, @selection)
+    @car_rentals = get_car_rentals_for_trip(@trip)
     # @car_rentals is an array of instances of car_rentals
+    @categories = ["Mini", "Economy", "Compact", "Intermediate/Standard", "Fullsize", "Premium/Luxury"]
+    @best_car_rentals = []
+    @categories.each do |category|
+      best_category_cars = get_best_cars(@car_rentals, category)
+      @best_car_rentals << best_category_cars
+    end
+
+    @best_car_rentals = @best_car_rentals.flatten
+    @best_car_rentals.each do |car_rental|
+      car_rental.selection = @selection
+      car_rental.save
+    end
+
     # Uncomment if you want to test with a seed
     # @car_rentals = [CarRental.all[0], CarRental.all[1], CarRental.all[2], CarRental.all[3], CarRental.all[4]]
     redirect_to selection_path(@selection, :trip_id => @trip.id)
@@ -49,7 +62,7 @@ class SelectionsController < ApplicationController
 
   private
 
-  def get_car_rentals_for_trip(trip, selection)
+  def get_car_rentals_for_trip(trip)
     options = {
         pick_up_place: trip.round_trip_flight.flight1_destination_airport_iata,
         drop_off_place: trip.round_trip_flight.flight2_origin_airport_iata,
@@ -59,12 +72,10 @@ class SelectionsController < ApplicationController
         currency: @currency,
         user_ip: @user_ip,
       }
-    car_rentals = (Rental::SmartRentalAgent.new(options, selection).obtain_rentals)
+    car_rentals = (Rental::SmartRentalAgent.new(options).obtain_rentals)
   end
 
   def get_best_cars_per_category(rentals)
-    # category_index = define_category_index
-      # A mettre dans le js
     best_cars = {}
     best_cars[:mini] = get_best_cars(rentals, "Mini")
     best_cars[:economy] = get_best_cars(rentals, "Economy")
@@ -185,7 +196,7 @@ class SelectionsController < ApplicationController
   def get_unique_sorted_cars(rentals, category)
     cars = rentals.select {|rental| rental.car.category == category}
     sorted_cars = cars.sort_by { |rental| rental.price }
-    unique_sorted_cars = sorted_cars.uniq { |rental| rental.car }
+    unique_sorted_cars = sorted_cars.uniq {|rental| rental.car}
   end
 
 end
