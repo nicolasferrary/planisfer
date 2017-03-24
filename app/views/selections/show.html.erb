@@ -110,19 +110,11 @@
 
   <script>
     $(document).ready(function() {
-
-      $('.card').mouseenter('click', function(e) {
+      $('.card').mouseover('click', function(e) {
         e.preventDefault();
         $('.card.selected').removeClass('selected');
         $(this).addClass('selected');
       })
-
-      $('.car-form-text').mouseenter('click', function(e) {
-        e.preventDefault();
-        $('.car-form-text.selected').removeClass('selected');
-        $(this).addClass('selected');
-      })
-
     });
 
 

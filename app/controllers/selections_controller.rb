@@ -76,9 +76,8 @@ class SelectionsController < ApplicationController
   end
 
   def get_best_cars(rentals, category)
-    cars = rentals.select {|rental| rental.car.category == category}
-    sorted_cars = cars.sort_by { |rental| rental.price }
-    best_cars = sorted_cars.first(5)
+    unique_sorted_cars = get_unique_sorted_cars(rentals, category)
+    best_cars = unique_sorted_cars.first(5)
   end
 
   def define_category_index
@@ -170,8 +169,8 @@ class SelectionsController < ApplicationController
   end
 
   def number_rentals(rentals, category)
-    category_rentals = rentals.select {|rental| rental.car.category == category}
-    category_rentals.count
+    unique_sorted_cars = get_unique_sorted_cars(rentals, category)
+    unique_sorted_cars.count
   end
 
   def set_indexes
@@ -181,6 +180,12 @@ class SelectionsController < ApplicationController
     @standard_index = params[:standard_index].to_i || 0
     @fullsize_index = params[:fullsize_index].to_i || 0
     @premium_index = params[:premium_index].to_i || 0
+  end
+
+  def get_unique_sorted_cars(rentals, category)
+    cars = rentals.select {|rental| rental.car.category == category}
+    sorted_cars = cars.sort_by { |rental| rental.price }
+    unique_sorted_cars = sorted_cars.uniq { |rental| rental.car }
   end
 
 end

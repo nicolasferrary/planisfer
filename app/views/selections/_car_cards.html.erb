@@ -116,7 +116,7 @@
         <div class = "card-price">
           <p> <%= @car_selection[:standard][@standard_index].price.round %> €</p>
         </div>
-        <%= link_to selection_path(@selection, :trip_id => @trip.id, :compact_index => @photo_params[:next_compact]), remote: true, class: "more-photos" do %>
+        <%= link_to selection_path(@selection, :trip_id => @trip.id, :standard_index => @photo_params[:next_standard]), remote: true, class: "more-photos" do %>
           <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
         <% end %>
         <%= link_to selection_path(@selection, :trip_id => @trip.id, :standard_index => @photo_params[:previous_standard]), remote: true, class: "previous-photos" do %>
@@ -208,4 +208,7 @@
   <% # Fin de la 6e card %>
 </div>
 <% # Fin de la row de cards%>
+
+
+
 
