@@ -144,6 +144,10 @@
         handler.getMap().setZoom(5);
         handler.fitMapToBounds();
 
+        // Set zoom when loading the page when there is one marker
+        // The closer to 15, the higher in the sky
+        handler.getMap().setZoom(6);
+
       });
       $('.result-card').mouseenter('click', function(e) {
         e.preventDefault();
@@ -155,20 +159,21 @@
           type: "GET",
           url: '/round_trip_flights/' + roundTripFlightId + '/refresh_map',
           dataType: "json",
-          success: function(result){
+          success: function(result) {
             for (var i = 0; i < markers.length; i++) {
               markers[i].setMap(null);
               handler.removeMarkers(markers);
             }
           markers = [];
           markers = handler.addMarkers(result);
-
-
           }
         })
         handler.bounds.extendWith(markers);
-        handler.getMap().setZoom(5);
         handler.fitMapToBounds();
+
+        // The closer to 0, the higher in the sky
+        handler.getMap().setZoom(6);
+
       })
     });
 
