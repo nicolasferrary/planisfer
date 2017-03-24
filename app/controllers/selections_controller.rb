@@ -10,6 +10,7 @@ class SelectionsController < ApplicationController
     @region = @trip.region
     @region_airports_iata = Constants::REGIONS_AIRPORTS[@region.name]
     @region_airports = @region_airports_iata.map { |airport_iata| Constants::CITY_REGION[airport_iata]}
+    @pick_up_location = Constants::CITY_REGION.invert[params[:pick_up_location]] || @trip.round_trip_flight.flight1_destination_airport_iata
     @user_ip = Net::HTTP.get(URI("https://api.ipify.org"))
     # IPv4 address.
     # Otherwise, in dev, you can use Localhost v4 address @user_ip = "127.0.0.1"
@@ -64,6 +65,7 @@ class SelectionsController < ApplicationController
 
   def get_car_rentals_for_trip(trip)
     options = {
+        # pick_up_place: @pick_up_location,
         pick_up_place: trip.round_trip_flight.flight1_destination_airport_iata,
         drop_off_place: trip.round_trip_flight.flight2_origin_airport_iata,
         pick_up_date_time: trip.round_trip_flight.flight1_landing_at,
