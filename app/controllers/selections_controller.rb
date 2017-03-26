@@ -73,7 +73,7 @@ class SelectionsController < ApplicationController
         drop_off_place: @drop_off_location,
         pick_up_date_time: trip.round_trip_flight.flight1_landing_at,
         drop_off_date_time: trip.round_trip_flight.flight2_take_off_at - 60*60,
-        driver_age: @pick_up_lcoation == 1 ? 30 : 21,
+        driver_age: @over_25 == 1 ? 30 : 21,
         currency: @currency,
         user_ip: @user_ip,
       }
