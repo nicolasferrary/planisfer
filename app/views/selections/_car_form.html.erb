@@ -52,10 +52,11 @@
           <div class = "col-xs-12">
           <span class= "light-data driver"> Driver is > 25 years old </span>
           <span>
-            <% if params[:over_25].to_i == 0 %>
-              <%= check_box_tag :age, 1, false, class: "age-checkbox"  %>
+
+            <% if params[:over_25].to_i == 1 %>
+              <%= check_box_tag :over_25, 1,true, class: "age-checkbox"  %>
             <% else %>
-              <%= check_box_tag :age, 1, true, class: "age-checkbox"  %>
+              <%= check_box_tag :over_25, 1, false, class: "age-checkbox"  %>
             <% end %>
           </span>
           <span> <%= submit_tag "Update search", class: "btn-brand" %> </span>

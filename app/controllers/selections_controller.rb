@@ -3,12 +3,12 @@ require "net/http"
 class SelectionsController < ApplicationController
 
   def create
+    @trip = Trip.find(params[:trip_id])
     @pick_up_location = Constants::CITY_REGION.invert[params[:pick_up_location]] || @trip.round_trip_flight.flight1_destination_airport_iata
     @drop_off_location = Constants::CITY_REGION.invert[params[:drop_off_location]] || @trip.round_trip_flight.flight2_origin_airport_iata
-    @over_25 = params[:over_25].to_i || 1
+    @over_25 = params[:over_25].to_i
     @selection = Selection.new()
     @selection.save
-    @trip = Trip.find(params[:trip_id])
     @search = @trip.search
     @region = @trip.region
     @region_airports_iata = Constants::REGIONS_AIRPORTS[@region.name]
@@ -73,7 +73,7 @@ class SelectionsController < ApplicationController
         drop_off_place: @drop_off_location,
         pick_up_date_time: trip.round_trip_flight.flight1_landing_at,
         drop_off_date_time: trip.round_trip_flight.flight2_take_off_at - 60*60,
-        driver_age: @pick_up_lcoation == 1 ? 30 : 24,
+        driver_age: @pick_up_lcoation == 1 ? 30 : 21,
         currency: @currency,
         user_ip: @user_ip,
       }
