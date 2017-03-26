@@ -17,7 +17,7 @@
               <%= image_tag "car.png", width: "30px", height: "auto", class: "car" %>
             </div>
             <div class = "col-md-4">
-              <%= select_tag :pick_up_location, options_for_select(@region_airports, Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata]), class: "form-control car-form-item", prompt: "Airports where you can pick-up a car" %>
+              <%= select_tag :pick_up_location, options_for_select(@region_airports, Constants::CITY_REGION[@pick_up_location]), class: "form-control car-form-item", prompt: "Airports where you can pick-up a car" %>
             </div>
             <div class = "col-md-4">
               <%= text_field_tag :pick_up_date, @trip.starts_on.strftime("%B %e"), placeholder: "Pick-up-date", "class" => 'form-control car-datepicker car-form-item'%>
@@ -50,8 +50,15 @@
         <%# Beginning 3rd row form %>
         <div class = "row">
           <div class = "col-xs-12">
-          <span class= "light-data driver"> Driver is > 25 years old </span> <span> <%= check_box_tag :age, 1, {:checked => "checked"}, class: "age-checkbox"  %> </span>
-         <!--  <span> <%= submit_tag "Update search", class: "btn-brand" %> </span> -->
+          <span class= "light-data driver"> Driver is > 25 years old </span>
+          <span>
+            <% if params[:over_25].to_i == 0 %>
+              <%= check_box_tag :age, 1, false, class: "age-checkbox"  %>
+            <% else %>
+              <%= check_box_tag :age, 1, true, class: "age-checkbox"  %>
+            <% end %>
+          </span>
+          <span> <%= submit_tag "Update search", class: "btn-brand" %> </span>
           </div>
         </div>
         <%# End 3rd row form %>

@@ -3,6 +3,9 @@ require "net/http"
 class SelectionsController < ApplicationController
 
   def create
+    @pick_up_location = Constants::CITY_REGION.invert[params[:pick_up_location]] || @trip.round_trip_flight.flight1_destination_airport_iata
+    @drop_off_location = Constants::CITY_REGION.invert[params[:drop_off_location]] || @trip.round_trip_flight.flight2_origin_airport_iata
+    @over_25 = params[:over_25].to_i || 1
     @selection = Selection.new()
     @selection.save
     @trip = Trip.find(params[:trip_id])
@@ -10,7 +13,6 @@ class SelectionsController < ApplicationController
     @region = @trip.region
     @region_airports_iata = Constants::REGIONS_AIRPORTS[@region.name]
     @region_airports = @region_airports_iata.map { |airport_iata| Constants::CITY_REGION[airport_iata]}
-    @pick_up_location = Constants::CITY_REGION.invert[params[:pick_up_location]] || @trip.round_trip_flight.flight1_destination_airport_iata
     @user_ip = Net::HTTP.get(URI("https://api.ipify.org"))
     # IPv4 address.
     # Otherwise, in dev, you can use Localhost v4 address @user_ip = "127.0.0.1"
@@ -35,7 +37,7 @@ class SelectionsController < ApplicationController
 
     # Uncomment if you want to test with a seed
     # @car_rentals = [CarRental.all[0], CarRental.all[1], CarRental.all[2], CarRental.all[3], CarRental.all[4]]
-    redirect_to selection_path(@selection, :trip_id => @trip.id)
+    redirect_to selection_path(@selection, :trip_id => @trip.id, :pick_up_location => @pick_up_location, :drop_off_location => @drop_off_location, :over_25 => @over_25)
   end
 
   def show
@@ -47,6 +49,8 @@ class SelectionsController < ApplicationController
     @region_airports_iata = Constants::REGIONS_AIRPORTS[@region.name]
     @region_airports = @region_airports_iata.map { |airport_iata| Constants::CITY_REGION[airport_iata]}
     @car_selection = get_best_cars_per_category(@car_rentals)
+    @pick_up_location = params[:pick_up_location]
+    @drop_off_location = params[:drop_off_location]
     set_indexes
     # @car_selection is a hash of arrays of instances of car_rentals (up to 5 instances per car category)
 
@@ -65,12 +69,11 @@ class SelectionsController < ApplicationController
 
   def get_car_rentals_for_trip(trip)
     options = {
-        # pick_up_place: @pick_up_location,
-        pick_up_place: trip.round_trip_flight.flight1_destination_airport_iata,
-        drop_off_place: trip.round_trip_flight.flight2_origin_airport_iata,
+        pick_up_place: @pick_up_location,
+        drop_off_place: @drop_off_location,
         pick_up_date_time: trip.round_trip_flight.flight1_landing_at,
         drop_off_date_time: trip.round_trip_flight.flight2_take_off_at - 60*60,
-        driver_age: 30,
+        driver_age: @pick_up_lcoation == 1 ? 30 : 24,
         currency: @currency,
         user_ip: @user_ip,
       }
