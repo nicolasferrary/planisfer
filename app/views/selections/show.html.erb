@@ -81,9 +81,15 @@
     });
   </script>
 
-<script type="text/javascript">
-  $(function() {
-    $('#datetimepicker1').datetimepicker({
+<script>
+  $(function () {
+    $('#datetimepicker').datetimepicker({
+        format: 'YYYY MMM DD [-] hh a',
+        sideBySide: true
+    });
+    $('#datetimepicker2').datetimepicker({
+        format: 'YYYY MMM DD [-] hh a',
+        sideBySide: true
     });
   });
 </script>

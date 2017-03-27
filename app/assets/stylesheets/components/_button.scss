@@ -47,3 +47,15 @@
     border: 1px solid $brand-color !important;
   }
 }
+
+.new-search-btn{
+  width: 50%;
+  height: 10px;
+  display:flex;
+  justify-content: space-around;
+  font-size: 14px;
+  float: right;
+  align-items: center;
+}
+
+

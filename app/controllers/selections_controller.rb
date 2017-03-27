@@ -4,9 +4,21 @@ class SelectionsController < ApplicationController
 
   def create
     @trip = Trip.find(params[:trip_id])
+    #Define params for API
     @pick_up_location = Constants::CITY_REGION.invert[params[:pick_up_location]] || @trip.round_trip_flight.flight1_destination_airport_iata
     @drop_off_location = Constants::CITY_REGION.invert[params[:drop_off_location]] || @trip.round_trip_flight.flight2_origin_airport_iata
-    @over_25 = params[:over_25].to_i
+    if !params[:pick_up_date_time].nil?
+      @pick_up_date_time = Time.zone.parse(params[:pick_up_date_time])
+    else
+      @pick_up_date_time = @trip.round_trip_flight.flight1_landing_at
+    end
+    if !params[:drop_off_date_time].nil?
+      @drop_off_date_time = Time.zone.parse(params[:drop_off_date_time])
+    else
+      @drop_off_date_time = @trip.round_trip_flight.flight2_take_off_at - 60*60
+    end
+    @under_25 = params[:under_25].to_i
+
     @selection = Selection.new()
     @selection.save
     @search = @trip.search
@@ -37,7 +49,7 @@ class SelectionsController < ApplicationController
 
     # Uncomment if you want to test with a seed
     # @car_rentals = [CarRental.all[0], CarRental.all[1], CarRental.all[2], CarRental.all[3], CarRental.all[4]]
-    redirect_to selection_path(@selection, :trip_id => @trip.id, :pick_up_location => @pick_up_location, :drop_off_location => @drop_off_location, :over_25 => @over_25)
+    redirect_to selection_path(@selection, :trip_id => @trip.id, :pick_up_location => @pick_up_location, :drop_off_location => @drop_off_location, :under_25 => @under_25, :pick_up_date_time => @pick_up_date_time, :drop_off_date_time => @drop_off_date_time)
   end
 
   def show
@@ -51,6 +63,9 @@ class SelectionsController < ApplicationController
     @car_selection = get_best_cars_per_category(@car_rentals)
     @pick_up_location = params[:pick_up_location]
     @drop_off_location = params[:drop_off_location]
+    @pick_up_date_time = params[:pick_up_date_time]
+    @drop_off_date_time = params[:drop_off_date_time]
+    @under_25 = params[:under_25]
     set_indexes
     # @car_selection is a hash of arrays of instances of car_rentals (up to 5 instances per car category)
 
@@ -71,9 +86,9 @@ class SelectionsController < ApplicationController
     options = {
         pick_up_place: @pick_up_location,
         drop_off_place: @drop_off_location,
-        pick_up_date_time: trip.round_trip_flight.flight1_landing_at,
-        drop_off_date_time: trip.round_trip_flight.flight2_take_off_at - 60*60,
-        driver_age: @over_25 == 1 ? 30 : 21,
+        pick_up_date_time: @pick_up_date_time,
+        drop_off_date_time: @drop_off_date_time,
+        driver_age: @under_25 == 1 ? 21 : 30,
         currency: @currency,
         user_ip: @user_ip,
       }

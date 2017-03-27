@@ -14,16 +14,13 @@
         <div class = "row">
           <div class = "car-form-row">
             <div class = "col-md-1">
-              <%= image_tag "car.png", width: "30px", height: "auto", class: "car" %>
+              <%= image_tag "car.png", width: "30px", height: "auto", class: "car form-icon" %>
             </div>
-            <div class = "col-md-4">
+            <div class = "col-md-6">
               <%= select_tag :pick_up_location, options_for_select(@region_airports, Constants::CITY_REGION[@pick_up_location]), class: "form-control car-form-item", prompt: "Airports where you can pick-up a car" %>
             </div>
-            <div class = "col-md-4">
-              <%= text_field_tag :pick_up_date, @trip.starts_on.strftime("%B %e"), placeholder: "Pick-up-date", "class" => 'form-control car-datepicker car-form-item'%>
-            </div>
-            <div class = "col-md-3">
-              <%= select_tag :pick_up_time, options_for_select(@times, @trip.round_trip_flight.flight1_landing_at.localtime.strftime("%l %p").strip), class: "form-control car-form-item" %>
+            <div class = "col-md-5">
+              <%= text_field_tag :pick_up_date_time, Time.zone.parse(@pick_up_date_time).strftime("%Y %b %e - %I %P"), "class" => 'form-control car-datepicker car-form-item', "id" => 'datetimepicker'%>
             </div>
           </div>
         </div>
@@ -34,32 +31,29 @@
             <div class = "col-md-1">
               <%= image_tag "flipped-car.png", width: "30px", height: "auto", class: "car" %>
             </div>
-            <div class = "col-md-4">
+            <div class = "col-md-6">
               <%= select_tag :drop_off_location, options_for_select(@region_airports, Constants::CITY_REGION[@trip.round_trip_flight.flight2_origin_airport_iata]), class: "form-control car-form-item", prompt: "Airports where you can drop-off a car" %>
             </div>
-            <div class = "col-md-4">
-              <%= text_field_tag :drop_off_date, @trip.returns_on.strftime("%B %e"), placeholder: "Pick-up-date", "class" => 'form-control car-datepicker car-form-item'%>
-
-            </div>
-            <div class = "col-md-3">
-              <%= select_tag :drop_off_time, options_for_select(@times, @trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%l %p").strip), class: "form-control car-form-item" %>
+            <div class = "col-md-5">
+              <%= text_field_tag :drop_off_date_time, Time.zone.parse(@drop_off_date_time).strftime("%Y %b %e - %I %P"), "class" => 'form-control car-datepicker car-form-item', "id" => 'datetimepicker2'%>
             </div>
           </div>
         </div>
         <%# End 2nd row form %>
         <%# Beginning 3rd row form %>
         <div class = "row">
-          <div class = "col-xs-12">
-          <span class= "light-data driver"> Driver is > 25 years old </span>
+          <div class = "col-xs-9">
+          <span class= "light-data driver"> Driver is under 25 years old </span>
           <span>
-
-            <% if params[:over_25].to_i == 1 %>
-              <%= check_box_tag :over_25, 1,true, class: "age-checkbox"  %>
+            <% if params[:under_25].to_i == 1 %>
+              <%= check_box_tag :under_25, 1,true, class: "age-checkbox"  %>
             <% else %>
-              <%= check_box_tag :over_25, 1, false, class: "age-checkbox"  %>
+              <%= check_box_tag :under_25, 1, false, class: "age-checkbox"  %>
             <% end %>
           </span>
-          <span> <%= submit_tag "Update search", class: "btn-brand" %> </span>
+          </div>
+          <div class = "col-xs-3">
+            <%= submit_tag "SEARCH", class: "btn-brand new-search-btn" %>
           </div>
         </div>
         <%# End 3rd row form %>
@@ -70,25 +64,9 @@
 </div>
 <% #Fin de la row de formulaire %>
 
-<div class="container">
-    <div class="row">
-        <div class='col-sm-6'>
-            <input type='text' class="form-control" id='datetimepicker4' />
-        </div>
-    </div>
-</div>
 
 
-<% content_for(:after_js) do %>
 
-  <script type="text/javascript">
-    $(function () {
-            $('#datetimepicker4').datetimepicker({
-                inline: true,
-                sideBySide: true
-            });
-        });
-  </script>
 
-<% end %>
+
 
