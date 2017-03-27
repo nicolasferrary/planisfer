@@ -69,3 +69,26 @@
   </div>
 </div>
 <% #Fin de la row de formulaire %>
+
+<div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+            <input type='text' class="form-control" id='datetimepicker4' />
+        </div>
+    </div>
+</div>
+
+
+<% content_for(:after_js) do %>
+
+  <script type="text/javascript">
+    $(function () {
+            $('#datetimepicker4').datetimepicker({
+                inline: true,
+                sideBySide: true
+            });
+        });
+  </script>
+
+<% end %>
+

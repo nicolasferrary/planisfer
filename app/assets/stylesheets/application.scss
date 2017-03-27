@@ -1,12 +1,13 @@
 // Graphical variables
 @import "config/variables";
 @import "config/bootstrap_variables";
-@import "bootstrap-datepicker";
 @import "seiyria-bootstrap-slider";
 
 // External libraries
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-datepicker";
+@import 'bootstrap-datetimepicker';
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
