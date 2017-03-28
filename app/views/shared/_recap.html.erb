@@ -116,7 +116,9 @@
     <div class = "col-sm-12">
       <div class = text-center>
         <%= render 'shared/book_modal', modal_name: "book_modal" %>
-        <button class="btn-brand" data-toggle="modal" data-target="#book_modal">BOOK</button>
+        <%= link_to trip_path(@trip) do %>
+        <button class="btn-brand" data-toggle="modal">BOOK</button>
+        <% end %>
       </div>
     </div>
     <% #End of booking button bootstrap col %>
