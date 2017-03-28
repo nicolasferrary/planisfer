@@ -1,7 +1,7 @@
 module Constants
 
   DESTINATIONS = {
-    "croatia" => {
+    "Croatia" => {
         "title" => "Discover Croatia",
         "text" => "Welcome in Croatia",
         "image_1" => "croatia/krka.jpg",
@@ -12,7 +12,7 @@ module Constants
         "image_6" => "croatia/dubrovnik.jpg",
                   },
 
-    "greece" => {
+    "Greece" => {
         "title" => "Discover Greece",
         "text" => "Welcome in Greece",
         "image_1" => "greece/athenes.jpg",
@@ -23,7 +23,7 @@ module Constants
         "image_6" => "greece/zagoria.jpg",
                   },
 
-    "romania" => {
+    "Romania" => {
         "title" => "Discover Romania",
         "text" => "Welcome in Romania",
         "image_1" => "romania/bucegi.jpg",
@@ -34,7 +34,7 @@ module Constants
         "image_6" => "romania/sinaia.jpg",
                   },
 
-    "south-of-france" => {
+    "South-of-france" => {
         "title" => "Discover South of France",
         "text" => "Welcome in South of France",
         "image_1" => "south-of-france/aix.jpg",
@@ -45,7 +45,7 @@ module Constants
         "image_6" => "south-of-france/saint-tropez.jpg",
                   },
 
-    "corsica" => {
+    "Corsica" => {
         "title" => "Discover Central Europe",
         "text" => "Welcome in Central Europe",
         "image_1" => "corsica/bonifacio.jpg",
@@ -56,7 +56,7 @@ module Constants
         "image_6" => "corsica/lavezzi.jpg",
                   },
 
-    "portugal" => {
+    "Portugal" => {
         "title" => "Discover Portugal",
         "text" => "Welcome in Portugal",
         "image_1" => "portugal/algarve.jpg",
@@ -67,7 +67,7 @@ module Constants
         "image_6" => "portugal/porto.jpg",
                   },
 
-    "scotland" => {
+    "Scotland" => {
         "title" => "Discover Scotland",
         "text" => "Welcome in Scotland",
         "image_1" => "scotland/beef.jpg",
@@ -78,7 +78,7 @@ module Constants
         "image_6" => "scotland/skye.jpg",
                   },
 
-    "ireland" => {
+    "Ireland" => {
         "title" => "Discover Ireland",
         "text" => "Welcome in Ireland",
         "image_1" => "ireland/dublin.jpg",
