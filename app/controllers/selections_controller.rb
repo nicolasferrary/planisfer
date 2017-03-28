@@ -12,6 +12,7 @@ class SelectionsController < ApplicationController
     else
       @pick_up_date_time = @trip.round_trip_flight.flight1_landing_at
     end
+    raise
     if !params[:drop_off_date_time].nil?
       @drop_off_date_time = Time.zone.parse(params[:drop_off_date_time])
     else
