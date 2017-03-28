@@ -13,6 +13,7 @@ Airport.destroy_all
 City.destroy_all
 CarRental.destroy_all
 Car.destroy_all
+Selection.destroy_all
 
 
 city1 = City.create!(name:"Paris")
@@ -387,6 +388,7 @@ search1.city = city1
 search1.region = region1
 search1.save!
 
+selection = Selection.new()
 
 car1 = Car.new
 car1.name = "Mini Cooper"
@@ -406,6 +408,7 @@ car_rental1.drop_off_date_time = "2017-04-21 16:55:00"
 car_rental1.driver_age = 30
 car_rental1.company = "Easycar"
 car_rental1.car = car1
+car_rental1.selection = selection
 car_rental1.save!
 
 car2 = Car.new
@@ -426,6 +429,7 @@ car_rental2.drop_off_date_time = "2017-04-21 16:55:00"
 car_rental2.driver_age = 30
 car_rental2.company = "Easycar"
 car_rental2.car = car2
+car_rental2.selection = selection
 car_rental2.save!
 
 car3 = Car.new
@@ -446,6 +450,7 @@ car_rental3.drop_off_date_time = "2017-04-21 16:55:00"
 car_rental3.driver_age = 30
 car_rental3.company = "Easycar"
 car_rental3.car = car3
+car_rental3.selection = selection
 car_rental3.save!
 
 car5 = Car.new
@@ -466,6 +471,7 @@ car_rental5.drop_off_date_time = "2017-04-21 16:55:00"
 car_rental5.driver_age = 30
 car_rental5.company = "Easycar"
 car_rental5.car = car5
+car_rental5.selection = selection
 car_rental5.save!
 
 car6 = Car.new
@@ -486,6 +492,7 @@ car_rental6.drop_off_date_time = "2017-04-21 16:55:00"
 car_rental6.driver_age = 30
 car_rental6.company = "Easycar"
 car_rental6.car = car6
+car_rental6.selection = selection
 car_rental6.save!
 
 trip1 = Trip.new(
