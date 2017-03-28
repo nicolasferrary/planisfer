@@ -22,6 +22,7 @@ module Rental
           user_ip: @user_ip,
           currency: @currency
         ).make_request
+      raise
 
       @data = JSON.parse(json)
 

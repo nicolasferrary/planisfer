@@ -1,7 +1,7 @@
 <% #Début de la row de formulaire %>
 <div class = "row">
   <div class = col-xs-12>
-    <div class = "car-form">
+    <div class = "car-form <%= 'not-displayed' if @status == 'none' %>" id = "modify">
       <% #Début du formulaire d'update %>
       <%=form_tag selections_path(:trip_id => @trip.id), method: :post do %>
 

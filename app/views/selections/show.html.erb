@@ -20,22 +20,33 @@
       <% # Début case bootstrap formulaire et cards %>
       <div class="col-xs-12 col-sm-8">
         <div class = "row">
-          <div class = "col-xs-12 col-sm-2">
-            <h4> Your cars</h4>
-          </div>
-          <div class = "col-xs-12 col-sm-8">
-            <h5 class = "car-recap-text"> <%= Constants::CITY_REGION[@pick_up_location]%> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  to <%= Constants::CITY_REGION[@drop_off_location]%> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %> </h5>
-          </div>
-          <div class = "col-xs-12 col-sm-2">
-            <p id="modify-search"><strong>Modify search</strong></p>
+          <div class = "car-recap-row">
+            <div class = "col-xs-12 col-sm-3">
+              <h4> Select your car </h4>
+            </div>
+            <div class = "col-xs-12 col-sm-6">
+              <h5 id = "car-recap-text"> <%= Constants::CITY_REGION[@pick_up_location]%> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  <span class="fa fa-long-arrow-right" aria-hidden="true"></span> <%= Constants::CITY_REGION[@drop_off_location]%> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %> </h5>
+            </div>
+            <div class = "col-xs-12 col-sm-3">
+              <%= link_to "javascript:showhide('modify')", class: "modify-search-link" do%>
+                <div>
+                  <h5 class="<%= 'hidden' if @status == 'modify' %>" id="modify-search"> Modify search </h5>
+                </div>
+              <% end  %>
+            </div>
           </div>
         </div>
-        <%= render "car_form" %>
+
+
+
+
         <% #Début row titre cards %>
-        <div id="TitleShow">
+  <!--       <div id="TitleShow">
           <h4>THE BEST CARS PER CATEGORY </h4>
-        </div>
+        </div> -->
         <% #Fin row titre cards %>
+
+        <%= render "car_form" %>
 
         <div id = "car-cards-partial">
           <%= render "car_cards" %>
@@ -103,6 +114,20 @@
         sideBySide: true
     });
   });
+  function showhide(id) {
+    var e = document.getElementById(id);
+    if ($('#' + e.id).hasClass('not-displayed')) {
+      $('#' + e.id).slideDown('slow');
+      $('#' + e.id).removeClass('not-displayed')
+      // $("#see-filters").addClass("hidden");
+      // $("#hide-filters").removeClass("hidden");
+    } else {
+      $('#' + e.id).slideUp('slow');
+      $('#' + e.id).addClass('not-displayed')
+      // $("#see-filters").removeClass("hidden");
+      // $("#hide-filters").addClass("hidden");
+    };
+  };
 </script>
 
 <% end %>

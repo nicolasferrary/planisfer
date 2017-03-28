@@ -163,4 +163,45 @@ car.datepicker{
   margin-left: 30px;
 }
 
+#car-recap-text{
+  text-align: center;
+  padding-top: 4px;
+}
+
+#modify-search{
+  text-align: right;
+  padding-top: 4px;
+  opacity: 0.7;
+  text-decoration: none;
+}
+
+#modify-search:hover{
+  text-decoration: none;
+  opacity: 1;
+}
+
+.modify-search-link{
+  text-decoration: none;
+}
+
+.modify-search-link:hover{
+  text-decoration: none;
+}
+
+.modify-search-link:visited{
+  text-decoration: none;
+}
+
+.modify-search-link:active{
+  text-decoration: none;
+}
+
+.modify-search-link:focus{
+  text-decoration: none;
+}
+
+.car-recap-row{
+  margin-bottom: 50px;
+  vertical-align: center;
+}
 
