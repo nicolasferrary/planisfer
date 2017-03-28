@@ -15,7 +15,7 @@ class SelectionsController < ApplicationController
     if !params[:drop_off_date_time].nil?
       @drop_off_date_time = Time.zone.parse(params[:drop_off_date_time])
     else
-      @drop_off_date_time = @trip.round_trip_flight.flight2_take_off_at - 60*60
+      @drop_off_date_time = @trip.round_trip_flight.flight2_take_off_at
     end
     @under_25 = params[:under_25].to_i
 

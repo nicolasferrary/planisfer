@@ -24,7 +24,7 @@
         <span> <%= @trip.city.name %></span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span><%= Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata] %></span>
       </div>
       <div class = "times">
-        <span><%= @trip.round_trip_flight.flight1_take_off_at.localtime.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight1_landing_at.localtime.strftime("%H:%M") %></span>
+        <span><%= @trip.round_trip_flight.flight1_take_off_at.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight1_landing_at.strftime("%H:%M") %></span>
       </div>
       <div class = "carrier">
         <%= Constants::AIRLINES[@trip.round_trip_flight.carrier1] %>
@@ -50,7 +50,7 @@
         <span> <%= Constants::CITY_REGION[@trip.round_trip_flight.flight2_origin_airport_iata] %> </span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span> <%= @trip.city.name %></span>
       </div>
       <div class = "times">
-        <span><%= @trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %></span>
+        <span><%= @trip.round_trip_flight.flight2_take_off_at.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight2_landing_at.strftime("%H:%M") %></span>
       </div>
       <div class = "carrier">
         <%= Constants::AIRLINES[@trip.round_trip_flight.carrier2] %>

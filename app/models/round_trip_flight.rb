@@ -80,11 +80,15 @@ class RoundTripFlight < ApplicationRecord
     end
 
     def extract_take_off_at(item, slice)
-      Time.parse item['slice'][slice]['segment'].first['leg'].first['departureTime']
+      string_time = item['slice'][slice]['segment'].first['leg'].first['departureTime']
+      local_string_time = string_time.gsub(/\+(.*)/, '+00:00')
+      Time.zone.parse(local_string_time)
     end
 
     def extract_landing_at(item, slice)
-      Time.parse item['slice'][slice]['segment'].first['leg'].first['arrivalTime']
+      string_time = item['slice'][slice]['segment'].first['leg'].first['arrivalTime']
+      local_string_time = string_time.gsub(/\+(.*)/, '+00:00')
+      Time.zone.parse(local_string_time)
     end
 
     def extract_carrier(item, slice)
