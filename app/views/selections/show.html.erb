@@ -19,10 +19,21 @@
     <div class="row">
       <% # Début case bootstrap formulaire et cards %>
       <div class="col-xs-12 col-sm-8">
+        <div class = "row">
+          <div class = "col-xs-12 col-sm-2">
+            <h4> Your cars</h4>
+          </div>
+          <div class = "col-xs-12 col-sm-8">
+            <h5 class = "car-recap-text"> <%= Constants::CITY_REGION[@pick_up_location]%> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  to <%= Constants::CITY_REGION[@drop_off_location]%> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %> </h5>
+          </div>
+          <div class = "col-xs-12 col-sm-2">
+            <p id="modify-search"><strong>Modify search</strong></p>
+          </div>
+        </div>
         <%= render "car_form" %>
         <% #Début row titre cards %>
         <div id="TitleShow">
-          <h3>THE BEST CARS PER CATEGORY </h3>
+          <h4>THE BEST CARS PER CATEGORY </h4>
         </div>
         <% #Fin row titre cards %>
 
@@ -84,11 +95,11 @@
 <script>
   $(function () {
     $('#datetimepicker').datetimepicker({
-        format: 'YYYY MMM DD [-] hh a',
+        format: 'MMM DD [-] hh a',
         sideBySide: true
     });
     $('#datetimepicker2').datetimepicker({
-        format: 'YYYY MMM DD [-] hh a',
+        format: 'MMM DD [-] hh a',
         sideBySide: true
     });
   });

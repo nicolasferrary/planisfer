@@ -55,7 +55,23 @@
   justify-content: space-around;
   font-size: 14px;
   float: right;
-  align-items: center;
+  padding-bottom: 26px;
+  padding-top: 10px;
+}
+
+#modify-search {
+  color: $brand-color;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 
+#modify-search p{
+  color: $brand-color;
+  text-decoration: none;
+  margin: 0 0 5px;
+}
+
+#modify-search:hover {
+  text-decoration: none;
+}
