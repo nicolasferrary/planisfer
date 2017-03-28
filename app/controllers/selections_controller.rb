@@ -3,9 +3,25 @@ require "net/http"
 class SelectionsController < ApplicationController
 
   def create
+    @trip = Trip.find(params[:trip_id])
+    #Define params for API
+    @pick_up_location = Constants::CITY_REGION.invert[params[:pick_up_location]] || @trip.round_trip_flight.flight1_destination_airport_iata
+    @drop_off_location = Constants::CITY_REGION.invert[params[:drop_off_location]] || @trip.round_trip_flight.flight2_origin_airport_iata
+    if !params[:pick_up_date_time].nil?
+      @pick_up_date_time = Time.zone.parse(params[:pick_up_date_time])
+    else
+      @pick_up_date_time = @trip.round_trip_flight.flight1_landing_at
+    end
+    raise
+    if !params[:drop_off_date_time].nil?
+      @drop_off_date_time = Time.zone.parse(params[:drop_off_date_time])
+    else
+      @drop_off_date_time = @trip.round_trip_flight.flight2_take_off_at - 60*60
+    end
+    @under_25 = params[:under_25].to_i
+
     @selection = Selection.new()
     @selection.save
-    @trip = Trip.find(params[:trip_id])
     @search = @trip.search
     @region = @trip.region
     @region_airports_iata = Constants::REGIONS_AIRPORTS[@region.name]
@@ -17,11 +33,24 @@ class SelectionsController < ApplicationController
 
     # Lancer les requetes
     # Comment if you want to test with a seed
-    get_car_rentals_for_trip(@trip, @selection)
+    @car_rentals = get_car_rentals_for_trip(@trip)
     # @car_rentals is an array of instances of car_rentals
+    @categories = ["Mini", "Economy", "Compact", "Intermediate/Standard", "Fullsize", "Premium/Luxury"]
+    @best_car_rentals = []
+    @categories.each do |category|
+      best_category_cars = get_best_cars(@car_rentals, category)
+      @best_car_rentals << best_category_cars
+    end
+
+    @best_car_rentals = @best_car_rentals.flatten
+    @best_car_rentals.each do |car_rental|
+      car_rental.selection = @selection
+      car_rental.save
+    end
+
     # Uncomment if you want to test with a seed
     # @car_rentals = [CarRental.all[0], CarRental.all[1], CarRental.all[2], CarRental.all[3], CarRental.all[4]]
-    redirect_to selection_path(@selection, :trip_id => @trip.id)
+    redirect_to selection_path(@selection, :trip_id => @trip.id, :pick_up_location => @pick_up_location, :drop_off_location => @drop_off_location, :under_25 => @under_25, :pick_up_date_time => @pick_up_date_time, :drop_off_date_time => @drop_off_date_time)
   end
 
   def show
@@ -33,12 +62,19 @@ class SelectionsController < ApplicationController
     @region_airports_iata = Constants::REGIONS_AIRPORTS[@region.name]
     @region_airports = @region_airports_iata.map { |airport_iata| Constants::CITY_REGION[airport_iata]}
     @car_selection = get_best_cars_per_category(@car_rentals)
+    @pick_up_location = params[:pick_up_location]
+    @drop_off_location = params[:drop_off_location]
+    @pick_up_date_time = params[:pick_up_date_time]
+    @drop_off_date_time = params[:drop_off_date_time]
+    @under_25 = params[:under_25]
     set_indexes
     # @car_selection is a hash of arrays of instances of car_rentals (up to 5 instances per car category)
 
     # This is just for test
     @times = ["6 AM", "7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM", "10 PM" ]
     @photo_params = surounding_params(@car_rentals)
+
+    @status = "none"
 
     respond_to do |format|
       format.html {}
@@ -49,22 +85,20 @@ class SelectionsController < ApplicationController
 
   private
 
-  def get_car_rentals_for_trip(trip, selection)
+  def get_car_rentals_for_trip(trip)
     options = {
-        pick_up_place: trip.round_trip_flight.flight1_destination_airport_iata,
-        drop_off_place: trip.round_trip_flight.flight2_origin_airport_iata,
-        pick_up_date_time: trip.round_trip_flight.flight1_landing_at,
-        drop_off_date_time: trip.round_trip_flight.flight2_take_off_at - 60*60,
-        driver_age: 30,
+        pick_up_place: @pick_up_location,
+        drop_off_place: @drop_off_location,
+        pick_up_date_time: @pick_up_date_time,
+        drop_off_date_time: @drop_off_date_time,
+        driver_age: @under_25 == 1 ? 21 : 30,
         currency: @currency,
         user_ip: @user_ip,
       }
-    car_rentals = (Rental::SmartRentalAgent.new(options, selection).obtain_rentals)
+    car_rentals = (Rental::SmartRentalAgent.new(options).obtain_rentals)
   end
 
   def get_best_cars_per_category(rentals)
-    # category_index = define_category_index
-      # A mettre dans le js
     best_cars = {}
     best_cars[:mini] = get_best_cars(rentals, "Mini")
     best_cars[:economy] = get_best_cars(rentals, "Economy")
@@ -76,9 +110,8 @@ class SelectionsController < ApplicationController
   end
 
   def get_best_cars(rentals, category)
-    cars = rentals.select {|rental| rental.car.category == category}
-    sorted_cars = cars.sort_by { |rental| rental.price }
-    best_cars = sorted_cars.first(5)
+    unique_sorted_cars = get_unique_sorted_cars(rentals, category)
+    best_cars = unique_sorted_cars.first(5)
   end
 
   def define_category_index
@@ -170,8 +203,8 @@ class SelectionsController < ApplicationController
   end
 
   def number_rentals(rentals, category)
-    category_rentals = rentals.select {|rental| rental.car.category == category}
-    category_rentals.count
+    unique_sorted_cars = get_unique_sorted_cars(rentals, category)
+    unique_sorted_cars.count
   end
 
   def set_indexes
@@ -181,6 +214,12 @@ class SelectionsController < ApplicationController
     @standard_index = params[:standard_index].to_i || 0
     @fullsize_index = params[:fullsize_index].to_i || 0
     @premium_index = params[:premium_index].to_i || 0
+  end
+
+  def get_unique_sorted_cars(rentals, category)
+    cars = rentals.select {|rental| rental.car.category == category}
+    sorted_cars = cars.sort_by { |rental| rental.price }
+    unique_sorted_cars = sorted_cars.uniq {|rental| rental.car}
   end
 
 end

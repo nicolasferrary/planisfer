@@ -19,68 +19,34 @@
     <div class="row">
       <% # Début case bootstrap formulaire et cards %>
       <div class="col-xs-12 col-sm-8">
-        <% #Début de la row de formulaire %>
         <div class = "row">
-          <div class = col-xs-12>
-            <div class = "car-form">
-            <div class= "row">
-              <div class = "col-xs-12">
-                <h5> Your car rental details </h5>
-              </div>
+          <div class = "car-recap-row">
+            <div class = "col-xs-12 col-sm-3">
+              <h4> Select your car </h4>
             </div>
-              <%# Beginning 1st row form %>
-              <div class = "row">
-                <div class = "car-form-row">
-                  <div class = "col-md-1">
-                    <%= image_tag "car.png", width: "30px", height: "auto", class: "car" %>
-                  </div>
-                  <div class = "col-md-4">
-                    <%= select_tag :pick_up_location, options_for_select(@region_airports, Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata]), class: "form-control car-form-item", prompt: "Airports where you can pick-up a car" %>
-                  </div>
-                  <div class = "col-md-4">
-                    <%= text_field_tag :pick_up_date, @trip.starts_on.strftime("%B %e"), placeholder: "Pick-up-date", "class" => 'form-control car-datepicker car-form-item'%>
-                  </div>
-                  <div class = "col-md-3">
-                    <%= select_tag :pick_up_time, options_for_select(@times, @trip.round_trip_flight.flight1_landing_at.localtime.strftime("%l %p").strip), class: "form-control car-form-item" %>
-                  </div>
-                </div>
-              </div>
-              <%# End 1st row form %>
-              <%# Beginning 2nd row form %>
-              <div class = "row">
-                <div class = "car-form-row">
-                  <div class = "col-md-1">
-                    <%= image_tag "flipped-car.png", width: "30px", height: "auto", class: "car" %>
-                  </div>
-                  <div class = "col-md-4">
-                    <%= select_tag :drop_off_location, options_for_select(@region_airports, Constants::CITY_REGION[@trip.round_trip_flight.flight2_origin_airport_iata]), class: "form-control car-form-item", prompt: "Airports where you can drop-off a car" %>
-                  </div>
-                  <div class = "col-md-4">
-                    <%= text_field_tag :drop_off_date, @trip.returns_on.strftime("%B %e"), placeholder: "Pick-up-date", "class" => 'form-control car-datepicker car-form-item'%>
-
-                  </div>
-                  <div class = "col-md-3">
-                    <%= select_tag :drop_off_time, options_for_select(@times, @trip.round_trip_flight.flight2_take_off_at.localtime.strftime("%l %p").strip), class: "form-control car-form-item" %>
-                  </div>
-                </div>
-              </div>
-              <%# End 2nd row form %>
-              <%# Beginning 3rd row form %>
-              <div class = "row">
-                <div class = "col-xs-12">
-                <span class= "light-data driver"> Driver is > 25 years old </span> <span> <%= check_box_tag :age, 1, {:checked => "checked"}, class: "age-checkbox"  %> </span>
+            <div class = "col-xs-12 col-sm-6">
+              <h5 id = "car-recap-text"> <%= Constants::CITY_REGION[@pick_up_location]%> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  <span class="fa fa-long-arrow-right" aria-hidden="true"></span> <%= Constants::CITY_REGION[@drop_off_location]%> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %> </h5>
             </div>
-              </div>
-              <%# End 3rd row form %>
+            <div class = "col-xs-12 col-sm-3">
+              <%= link_to "javascript:showhide('modify')", class: "modify-search-link" do%>
+                <div>
+                  <h5 class="<%= 'hidden' if @status == 'modify' %>" id="modify-search"> Modify search </h5>
+                </div>
+              <% end  %>
             </div>
           </div>
         </div>
-        <% #Fin de la row de formulaire %>
+
+
+
+
         <% #Début row titre cards %>
-        <div id="TitleShow">
-          <h3>THE BEST CARS PER CATEGORY </h3>
-        </div>
+  <!--       <div id="TitleShow">
+          <h4>THE BEST CARS PER CATEGORY </h4>
+        </div> -->
         <% #Fin row titre cards %>
+
+        <%= render "car_form" %>
 
         <div id = "car-cards-partial">
           <%= render "car_cards" %>
@@ -110,19 +76,11 @@
 
   <script>
     $(document).ready(function() {
-
-      $('.card').mouseenter('click', function(e) {
+      $('.card').mouseover('click', function(e) {
         e.preventDefault();
         $('.card.selected').removeClass('selected');
         $(this).addClass('selected');
       })
-
-      $('.car-form-text').mouseenter('click', function(e) {
-        e.preventDefault();
-        $('.car-form-text.selected').removeClass('selected');
-        $(this).addClass('selected');
-      })
-
     });
 
 
@@ -144,5 +102,32 @@
       });
     });
   </script>
+
+<script>
+  $(function () {
+    $('#datetimepicker').datetimepicker({
+        format: 'MMM DD [-] hh a',
+        sideBySide: true
+    });
+    $('#datetimepicker2').datetimepicker({
+        format: 'MMM DD [-] hh a',
+        sideBySide: true
+    });
+  });
+  function showhide(id) {
+    var e = document.getElementById(id);
+    if ($('#' + e.id).hasClass('not-displayed')) {
+      $('#' + e.id).slideDown('slow');
+      $('#' + e.id).removeClass('not-displayed')
+      // $("#see-filters").addClass("hidden");
+      // $("#hide-filters").removeClass("hidden");
+    } else {
+      $('#' + e.id).slideUp('slow');
+      $('#' + e.id).addClass('not-displayed')
+      // $("#see-filters").removeClass("hidden");
+      // $("#hide-filters").addClass("hidden");
+    };
+  };
+</script>
 
 <% end %>
