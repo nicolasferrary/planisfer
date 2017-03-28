@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316082840) do
+ActiveRecord::Schema.define(version: 20170328081600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,7 +39,9 @@ ActiveRecord::Schema.define(version: 20170316082840) do
     t.string   "deep_link_url"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "selection_id"
     t.index ["car_id"], name: "index_car_rentals_on_car_id", using: :btree
+    t.index ["selection_id"], name: "index_car_rentals_on_selection_id", using: :btree
   end
 
   create_table "cars", force: :cascade do |t|
@@ -83,10 +85,13 @@ ActiveRecord::Schema.define(version: 20170316082840) do
     t.float    "longitude_arrive"
     t.float    "latitude_back"
     t.float    "longitude_back"
-    t.string   "f1_number"
-    t.string   "f2_number"
     t.float    "latitude_home"
     t.float    "longitude_home"
+    t.string   "f1_number"
+    t.string   "f2_number"
+    t.string   "region"
+    t.integer  "region_id"
+    t.index ["region_id"], name: "index_round_trip_flights_on_region_id", using: :btree
   end
 
   create_table "searches", force: :cascade do |t|
@@ -99,6 +104,11 @@ ActiveRecord::Schema.define(version: 20170316082840) do
     t.integer  "nb_travelers"
     t.string   "flight1_range"
     t.string   "flight2_range"
+  end
+
+  create_table "selections", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "trips", force: :cascade do |t|
@@ -125,6 +135,8 @@ ActiveRecord::Schema.define(version: 20170316082840) do
   add_foreign_key "airports", "cities"
   add_foreign_key "airports", "regions"
   add_foreign_key "car_rentals", "cars"
+  add_foreign_key "car_rentals", "selections"
+  add_foreign_key "round_trip_flights", "regions"
   add_foreign_key "trips", "car_rentals"
   add_foreign_key "trips", "cities"
   add_foreign_key "trips", "regions"

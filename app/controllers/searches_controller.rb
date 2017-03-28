@@ -21,6 +21,7 @@ class SearchesController < ApplicationController
     @routes = Avion.generate_routes(@city_name, @region_airports)
     # Launch APi requests and gather trips
     @trips = get_trips_for_routes(@routes, @starts_on, @returns_on, @nb_travelers, @city, @region, @search)
+
     redirect_to search_path(@search)
   end
 
@@ -154,14 +155,7 @@ class SearchesController < ApplicationController
   def refresh_map
     # récupérer le round_trip
     @round_trip_flight = RoundTripFlight.find(params[:round_trip_flight_id])
-    # renvoyer les coordonnées des marqueurs à afficher
-    latitude_arrive = @round_trip_flight.latitude_arrive
-    longitude_arrive = @round_trip_flight.longitude_arrive
-    latitude_back = @round_trip_flight.latitude_back
-    longitude_back = @round_trip_flight.longitude_back
-
-
-    if longitude_arrive == longitude_back && latitude_arrive == latitude_back
+    if @round_trip_flight.longitude_arrive == @round_trip_flight.latitude_back && @round_trip_flight.latitude_arrive == @round_trip_flight.latitude_back
       render json: [
         # To show the city of departure on the map
         # {
@@ -178,8 +172,9 @@ class SearchesController < ApplicationController
         },
         # in progress = récupérer @region pour pouvoir adapter le code par destination
         {
-          lat: highlight_coordinates("Portugal", "highlight_1")[0],
-          lng: -7.9304397 ,
+          #lat: highlight_coordinates("Portugal", "highlight_6")[0],
+          lat: 41.1579438,
+          lng: -8.629105299999999,
           infowindow: "Hello World",
           picture: { url: view_context.image_url("interest.svg"), width: 40, height: 40 },
         }
@@ -208,13 +203,12 @@ class SearchesController < ApplicationController
 
         ].to_json
     end
-
   end
 
   private
 
-  def highlight_coordinates(region, city)
-    Geocoder.coordinates(Constants::DESTINATIONS[region][city])
+  def highlight_coordinates(region, highlight)
+    Geocoder.coordinates(Constants::DESTINATIONS[region][highlight])
   end
 
 
