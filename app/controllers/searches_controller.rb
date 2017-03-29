@@ -96,7 +96,39 @@ class SearchesController < ApplicationController
         lng: @round_trips.first.longitude_arrive,
         infowindow: @round_trips.first.flight1_destination_airport_iata,
         picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
-      }]
+      },
+      # Working on highlights markers
+      {
+        lat: highlight_coordinates(@region, "highlight_1")[0],
+        lng: highlight_coordinates(@region, "highlight_1")[1],
+        infowindow: "Hello",
+        picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+      },
+      {
+        lat: highlight_coordinates(@region, "highlight_2")[0],
+        lng: highlight_coordinates(@region, "highlight_2")[1],
+        infowindow: "highlight_2",
+        picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+      },
+      {
+        lat: highlight_coordinates(@region, "highlight_3")[0],
+        lng: highlight_coordinates(@region, "highlight_3")[1],
+        infowindow: "highlight_3",
+        picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+      },
+      {
+        lat: highlight_coordinates(@region, "highlight_4")[0],
+        lng: highlight_coordinates(@region, "highlight_4")[1],
+        infowindow: "highlight_4",
+        picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+      },
+      {
+        lat: highlight_coordinates(@region, "highlight_5")[0],
+        lng: highlight_coordinates(@region, "highlight_5")[1],
+        infowindow: "highlight_5",
+        picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+      }
+    ]
 
     else
       @first_result = [
@@ -117,6 +149,37 @@ class SearchesController < ApplicationController
           lng: @round_trips.first.longitude_back,
           infowindow: @round_trips.first.flight2_origin_airport_iata,
           picture: { url: view_context.image_url("orange.svg"), width: 40, height: 40 }
+        },
+        # Working on highlights markers
+        {
+          lat: highlight_coordinates(@region, "highlight_1")[0],
+          lng: highlight_coordinates(@region, "highlight_1")[1],
+          infowindow: "highlight_1",
+          picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+        },
+        {
+          lat: highlight_coordinates(@region, "highlight_2")[0],
+          lng: highlight_coordinates(@region, "highlight_2")[1],
+          infowindow: "highlight_2",
+          picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+        },
+        {
+          lat: highlight_coordinates(@region, "highlight_3")[0],
+          lng: highlight_coordinates(@region, "highlight_3")[1],
+          infowindow: "highlight_3",
+          picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+        },
+        {
+          lat: highlight_coordinates(@region, "highlight_4")[0],
+          lng: highlight_coordinates(@region, "highlight_4")[1],
+          infowindow: "highlight_4",
+          picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+        },
+        {
+          lat: highlight_coordinates(@region, "highlight_5")[0],
+          lng: highlight_coordinates(@region, "highlight_5")[1],
+          infowindow: "highlight_5",
+          picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
         }
       ]
     end
@@ -155,6 +218,7 @@ class SearchesController < ApplicationController
   def refresh_map
     # récupérer le round_trip
     @round_trip_flight = RoundTripFlight.find(params[:round_trip_flight_id])
+
     if @round_trip_flight.longitude_arrive == @round_trip_flight.latitude_back && @round_trip_flight.latitude_arrive == @round_trip_flight.latitude_back
       render json: [
         # To show the city of departure on the map
@@ -171,12 +235,36 @@ class SearchesController < ApplicationController
           picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
         },
         # in progress = récupérer @region pour pouvoir adapter le code par destination
+        # Working on highlights markers
         {
-          #lat: highlight_coordinates("Portugal", "highlight_6")[0],
-          lat: 41.1579438,
-          lng: -8.629105299999999,
-          infowindow: "Hello World",
-          picture: { url: view_context.image_url("interest.svg"), width: 40, height: 40 },
+          lat: highlight_coordinates(@round_trip_flight.region.name, "highlight_1")[0],
+          lng: highlight_coordinates(@round_trip_flight.region.name, "highlight_1")[1],
+          infowindow: Constants::DESTINATIONS[@round_trip_flight.region.name][image_1],
+          picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+        },
+         {
+          lat: highlight_coordinates(@round_trip_flight.region.name, "highlight_2")[0],
+          lng: highlight_coordinates(@round_trip_flight.region.name, "highlight_2")[1],
+          infowindow: "highlight_2",
+          picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+        },
+        {
+          lat: highlight_coordinates(@round_trip_flight.region.name, "highlight_3")[0],
+          lng: highlight_coordinates(@round_trip_flight.region.name, "highlight_3")[1],
+          infowindow: "highlight_3",
+          picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+        },
+        {
+          lat: highlight_coordinates(@round_trip_flight.region.name, "highlight_4")[0],
+          lng: highlight_coordinates(@round_trip_flight.region.name, "highlight_4")[1],
+          infowindow: "highlight_4",
+          picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+        },
+        {
+          lat: highlight_coordinates(@round_trip_flight.region.name, "highlight_5")[0],
+          lng: highlight_coordinates(@round_trip_flight.region.name, "highlight_5")[1],
+          infowindow: "highlight_5",
+          picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
         }
         ].to_json
     else

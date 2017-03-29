@@ -1,4 +1,4 @@
-<!-- <!-- USELESS -->
+
 
 <div id="map", style="width: 100%; height: 400px;"> </div>
 
@@ -12,17 +12,39 @@
             scrollwheel: false
           },
           internal: { id: 'map' } }, function(){
-          markers = handler.addMarkers( <%= raw refresh_map %>
-          // [
-            // {
-            //   "lat": <%#=  @round_trip_flight.latitude_arrive %>,
-            //   "lng": <%#=  @round_trip_flight.longitude_arrive  %>,
-            // },
-            // {
-            //   "lat": <%#=  @round_trip_flight.latitude_back %>,
-            //   "lng": <%#=  @round_trip_flight.longitude_back %>,
-            // },
-          // ]
+          markers = handler.addMarkers( <%#= raw refresh_map %>
+          [
+            {
+              lat: highlight_coordinates(@region, "highlight_1")[0],
+              lng: highlight_coordinates(@region, "highlight_1")[1],
+              infowindow: "highlight_1",
+              picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+            },
+             {
+              lat: highlight_coordinates(@region, "highlight_2")[0],
+              lng: highlight_coordinates(@region, "highlight_2")[1],
+              infowindow: "highlight_2",
+              picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+            },
+            {
+              lat: highlight_coordinates(@region, "highlight_3")[0],
+              lng: highlight_coordinates(@region, "highlight_3")[1],
+              infowindow: "highlight_3",
+              picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+            },
+            {
+              lat: highlight_coordinates(@region, "highlight_4")[0],
+              lng: highlight_coordinates(@region, "highlight_4")[1],
+              infowindow: "highlight_4",
+              picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+            },
+            {
+              lat: highlight_coordinates(@region, "highlight_5")[0],
+              lng: highlight_coordinates(@region, "highlight_5")[1],
+              infowindow: "highlight_5",
+              picture: { url: view_context.image_url("pin.svg"), width: 40, height: 40 }
+            }
+           ]
           );
           // handler.bounds.extendWith(markers);
           // handler.fitMapToBounds();
@@ -36,4 +58,6 @@
 
 <% end %>
 
+
+  --> --> -->
  -->
