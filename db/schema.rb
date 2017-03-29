@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329104358) do
+ActiveRecord::Schema.define(version: 20170329124910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,10 +123,8 @@ ActiveRecord::Schema.define(version: 20170329104358) do
     t.float    "longitude"
     t.integer  "search_id"
     t.integer  "car_rental_id"
-    t.integer  "region_id"
     t.index ["car_rental_id"], name: "index_trips_on_car_rental_id", using: :btree
     t.index ["city_id"], name: "index_trips_on_city_id", using: :btree
-    t.index ["region_id"], name: "index_trips_on_region_id", using: :btree
     t.index ["round_trip_flight_id"], name: "index_trips_on_round_trip_flight_id", using: :btree
     t.index ["search_id"], name: "index_trips_on_search_id", using: :btree
   end
@@ -138,7 +136,6 @@ ActiveRecord::Schema.define(version: 20170329104358) do
   add_foreign_key "round_trip_flights", "regions"
   add_foreign_key "trips", "car_rentals"
   add_foreign_key "trips", "cities"
-  add_foreign_key "trips", "regions"
   add_foreign_key "trips", "round_trip_flights"
   add_foreign_key "trips", "searches"
 end

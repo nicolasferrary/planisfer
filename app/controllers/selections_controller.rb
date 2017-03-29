@@ -22,7 +22,7 @@ class SelectionsController < ApplicationController
     @selection = Selection.new()
     @selection.save
     @search = @trip.search
-    @region = @trip.region
+    @region = @trip.round_trip_flight.region
     @region_airports_iata = Constants::REGIONS_AIRPORTS[@region.name]
     @region_airports = @region_airports_iata.map { |airport_iata| Constants::CITY_REGION[airport_iata]}
     @user_ip = Net::HTTP.get(URI("https://api.ipify.org"))
@@ -57,7 +57,7 @@ class SelectionsController < ApplicationController
     @search = @trip.search
     @selection = Selection.find(params[:id])
     @car_rentals = CarRental.where(selection_id: @selection.id)
-    @region = @trip.region
+    @region = @trip.round_trip_flight.region
     @region_airports_iata = Constants::REGIONS_AIRPORTS[@region.name]
     @region_airports = @region_airports_iata.map { |airport_iata| Constants::CITY_REGION[airport_iata]}
     @car_selection = get_best_cars_per_category(@car_rentals)

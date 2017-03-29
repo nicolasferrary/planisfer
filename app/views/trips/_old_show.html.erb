@@ -7,7 +7,7 @@ OLD VERSION
     <%= image_tag "logo.png", class:"logo-1"%>
     <% end %>
   </div>
-  <h1 class="">Your tickets to <%= @trip.region.name %></h1>
+  <h1 class="">Your tickets to <%= @trip.round_trip_flight.region.name %></h1>
   <%= link_to "> Back to all flights", search_path(@search), class: "back" %>
 </div>
 
@@ -44,7 +44,7 @@ OLD VERSION
             <span class="boardingtime">FROM<br><span><%=Constants::AIRPORTS[@search.city] %> </span></span>
             <span class="boardingtime-2">TO<br><span><%= Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata]  %></span></span>
 
-            <span class="flight flightslip">DESTINATION<br><span><%= @trip.region.name %></span></span>
+            <span class="flight flightslip">DESTINATION<br><span><%= @trip.round_trip_flight.region.name %></span></span>
             <span class="name nameslip">PASSENGERS<br><span><%= @trip.nb_travelers%></span></span>
             <span class="plane-1"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="45" width="45" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
           </div>
@@ -70,7 +70,7 @@ OLD VERSION
             <span class="seat">ARRIVAL<br><span><%= @trip.round_trip_flight.flight2_landing_at.localtime.strftime("%H:%M") %></span></span>
             <span class="boardingtime-1">FROM<br><span><%= Constants::CITY_REGION[@trip.round_trip_flight.flight2_origin_airport_iata] %></span></span>
             <span class="boardingtime-3">TO<br><span><%=Constants::AIRPORTS[@search.city] %></span></span>
-            <span class="flight flightslip">ORIGIN<br><span><%= @trip.region.name %></span></span>
+            <span class="flight flightslip">ORIGIN<br><span><%= @trip.round_trip_flight.region.name %></span></span>
             <span class="name nameslip">PASSENGERS<br><span><%= @trip.nb_travelers%></span></span>
             <span class="plane-1"><?xml version="1.0" ?><svg clip-rule="evenodd" fill-rule="evenodd" height="45" width="45" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><g stroke="#222"><line fill="none" stroke-linecap="round" stroke-width="30" x1="300" x2="55" y1="390" y2="390"/><path d="M98 325c-9 10 10 16 25 6l311-156c24-17 35-25 42-50 2-15-46-11-78-7-15 1-34 10-42 16l-56 35 1-1-169-31c-14-3-24-5-37-1-10 5-18 10-27 18l122 72c4 3 5 7 1 9l-44 27-75-15c-10-2-18-4-28 0-8 4-14 9-20 15l74 63z" fill="#222" stroke-linejoin="round" stroke-width="10"/></g></svg></span>
           </div>
@@ -99,7 +99,7 @@ OLD VERSION
     <p>ROADTRIP TO</p>
   </div>
   <div>
-    <h4><%= @trip.region.name %></h4>
+    <h4><%= @trip.round_trip_flight.region.name %></h4>
     <div id="booking-title">
       <p>PRICE / <%= @trip.nb_travelers%> TRAVELERS</p>
     </div>
