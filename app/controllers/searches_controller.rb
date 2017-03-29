@@ -233,7 +233,7 @@ class SearchesController < ApplicationController
       }
       rtf = (Avion::SmartQPXAgent.new(options).obtain_offers)
       rtf.each do |rtf|
-        trip = Trip.create(starts_on, returns_on, nb_travelers, city, region, rtf, search)
+        trip = Trip.create(starts_on, returns_on, nb_travelers, city, rtf, search)
         trips << trip
       end
     end

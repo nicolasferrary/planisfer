@@ -79,6 +79,7 @@ module Avion
         rtf = RoundTripFlight.create_flight(option, @region)
         # coordinates = Geocoder.coordinates("IATA, REgion ou ville")
         rtfs << rtf
+
       end
       rtfs
     end
