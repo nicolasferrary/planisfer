@@ -2,6 +2,7 @@ class RoundTripFlight < ApplicationRecord
   attr_accessor :region
 
   has_many :trips, dependent: :destroy
+  belongs_to :region
   validates :price, presence: true
   validates :flight1_origin_airport_iata, presence: true
   validates :flight1_destination_airport_iata, presence: true
@@ -41,7 +42,6 @@ class RoundTripFlight < ApplicationRecord
   class << self
     def create_flight(option, region)
       round_trip_flight = RoundTripFlight.new
-      round_trip_flight.region = region
       round_trip_flight.currency = extract_currency(option)
       round_trip_flight.price = extract_price(option)
       round_trip_flight.flight1_origin_airport_iata = extract_origin_airport_iata(option, 0)
@@ -59,6 +59,7 @@ class RoundTripFlight < ApplicationRecord
       round_trip_flight.destination_airport_coordinates
       round_trip_flight.origin_airport_coordinates
       round_trip_flight.home_airport_coordinates
+      round_trip_flight.region = region
       round_trip_flight.save
       round_trip_flight
     end

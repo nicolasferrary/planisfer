@@ -21,6 +21,7 @@ class SearchesController < ApplicationController
     @routes = Avion.generate_routes(@city_name, @region_airports)
     # Launch APi requests and gather trips
     @trips = get_trips_for_routes(@routes, @starts_on, @returns_on, @nb_travelers, @city, @region, @search)
+
     redirect_to search_path(@search)
   end
 
@@ -74,32 +75,37 @@ class SearchesController < ApplicationController
     @trips_selection = @trips.first(10)
 
     @round_trips = @trips_selection.map(&:round_trip_flight)
-    # declenche le geocode sur ces objets
+
+    # Geocode on these objects
     #@round_trips.map(&:destination_airport_coordinates).map(&:origin_airport_coordinates)
 
     # GEOCODING
+    # Define the marker when we load the page
+    # Show only one marker if the city is the same for arrival and departure
+
     if @round_trips.first.latitude_arrive == @round_trips.first.latitude_back
        @first_result = [
-      {
-        lat: @round_trips.first.latitude_home,
-        lng: @round_trips.first.longitude_home,
-        infowindow: @round_trips.first.flight1_origin_airport_iata,
-        picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
-      },
+      # {
+      #   lat: @round_trips.first.latitude_home,
+      #   lng: @round_trips.first.longitude_home,
+      #   infowindow: @round_trips.first.flight1_origin_airport_iata,
+      #   picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
+      # },
       {
         lat: @round_trips.first.latitude_arrive,
         lng: @round_trips.first.longitude_arrive,
         infowindow: @round_trips.first.flight1_destination_airport_iata,
         picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
       }]
+
     else
       @first_result = [
-        {
-          lat: @round_trips.first.latitude_home,
-          lng: @round_trips.first.longitude_home,
-          infowindow: @round_trips.first.flight1_origin_airport_iata,
-          picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
-        },
+        # {
+        #   lat: @round_trips.first.latitude_home,
+        #   lng: @round_trips.first.longitude_home,
+        #   infowindow: @round_trips.first.flight1_origin_airport_iata,
+        #   picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
+        # },
         {
           lat: @round_trips.first.latitude_arrive,
           lng: @round_trips.first.longitude_arrive,
@@ -149,50 +155,69 @@ class SearchesController < ApplicationController
   def refresh_map
     # récupérer le round_trip
     @round_trip_flight = RoundTripFlight.find(params[:round_trip_flight_id])
-    # renvoyer les coordonnées des marqueurs à afficher
-    latitude_arrive = @round_trip_flight.latitude_arrive
-    longitude_arrive = @round_trip_flight.longitude_arrive
-    latitude_back = @round_trip_flight.latitude_back
-    longitude_back = @round_trip_flight.longitude_back
-
-    if longitude_arrive == longitude_back && latitude_arrive == latitude_back
+    if @round_trip_flight.longitude_arrive == @round_trip_flight.latitude_back && @round_trip_flight.latitude_arrive == @round_trip_flight.latitude_back
       render json: [
-        {
-          lat: @round_trip_flight.latitude_home,
-          lng: @round_trip_flight.longitude_home,
-          infowindow: @round_trip_flight.flight1_origin_airport_iata,
-          picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
-        },
+        # To show the city of departure on the map
+        # {
+        #   lat: @round_trip_flight.latitude_home,
+        #   lng: @round_trip_flight.longitude_home,
+        #   infowindow: @round_trip_flight.flight1_origin_airport_iata,
+        #   picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
+        # },
         {
           lat: @round_trip_flight.latitude_arrive,
           lng: @round_trip_flight.longitude_arrive,
           infowindow: @round_trip_flight.flight1_destination_airport_iata,
           picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
-        }].to_json
+        },
+        # in progress = récupérer @region pour pouvoir adapter le code par destination
+        {
+          #lat: highlight_coordinates("Portugal", "highlight_6")[0],
+          lat: 41.1579438,
+          lng: -8.629105299999999,
+          infowindow: "Hello World",
+          picture: { url: view_context.image_url("interest.svg"), width: 40, height: 40 },
+        }
+        ].to_json
     else
       render json: [
-          {
-            lat: @round_trip_flight.latitude_home,
-            lng: @round_trip_flight.longitude_home,
-            infowindow: @round_trip_flight.flight1_origin_airport_iata,
-            picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
-          },
-          {
-            lat: @round_trip_flight.latitude_arrive,
-            lng: @round_trip_flight.longitude_arrive,
-            infowindow: @round_trip_flight.flight1_destination_airport_iata,
-            picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
-          },
-          {
-            lat: @round_trip_flight.latitude_back,
-            lng: @round_trip_flight.longitude_back,
-            infowindow: @round_trip_flight.flight2_origin_airport_iata,
-            picture: { url: view_context.image_url("orange.svg"), width: 40, height: 40 }
-          }].to_json
+        # To show the city of departure on the map
+        # {
+        #   lat: @round_trip_flight.latitude_home,
+        #   lng: @round_trip_flight.longitude_home,
+        #   infowindow: @round_trip_flight.flight1_origin_airport_iata,
+        #   picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
+        # },
+        {
+          lat: @round_trip_flight.latitude_arrive,
+          lng: @round_trip_flight.longitude_arrive,
+          infowindow: @round_trip_flight.flight1_destination_airport_iata,
+          picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
+        },
+        {
+          lat: @round_trip_flight.latitude_back,
+          lng: @round_trip_flight.longitude_back,
+          infowindow: @round_trip_flight.flight2_origin_airport_iata,
+          picture: { url: view_context.image_url("orange.svg"), width: 40, height: 40 }
+        }
+
+        ].to_json
     end
   end
 
   private
+
+  def highlight_coordinates(region, highlight)
+    Geocoder.coordinates(Constants::DESTINATIONS[region][highlight])
+  end
+
+
+  # def highlight_coordinates
+  #     @latitude = Geocoder.coordinates("Faro, Portugal")[0],
+  #     @longitude = Geocoder.coordinates("Faro, Portugal")[1]
+  # end
+
+# @latitude = Geocoder.search("Faro, Portugal")[0].data["geometry"]["location"]["lat"]
 
   def get_trips_for_routes(routes, starts_on, returns_on, nb_travelers, city, region, search)
     trips = []
