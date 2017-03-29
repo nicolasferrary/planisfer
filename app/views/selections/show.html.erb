@@ -1,0 +1,133 @@
+
+<% # bandeau du haut %>
+
+<div class="flight-ticket-title text-center">
+    <div class="banner-content">
+    <%= link_to root_path do %>
+    <%= image_tag "logo.png", class:"logo-1"%>
+    <% end %>
+  </div>
+  <h1 class="">Select a car</h1>
+  <%= link_to "> Back to all flights", search_path(@search), class: "back" %>
+</div>
+
+<% # Fin du bandeau du haut %>
+<% # début du wrapper %>
+<div class = "card-wrapper">
+  <% # début du container %>
+  <div class="container">
+    <div class="row">
+      <% # Début case bootstrap formulaire et cards %>
+      <div class="col-xs-12 col-sm-8">
+        <div class = "row">
+          <div class = "car-recap-row">
+            <div class = "col-xs-12 col-sm-3">
+              <h4> Select your car </h4>
+            </div>
+            <div class = "col-xs-12 col-sm-6">
+              <h5 id = "car-recap-text"> <%= Constants::CITY_REGION[@pick_up_location]%> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  <span class="fa fa-long-arrow-right" aria-hidden="true"></span> <%= Constants::CITY_REGION[@drop_off_location]%> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %> </h5>
+            </div>
+            <div class = "col-xs-12 col-sm-3">
+              <%= link_to "javascript:showhide('modify')", class: "modify-search-link" do%>
+                <div>
+                  <h5 class="<%= 'hidden' if @status == 'modify' %>" id="modify-search"> Modify search </h5>
+                </div>
+              <% end  %>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <% #Début row titre cards %>
+  <!--       <div id="TitleShow">
+          <h4>THE BEST CARS PER CATEGORY </h4>
+        </div> -->
+        <% #Fin row titre cards %>
+
+        <%= render "car_form" %>
+
+        <div id = "car-cards-partial">
+          <%= render "car_cards" %>
+        </div>
+
+      </div>
+      <% # Fin de la case bootstrap pour les formulaires et cards %>
+
+
+      <% # Début case bootstrap Carnet de voyage %>
+      <div class="col-xs-12 col-sm-4">
+        <%= render "shared/recap" %>
+      </div>
+      <% #Fin case bootstrap Carnet de voyage  %>
+
+    </div>
+    <% # Find de la row %>
+
+  </div>
+  <% # Find du container %>
+</div>
+ <% # Find du wrapper %>
+
+
+
+<% content_for(:after_js) do %>
+
+  <script>
+    $(document).ready(function() {
+      $('.card').mouseover('click', function(e) {
+        e.preventDefault();
+        $('.card.selected').removeClass('selected');
+        $(this).addClass('selected');
+      })
+    });
+
+
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      $('#pick_up_date').datepicker({
+        todayHighlight: true,
+        orientation: "bottom-left",
+        autoclose: true,
+        format: 'MM dd',
+      });
+      $('#drop_off_date').datepicker({
+        todayHighlight: true,
+        orientation: "bottom-left",
+        autoclose: true,
+        format: 'MM dd',
+      });
+    });
+  </script>
+
+<script>
+  $(function () {
+    $('#datetimepicker').datetimepicker({
+        format: 'MMM DD [-] hh a',
+        sideBySide: true
+    });
+    $('#datetimepicker2').datetimepicker({
+        format: 'MMM DD [-] hh a',
+        sideBySide: true
+    });
+  });
+  function showhide(id) {
+    var e = document.getElementById(id);
+    if ($('#' + e.id).hasClass('not-displayed')) {
+      $('#' + e.id).slideDown('slow');
+      $('#' + e.id).removeClass('not-displayed')
+      // $("#see-filters").addClass("hidden");
+      // $("#hide-filters").removeClass("hidden");
+    } else {
+      $('#' + e.id).slideUp('slow');
+      $('#' + e.id).addClass('not-displayed')
+      // $("#see-filters").removeClass("hidden");
+      // $("#hide-filters").addClass("hidden");
+    };
+  };
+</script>
+
+<% end %>

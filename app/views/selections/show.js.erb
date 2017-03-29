@@ -1,0 +1,9 @@
+$('#car-cards-partial').html('<%= j render "car_cards" %>');
+
+
+$('.card').mouseover('click', function(e) {
+  e.preventDefault();
+  $('.card.selected').removeClass('selected');
+  $(this).addClass('selected');
+})
+

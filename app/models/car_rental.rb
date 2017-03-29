@@ -1,6 +1,7 @@
 class CarRental < ApplicationRecord
   belongs_to :car
   has_many :trips
+  belongs_to :selection
 
 
   class << self
