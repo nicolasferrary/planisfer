@@ -1,5 +1,4 @@
 class RoundTripFlight < ApplicationRecord
-  attr_accessor :region
 
   has_many :trips, dependent: :destroy
   belongs_to :region

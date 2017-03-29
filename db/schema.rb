@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328081600) do
+ActiveRecord::Schema.define(version: 20170329104358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,11 +85,10 @@ ActiveRecord::Schema.define(version: 20170328081600) do
     t.float    "longitude_arrive"
     t.float    "latitude_back"
     t.float    "longitude_back"
-    t.float    "latitude_home"
-    t.float    "longitude_home"
     t.string   "f1_number"
     t.string   "f2_number"
-    t.string   "region"
+    t.float    "latitude_home"
+    t.float    "longitude_home"
     t.integer  "region_id"
     t.index ["region_id"], name: "index_round_trip_flights_on_region_id", using: :btree
   end
@@ -117,7 +116,6 @@ ActiveRecord::Schema.define(version: 20170328081600) do
     t.date     "returns_on"
     t.integer  "nb_travelers"
     t.integer  "city_id"
-    t.integer  "region_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "round_trip_flight_id"
@@ -125,6 +123,7 @@ ActiveRecord::Schema.define(version: 20170328081600) do
     t.float    "longitude"
     t.integer  "search_id"
     t.integer  "car_rental_id"
+    t.integer  "region_id"
     t.index ["car_rental_id"], name: "index_trips_on_car_rental_id", using: :btree
     t.index ["city_id"], name: "index_trips_on_city_id", using: :btree
     t.index ["region_id"], name: "index_trips_on_region_id", using: :btree

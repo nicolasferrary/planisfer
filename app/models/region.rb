@@ -5,6 +5,7 @@ class Region < ApplicationRecord
  has_many :round_trip_flights, dependent: :destroy
 
 
+
  def self.create(name)
   region = Region.new(name: name)
   region.save

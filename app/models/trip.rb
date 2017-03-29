@@ -1,9 +1,10 @@
 class Trip < ApplicationRecord
  belongs_to :round_trip_flight
+ belongs_to :trip
  belongs_to :car_rental
  belongs_to :city
- belongs_to :region
  belongs_to :search
+ belongs_to :region
  validates :starts_on, presence: true
  validates :returns_on, presence: true
  validates :nb_travelers, presence: true
@@ -23,6 +24,7 @@ class Trip < ApplicationRecord
       trip.car_rental = CarRental.new()
       trip.save
       trip
+      raise
     end
   end
 
