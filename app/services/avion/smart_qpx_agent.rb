@@ -17,29 +17,16 @@ module Avion
     end
 
     def obtain_offers
-      # Get deserialized Offer object from cache if found
-      # cached = $redis.get(@cache_key_name)
-      # if cached
-      #   puts "Found key #{@cache_key_name} in cache"
-      #   return Marshal.load(cached)
-      # end
-
-      # If not – run two requests one after another and try to combine them
-      start = Time.now # debugging
       if search_params_make_sense
         json = Avion::QPXRequester.new(
           city: @city,
           region_airport1: @region_airport1,
-          region_airport2: @region_airport2,
           starts_on: @starts_on,
-          returns_on: @returns_on,
           nb_travelers: @nb_travelers,
-          nb_solutions: 3,
-          api_key: ENV['GOOGLE_QPX_API_KEY']
+          nb_solutions: 20,
+          api_key: ENV['AMADEUS_SANDBOX_API_KEY']
         ).make_request
 
-        # DEBUG ONLY
-        puts "#{@city} - #{@region} request made to QPX"
       else
         raise 'Search params did not make sense'
       end
