@@ -18,7 +18,7 @@ module Avion
           origin: @origin,
           destination: @destination,
           departure: @departure,
-          return: @return
+          return: @return,
           nb_travelers: @nb_travelers,
           nb_solutions: 20,
           api_key: ENV['AMADEUS_SANDBOX_API_KEY']
@@ -30,4 +30,5 @@ module Avion
 
       @data = JSON.parse(json)
     end
+  end
 end
