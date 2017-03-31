@@ -40,11 +40,11 @@ class RoundTripFlight < ApplicationRecord
 
   class << self
 
- def create_flight(data, result, itinerary, region)
+    def create_flight(data, result, itinerary, region)
       round_trip_flight = RoundTripFlight.new
       round_trip_flight.region = region
       round_trip_flight.currency = extract_currency(data)
-      round_trip_flight.price = extract_price(result)
+      round_trip_flight.price = extract_price(result['fare'])
       round_trip_flight.flight1_origin_airport_iata = extract_origin_airport_iata(itinerary, 'outbound')
       round_trip_flight.flight1_destination_airport_iata = extract_destination_airport_iata(itinerary, 'outbound')
       round_trip_flight.flight2_origin_airport_iata = extract_origin_airport_iata(itinerary, 'inbound')
@@ -64,39 +64,37 @@ class RoundTripFlight < ApplicationRecord
       round_trip_flight
     end
 
+    def create_complex_flight(outbound, inbound, region)
+      round_trip_flight = RoundTripFlight.new
+      round_trip_flight.region = region
+      round_trip_flight.currency = outbound[2]
+      round_trip_flight.price = extract_price(outbound[1]).to_f + extract_price(inbound[1]).to_f
+      round_trip_flight.flight1_origin_airport_iata = extract_origin_airport_iata(outbound[0], 'outbound')
+      round_trip_flight.flight1_destination_airport_iata = extract_destination_airport_iata(outbound[0], 'outbound')
+      round_trip_flight.flight2_origin_airport_iata = extract_origin_airport_iata(inbound[0], 'outbound') #because request is done for a one way, so the api will call it an outbound flight
+      round_trip_flight.flight2_destination_airport_iata = extract_destination_airport_iata(inbound[0], 'outbound')
+      round_trip_flight.flight1_take_off_at = extract_take_off_at(outbound[0], 'outbound')
+      round_trip_flight.flight1_landing_at = extract_landing_at(outbound[0], 'outbound')
+      round_trip_flight.flight2_take_off_at = extract_take_off_at(inbound[0], 'outbound')
+      round_trip_flight.flight2_landing_at = extract_landing_at(inbound[0], 'outbound')
+      round_trip_flight.carrier1 = extract_carrier(outbound[0], 'outbound')
+      round_trip_flight.carrier2 = extract_carrier(inbound[0], 'outbound')
+      round_trip_flight.f1_number = round_trip_flight.carrier1 + extract_flight_number(outbound[0], 'outbound')
+      round_trip_flight.f2_number = round_trip_flight.carrier2 + extract_flight_number(inbound[0], 'outbound')
+      round_trip_flight.destination_airport_coordinates
+      round_trip_flight.origin_airport_coordinates
+      round_trip_flight.home_airport_coordinates
+      round_trip_flight.save
+      round_trip_flight
+    end
 
-# A CHANGER POUR ADAPTER A AMADEUS
-
-    # def create_complex_flight(result1, itinerary1, result2, itinerary2, region)
-    #   round_trip_flight = RoundTripFlight.new
-    #   round_trip_flight.region = region
-    #   round_trip_flight.currency = extract_currency(result1)
-    #   round_trip_flight.price = extract_price(itinerary1) + extract_price(itinerary2)
-    #   round_trip_flight.flight1_origin_airport_iata = extract_origin_airport_iata(result1, 0)
-    #   round_trip_flight.flight1_destination_airport_iata = extract_destination_airport_iata(result1, 0)
-    #   round_trip_flight.flight2_origin_airport_iata = extract_origin_airport_iata(result2, 0)
-    #   round_trip_flight.flight2_destination_airport_iata = extract_destination_airport_iata(result2, 0)
-    #   round_trip_flight.flight1_take_off_at = extract_take_off_at(result1, 0)
-    #   round_trip_flight.flight1_landing_at = extract_landing_at(result1 0)
-    #   round_trip_flight.flight2_take_off_at = extract_take_off_at(result2, 0)
-    #   round_trip_flight.flight2_landing_at = extract_landing_at(result2, 0)
-    #   round_trip_flight.carrier1 = extract_carrier(result1, 0)
-    #   round_trip_flight.carrier2 = extract_carrier(result2, 0)
-    #   round_trip_flight.f1_number = round_trip_flight.carrier1 + extract_flight_number(result1, 0)
-    #   round_trip_flight.f2_number = round_trip_flight.carrier2 + extract_flight_number(result2, 0)
-    #   round_trip_flight.destination_airport_coordinates
-    #   round_trip_flight.origin_airport_coordinates
-    #   round_trip_flight.home_airport_coordinates
-    #   round_trip_flight.save
-    #   round_trip_flight
-    # end
 
     def extract_currency(data)
       data['currency']
     end
 
-    def extract_price(result)
-      result['fare']['total_price']
+    def extract_price(fare)
+      fare['total_price']
     end
 
     def extract_origin_airport_iata(itinerary, leg)
@@ -124,6 +122,8 @@ class RoundTripFlight < ApplicationRecord
     end
 
   end
+
+end
 
 
 

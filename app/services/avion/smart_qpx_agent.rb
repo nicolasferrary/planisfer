@@ -13,22 +13,24 @@ module Avion
     end
 
     def obtain_offers
-      if search_params_make_sense
         json = Avion::QPXRequester.new(
           origin: @origin,
           destination: @destination,
           departure: @departure,
           return: @return,
           nb_travelers: @nb_travelers,
-          nb_solutions: 20,
+          nb_solutions: 5,
           api_key: ENV['AMADEUS_SANDBOX_API_KEY']
         ).make_request
 
-      else
-        raise 'Search params did not make sense'
-      end
-
       @data = JSON.parse(json)
     end
+
+    private
+
+    def search_params_make_sense
+      (Date.parse(@departure) < Date.parse(@return))
+    end
+
   end
 end
