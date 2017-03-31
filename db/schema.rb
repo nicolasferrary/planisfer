@@ -85,10 +85,10 @@ ActiveRecord::Schema.define(version: 20170329124910) do
     t.float    "longitude_arrive"
     t.float    "latitude_back"
     t.float    "longitude_back"
-    t.string   "f1_number"
-    t.string   "f2_number"
     t.float    "latitude_home"
     t.float    "longitude_home"
+    t.string   "f1_number"
+    t.string   "f2_number"
     t.integer  "region_id"
     t.index ["region_id"], name: "index_round_trip_flights_on_region_id", using: :btree
   end

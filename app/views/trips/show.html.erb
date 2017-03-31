@@ -85,9 +85,7 @@
 
     <hr>
 
-
-
-<!--     CAR CARD -->
+    <!--     CAR CARD -->
 
     <p>Your travel buddy, <%= first_result.car.name %> waits for you at <%= Constants::CITY_REGION[@trip.round_trip_flight.flight1_destination_airport_iata]  %>: <%= first_result.pick_up_location  %> on <%= first_result.pick_up_date_time.strftime("%B %e") %> at <%= first_result.pick_up_date_time.strftime("%H:%M")  %> </p>
 

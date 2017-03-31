@@ -14,32 +14,12 @@ class Car < ApplicationRecord
       car
     end
 
-    def extract_category(data, rental_data)
-      id = rental_data['car_class_id']
-      category = data['car_classes'].select { |car_class|
-        car_class['id'] == id
-      }
-      if category == []
-        "unknown"
-      else
-        category.first['name']
-      end
-    end
-
     def extract_name(rental_data)
-      if rental_data['vehicle'] == nil
+      if data['code'] == nil
         "Unknown car"
       else
-        rental_data['vehicle'].gsub(" or similar", "")
+        data['code']
       end
-    end
-
-    def extract_image_url(data, rental_data)
-      image_id = rental_data['image_id']
-      image_urls = data['images'].select{ |image|
-        image['id'] == image_id
-      }
-      image_url = image_urls.first['url'] unless image_urls == []
     end
 
   end
