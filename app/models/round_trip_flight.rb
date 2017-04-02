@@ -107,6 +107,7 @@ class RoundTripFlight < ApplicationRecord
 
     def extract_take_off_at(itinerary, leg)
       Time.parse itinerary[leg]['flights'][0]['departs_at']
+      raise
     end
 
     def extract_landing_at(itinerary, leg)
