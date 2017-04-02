@@ -22,7 +22,7 @@ module Iata
 
     private
 
-    # This method transforms an array of options from the API result into an array of trips
+    # This method transforms an array of options from the API result into an array of airports
     def create_airports(options)
       airports = []
       options.each do |option|
@@ -31,7 +31,5 @@ module Iata
       end
       airports
     end
-
-
   end
 end

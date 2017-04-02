@@ -31,7 +31,8 @@
                     <%=form_tag searches_path, :controller => 'searches', method: :post, id: "new_result" do %>
                       <div class="row">
                         <div class="col-xs-6">
-                          <%= select_tag :city, options_for_select(Constants::AIRPORTS.invert.sort), class: "input-lg form-control", prompt: "From" %>
+                          <%= text_field_tag :city, "", class: "input-lg form-control",  placeholder: "From" %>
+                          <%#= select_tag :city, options_for_select(Constants::AIRPORTS.invert.sort), class: "input-lg form-control", prompt: "From" %>
                         </div>
                         <div class="col-xs-6">
                           <%= select_tag  :region, options_for_select(Constants::REGIONS.sort), class: "input-lg form-control", prompt: "To" %>

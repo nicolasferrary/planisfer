@@ -6,7 +6,7 @@ class Airport < ApplicationRecord
 
   class << self
    def create(data)
-    airport = Airport.new()
+    airport = Airport.new
     airport.name = extract_name(data)
     airport.iata = extract_iata(data)
     airport.save
@@ -30,6 +30,5 @@ class Airport < ApplicationRecord
         data['code']
       end
     end
-
   end
 end

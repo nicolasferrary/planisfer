@@ -16,11 +16,11 @@ class SearchesController < ApplicationController
     @returns_on = params[:returns_on]
     @nb_travelers = params[:nb_travelers]
     @region_airports = Constants::REGIONS_AIRPORTS[@region_name]
-
+    @airports = get_airports(@city)
     # generate routes
     @routes = Avion.generate_routes(@city_name, @region_airports)
     # Launch APi requests and gather trips
-    @trips = get_trips_for_routes(@routes, @starts_on, @returns_on, @nb_travelers, @city, @region, @search)
+    @trips = get_trips_for_routes(@routes, @starts_on, @returns_on, @nb_travelers, @city, @region, @search, @airports[0])
 
     redirect_to search_path(@search)
   end
@@ -219,7 +219,7 @@ class SearchesController < ApplicationController
 
 # @latitude = Geocoder.search("Faro, Portugal")[0].data["geometry"]["location"]["lat"]
 
-  def get_trips_for_routes(routes, starts_on, returns_on, nb_travelers, city, region, search)
+  def get_trips_for_routes(routes, starts_on, returns_on, nb_travelers, city, region, search, airport)
     trips = []
     routes.each do |route|
       options = {
@@ -229,7 +229,8 @@ class SearchesController < ApplicationController
         starts_on: starts_on,
         returns_on: returns_on,
         nb_travelers: nb_travelers,
-        region: region
+        region: region,
+        airport: airport
       }
       rtf = (Avion::SmartQPXAgent.new(options).obtain_offers)
       rtf.each do |rtf|
@@ -290,6 +291,15 @@ class SearchesController < ApplicationController
     else
       return "#{nb_travelers} TRAVELERS"
     end
+  end
+
+  def get_airports(city)
+    airports = []
+    options =
+    {city: city
+    }
+    airports = Iata::SmartIataAgent.new(options).obtain_offers
+    return airports
   end
 
 end

@@ -6,6 +6,7 @@ module Avion
   class QPXRequester
     # date should be a string in "YYYY-MM-DD" format
     def initialize(args = {})
+      @airport = args[:airport]
       @city = args[:city] # airport code
       @region_airport1 = args[:region_airport1]
       @region_airport2 = args[:region_airport2]
@@ -35,12 +36,12 @@ module Avion
       request_hash = {
         'request' =>
         { 'slice' => [
-          { 'origin' => @city,
+          { 'origin' => @airport,
             'destination' => @region_airport1,
             'date' => @starts_on,
             'maxStops' => 0 },
           { 'origin' => @region_airport2,
-            'destination' => @city,
+            'destination' => @airport,
             'date' => @returns_on,
             'maxStops' => 0 }
         ],
