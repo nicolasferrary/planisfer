@@ -106,12 +106,13 @@ class RoundTripFlight < ApplicationRecord
     end
 
     def extract_take_off_at(itinerary, leg)
-      Time.parse itinerary[leg]['flights'][0]['departs_at']
-      raise
+      local_time = itinerary[leg]['flights'][0]['departs_at'] + " UTC"
+      Time.parse local_time
     end
 
     def extract_landing_at(itinerary, leg)
-      Time.parse itinerary[leg]['flights'][0]['arrives_at']
+      local_time = itinerary[leg]['flights'][0]['arrives_at'] + " UTC"
+      Time.parse local_time
     end
 
     def extract_carrier(itinerary, leg)
