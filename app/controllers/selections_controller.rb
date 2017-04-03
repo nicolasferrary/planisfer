@@ -5,6 +5,7 @@ class SelectionsController < ApplicationController
   def create
     @trip = Trip.find(params[:trip_id])
     #Define params for API
+    #Clean what is not needed (heritage from Skyscanner API)
     @pick_up_location = Constants::CITY_REGION.invert[params[:pick_up_location]] || @trip.round_trip_flight.flight1_destination_airport_iata
     @drop_off_location = Constants::CITY_REGION.invert[params[:drop_off_location]] || @trip.round_trip_flight.flight2_origin_airport_iata
     if !params[:pick_up_date_time].nil?

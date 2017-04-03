@@ -17,16 +17,30 @@ module Rental
     end
 
     def make_request
-    #create the session
-      url = "http://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/" + @market + "/" + @currency + "/" + @locale + "/" + @pick_up_place + "/" + @drop_off_place + "/" + @pick_up_date_time.strftime("%FT%R") + "/" + @drop_off_date_time.strftime("%FT%R") + "/" + @driver_age.to_s + "/" + "?apiKey=" + @api_key + "&userip=" + @user_ip
-      response = RestClient.get url, {accept: :json, content_type: "application/x-www-form-urlencoded"}
-      # poll the results
-      sleep 10
-      response.headers[:location]
-      polling_url = "http://partners.api.skyscanner.net" + response.headers[:location].gsub(/&deltaExclude.*/,"")
-      response = RestClient.get polling_url, {accept: :json}
-      response.body
+      # Authentification see here (https://developer.sabre.com/docs/rest_basics/authentication)
+      # Client ID
+        # V1:7z0cif7m6wb63vrs:DEVCENTER:EXT:Planisfer:AA
+      # Base64 Encoded credentials - intermediary step
+        # N3owY2lmN202d2I2M3ZyczpERVZDRU5URVI6RVhUOlBsYW5pc2ZlcjpBQQ0K:OGl0SEpNMw0K
+      # Base64 Encoded credentials - final step
+      TjNvd1kybG1OMjAyZDJJMk0zWnljenBFUlZaRFJVNVVSVkk2UlZoVU9sQnNZVzVwYzJabGNqcEJRUTBLOk9HbDBTRXBOTXcwSw==
+
+
     end
+
+
+# OLD - Skyscanner api request
+    # def make_request
+    # #create the session
+    #   url = "http://partners.api.skyscanner.net/apiservices/carhire/liveprices/v2/" + @market + "/" + @currency + "/" + @locale + "/" + @pick_up_place + "/" + @drop_off_place + "/" + @pick_up_date_time.strftime("%FT%R") + "/" + @drop_off_date_time.strftime("%FT%R") + "/" + @driver_age.to_s + "/" + "?apiKey=" + @api_key + "&userip=" + @user_ip
+    #   response = RestClient.get url, {accept: :json, content_type: "application/x-www-form-urlencoded"}
+    #   # poll the results
+    #   sleep 10
+    #   response.headers[:location]
+    #   polling_url = "http://partners.api.skyscanner.net" + response.headers[:location].gsub(/&deltaExclude.*/,"")
+    #   response = RestClient.get polling_url, {accept: :json}
+    #   response.body
+    # end
 
 
   end
