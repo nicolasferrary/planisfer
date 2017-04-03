@@ -567,7 +567,11 @@ module Constants
   'WF'=>  'Wideroe',
   'MF'=>  'Xiamen Airlines',
   'IY'=>  'Yemenia',
-  '4U'=> 'Germanwings'
+  '4U'=> 'Germanwings',
+  'A5' => 'Hop!',
+  'FR' => 'Ryanair',
+  'U2' => 'easyJet',
+  'TO' => 'Transavia'
   }
 
 
