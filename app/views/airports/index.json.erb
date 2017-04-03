@@ -1,0 +1,5 @@
+
+<% json.array!(@airports) do |airport| %>
+ <%   json.name    airport.name %>
+ <%   json.iata    airport.iata %>
+<% end %>

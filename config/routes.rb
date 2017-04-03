@@ -6,5 +6,8 @@ Rails.application.routes.draw do
     get :refresh_map, to: "searches#refresh_map"
   end
   resources :selections, only: [:create, :show]
+  resources :airports do
+    get :autocomplete_name, :on => :collection
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

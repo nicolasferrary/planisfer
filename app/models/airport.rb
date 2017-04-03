@@ -1,8 +1,13 @@
 class Airport < ApplicationRecord
- belongs_to :city
- belongs_to :region
+ belongs_to :city, optional: true
+ belongs_to :region, optional: true
  validates :name, presence: true
  validates :iata, presence: true
+
+  def self.search(term)
+    where('LOWER(name) LIKE :term', term: "%#{term.downcase}%")
+  end
+
 
   class << self
    def create(data)
@@ -11,7 +16,9 @@ class Airport < ApplicationRecord
     airport.iata = extract_iata(data)
     airport.save
     airport
+    building_autocomplete(airport)
    end
+
 
    private
 
@@ -30,5 +37,13 @@ class Airport < ApplicationRecord
         data['code']
       end
     end
+
+    def building_autocomplete(airport)
+     @airport_listing = []
+     @airport_listing << airport
+     return @airport_listing
+    end
+
+
   end
 end

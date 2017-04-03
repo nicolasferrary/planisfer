@@ -13,8 +13,8 @@ module Iata
 
       @data = JSON.parse(json)
 
-      if @data['response']['airports_by_cities'] != []
-        airports = create_airports(@data['response']['airports_by_cities'])
+      if @data['response']['cities'] != []
+        airports = create_airports(@data['response']['cities'])
       else
         airports = []
       end
