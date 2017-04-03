@@ -17,16 +17,22 @@ module Rental
     end
 
     def make_request
-      # Authentification see here (https://developer.sabre.com/docs/rest_basics/authentication)
+    # Authentification see here (https://developer.sabre.com/docs/rest_basics/authentication)
       # Client ID
-        # V1:7z0cif7m6wb63vrs:DEVCENTER:EXT:Planisfer:AA
+        # V1:7z0cif7m6wb63vrs:DEVCENTER:EXT
       # Base64 Encoded credentials - intermediary step
-        # N3owY2lmN202d2I2M3ZyczpERVZDRU5URVI6RVhUOlBsYW5pc2ZlcjpBQQ0K:OGl0SEpNMw0K
+        # VjE6N3owY2lmN202d2I2M3ZyczpERVZDRU5URVI6RVhUDQo=
+      # Encoded password : ZjhpdEhKTTM=
       # Base64 Encoded credentials - final step
-      TjNvd1kybG1OMjAyZDJJMk0zWnljenBFUlZaRFJVNVVSVkk2UlZoVU9sQnNZVzVwYzJabGNqcEJRUTBLOk9HbDBTRXBOTXcwSw==
+      encoded_credentials = 'VmpFNk4zb3dZMmxtTjIwMmQySTJNM1p5Y3pwRVJWWkRSVTVVUlZJNlJWaFVEUW89OmY4aXRISk0z'
 
-
+      # Get an access token
+        url = 'https://api.test.sabre.com/v2/auth/token'
+        response = RestClient.post url, 'grant_type=client_credentials', {authorization: 'Basic ' + encoded_credentials, :content_type => 'application/x-www-form-urlencoded' }
+# Invalid request 400 "Invalid payload: grant_type must be specified"
     end
+
+    private
 
 
 # OLD - Skyscanner api request
