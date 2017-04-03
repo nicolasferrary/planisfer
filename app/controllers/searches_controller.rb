@@ -51,7 +51,6 @@ class SearchesController < ApplicationController
       @selected_cities = @selected_cities
     else
       @selected_cities = params["selected-cities"].split(",")
-      raise
     end
 
     # Define selected airports based on selected cities
