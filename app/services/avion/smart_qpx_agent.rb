@@ -19,7 +19,7 @@ module Avion
           departure: @departure,
           return: @return,
           nb_travelers: @nb_travelers,
-          nb_solutions: 5,
+          nb_solutions: 3,
           api_key: ENV['AMADEUS_SANDBOX_API_KEY']
         ).make_request
 
