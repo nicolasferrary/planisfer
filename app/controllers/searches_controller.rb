@@ -308,9 +308,11 @@ class SearchesController < ApplicationController
     if outbounds != [] && inbounds != []
       outbounds.each do |outbound|
         inbounds.each do |inbound|
-          rtf = create_complex_rtf(outbound, inbound)
+          if outbound[0]['outbound']['flights'][0]['destination']['airport'] != inbound[0]['outbound']['flights'][0]['origin']['airport']
+            rtf = create_complex_rtf(outbound, inbound)
+            rtfs << rtf
+          end
           #inbound and outoubnd are arrays of 3 elements : the itinerary, the fare and the currency
-          rtfs << rtf
         end
       end
     end
