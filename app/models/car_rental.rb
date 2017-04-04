@@ -6,11 +6,12 @@ class CarRental < ApplicationRecord
 
   class << self
     def create(data, data_rental, pick_up_date_time, drop_off_date_time)
+
       car_rental = CarRental.new
       car_rental.price = extract_price(data_rental)
-      car_rental.currency = extract_currency(data)
-      car_rental.pick_up_location = extract_pick_up_address(data_rental)
-      car_rental.drop_off_location = extract_drop_off_address(data_rental)
+      car_rental.currency = extract_currency(data_rental)
+      car_rental.pick_up_location = extract_pick_up_address(data)
+      car_rental.drop_off_location = extract_drop_off_address(data)
       car_rental.pick_up_date_time = pick_up_date_time
       car_rental.drop_off_date_time = drop_off_date_time
       car_rental.company = extract_company(data_rental)
@@ -21,11 +22,11 @@ class CarRental < ApplicationRecord
 
 
     def extract_price(data_rental)
-      data_rental["VehAvailCore"]["VehicleCharges"]["TotalCharge"]["Amount"].to_f
+      data_rental["VehAvailCore"]["VehicleCharges"]["VehicleCharge"]["TotalCharge"]["Amount"].to_f
     end
 
     def extract_currency(data_rental)
-      data_rental["VehAvailCore"]["VehicleCharges"]["TotalCharge"]["CurrencyCode"]
+      data_rental["VehAvailCore"]["VehicleCharges"]["VehicleCharge"]["TotalCharge"]["CurrencyCode"]
     end
 
     def extract_pick_up_address(data)
