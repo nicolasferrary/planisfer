@@ -36,6 +36,7 @@ module Rental
       car_url = "https://api.test.sabre.com/v2.4.0/shop/cars"
       request_body = compose_body_request
       response = RestClient.post car_url, request_body, {authorization: 'Bearer ' + access_token, :content_type => 'application/json'}
+      response.body
     end
 
     private

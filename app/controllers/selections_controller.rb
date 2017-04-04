@@ -18,6 +18,7 @@ class SelectionsController < ApplicationController
     else
       @drop_off_date_time = @trip.round_trip_flight.flight2_take_off_at
     end
+    #A enlever
     @under_25 = params[:under_25].to_i
 
     @selection = Selection.new()
@@ -91,7 +92,6 @@ class SelectionsController < ApplicationController
         drop_off_place: @drop_off_location,
         pick_up_date_time: @pick_up_date_time,
         drop_off_date_time: @drop_off_date_time,
-        driver_age: @under_25 == 1 ? 21 : 30,
         currency: @currency,
         user_ip: @user_ip,
       }
