@@ -44,25 +44,25 @@ module Rental
     def compose_body_request
 
       request_hash = {
-    "OTA_VehAvailRateRQ": {
-      "VehAvailRQCore": {
-        "QueryType": "Shop",
-        "RateQualifier": {
-          "CurrencyCode": @currency
-          },
-        "VehRentalCore": {
-          "PickUpDateTime": @pick_up_date_time.strftime("%m-%dT%H:%M"),
-          "ReturnDateTime": @drop_off_date_time.strftime("%m-%dT%H:%M"),
-          "PickUpLocation": {
-            "LocationCode": @pick_up_place
-          },
-          "ReturnLocation": {
-            "LocationCode": @drop_off_place
+        "OTA_VehAvailRateRQ": {
+          "VehAvailRQCore": {
+            "QueryType": "Shop",
+            "RateQualifier": {
+              "CurrencyCode": @currency
+              },
+            "VehRentalCore": {
+              "PickUpDateTime": @pick_up_date_time.strftime("%m-%dT%H:%M"),
+              "ReturnDateTime": @drop_off_date_time.strftime("%m-%dT%H:%M"),
+              "PickUpLocation": {
+                "LocationCode": @pick_up_place
+              },
+              "ReturnLocation": {
+                "LocationCode": @drop_off_place
+              }
+            }
           }
         }
       }
-    }
-}
 
 #"07-07T09:00"
 

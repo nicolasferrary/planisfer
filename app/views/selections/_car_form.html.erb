@@ -43,14 +43,7 @@
         <%# Beginning 3rd row form %>
         <div class = "row">
           <div class = "col-xs-9">
-          <span class= "light-data driver"> Driver is under 25 years old </span>
-          <span>
-            <% if params[:under_25].to_i == 1 %>
-              <%= check_box_tag :under_25, 1,true, class: "age-checkbox"  %>
-            <% else %>
-              <%= check_box_tag :under_25, 1, false, class: "age-checkbox"  %>
-            <% end %>
-          </span>
+
           </div>
           <div class = "col-xs-3">
             <%= submit_tag "SEARCH", class: "btn-brand new-search-btn" %>
