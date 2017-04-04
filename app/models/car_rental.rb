@@ -15,7 +15,7 @@ class CarRental < ApplicationRecord
       car_rental.pick_up_date_time = pick_up_date_time
       car_rental.drop_off_date_time = drop_off_date_time
       car_rental.company = extract_company(data_rental)
-      car_rental.car = extract_car(data_rental)
+      # car_rental.car = extract_car(data_rental)
       car_rental.save
       car_rental
     end
