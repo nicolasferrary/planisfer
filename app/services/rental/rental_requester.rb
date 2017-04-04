@@ -16,7 +16,7 @@ module Rental
       @api_key = args[:api_key]
     end
     def make_request
-    # Authentification see here (https://developer.sabre.com/docs/rest_basics/authentication)
+    # Authentification process: see here (https://developer.sabre.com/docs/rest_basics/authentication)
       # Client ID
         # V1:7z0cif7m6wb63vrs:DEVCENTER:EXT
       # Base64 Encoded credentials - intermediary step
