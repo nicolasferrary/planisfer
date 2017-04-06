@@ -7,6 +7,10 @@ class Car < ApplicationRecord
       car = Car.new()
       car.sipp = sipp
       car.category = extract_category(sipp)
+      if !Constants::CAR_IMAGE[sipp.first(2)].nil?
+        car.image_url = Constants::CAR_IMAGE[sipp.first(2)]
+      end
+      # Add image to the car. Eg use Amadeus API
       car.save
     end
 

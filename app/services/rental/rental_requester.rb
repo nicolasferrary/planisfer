@@ -32,7 +32,6 @@ module Rental
       last_access_token = Token.last
       if (!last_access_token.nil?) && (Time.now - last_access_token.created_at < 600000)
         access_token = last_access_token.text
-        raise
       else
         token = Token.new()
         # Client ID

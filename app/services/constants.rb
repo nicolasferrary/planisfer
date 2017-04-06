@@ -824,6 +824,40 @@ module Constants
 #     "IY"=>"http://www.yemenia.com/"
 #   }
 
+CAR_IMAGE = {
+"CC" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/audi-a1-3d-grau-2015.png",
+"CD" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/peugeot-308-5d-weiss-2014.png",
+"CF" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/vauxhall-mokka-5d-blau-2013.png",
+"CL" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/seat-leon-5d-rot-2017.png",
+"CW" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/vauxhall-astra-kombi-blau-2012.png",
+"EB" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/fiat-500-2d-silber-2013.png",
+"EC" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/vauxhall-corsa-3d-gelb-2015.png",
+"FD" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/mb-c-klasse-4d-schwarz-2014.png",
+"FV" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/vauxhall-vivaro-van-weiss-2015.png",
+"FW" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/audi-a4-kombi-brown-2016.png",
+"ID" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/skoda-octavia-4d-grau-2017.png",
+"IF" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/renault-kadjar-5d-braun-2016.png",
+"IL" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/mb-a-klasse-5d-weiss-2016.png",
+"IV" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/citroen-c4-grand-picasso-5d-grau-2014.png",
+"IW" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/skoda-octavia-kombi-grau-2017.png",
+"LD" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/jaguar-xf-4d-weiss-2015.png",
+"LF" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/volvo-xc90-5d-schwarz-2015.png",
+"LS" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/bmw-4er-grand-coupe-4d-braun-2017.png",
+"LT" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/mb-e-klasse-cabrio-2d-silber-offen-2013.png",
+"PD" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/bmw-5er-4d-weiss-2017.png",
+"PF" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/mb-glc-5d-silber-2015.png",
+"PT" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/mb-slc-cabrio-2d-grau-offen-2016.png",
+"PW" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/mb-e-klasse-kombi-schwarz-2013.png",
+"SD"  => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/skoda-superb-4d-grau-2016.png",
+"ST" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/mb-gla-silber-5d-2017.png",
+"SV" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/vw-caddy-maxi-5d-braun-2013.png",
+"SW" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/skoda-superb-kombi-weiss-2016.png",
+"XD" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/jaguar-xj-4d-silber-2013.png",
+"XF" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/mb-gle-coupe-5d-weiss-2015.png",
+"XJ" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/land-rover-range-rover-hse-sport-rot-2016.png",
+"XS" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/mb-s-klasse-coupe-2d-silber-2016.png",
+"XT" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/jaguar-f-type-cabrio-2d-silber-2014.png"
+}
 
 
 end
