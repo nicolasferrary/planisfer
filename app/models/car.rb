@@ -10,7 +10,7 @@ class Car < ApplicationRecord
       if !Constants::CAR_IMAGE[sipp.first(2)].nil?
         car.image_url = Constants::CAR_IMAGE[sipp.first(2)]
       end
-      # Add image to the car. Eg use Amadeus API
+      # Add car.name taking names from the google doc
       car.save
     end
 
