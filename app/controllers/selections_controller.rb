@@ -29,6 +29,7 @@ class SelectionsController < ApplicationController
 
     # Launch requests
     @car_rentals = get_car_rentals_for_trip(@trip)
+    raise
     # @car_rentals is an array of instances of car_rentals
     @categories = ["Mini", "Economy", "Compact", "Intermediate", "Fullsize", "Premium"]
     @best_car_rentals = []
@@ -79,14 +80,28 @@ class SelectionsController < ApplicationController
   private
 
   def get_car_rentals_for_trip(trip)
-    options = {
+    if @pick_up_location == @drop_off_location
+      #Launch Amadeus api
+      options = {
         pick_up_place: @pick_up_location,
         drop_off_place: @drop_off_location,
         pick_up_date_time: @pick_up_date_time,
         drop_off_date_time: @drop_off_date_time,
         currency: @currency,
       }
-    car_rentals = (Rental::SmartRentalAgent.new(options).obtain_rentals)
+      car_rentals = (Rental::SmartRentalAgent.new(options).obtain_rentals_amadeus)
+        raise
+    else
+      #Launch Sabre api
+      options = {
+        pick_up_place: @pick_up_location,
+        drop_off_place: @drop_off_location,
+        pick_up_date_time: @pick_up_date_time,
+        drop_off_date_time: @drop_off_date_time,
+        currency: @currency,
+      }
+      car_rentals = (Rental::SmartRentalAgent.new(options).obtain_rentals_sabre)
+    end
   end
 
   def get_best_cars_per_category(rentals)
