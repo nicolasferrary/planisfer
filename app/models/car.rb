@@ -9,6 +9,7 @@ class Car < ApplicationRecord
       car.category = extract_category(sipp)
       if !Constants::CAR_IMAGE[sipp.first(2)].nil?
         car.image_url = Constants::CAR_IMAGE[sipp.first(2)]
+        car.name = Constants::CAR_NAME[sipp.first(2)]
       end
       # Add car.name taking names from the google doc
       car.save
