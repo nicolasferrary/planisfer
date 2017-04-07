@@ -825,6 +825,7 @@ module Constants
 #   }
 
 CAR_IMAGE = {
+"CB" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/vauxhall-corsa-5d-silber-2015.png",
 "CC" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/audi-a1-3d-grau-2015.png",
 "CD" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/peugeot-308-5d-weiss-2014.png",
 "CF" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/vauxhall-mokka-5d-blau-2013.png",
@@ -859,5 +860,40 @@ CAR_IMAGE = {
 "XT" => "https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/jaguar-f-type-cabrio-2d-silber-2014.png"
 }
 
+CAR_NAME = {
+"CB" => "Opel Corsa",
+"CC" => "Audi A1",
+"CD" => " Peugeot 308",
+"CF" => "Opel Mokka",
+"CL" => "Seat Leon" ,
+"CW" => "Opel Astra Estate",
+"EB" => "Fiat 500",
+"EC" => "Opel Corsa",
+"FD" => "Mercedes Benz C class",
+"FV" => "Vauxhall Vivaro 9 Seater",
+"FW" => "Audi A4",
+"ID" => "Skoda Octavia",
+"IF" => "Renault Kadjar",
+"IL" => "Mercedes Benz class A",
+"IV" => "Citroen C4 Grand Picasso",
+"IW" => "Skoda Octavia Estate",
+"LD" => "Jaguar XF",
+"LF" => "Volvo XC 90",
+"LS" => "BMW4 Series Gran Coupe",
+"LT" => "Mercedes benz E Class Convertible",
+"PD" => "BMW 520",
+"PF" => "Mercedes Benz GLC",
+"PT" => "Mercedes Benz SLC",
+"PW" => "Mercedes Benz E Class Estate",
+"SD"  =>"Skoda Superb",
+"ST" => "Mercedes Benz GLA",
+"SV" => "VW Caddy 7 seater",
+"SW" => "Skoda Superb Estate",
+"XD" => "Jaguar XJ",
+"XF" => "Mercedes Benz GLE Coupé",
+"XJ" => "Range Rover Sport",
+"XS" => "Mercedes Benz S Class Coupé",
+"XT" => "Jaguar F Type Convertible"
+}
 
 end
