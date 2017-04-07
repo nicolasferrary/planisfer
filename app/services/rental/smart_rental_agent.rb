@@ -71,6 +71,7 @@ module Rental
           car_rentals << car_rental
         end
       end
+      car_rentals
     end
 
   end

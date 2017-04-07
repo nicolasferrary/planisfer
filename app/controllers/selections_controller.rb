@@ -29,7 +29,6 @@ class SelectionsController < ApplicationController
 
     # Launch requests
     @car_rentals = get_car_rentals_for_trip(@trip)
-    raise
     # @car_rentals is an array of instances of car_rentals
     @categories = ["Mini", "Economy", "Compact", "Intermediate", "Fullsize", "Premium"]
     @best_car_rentals = []
@@ -90,7 +89,6 @@ class SelectionsController < ApplicationController
         currency: @currency,
       }
       car_rentals = (Rental::SmartRentalAgent.new(options).obtain_rentals_amadeus)
-        raise
     else
       #Launch Sabre api
       options = {
