@@ -4,12 +4,8 @@ class Airport < ApplicationRecord
  validates :name, presence: true
  validates :iata, presence: true
 
-  def self.search(term)
-    where('LOWER(name) LIKE :term', term: "%#{term.downcase}%")
-  end
-
-
   class << self
+
    def create(data)
     airport = Airport.new
     airport.name = extract_name(data)
@@ -18,7 +14,6 @@ class Airport < ApplicationRecord
     airport
     building_autocomplete(airport)
    end
-
 
    private
 

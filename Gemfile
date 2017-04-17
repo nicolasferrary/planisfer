@@ -26,6 +26,7 @@ gem 'rails-assets-seiyria-bootstrap-slider', source: 'https://rails-assets.org'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 
+
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
 end

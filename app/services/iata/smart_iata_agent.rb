@@ -12,7 +12,7 @@ module Iata
       ).make_request
 
       @data = JSON.parse(json)
-
+      raise
       if @data['response']['cities'] != []
         airports = create_airports(@data['response']['cities'])
       else

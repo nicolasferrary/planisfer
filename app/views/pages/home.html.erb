@@ -20,11 +20,6 @@
                 </div>
               </div> <!-- fin du col-xs-12 col-md-8 -->
 
-<!--             <div class="airports-search">
-              <input type="text" id="airports-search-txt" autofocus>
-              <div class="results" id="airports-search-results"></div>
-            </div> -->
-
               <div class="col-xs-12 col-md-4">
                 <div class="sticky-form">
                   <div class="form-post text-center">
@@ -35,12 +30,13 @@
                     <%=form_tag searches_path, :controller => 'searches', method: :post, id: "new_result" do %>
                       <div class="row">
                         <div class="col-xs-6">
-                          <%= text_field_tag :city, "", class: "input-lg form-control",  placeholder: "From" %>
 
-                          <%#= autocomplete_field_tag 'airport_name', '', autocomplete_name_airports_path, '' %>
+                        <%#= select_tag :city, options_from_collection_for_select(Airport.all, :id, :name, :iata), class: "js-airports-list input-lg form-control select2-css", :prompt => "From" %>
 
+                        <%= text_field_tag :city, nil, placeholder: "From", id: "js-airports-list", class: "input-lg form-control"  %>
 
                         </div>
+
                         <div class="col-xs-6">
                           <%= select_tag  :region, options_for_select(Constants::REGIONS.sort), class: "input-lg form-control", prompt: "To" %>
                         </div>
@@ -298,6 +294,27 @@
 
 <%= content_for :after_js do %>
 <script>
+
+  // Autocomplete
+
+  var airports = ["Paris", "Berlin", "Dublin", "Barcelona", "Florence", "Poitiers"];
+  // var airports = Airport.all;
+
+  $(document).ready(function() {
+    $("#js-airports-list").autocomplete({
+      source : airports,
+      value: "From",
+    });
+  });
+
+  // $(document).ready(function() {
+  //   $("select.js-airports-list").select2({
+  //     placeholder: 'From',
+  //     allowClear: true
+  //   });
+  // });
+
+// Date Picker
   $(document).ready(function() {
     $('#starts_on').datepicker({
       todayHighlight: true,
