@@ -31,9 +31,9 @@
                       <div class="row">
                         <div class="col-xs-6">
 
-                        <%#= select_tag :city, options_from_collection_for_select(Airport.all, :id, :name, :iata), class: "js-airports-list input-lg form-control select2-css", :prompt => "From" %>
+                        <%= select_tag :city, options_from_collection_for_select(Airport.all,:iata, :name), class: "js-airports-list input-lg form-control select2-css", :prompt => "From" %>
 
-                        <%= text_field_tag :city, nil, placeholder: "From", id: "js-airports-list", class: "input-lg form-control"  %>
+                        <%#= text_field_tag :city, nil, placeholder: "From", id: "js-airports-list", class: "input-lg form-control"  %>
 
                         </div>
 
@@ -297,22 +297,23 @@
 
   // Autocomplete
 
-  var airports = ["Paris", "Berlin", "Dublin", "Barcelona", "Florence", "Poitiers"];
+  // var airports = ["Paris", "Berlin", "Dublin", "Barcelona", "Florence", "Poitiers"];
   // var airports = Airport.all;
 
-  $(document).ready(function() {
-    $("#js-airports-list").autocomplete({
-      source : airports,
-      value: "From",
-    });
-  });
-
   // $(document).ready(function() {
-  //   $("select.js-airports-list").select2({
-  //     placeholder: 'From',
-  //     allowClear: true
+  //   $("#js-airports-list").autocomplete({
+  //     source : airports,
+  //     value: "From",
   //   });
   // });
+
+  $(document).ready(function() {
+    $("select.js-airports-list").select2({
+      placeholder: 'From',
+      allowClear: true,
+      tags: true,
+    });
+  });
 
 // Date Picker
   $(document).ready(function() {

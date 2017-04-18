@@ -36,12 +36,12 @@ module Avion
       request_hash = {
         'request' =>
         { 'slice' => [
-          { 'origin' => @airport,
+          { 'origin' => @city,
             'destination' => @region_airport1,
             'date' => @starts_on,
             'maxStops' => 0 },
           { 'origin' => @region_airport2,
-            'destination' => @airport,
+            'destination' => @city,
             'date' => @returns_on,
             'maxStops' => 0 }
         ],

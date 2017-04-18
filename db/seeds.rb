@@ -1,3 +1,4 @@
+require 'csv'
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -15,6 +16,19 @@ CarRental.destroy_all
 Car.destroy_all
 Selection.destroy_all
 
+
+# Seeding all the airports with IATA codes and coordinates
+
+csv_options = { col_sep: ';', headers: :first_row, encoding: 'ISO-8859-1'}
+filepath = 'airports_city.csv'
+
+CSV.foreach(filepath, csv_options) do |row|
+  Airport.create!(
+    name: row['name'],
+    iata: row['iata'],
+    coordinates: row['coordinates']
+    )
+end
 
 city1 = City.create!(name:"Paris")
 city2 = City.create!(name:"London")

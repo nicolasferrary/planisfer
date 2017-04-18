@@ -11,7 +11,6 @@ module Avion
       @starts_on = args[:starts_on]
       @returns_on = args[:returns_on]
       @nb_travelers = args[:nb_travelers]
-      @airport = args[:airport].iata
       # @cache_key_name = generate_cache_key_name
       # while in development
       # puts @cache_key_name
@@ -36,7 +35,6 @@ module Avion
           returns_on: @returns_on,
           nb_travelers: @nb_travelers,
           nb_solutions: 3,
-          airport: @airport,
           api_key: ENV['GOOGLE_QPX_API_KEY']
         ).make_request
 
