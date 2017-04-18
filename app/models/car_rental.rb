@@ -88,10 +88,12 @@ class CarRental < ApplicationRecord
     def extract_car_from_amadeus(result_car)
       sipp = result_car["vehicle_info"]["acriss_code"]
       cars = Car.where(sipp: sipp)
-      car = cars.sample
-      if car.image_url.nil?
-        car.image_url = extract_image_from_amadeus(result_car)
-        car.save
+      if cars != []
+        car = cars.sample
+        if car.image_url.nil?
+          car.image_url = extract_image_from_amadeus(result_car)
+          car.save
+        end
       end
       car
     end

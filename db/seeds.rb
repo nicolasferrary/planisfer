@@ -10,7 +10,7 @@ require 'csv'
 # Trip.destroy_all
 # RoundTripFlight.destroy_all
 # Region.destroy_all
-# Airport.destroy_all
+Airport.destroy_all
 # City.destroy_all
 # CarRental.destroy_all
 # Selection.destroy_all
@@ -20,7 +20,7 @@ Car.destroy_all
 # Seeding all the airports with IATA codes and coordinates
 
 csv_options = { col_sep: ';', headers: :first_row, encoding: 'ISO-8859-1'}
-filepath = 'airports_city.csv'
+filepath = 'db/airports_city.csv'
 
 CSV.foreach(filepath, csv_options) do |row|
   Airport.create!(
