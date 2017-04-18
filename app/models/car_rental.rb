@@ -16,6 +16,7 @@ class CarRental < ApplicationRecord
       car_rental.drop_off_date_time = drop_off_date_time
       car_rental.company = extract_company_from_sabre(data_rental)
       car_rental.car = extract_car_from_sabre(data_rental)
+      car_rental.company = extract_company_from_sabre(data_rental)
       car_rental.save
       car_rental
     end
@@ -47,6 +48,10 @@ class CarRental < ApplicationRecord
       car = cars.sample
     end
 
+    def extract_company_from_sabre(data_rental)
+      data_rental["Vendor"]["CompanyShortName"]
+    end
+
 
 
     def create_from_amadeus(result, result_car, pick_up_date_time, drop_off_date_time)
@@ -59,6 +64,7 @@ class CarRental < ApplicationRecord
       car_rental.drop_off_date_time = drop_off_date_time
       car_rental.company = extract_company_from_amadeus(result)
       car_rental.car = extract_car_from_amadeus(result_car)
+      car_rental.company = extract_company_from_amadeus(result)
       car_rental.save
       car_rental
     end
@@ -92,6 +98,10 @@ class CarRental < ApplicationRecord
 
     def extract_image_from_amadeus(result_car)
       result_car["images"][0]["url"]
+    end
+
+    def extract_company_from_amadeus(result)
+      result["provider"]["company_name"]
     end
 
   end
