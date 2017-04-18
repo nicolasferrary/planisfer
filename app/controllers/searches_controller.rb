@@ -16,11 +16,15 @@ class SearchesController < ApplicationController
     @returns_on = params[:returns_on]
     @nb_travelers = params[:nb_travelers]
     @region_airports = Constants::REGIONS_AIRPORTS[@region_name]
-
+    # TO DELETE
+    # @airports = get_airports(@city)
+    # generate routes
+    @routes = Avion.generate_routes(@city_name, @region_airports)
     # Launch APi requests and gather trips
     @trips = get_trips_for(@starts_on, @returns_on, @nb_travelers, @city, @region, @search, @region_airports)
 
     redirect_to search_path(@search)
+
   end
 
   def show
@@ -81,43 +85,43 @@ class SearchesController < ApplicationController
     # Define the marker when we load the page
     # Show only one marker if the city is the same for arrival and departure
 
-    if @round_trips.first.latitude_arrive == @round_trips.first.latitude_back
-       @first_result = [
-      # {
-      #   lat: @round_trips.first.latitude_home,
-      #   lng: @round_trips.first.longitude_home,
-      #   infowindow: @round_trips.first.flight1_origin_airport_iata,
-      #   picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
-      # },
-      {
-        lat: @round_trips.first.latitude_arrive,
-        lng: @round_trips.first.longitude_arrive,
-        infowindow: @round_trips.first.flight1_destination_airport_iata,
-        picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
-      }]
+    # if @round_trips.first.latitude_arrive == @round_trips.first.latitude_back
+    #    @first_result = [
+    #   # {
+    #   #   lat: @round_trips.first.latitude_home,
+    #   #   lng: @round_trips.first.longitude_home,
+    #   #   infowindow: @round_trips.first.flight1_origin_airport_iata,
+    #   #   picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
+    #   # },
+    #   {
+    #     lat: @round_trips.first.latitude_arrive,
+    #     lng: @round_trips.first.longitude_arrive,
+    #     infowindow: @round_trips.first.flight1_destination_airport_iata,
+    #     picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
+    #   }]
 
-    else
-      @first_result = [
-        # {
-        #   lat: @round_trips.first.latitude_home,
-        #   lng: @round_trips.first.longitude_home,
-        #   infowindow: @round_trips.first.flight1_origin_airport_iata,
-        #   picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
-        # },
-        {
-          lat: @round_trips.first.latitude_arrive,
-          lng: @round_trips.first.longitude_arrive,
-          infowindow: @round_trips.first.flight1_destination_airport_iata,
-          picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
-        },
-        {
-          lat: @round_trips.first.latitude_back,
-          lng: @round_trips.first.longitude_back,
-          infowindow: @round_trips.first.flight2_origin_airport_iata,
-          picture: { url: view_context.image_url("orange.svg"), width: 40, height: 40 }
-        }
-      ]
-    end
+    # else
+    #   @first_result = [
+    #     # {
+    #     #   lat: @round_trips.first.latitude_home,
+    #     #   lng: @round_trips.first.longitude_home,
+    #     #   infowindow: @round_trips.first.flight1_origin_airport_iata,
+    #     #   picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
+    #     # },
+    #     {
+    #       lat: @round_trips.first.latitude_arrive,
+    #       lng: @round_trips.first.longitude_arrive,
+    #       infowindow: @round_trips.first.flight1_destination_airport_iata,
+    #       picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
+    #     },
+    #     {
+    #       lat: @round_trips.first.latitude_back,
+    #       lng: @round_trips.first.longitude_back,
+    #       infowindow: @round_trips.first.flight2_origin_airport_iata,
+    #       picture: { url: view_context.image_url("orange.svg"), width: 40, height: 40 }
+    #     }
+    #   ]
+    # end
 
     respond_to do |format|
       format.html {}
@@ -396,6 +400,16 @@ class SearchesController < ApplicationController
       return "#{nb_travelers} TRAVELERS"
     end
   end
+
+  # TO DELETE
+  # def get_airports(city)
+  #   airports = []
+  #   options =
+  #   {city: city
+  #   }
+  #   airports = Iata::SmartIataAgent.new(options).obtain_offers
+  #   return airports
+  # end
 
 end
 

@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406095333) do
+
+ActiveRecord::Schema.define(version: 20170418104115) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +22,9 @@ ActiveRecord::Schema.define(version: 20170406095333) do
     t.string   "iata"
     t.integer  "city_id"
     t.integer  "region_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "coordinates"
     t.index ["city_id"], name: "index_airports_on_city_id", using: :btree
     t.index ["region_id"], name: "index_airports_on_region_id", using: :btree
   end
@@ -86,10 +89,10 @@ ActiveRecord::Schema.define(version: 20170406095333) do
     t.float    "longitude_arrive"
     t.float    "latitude_back"
     t.float    "longitude_back"
-    t.string   "f1_number"
-    t.string   "f2_number"
     t.float    "latitude_home"
     t.float    "longitude_home"
+    t.string   "f1_number"
+    t.string   "f2_number"
     t.integer  "region_id"
     t.index ["region_id"], name: "index_round_trip_flights_on_region_id", using: :btree
   end

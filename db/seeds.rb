@@ -1,3 +1,4 @@
+require 'csv'
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -16,8 +17,26 @@
 Car.destroy_all
 
 
-# Seed of cars (1 car per mini_sipp)
+# Seeding all the airports with IATA codes and coordinates
 
+csv_options = { col_sep: ';', headers: :first_row, encoding: 'ISO-8859-1'}
+filepath = 'airports_city.csv'
+
+CSV.foreach(filepath, csv_options) do |row|
+  Airport.create!(
+    name: row['name'],
+    iata: row['iata'],
+    coordinates: row['coordinates']
+    )
+end
+
+city1 = City.create!(name:"Paris")
+city2 = City.create!(name:"London")
+city3 = City.create!(name:"Barcelona")
+city4 = City.create!(name:"Milan")
+
+
+# Seed of cars (1 car per mini_sipp)
 sipp_hash = {
   "category" => ["M", "N", "E", "H", "C", "D", "I", "J", "S", "R", "F", "G", "P", "U", "L", "W", "O", "X"],
   "type" => ["B", "C", "D", "W", "V", "L", "S", "T", "F", "J", "X", "P", "Q", "Z", "E", "M", "R", "H", "Y", "N", "G", "K"],

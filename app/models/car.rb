@@ -13,8 +13,7 @@ class Car < ApplicationRecord
       # Add car.name taking names from the google doc
       car.save
     end
-
-
+    
     def extract_category(sipp)
       sipp_to_category = {
         "M" => "Mini",
