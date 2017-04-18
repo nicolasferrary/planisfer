@@ -8,8 +8,9 @@ class Car < ApplicationRecord
       car.sipp = sipp
       car.category = extract_category(sipp)
       if !Constants::CAR_IMAGE[sipp.first(2)].nil?
-        car.image_url = Constants::CAR_IMAGE[sipp.first(2)]
-        car.name = Constants::CAR_NAME[sipp.first(2)]
+        index = define_index(sipp)
+        car.image_url = extract_car_image(sipp, index)
+        car.name = extract_car_name(sipp, index)
       end
       # Add car.name taking names from the google doc
       car.save
@@ -38,6 +39,20 @@ class Car < ApplicationRecord
       }
       category = sipp_to_category[sipp[0]]
     end
+
+    def define_index(sipp)
+      image_array = Constants::CAR_IMAGE[sipp.first(2)]
+      index = rand(0..(image_array.count - 1))
+    end
+
+    def extract_car_image(sipp, index)
+      Constants::CAR_IMAGE[sipp.first(2)][index]
+    end
+
+    def extract_car_name(sipp, index)
+      Constants::CAR_NAME[sipp.first(2)][index]
+    end
+
   end
 
 end
