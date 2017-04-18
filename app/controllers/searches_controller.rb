@@ -19,7 +19,7 @@ class SearchesController < ApplicationController
     # TO DELETE
     # @airports = get_airports(@city)
     # generate routes
-    @routes = Avion.generate_routes(@city_name, @region_airports)
+    # @routes = Avion.generate_routes(@city_name, @region_airports)
     # Launch APi requests and gather trips
     @trips = get_trips_for(@starts_on, @returns_on, @nb_travelers, @city, @region, @search, @region_airports)
 
