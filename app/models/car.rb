@@ -4,14 +4,22 @@ class Car < ApplicationRecord
   class << self
 
     def create(sipp)
-      car = Car.new()
-      car.sipp = sipp
-      car.category = extract_category(sipp)
       if !Constants::CAR_IMAGE[sipp.first(2)].nil?
-        car.image_url = Constants::CAR_IMAGE[sipp.first(2)]
+        n = Constants::CAR_IMAGE[sipp.first(2)].count
+        (0..(n-1)).each do |i|
+          car = Car.new()
+          car.sipp = sipp
+          car.category = extract_category(sipp)
+          car.image_url = extract_car_image(sipp, i)
+          car.name = extract_car_name(sipp, i)
+          car.save
+        end
+      else
+        car = Car.new()
+        car.sipp = sipp
+        car.category = extract_category(sipp)
+        car.save
       end
-      # Add car.name taking names from the google doc
-      car.save
     end
     
     def extract_category(sipp)
@@ -36,6 +44,15 @@ class Car < ApplicationRecord
       }
       category = sipp_to_category[sipp[0]]
     end
+
+    def extract_car_image(sipp, i)
+      Constants::CAR_IMAGE[sipp.first(2)][i]
+    end
+
+    def extract_car_name(sipp, i)
+      Constants::CAR_NAME[sipp.first(2)][i]
+    end
+
   end
 
 end

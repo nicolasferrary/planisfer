@@ -9,9 +9,10 @@ module Rental
       @pick_up_date_time = args[:pick_up_date_time]
       @drop_off_date_time = args[:drop_off_date_time]
       @currency = args[:currency]
+      @car_amadeus_api_key = ENV['AMADEUS_SANDBOX_API_KEY']
     end
-    def make_request
 
+    def make_request_sabre
       access_token = generate_token
       # TODO : To avoid calling new access_token every time, let's stock tokens in a tab and call them unless they are expired (> 600 000 sec) ==> Use https://developer.sabre.com/resources/best_practices#handling-expirations
 
@@ -19,6 +20,12 @@ module Rental
       car_url = "https://api.test.sabre.com/v2.4.0/shop/cars"
       request_body = compose_body_request
       response = RestClient.post car_url, request_body, {authorization: 'Bearer ' + access_token, :content_type => 'application/json'}
+      response.body
+    end
+
+    def make_request_amadeus
+      url = 'https://api.sandbox.amadeus.com/v1.2/cars/search-airport?apikey=' + @car_amadeus_api_key + '&location=' + @pick_up_place + '&pick_up=' + @pick_up_date_time.strftime("%Y-%m-%d") + '&drop_off=' + @drop_off_date_time.strftime("%Y-%m-%d") + '&currency=' + @currency
+      response = RestClient.get url
       response.body
     end
 
