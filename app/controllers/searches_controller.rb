@@ -9,7 +9,6 @@ class SearchesController < ApplicationController
     end
 
     @city = City.create(params[:city])
-    @city_iata = params[:city]
     @region = Region.create(params[:region])
     @region_name = params[:region]
     @starts_on = params[:starts_on]
