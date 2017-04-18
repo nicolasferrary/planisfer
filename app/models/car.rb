@@ -12,7 +12,6 @@ class Car < ApplicationRecord
         car.image_url = extract_car_image(sipp, index)
         car.name = extract_car_name(sipp, index)
       end
-      # Add car.name taking names from the google doc
       car.save
     end
 
