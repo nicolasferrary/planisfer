@@ -9,21 +9,19 @@ class SearchesController < ApplicationController
     end
 
     @city = City.create(params[:city])
-    @city_name = params[:city]
+    @city_iata = params[:city]
     @region = Region.create(params[:region])
     @region_name = params[:region]
     @starts_on = params[:starts_on]
     @returns_on = params[:returns_on]
     @nb_travelers = params[:nb_travelers]
     @region_airports = Constants::REGIONS_AIRPORTS[@region_name]
-
     # TO DELETE
     # @airports = get_airports(@city)
-
     # generate routes
     @routes = Avion.generate_routes(@city_name, @region_airports)
     # Launch APi requests and gather trips
-    @trips = get_trips_for_routes(@routes, @starts_on, @returns_on, @nb_travelers, @city, @region, @search)
+    @trips = get_trips_for(@starts_on, @returns_on, @nb_travelers, @city, @region, @search, @region_airports)
 
     redirect_to search_path(@search)
 
@@ -223,25 +221,132 @@ class SearchesController < ApplicationController
 
 # @latitude = Geocoder.search("Faro, Portugal")[0].data["geometry"]["location"]["lat"]
 
-  def get_trips_for_routes(routes, starts_on, returns_on, nb_travelers, city, region, search)
+  def get_trips_for(starts_on, returns_on, nb_travelers, city, region, search, region_airports)
     trips = []
-    routes.each do |route|
+    rtfs = []
+    # create rtf for routes with same landing and departure airports in destination region and add them to rtfs
+      # Launch one request
+      # Stock results in @data
+      # Create rtfs with @data
+      # Put each rtf in rtfs
+    # same for routes with different airports
+      # outbounds =[]
+      #inbounds = []
+      # For each airport, do
+        #launch two requests
+        # Stock results in @data1 and @data2
+        # Mettre chaque flight de @data 1 dans outbounds
+        # Mettre chaque flight de @data2 dans inbounds
+      #end
+      # Pour chaque flight de @data 1, prendre chaque flight de @data 2 et créer un complex round trip flight
+      # Put the rtf in rtfs
+    # Create trips for each rtf
+
+    # create rtf for routes with same landing and departure airports in destination region and add them to rtfs
+
+      # Launch one return request per airport, then create rtfs and stck them in rtfs
+    region_airports.each do |airport|
       options = {
-        city: route.first,
-        region_airport1: route[1],
-        region_airport2: route[2],
-        starts_on: starts_on,
-        returns_on: returns_on,
+        origin: city.name,
+        destination: airport,
+        departure: starts_on,
+        return: returns_on,
         nb_travelers: nb_travelers,
         region: region
       }
-      rtf = (Avion::SmartQPXAgent.new(options).obtain_offers)
+      @data = (Avion::SmartQPXAgent.new(options).obtain_offers)
+      # Create a rtf with @data for each itinerary of each same_airport_route and put it in rtfs
+      if @data['results'] != []
+        rtf = create_rtf(@data, @data['results'])
+      else
+        rtf = []
+      end
       rtf.each do |rtf|
-        trip = Trip.create(starts_on, returns_on, nb_travelers, city, rtf, search)
-        trips << trip
+        rtfs << rtf
       end
     end
+    # end of rtf creation for same_airport routes
+
+# A FAIRE
+
+    # # create rtf for routes with different landing and departure airports in destination region and add them to rtfs
+    outbounds = []
+    inbounds = []
+    # For each airport launch 2 requests and stock data in outbounds and inbounds arrays
+    region_airports.each do |airport|
+
+      options1 = {
+        origin: city.name,
+        destination: airport,
+        departure: starts_on,
+        nb_travelers: nb_travelers,
+        region: region
+      }
+      @data1 = (Avion::SmartQPXAgent.new(options1).obtain_offers)
+      @data1['results'].each do |result|
+        result['itineraries'].each do |itinerary|
+          outbound_flight = [itinerary, result['fare'], @data1['currency']]
+          outbounds << outbound_flight
+        end
+      end
+
+
+      options2 = {
+        origin: airport,
+        destination: city.name,
+        departure: returns_on,
+        nb_travelers: nb_travelers,
+        region: region
+      }
+      @data2 = (Avion::SmartQPXAgent.new(options2).obtain_offers)
+      @data2['results'].each do |result|
+        result['itineraries'].each do |itinerary|
+          inbound_flight = [itinerary, result['fare'], @data2['currency']]
+          inbounds << inbound_flight
+        end
+      end
+
+
+    end
+# Protéger le code
+    if outbounds != [] && inbounds != []
+      outbounds.each do |outbound|
+        inbounds.each do |inbound|
+          if outbound[0]['outbound']['flights'][0]['destination']['airport'] != inbound[0]['outbound']['flights'][0]['origin']['airport']
+            rtf = create_complex_rtf(outbound, inbound)
+            rtfs << rtf
+          end
+          #inbound and outoubnd are arrays of 3 elements : the itinerary, the fare and the currency
+        end
+      end
+    end
+
+    # end of rtf creation for different_airport routes
+
+    #create trips with rtf
+    rtfs.each do |rtf|
+      trip = Trip.create(starts_on, returns_on, nb_travelers, city, rtf, search)
+      trips << trip
+    end
+
     return trips
+
+  end
+
+  # This method transforms an array of options from the API result into an array of trips
+  def create_rtf(data, results)
+    rtfs = []
+    results.each do |result|
+      result['itineraries'].each do |itinerary|
+        rtf = RoundTripFlight.create_flight(data, result, itinerary, @region)
+        rtfs << rtf
+      end
+    end
+    rtfs
+  end
+
+  def create_complex_rtf(outbound, inbound)
+    rtf = RoundTripFlight.create_complex_flight(outbound, inbound, @region)
   end
 
   def apply_index_filters
@@ -307,3 +412,136 @@ class SearchesController < ApplicationController
   # end
 
 end
+
+
+
+# OUT ==================================
+
+
+# def get_trips_for_routes(routes, starts_on, returns_on, nb_travelers, city, region, user_ip, search, currency)
+#     trips = []
+#     rtfs = []
+#     # create rtf for routes with same landing and departure airports in destination region and add them to rtfs
+#       # Launch one request
+#       # Stock results in @data
+#       # Create a rtf with @data
+#       # Put the rtf in rtfs
+#     # same for routes with different airports
+#       # Launch two requests
+#       # Stock results in @data1 and @data2
+#       # Create a rtf with @data1 and @data2
+#       # Put the rtf in rtfs
+#     # Create trips for each rtf
+
+#     # create rtf for routes with same landing and departure airports in destination region and add them to rtfs
+#     same_airport_routes = routes.select { |route|
+#       route[1] == route[2]
+#     }
+#       # Launch one request per same_airport_route and stock results in @data
+#     same_airport_routes.each do |route|
+#       options = {
+#         origin: route.first,
+#         destination: route[1],
+#         departure: starts_on,
+#         return: returns_on,
+#         nb_travelers: nb_travelers,
+#         region: region,
+#         user_ip: user_ip,
+#         currency: currency
+#       }
+#       @data = (Avion::SmartQPXAgent.new(options).obtain_offers)
+
+#       # Create a rtf with @data for each itinerary of each same_airport_route and put it in rtfs
+#       if !@data['itineraries'].nil?
+#         rtf = create_rtf(@data, @data['itineraries'])
+#       else
+#         rtf = []
+#       end
+#       rtf.each do |rtf|
+#         rtfs << rtf
+#       end
+
+#     end
+#     # end of rtf creation for same_airport routes
+
+#     # create rtf for routes with different landing and departure airports in destination region and add them to rtfs
+#     different_airport_routes = routes.select { |route|
+#       route[1] != route[2]
+#     }
+
+#     # Launch two one way requests per different_airport_route and stock results in @data1 and @data2
+#     different_airport_routes.each do |route|
+#       #Launch first request
+#       options1 = {
+#         origin: route.first,
+#         destination: route[1],
+#         departure: starts_on,
+#         return: '',
+#         nb_travelers: nb_travelers,
+#         region: region,
+#         user_ip: user_ip,
+#         currency: currency
+#       }
+#       @data1 = (Avion::SmartQPXAgent.new(options1).obtain_offers)
+
+#       options2 = {
+#         origin: route[2],
+#         destination: route[3],
+#         departure: returns_on,
+#         return: '',
+#         nb_travelers: nb_travelers,
+#         region: region,
+#         user_ip: user_ip,
+#         currency: currency
+#       }
+#       @data2 = (Avion::SmartQPXAgent.new(options2).obtain_offers)
+
+#       # Create a rtf with @data1 and @data2 for each itinerary combo of itineraries of @data 1 @data2
+
+
+#       if !@data1['itineraries'].nil? && !@data2['itineraries'].nil?
+#         rtf = create_complex_rtf(@data1, @data1['itineraries'], @data2, @data2['itineraries'])
+#       else
+#         rtf = []
+#       end
+#       rtf.each do |rtf|
+#         rtfs << rtf
+#       end
+
+#     end
+#     # end of rtf creation for different_airport routes
+
+#     #create trips with rtf
+#     rtfs.each do |rtf|
+#       trip = Trip.create(starts_on, returns_on, nb_travelers, city, region, rtf, search)
+#       trips << trip
+#     end
+
+#     return trips
+
+#   end
+
+#   # This method transforms an array of options from the API result into an array of trips
+#   def create_rtf(data, itineraries)
+#     rtfs = []
+#     itineraries.each do |itinerary|
+#       rtf = RoundTripFlight.create_flight(data, itinerary, @region)
+#       # coordinates = Geocoder.coordinates("IATA, REgion ou ville")
+#       rtfs << rtf
+#     end
+#     rtfs
+#   end
+
+#   # Same with return flights from different airports
+
+#   def create_complex_rtf(data1, itineraries1, data2, itineraries2)
+#     rtfs = []
+#     itineraries1.each do |itinerary1|
+#       itineraries2.each do |itinerary2|
+#         rtf = RoundTripFlight.create_complex_flight(data1, itinerary1, data2, itinerary2, @region)
+#         # coordinates = Geocoder.coordinates("IATA, REgion ou ville")
+#         rtfs << rtf
+#       end
+#     end
+#     rtfs
+#   end

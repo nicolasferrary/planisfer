@@ -1,26 +1,41 @@
 class Car < ApplicationRecord
   has_many :car_rentals, dependent: :destroy
-  validates :name, presence: true
 
   class << self
-    def create(data, rental_data)
-      car = Car.new
-      car.name = extract_name(rental_data)
-      car.category = extract_category(data, rental_data)
-      car.doors = rental_data['doors']
-      car.seats = rental_data['seats']
-      car.image_url = extract_image_url(data, rental_data)
-      car.save
-      car
-    end
 
-    def extract_name(rental_data)
-      if data['code'] == nil
-        "Unknown car"
-      else
-        data['code']
+    def create(sipp)
+      car = Car.new()
+      car.sipp = sipp
+      car.category = extract_category(sipp)
+      if !Constants::CAR_IMAGE[sipp.first(2)].nil?
+        car.image_url = Constants::CAR_IMAGE[sipp.first(2)]
       end
+      # Add car.name taking names from the google doc
+      car.save
     end
-
+    
+    def extract_category(sipp)
+      sipp_to_category = {
+        "M" => "Mini",
+        "N" => "Mini",
+        "E" => "Economy",
+        "H" => "Economy",
+        "C" => "Compact",
+        "D" => "Compact",
+        "I" => "Intermediate",
+        "J" => "Intermediate",
+        "S" => "Intermediate",
+        "R" => "Intermediate",
+        "F" => "Fullsize",
+        "G" => "Fullsize",
+        "P" => "Premium",
+        "L" => "Premium",
+        "W" => "Premium",
+        "O" => "Fullsize",
+        "X" => "Special",
+      }
+      category = sipp_to_category[sipp[0]]
+    end
   end
+
 end
