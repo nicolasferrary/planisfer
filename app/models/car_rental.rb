@@ -43,7 +43,8 @@ class CarRental < ApplicationRecord
 
     def extract_car_from_sabre(data_rental)
       sipp = data_rental["VehAvailCore"]["RentalRate"]["Vehicle"]["VehType"]
-      Car.find_by_sipp(sipp)
+      cars = Car.where(sipp: sipp)
+      car = cars.sample
     end
 
 
@@ -80,7 +81,8 @@ class CarRental < ApplicationRecord
 
     def extract_car_from_amadeus(result_car)
       sipp = result_car["vehicle_info"]["acriss_code"]
-      car = Car.find_by_sipp(sipp)
+      cars = Car.where(sipp: sipp)
+      car = cars.sample
       if car.image_url.nil?
         car.image_url = extract_image_from_amadeus(result_car)
         car.save

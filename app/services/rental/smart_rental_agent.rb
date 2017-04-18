@@ -22,11 +22,10 @@ module Rental
         ).make_request_sabre
 
       @data_sabre = JSON.parse(json)["OTA_VehAvailRateRS"]["VehAvailRSCore"]
-      # # Just for tests
       @data_rentals_sabre = @data_sabre["VehVendorAvails"]["VehVendorAvail"]
 
       if @data_rentals_sabre != []
-        car_rentals = create_car_rentals_sabre(@data_sabre, @data_rentals)
+        car_rentals = create_car_rentals_sabre(@data_sabre, @data_rentals_sabre)
       else
         car_rentals = []
       end

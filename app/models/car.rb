@@ -4,15 +4,22 @@ class Car < ApplicationRecord
   class << self
 
     def create(sipp)
-      car = Car.new()
-      car.sipp = sipp
-      car.category = extract_category(sipp)
       if !Constants::CAR_IMAGE[sipp.first(2)].nil?
-        index = define_index(sipp)
-        car.image_url = extract_car_image(sipp, index)
-        car.name = extract_car_name(sipp, index)
+        n = Constants::CAR_IMAGE[sipp.first(2)].count
+        (0..(n-1)).each do |i|
+          car = Car.new()
+          car.sipp = sipp
+          car.category = extract_category(sipp)
+          car.image_url = extract_car_image(sipp, i)
+          car.name = extract_car_name(sipp, i)
+          car.save
+        end
+      else
+        car = Car.new()
+        car.sipp = sipp
+        car.category = extract_category(sipp)
+        car.save
       end
-      car.save
     end
 
 
@@ -39,17 +46,12 @@ class Car < ApplicationRecord
       category = sipp_to_category[sipp[0]]
     end
 
-    def define_index(sipp)
-      image_array = Constants::CAR_IMAGE[sipp.first(2)]
-      index = rand(0..(image_array.count - 1))
+    def extract_car_image(sipp, i)
+      Constants::CAR_IMAGE[sipp.first(2)][i]
     end
 
-    def extract_car_image(sipp, index)
-      Constants::CAR_IMAGE[sipp.first(2)][index]
-    end
-
-    def extract_car_name(sipp, index)
-      Constants::CAR_NAME[sipp.first(2)][index]
+    def extract_car_name(sipp, i)
+      Constants::CAR_NAME[sipp.first(2)][i]
     end
 
   end
