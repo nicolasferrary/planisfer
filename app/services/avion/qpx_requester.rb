@@ -28,6 +28,5 @@ module Avion
     rescue
       response.body unless response.nil?
     end
-
   end
 end
