@@ -149,6 +149,7 @@
   <% # Fin de la 5e card %>
   <% # Début de la 6e card %>
   <% if @car_selection[:premium][@premium_index] %>
+  <% raise %>
     <div class="col-xs-12 col-sm-6">
       <div class="card <%= "selected" if params[:premium_index_index] %>">
         <% if !@car_selection[:premium][@premium_index].car.image_url.nil? %>

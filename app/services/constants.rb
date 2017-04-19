@@ -855,7 +855,9 @@ CAR_IMAGE = {
   "LP" => ["https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/bmw-m550d-4d-weiss-2014.png"],
   "LS" => ["https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/bmw-4er-grand-coupe-4d-braun-2017.png"],
   "LT" => ["https://www.sixt.co.uk/fileadmin/files/global/user_upload/fleet/png/350x200/mb-e-klasse-cabrio-2d-silber-offen-2013.png", "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/mb-c-klasse-cabrio-2d-weiss-2016-offen.png", "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/land-rover-range-rover-evoque-cabrio-orange-2016.png"],
+  "LV" => ["http://www.rentaldeals.gr/model_photos/vw_transporter-1363004910.png"],
   "LW" => ["https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/bmw-5er-kombi-silber-2017.png"],
+  "LX" => ["https://www1.drivenow.com.au/webdata/images/supplier/vehicles/europcar/small/lxar-premium.jpg"],
   "MB" => ["https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/smart-for-two-coupe-2d-blau-2014.png", "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/ford-ka-3d-blau-2011.png"],
   "MC" => ["https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/renault-twingo-5d-weiss-2014.png", "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/opel-adam-3d-grau-rot-2016.png", "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/hyundai-i10-5d-weiss-2014.png", "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/suzuki-alto-5d-rosa-2009.png", "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/vw-up-5d-weiss-2013.png"],
   "MD" => ["https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/suzuki-alto-5d-rosa-2009.png"],
@@ -920,7 +922,9 @@ CAR_NAME = {
   "LP" => ["BMW 550d Limousine"],
   "LS" => ["BMW4 Series Gran Coupe"],
   "LT" => ["Mercedes benz E Class Convertible", "Mercedes Benz Classe C Cabriolet", "Range Rover Evoque Cabrio"],
+  "LV" => ["VW Transporter"],
   "LW" => ["BMW 525/530 Touring"],
+  "LX" => ["Mercedes Benz E class"],
   "MB" => ["Smart Fortwo", "Ford Ka"],
   "MC" => ["Renault Twingo", "Opel Adam", "Hyundai i10", "Suzuki Alto", "VW Up"],
   "MD" => ["Suzuki Alto"],
@@ -949,6 +953,7 @@ CAR_NAME = {
   "XV" => ["Mercedes Benz V Class"],
   "XX" => ["Maserati Quattroporte SQ4"],
 }
+
 
 #OLD
 
