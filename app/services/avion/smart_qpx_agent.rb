@@ -23,7 +23,7 @@ module Avion
           api_key: ENV['AMADEUS_SANDBOX_API_KEY']
         ).make_request
 
-      @data = JSON.parse(json)
+      @data = JSON.parse(json) unless json.nil?
     end
 
     private

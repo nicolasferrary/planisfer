@@ -255,13 +255,15 @@ class SearchesController < ApplicationController
       }
       @data = (Avion::SmartQPXAgent.new(options).obtain_offers)
       # Create a rtf with @data for each itinerary of each same_airport_route and put it in rtfs
-      if @data['results'] != []
-        rtf = create_rtf(@data, @data['results'])
-      else
-        rtf = []
-      end
-      rtf.each do |rtf|
-        rtfs << rtf
+      if !@data.nil?
+        if @data['results'] != []
+          rtf = create_rtf(@data, @data['results'])
+        else
+          rtf = []
+        end
+        rtf.each do |rtf|
+          rtfs << rtf
+        end
       end
     end
     # end of rtf creation for same_airport routes
@@ -282,10 +284,12 @@ class SearchesController < ApplicationController
         region: region
       }
       @data1 = (Avion::SmartQPXAgent.new(options1).obtain_offers)
-      @data1['results'].each do |result|
-        result['itineraries'].each do |itinerary|
-          outbound_flight = [itinerary, result['fare'], @data1['currency']]
-          outbounds << outbound_flight
+      if !@data1.nil?
+        @data1['results'].each do |result|
+          result['itineraries'].each do |itinerary|
+            outbound_flight = [itinerary, result['fare'], @data1['currency']]
+            outbounds << outbound_flight
+          end
         end
       end
 
@@ -298,10 +302,12 @@ class SearchesController < ApplicationController
         region: region
       }
       @data2 = (Avion::SmartQPXAgent.new(options2).obtain_offers)
-      @data2['results'].each do |result|
-        result['itineraries'].each do |itinerary|
-          inbound_flight = [itinerary, result['fare'], @data2['currency']]
-          inbounds << inbound_flight
+      if !@data1.nil?
+        @data2['results'].each do |result|
+          result['itineraries'].each do |itinerary|
+            inbound_flight = [itinerary, result['fare'], @data2['currency']]
+            inbounds << inbound_flight
+          end
         end
       end
 
