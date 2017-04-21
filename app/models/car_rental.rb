@@ -99,7 +99,7 @@ class CarRental < ApplicationRecord
     end
 
     def extract_image_from_amadeus(result_car)
-      result_car["images"][0]["url"]
+      result_car["images"][0]["url"] unless result_car["images"].nil?
     end
 
     def extract_company_from_amadeus(result)

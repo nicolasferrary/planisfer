@@ -95,14 +95,21 @@
   right : 5px;
 }
 
-.company-name {
+
+// .company-name {
+//   position: absolute;
+//   bottom: -5px;
+//   right: 10px;
+// }
+// .company-name p {
+//   font-size: 10px;
+//   }
+
+.company-logo{
   position: absolute;
-  bottom: -5px;
+  bottom: 2px;
   right: 10px;
 }
-.company-name p {
-  font-size: 10px;
-  }
 
 .seats-infos{
   position: absolute;

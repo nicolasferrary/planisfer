@@ -25,8 +25,8 @@ module Avion
         url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=' + @api_key + '&origin=' + @origin +'&destination=' + @destination + '&departure_date=' + @departure + '&adults=' + @nb_travelers + '&nonstop=true' + '&currency=' + @currency + '&number_of_results=' + @nb_solutions.to_s
       end
       response = RestClient.get(url, content_type: :json, accept: :json)
-      response.body
+    rescue
+      response.body unless response.nil?
     end
-
   end
 end
