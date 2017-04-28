@@ -23,9 +23,7 @@
             <p><%= @car_selection[:mini][@mini_index].car.category %></p>
           </div>
           <div class = "card-infos">
-            <div class = "company-name">
-              <p> <%= @car_selection[:mini][@mini_index].company %></p>
-            </div>
+            <%= image_tag "carlogos/" + @car_selection[:mini][@mini_index].company.downcase + ".png", height: 25, width: "auto", class: "company-logo" %>
           </div>
           <a class="card-link" href="#" ></a>
         </div>
@@ -55,10 +53,8 @@
           <p><%= @car_selection[:economy][@economy_index].car.category %></p>
         </div>
         <div class = "card-infos">
-            <div class = "company-name">
-              <p> <%= @car_selection[:economy][@economy_index].company %></p>
-            </div>
-          </div>
+          <%= image_tag "carlogos/" + @car_selection[:economy][@economy_index].company.downcase + ".png", height: 25, width: "auto", class: "company-logo" %>
+        </div>
         <a class="card-link" href="#" ></a>
       </div>
     </div>
@@ -86,10 +82,8 @@
           <p><%= @car_selection[:compact][@compact_index].car.category %></p>
         </div>
         <div class = "card-infos">
-            <div class = "company-name">
-              <p> <%= @car_selection[:compact][@compact_index].company %></p>
-            </div>
-          </div>
+          <%= image_tag "carlogos/" + @car_selection[:compact][@compact_index].company.downcase + ".png", height: 25, width: "auto", class: "company-logo" %>
+        </div>
         <a class="card-link" href="#" ></a>
       </div>
     </div>
@@ -117,10 +111,8 @@
           <p><%= @car_selection[:intermediate][@intermediate_index].car.category %></p>
         </div>
         <div class = "card-infos">
-            <div class = "company-name">
-              <p> <%= @car_selection[:intermediate][@intermediate_index].company %></p>
-            </div>
-          </div>
+          <%= image_tag "carlogos/" + @car_selection[:intermediate][@intermediate_index].company.downcase + ".png", height: 25, width: "auto", class: "company-logo" %>
+        </div>
         <a class="card-link" href="#" ></a>
       </div>
     </div>
@@ -148,10 +140,8 @@
           <p><%= @car_selection[:fullsize][@fullsize_index].car.category %></p>
         </div>
         <div class = "card-infos">
-            <div class = "company-name">
-              <p> <%= @car_selection[:fullsize][@fullsize_index].company %></p>
-            </div>
-          </div>
+          <%= image_tag "carlogos/" + @car_selection[:fullsize][@fullsize_index].company.downcase + ".png", height: 25, width: "auto", class: "company-logo" %>
+        </div>
         <a class="card-link" href="#" ></a>
       </div>
     </div>
@@ -179,10 +169,8 @@
           <p><%= @car_selection[:premium][@premium_index].car.category %></p>
         </div>
         <div class = "card-infos">
-            <div class = "company-name">
-              <p> <%= @car_selection[:premium][@premium_index].company %></p>
-            </div>
-          </div>
+          <%= image_tag "carlogos/" + @car_selection[:premium][@premium_index].company.downcase + ".png", height: 25, width: "auto", class: "company-logo" %>
+        </div>
         <a class="card-link" href="#" ></a>
       </div>
     </div>

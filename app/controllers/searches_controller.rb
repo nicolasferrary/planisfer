@@ -278,7 +278,7 @@ class SearchesController < ApplicationController
         region: region
       }
       @data1 = (Avion::SmartQPXAgent.new(options1).obtain_offers)
-      if !@data.nil?
+      if !@data1.nil?
         @data1['results'].each do |result|
           result['itineraries'].each do |itinerary|
             outbound_flight = [itinerary, result['fare'], @data1['currency']]
@@ -295,7 +295,7 @@ class SearchesController < ApplicationController
         region: region
       }
       @data2 = (Avion::SmartQPXAgent.new(options2).obtain_offers)
-      if !@data.nil?
+      if !@data2.nil?
         @data2['results'].each do |result|
           result['itineraries'].each do |itinerary|
             inbound_flight = [itinerary, result['fare'], @data2['currency']]
