@@ -212,12 +212,6 @@ class SearchesController < ApplicationController
     Geocoder.coordinates(Constants::DESTINATIONS[region][highlight])
   end
 
-
-  # def highlight_coordinates
-  #     @latitude = Geocoder.coordinates("Faro, Portugal")[0],
-  #     @longitude = Geocoder.coordinates("Faro, Portugal")[1]
-  # end
-
 # @latitude = Geocoder.search("Faro, Portugal")[0].data["geometry"]["location"]["lat"]
 
   def get_trips_for(starts_on, returns_on, nb_travelers, city, region, search, region_airports)
@@ -255,13 +249,15 @@ class SearchesController < ApplicationController
       }
       @data = (Avion::SmartQPXAgent.new(options).obtain_offers)
       # Create a rtf with @data for each itinerary of each same_airport_route and put it in rtfs
-      if @data['results'] != []
-        rtf = create_rtf(@data, @data['results'])
-      else
-        rtf = []
-      end
-      rtf.each do |rtf|
-        rtfs << rtf
+      if !@data.nil?
+        if @data['results'] != []
+          rtf = create_rtf(@data, @data['results'])
+        else
+          rtf = []
+        end
+        rtf.each do |rtf|
+          rtfs << rtf
+        end
       end
     end
     # end of rtf creation for same_airport routes
@@ -282,13 +278,14 @@ class SearchesController < ApplicationController
         region: region
       }
       @data1 = (Avion::SmartQPXAgent.new(options1).obtain_offers)
-      @data1['results'].each do |result|
-        result['itineraries'].each do |itinerary|
-          outbound_flight = [itinerary, result['fare'], @data1['currency']]
-          outbounds << outbound_flight
+      if !@data.nil?
+        @data1['results'].each do |result|
+          result['itineraries'].each do |itinerary|
+            outbound_flight = [itinerary, result['fare'], @data1['currency']]
+            outbounds << outbound_flight
+          end
         end
       end
-
 
       options2 = {
         origin: airport,
@@ -298,13 +295,14 @@ class SearchesController < ApplicationController
         region: region
       }
       @data2 = (Avion::SmartQPXAgent.new(options2).obtain_offers)
-      @data2['results'].each do |result|
-        result['itineraries'].each do |itinerary|
-          inbound_flight = [itinerary, result['fare'], @data2['currency']]
-          inbounds << inbound_flight
+      if !@data.nil?
+        @data2['results'].each do |result|
+          result['itineraries'].each do |itinerary|
+            inbound_flight = [itinerary, result['fare'], @data2['currency']]
+            inbounds << inbound_flight
+          end
         end
       end
-
 
     end
 # Protéger le code

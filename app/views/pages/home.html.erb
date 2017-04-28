@@ -31,15 +31,13 @@
                       <div class="row">
                         <div class="col-xs-12">
 
-                        <%= select_tag :city, options_from_collection_for_select(Airport.all, :iata, :name), class: "js-airports-list", :prompt => "From" %>
-
-                        <%#= text_field_tag :city, nil, placeholder: "From", id: "js-airports-list", class: "input-lg form-control"  %>
+                        <%= select_tag :city, options_from_collection_for_select(Airport.all, :iata, :name), class: "js-airports-list input-lg form-control", :prompt => "From" %>
 
                         </div>
                         <br>
                         <br>
                         <div class="col-xs-12">
-                          <%= select_tag  :region, options_for_select(Constants::REGIONS.sort), class: "input-lg form-control", prompt: "To" %>
+                          <%= select_tag  :region, options_for_select(Constants::REGIONS.sort), class: "input-lg form-control text-center", prompt: "To" %>
                         </div>
                         <div class="col-xs-6">
                           <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'input-lg form-control datepicker text-center'%>
@@ -298,18 +296,6 @@
 
 <%= content_for :after_js do %>
 <script>
-
-  // Autocomplete
-
-  // var airports = ["Paris", "Berlin", "Dublin", "Barcelona", "Florence", "Poitiers"];
-  // var airports = Airport.all;
-
-  // $(document).ready(function() {
-  //   $("#js-airports-list").autocomplete({
-  //     source : airports,
-  //     value: "From",
-  //   });
-  // });
 
   $(document).ready(function() {
     $("select.js-airports-list").select2({
