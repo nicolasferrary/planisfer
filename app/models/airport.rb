@@ -4,12 +4,6 @@ class Airport < ApplicationRecord
    validates :name, presence: true
    validates :iata, presence: true
 
-  attr_reader :name, :iata
-  def initialize(name, iata)
-    @name = name
-    @iata = iata
-  end
-
 
   # def display_names(airports)
   #   airports.each do |airport|
