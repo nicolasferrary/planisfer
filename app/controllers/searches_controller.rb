@@ -212,12 +212,6 @@ class SearchesController < ApplicationController
     Geocoder.coordinates(Constants::DESTINATIONS[region][highlight])
   end
 
-
-  # def highlight_coordinates
-  #     @latitude = Geocoder.coordinates("Faro, Portugal")[0],
-  #     @longitude = Geocoder.coordinates("Faro, Portugal")[1]
-  # end
-
 # @latitude = Geocoder.search("Faro, Portugal")[0].data["geometry"]["location"]["lat"]
 
   def get_trips_for(starts_on, returns_on, nb_travelers, city, region, search, region_airports)
@@ -293,7 +287,6 @@ class SearchesController < ApplicationController
         end
       end
 
-
       options2 = {
         origin: airport,
         destination: city.name,
@@ -302,7 +295,7 @@ class SearchesController < ApplicationController
         region: region
       }
       @data2 = (Avion::SmartQPXAgent.new(options2).obtain_offers)
-      if !@data1.nil?
+      if !@data2.nil?
         @data2['results'].each do |result|
           result['itineraries'].each do |itinerary|
             inbound_flight = [itinerary, result['fare'], @data2['currency']]
@@ -310,7 +303,6 @@ class SearchesController < ApplicationController
           end
         end
       end
-
 
     end
 # Protéger le code
