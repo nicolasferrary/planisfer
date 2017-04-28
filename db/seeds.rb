@@ -26,7 +26,9 @@ CSV.foreach(filepath, csv_options) do |row|
   Airport.create!(
     name: row['name'],
     iata: row['iata'],
-    coordinates: row['coordinates']
+    coordinates: row['coordinates'],
+    country: row['parent_name'],
+    content: "#{row['iata']} #{row['name']}, #{row['parent_name']}"
     )
 end
 

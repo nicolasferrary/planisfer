@@ -30,9 +30,7 @@
                     <%=form_tag searches_path, :controller => 'searches', method: :post, id: "new_result" do %>
                       <div class="row">
                         <div class="col-xs-12">
-
-                        <%= select_tag :city, options_from_collection_for_select(Airport.all, :iata, :name), class: "js-airports-list input-lg form-control", :prompt => "From" %>
-
+                        <%= select_tag :city, options_from_collection_for_select(Airport.all,:iata, :content), class: "js-airports-list input-lg form-control select2-css", :prompt => "From" %>
                         </div>
                         <br>
                         <br>
