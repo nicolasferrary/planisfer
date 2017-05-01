@@ -10,52 +10,70 @@ require 'csv'
 # Trip.destroy_all
 # RoundTripFlight.destroy_all
 # Region.destroy_all
-Airport.destroy_all
 # City.destroy_all
 # CarRental.destroy_all
 # Selection.destroy_all
-Car.destroy_all
+
+
+# Airport.destroy_all
+# Car.destroy_all
+Poi.destroy_all
 
 
 # Seeding all the airports with IATA codes and coordinates
 
+# csv_options = { col_sep: ';', headers: :first_row, encoding: 'ISO-8859-1'}
+# filepath = 'db/airports_city.csv'
+
+# CSV.foreach(filepath, csv_options) do |row|
+#   Airport.create!(
+#     name: row['name'],
+#     iata: row['iata'],
+#     coordinates: row['coordinates'],
+#     country: row['parent_name'],
+#     content: "#{row['iata']} #{row['name']}, #{row['parent_name']}"
+#     )
+# end
+
+# Seeding all the POIs
+
+
 csv_options = { col_sep: ';', headers: :first_row, encoding: 'ISO-8859-1'}
-filepath = 'db/airports_city.csv'
+filepath = 'db/poi.csv'
 
 CSV.foreach(filepath, csv_options) do |row|
-  Airport.create!(
-    name: row['name'],
-    iata: row['iata'],
-    coordinates: row['coordinates'],
-    country: row['parent_name'],
-    content: "#{row['iata']} #{row['name']}, #{row['parent_name']}"
+  Poi.create!(
+    name: row[0],
+    photo: row['photo'],
+    title: row['title'],
+    description: row['description']
     )
 end
 
-city1 = City.create!(name:"Paris")
-city2 = City.create!(name:"London")
-city3 = City.create!(name:"Barcelona")
-city4 = City.create!(name:"Milan")
+# city1 = City.create!(name:"Paris")
+# city2 = City.create!(name:"London")
+# city3 = City.create!(name:"Barcelona")
+# city4 = City.create!(name:"Milan")
 
 
-# Seed of cars (1 car per mini_sipp)
-sipp_hash = {
-  "category" => ["M", "N", "E", "H", "C", "D", "I", "J", "S", "R", "F", "G", "P", "U", "L", "W", "O", "X"],
-  "type" => ["B", "C", "D", "W", "V", "L", "S", "T", "F", "J", "X", "P", "Q", "Z", "E", "M", "R", "H", "Y", "N", "G", "K"],
-  "transmission" => ["M", "N", "C", "A", "B", "D"],
-  "fuel_and_ac" => ["R", "N", "D", "Q", "H", "I", "E", "C", "L", "S", "A", "B", "M", "F", "V", "Z", "U", "X"]
-}
+# # Seed of cars (1 car per mini_sipp)
+# sipp_hash = {
+#   "category" => ["M", "N", "E", "H", "C", "D", "I", "J", "S", "R", "F", "G", "P", "U", "L", "W", "O", "X"],
+#   "type" => ["B", "C", "D", "W", "V", "L", "S", "T", "F", "J", "X", "P", "Q", "Z", "E", "M", "R", "H", "Y", "N", "G", "K"],
+#   "transmission" => ["M", "N", "C", "A", "B", "D"],
+#   "fuel_and_ac" => ["R", "N", "D", "Q", "H", "I", "E", "C", "L", "S", "A", "B", "M", "F", "V", "Z", "U", "X"]
+# }
 
-sipp_hash["category"].each do |category|
-  sipp_hash["type"].each do |type|
-    sipp_hash["transmission"].each do |transmission|
-      sipp_hash["fuel_and_ac"].each do |fuel|
-        sipp = category + type + transmission + fuel
-        Car.create(sipp)
-      end
-    end
-  end
-end
+# sipp_hash["category"].each do |category|
+#   sipp_hash["type"].each do |type|
+#     sipp_hash["transmission"].each do |transmission|
+#       sipp_hash["fuel_and_ac"].each do |fuel|
+#         sipp = category + type + transmission + fuel
+#         Car.create(sipp)
+#       end
+#     end
+#   end
+# end
 
 
 
