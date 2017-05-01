@@ -1,5 +1,5 @@
 class Poi < ApplicationRecord
   validates :name, presence: true
-  geocoded_by :name
-  after_validation :geocode, if: :name_changed?
+  geocoded_by :location
+  after_validation :geocode, if: :location_changed?
 end

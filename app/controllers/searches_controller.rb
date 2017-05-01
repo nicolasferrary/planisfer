@@ -1,7 +1,9 @@
 class SearchesController < ApplicationController
 
   def create
-    @search = Search.new(city: params[:city], region: params[:region], starts_on: params[:starts_on], returns_on: params[:returns_on], nb_travelers: params[:nb_travelers])
+    @region = Region.find_by_name(params[:region])
+    @search = Search.new(city: params[:city], starts_on: params[:starts_on], returns_on: params[:returns_on], nb_travelers: params[:nb_travelers])
+    @search.region = @region
 
     unless @search.save
       flash[:search_error] = "Please fill empty fields"
@@ -9,8 +11,7 @@ class SearchesController < ApplicationController
     end
 
     @city = City.create(params[:city])
-    @region = Region.create(params[:region])
-    @region_name = params[:region]
+    @region_name = @search.region.name
     @starts_on = params[:starts_on]
     @returns_on = params[:returns_on]
     @nb_travelers = params[:nb_travelers]
@@ -20,7 +21,7 @@ class SearchesController < ApplicationController
     # generate routes
     # @routes = Avion.generate_routes(@city_name, @region_airports)
     # Launch APi requests and gather trips
-    @trips = get_trips_for(@starts_on, @returns_on, @nb_travelers, @city, @region, @search, @region_airports)
+    @trips = get_trips_for(@starts_on, @returns_on, @nb_travelers, @city, @search, @region_airports)
 
     redirect_to search_path(@search)
 
@@ -30,7 +31,7 @@ class SearchesController < ApplicationController
     @search = Search.find(params[:id])
     @trips = @search.trips
     @region = @search.region
-    @region_airports = Constants::REGIONS_AIRPORTS[@region]
+    @region_airports = Constants::REGIONS_AIRPORTS[@region.name]
     @selected_airports = @region_airports
     @nb_travelers = @search.nb_travelers
     @passengers_title = passengers(@nb_travelers)
@@ -76,6 +77,19 @@ class SearchesController < ApplicationController
     @trips_selection = @trips.first(10)
 
     @round_trips = @trips_selection.map(&:round_trip_flight)
+
+    # Define POIs we want to show on the map
+    @pois = []
+    @region.pois.each do |poi_name|
+      poi = Poi.find_by_name(poi_name.strip)
+      @pois << poi
+    end
+    # NB : We should protect code to exclude from @pois any poi that has a nil latitude or longitude
+    @pois_markers_hash = Gmaps4rails.build_markers(@pois) do |poi, marker|
+      marker.lat poi.latitude
+      marker.lng poi.longitude
+    end
+
 
     # Geocode on these objects
     #@round_trips.map(&:destination_airport_coordinates).map(&:origin_airport_coordinates)
@@ -214,7 +228,7 @@ class SearchesController < ApplicationController
 
 # @latitude = Geocoder.search("Faro, Portugal")[0].data["geometry"]["location"]["lat"]
 
-  def get_trips_for(starts_on, returns_on, nb_travelers, city, region, search, region_airports)
+  def get_trips_for(starts_on, returns_on, nb_travelers, city, search, region_airports)
     trips = []
     rtfs = []
     # create rtf for routes with same landing and departure airports in destination region and add them to rtfs
@@ -245,7 +259,7 @@ class SearchesController < ApplicationController
         departure: starts_on,
         return: returns_on,
         nb_travelers: nb_travelers,
-        region: region
+        region: search.region.name
       }
       @data = (Avion::SmartQPXAgent.new(options).obtain_offers)
       # Create a rtf with @data for each itinerary of each same_airport_route and put it in rtfs
@@ -275,7 +289,7 @@ class SearchesController < ApplicationController
         destination: airport,
         departure: starts_on,
         nb_travelers: nb_travelers,
-        region: region
+        region: search.region.name
       }
       @data1 = (Avion::SmartQPXAgent.new(options1).obtain_offers)
       if !@data1.nil?
@@ -292,7 +306,7 @@ class SearchesController < ApplicationController
         destination: city.name,
         departure: returns_on,
         nb_travelers: nb_travelers,
-        region: region
+        region: search.region.name
       }
       @data2 = (Avion::SmartQPXAgent.new(options2).obtain_offers)
       if !@data2.nil?
@@ -398,17 +412,10 @@ class SearchesController < ApplicationController
     end
   end
 
-  # TO DELETE
-  # def get_airports(city)
-  #   airports = []
-  #   options =
-  #   {city: city
-  #   }
-  #   airports = Iata::SmartIataAgent.new(options).obtain_offers
-  #   return airports
-  # end
-
 end
+
+
+
 
 
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170501114041) do
+ActiveRecord::Schema.define(version: 20170501153555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20170501114041) do
     t.datetime "updated_at",  null: false
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "location"
   end
 
   create_table "regions", force: :cascade do |t|
@@ -112,7 +113,6 @@ ActiveRecord::Schema.define(version: 20170501114041) do
 
   create_table "searches", force: :cascade do |t|
     t.string   "city"
-    t.string   "region"
     t.date     "starts_on"
     t.date     "returns_on"
     t.datetime "created_at",    null: false
@@ -120,6 +120,8 @@ ActiveRecord::Schema.define(version: 20170501114041) do
     t.integer  "nb_travelers"
     t.string   "flight1_range"
     t.string   "flight2_range"
+    t.integer  "region_id"
+    t.index ["region_id"], name: "index_searches_on_region_id", using: :btree
   end
 
   create_table "selections", force: :cascade do |t|
@@ -157,6 +159,7 @@ ActiveRecord::Schema.define(version: 20170501114041) do
   add_foreign_key "car_rentals", "cars"
   add_foreign_key "car_rentals", "selections"
   add_foreign_key "round_trip_flights", "regions"
+  add_foreign_key "searches", "regions"
   add_foreign_key "trips", "car_rentals"
   add_foreign_key "trips", "cities"
   add_foreign_key "trips", "round_trip_flights"

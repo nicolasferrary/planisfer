@@ -1,5 +1,6 @@
 
 <div class="flight-ticket-title-1 text-center">
+
   <div class="banner-content">
     <%= link_to root_path do %>
     <%= image_tag "logo.png", class:"logo-1"%>
@@ -144,7 +145,7 @@
           ]
         },
         internal: { id: 'map' } }, function() {
-        markers = handler.addMarkers( <%= raw @first_result.to_json %> );
+        markers = handler.addMarkers( <%= raw @pois_markers_hash.to_json %> );
         handler.bounds.extendWith(markers);
         handler.getMap().setZoom(5);
         handler.fitMapToBounds();
@@ -154,6 +155,7 @@
         handler.getMap().setZoom(6);
 
       });
+      <% raise %>
       $('.result-card').mouseenter('click', function(e) {
         e.preventDefault();
         $('.cardContainer.selected').removeClass('selected');
