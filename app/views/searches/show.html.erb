@@ -6,7 +6,7 @@
     <%= image_tag "logo.png", class:"logo-1"%>
     <% end %>
   </div>
-  <h1 class="">Your research for <%= @region%></h1>
+  <h1 class="">Your research for <%= @region.name%></h1>
 </div>
 
 <div>
@@ -34,7 +34,7 @@
 <!-- A priori la div ci dessous n'est pas utile -->
             <div class = "filter-box">
 
-              <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region %> </strong></h5>
+              <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region.name %> </strong></h5>
               <div class="filters">
                 <ul class="text-center">
                   <li>
@@ -51,7 +51,7 @@
 
           <div class="filter-slider-item">
             <div class = "filter-box">
-              <h5 class = "text-center" > From <strong> <%= @region %> </strong> to <strong> <%= @city_real_name %></strong></h5>
+              <h5 class = "text-center" > From <strong> <%= @region.name %> </strong> to <strong> <%= @city_real_name %></strong></h5>
               <div class="filters">
                 <ul class="text-center">
                   <li>
@@ -155,7 +155,6 @@
         handler.getMap().setZoom(6);
 
       });
-      <% raise %>
       $('.result-card').mouseenter('click', function(e) {
         e.preventDefault();
         $('.cardContainer.selected').removeClass('selected');

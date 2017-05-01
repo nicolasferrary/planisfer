@@ -37,7 +37,7 @@ Poi.destroy_all
 
 # Seeding all the POIs
 
-csv_options = { col_sep: ',', headers: :first_row, encoding: 'ISO-8859-1'}
+csv_options = { col_sep: ';', headers: :first_row, encoding: 'ISO-8859-1'}
 filepath = 'db/poi.csv'
 
 CSV.foreach(filepath, csv_options) do |row|
