@@ -145,7 +145,7 @@
           ]
         },
         internal: { id: 'map' } }, function() {
-        markers = handler.addMarkers( <%= raw @pois_markers_hash.to_json %> );
+        markers = handler.addMarkers( <%= raw @pois_markers.to_json %> );
         handler.bounds.extendWith(markers);
         handler.getMap().setZoom(5);
         handler.fitMapToBounds();

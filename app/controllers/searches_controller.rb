@@ -79,17 +79,11 @@ class SearchesController < ApplicationController
     @round_trips = @trips_selection.map(&:round_trip_flight)
 
     # Define POIs we want to show on the map
-    @pois = []
-    @region.pois.each do |poi_name|
-      poi = Poi.find_by_name(poi_name.strip)
-      @pois << poi
-    end
-    # NB : We should protect code to exclude from @pois any poi that has a nil latitude or longitude
-    @pois_markers_hash = Gmaps4rails.build_markers(@pois) do |poi, marker|
-      marker.lat poi.latitude
-      marker.lng poi.longitude
-    end
+    @pois = define_pois(@region)
 
+    # NB : We should protect code to exclude from @pois any poi that has a nil latitude or longitude
+
+    @pois_markers = build_markers(@pois)
 
     # Geocode on these objects
     #@round_trips.map(&:destination_airport_coordinates).map(&:origin_airport_coordinates)
@@ -170,15 +164,12 @@ class SearchesController < ApplicationController
   def refresh_map
     # récupérer le round_trip
     @round_trip_flight = RoundTripFlight.find(params[:round_trip_flight_id])
+    @region = @round_trip_flight.region
+    @pois = define_pois(@region)
+    @pois_markers = build_markers(@pois)
     if @round_trip_flight.longitude_arrive == @round_trip_flight.latitude_back && @round_trip_flight.latitude_arrive == @round_trip_flight.latitude_back
       render json: [
-        # To show the city of departure on the map
-        # {
-        #   lat: @round_trip_flight.latitude_home,
-        #   lng: @round_trip_flight.longitude_home,
-        #   infowindow: @round_trip_flight.flight1_origin_airport_iata,
-        #   picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
-        # },
+
         {
           lat: @round_trip_flight.latitude_arrive,
           lng: @round_trip_flight.longitude_arrive,
@@ -193,16 +184,10 @@ class SearchesController < ApplicationController
           infowindow: "Hello World",
           picture: { url: view_context.image_url("interest.svg"), width: 40, height: 40 },
         }
-        ].to_json
+        ].concat(@pois_markers).to_json
     else
       render json: [
-        # To show the city of departure on the map
-        # {
-        #   lat: @round_trip_flight.latitude_home,
-        #   lng: @round_trip_flight.longitude_home,
-        #   infowindow: @round_trip_flight.flight1_origin_airport_iata,
-        #   picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
-        # },
+
         {
           lat: @round_trip_flight.latitude_arrive,
           lng: @round_trip_flight.longitude_arrive,
@@ -216,7 +201,7 @@ class SearchesController < ApplicationController
           picture: { url: view_context.image_url("orange.svg"), width: 40, height: 40 }
         }
 
-        ].to_json
+        ].concat(@pois_markers).to_json
     end
   end
 
@@ -409,6 +394,28 @@ class SearchesController < ApplicationController
       return "1 TRAVELER"
     else
       return "#{nb_travelers} TRAVELERS"
+    end
+  end
+
+  def define_pois(region)
+    @pois = []
+    @region.pois.each do |poi_name|
+      poi = Poi.find_by_name(poi_name.strip)
+      @pois << poi
+    end
+    @pois
+  end
+
+  def build_markers(pois)
+    Gmaps4rails.build_markers(pois) do |poi, marker|
+      marker.lat poi.latitude
+      marker.lng poi.longitude
+      marker.infowindow poi.name
+      marker.picture({
+                  # :url => view_context.image_url("interest.svg"),
+                  :width   => 40,
+                  :height  => 40
+                 })
     end
   end
 
