@@ -407,10 +407,13 @@ class SearchesController < ApplicationController
   end
 
   def build_markers(pois)
+
     Gmaps4rails.build_markers(pois) do |poi, marker|
+      @poi = poi
       marker.lat poi.latitude
       marker.lng poi.longitude
       marker.infowindow poi.name
+      marker.infowindow render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => poi})
       marker.picture({
                   # :url => view_context.image_url("interest.svg"),
                   :width   => 40,
