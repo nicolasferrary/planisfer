@@ -83,11 +83,10 @@
             <% end %>
 
             <div class="city-tags">
-              <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[0])%>" data-city="<%=  Constants::CITY_REGION[@region_airports[0]]%>"><%= Constants::CITY_REGION[@region_airports[0]] %></div>
-
-              <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[1])%>" data-city="<%=Constants::CITY_REGION[@region_airports[1]]%>"><%= Constants::CITY_REGION[@region_airports[1]] %></div>
-              <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[2])%>" data-city="<%=Constants::CITY_REGION[@region_airports[2]]%>" ><%= Constants::CITY_REGION[@region_airports[2]] %></div>
-              <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[3])%>" data-city="<%=Constants::CITY_REGION[@region_airports[3]]%>" ><%= Constants::CITY_REGION[@region_airports[3]] %></div>
+              <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[0])%>" data-city="<%=  @region_airports[0].name%>"><%= @region_airports[0].name %></div>
+              <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[1])%>" data-city="<%=  @region_airports[1].name%>"><%= @region_airports[1].name %></div>
+              <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[2])%>" data-city="<%=  @region_airports[2].name%>"><%= @region_airports[2].name %></div>
+              <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[3])%>" data-city="<%=  @region_airports[3].name%>"><%= @region_airports[3].name %></div>
             </div>
           </div>
         </div> <!-- fin filter-buttons -->

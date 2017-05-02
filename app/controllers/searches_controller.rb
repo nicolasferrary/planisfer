@@ -15,8 +15,8 @@ class SearchesController < ApplicationController
     @starts_on = params[:starts_on]
     @returns_on = params[:returns_on]
     @nb_travelers = params[:nb_travelers]
-    @region_airports = Constants::REGIONS_AIRPORTS[@region_name]
-    # TO DELETE
+    @region_airports = define_airports(@region)
+     # TO DELETE
     # @airports = get_airports(@city)
     # generate routes
     # @routes = Avion.generate_routes(@city_name, @region_airports)
@@ -31,7 +31,7 @@ class SearchesController < ApplicationController
     @search = Search.find(params[:id])
     @trips = @search.trips
     @region = @search.region
-    @region_airports = Constants::REGIONS_AIRPORTS[@region.name]
+    @region_airports = define_airports(@region)
     @selected_airports = @region_airports
     @nb_travelers = @search.nb_travelers
     @passengers_title = passengers(@nb_travelers)
@@ -46,7 +46,7 @@ class SearchesController < ApplicationController
     # Initialize selected cities for filters
     @selected_cities = []
     @region_airports.each do |airport|
-      @selected_cities << Constants::CITY_REGION[airport]
+      @selected_cities << airport.name
     end
 
     # Attribute selected cities in params to @selected cities
@@ -60,7 +60,7 @@ class SearchesController < ApplicationController
     # Define selected airports based on selected cities
     @selected_airports = []
     @selected_cities.each do |city|
-      airport = Constants::CITY_REGION.invert[city]
+      airport = Airport.find_by_name("city")
       @selected_airports << airport
     end
 
@@ -162,39 +162,38 @@ class SearchesController < ApplicationController
 
 
   def refresh_map
+    raise
     # récupérer le round_trip
     @round_trip_flight = RoundTripFlight.find(params[:round_trip_flight_id])
     @region = @round_trip_flight.region
     @pois = define_pois(@region)
     @pois_markers = build_markers(@pois)
-    if @round_trip_flight.longitude_arrive == @round_trip_flight.latitude_back && @round_trip_flight.latitude_arrive == @round_trip_flight.latitude_back
+    @destination_iata = @round_trip_flight.flight1_destination_airport_iata
+    @return_iata = @round_trip_flight.flight2_origin_airport_iata
+    @destination_airport = Airport.find_by_iata(@destination_iata)
+    @return_airport = Airport.find_by_iata(@return_iata)
+
+
+    if @destination_iata == @return_iata
       render json: @pois_markers.concat([
         {
-          lat: @round_trip_flight.latitude_arrive,
-          lng: @round_trip_flight.longitude_arrive,
+          lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
+          lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
           infowindow: @round_trip_flight.flight1_destination_airport_iata,
           picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
         },
-        # in progress = récupérer @region pour pouvoir adapter le code par destination
-        {
-          #lat: highlight_coordinates("Portugal", "highlight_6")[0],
-          lat: 41.1579438,
-          lng: -8.629105299999999,
-          infowindow: "Hello World",
-          picture: { url: view_context.image_url("interest.svg"), width: 40, height: 40 }
-        }
         ]).to_json
     else
       render json: @pois_markers.concat([
         {
-          lat: @round_trip_flight.latitude_arrive,
-          lng: @round_trip_flight.longitude_arrive,
+          lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
+          lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
           infowindow: @round_trip_flight.flight1_destination_airport_iata,
           picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
         },
         {
-          lat: @round_trip_flight.latitude_back,
-          lng: @round_trip_flight.longitude_back,
+          lat: @return_airport.coordinates.gsub(/\:(.*)/, '').to_f,
+          lng: @return_airport.coordinates.gsub(/(.*)\:/, '').to_f,
           infowindow: @round_trip_flight.flight2_origin_airport_iata,
           picture: { url: view_context.image_url("orange.svg"), width: 40, height: 40 }
         }
@@ -238,7 +237,7 @@ class SearchesController < ApplicationController
     region_airports.each do |airport|
       options = {
         origin: city.name,
-        destination: airport,
+        destination: airport.iata,
         departure: starts_on,
         return: returns_on,
         nb_travelers: nb_travelers,
@@ -259,17 +258,15 @@ class SearchesController < ApplicationController
     end
     # end of rtf creation for same_airport routes
 
-# A FAIRE
 
     # # create rtf for routes with different landing and departure airports in destination region and add them to rtfs
     outbounds = []
     inbounds = []
     # For each airport launch 2 requests and stock data in outbounds and inbounds arrays
     region_airports.each do |airport|
-
       options1 = {
         origin: city.name,
-        destination: airport,
+        destination: airport.iata,
         departure: starts_on,
         nb_travelers: nb_travelers,
         region: search.region.name
@@ -285,7 +282,7 @@ class SearchesController < ApplicationController
       end
 
       options2 = {
-        origin: airport,
+        origin: airport.iata,
         destination: city.name,
         departure: returns_on,
         nb_travelers: nb_travelers,
@@ -418,6 +415,15 @@ class SearchesController < ApplicationController
                   :height  => 20
                  })
     end
+  end
+
+  def define_airports(region)
+    region_airports =[]
+    region.airports.each do |airport_iata|
+      airport = Airport.find_by_iata(airport_iata)
+      region_airports << airport
+    end
+    region_airports
   end
 
 end
