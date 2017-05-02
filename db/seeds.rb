@@ -46,23 +46,27 @@ CSV.foreach(filepath, csv_options) do |row|
     location: row['location'],
     photo: row['photo'],
     title: row['title'],
-    description: row['description']
+    description1: row['description1'],
+    description2: row['description2'],
+    description3: row['description3'],
+    description4: row['description4'],
+    description5: row['description5']
     )
 end
 
 
 # Seeding all the Regions
 
-csv_options = { col_sep: ',', headers: :first_row, encoding: 'ISO-8859-1'}
-filepath = 'db/region.csv'
+# csv_options = { col_sep: ',', headers: :first_row, encoding: 'ISO-8859-1'}
+# filepath = 'db/region.csv'
 
-CSV.foreach(filepath, csv_options) do |row|
-  Region.create!(
-    name: row['region'],
-    description: row['description'],
-    pois: row['poi']
-    )
-end
+# CSV.foreach(filepath, csv_options) do |row|
+#   Region.create!(
+#     name: row['region'],
+#     description: row['description'],
+#     pois: row['poi']
+#     )
+# end
 
 # city1 = City.create!(name:"Paris")
 # city2 = City.create!(name:"London")

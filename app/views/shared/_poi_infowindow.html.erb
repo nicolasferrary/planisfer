@@ -9,7 +9,7 @@
 
     <div class = "col-xs-12 col-md-6">
       <div class = "poi-title">
-        <%= @poi.title %>
+        <%= @poi.title%>
       </div>
     </div>
 
@@ -22,7 +22,24 @@
     </div>
 
     <div class = "col-xs-12 col-md-6">
-      <%= @poi.description %>
+      <ul class = "description-list">
+        <% if !@poi.description1.nil? %>
+          <li><%= @poi.description1%></li>
+        <% end %>
+        <% if !@poi.description2.nil? %>
+          <li><%= @poi.description2%></li>
+        <% end %>
+        <% if !@poi.description3.nil? %>
+          <li><%= @poi.description3%></li>
+        <% end %>
+        <% if !@poi.description4.nil? %>
+          <li><%= @poi.description4%></li>
+        <% end %>
+        <% if !@poi.description5.nil? %>
+          <li><%= @poi.description5%></li>
+        <% end %>
+
+      </ul>
     </div>
 
   </div>
