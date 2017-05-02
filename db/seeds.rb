@@ -53,16 +53,16 @@ end
 
 # Seeding all the Regions
 
-# csv_options = { col_sep: ',', headers: :first_row, encoding: 'ISO-8859-1'}
-# filepath = 'db/region.csv'
+csv_options = { col_sep: ',', headers: :first_row, encoding: 'ISO-8859-1'}
+filepath = 'db/region.csv'
 
-# CSV.foreach(filepath, csv_options) do |row|
-#   Region.create!(
-#     name: row['region'],
-#     description: row['description'],
-#     pois: row['poi']
-#     )
-# end
+CSV.foreach(filepath, csv_options) do |row|
+  Region.create!(
+    name: row['region'],
+    description: row['description'],
+    pois: row['poi']
+    )
+end
 
 # city1 = City.create!(name:"Paris")
 # city2 = City.create!(name:"London")
