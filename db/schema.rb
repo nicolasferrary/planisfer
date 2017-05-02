@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170502090551) do
+ActiveRecord::Schema.define(version: 20170502104710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20170502090551) do
     t.datetime "updated_at",               null: false
     t.string   "description"
     t.text     "pois",        default: [],              array: true
+    t.text     "airports",    default: [],              array: true
   end
 
   create_table "round_trip_flights", force: :cascade do |t|

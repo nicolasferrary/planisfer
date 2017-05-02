@@ -168,8 +168,7 @@ class SearchesController < ApplicationController
     @pois = define_pois(@region)
     @pois_markers = build_markers(@pois)
     if @round_trip_flight.longitude_arrive == @round_trip_flight.latitude_back && @round_trip_flight.latitude_arrive == @round_trip_flight.latitude_back
-      render json: [
-
+      render json: @pois_markers.concat([
         {
           lat: @round_trip_flight.latitude_arrive,
           lng: @round_trip_flight.longitude_arrive,
@@ -182,12 +181,11 @@ class SearchesController < ApplicationController
           lat: 41.1579438,
           lng: -8.629105299999999,
           infowindow: "Hello World",
-          picture: { url: view_context.image_url("interest.svg"), width: 40, height: 40 },
+          picture: { url: view_context.image_url("interest.svg"), width: 40, height: 40 }
         }
-        ].concat(@pois_markers).to_json
+        ]).to_json
     else
-      render json: [
-
+      render json: @pois_markers.concat([
         {
           lat: @round_trip_flight.latitude_arrive,
           lng: @round_trip_flight.longitude_arrive,
@@ -201,7 +199,7 @@ class SearchesController < ApplicationController
           picture: { url: view_context.image_url("orange.svg"), width: 40, height: 40 }
         }
 
-        ].concat(@pois_markers).to_json
+        ]).to_json
     end
   end
 
@@ -416,8 +414,8 @@ class SearchesController < ApplicationController
       marker.infowindow render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => poi})
       marker.picture({
                   # :url => view_context.image_url("interest.svg"),
-                  :width   => 40,
-                  :height  => 40
+                  :width   => 20,
+                  :height  => 20
                  })
     end
   end

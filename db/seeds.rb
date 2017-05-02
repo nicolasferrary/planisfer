@@ -7,8 +7,8 @@ require 'csv'
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# Trip.destroy_all
-# RoundTripFlight.destroy_all
+Trip.destroy_all
+RoundTripFlight.destroy_all
 # City.destroy_all
 # CarRental.destroy_all
 # Selection.destroy_all
@@ -16,9 +16,9 @@ require 'csv'
 
 # Airport.destroy_all
 # Car.destroy_all
-Poi.destroy_all
-# Search.destroy_all
-# Region.destroy_all
+# Poi.destroy_all
+Search.destroy_all
+Region.destroy_all
 
 # Seeding all the airports with IATA codes and coordinates
 
@@ -37,36 +37,37 @@ Poi.destroy_all
 
 # Seeding all the POIs
 
-csv_options = { col_sep: ';', headers: :first_row, encoding: 'ISO-8859-1'}
-filepath = 'db/poi.csv'
+# csv_options = { col_sep: ';', headers: :first_row, encoding: 'ISO-8859-1'}
+# filepath = 'db/poi.csv'
 
-CSV.foreach(filepath, csv_options) do |row|
-  Poi.create!(
-    name: row[0],
-    location: row['location'],
-    photo: row['photo'],
-    title: row['title'],
-    description1: row['description1'],
-    description2: row['description2'],
-    description3: row['description3'],
-    description4: row['description4'],
-    description5: row['description5']
-    )
-end
+# CSV.foreach(filepath, csv_options) do |row|
+#   Poi.create!(
+#     name: row[0],
+#     location: row['location'],
+#     photo: row['photo'],
+#     title: row['title'],
+#     description1: row['description1'],
+#     description2: row['description2'],
+#     description3: row['description3'],
+#     description4: row['description4'],
+#     description5: row['description5']
+#     )
+# end
 
 
 # Seeding all the Regions
 
-# csv_options = { col_sep: ',', headers: :first_row, encoding: 'ISO-8859-1'}
-# filepath = 'db/region.csv'
+csv_options = { col_sep: ';', headers: :first_row, encoding: 'ISO-8859-1'}
+filepath = 'db/region.csv'
 
-# CSV.foreach(filepath, csv_options) do |row|
-#   Region.create!(
-#     name: row['region'],
-#     description: row['description'],
-#     pois: row['poi']
-#     )
-# end
+CSV.foreach(filepath, csv_options) do |row|
+  Region.create!(
+    name: row[0],
+    description: row['description'],
+    pois: row['poi'],
+    airports: row['airports']
+    )
+end
 
 # city1 = City.create!(name:"Paris")
 # city2 = City.create!(name:"London")
