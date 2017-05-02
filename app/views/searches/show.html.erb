@@ -1,12 +1,11 @@
 
 <div class="flight-ticket-title-1 text-center">
-
   <div class="banner-content">
     <%= link_to root_path do %>
     <%= image_tag "logo.png", class:"logo-1"%>
     <% end %>
   </div>
-  <h1 class="">Your research for <%= @region.name%></h1>
+  <h1 class="">Your research for <%= @region.name%> </h1>
 </div>
 
 <div>
@@ -75,7 +74,8 @@
         <div class="filter-buttons">
           <div class = "text-center ">
             <% if @selected_cities.count == 4 %>
-              <h5 class = "text-center" > Click to <strong> remove </strong> some cities</h5>
+              <h5 class = "text-center" > Click to <strong> remove
+               </strong> some cities</h5>
             <% elsif @selected_cities.count == 0 %>
               <h5 class = "text-center" > Click to <strong> add </strong> some cities</h5>
             <% else %>
@@ -191,25 +191,25 @@
 
   </script>
 
-<script>
-  $(document).ready(function() {
-    $('.filtered-city').on('click', function(event) {
-      $(this).toggleClass('city-selected');
-      update_form_selected_cities();
+  <script>
+    $(document).ready(function() {
+      $('.filtered-city').on('click', function(event) {
+        $(this).toggleClass('city-selected');
+        update_form_selected_cities();
+      });
+      $(".filtered-city").removeClass("city-selected");
+      <% @selected_cities.each do |city| %>
+      $(".filtered-city[data-city=<%= city %>]").addClass("city-selected");
+      <% end %>
     });
-    $(".filtered-city").removeClass("city-selected");
-    <% @selected_cities.each do |city| %>
-    $(".filtered-city[data-city=<%= city %>]").addClass("city-selected");
-    <% end %>
-  });
-  function update_form_selected_cities() {
-    var selected_cities = "";
-    $(".city-selected").each(function( index ) {
-      selected_cities = selected_cities + $(this).text() + ",";
-    });
+    function update_form_selected_cities() {
+      var selected_cities = "";
+      $(".city-selected").each(function( index ) {
+        selected_cities = selected_cities + $(this).text() + ",";
+      });
       selected_cities = selected_cities.slice(0,-1); //remove last coma
       $('#selected-cities').val(selected_cities);
-      }
+    }
   </script>
   <script>
     function showhide(id) {

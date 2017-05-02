@@ -16,11 +16,7 @@ class SearchesController < ApplicationController
     @returns_on = params[:returns_on]
     @nb_travelers = params[:nb_travelers]
     @region_airports = define_airports(@region)
-     # TO DELETE
-    # @airports = get_airports(@city)
-    # generate routes
-    # @routes = Avion.generate_routes(@city_name, @region_airports)
-    # Launch APi requests and gather trips
+
     @trips = get_trips_for(@starts_on, @returns_on, @nb_travelers, @city, @search, @region_airports)
 
     redirect_to search_path(@search)
@@ -48,7 +44,6 @@ class SearchesController < ApplicationController
     @region_airports.each do |airport|
       @selected_cities << airport.name
     end
-
     # Attribute selected cities in params to @selected cities
     params["selected-cities"] == nil if params["selected-cities"] == ""
     if params["selected-cities"] == nil || params["selected-cities"] == ""
@@ -60,7 +55,7 @@ class SearchesController < ApplicationController
     # Define selected airports based on selected cities
     @selected_airports = []
     @selected_cities.each do |city|
-      airport = Airport.find_by_name("city")
+      airport = Airport.find_by_name(city)
       @selected_airports << airport
     end
 
