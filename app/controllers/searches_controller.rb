@@ -162,7 +162,6 @@ class SearchesController < ApplicationController
 
 
   def refresh_map
-    raise
     # récupérer le round_trip
     @round_trip_flight = RoundTripFlight.find(params[:round_trip_flight_id])
     @region = @round_trip_flight.region
