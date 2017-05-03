@@ -16,7 +16,6 @@ class CarRental < ApplicationRecord
       car_rental.drop_off_date_time = drop_off_date_time
       car_rental.company = extract_company_from_sabre(data_rental)
       car_rental.car = extract_car_from_sabre(data_rental)
-      car_rental.company = extract_company_from_sabre(data_rental)
       car_rental.save
       car_rental
     end
@@ -64,7 +63,6 @@ class CarRental < ApplicationRecord
       car_rental.drop_off_date_time = drop_off_date_time
       car_rental.company = extract_company_from_amadeus(result)
       car_rental.car = extract_car_from_amadeus(result_car)
-      car_rental.company = extract_company_from_amadeus(result)
       car_rental.save
       car_rental
     end
