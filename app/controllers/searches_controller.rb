@@ -54,8 +54,8 @@ class SearchesController < ApplicationController
 
     # Define selected airports based on selected cities
     @selected_airports = []
-    @selected_cities.each do |city|
-      airport = Airport.find_by_name(city)
+    @selected_cities.each do |name|
+      airport = Airport.find_by_name(name)
       @selected_airports << airport
     end
 
