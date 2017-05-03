@@ -145,12 +145,12 @@
         internal: { id: 'map' } }, function() {
         markers = handler.addMarkers( <%= raw @pois_markers.to_json %> );
         handler.bounds.extendWith(markers);
-        handler.getMap().setZoom(5);
+        // handler.getMap().setZoom(7);
         handler.fitMapToBounds();
 
         // Set zoom when loading the page when there is one marker
         // The closer to 15, the higher in the sky
-        handler.getMap().setZoom(6);
+        // handler.getMap().setZoom(7);
 
       });
       $('.result-card').mouseenter('click', function(e) {
@@ -176,7 +176,7 @@
         handler.fitMapToBounds();
 
         // The closer to 0, the higher in the sky
-        handler.getMap().setZoom(6);
+        // handler.getMap().setZoom(7);
 
       })
     });
