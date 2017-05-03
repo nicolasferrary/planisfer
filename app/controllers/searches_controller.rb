@@ -42,7 +42,7 @@ class SearchesController < ApplicationController
     # Initialize selected cities for filters
     @selected_cities = []
     @region_airports.each do |airport|
-      @selected_cities << airport.name
+      @selected_cities << airport.cityname
     end
     # Attribute selected cities in params to @selected cities
     params["selected-cities"] == nil if params["selected-cities"] == ""
