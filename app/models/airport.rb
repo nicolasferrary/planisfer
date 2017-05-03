@@ -1,6 +1,5 @@
 class Airport < ApplicationRecord
    belongs_to :city, optional: true
-   belongs_to :region, optional: true
    validates :name, presence: true
    validates :iata, presence: true
 

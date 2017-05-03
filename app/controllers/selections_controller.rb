@@ -6,8 +6,18 @@ class SelectionsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     #Define params for API
     #Clean what is not needed (heritage from Skyscanner API)
-    @pick_up_location = Constants::CITY_REGION.invert[params[:pick_up_location]] || @trip.round_trip_flight.flight1_destination_airport_iata
-    @drop_off_location = Constants::CITY_REGION.invert[params[:drop_off_location]] || @trip.round_trip_flight.flight2_origin_airport_iata
+    if params[:pick_up_location].nil? || params[:pick_up_location] == ""
+      @pick_up_location = @trip.round_trip_flight.flight1_destination_airport_iata
+    else
+      @pick_up_location = Airport.find_by_name(params[:pick_up_location]).iata
+    end
+
+    if params[:drop_off_location].nil? || params[:drop_off_location] == ""
+      @drop_off_location = @trip.round_trip_flight.flight2_origin_airport_iata
+    else
+       @drop_off_location = Airport.find_by_name(params[:drop_off_location]).iata
+    end
+
     if !params[:pick_up_date_time].nil?
       @pick_up_date_time = Time.zone.parse(params[:pick_up_date_time])
     else
@@ -23,8 +33,7 @@ class SelectionsController < ApplicationController
     @selection.save
     @search = @trip.search
     @region = @trip.round_trip_flight.region
-    @region_airports_iata = Constants::REGIONS_AIRPORTS[@region.name]
-    @region_airports = @region_airports_iata.map { |airport_iata| Constants::CITY_REGION[airport_iata]}
+    @region_airports = @region.airports.map { |airport_iata| Airport.find_by_iata(airport_iata).name}
     @currency = 'EUR'
 
     # Launch requests
@@ -36,7 +45,6 @@ class SelectionsController < ApplicationController
       best_category_cars = get_best_cars(@car_rentals, category)
       @best_car_rentals << best_category_cars
     end
-
     @best_car_rentals = @best_car_rentals.flatten
     @best_car_rentals.each do |car_rental|
       car_rental.selection = @selection
@@ -54,8 +62,7 @@ class SelectionsController < ApplicationController
     @selection = Selection.find(params[:id])
     @car_rentals = CarRental.where(selection_id: @selection.id)
     @region = @trip.round_trip_flight.region
-    @region_airports_iata = Constants::REGIONS_AIRPORTS[@region.name]
-    @region_airports = @region_airports_iata.map { |airport_iata| Constants::CITY_REGION[airport_iata]}
+    @region_airports = @region.airports.map { |airport_iata| Airport.find_by_iata(airport_iata).name}
     @car_selection = get_best_cars_per_category(@car_rentals)
     @pick_up_location = params[:pick_up_location]
     @drop_off_location = params[:drop_off_location]

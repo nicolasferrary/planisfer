@@ -22,7 +22,6 @@ module Avion
           nb_solutions: 5,
           api_key: ENV['AMADEUS_SANDBOX_API_KEY']
         ).make_request
-
       @data = JSON.parse(json) unless json.nil?
     end
 

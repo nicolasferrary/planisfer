@@ -14,29 +14,6 @@ class RoundTripFlight < ApplicationRecord
   validates :f1_number, presence: true
   validates :f2_number, presence: true
 
-  def destination_airport_coordinates
-    results = Geocoder.coordinates( "#{ flight1_destination_airport_iata } airport")
-    self.latitude_arrive = results[0]
-    self.longitude_arrive = results[1]
-    self.save
-    self
-  end
-
-  def origin_airport_coordinates
-    results = Geocoder.coordinates(" #{ flight2_origin_airport_iata } airport")
-    self.latitude_back = results[0]
-    self.longitude_back = results[1]
-    self.save
-    self
-  end
-
-  def home_airport_coordinates
-    results = Geocoder.coordinates(" #{ flight1_origin_airport_iata } airport")
-    self.latitude_home = results[0]
-    self.longitude_home = results[1]
-    self.save
-    self
-  end
 
   class << self
 
@@ -57,9 +34,6 @@ class RoundTripFlight < ApplicationRecord
       round_trip_flight.carrier2 = extract_carrier(itinerary, 'inbound')
       round_trip_flight.f1_number = round_trip_flight.carrier1 + extract_flight_number(itinerary, 'outbound')
       round_trip_flight.f2_number = round_trip_flight.carrier2 + extract_flight_number(itinerary, 'inbound')
-      round_trip_flight.destination_airport_coordinates
-      round_trip_flight.origin_airport_coordinates
-      round_trip_flight.home_airport_coordinates
       round_trip_flight.save
       round_trip_flight
     end
@@ -81,9 +55,9 @@ class RoundTripFlight < ApplicationRecord
       round_trip_flight.carrier2 = extract_carrier(inbound[0], 'outbound')
       round_trip_flight.f1_number = round_trip_flight.carrier1 + extract_flight_number(outbound[0], 'outbound')
       round_trip_flight.f2_number = round_trip_flight.carrier2 + extract_flight_number(inbound[0], 'outbound')
-      round_trip_flight.destination_airport_coordinates
-      round_trip_flight.origin_airport_coordinates
-      round_trip_flight.home_airport_coordinates
+      # round_trip_flight.destination_airport_coordinates
+      # round_trip_flight.origin_airport_coordinates
+      # round_trip_flight.home_airport_coordinates
       round_trip_flight.save
       round_trip_flight
     end

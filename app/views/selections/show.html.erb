@@ -25,7 +25,7 @@
               <h4> Select your car </h4>
             </div>
             <div class = "col-xs-12 col-sm-6">
-              <h5 id = "car-recap-text"> <%= Constants::CITY_REGION[@pick_up_location]%> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  <span class="fa fa-long-arrow-right" aria-hidden="true"></span> <%= Constants::CITY_REGION[@drop_off_location]%> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %> </h5>
+              <h5 id = "car-recap-text"> <%= Airport.find_by_iata(@pick_up_location).name%> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  <span class="fa fa-long-arrow-right car-selection-arrow" aria-hidden="true"></span> <%= Airport.find_by_iata(@drop_off_location).name %> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %> </h5>
             </div>
             <div class = "col-xs-12 col-sm-3">
               <%= link_to "javascript:showhide('modify')", class: "modify-search-link" do%>

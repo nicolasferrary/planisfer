@@ -5,7 +5,7 @@
     <%= image_tag "logo.png", class:"logo-1"%>
     <% end %>
   </div>
-  <h1 class="">Your research for <%= @region%></h1>
+  <h1 class="">Your research for <%= @region.name%> </h1>
 </div>
 
 <div>
@@ -33,7 +33,7 @@
 <!-- A priori la div ci dessous n'est pas utile -->
             <div class = "filter-box">
 
-              <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region %> </strong></h5>
+              <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region.name %> </strong></h5>
               <div class="filters">
                 <ul class="text-center">
                   <li>
@@ -50,7 +50,7 @@
 
           <div class="filter-slider-item">
             <div class = "filter-box">
-              <h5 class = "text-center" > From <strong> <%= @region %> </strong> to <strong> <%= @city_real_name %></strong></h5>
+              <h5 class = "text-center" > From <strong> <%= @region.name %> </strong> to <strong> <%= @city_real_name %></strong></h5>
               <div class="filters">
                 <ul class="text-center">
                   <li>
@@ -74,7 +74,8 @@
         <div class="filter-buttons">
           <div class = "text-center ">
             <% if @selected_cities.count == 4 %>
-              <h5 class = "text-center" > Click to <strong> remove </strong> some cities</h5>
+              <h5 class = "text-center" > Click to <strong> remove
+               </strong> some cities</h5>
             <% elsif @selected_cities.count == 0 %>
               <h5 class = "text-center" > Click to <strong> add </strong> some cities</h5>
             <% else %>
@@ -82,11 +83,9 @@
             <% end %>
 
             <div class="city-tags">
-              <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[0])%>" data-city="<%=  Constants::CITY_REGION[@region_airports[0]]%>"><%= Constants::CITY_REGION[@region_airports[0]] %></div>
-
-              <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[1])%>" data-city="<%=Constants::CITY_REGION[@region_airports[1]]%>"><%= Constants::CITY_REGION[@region_airports[1]] %></div>
-              <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[2])%>" data-city="<%=Constants::CITY_REGION[@region_airports[2]]%>" ><%= Constants::CITY_REGION[@region_airports[2]] %></div>
-              <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(@region_airports[3])%>" data-city="<%=Constants::CITY_REGION[@region_airports[3]]%>" ><%= Constants::CITY_REGION[@region_airports[3]] %></div>
+              <% @region_airports.each do |airport| %>
+                <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city="<%=  airport.name%>"><%= airport.name %></div>
+              <% end %>
             </div>
           </div>
         </div> <!-- fin filter-buttons -->
@@ -144,7 +143,7 @@
           ]
         },
         internal: { id: 'map' } }, function() {
-        markers = handler.addMarkers( <%= raw @first_result.to_json %> );
+        markers = handler.addMarkers( <%= raw @pois_markers.to_json %> );
         handler.bounds.extendWith(markers);
         handler.getMap().setZoom(5);
         handler.fitMapToBounds();
@@ -191,25 +190,25 @@
 
   </script>
 
-<script>
-  $(document).ready(function() {
-    $('.filtered-city').on('click', function(event) {
-      $(this).toggleClass('city-selected');
-      update_form_selected_cities();
+  <script>
+    $(document).ready(function() {
+      $('.filtered-city').on('click', function(event) {
+        $(this).toggleClass('city-selected');
+        update_form_selected_cities();
+      });
+      $(".filtered-city").removeClass("city-selected");
+      <% @selected_cities.each do |city| %>
+      $(".filtered-city[data-city=<%= city %>]").addClass("city-selected");
+      <% end %>
     });
-    $(".filtered-city").removeClass("city-selected");
-    <% @selected_cities.each do |city| %>
-    $(".filtered-city[data-city=<%= city %>]").addClass("city-selected");
-    <% end %>
-  });
-  function update_form_selected_cities() {
-    var selected_cities = "";
-    $(".city-selected").each(function( index ) {
-      selected_cities = selected_cities + $(this).text() + ",";
-    });
+    function update_form_selected_cities() {
+      var selected_cities = "";
+      $(".city-selected").each(function( index ) {
+        selected_cities = selected_cities + $(this).text() + ",";
+      });
       selected_cities = selected_cities.slice(0,-1); //remove last coma
       $('#selected-cities').val(selected_cities);
-      }
+    }
   </script>
   <script>
     function showhide(id) {
