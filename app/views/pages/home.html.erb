@@ -35,7 +35,7 @@
                         <br>
                         <br>
                         <div class="col-xs-12">
-                          <%= select_tag  :region, options_for_select(Constants::REGIONS.sort), class: "input-lg form-control text-center", prompt: "To" %>
+                          <%= select_tag  :region, options_from_collection_for_select(Region.all.order('name ASC'), :name, :name), class: "input-lg form-control text-center", prompt: "To" %>
                         </div>
                         <div class="col-xs-6">
                           <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'input-lg form-control datepicker text-center'%>

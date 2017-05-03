@@ -1,7 +1,9 @@
 class SearchesController < ApplicationController
 
   def create
-    @search = Search.new(city: params[:city], region: params[:region], starts_on: params[:starts_on], returns_on: params[:returns_on], nb_travelers: params[:nb_travelers])
+    @region = Region.find_by_name(params[:region])
+    @search = Search.new(city: params[:city], starts_on: params[:starts_on], returns_on: params[:returns_on], nb_travelers: params[:nb_travelers])
+    @search.region = @region
 
     unless @search.save
       flash[:search_error] = "Please fill empty fields"
@@ -9,18 +11,13 @@ class SearchesController < ApplicationController
     end
 
     @city = City.create(params[:city])
-    @region = Region.create(params[:region])
-    @region_name = params[:region]
+    @region_name = @search.region.name
     @starts_on = params[:starts_on]
     @returns_on = params[:returns_on]
     @nb_travelers = params[:nb_travelers]
-    @region_airports = Constants::REGIONS_AIRPORTS[@region_name]
-    # TO DELETE
-    # @airports = get_airports(@city)
-    # generate routes
-    # @routes = Avion.generate_routes(@city_name, @region_airports)
-    # Launch APi requests and gather trips
-    @trips = get_trips_for(@starts_on, @returns_on, @nb_travelers, @city, @region, @search, @region_airports)
+    @region_airports = define_airports(@region)
+
+    @trips = get_trips_for(@starts_on, @returns_on, @nb_travelers, @city, @search, @region_airports)
 
     redirect_to search_path(@search)
 
@@ -30,7 +27,7 @@ class SearchesController < ApplicationController
     @search = Search.find(params[:id])
     @trips = @search.trips
     @region = @search.region
-    @region_airports = Constants::REGIONS_AIRPORTS[@region]
+    @region_airports = define_airports(@region)
     @selected_airports = @region_airports
     @nb_travelers = @search.nb_travelers
     @passengers_title = passengers(@nb_travelers)
@@ -45,9 +42,8 @@ class SearchesController < ApplicationController
     # Initialize selected cities for filters
     @selected_cities = []
     @region_airports.each do |airport|
-      @selected_cities << Constants::CITY_REGION[airport]
+      @selected_cities << airport.name
     end
-
     # Attribute selected cities in params to @selected cities
     params["selected-cities"] == nil if params["selected-cities"] == ""
     if params["selected-cities"] == nil || params["selected-cities"] == ""
@@ -59,7 +55,7 @@ class SearchesController < ApplicationController
     # Define selected airports based on selected cities
     @selected_airports = []
     @selected_cities.each do |city|
-      airport = Constants::CITY_REGION.invert[city]
+      airport = Airport.find_by_name(city)
       @selected_airports << airport
     end
 
@@ -76,6 +72,13 @@ class SearchesController < ApplicationController
     @trips_selection = @trips.first(10)
 
     @round_trips = @trips_selection.map(&:round_trip_flight)
+
+    # Define POIs we want to show on the map
+    @pois = define_pois(@region)
+
+    # NB : We should protect code to exclude from @pois any poi that has a nil latitude or longitude
+
+    @pois_markers = build_markers(@pois)
 
     # Geocode on these objects
     #@round_trips.map(&:destination_airport_coordinates).map(&:origin_airport_coordinates)
@@ -156,53 +159,40 @@ class SearchesController < ApplicationController
   def refresh_map
     # récupérer le round_trip
     @round_trip_flight = RoundTripFlight.find(params[:round_trip_flight_id])
-    if @round_trip_flight.longitude_arrive == @round_trip_flight.latitude_back && @round_trip_flight.latitude_arrive == @round_trip_flight.latitude_back
-      render json: [
-        # To show the city of departure on the map
-        # {
-        #   lat: @round_trip_flight.latitude_home,
-        #   lng: @round_trip_flight.longitude_home,
-        #   infowindow: @round_trip_flight.flight1_origin_airport_iata,
-        #   picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
-        # },
+    @region = @round_trip_flight.region
+    @pois = define_pois(@region)
+    @pois_markers = build_markers(@pois)
+    @destination_iata = @round_trip_flight.flight1_destination_airport_iata
+    @return_iata = @round_trip_flight.flight2_origin_airport_iata
+    @destination_airport = Airport.find_by_iata(@destination_iata)
+    @return_airport = Airport.find_by_iata(@return_iata)
+
+
+    if @destination_iata == @return_iata
+      render json: @pois_markers.concat([
         {
-          lat: @round_trip_flight.latitude_arrive,
-          lng: @round_trip_flight.longitude_arrive,
+          lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
+          lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
           infowindow: @round_trip_flight.flight1_destination_airport_iata,
           picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
         },
-        # in progress = récupérer @region pour pouvoir adapter le code par destination
-        {
-          #lat: highlight_coordinates("Portugal", "highlight_6")[0],
-          lat: 41.1579438,
-          lng: -8.629105299999999,
-          infowindow: "Hello World",
-          picture: { url: view_context.image_url("interest.svg"), width: 40, height: 40 },
-        }
-        ].to_json
+        ]).to_json
     else
-      render json: [
-        # To show the city of departure on the map
-        # {
-        #   lat: @round_trip_flight.latitude_home,
-        #   lng: @round_trip_flight.longitude_home,
-        #   infowindow: @round_trip_flight.flight1_origin_airport_iata,
-        #   picture: { url: view_context.image_url("noir.svg"), width: 40, height: 40 }
-        # },
+      render json: @pois_markers.concat([
         {
-          lat: @round_trip_flight.latitude_arrive,
-          lng: @round_trip_flight.longitude_arrive,
+          lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
+          lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
           infowindow: @round_trip_flight.flight1_destination_airport_iata,
           picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
         },
         {
-          lat: @round_trip_flight.latitude_back,
-          lng: @round_trip_flight.longitude_back,
+          lat: @return_airport.coordinates.gsub(/\:(.*)/, '').to_f,
+          lng: @return_airport.coordinates.gsub(/(.*)\:/, '').to_f,
           infowindow: @round_trip_flight.flight2_origin_airport_iata,
           picture: { url: view_context.image_url("orange.svg"), width: 40, height: 40 }
         }
 
-        ].to_json
+        ]).to_json
     end
   end
 
@@ -214,7 +204,7 @@ class SearchesController < ApplicationController
 
 # @latitude = Geocoder.search("Faro, Portugal")[0].data["geometry"]["location"]["lat"]
 
-  def get_trips_for(starts_on, returns_on, nb_travelers, city, region, search, region_airports)
+  def get_trips_for(starts_on, returns_on, nb_travelers, city, search, region_airports)
     trips = []
     rtfs = []
     # create rtf for routes with same landing and departure airports in destination region and add them to rtfs
@@ -241,11 +231,11 @@ class SearchesController < ApplicationController
     region_airports.each do |airport|
       options = {
         origin: city.name,
-        destination: airport,
+        destination: airport.iata,
         departure: starts_on,
         return: returns_on,
         nb_travelers: nb_travelers,
-        region: region
+        region: search.region.name
       }
       @data = (Avion::SmartQPXAgent.new(options).obtain_offers)
       # Create a rtf with @data for each itinerary of each same_airport_route and put it in rtfs
@@ -262,20 +252,18 @@ class SearchesController < ApplicationController
     end
     # end of rtf creation for same_airport routes
 
-# A FAIRE
 
     # # create rtf for routes with different landing and departure airports in destination region and add them to rtfs
     outbounds = []
     inbounds = []
     # For each airport launch 2 requests and stock data in outbounds and inbounds arrays
     region_airports.each do |airport|
-
       options1 = {
         origin: city.name,
-        destination: airport,
+        destination: airport.iata,
         departure: starts_on,
         nb_travelers: nb_travelers,
-        region: region
+        region: search.region.name
       }
       @data1 = (Avion::SmartQPXAgent.new(options1).obtain_offers)
       if !@data1.nil?
@@ -288,11 +276,11 @@ class SearchesController < ApplicationController
       end
 
       options2 = {
-        origin: airport,
+        origin: airport.iata,
         destination: city.name,
         departure: returns_on,
         nb_travelers: nb_travelers,
-        region: region
+        region: search.region.name
       }
       @data2 = (Avion::SmartQPXAgent.new(options2).obtain_offers)
       if !@data2.nil?
@@ -398,17 +386,44 @@ class SearchesController < ApplicationController
     end
   end
 
-  # TO DELETE
-  # def get_airports(city)
-  #   airports = []
-  #   options =
-  #   {city: city
-  #   }
-  #   airports = Iata::SmartIataAgent.new(options).obtain_offers
-  #   return airports
-  # end
+  def define_pois(region)
+    @pois = []
+    @region.pois.each do |poi_name|
+      poi = Poi.find_by_name(poi_name.strip)
+      @pois << poi
+    end
+    @pois
+  end
+
+  def build_markers(pois)
+
+    Gmaps4rails.build_markers(pois) do |poi, marker|
+      @poi = poi
+      marker.lat poi.latitude
+      marker.lng poi.longitude
+      marker.infowindow poi.name
+      marker.infowindow render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => poi})
+      marker.picture({
+                  # :url => view_context.image_url("interest.svg"),
+                  :width   => 20,
+                  :height  => 20
+                 })
+    end
+  end
+
+  def define_airports(region)
+    region_airports =[]
+    region.airports.each do |airport_iata|
+      airport = Airport.find_by_iata(airport_iata)
+      region_airports << airport
+    end
+    region_airports
+  end
 
 end
+
+
+
 
 
 
