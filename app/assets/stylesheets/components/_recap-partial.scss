@@ -48,8 +48,41 @@
 
 .date{
   color: $orange;
+  display: flex;
+  justify-content : space-between;
 }
 
 .select-car-text{
 color: $brand-color;
 }
+
+.car-times{
+  font-size: 12px;
+}
+
+.car-details{
+  display: flex;
+  justify-content : space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.remove{
+  float: right;
+}
+
+.change{
+  float: right;
+  font-size: 12px;
+}
+
+.booking-price {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-family: Montserrat;
+  font-size: 27px;
+  font-weight: bolder;
+  font-size: 24px;
+}
+
+

@@ -50,10 +50,16 @@ class SelectionsController < ApplicationController
       car_rental.selection = @selection
       car_rental.save
     end
-
+    options = {
+      :trip_id => @trip.id,
+      :pick_up_location => @pick_up_location,
+      :drop_off_location => @drop_off_location,
+      :pick_up_date_time => @pick_up_date_time,
+      :drop_off_date_time => @drop_off_date_time
+    }
     # Uncomment if you want to test with a seed
     # @car_rentals = [CarRental.all[0], CarRental.all[1], CarRental.all[2], CarRental.all[3], CarRental.all[4]]
-    redirect_to selection_path(@selection, :trip_id => @trip.id, :pick_up_location => @pick_up_location, :drop_off_location => @drop_off_location, :pick_up_date_time => @pick_up_date_time, :drop_off_date_time => @drop_off_date_time)
+    redirect_to selection_path(@selection, options)
   end
 
   def show
@@ -75,6 +81,17 @@ class SelectionsController < ApplicationController
     @photo_params = surounding_params(@car_rentals)
 
     @status = "none"
+
+    @options = {
+      :trip_id => @trip.id,
+      :pick_up_location => @pick_up_location,
+      :drop_off_location => @drop_off_location,
+      :pick_up_date_time => @pick_up_date_time,
+      :drop_off_date_time => @drop_off_date_time,
+      :selection_id => @selection
+    }
+
+
 
     respond_to do |format|
       format.html {}
