@@ -91,7 +91,7 @@ class SelectionsController < ApplicationController
     }
 
     # When a car rental is selected by user, it is passed to params. Here, we allocate it to @trip
-    @trip.car_rental = CarRental.find(params[:car_rental_id]) unless params[:car_rental_id].nil?
+
 
     respond_to do |format|
       format.html {}
