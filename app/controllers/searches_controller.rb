@@ -58,7 +58,6 @@ class SearchesController < ApplicationController
       airport = Airport.find_by_name(name)
       @selected_airports << airport
     end
-
     # Define min and max times based on filters
     @f1_min_time = set_range(params[:flight1_range])[0]
     @f1_max_time = set_range(params[:flight1_range])[1]
@@ -359,22 +358,23 @@ class SearchesController < ApplicationController
 
   def filter_by_f1_takeoff(trips)
     trips.select { |trip|
-      (trip.round_trip_flight.flight1_take_off_at.localtime.hour >= Time.parse(@f1_min_time).hour) &&
-      (trip.round_trip_flight.flight1_take_off_at.localtime.hour < Time.parse(@f1_max_time).hour)
+      (trip.round_trip_flight.flight1_take_off_at.hour >= Time.parse(@f1_min_time).hour) &&
+      (trip.round_trip_flight.flight1_take_off_at.hour < Time.parse(@f1_max_time).hour)
     }
   end
 
   def filter_by_f2_takeoff(trips)
     trips.select { |trip|
-      trip.round_trip_flight.flight2_take_off_at.localtime.hour >= Time.parse(@f2_min_time).hour &&
-      trip.round_trip_flight.flight2_take_off_at.localtime.hour < Time.parse(@f2_max_time).hour
+      trip.round_trip_flight.flight2_take_off_at.hour >= Time.parse(@f2_min_time).hour &&
+      trip.round_trip_flight.flight2_take_off_at.hour < Time.parse(@f2_max_time).hour
     }
   end
 
   def filter_by_selected_airports(trips)
     trips.select { |trip|
-      @selected_airports.include?(trip.round_trip_flight.flight1_destination_airport_iata) &&
-      @selected_airports.include?(trip.round_trip_flight.flight2_origin_airport_iata)
+      @selected_airports_iata = @selected_airports.map { |airport| airport.iata}
+      @selected_airports_iata.include?(trip.round_trip_flight.flight1_destination_airport_iata) &&
+      @selected_airports_iata.include?(trip.round_trip_flight.flight2_origin_airport_iata)
     }
   end
 

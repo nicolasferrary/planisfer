@@ -3,6 +3,7 @@
   <div class = "row">
     <div class = "col-xs-12">
       <h3 class="text-center">Your roadtrip in <%= @trip.round_trip_flight.region.name %></h3>
+      <p><%= @trip.nb_travelers%> TRAVELERS</p>
       <hr id="hr-title">
     </div>
   </div>
@@ -87,7 +88,7 @@
     <% #Beg of content bootstrap col %>
     <div class = "col-sm-10">
       <% # Il faudra mettre un if else avec les infos de la voiture choisie %>
-       <%= link_to "Select your car" %>
+       <p class = "select-car-text">Click on a car to add it to your roadtrip</p>
     </div>
     <% #End of content bootstrap col %>
   </div>
