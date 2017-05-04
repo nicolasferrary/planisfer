@@ -359,15 +359,15 @@ class SearchesController < ApplicationController
 
   def filter_by_f1_takeoff(trips)
     trips.select { |trip|
-      (trip.round_trip_flight.flight1_take_off_at.localtime.hour >= Time.parse(@f1_min_time).hour) &&
-      (trip.round_trip_flight.flight1_take_off_at.localtime.hour < Time.parse(@f1_max_time).hour)
+      (trip.round_trip_flight.flight1_take_off_at.hour >= Time.parse(@f1_min_time).hour) &&
+      (trip.round_trip_flight.flight1_take_off_at.hour < Time.parse(@f1_max_time).hour)
     }
   end
 
   def filter_by_f2_takeoff(trips)
     trips.select { |trip|
-      trip.round_trip_flight.flight2_take_off_at.localtime.hour >= Time.parse(@f2_min_time).hour &&
-      trip.round_trip_flight.flight2_take_off_at.localtime.hour < Time.parse(@f2_max_time).hour
+      trip.round_trip_flight.flight2_take_off_at.hour >= Time.parse(@f2_min_time).hour &&
+      trip.round_trip_flight.flight2_take_off_at.hour < Time.parse(@f2_max_time).hour
     }
   end
 
