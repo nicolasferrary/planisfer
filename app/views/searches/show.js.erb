@@ -1,30 +1,30 @@
 $('#page-result-container').html('<%= j render "results" %>');
-  var handler = Gmaps.build('Google');
-  handler.buildMap({
-    provider: {
-      scrollwheel: false,
-      styles: [
-        {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},
-        {"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},
-        {"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},
-        {"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},
-        {"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},
-        {"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},
-        {"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},
-        {"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
-      ]
-    },
-    internal: { id: 'map' } }, function() {
-    markers = handler.addMarkers( <%= raw @pois_markers.to_json %> );
-    handler.bounds.extendWith(markers);
-    // handler.getMap().setZoom(7);
-    handler.fitMapToBounds();
+var handler = Gmaps.build('Google');
+handler.buildMap({
+  provider: {
+    scrollwheel: false,
+    styles: [
+      {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},
+      {"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},
+      {"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},
+      {"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},
+      {"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},
+      {"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},
+      {"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},
+      {"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
+    ]
+  },
+  internal: { id: 'map' } }, function() {
+  markers = handler.addMarkers( <%= raw @pois_markers.to_json %> );
+  handler.bounds.extendWith(markers);
+  // handler.getMap().setZoom(7);
+  handler.fitMapToBounds();
 
-    // Set zoom when loading the page when there is one marker
-    // The closer to 15, the higher in the sky
-    // handler.getMap().setZoom(7);
+  // Set zoom when loading the page when there is one marker
+  // The closer to 15, the higher in the sky
+  // handler.getMap().setZoom(7);
 
-  });
+});
 $('.result-card').mouseenter('click', function(e) {
   e.preventDefault();
   $('.cardContainer.selected').removeClass('selected');
