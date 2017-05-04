@@ -87,10 +87,10 @@ class SelectionsController < ApplicationController
       :pick_up_location => @pick_up_location,
       :drop_off_location => @drop_off_location,
       :pick_up_date_time => @pick_up_date_time,
-      :drop_off_date_time => @drop_off_date_time
+      :drop_off_date_time => @drop_off_date_time,
+      :selection_id => @selection
     }
 
-    # When a car rental is selected by user, it is passed to params. Here, we allocate it to @trip
 
 
     respond_to do |format|

@@ -4,7 +4,7 @@
   <div id = "mini">
     <% if @car_selection[:mini][@mini_index] %>
       <div class="col-xs-12 col-sm-6">
-        <%= link_to selection_path(@selection, @options.merge({:car_rental_id =>@car_selection[:mini][@mini_index]})), class: 'tabLink result-card' do %>
+        <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:economy][@economy_index]})), method: :put, class: 'tabLink result-card' do %>
           <div class="card <%= 'selected' unless params[:economy_index] || params[:compact_index] || params[:intermediate_index] || params[:fullsize_index] || params[:premium_index] %>">
             <% if !@car_selection[:mini][@mini_index].car.image_url.nil? %>
               <%= image_tag @car_selection[:mini][@mini_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
