@@ -36,7 +36,7 @@
   <% # début de la 2eme card %>
   <% if @car_selection[:economy][@economy_index] %>
     <div class="col-xs-12 col-sm-6">
-      <%= link_to selection_path(@selection, @options), class: 'tabLink result-card' do %>
+      <%= link_to selection_path(@selection, @options.merge({:car_rental_id =>@car_selection[:economy][@economy_index]})), class: 'tabLink result-card' do %>
         <div class="card <%= "selected" if params[:economy_index] %>" >
           <% if !@car_selection[:economy][@economy_index].car.image_url.nil? %>
             <%= image_tag @car_selection[:economy][@economy_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
@@ -66,7 +66,7 @@
   <% # Début de la 3e card %>
   <% if @car_selection[:compact][@compact_index] %>
     <div class="col-xs-12 col-sm-6">
-      <%= link_to selection_path(@selection, @options), class: 'tabLink result-card' do %>
+      <%= link_to selection_path(@selection, @options.merge({:car_rental_id =>@car_selection[:compact][@compact_index]})), class: 'tabLink result-card' do %>
         <div class="card <%= "selected" if params[:compact_index] %>">
           <% if !@car_selection[:compact][@compact_index].car.image_url.nil? %>
             <%= image_tag @car_selection[:compact][@compact_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
@@ -96,7 +96,7 @@
   <% # Début de la 4e card %>
   <% if @car_selection[:intermediate][@intermediate_index] %>
     <div class="col-xs-12 col-sm-6">
-      <%= link_to selection_path(@selection, @options), class: 'tabLink result-card' do %>
+      <%= link_to selection_path(@selection, @options.merge({:car_rental_id =>@car_selection[:intermediate][@intermediate_index]})), class: 'tabLink result-card' do %>
         <div class="card <%= "selected" if params[:intermediate_index] %>">
           <% if !@car_selection[:intermediate][@intermediate_index].car.image_url.nil? %>
             <%= image_tag @car_selection[:intermediate][@intermediate_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
@@ -126,7 +126,7 @@
   <% # Début de la 5e card %>
   <% if @car_selection[:fullsize][@fullsize_index] %>
     <div class="col-xs-12 col-sm-6">
-      <%= link_to selection_path(@selection, @options), class: 'tabLink result-card' do %>
+      <%= link_to selection_path(@selection, @options.merge({:car_rental_id =>@car_selection[:fullsize][@fullsize_index]})), class: 'tabLink result-card' do %>
         <div class="card <%= "selected" if params[:fullsize_index] %>">
           <% if !@car_selection[:fullsize][@fullsize_index].car.image_url.nil? %>
             <%= image_tag @car_selection[:fullsize][@fullsize_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
@@ -156,7 +156,7 @@
   <% # Début de la 6e card %>
   <% if @car_selection[:premium][@premium_index] %>
     <div class="col-xs-12 col-sm-6">
-      <%= link_to selection_path(@selection, @options), class: 'tabLink result-card' do %>
+      <%= link_to selection_path(@selection, @options.merge({:car_rental_id =>@car_selection[:premium][@premium_index]})), class: 'tabLink result-card' do %>
         <div class="card <%= "selected" if params[:premium_index_index] %>">
           <% if !@car_selection[:premium][@premium_index].car.image_url.nil? %>
             <%= image_tag @car_selection[:premium][@premium_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
