@@ -3,11 +3,30 @@
   <div class = "row">
     <div class = "col-xs-12">
       <h3 class="text-center">Your roadtrip in <%= @trip.round_trip_flight.region.name %></h3>
-      <p><%= @trip.nb_travelers%> traveler<%='s' unless @trip.nb_travelers == 1%></p>
-      <hr id="hr-title">
+      <div class = "origin-and-destination">
+        <span><%= @trip.nb_travelers%> traveler<%='s' unless @trip.nb_travelers == 1%></span> <span class = "booking-price"><%= @trip.price.round%>€</span>
+      </div>
     </div>
   </div>
   <% # End of row 1 %>
+
+
+  <% # Beg of row 9 %>
+  <div class = "row">
+    <% #Beg of booking button bootstrap col %>
+    <div class = "col-sm-12">
+      <div class = text-center>
+        <%= render 'shared/book_modal', modal_name: "book_modal" %>
+        <%= link_to trip_path(@trip) do %>
+        <button class="btn-brand" data-toggle="modal">BOOK</button>
+        <% end %>
+      </div>
+    </div>
+    <% #End of booking button bootstrap col %>
+  </div>
+
+  <hr id="hr-title">
+  <% # End of row 9 %>
 
   <% # Beg of row 3 %>
   <div class = "row">
@@ -55,6 +74,9 @@
       </div>
       <div class = "carrier">
         <%= Constants::AIRLINES[@trip.round_trip_flight.carrier2] %>
+        <%= link_to search_path(@search) do %>
+        <i class="fa fa-pencil-square-o change" aria-hidden="true">Change flights</i>
+      <% end %>
       </div>
       <hr id="hr-title">
     </div>
@@ -117,34 +139,6 @@
 
 
 
-  <% # Beg of row 7 %>
-  <div class = "row">
-    <% #Beg of price recap bootstrap col %>
-    <div class = "col-xs-12">
-      <hr id="hr-title">
-      <div id="booking-title">
-        <p class = "text-center">PRICE / <%= @trip.nb_travelers%> TRAVELERS</p>
-        <h4 class = "text-center"><%= @trip.price.round%>€</h4>
-      </div>
-    </div>
-    <% #End of price recap bootstrap col %>
-  </div>
-  <% # End of row 7 %>
 
-
-  <% # Beg of row 9 %>
-  <div class = "row">
-    <% #Beg of booking button bootstrap col %>
-    <div class = "col-sm-12">
-      <div class = text-center>
-        <%= render 'shared/book_modal', modal_name: "book_modal" %>
-        <%= link_to trip_path(@trip) do %>
-        <button class="btn-brand" data-toggle="modal">BOOK</button>
-        <% end %>
-      </div>
-    </div>
-    <% #End of booking button bootstrap col %>
-  </div>
-  <% # End of row 9 %>
 
 </div>
