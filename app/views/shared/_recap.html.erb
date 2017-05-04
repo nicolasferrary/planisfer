@@ -3,7 +3,7 @@
   <div class = "row">
     <div class = "col-xs-12">
       <h3 class="text-center">Your roadtrip in <%= @trip.round_trip_flight.region.name %></h3>
-      <p><%= @trip.nb_travelers%> TRAVELERS</p>
+      <p><%= @trip.nb_travelers%> traveler<%='s' unless @trip.nb_travelers == 1%></p>
       <hr id="hr-title">
     </div>
   </div>
@@ -19,7 +19,7 @@
     <% #Beg of content bootstrap col %>
     <div class = "col-sm-10">
       <div class = "date">
-        <%= @trip.starts_on.strftime("%B %d")%>
+        <%= @trip.starts_on.strftime("%b %e")%>
       </div>
       <div class = "origin-and-destination">
         <span> <%= @trip.city.name %></span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span>
@@ -80,15 +80,34 @@
   <% # Beg of row 5 %>
   <div class = "row">
     <% #Beg of icon bootstrap col %>
-    <% # Il faudra mettre un if else avec la photo de la voiture choisie %>
+    <% # On pourra mettre un if else avec la photo de la voiture choisie %>
     <div class = "col-sm-2">
         <%= image_tag "car.png", width: "30px", height: "auto", class: "car" %>
     </div>
     <% #End of icon bootstrap col %>
     <% #Beg of content bootstrap col %>
     <div class = "col-sm-10">
-      <% # Il faudra mettre un if else avec les infos de la voiture choisie %>
-       <p class = "select-car-text">Click on a car to add it to your roadtrip</p>
+      <% if @trip.car_rental.nil? %>
+        <p class = "select-car-text">Click on a car to add it to your roadtrip</p>
+      <% else %>
+
+
+        <div class = "date">
+          <span> <%= Time.zone.parse(@pick_up_date_time).strftime("%b %e")%></span><span><%= Time.zone.parse(@drop_off_date_time).strftime("%b %e") %></span>
+        </div>
+        <div class = "origin-and-destination">
+          <span class = "car-times"> <%= Time.zone.parse(@pick_up_date_time).strftime("%I %P")%></span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span class = "car-times"><%= Time.zone.parse(@drop_off_date_time).strftime("%I %P")%></span>
+        </div>
+        <div class = "times">
+          <span><%= Airport.find_by_iata(@pick_up_location).cityname %></span><span><%= Airport.find_by_iata(@drop_off_location).cityname %></span>
+        </div>
+
+        <div class = "car-details">
+          <span><%= @trip.car_rental.car.name %></span> <span> <%= image_tag "carlogos/" + @car_selection[:mini][@mini_index].company.downcase + ".png", height: 15, width: "auto", class: "company-logo" %> </span>
+        </div>
+        <div class= "car-times">or similar</div>
+
+      <% end %>
     </div>
     <% #End of content bootstrap col %>
   </div>

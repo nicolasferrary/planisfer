@@ -48,8 +48,22 @@
 
 .date{
   color: $orange;
+  display: flex;
+  justify-content : space-between;
 }
 
 .select-car-text{
 color: $brand-color;
 }
+
+.car-times{
+  font-size: 12px;
+}
+
+.car-details{
+  display: flex;
+  justify-content : space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
