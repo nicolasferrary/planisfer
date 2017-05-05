@@ -1,13 +1,17 @@
 class Trip < ApplicationRecord
- belongs_to :round_trip_flight
- belongs_to :car_rental
- belongs_to :city
- belongs_to :search
- validates :starts_on, presence: true
- validates :returns_on, presence: true
- validates :nb_travelers, presence: true
- validates :city_id, presence: true
- validates :round_trip_flight, presence: true
+
+  monetize :price_cents
+
+  belongs_to :round_trip_flight
+  belongs_to :car_rental, optional: true
+  belongs_to :city
+  belongs_to :search
+  validates :starts_on, presence: true
+  validates :returns_on, presence: true
+  validates :nb_travelers, presence: true
+  validates :city_id, presence: true
+  validates :round_trip_flight, presence: true
+
 
 
 

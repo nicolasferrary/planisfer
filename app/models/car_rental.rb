@@ -1,4 +1,7 @@
 class CarRental < ApplicationRecord
+
+  monetize :price_cents
+
   belongs_to :car
   has_many :trips
   belongs_to :selection

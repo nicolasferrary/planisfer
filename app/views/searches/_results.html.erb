@@ -44,7 +44,7 @@
               </div>
               <div class="price-action">
                 <div class="card-price ">
-                  <p><%= trip.price.round %> <%= trip.round_trip_flight.currency %></p>
+                  <p><%= money_without_cents_and_with_symbol(trip.price.round) %></p>
                 </div> <!-- fin card-price -->
               </div>
             </div>

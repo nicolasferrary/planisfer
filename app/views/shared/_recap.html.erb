@@ -4,7 +4,7 @@
     <div class = "col-xs-12">
       <h3 class="text-center">Your roadtrip in <%= @trip.round_trip_flight.region.name %></h3>
       <div class = "origin-and-destination">
-        <span><%= @trip.nb_travelers%> traveler<%='s' unless @trip.nb_travelers == 1%></span> <span class = "booking-price"><%= @trip.price.round%>€</span>
+        <span> <p> <%= @trip.nb_travelers%> traveler<%='s' unless @trip.nb_travelers == 1%> </p> <p> Flights <%= 'and car rental' unless @trip.car_rental.nil? %> </p> </span> <span class = "booking-price"><%= money_without_cents_and_with_symbol(@trip.price.round)%></span>
       </div>
     </div>
   </div>
@@ -113,7 +113,6 @@
         <p class = "select-car-text">Click on a car to add it to your roadtrip</p>
       <% else %>
 
-
         <div class = "date">
           <span> <%= Time.zone.parse(@pick_up_date_time).strftime("%b %e")%></span><span><%= Time.zone.parse(@drop_off_date_time).strftime("%b %e") %></span>
         </div>
@@ -128,7 +127,7 @@
           <span><%= @trip.car_rental.car.name %></span> <span> <%= image_tag "carlogos/" + @car_selection[:mini][@mini_index].company.downcase + ".png", height: 15, width: "auto"%> </span>
         </div>
         <div class= "car-times">or similar</div>
-        <%= link_to selection_path(@selection, @options) do %>
+        <%= link_to trip_path(@trip, @options.merge({:car_rental_id => nil})), method: :put do %>
           <i class="fa fa-trash remove" aria-hidden="true"></i>
         <% end %>
       <% end %>

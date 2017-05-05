@@ -7,8 +7,8 @@ class TripsController < ApplicationController
   def update
     @selection = Selection.find(params[:selection_id])
     @trip = Trip.find(params[:trip_id])
-    @trip.car_rental = CarRental.find(params[:car_rental_id]) unless params[:car_rental_id].nil?
-    @trip.price = @trip.price + @trip.car_rental.price
+    @trip.car_rental = define_car_rental(@trip)
+    @trip.price = calculate_trip_price(@trip)
     @trip.save
 
     @pick_up_location = params[:pick_up_location]
@@ -31,6 +31,24 @@ class TripsController < ApplicationController
     # @search = @trip.search
     # en attente de pick up a car_rental
     # @selection = @trip.car_rental.selection
+  end
+
+  private
+
+  def define_car_rental(trip)
+    if params[:car_rental_id].nil?
+      @trip.car_rental = nil
+    else
+      @trip.car_rental = CarRental.find(params[:car_rental_id])
+    end
+  end
+
+  def calculate_trip_price(trip)
+    if trip.car_rental.nil?
+      trip.price = trip.round_trip_flight.price
+    else
+      trip.price = trip.round_trip_flight.price + trip.car_rental.price
+    end
   end
 
 end

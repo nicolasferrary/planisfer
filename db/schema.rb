@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503143017) do
+ActiveRecord::Schema.define(version: 20170505095702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 20170503143017) do
   end
 
   create_table "car_rentals", force: :cascade do |t|
-    t.float    "price"
     t.string   "currency"
     t.string   "pick_up_location"
     t.string   "drop_off_location"
@@ -38,9 +37,10 @@ ActiveRecord::Schema.define(version: 20170503143017) do
     t.string   "company"
     t.integer  "car_id"
     t.string   "deep_link_url"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "selection_id"
+    t.integer  "price_cents",        default: 0, null: false
     t.index ["car_id"], name: "index_car_rentals_on_car_id", using: :btree
     t.index ["selection_id"], name: "index_car_rentals_on_selection_id", using: :btree
   end
@@ -88,7 +88,6 @@ ActiveRecord::Schema.define(version: 20170503143017) do
   end
 
   create_table "round_trip_flights", force: :cascade do |t|
-    t.float    "price"
     t.string   "flight1_origin_airport_iata"
     t.string   "flight1_destination_airport_iata"
     t.string   "flight2_origin_airport_iata"
@@ -97,8 +96,8 @@ ActiveRecord::Schema.define(version: 20170503143017) do
     t.datetime "flight1_take_off_at"
     t.datetime "flight2_take_off_at"
     t.datetime "flight2_landing_at"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.string   "currency"
     t.string   "carrier1"
     t.string   "carrier2"
@@ -111,6 +110,7 @@ ActiveRecord::Schema.define(version: 20170503143017) do
     t.float    "latitude_home"
     t.float    "longitude_home"
     t.integer  "region_id"
+    t.integer  "price_cents",                      default: 0, null: false
     t.index ["region_id"], name: "index_round_trip_flights_on_region_id", using: :btree
   end
 
@@ -139,18 +139,18 @@ ActiveRecord::Schema.define(version: 20170503143017) do
   end
 
   create_table "trips", force: :cascade do |t|
-    t.float    "price"
     t.date     "starts_on"
     t.date     "returns_on"
     t.integer  "nb_travelers"
     t.integer  "city_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "round_trip_flight_id"
     t.float    "latitude"
     t.float    "longitude"
     t.integer  "search_id"
     t.integer  "car_rental_id"
+    t.integer  "price_cents",          default: 0, null: false
     t.index ["car_rental_id"], name: "index_trips_on_car_rental_id", using: :btree
     t.index ["city_id"], name: "index_trips_on_city_id", using: :btree
     t.index ["round_trip_flight_id"], name: "index_trips_on_round_trip_flight_id", using: :btree
