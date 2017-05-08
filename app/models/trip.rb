@@ -22,6 +22,7 @@ class Trip < ApplicationRecord
       trip.city = city
       trip.price = round_trip_flight.price
       trip.car_rental = CarRental.new()
+      trip.sku = "Trip from #{trip.city.name} to #{trip.search.region.name} - #{trip.search.nb_travelers}travelers"
       trip.save
       trip
     end

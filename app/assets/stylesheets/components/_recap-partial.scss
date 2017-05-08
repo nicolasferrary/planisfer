@@ -9,6 +9,23 @@
 
 }
 
+
+.recap-title{
+  display: flex;
+  justify-content : space-between;
+  align-items: center;
+  padding-right: 15px;
+  padding-left: 15px;
+  h3 {
+    margin-top: 11px;
+  }
+}
+
+.title-background{
+  background-color: $secondary-color;
+  color: white
+}
+
 .recap-box:hover{
       background: white;
       box-shadow: 1px 1px 1px #5d5d5d;
@@ -20,6 +37,12 @@
 }
 
 .origin-and-destination{
+  display: flex;
+  justify-content : space-between;
+  align-items: center;
+}
+
+.price-and-book{
   display: flex;
   justify-content : space-between;
   align-items: center;
@@ -83,6 +106,10 @@ color: $brand-color;
   font-size: 27px;
   font-weight: bolder;
   font-size: 24px;
+}
+
+.price-top{
+  padding-top: 0px;
 }
 
 
