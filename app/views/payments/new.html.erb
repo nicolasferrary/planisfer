@@ -157,7 +157,7 @@
       <% # Début de la colonne infos perso et paiement %>
 
       <div class="col-xs-12 col-sm-8">
-        <%=form_tag orders_path do %>
+        <%=form_tag users_path(:order_id => @order.id), method: :post do %>
           <div class = "travel-infos-box">
             <div class = "travel-infos-title">
               <h4>Who is traveling</h4>
@@ -172,13 +172,13 @@
                   </div>
 
                   <div class = "col-sm-2">
-                    <%= select_tag "title_pax[num]", options_for_select(["Mr", "Mrs"]), prompt: "Title", class: "form-control grey" %>
+                    <%= select_tag :title_pax1, options_for_select(["Mr", "Mrs"]), prompt: "Title", class: "form-control grey" %>
                   </div>
                   <div class = "col-sm-3">
-                    <%= text_field_tag "first_name_pax[num]", nil, placeholder: "First name", class: "form-control"  %>
+                    <%= text_field_tag :first_name_pax1, nil, placeholder: "First name", class: "form-control"  %>
                   </div>
                   <div class = "col-sm-4">
-                    <%= text_field_tag "name_pax[num]", nil, placeholder: "Name", class: "form-control" %>
+                    <%= text_field_tag :name_pax1, nil, placeholder: "Name", class: "form-control" %>
                   </div>
                 </div>
               </div>
@@ -195,6 +195,10 @@
                   <%= text_field_tag "email", nil, placeholder: "Email", class: "form-control" %>
                 </div>
               </div>
+            </div>
+            <div class = "row">
+              <%= hidden_field_tag 'trip_id', @trip.id %>
+              <%= submit_tag 'Next', class: 'btn-brand next-button' %>
             </div>
           </div>
         <% end %>
