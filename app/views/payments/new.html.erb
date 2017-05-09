@@ -157,7 +157,7 @@
       <% # Début de la colonne infos perso et paiement %>
 
       <div class="col-xs-12 col-sm-8">
-        <%=form_tag order_payments_path(@order) do %>
+        <%=form_tag orders_path do %>
           <div class = "travel-infos-box">
             <div class = "travel-infos-title">
               <h4>Who is traveling</h4>
@@ -197,27 +197,11 @@
               </div>
             </div>
           </div>
+        <% end %>
 
-          <div class = "travel-infos-box">
-            <div class = "travel-infos-title">
-              <h4>We can help you plan your trip</h4>
-            </div>
-            <div class = "row">
-              <div class = "col-xs-12">
-                <p class = "infos-left-text">Not sure what to do in <%= @trip.round_trip_flight.region.name %>? Need some help to find the best hotels?</p>
-                <p class = "infos-left-text">Our experts can help you prepare your trip. </p>
-                <p class = "infos-left-text">Just let us know when you would like us to call you. </p>
-                <div class = "col-sm-4" >
-                  <%= text_field_tag "phone", nil, placeholder: "Phone number", class: "form-control" %>
-                </div>
-                <div class = "col-sm-8" >
-                  <%= text_field_tag "contact-time", nil, placeholder: "Tell us when is the best time for us to call you", class: "form-control" %>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div class = "travel-infos-box">
+        <div class = "travel-infos-box">
+          <%=form_tag order_payments_path(@order) do %>
             <div class = "travel-infos-title">
               <h4>Everything seems alright? Great! Looks like you can book.</h4>
             </div>
@@ -238,10 +222,8 @@
                 </div>
               </div>
             </div>
-          </div>
-
-        <% end %>
-
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
