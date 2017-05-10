@@ -1,0 +1,89 @@
+<div class="col-xs-12 col-sm-8">
+  <%=form_tag users_path(:order_id => @order.id), remote: true, method: :post do %>
+    <div class = "travel-infos-box">
+      <div class = "travel-infos-title">
+        <div class = "row">
+          <div class = "col-sm-6">
+            <h4 class = "<%= 'light' if @status == 'OK' %>">1. Who is traveling</h4>
+          </div>
+          <div class = col-sm-6>
+            <%= link_to new_order_payment_path(:trip_id => @trip.id, :order => @order) do%>
+              <p class = "edit <%= 'not-displayed' if @status == 'none' %>"> Edit </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class = "<%= 'not-displayed' if @status == 'OK' %>">
+        <% for num in (1..@trip.nb_travelers) %>
+          <div class = "row">
+            <div class = "passenger-row">
+
+              <div class = "col-sm-3" >
+                <p class = "infos-left-text">Passenger <%= num %></p>
+              </div>
+
+              <div class = "col-sm-2">
+                <%= select_tag "title_pax[#{num}]", options_for_select(["Mr", "Mrs"], @default_values["#{num}"][:title]), prompt: "Title", class: "form-control grey" %>
+              </div>
+              <div class = "col-sm-3">
+                <%= text_field_tag "first_name_pax[#{num}]", @default_values["#{num}"][:first_name], placeholder: "First name", class: "form-control"  %>
+              </div>
+              <div class = "col-sm-4">
+                <%= text_field_tag "name_pax[#{num}]", @default_values["#{num}"][:name], placeholder: "Name", class: "form-control" %>
+              </div>
+            </div>
+          </div>
+          <hr id="hr-content">
+        <% end %>
+
+
+        <div class = "row">
+          <div class = "email-row">
+            <div class = "col-sm-8" >
+              <p class = "infos-left-text">Please send my travel documents to this e-mail address</p>
+            </div>
+            <div class = "col-sm-4" >
+              <%= text_field_tag "email", @default_values[:email], placeholder: "Email", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+        <div class = "row">
+          <%= hidden_field_tag 'trip_id', @trip.id %>
+          <%= hidden_field_tag 'status', "OK" %>
+          <%= submit_tag 'Next', class: 'btn-brand next-button' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+
+  <div class = "travel-infos-box">
+    <%=form_tag order_payments_path(@order) do %>
+      <div class = "travel-infos-title">
+        <h4 class = "<%= 'light' if @status == 'none' %>">2. Payment</h4>
+      </div>
+      <div class = "<%= 'not-displayed' if @status == 'none' %>">
+        <div class = "row">
+          <div class="col-sm-9">
+            <p>Total: <%= humanized_money_with_symbol(@order.amount) %></p>
+            <p>Everything seems alright? Great! Looks like you can book.</p>
+          </div>
+          <div class="col-sm-3">
+            <div class = "payement-button">
+              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+              data-name="Securized payment"
+              data-email="<%= @default_values[:email] %>"
+              data-description="<%= @order.trip_sku %>"
+              data-amount="<%= @order.amount_cents %>"
+              data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+              data-currency="<%= @order.amount.currency %>">
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

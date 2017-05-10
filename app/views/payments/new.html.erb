@@ -209,7 +209,7 @@
               <div class = "row">
                 <%= hidden_field_tag 'trip_id', @trip.id %>
                 <%= hidden_field_tag 'status', "OK" %>
-                <%= submit_tag 'Next', class: 'btn-brand next-button' %>
+                <%= submit_tag 'Next', class: 'btn-brand next-button', id: "next-action" %>
               </div>
             </div>
           </div>
@@ -232,7 +232,7 @@
                     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                     data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                     data-name="Securized payment"
-                    data-email="<%= @order.user.mail %>"
+                    data-email="<%= @default_values[:email] %>"
                     data-description="<%= @order.trip_sku %>"
                     data-amount="<%= @order.amount_cents %>"
                     data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
@@ -248,4 +248,3 @@
     </div>
   </div>
 </div>
-
