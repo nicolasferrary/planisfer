@@ -1,3 +1,5 @@
+require 'rest-client'
+
 class PaymentsController < ApplicationController
   before_action :set_order
 
@@ -6,7 +8,13 @@ class PaymentsController < ApplicationController
     @default_values = define_default_values(@order, @trip.nb_travelers)
     @status = check_status
     # Create a component for worldia
-    worldia_create_component(@trip)
+    @component = worldia_create_component(@trip)
+    # Gather the component's variation
+    @component_variation = worldia_gather_variation(@component, @trip)
+    # Create a quote
+    @quote = worldia_create_quote(@trip)
+    #Add component to quote
+    worldia_add_component_to_quote(@quote, @component_variation)
   end
 
   def create
@@ -68,24 +76,60 @@ class PaymentsController < ApplicationController
   end
 
   def worldia_create_component(trip)
-    json = {
+    request_hash = {
       "name": trip.sku,
       "status":3,
       "type":"activity",
       "pricingCalculator":"standard_fixed",
       "pricingConfiguration":{"cost": trip.price_cents.fdiv(100), "price": trip.price_cents.fdiv(100), "purchasingCurrency": "EUR"},
-      "shortDescription": define_description(trip),
+      "shortDescription":define_description(trip),
       "location":300
       }
+    json = request_hash.to_json
+    url = "https://www.worldia.com/api/v1/products/"
+    RestClient.post url, json, {:content_type => 'application/json'}
+# Faut il mettre un content type (json ou url encoded?)
   end
 
   def define_description(trip)
     if !trip.car_rental.nil?
-      "FLight1: #{trip.round_trip_flight.f1_number} on #{trip.starts_on} ; Flight2: #{trip.round_trip_flight.f2_number} on #{trip.returns_on} ; car rental: #{trip.car_rental.car.category} car with #{trip.car_rental.company} between #{trip.car_rental.pick_up_date_time} and #{trip.car_rental.drop_off_date_time}. Pick up location : #{trip.car_rental.pick_up_location} and drop_off location : #{trip.car_rental.drop_off_location}"
+      "Flight1: #{trip.round_trip_flight.f1_number} on #{trip.starts_on} ; Flight2: #{trip.round_trip_flight.f2_number} on #{trip.returns_on} ; car rental: #{trip.car_rental.car.category} car with #{trip.car_rental.company} between #{trip.car_rental.pick_up_date_time} and #{trip.car_rental.drop_off_date_time}. Pick up location : #{trip.car_rental.pick_up_location} and drop_off location : #{trip.car_rental.drop_off_location}"
     else
-      "FLight1: #{trip.round_trip_flight.f1_number} on #{trip.starts_on} ; Flight2: #{trip.round_trip_flight.f2_number} on #{trip.returns_on} ; No car rental"
+      "Flight1: #{trip.round_trip_flight.f1_number} on #{trip.starts_on} ; Flight2: #{trip.round_trip_flight.f2_number} on #{trip.returns_on} ; No car rental"
     end
   end
+
+  def worldia_gather_variation(component, trip)
+    date = trip.starts_on.strftime("%Y-%m-%d")
+    url = "http://www.worldia.com/api/v1/product-variants/resolve?date=2017-09-01&options=&paxPlan=45,45&product=#{component}"
+    response = RestClient.get(url, content_type: :json, accept: :json)
+  end
+
+  def worldia_create_quote(trip)
+    request_hash = {
+      "name":"trip.sku",
+      "paxPlan":[[]],
+      "startDate":trip.starts_on.strftime("%Y-%m-%d"),
+      "areas": [{"id": 41}]
+      }
+      json = request_hash.to_json
+    url = "http://www.worldia.com/api/v1/carts/"
+    RestClient.post url, json, {:content_type => 'application/json'}
+  end
+
+  def worldia_add_component_to_quote(quote, variation)
+    request_hash =  {
+    "day": 0,
+    "position": 0,
+    "variantId": variation.id
+    }
+    json = request_hash.to_json
+    url = "http://www.worldia.com/api/v1/carts/#{quote.id}/items/"
+    RestClient.post url, json, {:content_type => 'application/json'}
+
+  end
+
+
 
 end
 
