@@ -8,6 +8,7 @@ class PaymentsController < ApplicationController
   end
 
   def create
+    @trip = Trip.find(params[:trip_id])
     customer = Stripe::Customer.create(
       source: params[:stripeToken],
       email:  params[:stripeEmail]
@@ -21,7 +22,7 @@ class PaymentsController < ApplicationController
     )
 
     @order.update(payment: charge.to_json, state: 'paid')
-    redirect_to order_path(@order)
+    redirect_to order_path(@order, trip_id: @trip.id)
 
   rescue Stripe::CardError => e
     flash[:error] = e.message

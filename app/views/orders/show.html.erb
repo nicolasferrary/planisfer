@@ -1,28 +1,35 @@
-<h1 class = "text-center validation">Congrats, you have just done your first order on Planisfer </h1>
-
-<h3 class = "text-center">Enjoy your trip :)</h3>
+<h1 class = "text-center">Congratulations, your trip is now booked </h1>
 <!-- <ul >
   <li>Status: <%= @order.state %></li>
   <li>Item: <%= @order.trip_sku %></li>
   <li>Amount: <%= humanized_money_with_symbol(@order.amount) %></li>
 <ul> -->
 
-          <div class = "travel-infos-box">
-            <div class = "travel-infos-title">
-              <h4>We can help you plan your trip</h4>
-            </div>
-            <div class = "row">
-              <div class = "col-xs-12">
-                <p class = "infos-left-text">Not sure what to do in <%= @trip.round_trip_flight.region.name %>? Need some help to find the best hotels?</p>
-                <p class = "infos-left-text">Our experts can help you prepare your trip. </p>
-                <p class = "infos-left-text">Just let us know when you would like us to call you. </p>
-                <div class = "col-sm-4" >
-                  <%= text_field_tag "phone", nil, placeholder: "Phone number", class: "form-control" %>
-                </div>
-                <div class = "col-sm-8" >
-                  <%= text_field_tag "contact-time", nil, placeholder: "Tell us when is the best time for us to call you", class: "form-control" %>
-                </div>
-              </div>
-            </div>
+<div class = "travel-infos-box">
+  <div class = "travel-infos-title">
+    <h4>We can help you plan your trip</h4>
+  </div>
+  <%= form_tag user_path(@user, :order_id => @order.id, :trip_id => @trip.id), method: :patch do %>
+    <div class = "row">
+      <div class = "col-xs-12">
+        <p class = "infos-left-text">Not sure what to do in <%= @trip.round_trip_flight.region.name %>? Need some help to find the best hotels?</p>
+        <p class = "infos-left-text">Our experts can help you prepare your trip. </p>
+        <% if @order.user.phone.nil? %>
+          <p class = "infos-left-text">Just let us know when you would like us to ca  ll you. </p>
+          <div class = "col-sm-4" >
+            <%= text_field_tag :phone, nil, placeholder: "Phone number", class: "form-control" %>
           </div>
+          <div class = "col-sm-4" >
+            <%= text_field_tag :contact_time, nil, placeholder: "Tell us when is the best time for us to call you", class: "form-control" %>
+          </div>
+          <div class = "col-sm-4" >
+            <%= submit_tag 'Confirm', class: 'btn-brand next-button' %>
+          </div>
+        <% else %>
+          <p>Thank you. Let's talk soon.</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
 

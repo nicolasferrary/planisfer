@@ -8,6 +8,8 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.where(state: 'paid').find(params[:id])
+    @trip = Trip.find(params[:trip_id])
+    @user = @order.user
   end
 
 end

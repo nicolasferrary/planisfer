@@ -20,6 +20,15 @@ class UsersController < ApplicationController
     redirect_to new_order_payment_path(@order, trip_id: @trip.id, status: "OK")
   end
 
+  def update
+    @order = Order.find(params[:order_id])
+    @trip = Trip.find(params[:trip_id])
+    @user = User.find(params[:id])
+    @user.phone = params[:phone]
+    @user.call_time = params[:contact_time]
+    @user.save
+    redirect_to order_path(@order, trip_id: @trip.id)
+  end
 
 
   private
