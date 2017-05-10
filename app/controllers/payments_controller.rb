@@ -5,6 +5,8 @@ class PaymentsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @default_values = define_default_values(@order, @trip.nb_travelers)
     @status = check_status
+    # Create a component for worldia
+    worldia_create_component(@trip)
   end
 
   def create
@@ -62,6 +64,26 @@ class PaymentsController < ApplicationController
       @status = "OK"
     else
       @status = "none"
+    end
+  end
+
+  def worldia_create_component(trip)
+    json = {
+      "name": trip.sku,
+      "status":3,
+      "type":"activity",
+      "pricingCalculator":"standard_fixed",
+      "pricingConfiguration":{"cost": trip.price_cents.fdiv(100), "price": trip.price_cents.fdiv(100), "purchasingCurrency": "EUR"},
+      "shortDescription": define_description(trip),
+      "location":300
+      }
+  end
+
+  def define_description(trip)
+    if !trip.car_rental.nil?
+      "FLight1: #{trip.round_trip_flight.f1_number} on #{trip.starts_on} ; Flight2: #{trip.round_trip_flight.f2_number} on #{trip.returns_on} ; car rental: #{trip.car_rental.car.category} car with #{trip.car_rental.company} between #{trip.car_rental.pick_up_date_time} and #{trip.car_rental.drop_off_date_time}. Pick up location : #{trip.car_rental.pick_up_location} and drop_off location : #{trip.car_rental.drop_off_location}"
+    else
+      "FLight1: #{trip.round_trip_flight.f1_number} on #{trip.starts_on} ; Flight2: #{trip.round_trip_flight.f2_number} on #{trip.returns_on} ; No car rental"
     end
   end
 
