@@ -34,7 +34,7 @@
     margin-top: 0px;
     }
     height: 100px;
-    padding-top: 20px;
+    padding-top: 25px;
     margin-left: 30px;
     border-bottom: 1px solid #E6E6E6;
   }
@@ -59,7 +59,7 @@ a {
 }
 
 .banner2-title {
-  font-size: 40px;
+  font-size: 34px;
   font-weight: 350;
   font-style: normal;
   font-stretch: normal;
@@ -103,7 +103,27 @@ a {
 .how-it-works{
   padding-right: 15px;
   color: $brand-color;
-  padding-top:22px;
+  padding-top:20px;
+  text-decoration: none;
+}
+
+.how-link{
+  text-decoration: none;
+}
+
+.how-link:hover{
+  text-decoration: none;
+}
+
+.how-link:visited{
+  text-decoration: none;
+}
+
+.how-link:active{
+  text-decoration: none;
+}
+
+.how-link:focus{
   text-decoration: none;
 }
 

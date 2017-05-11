@@ -23,20 +23,35 @@
 }
 
 
-.how-images{
-  width: 135px;
-  height: 90px;
-  border-radius: 30%;
-  margin-bottom: 20px;
-}
-
 .how-image-container{
   position: relative;
   font-size: 25px;
   line-height: 30px;
-  width: 30px;
-  color: grey;
+  width: 135px;
+  height: 90px;
+  margin-left: 52.5px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-size: cover !important;
 }
+
+#image1{
+  background-image: url('vintage-map.jpg');
+}
+
+#image2{
+  background-image: url('map-screenshot.jpg');
+}
+
+#image3{
+  background-image: url('Itinerary-small.png');
+}
+
+#image4{
+  background-image: url('carimage.jpg');
+}
+
+
 
 .badge {
   position: absolute;

@@ -14,7 +14,7 @@
         <span class = "banner2-title">Explore the world your own way</span>
       </div>
       <div class = "col-md-4">
-        <%= link_to "javascript:showhide('how')" do%>
+        <%= link_to "javascript:showhide('how')", class: "how-link" do%>
           <p class = "how-it-works text-center">How it works</p>
         <% end %>
       </div>
@@ -35,8 +35,7 @@
             <div class = "row">
               <div class = "col-md-5 col-md-offset-1">
                 <div class = "text-center">
-                  <div class = "how-image-container">
-                    <%= image_tag "vintage-map.jpg", class: "how-images" %>
+                  <div class = "how-image-container" id = "image1">
                     <div class="badge">1</div>
                   </div>
                   <p><strong>Select a destination</strong></p>
@@ -44,7 +43,9 @@
               </div>
               <div class = "col-md-5">
                 <div class = "text-center">
-                  <%= image_tag "andalucia/frigiliana & nerja.jpg", class: "how-images" %>
+                  <div class = "how-image-container" id = "image2">
+                    <div class="badge">2</div>
+                  </div>
                   <p><strong>Explore its landmarks & hidden gems</strong></p>
                 </div>
               </div>
@@ -54,13 +55,17 @@
             <div class = "row">
               <div class = "col-md-5 col-md-offset-1">
                 <div class = "text-center">
-                  <%= image_tag "andalucia/frigiliana & nerja.jpg", class: "how-images" %>
+                  <div class = "how-image-container" id="image4">
+                    <div class="badge">3</div>
+                  </div>
                   <p><strong>Book the best flights & car</strong></p>
                 </div>
               </div>
               <div class = "col-md-5">
                 <div class = "text-center">
-                  <%= image_tag "andalucia/frigiliana & nerja.jpg", class: "how-images" %>
+                  <div class = "how-image-container" id = "image3">
+                    <div class="badge">4</div>
+                  </div>
                   <p><strong>Plan your trip with our experts</strong></p>
                 </div>
               </div>
@@ -73,7 +78,7 @@
       <div class = "row">
         <div class="col-md-12">
           <div class="trending text-center" id="trendy-destination">
-            <h2 class="banner2-subtitle"><strong>Trendy destinations</strong></h2>
+            <h2 class="banner2-subtitle"><strong>Trending destinations</strong></h2>
 
             <div class="blocks">
               <a class="block sm destination" data-toggle="modal" data-target="#modal_1">
