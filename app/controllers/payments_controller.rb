@@ -10,6 +10,8 @@ class PaymentsController < ApplicationController
     # Create a component for worldia
     @component = worldia_create_component(@trip)
     # Gather the component's variation
+    @code = @component["code"]
+    raise
     @component_variation = worldia_gather_variation(@component, @trip)
     # Create a quote
     @quote = worldia_create_quote(@trip)
@@ -87,8 +89,8 @@ class PaymentsController < ApplicationController
       }
     json = request_hash.to_json
     url = "https://www.worldia.com/api/v1/products/"
-    RestClient.post url, json, {:content_type => 'application/json'}
-# Faut il mettre un content type (json ou url encoded?)
+    response = RestClient.post url, json, {:content_type => 'application/json'}
+    hash_response = JSON.parse(response.body)
   end
 
   def define_description(trip)

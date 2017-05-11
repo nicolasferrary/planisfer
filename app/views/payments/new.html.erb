@@ -157,7 +157,7 @@
       <% # Début de la colonne infos perso et paiement %>
 
       <div class="col-xs-12 col-sm-8">
-        <%=form_tag users_path(:order_id => @order.id), method: :post do %>
+        <%=form_tag users_path(:order_id => @order.id, :quote_id => @quote.id), method: :post do %>
           <div class = "travel-infos-box">
             <div class = "travel-infos-title">
               <div class = "row">
@@ -216,7 +216,7 @@
         <% end %>
 
         <div class = "travel-infos-box">
-          <%=form_tag order_payments_path(@order, :trip_id => @trip.id) do %>
+          <%=form_tag order_payments_path(@order, :trip_id => @trip.id, :quote_id => @quote.id) do %>
             <div class = "travel-infos-title">
               <h4 class = "<%= 'light' if @status == 'none' %>">2. Payment</h4>
             </div>
