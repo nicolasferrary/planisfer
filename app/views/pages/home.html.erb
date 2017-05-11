@@ -1,6 +1,6 @@
 <div">
   <%= link_to root_path do %>
-    <%= image_tag "logo.png", class: "logo"%>
+    <%= image_tag "blue_logo.png", class: "logo"%>
   <% end %>
 </div>
 
@@ -11,10 +11,12 @@
   <div class = "row">
     <div class="home-banner-title">
       <div class = "col-md-8 title-col">
-        <h1 class = "banner2-title">Explore the world your own way</h1>
+        <span class = "banner2-title">Explore the world your own way</span>
       </div>
       <div class = "col-md-4">
-        <p class = "how-it-works text-center">How it works</p>
+        <%= link_to "javascript:showhide('how')" do%>
+          <p class = "how-it-works text-center">How it works</p>
+        <% end %>
       </div>
     </div>
   </div>
@@ -24,40 +26,49 @@
     <div class = "col-md-8">
 
       <div class = "row">
-        <div class = "col-xs-12">
 
+        <div class = "col-xs-10 col-xs-offset-1">
+          <div class = "how-icons not-displayed" id="how">
+            <div>
+              <h2 class="banner2-subtitle"><strong>How it works</strong></h2>
+            </div>
+            <div class = "row">
+              <div class = "col-md-5 col-md-offset-1">
+                <div class = "text-center">
+                  <div class = "how-image-container">
+                    <%= image_tag "vintage-map.jpg", class: "how-images" %>
+                    <div class="badge">1</div>
+                  </div>
+                  <p><strong>Select a destination</strong></p>
+                </div>
+              </div>
+              <div class = "col-md-5">
+                <div class = "text-center">
+                  <%= image_tag "andalucia/frigiliana & nerja.jpg", class: "how-images" %>
+                  <p><strong>Explore its landmarks & hidden gems</strong></p>
+                </div>
+              </div>
+
+            </div>
+
+            <div class = "row">
+              <div class = "col-md-5 col-md-offset-1">
+                <div class = "text-center">
+                  <%= image_tag "andalucia/frigiliana & nerja.jpg", class: "how-images" %>
+                  <p><strong>Book the best flights & car</strong></p>
+                </div>
+              </div>
+              <div class = "col-md-5">
+                <div class = "text-center">
+                  <%= image_tag "andalucia/frigiliana & nerja.jpg", class: "how-images" %>
+                  <p><strong>Plan your trip with our experts</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- <div class = "row">
-        <div class = "col-md-5 col-md-offset-1">
-          <div class = "how-icons text-center">
-            <%= image_tag "vintage-map.jpg", class: "how-images" %>
-            <p><strong>Select a destination</strong></p>
-          </div>
-        </div>
-        <div class = "col-md-5">
-          <div class = "how-icons text-center">
-            <%= image_tag "andalucia/frigiliana & nerja.jpg", class: "how-images" %>
-            <p><strong>Explore its landmarks & hidden gems</strong></p>
-          </div>
-        </div>
-      </div>
-
-      <div class = "row">
-        <div class = "col-md-5 col-md-offset-1">
-          <div class = "how-icons text-center">
-            <%= image_tag "andalucia/frigiliana & nerja.jpg", class: "how-images" %>
-            <p><strong>Book the best flights & car</strong></p>
-          </div>
-        </div>
-        <div class = "col-md-5">
-          <div class = "how-icons text-center">
-            <%= image_tag "andalucia/frigiliana & nerja.jpg", class: "how-images" %>
-            <p><strong>Plan your trip with our experts</strong></p>
-          </div>
-        </div>
-      </div> -->
 
       <div class = "row">
         <div class="col-md-12">
@@ -363,6 +374,20 @@
 
   });
 </script>
+
+<script>
+  function showhide(id) {
+    var e = document.getElementById(id);
+    if ($('#' + e.id).hasClass('not-displayed')) {
+      $('#' + e.id).slideDown('slow');
+      $('#' + e.id).removeClass('not-displayed')
+    } else {
+      $('#' + e.id).slideUp('slow');
+      $('#' + e.id).addClass('not-displayed')
+    };
+  };
+
+  </script>
 
 <% end %>
 

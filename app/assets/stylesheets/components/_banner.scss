@@ -34,7 +34,7 @@
     margin-top: 0px;
     }
     height: 100px;
-    padding-top: 25px;
+    padding-top: 20px;
     margin-left: 30px;
     border-bottom: 1px solid #E6E6E6;
   }
@@ -60,7 +60,7 @@ a {
 
 .banner2-title {
   font-size: 40px;
-  font-weight: 300;
+  font-weight: 350;
   font-style: normal;
   font-stretch: normal;
   letter-spacing: -1px;
@@ -78,7 +78,6 @@ a {
   text-align: center;
   padding-bottom: 24px;
   color: #404040;
-  margin-bottom: 25px;
 }
 
 
@@ -86,7 +85,6 @@ a {
   margin-top: 45px;
   font-size: 24px;
   font-weight: 300;
-
 }
 
 .logo {
@@ -105,10 +103,15 @@ a {
 .how-it-works{
   padding-right: 15px;
   color: $brand-color;
-  padding-top:17px;
+  padding-top:22px;
+  text-decoration: none;
 }
 
 .title-col{
   padding-left: 0px;
 }
 
+
+.how-it-works-line{
+  width: 70%;
+}
