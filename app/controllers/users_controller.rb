@@ -20,15 +20,15 @@ class UsersController < ApplicationController
     @order.user = @user
     @order.save
 
-    # Worldia : Add user to quote
-    @quote_id = params([:quote_id])
-    worldia_add_user_to_quote(@user, @quote_id)
+    # # Worldia : Add user to quote
+    # @quote_id = params([:quote_id])
+    # worldia_add_user_to_quote(@user, @quote_id)
 
-    #Worldia : Add passengers to quote
-    worldia_add_passengers_to_quote(@passengers, @quote_id)
+    # #Worldia : Add passengers to quote
+    # worldia_add_passengers_to_quote(@passengers, @quote_id)
 
-    #Worldia : Create payment
-    worldia_create_payment(@quote_id)
+    # #Worldia : Create payment
+    # worldia_create_payment(@quote_id)
 
     redirect_to new_order_payment_path(@order, trip_id: @trip.id, status: "OK")
   end
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   private
 
   def worldia_add_user_to_quote(user, quote_id)
-    url = "http://www.worldia.com/api/v1/carts/#{quote_id}"
+    url = "https://www.worldia.com/api/v1/carts/#{quote_id}"
     jon = {
     "customerId": user.id
     }.to_json
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   end
 
   def worldia_add_passengers_to_quote(passengers, quote_id)
-    url = "http://www.worldia.com/api/v1/checkout/#{quote_id}/select_pax"
+    url = "https://www.worldia.com/api/v1/checkout/#{quote_id}/select_pax"
     json = worldia_pax_hash(passengers).to_json
     RestClient.post url, json, {:content_type => 'application/json'}
 
@@ -75,7 +75,7 @@ class UsersController < ApplicationController
   end
 
   def worldia_create_payment(quote_id)
-    url = "http://www.worldia.com/api/v1/checkout/#{quote_id}/select_options"
+    url = "https://www.worldia.com/api/v1/checkout/#{quote_id}/select_options"
     json = {
       "insuranceMethod": "NO_INSURANCE",
       "paymentMethod":"phone"

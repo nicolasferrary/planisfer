@@ -1,4 +1,5 @@
 require 'rest-client'
+# require 'json'
 
 class PaymentsController < ApplicationController
   before_action :set_order
@@ -11,12 +12,12 @@ class PaymentsController < ApplicationController
     @component = worldia_create_component(@trip)
     # Gather the component's variation
     @code = @component["code"]
-    raise
-    @component_variation = worldia_gather_variation(@component, @trip)
-    # Create a quote
-    @quote = worldia_create_quote(@trip)
-    #Add component to quote
-    worldia_add_component_to_quote(@quote, @component_variation)
+    component_variation = worldia_gather_variation(@code, @trip)
+    # # Create a quote
+    # @quote = worldia_create_quote(@trip)
+    # #Add component to quote
+    # @variation_id = component_variation["id"]
+    # worldia_add_component_to_quote(@quote, @variation_id)
   end
 
   def create
@@ -101,10 +102,11 @@ class PaymentsController < ApplicationController
     end
   end
 
-  def worldia_gather_variation(component, trip)
+  def worldia_gather_variation(code, trip)
     date = trip.starts_on.strftime("%Y-%m-%d")
-    url = "http://www.worldia.com/api/v1/product-variants/resolve?date=2017-09-01&options=&paxPlan=45,45&product=#{component}"
+    url = "https://www.worldia.com/api/v1/product-variants/resolve?date=2017-09-01&options=&paxPlan=45,45&product=#{code}"
     response = RestClient.get(url, content_type: :json, accept: :json)
+    hash_response = JSON.parse(response.body)
   end
 
   def worldia_create_quote(trip)
@@ -115,8 +117,8 @@ class PaymentsController < ApplicationController
       "areas": [{"id": 41}]
       }
       json = request_hash.to_json
-    url = "http://www.worldia.com/api/v1/carts/"
-    RestClient.post url, json, {:content_type => 'application/json'}
+    url = "https://www.worldia.com/api/v1/carts/"
+    RestClient.post url, json, {:content_type => 'application/json', accept: :json}
   end
 
   def worldia_add_component_to_quote(quote, variation)
@@ -126,7 +128,7 @@ class PaymentsController < ApplicationController
     "variantId": variation.id
     }
     json = request_hash.to_json
-    url = "http://www.worldia.com/api/v1/carts/#{quote.id}/items/"
+    url = "https://www.worldia.com/api/v1/carts/#{quote.id}/items/"
     RestClient.post url, json, {:content_type => 'application/json'}
 
   end

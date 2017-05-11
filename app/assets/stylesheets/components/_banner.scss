@@ -6,17 +6,37 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to left, #FF5D3B, #FF2B67);
   position: relative;
+}
+
+.home-banner{
+ color: white;
+  height: 50vh;
+  background-size: cover !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 50vh;
 }
 
 .banner-title {
   position: absolute;
-  left: 230px;
   top: 240px;
     h1 {
     font-weight: bolder;
     }
+  }
+
+.home-banner-title {
+    h1 {
+    font-weight: bolder;
+    margin-top: 0px;
+    }
+    height: 100px;
+    padding-top: 25px;
+    margin-left: 30px;
+    border-bottom: 1px solid #E6E6E6;
   }
 
 
@@ -44,9 +64,21 @@ a {
   font-style: normal;
   font-stretch: normal;
   letter-spacing: -1px;
-  text-align: center;
   padding-bottom: 29px;
-  margin-bottom: 55px;
+  color: #404040;
+  float: left;
+}
+
+.banner2-subtitle {
+  font-size: 25px;
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: -1px;
+  text-align: center;
+  padding-bottom: 24px;
+  color: #404040;
+  margin-bottom: 25px;
 }
 
 
@@ -58,13 +90,25 @@ a {
 }
 
 .logo {
-  width: 74px;
+  width: 50px;
   position: absolute;
-  left: 30px;
-  top: 30px;
+  left: 20px;
+  top: 20px;
+  height: auto;
 }
+
 
 .button {
   padding-top: 10px;
+}
+
+.how-it-works{
+  padding-right: 15px;
+  color: $brand-color;
+  padding-top:17px;
+}
+
+.title-col{
+  padding-left: 0px;
 }
 

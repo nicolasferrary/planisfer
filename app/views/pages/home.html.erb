@@ -1,269 +1,300 @@
-  <div class="row">
-    <div class="col-xs-12 padding-off">
-      <div class="banner background-work">
-        <div class="banner-content">
-          <%= link_to root_path do %>
-            <%= image_tag "logo.png", class:"logo"%>
-          <% end %>
-
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-12 col-md-8">
-                <div class="banner-title">
-                 <h1>Roadtrips in Europe</h1>
-                 <h3>Find the best way to discover new regions</h3>
-                </div>
-                <div class="text-center">
-                  <a href="#trendy-destination">
-                    <%= image_tag "arrow.png", class: "floating arrow-img" %>
-                  </a>
-                </div>
-              </div> <!-- fin du col-xs-12 col-md-8 -->
-
-              <div class="col-xs-12 col-md-4">
-                <div class="sticky-form">
-                  <div class="form-post text-center">
-                    <h1>Book your flights</h1>
-                    <% if flash[:search_error] %>
-                      <p class="red-message"><%= flash[:search_error] %></p>
-                    <% end %>
-                    <%=form_tag searches_path, :controller => 'searches', method: :post, id: "new_result" do %>
-                      <div class="row">
-                        <div class="col-xs-12">
-                        <%= select_tag :city, options_from_collection_for_select(Airport.where(category: "city"),:iata, :content), class: "js-airports-list input-lg form-control select2-css", :prompt => "From" %>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="col-xs-12">
-                          <%= select_tag  :region, options_from_collection_for_select(Region.all.order('name ASC'), :name, :name), class: "input-lg form-control text-center", prompt: "To" %>
-                        </div>
-                        <div class="col-xs-6">
-                          <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'input-lg form-control datepicker text-center'%>
-                        </div>
-                        <div class="col-xs-6">
-                          <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => ' input-lg form-control datepicker text-center' %>
-                        </div>
-                        <div class="col-xs-12">
-                          <h3>Number of travelers</h3>
-                          <div class="group" data-toggle="buttons">
-                            <div class="travelers-btn-container">
-                              <% Constants::TRAVELERS.each do |number, text| %>
-
-                                <label class="btn btn-circle">
-                                  <input type="radio" name="nb_travelers" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
-                                </label>
-                              <% end %>
-                            </div> <!-- fin travelers-btn-container -->
-                          </div> <!-- fin de group -->
-                          <%= submit_tag "SEARCH", class: "btn-brand btn-big", 'data-toggle' => "modal", 'data-target' => '#wait_modal' %>
-                        </div> <!-- fin du col -->
-                      <%end%>
-                    </div> <!-- fin du row -->
-                  </div> <!-- fin du form-post -->
-                 </div> <!-- fin de sticky-form -->
-              </div> <!-- fin du col-xs-12 col-md-4 -->
-            </div><!--  fin du row -->
-          </div> <!-- fin du container  -->
-        </div> <!-- fin de banner-content -->
-      </div> <!-- fin de banner -->
-    </div> <!-- fin du 1er col-xs-12 principal -->
+<div">
+  <%= link_to root_path do %>
+    <%= image_tag "logo.png", class: "logo"%>
+  <% end %>
+</div>
 
 
-    <%= render 'wait_modal', modal_name: "wait_modal" %>
 
+<div class = "container">
 
-      <div class="col-md-9">
-      <!-- default size of col-md-9 changed to free the form -->
-
-        <div class="trending" id="trendy-destination">
-          <h1 class="banner2-title "><strong>Trendy destinations</strong></h1>
-
-          <div class="blocks">
-            <a class="block sm destination" data-toggle="modal" data-target="#modal_1">
-              <%= image_tag "croatie.jpg", class:"dest-image"%>
-              <span class="box">
-                <span class="text in-box">
-                  <span class="primarytext">Croatia</span>
-                </span>
-              </span>
-            </a>
-
-            <a class="block lg destination" data-toggle="modal" data-target="#modal_2">
-              <%= image_tag "greece.jpg", class:"dest-image"%>
-              <span class="box">
-                <span class="text in-box">
-                  <span class="primarytext">Greece</span>
-                </span>
-              </span>
-            </a>
-
-            <a class="block sm destination" data-toggle="modal" data-target="#modal_3">
-              <%= image_tag "romania.jpg", class:"dest-image"%>
-              <span class="box">
-                <span class="text in-box">
-                  <span class="primarytext">Romania</span>
-                </span>
-              </span>
-            </a>
-
-            <a class="block sm destination" data-toggle="modal" data-target="#modal_4">
-              <%= image_tag "france.jpg", class:"dest-image"%>
-              <span class="box">
-                <span class="text in-box">
-                  <span class="primarytext">South-of-France</span>
-                </span>
-              </span>
-            </a>
-
-            <a class="block sm destination" data-toggle="modal" data-target="#modal_5">
-              <%= image_tag "corsica.jpg", class:"dest-image"%>
-              <span class="box">
-                <span class="text in-box">
-                  <span class="primarytext">Corsica</span>
-                </span>
-              </span>
-            </a>
-            <a class="block lg destination" data-toggle="modal" data-target="#modal_6">
-              <%= image_tag "portugal.jpg", class:"dest-image"%>
-              <span class="box">
-                <span class="text in-box">
-                  <span class="primarytext">Portugal</span>
-                </span>
-              </span>
-            </a>
-            <a class="block sm destination" data-toggle="modal" data-target="#modal_7">
-              <%= image_tag "scotland.jpg", class:"dest-image"%>
-              <span class="box">
-                <span class="text in-box">
-                  <span class="primarytext">Scotland</span>
-                </span>
-              </span>
-            </a>
-            <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
-              <%= image_tag "test.jpg", class:"dest-image"%>
-              <span class="box">
-                <span class="text in-box">
-                  <span class="primarytext">Ireland</span>
-                </span>
-              </span>
-            </a>
-
-          </div> <!-- fin du blocks -->
-        </div> <!-- fin du trending -->
-      </div> <!-- fin du 2e col-xs-12 principal -->
-
-      <div class="col-md-3">
+  <div class = "row">
+    <div class="home-banner-title">
+      <div class = "col-md-8 title-col">
+        <h1 class = "banner2-title">Explore the world your own way</h1>
       </div>
-
-      <hr>
-
-    <!-- CALLS OF MODALS -->
-
-      <%# FIRST PART %>
-      <%= render 'slider',
-      this_city: "Croatia",
-      modal_name: 'modal_1' %>
-      <%# END of FIRST PART %>
-
-      <%# PART 2 %>
-      <%= render 'slider',
-      this_city: "Greece",
-      modal_name: 'modal_2' %>
-      <%# END OF PART 2 %>
-
-      <%# PART 3 %>
-      <%= render 'slider',
-      this_city: "Romania",
-      modal_name: 'modal_3' %>
-      <%# END OF PART 3 %>
-
-      <%# PART 4 %>
-      <%= render 'slider',
-      this_city: "South-of-france",
-      modal_name: 'modal_4' %>
-      <%# END OF PART 4 %>
-
-      <%# PART 5 %>
-      <%= render 'slider',
-      this_city: "Corsica",
-      modal_name: 'modal_5' %>
-      <%# END OF PART 5 %>
-
-      <%# PART 6 %>
-      <%= render 'slider',
-      this_city: "Portugal",
-      modal_name: 'modal_6' %>
-      <%# END OF PART 6 %>
-
-      <%# PART 7 %>
-      <%= render 'slider',
-      this_city: "Scotland",
-      modal_name: 'modal_7' %>
-      <%# END OF PART 7 %>
-
-      <%# PART 8 %>
-      <%= render 'slider',
-      this_city: "Ireland",
-      modal_name: 'modal_8' %>
-      <%# END OF PART 8 %>
-
-
-    <!-- END OF MODALS  -->
-
-    <div class="col-xs-12 padding-off">
-      <div class="banner-content text-center">
-        <h1 class="banner2-title" id="why"><strong>Why use Planisfer </strong></h1>
+      <div class = "col-md-4">
+        <p class = "how-it-works text-center">How it works</p>
       </div>
-      <div class="col-xs-12">
-        <hr>
-      </div>
-      <div class="">
-        <div id="description-usp">
+    </div>
+  </div>
+
+  <div class = "row">
+
+    <div class = "col-md-8">
+
+      <div class = "row">
+        <div class = "col-xs-12">
+
         </div>
+      </div>
+
+      <!-- <div class = "row">
+        <div class = "col-md-5 col-md-offset-1">
+          <div class = "how-icons text-center">
+            <%= image_tag "vintage-map.jpg", class: "how-images" %>
+            <p><strong>Select a destination</strong></p>
+          </div>
+        </div>
+        <div class = "col-md-5">
+          <div class = "how-icons text-center">
+            <%= image_tag "andalucia/frigiliana & nerja.jpg", class: "how-images" %>
+            <p><strong>Explore its landmarks & hidden gems</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class = "row">
+        <div class = "col-md-5 col-md-offset-1">
+          <div class = "how-icons text-center">
+            <%= image_tag "andalucia/frigiliana & nerja.jpg", class: "how-images" %>
+            <p><strong>Book the best flights & car</strong></p>
+          </div>
+        </div>
+        <div class = "col-md-5">
+          <div class = "how-icons text-center">
+            <%= image_tag "andalucia/frigiliana & nerja.jpg", class: "how-images" %>
+            <p><strong>Plan your trip with our experts</strong></p>
+          </div>
+        </div>
+      </div> -->
+
+      <div class = "row">
+        <div class="col-md-12">
+          <div class="trending text-center" id="trendy-destination">
+            <h2 class="banner2-subtitle"><strong>Trendy destinations</strong></h2>
+
+            <div class="blocks">
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_1">
+                <%= image_tag "croatie.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext">Croatia</span>
+                  </span>
+                </span>
+              </a>
+
+              <a class="block lg destination" data-toggle="modal" data-target="#modal_2">
+                <%= image_tag "greece.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext">Greece</span>
+                  </span>
+                </span>
+              </a>
+
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_3">
+                <%= image_tag "romania.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext">Romania</span>
+                  </span>
+                </span>
+              </a>
+
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_4">
+                <%= image_tag "france.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext">South-of-France</span>
+                  </span>
+                </span>
+              </a>
+
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_5">
+                <%= image_tag "corsica.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext">Corsica</span>
+                  </span>
+                </span>
+              </a>
+              <a class="block lg destination" data-toggle="modal" data-target="#modal_6">
+                <%= image_tag "portugal.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext">Portugal</span>
+                  </span>
+                </span>
+              </a>
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_7">
+                <%= image_tag "scotland.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext">Scotland</span>
+                  </span>
+                </span>
+              </a>
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
+                <%= image_tag "test.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext">Ireland</span>
+                  </span>
+                </span>
+              </a>
+
+            </div> <!-- fin du blocks -->
+          </div> <!-- fin du trending -->
+        </div> <!-- fin du 2e col-xs-12 principal -->
+      </div>
+
+    </div>
+
+    <div class = "col-md-4">
+      <div class="sticky-form">
+        <div class="form-post text-center">
+          <h1>Book your flights</h1>
+          <% if flash[:search_error] %>
+            <p class="red-message"><%= flash[:search_error] %></p>
+          <% end %>
+          <%=form_tag searches_path, :controller => 'searches', method: :post, id: "new_result" do %>
+            <div class="row">
+              <div class="col-xs-12">
+              <%= select_tag :city, options_from_collection_for_select(Airport.where(category: "city"),:iata, :content), class: "js-airports-list input-lg form-control select2-css", :prompt => "From" %>
+              </div>
+              <br>
+              <br>
+              <div class="col-xs-12">
+                <%= select_tag  :region, options_from_collection_for_select(Region.all.order('name ASC'), :name, :name), class: "input-lg form-control text-center", prompt: "To" %>
+              </div>
+              <div class="col-xs-6">
+                <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'input-lg form-control datepicker text-center'%>
+              </div>
+              <div class="col-xs-6">
+                <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => ' input-lg form-control datepicker text-center' %>
+              </div>
+              <div class="col-xs-12">
+                <h3>Number of travelers</h3>
+                <div class="group" data-toggle="buttons">
+                  <div class="travelers-btn-container">
+                    <% Constants::TRAVELERS.each do |number, text| %>
+                      <label class="btn btn-circle">
+                        <input type="radio" name="nb_travelers" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
+                      </label>
+                    <% end %>
+                  </div> <!-- fin travelers-btn-container -->
+                </div> <!-- fin de group -->
+                <%= submit_tag "SEARCH", class: "btn-brand btn-big", 'data-toggle' => "modal", 'data-target' => '#wait_modal' %>
+              </div> <!-- fin du col -->
+            <%end%>
+          </div> <!-- fin du row -->
+        </div> <!-- fin du form-post -->
+      </div> <!-- fin de sticky-form -->
+    </div>
+
+  </div>
+</div>
+
+<%= render 'wait_modal', modal_name: "wait_modal" %>
+
+  <!-- CALLS OF MODALS -->
+
+    <%# FIRST PART %>
+    <%= render 'slider',
+    this_city: "Croatia",
+    modal_name: 'modal_1' %>
+    <%# END of FIRST PART %>
+
+    <%# PART 2 %>
+    <%= render 'slider',
+    this_city: "Greece",
+    modal_name: 'modal_2' %>
+    <%# END OF PART 2 %>
+
+    <%# PART 3 %>
+    <%= render 'slider',
+    this_city: "Romania",
+    modal_name: 'modal_3' %>
+    <%# END OF PART 3 %>
+
+    <%# PART 4 %>
+    <%= render 'slider',
+    this_city: "South-of-france",
+    modal_name: 'modal_4' %>
+    <%# END OF PART 4 %>
+
+    <%# PART 5 %>
+    <%= render 'slider',
+    this_city: "Corsica",
+    modal_name: 'modal_5' %>
+    <%# END OF PART 5 %>
+
+    <%# PART 6 %>
+    <%= render 'slider',
+    this_city: "Portugal",
+    modal_name: 'modal_6' %>
+    <%# END OF PART 6 %>
+
+    <%# PART 7 %>
+    <%= render 'slider',
+    this_city: "Scotland",
+    modal_name: 'modal_7' %>
+    <%# END OF PART 7 %>
+
+    <%# PART 8 %>
+    <%= render 'slider',
+    this_city: "Ireland",
+    modal_name: 'modal_8' %>
+    <%# END OF PART 8 %>
+
+
+  <!-- END OF MODALS  -->
+
+  <div class="col-xs-12 padding-off">
+    <div class="banner-content text-center">
+      <h1 class="banner2-title" id="why"><strong>Why use Planisfer </strong></h1>
+    </div>
+    <div class="col-xs-12">
+      <hr>
+    </div>
+    <div class="">
+      <div id="description-usp">
+      </div>
+        <div class="container">
+          <div class="row">
+            <div class=" col-xs-12 col-md-4  text-center">
+             <%= image_tag "europe.png", class: "glasses-img" %>
+             <p id="usp-title"> <strong>Get inspiration</strong></p>
+             <p>to travel through Europe</p>
+            </div>
+            <div class=" col-xs-12 col-md-4  text-center">
+              <%= image_tag "flight.png", class: "glasses-img" %>
+              <p id="usp-title"><strong>Find the best flights</strong> </p>
+              <p>combo for your roadtrip</p>
+            </div>
+            <div class=" col-xs-12 col-md-4  text-center">
+             <%= image_tag "money.png", class: "glasses-img" %>
+             <p id="usp-title"><strong>Save money & time</strong> </p>
+             <p>with our flights comparator</p>
+           </div>
+          </div>
+        </div>
+
+        <div class="footer text-center">
           <div class="container">
             <div class="row">
-              <div class=" col-xs-12 col-md-4  text-center">
-               <%= image_tag "europe.png", class: "glasses-img" %>
-               <p id="usp-title"> <strong>Get inspiration</strong></p>
-               <p>to travel through Europe</p>
-              </div>
-              <div class=" col-xs-12 col-md-4  text-center">
-                <%= image_tag "flight.png", class: "glasses-img" %>
-                <p id="usp-title"><strong>Find the best flights</strong> </p>
-                <p>combo for your roadtrip</p>
-              </div>
-              <div class=" col-xs-12 col-md-4  text-center">
-               <%= image_tag "money.png", class: "glasses-img" %>
-               <p id="usp-title"><strong>Save money & time</strong> </p>
-               <p>with our flights comparator</p>
-             </div>
-            </div>
-          </div>
-
-          <div class="footer text-center">
-            <div class="container">
-              <div class="row">
-                <div class="col-xs-4 col-xs-offset-4">
-                  <div class="text-footer">
-                    <ul class="list-unstyled list-inline">
-                      <li>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                          Who are we ?
-                        </button>
-                      </li>
-                      <!-- <li> Mentions légales </li> -->
-                    </ul>
-                    <br>
-                    Made with <i class="fa fa-heart"></i> @LeWagon
-                  </div>
+              <div class="col-xs-4 col-xs-offset-4">
+                <div class="text-footer">
+                  <ul class="list-unstyled list-inline">
+                    <li>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                        Who are we ?
+                      </button>
+                    </li>
+                    <!-- <li> Mentions légales </li> -->
+                  </ul>
+                  <br>
+                  Made with <i class="fa fa-heart"></i> @LeWagon
                 </div>
               </div>
             </div>
           </div>
-      </div>
-    </div> <!-- fin du 3e col-xs-12 -->
-  </div> <!-- fin du row principal -->
-</div> <!-- fin du container -->
+        </div>
+    </div>
+  </div> <!-- fin du 3e col-xs-12 -->
+</div> <!-- fin du row principal -->
+
 
 <!-- The Team Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
