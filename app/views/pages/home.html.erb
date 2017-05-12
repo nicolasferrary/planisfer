@@ -1,21 +1,15 @@
-<div">
-  <%= link_to root_path do %>
-    <%= image_tag "blue_logo.png", class: "logo"%>
-  <% end %>
-</div>
-
-
-
 <div class = "container">
 
   <div class = "row">
     <div class="home-banner-title">
-      <div class = "col-md-8 title-col">
-        <span class = "banner2-title">Explore the world your own way</span>
-      </div>
-      <div class = "col-md-4">
+      <div class = "col-md-12 title-col">
+        <span> <%= link_to root_path do %>
+          <%= image_tag "blue_logo_no_word.png", class: "logo"%>
+        <% end %> </span>
+        <span class ="brand-name">Planisfer</span>
+        <span class = "banner2-title">Your personal trip builder</span>
         <%= link_to "javascript:showhide('how')", class: "how-link" do%>
-          <p class = "how-it-works text-center">How it works</p>
+          <span class = "how-it-works">How it works</span>
         <% end %>
       </div>
     </div>
@@ -24,13 +18,14 @@
   <div class = "row">
 
     <div class = "col-md-8">
+      <h2 class="home-main-title"><strong>Explore the world your own way</strong></h2>
 
       <div class = "row">
 
         <div class = "col-xs-10 col-xs-offset-1">
           <div class = "how-icons not-displayed" id="how">
             <div>
-              <h2 class="banner2-subtitle"><strong>How it works</strong></h2>
+              <h2 class="how-title text-center">How it works</h2>
             </div>
             <div class = "row">
               <div class = "col-md-5 col-md-offset-1">
@@ -78,8 +73,6 @@
       <div class = "row">
         <div class="col-md-12">
           <div class="trending text-center" id="trendy-destination">
-            <h2 class="banner2-subtitle"><strong>Trending destinations</strong></h2>
-
             <div class="blocks">
               <a class="block sm destination" data-toggle="modal" data-target="#modal_1">
                 <%= image_tag "croatie.jpg", class:"dest-image"%>
@@ -159,20 +152,20 @@
 
     <div class = "col-md-4">
       <div class="sticky-form">
-        <div class="form-post text-center">
-          <h1>Book your flights</h1>
+        <div class="form-post">
+          <h1>Build a trip</h1>
           <% if flash[:search_error] %>
             <p class="red-message"><%= flash[:search_error] %></p>
           <% end %>
           <%=form_tag searches_path, :controller => 'searches', method: :post, id: "new_result" do %>
             <div class="row">
               <div class="col-xs-12">
-              <%= select_tag :city, options_from_collection_for_select(Airport.where(category: "city"),:iata, :content), class: "js-airports-list input-lg form-control select2-css", :prompt => "From" %>
+              <%= select_tag :city, options_from_collection_for_select(Airport.where(category: "city"),:iata, :content), class: "js-airports-list input-lg form-control", :prompt => "From" %>
               </div>
               <br>
               <br>
               <div class="col-xs-12">
-                <%= select_tag  :region, options_from_collection_for_select(Region.all.order('name ASC'), :name, :name), class: "input-lg form-control text-center", prompt: "To" %>
+                <%= select_tag  :region, options_from_collection_for_select(Region.all.order('name ASC'), :name, :name), class: "input-lg form-control", prompt: "To" %>
               </div>
               <div class="col-xs-6">
                 <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'input-lg form-control datepicker text-center'%>
