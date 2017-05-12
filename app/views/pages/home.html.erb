@@ -8,9 +8,6 @@
         <% end %> </span>
         <span class ="brand-name">Planisfer</span>
         <span class = "banner2-title">Your personal trip builder</span>
-        <%= link_to "javascript:showhide('how')", class: "how-link" do%>
-          <span class = "how-it-works">How it works</span>
-        <% end %>
       </div>
     </div>
   </div>
@@ -18,15 +15,16 @@
   <div class = "row">
 
     <div class = "col-md-8">
-      <h2 class="home-main-title"><strong>Explore the world your own way</strong></h2>
-
+      <div class = "home-text">
+        <h2 class="home-main-title"><strong>Explore the world your own way</strong></h2>
+        <%= link_to "javascript:showhide('how')", class: "how-link" do%>
+          <span class = "how-it-works">How it works</span>
+        <% end %>
+      </div>
       <div class = "row">
 
         <div class = "col-xs-10 col-xs-offset-1">
           <div class = "how-icons not-displayed" id="how">
-            <div>
-              <h2 class="how-title text-center">How it works</h2>
-            </div>
             <div class = "row">
               <div class = "col-md-5 col-md-offset-1">
                 <div class = "text-center">
@@ -61,7 +59,7 @@
                   <div class = "how-image-container" id = "image3">
                     <div class="badge">4</div>
                   </div>
-                  <p><strong>Plan your trip with our experts</strong></p>
+                  <p><strong>Plan your trip with our travel coach</strong></p>
                 </div>
               </div>
             </div>
@@ -91,12 +89,11 @@
                   </span>
                 </span>
               </a>
-
-              <a class="block sm destination" data-toggle="modal" data-target="#modal_3">
-                <%= image_tag "romania.jpg", class:"dest-image"%>
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
+                <%= image_tag "ireland/ring of kerry.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">
-                    <span class="primarytext">Romania</span>
+                    <span class="primarytext">Ireland</span>
                   </span>
                 </span>
               </a>
@@ -111,7 +108,7 @@
               </a>
 
               <a class="block sm destination" data-toggle="modal" data-target="#modal_5">
-                <%= image_tag "corsica.jpg", class:"dest-image"%>
+                <%= image_tag "corsica/cap corse.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">
                     <span class="primarytext">Corsica</span>
@@ -119,7 +116,7 @@
                 </span>
               </a>
               <a class="block lg destination" data-toggle="modal" data-target="#modal_6">
-                <%= image_tag "portugal.jpg", class:"dest-image"%>
+                <%= image_tag "portugal/evora.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">
                     <span class="primarytext">Portugal</span>
@@ -134,11 +131,61 @@
                   </span>
                 </span>
               </a>
-              <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
-                <%= image_tag "test.jpg", class:"dest-image"%>
+
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_3">
+                <%= image_tag "romania.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">
-                    <span class="primarytext">Ireland</span>
+                    <span class="primarytext">Romania</span>
+                  </span>
+                </span>
+              </a>
+
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
+                <%= image_tag "andalucia/granada.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext">Andalucia</span>
+                  </span>
+                </span>
+              </a>
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
+                <%= image_tag "north of italy/tuscany.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext">Northern Italy</span>
+                  </span>
+                </span>
+              </a>
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
+                <%= image_tag "northern spain/costa brava.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext">Northern Spain</span>
+                  </span>
+                </span>
+              </a>
+              <a class="block lg destination" data-toggle="modal" data-target="#modal_8">
+                <%= image_tag "sardinia/golfo di orosei.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext">Sardinia</span>
+                  </span>
+                </span>
+              </a>
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
+                <%= image_tag "sicily/ragusa.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext">Sicily</span>
+                  </span>
+                </span>
+              </a>
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
+                <%= image_tag "south of italy/puglie.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext">Southern Italy</span>
                   </span>
                 </span>
               </a>
@@ -174,7 +221,7 @@
                 <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => ' input-lg form-control datepicker text-center' %>
               </div>
               <div class="col-xs-12">
-                <h3>Number of travelers</h3>
+                <h3 class = "text-center">Number of travelers</h3>
                 <div class="group" data-toggle="buttons">
                   <div class="travelers-btn-container">
                     <% Constants::TRAVELERS.each do |number, text| %>
@@ -251,16 +298,16 @@
   <!-- END OF MODALS  -->
 
   <div class="col-xs-12 padding-off">
-    <div class="banner-content text-center">
+<!--     <div class="banner-content text-center">
       <h1 class="banner2-title" id="why"><strong>Why use Planisfer </strong></h1>
-    </div>
+    </div> -->
     <div class="col-xs-12">
       <hr>
     </div>
     <div class="">
       <div id="description-usp">
       </div>
-        <div class="container">
+     <!--    <div class="container">
           <div class="row">
             <div class=" col-xs-12 col-md-4  text-center">
              <%= image_tag "europe.png", class: "glasses-img" %>
@@ -278,7 +325,7 @@
              <p>with our flights comparator</p>
            </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="footer text-center">
           <div class="container">

@@ -13,11 +13,12 @@ class PaymentsController < ApplicationController
     # Gather the component's variation
     @code = @component["code"]
     component_variation = worldia_gather_variation(@code, @trip)
-    # # Create a quote
-    # @quote = worldia_create_quote(@trip)
+    # Create a quote
+    quote = worldia_create_quote(@trip)
     # #Add component to quote
-    # @variation_id = component_variation["id"]
-    # worldia_add_component_to_quote(@quote, @variation_id)
+    @variation_id = component_variation["id"]
+    @quote_id = quote["id"]
+    worldia_add_component_to_quote(@quote_id, @variation_id)
   end
 
   def create
@@ -111,24 +112,28 @@ class PaymentsController < ApplicationController
 
   def worldia_create_quote(trip)
     request_hash = {
-      "name":"trip.sku",
-      "paxPlan":[[]],
+      "name":trip.sku,
+      "paxPlan":[[{
+        "dateOfBirth": "1972-04-24",
+        "age": 44
+        },]],
       "startDate":trip.starts_on.strftime("%Y-%m-%d"),
       "areas": [{"id": 41}]
       }
       json = request_hash.to_json
     url = "https://www.worldia.com/api/v1/carts/"
-    RestClient.post url, json, {:content_type => 'application/json', accept: :json}
+    response = RestClient.post url, json, {:content_type => 'application/json', accept: :json}
+    hash_response = JSON.parse(response.body)
   end
 
-  def worldia_add_component_to_quote(quote, variation)
+  def worldia_add_component_to_quote(quote_id, variation_id)
     request_hash =  {
     "day": 0,
     "position": 0,
-    "variantId": variation.id
+    "variantId": variation_id
     }
     json = request_hash.to_json
-    url = "https://www.worldia.com/api/v1/carts/#{quote.id}/items/"
+    url = "https://www.worldia.com/api/v1/carts/#{quote_id}/items/"
     RestClient.post url, json, {:content_type => 'application/json'}
 
   end

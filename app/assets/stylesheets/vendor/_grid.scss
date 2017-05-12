@@ -1,8 +1,8 @@
 
 .block{
   float:left;
-  width:340px;
-  height:340px;
+  width:230px;
+  height:230px;
   margin-left:20px;
   margin-bottom:20px;
   position:relative;
@@ -11,10 +11,6 @@
   text-align:center;
   color:#fff
 }
-
-// .block.lg{
-//   width:660px
-// }
 
 .block .box{
   display:-webkit-box;
@@ -57,7 +53,18 @@
   background-position:center;
   background-repeat:no-repeat;
   -webkit-transition:transform .4s ease;
-  transition:transform .4s ease
+  transition:transform .4s ease;
+  width: auto;
+  height: 100%;
+}
+
+.lg{
+  width:480px;
+}
+
+.lg .dest-image{
+  width: 100%;
+  height: auto;
 }
 
 // Presence of text
@@ -122,6 +129,7 @@
 .trending{
   width:100%;
   margin:auto;
+  margin-top: 60px;
 }
 
 // Remove blocks to have all blocks in line on the left
