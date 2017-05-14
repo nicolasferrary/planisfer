@@ -1,9 +1,14 @@
 
 
 #all-filters {
-  background: #00CECB;
   color: white;
   padding: 10px 0 1px 0;
+  color: white;
+  border-top: 24px solid #00CECB;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  height: 0;
+  width: 150px;
 }
 
 
@@ -90,4 +95,12 @@ hr.vertical-divider {
 
 .sticky-form{
   margin-top: 57px;
+}
+
+#see-filters{
+  margin-top: -33px;
+}
+
+#hide-filters{
+  margin-top: -33px;
 }

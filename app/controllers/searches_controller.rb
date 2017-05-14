@@ -380,9 +380,9 @@ class SearchesController < ApplicationController
 
   def passengers(nb_travelers)
     if nb_travelers.to_i == 1
-      return "1 TRAVELER"
+      return "1 traveler"
     else
-      return "#{nb_travelers} TRAVELERS"
+      return "#{nb_travelers} travelers"
     end
   end
 
@@ -404,9 +404,9 @@ class SearchesController < ApplicationController
       marker.infowindow poi.name
       marker.infowindow render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => poi})
       marker.picture({
-                  # :url => view_context.image_url("interest.svg"),
-                  :width   => 20,
-                  :height  => 20
+                  :url => view_context.image_url("orange-star.svg"),
+                  :width   => 60,
+                  :height  => 60
                  })
     end
   end

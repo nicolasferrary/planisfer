@@ -4,8 +4,8 @@
 
 
 .page-result{
-  background: #F5F5F5;
-  padding-top: 30px;
+  // background: #F5F5F5;
+  padding-top: 20px;
 }
 
 .flexbox {
@@ -43,7 +43,7 @@
 
 
 #TitleShow {
-  margin-bottom: 16px;
+  margin-bottom: 28px;
   margin-top: -20px;
   text-align: center;
 }
@@ -76,6 +76,8 @@ a.box-select-all-flights {
 
 .box-select-all-flights {
   text-decoration: none;
+  display: flex;
+  justify-content: space-around;
 }
 
 .box-select-all-flights:hover {
@@ -123,4 +125,9 @@ a.box-select-all-flights {
 .light-data {
   font-size: 11px;
   font-weight: light;
+}
+
+#price-for{
+  float:right;
+  font-size: 12px;
 }
