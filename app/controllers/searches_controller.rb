@@ -405,9 +405,9 @@ class SearchesController < ApplicationController
       marker.lng poi.longitude
       marker.infowindow render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => poi})
       marker.picture({
-                  :url => view_context.image_url("orange-star.svg"),
-                  :width   => 20,
-                  :height  => 31
+                  :url => view_context.image_url("camera.svg"),
+                  :width   => 40,
+                  :height  => 44,
                  })
     end
     markers.concat(
@@ -417,9 +417,9 @@ class SearchesController < ApplicationController
         marker.lng airport.coordinates.gsub(/(.*)\:/, '').to_f
         marker.infowindow airport.name
         marker.picture({
-                    :url => view_context.image_url("bleu.svg"),
-                    :width   => 40,
-                    :height  => 40
+                    :url => view_context.image_url("airport-#{@airport_colours[airport.iata]}.svg"),
+                    :width   => 70,
+                    :height  => 35
                    })
       end
     )
@@ -432,6 +432,7 @@ class SearchesController < ApplicationController
       region_airports << airport
     end
     region_airports
+    raise
   end
 
   def define_colours(region_airports)
@@ -441,6 +442,7 @@ class SearchesController < ApplicationController
     end
     colours
   end
+
 
 end
 

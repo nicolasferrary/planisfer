@@ -24,6 +24,7 @@
                   </p>
                   <p>
                     <span class = "<%= @airport_colours[trip.round_trip_flight.flight2_origin_airport_iata] %>"> <span class="hours"><%= trip.round_trip_flight.flight2_take_off_at.strftime("%H:%M") %></span> <span class="airport"> <%= Airport.find_by_iata(trip.round_trip_flight.flight2_origin_airport_iata).cityname %><span class="light-data"> <%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> </span> </span>
+                    <% raise %>
                   </p>
                 </div>
                 <div class="card-description-item">
@@ -63,8 +64,8 @@
 
   <div class="col-xs-12 col-md-6">
     <div class = "legends">
-      <img><%= image_tag "orange-star.svg", class: "legend_highlight"%> Points of interest </img>
-      <img><%= image_tag "bleu.svg", class: "legend_airport" %> Airports </img>
+      <img><%= image_tag "camera.svg", class: "legend_highlight"%> Points of interest </img>
+      <img><%= image_tag "airport-colour-code-0.svg", class: "legend_airport" %> Airports </img>
     </div>
     <div class="airport-map">
       <div id="map", style="width: 100%; height: 600px;"></div>
