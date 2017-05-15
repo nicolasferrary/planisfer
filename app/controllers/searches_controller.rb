@@ -74,10 +74,9 @@ class SearchesController < ApplicationController
 
     # Define POIs we want to show on the map
     @pois = define_pois(@region)
-
     # NB : We should protect code to exclude from @pois any poi that has a nil latitude or longitude
 
-    @pois_markers = build_markers(@pois)
+    @initial_markers = build_markers(@pois, @region_airports)
 
     # Geocode on these objects
     #@round_trips.map(&:destination_airport_coordinates).map(&:origin_airport_coordinates)
@@ -160,7 +159,8 @@ class SearchesController < ApplicationController
     @round_trip_flight = RoundTripFlight.find(params[:round_trip_flight_id])
     @region = @round_trip_flight.region
     @pois = define_pois(@region)
-    @pois_markers = build_markers(@pois)
+    @region_airports = define_airports(@region)
+    @initial_markers = build_markers(@pois, @region_airports)
     @destination_iata = @round_trip_flight.flight1_destination_airport_iata
     @return_iata = @round_trip_flight.flight2_origin_airport_iata
     @destination_airport = Airport.find_by_iata(@destination_iata)
@@ -168,7 +168,7 @@ class SearchesController < ApplicationController
 
 
     if @destination_iata == @return_iata
-      render json: @pois_markers.concat([
+      render json: @initial_markers.concat([
         {
           lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
           lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
@@ -177,7 +177,7 @@ class SearchesController < ApplicationController
         },
         ]).to_json
     else
-      render json: @pois_markers.concat([
+      render json: @initial_markers.concat([
         {
           lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
           lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
@@ -395,13 +395,12 @@ class SearchesController < ApplicationController
     @pois
   end
 
-  def build_markers(pois)
+  def build_markers(pois, region_airports)
 
-    Gmaps4rails.build_markers(pois) do |poi, marker|
+    markers = Gmaps4rails.build_markers(pois) do |poi, marker|
       @poi = poi
       marker.lat poi.latitude
       marker.lng poi.longitude
-      marker.infowindow poi.name
       marker.infowindow render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => poi})
       marker.picture({
                   :url => view_context.image_url("orange-star.svg"),
@@ -409,6 +408,19 @@ class SearchesController < ApplicationController
                   :height  => 60
                  })
     end
+    markers.concat(
+      Gmaps4rails.build_markers(region_airports) do |airport, marker|
+        @airport = airport
+        marker.lat airport.coordinates.gsub(/\:(.*)/, '').to_f
+        marker.lng airport.coordinates.gsub(/(.*)\:/, '').to_f
+        marker.infowindow airport.name
+        marker.picture({
+                    :url => view_context.image_url("bleu.svg"),
+                    :width   => 60,
+                    :height  => 60
+                   })
+      end
+    )
   end
 
   def define_airports(region)
