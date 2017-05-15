@@ -78,7 +78,7 @@ class SearchesController < ApplicationController
     @pois = define_pois(@region)
     # NB : We should protect code to exclude from @pois any poi that has a nil latitude or longitude
 
-    @initial_markers = build_markers(@pois, @region_airports)
+    @initial_markers = build_markers(@pois)
 
     # Geocode on these objects
     #@round_trips.map(&:destination_airport_coordinates).map(&:origin_airport_coordinates)
@@ -157,12 +157,12 @@ class SearchesController < ApplicationController
 
 
   def refresh_map
-    # récupérer le round_trip
     @round_trip_flight = RoundTripFlight.find(params[:round_trip_flight_id])
     @region = @round_trip_flight.region
     @pois = define_pois(@region)
     @region_airports = define_airports(@region)
-    @initial_markers = build_markers(@pois, @region_airports)
+    @airport_colours = define_colours(@region_airports)
+    @initial_markers = build_markers(@pois)
     @destination_iata = @round_trip_flight.flight1_destination_airport_iata
     @return_iata = @round_trip_flight.flight2_origin_airport_iata
     @destination_airport = Airport.find_by_iata(@destination_iata)
@@ -174,8 +174,8 @@ class SearchesController < ApplicationController
         {
           lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
           lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
-          infowindow: @round_trip_flight.flight1_destination_airport_iata,
-          picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
+          infowindow: @destination_iata,
+          picture: { url: view_context.image_url("airport-#{@airport_colours[@destination_iata]}.svg"), width: 70, height: 35 }
         },
         ]).to_json
     else
@@ -183,14 +183,14 @@ class SearchesController < ApplicationController
         {
           lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
           lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
-          infowindow: @round_trip_flight.flight1_destination_airport_iata,
-          picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
+          infowindow: @destination_iata,
+          picture: { url: view_context.image_url("airport-#{@airport_colours[@destination_iata]}.svg"), width: 70, height: 35 }
         },
         {
           lat: @return_airport.coordinates.gsub(/\:(.*)/, '').to_f,
           lng: @return_airport.coordinates.gsub(/(.*)\:/, '').to_f,
-          infowindow: @round_trip_flight.flight2_origin_airport_iata,
-          picture: { url: view_context.image_url("orange.svg"), width: 40, height: 40 }
+          infowindow: @return_iata,
+          picture: { url: view_context.image_url("airport-#{@airport_colours[@return_iata]}.svg"), width: 70, height: 35 }
         }
 
         ]).to_json
@@ -397,7 +397,7 @@ class SearchesController < ApplicationController
     @pois
   end
 
-  def build_markers(pois, region_airports)
+  def build_markers(pois)
 
     markers = Gmaps4rails.build_markers(pois) do |poi, marker|
       @poi = poi
@@ -410,19 +410,6 @@ class SearchesController < ApplicationController
                   :height  => 44,
                  })
     end
-    markers.concat(
-      Gmaps4rails.build_markers(region_airports) do |airport, marker|
-        @airport = airport
-        marker.lat airport.coordinates.gsub(/\:(.*)/, '').to_f
-        marker.lng airport.coordinates.gsub(/(.*)\:/, '').to_f
-        marker.infowindow airport.name
-        marker.picture({
-                    :url => view_context.image_url("airport-#{@airport_colours[airport.iata]}.svg"),
-                    :width   => 70,
-                    :height  => 35
-                   })
-      end
-    )
   end
 
   def define_airports(region)
@@ -432,7 +419,6 @@ class SearchesController < ApplicationController
       region_airports << airport
     end
     region_airports
-    raise
   end
 
   def define_colours(region_airports)

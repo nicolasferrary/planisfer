@@ -24,7 +24,6 @@
                   </p>
                   <p>
                     <span class = "<%= @airport_colours[trip.round_trip_flight.flight2_origin_airport_iata] %>"> <span class="hours"><%= trip.round_trip_flight.flight2_take_off_at.strftime("%H:%M") %></span> <span class="airport"> <%= Airport.find_by_iata(trip.round_trip_flight.flight2_origin_airport_iata).cityname %><span class="light-data"> <%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> </span> </span>
-                    <% raise %>
                   </p>
                 </div>
                 <div class="card-description-item">

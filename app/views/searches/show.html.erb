@@ -149,25 +149,25 @@
         // handler.getMap().setZoom(7);
 
       });
+
       $('.result-card').mouseenter('click', function(e) {
         e.preventDefault();
         $('.cardContainer.selected').removeClass('selected');
         $(this).children('.cardContainer').addClass('selected');
         var roundTripFlightId = $(this).data('round-trip-flight-id');
-<%# Refresh map : To be coded in controller so that it removes non selected airports from the map and puts selected airports more clearly (eg bigger) %>
-        // $.ajax({
-        //   type: "GET",
-        //   url: '/round_trip_flights/' + roundTripFlightId + '/refresh_map',
-        //   dataType: "json",
-        //   success: function(result) {
-        //     for (var i = 0; i < markers.length; i++) {
-        //       markers[i].setMap(null);
-        //       handler.removeMarkers(markers);
-        //     }
-        //   markers = [];
-        //   markers = handler.addMarkers(result);
-        //   }
-        // })
+        $.ajax({
+          type: "GET",
+          url: '/round_trip_flights/' + roundTripFlightId + '/refresh_map',
+          dataType: "json",
+          success: function(result) {
+            for (var i = 0; i < markers.length; i++) {
+              markers[i].setMap(null);
+              handler.removeMarkers(markers);
+            }
+          markers = [];
+          markers = handler.addMarkers(result);
+          }
+        })
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
 
