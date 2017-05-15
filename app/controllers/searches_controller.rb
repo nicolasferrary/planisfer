@@ -1,6 +1,7 @@
 class SearchesController < ApplicationController
 
   def create
+
     @region = Region.find_by_name(params[:region])
     @search = Search.new(city: params[:city], starts_on: params[:starts_on], returns_on: params[:returns_on], nb_travelers: params[:nb_travelers])
     @search.region = @region
