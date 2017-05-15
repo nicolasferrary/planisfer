@@ -404,8 +404,8 @@ class SearchesController < ApplicationController
       marker.infowindow render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => poi})
       marker.picture({
                   :url => view_context.image_url("orange-star.svg"),
-                  :width   => 60,
-                  :height  => 60
+                  :width   => 20,
+                  :height  => 31
                  })
     end
     markers.concat(
@@ -416,8 +416,8 @@ class SearchesController < ApplicationController
         marker.infowindow airport.name
         marker.picture({
                     :url => view_context.image_url("bleu.svg"),
-                    :width   => 60,
-                    :height  => 60
+                    :width   => 40,
+                    :height  => 40
                    })
       end
     )
