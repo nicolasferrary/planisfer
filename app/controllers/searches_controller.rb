@@ -29,6 +29,7 @@ class SearchesController < ApplicationController
     @trips = @search.trips
     @region = @search.region
     @region_airports = define_airports(@region)
+    @airport_colours = define_colours(@region_airports)
     @selected_airports = @region_airports
     @nb_travelers = @search.nb_travelers
     @passengers_title = passengers(@nb_travelers)
@@ -431,6 +432,14 @@ class SearchesController < ApplicationController
       region_airports << airport
     end
     region_airports
+  end
+
+  def define_colours(region_airports)
+    colours = {}
+    region_airports.each_with_index do |airport, index|
+      colours[airport.iata] = "colour-code-#{index}"
+    end
+    colours
   end
 
 end
