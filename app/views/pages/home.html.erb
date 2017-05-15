@@ -422,26 +422,61 @@
   <script>
     $(document).ready(function() {
       $('#search-button').on('click', function(event) {
+
+        setTimeout(function() {
+          $('#airline1').removeClass('hidden');
+        }, 500)
+        setTimeout(function() {
+          $('#airline2').removeClass('hidden');
+          ('#airline5').removeClass('hidden');
+        }, 1000)
+        setTimeout(function() {
+          $('#airline7').removeClass('hidden');
+        }, 1300)
+        setTimeout(function() {
+          $('#airline12').removeClass('hidden');
+          $('#airline10').removeClass('hidden');
+        }, 2100)
+         setTimeout(function() {
+          $('#airline6').removeClass('hidden');
+        }, 2400)
+         setTimeout(function() {
+          $('#airline11').removeClass('hidden');
+          $('#airline3').removeClass('hidden');
+          $('#airline8').removeClass('hidden');
+        }, 3000)
+         setTimeout(function() {
+          $('#airline4').removeClass('hidden');
+        }, 3300)
+         setTimeout(function() {
+          $('#airline9').removeClass('hidden');
+        }, 4000)
+
+
         setTimeout(function() {
           $('#wait1').addClass('hidden');
+          $('#text2').removeClass('light');
+          $('#text2bis').removeClass('light');
+          $('#text1').addClass('light');
           $('#checked1').removeClass('hidden');
         }, 1000)
-      })
 
-      $('#search-button').on('click', function(event) {
         setTimeout(function() {
           $('#wait2').addClass('hidden');
+          $('#text3').removeClass('light');
+          $('#text2bis').addClass('light');
           $('#checked2').removeClass('hidden');
         }, 3000)
-      })
 
-      $('#search-button').on('click', function(event) {
         setTimeout(function() {
           $('#wait3').addClass('hidden');
+          $('#text4').removeClass('light');
+          $('#text2').addClass('light');
+          $('#text3').addClass('light');
           $('#checked3').removeClass('hidden');
         }, 5000)
-      })
 
+      })
     })
   </script>
 

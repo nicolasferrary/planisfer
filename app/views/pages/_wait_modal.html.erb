@@ -9,7 +9,7 @@
         <div class = "row">
           <div class = 'modal-row'>
             <div class = "col-md-10">
-              Identifying all possible airports
+              <span id = "text1">Identifying all possible airports</span>
             </div>
             <div class = "col-md-2">
               <div id = "wait1"><%= render 'modal_checkbox' %></div>
@@ -21,7 +21,7 @@
         <div class = "row">
           <div class = 'modal-row'>
             <div class = "col-md-12">
-              Searching the cheapest flights
+              <span class = "light", id = "text2">Searching the cheapest flights</span>
             </div>
           </div>
         </div>
@@ -30,12 +30,12 @@
           <div class = 'modal-sub-row'>
 
             <div class = "col-md-10">
-              Return flights (same arrival and departure airports)
+              <span class = "light", id = "text2bis">Return flights (same arrival and departure airports)</span>
             </div>
 
             <div class = "col-md-2">
               <div id = "wait2"><%= render 'modal_checkbox' %></div>
-              <div class = "modal-checkbox hidden", id = "checked2"><i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i></div>
+              <div class = "modal-checkbox sub-checkbox hidden", id = "checked2"><i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i></div>
             </div>
 
           </div>
@@ -45,12 +45,12 @@
           <div class = 'modal-sub-row'>
 
             <div class = "col-md-10">
-              Multi-city flights (different arrival and departure airports)
+              <span class = "light", id = "text3">Multi-city flights (different arrival and departure airports)</span>
             </div>
 
             <div class = "col-md-2">
               <div id = "wait3"><%= render 'modal_checkbox' %></div>
-              <div class = "modal-checkbox hidden", id = "checked3"><i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i></div>
+              <div class = "modal-checkbox sub-checkbox hidden", id = "checked3"><i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i></div>
             </div>
 
           </div>
@@ -59,7 +59,7 @@
         <div class = "row">
           <div class = 'modal-row'>
             <div class = "col-md-10">
-              Filtering direct flights only
+              <span class = "light", id = "text4">Filtering direct flights only</span>
             </div>
             <div class = "col-md-2">
               <div id = "wait4"><%= render 'modal_checkbox' %></div>
