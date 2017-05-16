@@ -160,10 +160,10 @@ class SearchesController < ApplicationController
     @region = @trip.search.region
     @pois = define_pois(@region)
     @initial_markers = build_markers(@pois)
-    # @destination_iata = @round_trip_flight.flight1_destination_airport_iata
-    # @return_iata = @round_trip_flight.flight2_origin_airport_iata
-    # @destination_airport = Airport.find_by_iata(@destination_iata)
-    # @return_airport = Airport.find_by_iata(@return_iata)
+    @destination_iata = @trip.round_trip_flight.flight1_destination_airport_iata
+    @return_iata = @trip.round_trip_flight.flight2_origin_airport_iata
+    @destination_airport = Airport.find_by_iata(@destination_iata)
+    @return_airport = Airport.find_by_iata(@return_iata)
 
     # # @region_airports is a array of city names for cities that appear at least once in the possible trips
     # @region_airports = define_airports(@trips)
@@ -172,16 +172,14 @@ class SearchesController < ApplicationController
 
 
     if @trip.arrival_city == @trip.return_city
-      render json: @initial_markers.to_json
-      # .concat([
-      #   {
-      #     lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
-      #     lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
-      #     infowindow: @trip.arrival_city,
-      #     picture: { url: view_context.image_url("airport-#{@airport_colours[@trip.arrival_city]}.svg"), width: 70, height: 35 }
-      #   },
-      #   ])
-      # .to_json
+      render json: @initial_markers.concat([
+        {
+          lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
+          lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
+          infowindow: @trip.arrival_city,
+          picture: { url: view_context.image_url("airport-colour-code-0.svg"), width: 70, height: 35 }
+        },
+        ]).to_json
     else
       # render json: @initial_markers.concat([
       #   {
