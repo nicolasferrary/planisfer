@@ -169,7 +169,7 @@
         var tripId = $(this).data('trip-id');
         $.ajax({
           type: "GET",
-          url: '/trip/' + tripId + '/refresh_map',
+          url: '/trips/' + tripId + '/refresh_map',
           dataType: "json",
           success: function(result) {
             for (var i = 0; i < markers.length; i++) {
