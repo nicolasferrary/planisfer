@@ -167,9 +167,11 @@
         $('.cardContainer.selected').removeClass('selected');
         $(this).children('.cardContainer').addClass('selected');
         var tripId = $(this).data('trip-id');
+        var colours = $(this).data('colours');
         $.ajax({
           type: "GET",
           url: '/trips/' + tripId + '/refresh_map',
+          data: {airport_colours: colours},
           dataType: "json",
           success: function(result) {
             for (var i = 0; i < markers.length; i++) {

@@ -164,9 +164,10 @@ class SearchesController < ApplicationController
     @return_iata = @trip.round_trip_flight.flight2_origin_airport_iata
     @destination_airport = Airport.find_by_iata(@destination_iata)
     @return_airport = Airport.find_by_iata(@return_iata)
+    @airport_colours = params[:airport_colours]
 
     # # @region_airports is a array of city names for cities that appear at least once in the possible trips
-    # @region_airports = define_airports(@trips)
+    # @region_airports = define_airports([@trip])
     # #@airport_colours is a hash that gives a colour code to each city in @region_airports
     # @airport_colours = define_colours(@region_airports)
 
@@ -177,25 +178,24 @@ class SearchesController < ApplicationController
           lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
           lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
           infowindow: @trip.arrival_city,
-          picture: { url: view_context.image_url("airport-colour-code-0.svg"), width: 70, height: 35 }
+          picture: { url: view_context.image_url("airport-#{@airport_colours[@trip.arrival_city]}.svg"), width: 70, height: 35 }
         },
         ]).to_json
     else
-      # render json: @initial_markers.concat([
-      #   {
-      #     lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
-      #     lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
-      #     infowindow: @trip.arrival_city,
-      #     picture: { url: view_context.image_url("airport-#{@airport_colours[@trip.arrival_city]}.svg"), width: 70, height: 35 }
-      #   },
-      #   {
-      #     lat: @return_airport.coordinates.gsub(/\:(.*)/, '').to_f,
-      #     lng: @return_airport.coordinates.gsub(/(.*)\:/, '').to_f,
-      #     infowindow: @trip.return_city,
-      #     picture: { url: view_context.image_url("airport-#{@airport_colours[@trip.return_city]}.svg"), width: 70, height: 35 }
-      #   }
-
-      #   ]).to_json
+      render json: @initial_markers.concat([
+        {
+          lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
+          lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
+          infowindow: @trip.arrival_city,
+          picture: { url: view_context.image_url("airport-#{@airport_colours[@trip.arrival_city]}.svg"), width: 70, height: 35 }
+        },
+        {
+          lat: @return_airport.coordinates.gsub(/\:(.*)/, '').to_f,
+          lng: @return_airport.coordinates.gsub(/(.*)\:/, '').to_f,
+          infowindow: @trip.return_city,
+          picture: { url: view_context.image_url("airport-#{@airport_colours[@trip.return_city]}.svg"), width: 70, height: 35 }
+        }
+        ]).to_json
     end
   end
 

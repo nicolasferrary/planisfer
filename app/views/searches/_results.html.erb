@@ -12,7 +12,7 @@
       </div>
       <div class="row" id="see-flights">
         <% @trips_selection.each_with_index do |trip, index| %>
-          <%= link_to selections_path(:trip_id => trip.id), class: 'tabLink result-card', 'data-toggle' => "modal", 'data-target' => '#car_wait_modal',method: :post, data: {trip_id: trip.id} do %>
+          <%= link_to selections_path(:trip_id => trip.id), class: 'tabLink result-card', 'data-toggle' => "modal", 'data-target' => '#car_wait_modal',method: :post, data: {trip_id: trip.id, colours: @airport_colours} do %>
             <div class="cardContainer <%= 'selected' if index == 0 %> <%= 'hidden the-hidden-results' if index > 3 %>" >
               <div class="card-description">
                 <div class="card-description-item">
