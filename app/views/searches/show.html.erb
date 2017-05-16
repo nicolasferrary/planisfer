@@ -23,82 +23,94 @@
   <!-- ouverture row -->
 
 
-    <div class="container-fluid">
+    <div class = "container-fluid">
 
-      <div class="filter-container">
+      <div class = "row">
 
-        <div class="filter-slider">
-<!-- La div ci dessous est utile, mais a priori pas la classe -->
-          <div class = "filer-slider-item">
-<!-- A priori la div ci dessous n'est pas utile -->
-            <div class = "filter-box">
+        <div class = 'col-md-6'>
 
-              <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region.name %> </strong></h5>
-              <div class="filters">
-                <ul class="text-center">
-                  <li>
-                    <h3><i class="fa fa-plane"></i> Take-off time</h3>
-                  </li>
-                  <li>
-                    <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider submit-on-change",
-                    data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
-                  </li>
-                </ul>
+          <div class = "row">
+            <div class="filter-slider">
+
+              <div class = 'col-md-6'>
+                <div class = "filer-slider-item">
+    <!-- A priori la div ci dessous n'est pas utile -->
+                  <div class = "filter-box">
+
+                    <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region.name %> </strong></h5>
+                    <div class="filters">
+                      <ul class="text-center">
+                        <li>
+                          <h3><i class="fa fa-plane"></i> Take-off time</h3>
+                        </li>
+                        <li>
+                          <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider submit-on-change",
+                          data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              <div class = 'col-md-6'>
+                <div class="filter-slider-item">
+                  <div class = "filter-box">
+                    <h5 class = "text-center" > From <strong> <%= @region.name %> </strong> to <strong> <%= @city_real_name %></strong></h5>
+                    <div class="filters">
+                      <ul class="text-center">
+                        <li>
+                          <h3><i class="fa fa-plane"></i> Take-off time</h3>
+                        </li>
+
+                        <li>
+                          <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider submit-on-change",
+                          data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
+
           </div>
 
-          <div class="filter-slider-item">
-            <div class = "filter-box">
-              <h5 class = "text-center" > From <strong> <%= @region.name %> </strong> to <strong> <%= @city_real_name %></strong></h5>
-              <div class="filters">
-                <ul class="text-center">
-                  <li>
-                    <h3><i class="fa fa-plane"></i> Take-off time</h3>
-                  </li>
-
-                  <li>
-                    <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider submit-on-change",
-                    data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
         </div>
 
-          <hr class="vertical-divider">
 
-        <div class="filter-buttons">
-          <div class = "text-center ">
-            <% if @selected_cities.count == 4 %>
-              <h5 class = "text-center" > Click to <strong> remove
-               </strong> some cities</h5>
-            <% elsif @selected_cities.count == 0 %>
-              <h5 class = "text-center" > Click to <strong> add </strong> some cities</h5>
-            <% else %>
-              <h5 class = "text-center" > Click to <strong> add </strong> or <strong> remove </strong> some cities</h5>
-            <% end %>
+        <div class = 'col-md-6'>
+          <div class="filter-buttons">
 
-            <div class="city-tags">
-              <% @region_airports.each do |airport| %>
-                <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city="<%= airport%>"><%= airport%></div>
-              <% end %>
+            <div class = "row">
+              <h5 class = "text-center" > Possible arrival and return <strong>cities </strong></h5>
             </div>
+
+            <div class = "row">
+              <% @region_airports.each do |airport| %>
+                <div class = "col-md-3 content-center">
+                  <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city="<%= airport%>"><%= airport%></div>
+                </div>
+              <% end %>
+
+            </div>
+
           </div>
-        </div> <!-- fin filter-buttons -->
 
-    <!--  fermeture row -->
+        </div>
+
       </div>
+
+      <div class="row">
+        <div class ="text-center filter-apply">
+          <%= hidden_field_tag 'selected-cities', params['selected-cities'], class: "submit-on-change" %>
+          <%# submit_tag "Apply filters", class: "btn-brand" %>
+        </div>
+      </div>
+
     </div>
 
-
-    <div class="row">
-      <div class ="text-center filter-apply">
-        <%= hidden_field_tag 'selected-cities', params['selected-cities'], class: "submit-on-change" %>
-        <%# submit_tag "Apply filters", class: "btn-brand" %>
-      </div>
-    </div>
   <% end %>
 </div>
 

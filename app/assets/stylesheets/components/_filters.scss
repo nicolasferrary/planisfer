@@ -33,15 +33,13 @@
 }
 
 
-.city-tags {
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  margin-top:20px;
-  .btn-tag {
-    margin: 0 5px;
-  }
+
+.btn-tag {
+  margin: 0 5px;
+  text-align:center;
+  margin-top: 20px;
 }
+
 
 
 .filter-container{
@@ -103,4 +101,9 @@ hr.vertical-divider {
 
 #hide-filters{
   margin-top: -33px;
+}
+
+.content-center{
+  display:flex;
+  justify-content:center;
 }
