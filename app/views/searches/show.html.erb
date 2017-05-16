@@ -82,7 +82,7 @@
 
             <div class="city-tags">
               <% @region_airports.each do |airport| %>
-                <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city="<%= airport.cityname%>"><%= airport.cityname %></div>
+                <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city="<%= airport%>"><%= airport%></div>
               <% end %>
             </div>
           </div>

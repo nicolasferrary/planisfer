@@ -16,7 +16,7 @@ class SearchesController < ApplicationController
     @starts_on = params[:starts_on]
     @returns_on = params[:returns_on]
     @nb_travelers = params[:nb_travelers]
-    @region_airports = define_airports(@region)
+    @all_region_airports = define__all_airports(@region)
 
     @trips = get_trips_for(@starts_on, @returns_on, @nb_travelers, @city, @search, @region_airports)
 
@@ -28,7 +28,10 @@ class SearchesController < ApplicationController
     @search = Search.find(params[:id])
     @trips = @search.trips
     @region = @search.region
-    @region_airports = define_airports(@region)
+
+    # @region_airports is a array of city names for cities that appear at least once in the possible trips
+    @region_airports = define_airports(@trips)
+    #@airport_colours is a hash that gives a colour code to each city in @region_airports
     @airport_colours = define_colours(@region_airports)
     @selected_airports = @region_airports
     @nb_travelers = @search.nb_travelers
@@ -42,10 +45,8 @@ class SearchesController < ApplicationController
     @status = "none"
 
     # Initialize selected cities for filters
-    @selected_cities = []
-    @region_airports.each do |airport|
-      @selected_cities << airport.cityname
-    end
+#VERIFIER QUE CA SERT ENCORE
+    @selected_cities = @region_airports
     # Attribute selected cities in params to @selected cities
     params["selected-cities"] == nil if params["selected-cities"] == ""
     if params["selected-cities"] == nil || params["selected-cities"] == ""
@@ -66,12 +67,10 @@ class SearchesController < ApplicationController
     @f2_min_time = set_range(params[:flight2_range])[0]
     @f2_max_time = set_range(params[:flight2_range])[1]
 
+    # Apply index filters and select number of trips to be displayed
     apply_index_filters
-
     @trips = @trips.sort_by { |trip| trip.price }
-
     @trips_selection = @trips.first(10)
-
     @round_trips = @trips_selection.map(&:round_trip_flight)
 
     # Define POIs we want to show on the map
@@ -160,7 +159,7 @@ class SearchesController < ApplicationController
     @round_trip_flight = RoundTripFlight.find(params[:round_trip_flight_id])
     @region = @round_trip_flight.region
     @pois = define_pois(@region)
-    @region_airports = define_airports(@region)
+    @region_airports = define_airports(@trips)
     @airport_colours = define_colours(@region_airports)
     @initial_markers = build_markers(@pois)
     @destination_iata = @round_trip_flight.flight1_destination_airport_iata
@@ -412,19 +411,28 @@ class SearchesController < ApplicationController
     end
   end
 
-  def define_airports(region)
-    region_airports =[]
-    region.airports.each do |airport_iata|
-      airport = Airport.find_by_iata(airport_iata)
-      region_airports << airport
+  def define_all_airports(region)
+    all_region_airports = []
+    region.airports.each do |airport|
+      iata =
     end
-    region_airports
+    all_region_airports
+  end
+
+  def define_airports(trips)
+    #Sets are a bit like array except they remove duplicates
+    region_airports = Set.new []
+    trips.each do |trip|
+      region_airports << trip.arrival_city
+      region_airports << trip.return_city
+    end
+    region_airports.to_a
   end
 
   def define_colours(region_airports)
     colours = {}
     region_airports.each_with_index do |airport, index|
-      colours[airport.iata] = "colour-code-#{index}"
+      colours[airport] = "colour-code-#{index}"
     end
     colours
   end
