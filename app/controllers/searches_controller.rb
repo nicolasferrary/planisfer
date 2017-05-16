@@ -16,9 +16,9 @@ class SearchesController < ApplicationController
     @starts_on = params[:starts_on]
     @returns_on = params[:returns_on]
     @nb_travelers = params[:nb_travelers]
-    @all_region_airports = define__all_airports(@region)
+    @all_region_airports = define_all_airports(@region)
 
-    @trips = get_trips_for(@starts_on, @returns_on, @nb_travelers, @city, @search, @region_airports)
+    @trips = get_trips_for(@starts_on, @returns_on, @nb_travelers, @city, @search, @all_region_airports)
 
     redirect_to search_path(@search)
 
@@ -204,7 +204,7 @@ class SearchesController < ApplicationController
 
 # @latitude = Geocoder.search("Faro, Portugal")[0].data["geometry"]["location"]["lat"]
 
-  def get_trips_for(starts_on, returns_on, nb_travelers, city, search, region_airports)
+  def get_trips_for(starts_on, returns_on, nb_travelers, city, search, all_region_airports)
     trips = []
     rtfs = []
     # create rtf for routes with same landing and departure airports in destination region and add them to rtfs
@@ -228,7 +228,7 @@ class SearchesController < ApplicationController
     # create rtf for routes with same landing and departure airports in destination region and add them to rtfs
 
       # Launch one return request per airport, then create rtfs and stck them in rtfs
-    region_airports.each do |airport|
+    all_region_airports.each do |airport|
       options = {
         origin: city.name,
         destination: airport.iata,
@@ -257,7 +257,7 @@ class SearchesController < ApplicationController
     outbounds = []
     inbounds = []
     # For each airport launch 2 requests and stock data in outbounds and inbounds arrays
-    region_airports.each do |airport|
+    all_region_airports.each do |airport|
       options1 = {
         origin: city.name,
         destination: airport.iata,
@@ -412,9 +412,10 @@ class SearchesController < ApplicationController
   end
 
   def define_all_airports(region)
-    all_region_airports = []
-    region.airports.each do |airport|
-      iata =
+    all_region_airports =[]
+    region.airports.each do |airport_iata|
+      airport = Airport.find_by_iata(airport_iata)
+      all_region_airports << airport
     end
     all_region_airports
   end
