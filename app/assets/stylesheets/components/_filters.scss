@@ -58,10 +58,8 @@
   flex: 0 0 49%;
 }
 
-hr.vertical-divider {
-  width: 1px;
-  height: 85px;
-  background: gray;
+.left-border{
+  border-left: 1px solid gray
 }
 
 .filters ul {
