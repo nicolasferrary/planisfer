@@ -171,13 +171,13 @@ class SearchesController < ApplicationController
     # #@airport_colours is a hash that gives a colour code to each city in @region_airports
     # @airport_colours = define_colours(@region_airports)
 
-
     if @trip.arrival_city == @trip.return_city
       render json: @initial_markers.concat([
         {
           lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
           lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
           infowindow: @trip.arrival_city,
+          json: { :id => 1 },
           picture: { url: view_context.image_url("airport-#{@airport_colours[@trip.arrival_city]}.svg"), width: 70, height: 35 }
         }
         ]).to_json
@@ -188,12 +188,14 @@ class SearchesController < ApplicationController
           lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
           lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
           infowindow: @trip.arrival_city,
+          json: { :id => 1 },
           picture: { url: view_context.image_url("airport-#{@airport_colours[@trip.arrival_city]}.svg"), width: 70, height: 35 }
         },
         {
           lat: @return_airport.coordinates.gsub(/\:(.*)/, '').to_f,
           lng: @return_airport.coordinates.gsub(/(.*)\:/, '').to_f,
           infowindow: @trip.return_city,
+          json: { :id => 2 },
           picture: { url: view_context.image_url("airport-#{@airport_colours[@trip.return_city]}.svg"), width: 70, height: 35 }
         }
         ]).to_json
@@ -414,6 +416,20 @@ class SearchesController < ApplicationController
                  })
     end
   end
+
+  # def build_airport_marker(trip, airport, airport_colours)
+  #   markers = Gmaps4rails.build_markers(airport) do |airport, marker|
+  #     @airport = airport
+  #     marker.lat airport.coordinates.gsub(/\:(.*)/, '').to_f
+  #     marker.lng airport.coordinates.gsub(/(.*)\:/, '').to_f
+  #     marker.infowindow trip.arrival_city
+  #     marker.picture({
+  #                 :url => view_context.image_url("airport-#{airport_colours[trip.arrival_city]}.svg"),
+  #                 :width   => 70,
+  #                 :height  => 35,
+  #                })
+  #   end
+  # end
 
   def define_all_airports(region)
     all_region_airports =[]

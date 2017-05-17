@@ -168,6 +168,7 @@
         $(this).children('.cardContainer').addClass('selected');
         var tripId = $(this).data('trip-id');
         var colours = $(this).data('colours');
+        //
         $.ajax({
           type: "GET",
           url: '/trips/' + tripId + '/refresh_map',
@@ -178,14 +179,36 @@
               markers[i].setMap(null);
               handler.removeMarkers(markers);
             }
-          markers = [];
-          markers = handler.addMarkers(result);
+            // markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
+            // handler.addMarker(result);
+            markers = handler.addMarkers(result);
+            // for(var i = 0; i < markers.length; i++){
+            //   m = Gmaps.map.markers[i];
+            //   function(m){
+            //     if (m.serviceObject.id == 1) {
+            //       m.panTo();
+            //       m.serviceObject.setZIndex(99);
+            //     else m.serviceObject.setZIndex(1);
+            //     }
+            //   }
+            // }
+
+            // Gmaps.mapMarker = function() {
+            //   $.each(Gmaps.store.markers, function() {
+            //     if (this.serviceObject.id == 1) {
+            //       this.panTo();
+            //       this.serviceObject.setZIndex(99);
+            //     else this.serviceObject.setZIndex();
+            //     }
+            //   });
+            // }
           // Trying to change zindex of airports
-          var zInd = markers.length - 1;
-          var lastmarker = markers[zInd];
+          // var zInd = markers.length;
+          // markers[zInd] = handler.addMarker(result);
           // lastmarker.setZIndex(zIndex:MAX_ZINDEX);
           }
         })
+
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
 
