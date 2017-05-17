@@ -180,6 +180,10 @@
             }
           markers = [];
           markers = handler.addMarkers(result);
+          // Trying to change zindex of airports
+          var zInd = markers.length - 1;
+          var lastmarker = markers[zInd];
+          // lastmarker.setZIndex(zIndex:MAX_ZINDEX);
           }
         })
         handler.bounds.extendWith(markers);

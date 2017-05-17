@@ -181,6 +181,7 @@ class SearchesController < ApplicationController
           picture: { url: view_context.image_url("airport-#{@airport_colours[@trip.arrival_city]}.svg"), width: 70, height: 35 }
         }
         ]).to_json
+
     else
       render json: @initial_markers.concat([
         {
