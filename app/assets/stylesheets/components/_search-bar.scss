@@ -9,21 +9,15 @@
   opacity: 1;
 
   h3 {
-  color: black;
   font-size: 17px;
   font-weight: bolder;
   }
-}
-
-.row {
-  margin-right: auto;
 }
 
 .form-post h1 {
   text-align: center;
   font-weight: bolder;
   font-size: 25px;
-  color: black;
   margin-bottom: 25px;
 
 }
@@ -166,38 +160,6 @@ car.datepicker{
 #car-recap-text{
   text-align: center;
   padding-top: 4px;
-}
-
-#modify-search{
-  text-align: right;
-  padding-top: 4px;
-  opacity: 0.7;
-  text-decoration: none;
-}
-
-#modify-search:hover{
-  text-decoration: none;
-  opacity: 1;
-}
-
-.modify-search-link{
-  text-decoration: none;
-}
-
-.modify-search-link:hover{
-  text-decoration: none;
-}
-
-.modify-search-link:visited{
-  text-decoration: none;
-}
-
-.modify-search-link:active{
-  text-decoration: none;
-}
-
-.modify-search-link:focus{
-  text-decoration: none;
 }
 
 .car-recap-row{

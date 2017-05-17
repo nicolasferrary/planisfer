@@ -18,6 +18,8 @@
   width: 100%;
 }
 
+
+
 .btn-tag {
   border-radius: 50px;
   border: 1px solid $secondary-color;
@@ -48,6 +50,11 @@
   }
 }
 
+.payement-button{
+  position: relative;
+  top: 25px;
+}
+
 .new-search-btn{
   width: 50%;
   height: 10px;
@@ -63,6 +70,8 @@
   color: $brand-color;
   text-decoration: none;
   cursor: pointer;
+  text-align: right;
+  opacity: 0.7;
 }
 
 
@@ -72,6 +81,34 @@
   margin: 0 0 5px;
 }
 
-#modify-search:hover {
+#modify-search:hover{
   text-decoration: none;
+  opacity: 1;
+}
+
+.modify-search-link{
+  text-decoration: none;
+}
+
+.modify-search-link:hover{
+  text-decoration: none;
+}
+
+.modify-search-link:visited{
+  text-decoration: none;
+}
+
+.modify-search-link:active{
+  text-decoration: none;
+}
+
+.modify-search-link:focus{
+  text-decoration: none;
+}
+
+.next-button{
+  float: right;
+  padding: 10px 30px;
+  margin-right: 15px;
+  margin-top: 25px;
 }

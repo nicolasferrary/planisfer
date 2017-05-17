@@ -91,6 +91,8 @@ class SelectionsController < ApplicationController
       :selection_id => @selection
     }
 
+    @pick_up_airport = Airport.find_by_iata(@pick_up_location)
+    @drop_off_airport = Airport.find_by_iata(@drop_off_location)
 
 
     respond_to do |format|

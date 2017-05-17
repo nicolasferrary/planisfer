@@ -4,8 +4,8 @@
 
 
 .page-result{
-  background: #F5F5F5;
-  padding-top: 30px;
+  // background: #F5F5F5;
+  padding-top: 20px;
 }
 
 .flexbox {
@@ -43,9 +43,23 @@
 
 
 #TitleShow {
-  margin-bottom: 16px;
+  margin-bottom: 28px;
   margin-top: -20px;
   text-align: center;
+}
+
+.titlepadding{
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+#poi-title {
+  text-align: center;
+}
+
+#poi-title h3{
+  font-size: 23px;
+  color: #333333;
 }
 
 #TitleShow h3{
@@ -67,7 +81,7 @@ a.box-select-all-flights {
 #more-flights p{
   color: $brand-color;
   text-decoration: none;
-  margin: 0 0 5px;
+  margin: 0 0 30px;
 }
 
 #more-flights:hover {
@@ -76,6 +90,8 @@ a.box-select-all-flights {
 
 .box-select-all-flights {
   text-decoration: none;
+  display: flex;
+  justify-content: space-around;
 }
 
 .box-select-all-flights:hover {
@@ -88,9 +104,54 @@ a.box-select-all-flights {
   color: #0185B5;
 }
 
-.info-label-back {
+.colour-code-0 {
   font-weight: bolder;
   color: $orange;
+}
+.colour-code-1 {
+  font-weight: bolder;
+  color: #0185B5;
+}
+.colour-code-2 {
+  font-weight: bolder;
+  color: $red;
+  // #EE5F5B
+}
+.colour-code-3 {
+  font-weight: bolder;
+  color: $yellow;
+  // #FDB631
+}
+.colour-code-4 {
+  font-weight: bolder;
+  color: $green;
+  // #32B796
+}
+.colour-code-5 {
+  font-weight: bolder;
+  color: blue;
+  // #0000FF
+}
+.colour-code-6 {
+  font-weight: bolder;
+  color: red;
+  // #FF0000
+}
+.colour-code-7 {
+  font-weight: bolder;
+  color: #c679ba;
+}
+.colour-code-8 {
+  font-weight: bolder;
+  color: #468ff4;
+}
+.colour-code-9 {
+  font-weight: bolder;
+  color: #9d74f7;
+}
+.colour-code-10 {
+  font-weight: bolder;
+  color: #4ef446;
 }
 
 .flight-label {
@@ -123,4 +184,9 @@ a.box-select-all-flights {
 .light-data {
   font-size: 11px;
   font-weight: light;
+}
+
+#price-for{
+  float:right;
+  font-size: 12px;
 }

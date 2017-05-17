@@ -1,9 +1,14 @@
 
 
 #all-filters {
-  background: #00CECB;
   color: white;
   padding: 10px 0 1px 0;
+  color: white;
+  border-top: 24px solid #00CECB;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  height: 0;
+  width: 150px;
 }
 
 
@@ -28,15 +33,13 @@
 }
 
 
-.city-tags {
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  margin-top:20px;
-  .btn-tag {
-    margin: 0 5px;
-  }
+
+.btn-tag {
+  margin: 0 5px;
+  text-align:center;
+  margin-top: 20px;
 }
+
 
 
 .filter-container{
@@ -55,10 +58,8 @@
   flex: 0 0 49%;
 }
 
-hr.vertical-divider {
-  width: 1px;
-  height: 85px;
-  background: gray;
+.left-border{
+  border-left: 1px solid gray
 }
 
 .filters ul {
@@ -86,4 +87,21 @@ hr.vertical-divider {
 }
 .city-selected:hover{
   opacity: 0.6;
+}
+
+.sticky-form{
+  margin-top: 57px;
+}
+
+#see-filters{
+  margin-top: -33px;
+}
+
+#hide-filters{
+  margin-top: -33px;
+}
+
+.content-center{
+  display:flex;
+  justify-content:center;
 }

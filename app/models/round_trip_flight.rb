@@ -1,5 +1,7 @@
 class RoundTripFlight < ApplicationRecord
 
+  monetize :price_cents
+
   has_many :trips, dependent: :destroy
   belongs_to :region
   validates :price, presence: true

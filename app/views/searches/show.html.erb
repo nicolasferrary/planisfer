@@ -11,7 +11,7 @@
 <div>
   <%= link_to "javascript:showhide('filters')", class: "box-select-all-flights" do%>
     <div class="text-center" id="all-filters">
-      <p class="<%= 'hidden' if @status == 'block' %>" id="see-filters"><strong>See filters</strong> <%= image_tag "arrow.png", class: "floating arrow-img-filter" %></p>
+      <p class="<%= 'hidden' if @status == 'block' %>" id="see-filters"><strong>Edit search</strong> <%= image_tag "arrow.png", class: "floating arrow-img-filter" %></p>
       <p class="<%= 'hidden' if @status == 'none' %>" id="hide-filters"><strong>Hide filters</strong><%= image_tag "arrow_up.png", class: "floating arrow-img-filter" %></p>
     </div>
   <% end  %>
@@ -23,82 +23,94 @@
   <!-- ouverture row -->
 
 
-    <div class="container-fluid">
+    <div class = "container-fluid">
 
-      <div class="filter-container">
+      <div class = "row">
 
-        <div class="filter-slider">
-<!-- La div ci dessous est utile, mais a priori pas la classe -->
-          <div class = "filer-slider-item">
-<!-- A priori la div ci dessous n'est pas utile -->
-            <div class = "filter-box">
+        <div class = 'col-md-6'>
 
-              <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region.name %> </strong></h5>
-              <div class="filters">
-                <ul class="text-center">
-                  <li>
-                    <h3><i class="fa fa-plane"></i> Take-off time</h3>
-                  </li>
-                  <li>
-                    <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider submit-on-change",
-                    data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
-                  </li>
-                </ul>
+          <div class = "row">
+            <div class="filter-slider">
+
+              <div class = 'col-md-6'>
+                <div class = "filer-slider-item">
+    <!-- A priori la div ci dessous n'est pas utile -->
+                  <div class = "filter-box">
+
+                    <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region.name %> </strong></h5>
+                    <div class="filters">
+                      <ul class="text-center">
+                        <li>
+                          <h3><i class="fa fa-plane"></i> Take-off time</h3>
+                        </li>
+                        <li>
+                          <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider submit-on-change",
+                          data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+              <div class = 'col-md-6'>
+                <div class="filter-slider-item">
+                  <div class = "filter-box">
+                    <h5 class = "text-center" > From <strong> <%= @region.name %> </strong> to <strong> <%= @city_real_name %></strong></h5>
+                    <div class="filters">
+                      <ul class="text-center">
+                        <li>
+                          <h3><i class="fa fa-plane"></i> Take-off time</h3>
+                        </li>
+
+                        <li>
+                          <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider submit-on-change",
+                          data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
+
           </div>
 
-          <div class="filter-slider-item">
-            <div class = "filter-box">
-              <h5 class = "text-center" > From <strong> <%= @region.name %> </strong> to <strong> <%= @city_real_name %></strong></h5>
-              <div class="filters">
-                <ul class="text-center">
-                  <li>
-                    <h3><i class="fa fa-plane"></i> Take-off time</h3>
-                  </li>
-
-                  <li>
-                    <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider submit-on-change",
-                    data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
         </div>
 
-          <hr class="vertical-divider">
 
-        <div class="filter-buttons">
-          <div class = "text-center ">
-            <% if @selected_cities.count == 4 %>
-              <h5 class = "text-center" > Click to <strong> remove
-               </strong> some cities</h5>
-            <% elsif @selected_cities.count == 0 %>
-              <h5 class = "text-center" > Click to <strong> add </strong> some cities</h5>
-            <% else %>
-              <h5 class = "text-center" > Click to <strong> add </strong> or <strong> remove </strong> some cities</h5>
-            <% end %>
+        <div class = 'col-md-6 left-border'>
+          <div class="filter-buttons">
 
-            <div class="city-tags">
-              <% @region_airports.each do |airport| %>
-                <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city="<%= airport.cityname%>"><%= airport.cityname %></div>
-              <% end %>
+            <div class = "row">
+              <h5 class = "text-center" > Possible arrival and return <strong>cities </strong></h5>
             </div>
+
+            <div class = "row">
+              <% @region_airports.each do |airport| %>
+                <div class = "col-md-3 content-center">
+                  <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city="<%= airport%>"><%= airport%></div>
+                </div>
+              <% end %>
+
+            </div>
+
           </div>
-        </div> <!-- fin filter-buttons -->
 
-    <!--  fermeture row -->
+        </div>
+
       </div>
+
+      <div class="row">
+        <div class ="text-center filter-apply">
+          <%= hidden_field_tag 'selected-cities', params['selected-cities'], class: "submit-on-change" %>
+          <%# submit_tag "Apply filters", class: "btn-brand" %>
+        </div>
+      </div>
+
     </div>
 
-
-    <div class="row">
-      <div class ="text-center filter-apply">
-        <%= hidden_field_tag 'selected-cities', params['selected-cities'], class: "submit-on-change" %>
-        <%# submit_tag "Apply filters", class: "btn-brand" %>
-      </div>
-    </div>
   <% end %>
 </div>
 
@@ -139,36 +151,70 @@
             {"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
           ]
         },
-        internal: { id: 'map' } }, function() {
-        markers = handler.addMarkers( <%= raw @pois_markers.to_json %> );
-        handler.bounds.extendWith(markers);
-        // handler.getMap().setZoom(7);
-        handler.fitMapToBounds();
+        internal: { id: 'map' }}, function() {
+          markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
+          // for (var i = 0; i < markers.length; i++) {
+          //   marker = markers[i];
+          //   marker.getServiceObject().addListener('mouseover', function() {
+          //     marker.infowindow.render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => this});
+          //   });
+          // }
+          handler.bounds.extendWith(markers);
+          // handler.getMap().setZoom(7);
+          handler.fitMapToBounds();
+          // Set zoom when loading the page when there is one marker
+          // The closer to 15, the higher in the sky
+          // handler.getMap().setZoom(7);
 
-        // Set zoom when loading the page when there is one marker
-        // The closer to 15, the higher in the sky
-        // handler.getMap().setZoom(7);
+        });
 
-      });
       $('.result-card').mouseenter('click', function(e) {
         e.preventDefault();
         $('.cardContainer.selected').removeClass('selected');
         $(this).children('.cardContainer').addClass('selected');
-        var roundTripFlightId = $(this).data('round-trip-flight-id');
-
+        var tripId = $(this).data('trip-id');
+        var colours = $(this).data('colours');
+        //
         $.ajax({
           type: "GET",
-          url: '/round_trip_flights/' + roundTripFlightId + '/refresh_map',
+          url: '/trips/' + tripId + '/refresh_map',
+          data: {airport_colours: colours},
           dataType: "json",
           success: function(result) {
             for (var i = 0; i < markers.length; i++) {
               markers[i].setMap(null);
               handler.removeMarkers(markers);
             }
-          markers = [];
-          markers = handler.addMarkers(result);
+            // markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
+            // handler.addMarker(result);
+            markers = handler.addMarkers(result);
+            // for(var i = 0; i < markers.length; i++){
+            //   m = Gmaps.map.markers[i];
+            //   function(m){
+            //     if (m.serviceObject.id == 1) {
+            //       m.panTo();
+            //       m.serviceObject.setZIndex(99);
+            //     else m.serviceObject.setZIndex(1);
+            //     }
+            //   }
+            // }
+
+            // Gmaps.mapMarker = function() {
+            //   $.each(Gmaps.store.markers, function() {
+            //     if (this.serviceObject.id == 1) {
+            //       this.panTo();
+            //       this.serviceObject.setZIndex(99);
+            //     else this.serviceObject.setZIndex();
+            //     }
+            //   });
+            // }
+          // Trying to change zindex of airports
+          // var zInd = markers.length;
+          // markers[zInd] = handler.addMarker(result);
+          // lastmarker.setZIndex(zIndex:MAX_ZINDEX);
           }
         })
+
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
 
@@ -176,14 +222,47 @@
         // handler.getMap().setZoom(7);
 
       })
-    });
+
+      $('.result-card').mouseleave('click', function(e) {
+        e.preventDefault();
+        var tripId = $(this).data('trip-id');
+        handler.removeMarkers(markers);
+        markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      })
+
+      $('.poi-card').mouseenter('click', function(e) {
+        e.preventDefault();
+        var poiId = $(this).data('poi');
+        var regionId = $(this).data('region');
+        $.ajax({
+          type: "GET",
+          url: '/pois/' + poiId + '/highlight_poi',
+          data: {region_id: regionId},
+          dataType: "json",
+          success: function(result) {
+            // console.log('test')
+            for (var i = 0; i < markers.length; i++) {
+              markers[i].setMap(null);
+              handler.removeMarkers(markers);
+            }
+            markers = handler.addMarkers(result);
+          }
+        })
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      })
+
+
+
 
       $("#more-flights").click(function() {
         $("#see-more-flights").toggleClass("hidden");
         $("#hide-more-flights").toggleClass("hidden");
         $(".the-hidden-results").toggleClass("hidden");
-      });
-
+      })
+    });
 
   </script>
 

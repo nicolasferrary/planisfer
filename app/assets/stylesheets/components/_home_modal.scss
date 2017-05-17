@@ -1,5 +1,6 @@
 .modal-body {
   padding-left: 55px;
+  padding-right: 55px;
 }
 
 .modal-content-destination {
@@ -21,4 +22,41 @@
 
 .slider-images {
   padding-left: 47px;
+}
+
+
+.modal-row{
+  margin-top: 50px;
+  display:flex;
+  align-items: center;
+}
+
+.modal-sub-row{
+  margin-top: 20px;
+  margin-left: 88px;
+  padding-right: 15px;
+}
+
+.logo-row{
+  margin-top: 50px;
+}
+
+.logo-sub-row{
+  margin-bottom: 50px;
+}
+
+
+.modal-header{
+  background-color: $brand-color;
+} h4 {
+    color: white;
+  }
+
+.modal-checkbox{
+  text-align:center;
+  color: $brand-color;
+}
+
+.sub-checkbox{
+  margin-right: -15px;
 }

@@ -1,6 +1,7 @@
 class SearchesController < ApplicationController
 
   def create
+
     @region = Region.find_by_name(params[:region])
     @search = Search.new(city: params[:city], starts_on: params[:starts_on], returns_on: params[:returns_on], nb_travelers: params[:nb_travelers])
     @search.region = @region
@@ -15,9 +16,9 @@ class SearchesController < ApplicationController
     @starts_on = params[:starts_on]
     @returns_on = params[:returns_on]
     @nb_travelers = params[:nb_travelers]
-    @region_airports = define_airports(@region)
+    @all_region_airports = define_all_airports(@region)
 
-    @trips = get_trips_for(@starts_on, @returns_on, @nb_travelers, @city, @search, @region_airports)
+    @trips = get_trips_for(@starts_on, @returns_on, @nb_travelers, @city, @search, @all_region_airports)
 
     redirect_to search_path(@search)
 
@@ -27,7 +28,11 @@ class SearchesController < ApplicationController
     @search = Search.find(params[:id])
     @trips = @search.trips
     @region = @search.region
-    @region_airports = define_airports(@region)
+
+    # @region_airports is a array of city names for cities that appear at least once in the possible trips
+    @region_airports = define_airports(@trips)
+    #@airport_colours is a hash that gives a colour code to each city in @region_airports
+    @airport_colours = define_colours(@region_airports)
     @selected_airports = @region_airports
     @nb_travelers = @search.nb_travelers
     @passengers_title = passengers(@nb_travelers)
@@ -40,10 +45,8 @@ class SearchesController < ApplicationController
     @status = "none"
 
     # Initialize selected cities for filters
-    @selected_cities = []
-    @region_airports.each do |airport|
-      @selected_cities << airport.cityname
-    end
+#VERIFIER QUE CA SERT ENCORE
+    @selected_cities = @region_airports
     # Attribute selected cities in params to @selected cities
     params["selected-cities"] == nil if params["selected-cities"] == ""
     if params["selected-cities"] == nil || params["selected-cities"] == ""
@@ -64,20 +67,17 @@ class SearchesController < ApplicationController
     @f2_min_time = set_range(params[:flight2_range])[0]
     @f2_max_time = set_range(params[:flight2_range])[1]
 
+    # Apply index filters and select number of trips to be displayed
     apply_index_filters
-
     @trips = @trips.sort_by { |trip| trip.price }
-
     @trips_selection = @trips.first(10)
-
     @round_trips = @trips_selection.map(&:round_trip_flight)
 
     # Define POIs we want to show on the map
     @pois = define_pois(@region)
-
     # NB : We should protect code to exclude from @pois any poi that has a nil latitude or longitude
 
-    @pois_markers = build_markers(@pois)
+    @initial_markers = build_markers(@pois)
 
     # Geocode on these objects
     #@round_trips.map(&:destination_airport_coordinates).map(&:origin_airport_coordinates)
@@ -156,43 +156,69 @@ class SearchesController < ApplicationController
 
 
   def refresh_map
-    # récupérer le round_trip
-    @round_trip_flight = RoundTripFlight.find(params[:round_trip_flight_id])
-    @region = @round_trip_flight.region
+    @trip = Trip.find(params[:trip_id])
+    @region = @trip.search.region
     @pois = define_pois(@region)
-    @pois_markers = build_markers(@pois)
-    @destination_iata = @round_trip_flight.flight1_destination_airport_iata
-    @return_iata = @round_trip_flight.flight2_origin_airport_iata
+    @initial_markers = build_markers(@pois)
+    @destination_iata = @trip.round_trip_flight.flight1_destination_airport_iata
+    @return_iata = @trip.round_trip_flight.flight2_origin_airport_iata
     @destination_airport = Airport.find_by_iata(@destination_iata)
     @return_airport = Airport.find_by_iata(@return_iata)
+    @airport_colours = params[:airport_colours]
 
+    # # @region_airports is a array of city names for cities that appear at least once in the possible trips
+    # @region_airports = define_airports([@trip])
+    # #@airport_colours is a hash that gives a colour code to each city in @region_airports
+    # @airport_colours = define_colours(@region_airports)
 
-    if @destination_iata == @return_iata
-      render json: @pois_markers.concat([
+    if @trip.arrival_city == @trip.return_city
+      render json: @initial_markers.concat([
         {
           lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
           lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
-          infowindow: @round_trip_flight.flight1_destination_airport_iata,
-          picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
-        },
+          infowindow: @trip.arrival_city,
+          json: { :id => 1 },
+          picture: { url: view_context.image_url("airport-#{@airport_colours[@trip.arrival_city]}.svg"), width: 70, height: 35 }
+        }
         ]).to_json
+
     else
-      render json: @pois_markers.concat([
+      render json: @initial_markers.concat([
         {
           lat: @destination_airport.coordinates.gsub(/\:(.*)/, '').to_f,
           lng: @destination_airport.coordinates.gsub(/(.*)\:/, '').to_f,
-          infowindow: @round_trip_flight.flight1_destination_airport_iata,
-          picture: { url: view_context.image_url("bleu.svg"), width: 40, height: 40 }
+          infowindow: @trip.arrival_city,
+          json: { :id => 1 },
+          picture: { url: view_context.image_url("airport-#{@airport_colours[@trip.arrival_city]}.svg"), width: 70, height: 35 }
         },
         {
           lat: @return_airport.coordinates.gsub(/\:(.*)/, '').to_f,
           lng: @return_airport.coordinates.gsub(/(.*)\:/, '').to_f,
-          infowindow: @round_trip_flight.flight2_origin_airport_iata,
-          picture: { url: view_context.image_url("orange.svg"), width: 40, height: 40 }
+          infowindow: @trip.return_city,
+          json: { :id => 2 },
+          picture: { url: view_context.image_url("airport-#{@airport_colours[@trip.return_city]}.svg"), width: 70, height: 35 }
         }
-
         ]).to_json
     end
+  end
+
+  def highlight_poi
+    @region = Region.find(params[:region_id])
+    @pois = define_pois(@region)
+    @selected_poi = Poi.find(params[:poi_id])
+    @pois_except_selected = @pois.delete_if {|poi| poi == @selected_poi }
+
+    @non_highlighted_markers = build_markers(@pois_except_selected)
+
+    render json: @non_highlighted_markers.concat([
+      {
+        lat: @selected_poi.latitude,
+        lng: @selected_poi.longitude,
+        infowindow: render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => @selected_poi}),
+        picture: { url: view_context.image_url("orange-camera.svg"), width: 40, height: 44 }
+      }
+      ]).to_json
+
   end
 
   private
@@ -203,7 +229,7 @@ class SearchesController < ApplicationController
 
 # @latitude = Geocoder.search("Faro, Portugal")[0].data["geometry"]["location"]["lat"]
 
-  def get_trips_for(starts_on, returns_on, nb_travelers, city, search, region_airports)
+  def get_trips_for(starts_on, returns_on, nb_travelers, city, search, all_region_airports)
     trips = []
     rtfs = []
     # create rtf for routes with same landing and departure airports in destination region and add them to rtfs
@@ -227,7 +253,7 @@ class SearchesController < ApplicationController
     # create rtf for routes with same landing and departure airports in destination region and add them to rtfs
 
       # Launch one return request per airport, then create rtfs and stck them in rtfs
-    region_airports.each do |airport|
+    all_region_airports.each do |airport|
       options = {
         origin: city.name,
         destination: airport.iata,
@@ -256,7 +282,7 @@ class SearchesController < ApplicationController
     outbounds = []
     inbounds = []
     # For each airport launch 2 requests and stock data in outbounds and inbounds arrays
-    region_airports.each do |airport|
+    all_region_airports.each do |airport|
       options1 = {
         origin: city.name,
         destination: airport.iata,
@@ -380,9 +406,9 @@ class SearchesController < ApplicationController
 
   def passengers(nb_travelers)
     if nb_travelers.to_i == 1
-      return "1 TRAVELER"
+      return "1 traveler"
     else
-      return "#{nb_travelers} TRAVELERS"
+      return "#{nb_travelers} travelers"
     end
   end
 
@@ -397,28 +423,61 @@ class SearchesController < ApplicationController
 
   def build_markers(pois)
 
-    Gmaps4rails.build_markers(pois) do |poi, marker|
+    markers = Gmaps4rails.build_markers(pois) do |poi, marker|
       @poi = poi
       marker.lat poi.latitude
       marker.lng poi.longitude
-      marker.infowindow poi.name
       marker.infowindow render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => poi})
+      # marker.json { :id => poi.id }
       marker.picture({
-                  # :url => view_context.image_url("interest.svg"),
-                  :width   => 20,
-                  :height  => 20
+                  :url => view_context.image_url("camera.svg"),
+                  :width   => 40,
+                  :height  => 44,
                  })
     end
   end
 
-  def define_airports(region)
-    region_airports =[]
+  # def build_airport_marker(trip, airport, airport_colours)
+  #   markers = Gmaps4rails.build_markers(airport) do |airport, marker|
+  #     @airport = airport
+  #     marker.lat airport.coordinates.gsub(/\:(.*)/, '').to_f
+  #     marker.lng airport.coordinates.gsub(/(.*)\:/, '').to_f
+  #     marker.infowindow trip.arrival_city
+  #     marker.picture({
+  #                 :url => view_context.image_url("airport-#{airport_colours[trip.arrival_city]}.svg"),
+  #                 :width   => 70,
+  #                 :height  => 35,
+  #                })
+  #   end
+  # end
+
+  def define_all_airports(region)
+    all_region_airports =[]
     region.airports.each do |airport_iata|
       airport = Airport.find_by_iata(airport_iata)
-      region_airports << airport
+      all_region_airports << airport
     end
-    region_airports
+    all_region_airports
   end
+
+  def define_airports(trips)
+    #Sets are a bit like array except they remove duplicates
+    region_airports = Set.new []
+    trips.each do |trip|
+      region_airports << trip.arrival_city
+      region_airports << trip.return_city
+    end
+    region_airports.to_a
+  end
+
+  def define_colours(region_airports)
+    colours = {}
+    region_airports.each_with_index do |airport, index|
+      colours[airport] = "colour-code-#{index}"
+    end
+    colours
+  end
+
 
 end
 

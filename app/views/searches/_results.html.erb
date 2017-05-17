@@ -1,16 +1,19 @@
 <div class="container-fluid page-result">
   <!-- part with tab and the result -->
-  <div class="col-xs-12 col-md-6">
+  <div class="col-xs-12 col-md-6 no-padding">
     <!-- part with tab showing best results by airports -->
     <div class="displayTrips">
-      <div id="TitleShow">
-        <h3>THE BEST DEALS FOR <%= @passengers_title %></h3>
-        <p>From <strong><%= @starts_on.strftime("%B %e") %></strong> - To <strong><%= @returns_on.strftime("%B %e") %></strong></p>
+      <div class = "row">
+        <div id="TitleShow">
+          <h3>CHEAPEST DIRECT FLIGHTS </h3>
+          <p> From <strong><%= @starts_on.strftime("%B %e") %></strong> - To <strong><%= @returns_on.strftime("%B %e") %></strong></p>
+          <span id="price-for"> Price for <%= @passengers_title %></span>
+        </div>
       </div>
       <div class="row" id="see-flights">
         <% @trips_selection.each_with_index do |trip, index| %>
-          <%= link_to selections_path(:trip_id => trip.id), class: 'tabLink result-card', 'data-toggle' => "modal", 'data-target' => '#car_wait_modal',method: :post, data: {round_trip_flight_id: trip.round_trip_flight.id} do %>
-            <div class="cardContainer <%= 'selected' if index == 0 %> <%= 'hidden the-hidden-results' if index > 3 %>" >
+          <%= link_to selections_path(:trip_id => trip.id), class: 'tabLink result-card', 'data-toggle' => "modal", 'data-target' => '#car_wait_modal',method: :post, data: {trip_id: trip.id, colours: @airport_colours} do %>
+            <div class="cardContainer <%= 'selected' if index == 0 %> <%= 'hidden the-hidden-results' if index > 2 %>" >
               <div class="card-description">
                 <div class="card-description-item">
                   <p>
@@ -20,13 +23,13 @@
                     </span>
                   </p>
                   <p>
-                    <span class="info-label-back"><span class="hours"><%= trip.round_trip_flight.flight2_take_off_at.strftime("%H:%M") %></span> <span class="airport"> <%= Airport.find_by_iata(trip.round_trip_flight.flight2_origin_airport_iata).cityname %><span class="light-data"> <%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> </span> </span>
+                    <span class = "<%= @airport_colours[trip.return_city] %>"> <span class="hours"><%= trip.round_trip_flight.flight2_take_off_at.strftime("%H:%M") %></span> <span class="airport"> <%= trip.return_city %><span class="light-data"> <%= trip.round_trip_flight.flight2_origin_airport_iata %> </span> </span> </span>
                   </p>
                 </div>
                 <div class="card-description-item">
                   <p>
                     <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                    <span class="info-label-go"> <span class="hours"> <%= trip.round_trip_flight.flight1_landing_at.strftime("%H:%M") %> </span> <span class="airport"><%= Airport.find_by_iata(trip.round_trip_flight.flight1_destination_airport_iata).cityname %> <span class="light-data"><%= trip.round_trip_flight.flight1_destination_airport_iata %></span> </span> </span>
+                    <span class= "<%= @airport_colours[trip.arrival_city] %>" %> <span class="hours"> <%= trip.round_trip_flight.flight1_landing_at.strftime("%H:%M") %> </span> <span class="airport"><%= trip.arrival_city %> <span class="light-data"><%= trip.round_trip_flight.flight1_destination_airport_iata %></span> </span> </span>
                   </p>
                   <p>
                     <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
@@ -44,7 +47,7 @@
               </div>
               <div class="price-action">
                 <div class="card-price ">
-                  <p><%= trip.price.round %> <%= trip.round_trip_flight.currency %></p>
+                  <p><%= money_without_cents_and_with_symbol(trip.price.round) %></p>
                 </div> <!-- fin card-price -->
               </div>
             </div>
@@ -56,12 +59,41 @@
         </div>
       </div>  <!-- fin du row -->
     </div> <!-- fin du displaytrips -->
+
+
+    <div class = "row">
+
+      <div id="poi-title">
+        <h3>MAIN POINTS OF INTEREST IN <%= @region.name.upcase%> </h3>
+      </div>
+
+      <div class="col-md-12">
+        <div class="trending text-center" id="trendy-destination">
+          <div class="blocks">
+            <% @region.pois.each do |poi| %>
+              <span class="block xsm destination" data-toggle="modal" data-target="#modal_1">
+                <%= image_tag "#{@region.name.downcase}/#{poi.downcase}.jpg", class:"dest-image"%>
+                <span class="box poi-card" data-poi = "<%= Poi.find_by_name(poi.strip).id %>"  data-region = "<%= @region.id %>">
+                  <span class="text in-box">
+                    <span class="primarytext"> <%= poi %></span>
+                  </span>
+                </span>
+              </span>
+            <% end %>
+          </div> <!-- fin du blocks -->
+        </div> <!-- fin du trending -->
+      </div> <!-- fin du 2e col-xs-12 principal -->
+    </div>
+
   </div>
 
   <div class="col-xs-12 col-md-6">
+    <div class = "legends">
+      <img><%= image_tag "camera.svg", class: "legend_highlight"%> Points of interest </img>
+      <img><%= image_tag "airport-colour-code-0.svg", class: "legend_airport" %> Airports </img>
+    </div>
     <div class="airport-map">
-      <div id="map", style="width: 100%; height: 600px;">
-      </div>
+      <div id="map", style="width: 100%; height: 600px;"></div>
     </div>
   </div>
 
