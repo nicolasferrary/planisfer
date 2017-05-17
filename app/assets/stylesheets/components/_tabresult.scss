@@ -48,6 +48,15 @@
   text-align: center;
 }
 
+#poi-title {
+  text-align: center;
+}
+
+#poi-title h3{
+  font-size: 23px;
+  color: #333333;
+}
+
 #TitleShow h3{
   font-size: 23px;
   color: #333333;
@@ -67,7 +76,7 @@ a.box-select-all-flights {
 #more-flights p{
   color: $brand-color;
   text-decoration: none;
-  margin: 0 0 5px;
+  margin: 0 0 30px;
 }
 
 #more-flights:hover {

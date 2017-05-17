@@ -13,7 +13,7 @@
       <div class="row" id="see-flights">
         <% @trips_selection.each_with_index do |trip, index| %>
           <%= link_to selections_path(:trip_id => trip.id), class: 'tabLink result-card', 'data-toggle' => "modal", 'data-target' => '#car_wait_modal',method: :post, data: {trip_id: trip.id, colours: @airport_colours} do %>
-            <div class="cardContainer <%= 'selected' if index == 0 %> <%= 'hidden the-hidden-results' if index > 3 %>" >
+            <div class="cardContainer <%= 'selected' if index == 0 %> <%= 'hidden the-hidden-results' if index > 2 %>" >
               <div class="card-description">
                 <div class="card-description-item">
                   <p>
@@ -59,6 +59,32 @@
         </div>
       </div>  <!-- fin du row -->
     </div> <!-- fin du displaytrips -->
+
+
+    <div class = "row">
+
+      <div id="poi-title">
+        <h3>MAIN POINTS OF INTEREST IN <%= @region.name.upcase%> </h3>
+      </div>
+
+      <div class="col-md-12">
+        <div class="trending text-center" id="trendy-destination">
+          <div class="blocks">
+            <% @region.pois.each do |poi| %>
+              <a class="block xsm destination" data-toggle="modal" data-target="#modal_1">
+                <%= image_tag "#{@region.name.downcase}/#{poi.downcase}.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext"> <%= poi %></span>
+                  </span>
+                </span>
+              </a>
+            <% end %>
+          </div> <!-- fin du blocks -->
+        </div> <!-- fin du trending -->
+      </div> <!-- fin du 2e col-xs-12 principal -->
+    </div>
+
   </div>
 
   <div class="col-xs-12 col-md-6">
