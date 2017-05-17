@@ -428,6 +428,7 @@ class SearchesController < ApplicationController
       marker.lat poi.latitude
       marker.lng poi.longitude
       marker.infowindow render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => poi})
+      # marker.json { :id => poi.id }
       marker.picture({
                   :url => view_context.image_url("camera.svg"),
                   :width   => 40,

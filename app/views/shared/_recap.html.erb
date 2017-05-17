@@ -7,7 +7,7 @@
         <div class = "col-xs-8">
           <h4>Your roadtrip in <%= @trip.round_trip_flight.region.name %></h4>
         </div>
-        <div class = "col-x-3">
+        <div class = "col-xs-4">
          <%= @trip.nb_travelers%> traveler<%='s' unless @trip.nb_travelers == 1%>
         </div>
       </div>
@@ -17,11 +17,12 @@
   <div class = "recap-box">
     <div class = "row">
       <div class = "col-xs-12">
+      <p>What's included?</p>
         <p><i class="fa fa-check-square-o" aria-hidden="true"> Flights</i></p>
         <% if !@trip.car_rental.nil? %>
           <p> <i class="fa fa-check-square-o" aria-hidden="true"> Car </i></p>
         <% end %>
-        <p><i class="fa fa-check-square-o" aria-hidden="true"> Personal assistant </i></p>
+ <!--        <p><i class="fa fa-check-square-o" aria-hidden="true"> Personal assistant </i></p> -->
       </div>
     </div>
 

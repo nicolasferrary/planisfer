@@ -70,6 +70,8 @@
   color: $brand-color;
   text-decoration: none;
   cursor: pointer;
+  text-align: right;
+  opacity: 0.7;
 }
 
 
@@ -79,7 +81,28 @@
   margin: 0 0 5px;
 }
 
-#modify-search:hover {
+#modify-search:hover{
+  text-decoration: none;
+  opacity: 1;
+}
+
+.modify-search-link{
+  text-decoration: none;
+}
+
+.modify-search-link:hover{
+  text-decoration: none;
+}
+
+.modify-search-link:visited{
+  text-decoration: none;
+}
+
+.modify-search-link:active{
+  text-decoration: none;
+}
+
+.modify-search-link:focus{
   text-decoration: none;
 }
 

@@ -151,16 +151,22 @@
             {"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
           ]
         },
-        internal: { id: 'map' } }, function() {
-        markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
-        handler.bounds.extendWith(markers);
-        // handler.getMap().setZoom(7);
-        handler.fitMapToBounds();
-        // Set zoom when loading the page when there is one marker
-        // The closer to 15, the higher in the sky
-        // handler.getMap().setZoom(7);
+        internal: { id: 'map' }}, function() {
+          markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
+          // for (var i = 0; i < markers.length; i++) {
+          //   marker = markers[i];
+          //   marker.getServiceObject().addListener('mouseover', function() {
+          //     marker.infowindow.render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => this});
+          //   });
+          // }
+          handler.bounds.extendWith(markers);
+          // handler.getMap().setZoom(7);
+          handler.fitMapToBounds();
+          // Set zoom when loading the page when there is one marker
+          // The closer to 15, the higher in the sky
+          // handler.getMap().setZoom(7);
 
-      });
+        });
 
       $('.result-card').mouseenter('click', function(e) {
         e.preventDefault();
@@ -248,15 +254,15 @@
         handler.fitMapToBounds();
       })
 
-    });
+
 
 
       $("#more-flights").click(function() {
         $("#see-more-flights").toggleClass("hidden");
         $("#hide-more-flights").toggleClass("hidden");
         $(".the-hidden-results").toggleClass("hidden");
-      });
-
+      })
+    });
 
   </script>
 

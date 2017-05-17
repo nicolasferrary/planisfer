@@ -1,6 +1,5 @@
 .card-wrapper{
   padding: 30px;
-  background-color: #F5F5F5;
   min-height: 100%;
 }
 
@@ -72,19 +71,19 @@
 
 .card-name {
   position: absolute;
-  top: 10px;
+  bottom: 5px;
   left: 10px;
-  font-size: 16px;
+  font-size: 11px;
 }
 
 .card-category {
   position: absolute;
-  bottom: -5px;
+  top: 10px;
   left: 10px;
   color: $orange;
 }
 .card-category p {
-  font-size: 10px;
+  font-size: 16px;
   }
 
 .card-infos span{
