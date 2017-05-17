@@ -202,6 +202,25 @@ class SearchesController < ApplicationController
     end
   end
 
+  def highlight_poi
+    @region = Region.find(params[:region_id])
+    @pois = define_pois(@region)
+    @selected_poi = Poi.find(params[:poi_id])
+    @pois_except_selected = @pois.delete_if {|poi| poi == @selected_poi }
+
+    @non_highlighted_markers = build_markers(@pois_except_selected)
+
+    render json: @non_highlighted_markers.concat([
+      {
+        lat: @selected_poi.latitude,
+        lng: @selected_poi.longitude,
+        infowindow: render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => @selected_poi}),
+        picture: { url: view_context.image_url("orange-camera.svg"), width: 40, height: 44 }
+      }
+      ]).to_json
+
+  end
+
   private
 
   def highlight_coordinates(region, highlight)

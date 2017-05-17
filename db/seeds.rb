@@ -16,7 +16,7 @@ require 'csv'
 
 # Airport.destroy_all
 # Car.destroy_all
-Poi.destroy_all
+# Poi.destroy_all
 # Search.destroy_all
 # Region.destroy_all
 
@@ -39,22 +39,22 @@ Poi.destroy_all
 
 # Seeding all the POIs
 
-csv_options = { col_sep: ';', headers: :first_row, encoding: 'ISO-8859-1'}
-filepath = 'db/poi.csv'
+# csv_options = { col_sep: ';', headers: :first_row, encoding: 'ISO-8859-1'}
+# filepath = 'db/poi.csv'
 
-CSV.foreach(filepath, csv_options) do |row|
-  Poi.create!(
-    name: row[0],
-    location: row['location'],
-    photo: row['photo'],
-    title: row['title'],
-    description1: row['description1'],
-    description2: row['description2'],
-    description3: row['description3'],
-    description4: row['description4'],
-    description5: row['description5']
-    )
-end
+# CSV.foreach(filepath, csv_options) do |row|
+#   Poi.create!(
+#     name: row[0],
+#     location: row['location'],
+#     photo: row['photo'],
+#     title: row['title'],
+#     description1: row['description1'],
+#     description2: row['description2'],
+#     description3: row['description3'],
+#     description4: row['description4'],
+#     description5: row['description5']
+#     )
+# end
 
 
 # Seeding all the Regions

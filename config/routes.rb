@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     resources :payments, only: [:new, :create]
   end
   resources :users, only: [:create, :update]
+  resources :pois, only: [:show] do
+    get :highlight_poi, to: "searches#highlight_poi"
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

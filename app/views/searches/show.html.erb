@@ -216,7 +216,40 @@
         // handler.getMap().setZoom(7);
 
       })
+
+      $('.result-card').mouseleave('click', function(e) {
+        e.preventDefault();
+        var tripId = $(this).data('trip-id');
+        handler.removeMarkers(markers);
+        markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      })
+
+      $('.poi-card').mouseenter('click', function(e) {
+        e.preventDefault();
+        var poiId = $(this).data('poi');
+        var regionId = $(this).data('region');
+        $.ajax({
+          type: "GET",
+          url: '/pois/' + poiId + '/highlight_poi',
+          data: {region_id: regionId},
+          dataType: "json",
+          success: function(result) {
+            // console.log('test')
+            for (var i = 0; i < markers.length; i++) {
+              markers[i].setMap(null);
+              handler.removeMarkers(markers);
+            }
+            markers = handler.addMarkers(result);
+          }
+        })
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      })
+
     });
+
 
       $("#more-flights").click(function() {
         $("#see-more-flights").toggleClass("hidden");
