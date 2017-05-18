@@ -14,6 +14,24 @@
   </span>
 </div>
 
+<div class="container-fluid page-result">
+  <!-- part with tab and the result -->
+  <div class="col-xs-12 col-md-6 no-padding">
+    <!-- part with tab showing best results by airports -->
+    <div class="displayTrips">
+      <div class = "row">
+        <div id="TitleShow">
+          <h3>CHEAPEST DIRECT FLIGHTS </h3>
+          <p> From <strong><%= @starts_on.strftime("%B %e") %></strong> - To <strong><%= @returns_on.strftime("%B %e") %></strong></p>
+          <span id="price-for"> Price for <%= @passengers_title %></span>
+        </div>
+      </div>
+
+      <!-- Price lists and map-->
+      <div id="page-result-container">
+        <%= render "results" %>
+      </div>
+
       <div class = "row">
 
         <div id = "all-flights">
@@ -130,11 +148,50 @@
         </div>
       </div>
 
+    </div> <!-- fin du displaytrips -->
 
-  <!-- Price lists and map-->
-  <div id="page-result-container">
-    <%= render "results" %>
+
+    <div class = "row">
+
+      <div id="poi-title">
+        <h3>MAIN POINTS OF INTEREST IN <%= @region.name.upcase%> </h3>
+      </div>
+
+      <div class="col-md-12">
+        <div class="trending text-center" id="trendy-destination">
+          <div class="blocks">
+            <% @region.pois.each do |poi| %>
+              <span class="block xsm destination" data-toggle="modal" data-target="#modal_1">
+                <%= image_tag "#{@region.name.downcase}/#{poi.downcase}.jpg", class:"dest-image"%>
+                <span class="box poi-card" data-poi = "<%= Poi.find_by_name(poi.strip).id %>"  data-region = "<%= @region.id %>">
+                  <span class="text in-box">
+                    <span class="primarytext"> <%= poi %></span>
+                  </span>
+                </span>
+              </span>
+            <% end %>
+          </div> <!-- fin du blocks -->
+        </div> <!-- fin du trending -->
+      </div> <!-- fin du 2e col-xs-12 principal -->
+    </div>
+
   </div>
+
+  <div class="col-xs-12 col-md-6">
+    <div class = "legends">
+      <img><%= image_tag "camera.svg", class: "legend_highlight"%> Points of interest </img>
+      <img><%= image_tag "airport-colour-code-0.svg", class: "legend_airport" %> Airports </img>
+    </div>
+    <div class="airport-map">
+      <div id="map", style="width: 100%; height: 600px;"></div>
+    </div>
+  </div>
+
+</div>
+
+<%= render 'car_wait_modal', modal_name: "car_wait_modal" %>
+
+
 
 
 <% content_for(:after_js) do %>
