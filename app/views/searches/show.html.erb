@@ -6,7 +6,7 @@
           <%= image_tag "blue_logo_no_word.png", class: "logo"%>
         <% end %> </span>
         <span class ="brand-name">Planisfer</span>
-        <span class = "banner2-title">Welcome to <%= @region.name %>!</span> <span class = "banner2-title">Let's book your flights</span>
+        <span class = "banner2-title">Welcome to <%= @region.name %>!</span> <span class = "banner2-title">Let's first book your flights</span>
       </div>
     </div>
   <span class = "booking-status">
@@ -190,6 +190,7 @@
     function showhide(id) {
       var e = document.getElementById(id);
       if ($('#' + e.id).hasClass('not-displayed')) {
+        $("#more-flights").addClass("hidden");
         $('#' + e.id).slideDown('slow');
         $('#' + e.id).removeClass('not-displayed')
         $("#see-filters").addClass("hidden");
@@ -199,6 +200,7 @@
         $('#' + e.id).addClass('not-displayed')
         $("#see-filters").removeClass("hidden");
         $("#hide-filters").addClass("hidden");
+        $("#more-flights").removeClass("hidden");
       };
     };
 

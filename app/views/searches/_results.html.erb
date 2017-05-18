@@ -53,22 +53,29 @@
             </div>
           <% end %>
         <% end %>
-        <div class=" text-center" id="more-flights">
-          <p id="see-more-flights"><strong>See more flights</strong></p>
-          <p class="hidden" id="hide-more-flights"><strong>See less flights</strong></p>
-        </div>
 
-        <div>
-          <%= link_to "javascript:showhide('filters')", class = "box-select-all-flights" do%>
-            <div class="text-center" id="all-filters">
-              <p class="<%= 'hidden' if @status == 'block' %>" id="see-filters"><strong>Edit search criteria</strong> <%= image_tag "arrow.png", class: "floating arrow-img-filter" %></p>
-              <p class="<%= 'hidden' if @status == 'none' %>" id="hide-filters"><strong>Hide filters</strong><%= image_tag "arrow_up.png", class: "floating arrow-img-filter" %></p>
-            </div>
+      </div>  <!-- fin du row -->
+
+      <div class = "row">
+
+        <div id = "all-flights">
+          <%= link_to "javascript:showhide('filters')" do%>
+              <p class="<%= 'hidden' if @status == 'block' %>" id="see-filters"><strong>Change search criteria</strong></p>
+              <p class="<%= 'hidden' if @status == 'none' %>" id="hide-filters"><strong>Hide filters</strong></p>
           <% end  %>
         </div>
 
-        <!-- ouverture filters -->
-        <div class= "page-result <%= 'not-displayed' if @status == 'none' %>" id="filters">
+        <div id="more-flights">
+          <span id="see-more-flights"><strong>See more flights</strong></span>
+          <span class="hidden" id="hide-more-flights"><strong>See less flights</strong></span>
+        </div>
+
+      </div>
+
+
+      <div class = "row">
+                <!-- ouverture filters -->
+        <div class= "<%= 'not-displayed' if @status == 'none' %>" id="filters">
           <%=form_tag search_path(@search), method: :get, remote: true, id: "searchForm" do %>
           <!-- ouverture row -->
 
@@ -77,7 +84,7 @@
 
               <div class = "row">
 
-                <div class = 'col-md-6'>
+                <div class = 'row'>
 
                   <div class = "row">
                     <div class="filter-slider">
@@ -130,11 +137,11 @@
                 </div>
 
 
-                <div class = 'col-md-6 left-border'>
+                <div class = 'row'>
                   <div class="filter-buttons">
 
                     <div class = "row">
-                      <h5 class = "text-center" > Possible arrival and return <strong>cities </strong></h5>
+                      <h5 class = "airport-filter" > Possible arrival and return <strong>cities </strong></h5>
                     </div>
 
                     <div class = "row">
@@ -163,8 +170,8 @@
 
           <% end %>
         </div>
+      </div>
 
-      </div>  <!-- fin du row -->
     </div> <!-- fin du displaytrips -->
 
 
