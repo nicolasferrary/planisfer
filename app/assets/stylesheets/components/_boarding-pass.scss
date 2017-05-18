@@ -11,14 +11,6 @@
 }
 
 
-
-.logo-1 {
-  width: 54px;
-  position: absolute;
-  left: 40px;
-  top: 17px;
-}
-
 .ticket-box{
   position: absolute;
   top: calc(27% - 125px);
@@ -352,21 +344,6 @@
   }
 }
 
-
-
-
-.flight-ticket-title {
-  padding: 25px 0;
-  background: $secondary-color;
-  margin-bottom: 0px;
-  text-transform: uppercase;
-  h1 {
-    margin-top: 0;
-    font-size: 26px;
-    color: white;
-    margin-bottom: 10px;
-  }
-}
 
 
 .booking {
