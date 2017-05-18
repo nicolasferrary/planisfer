@@ -1,9 +1,9 @@
 .booking-status-item{
   text-align: center;
   p {
-    color:white;
     font-size: 11px;
-    margin-bottom: 4px
+    margin-bottom: 4px;
+    text-transform: uppercase;
   }
   margin: 0 10px;
   width: 75px;
@@ -14,5 +14,5 @@
 }
 
 .underline{
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid $brand-color;
 }

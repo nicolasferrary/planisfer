@@ -1,120 +1,17 @@
 
 <div class="page-banner text-center">
-  <div class="banner-content">
-    <%= link_to root_path do %>
-    <%= image_tag "logo.png", class:"logo-1"%>
-    <% end %>
-  </div>
-  <h1 class="">Your research for <%= @region.name%> </h1>
+  <div class="page-banner-title">
+      <div class = "col-md-12 title-col">
+        <span> <%= link_to root_path do %>
+          <%= image_tag "blue_logo_no_word.png", class: "logo"%>
+        <% end %> </span>
+        <span class ="brand-name">Planisfer</span>
+        <span class = "banner2-title">Welcome to <%= @region.name %>!</span> <span class = "banner2-title">Let's book your flights</span>
+      </div>
+    </div>
   <span class = "booking-status">
     <%= render 'shared/booking_status' %>
   </span>
-</div>
-
-<div>
-  <%= link_to "javascript:showhide('filters')", class: "box-select-all-flights" do%>
-    <div class="text-center" id="all-filters">
-      <p class="<%= 'hidden' if @status == 'block' %>" id="see-filters"><strong>Edit search</strong> <%= image_tag "arrow.png", class: "floating arrow-img-filter" %></p>
-      <p class="<%= 'hidden' if @status == 'none' %>" id="hide-filters"><strong>Hide filters</strong><%= image_tag "arrow_up.png", class: "floating arrow-img-filter" %></p>
-    </div>
-  <% end  %>
-</div>
-
-<!-- ouverture filters -->
-<div class= "page-result <%= 'not-displayed' if @status == 'none' %>" id="filters">
-  <%=form_tag search_path(@search), method: :get, remote: true, id: "searchForm" do %>
-  <!-- ouverture row -->
-
-
-    <div class = "container-fluid">
-
-      <div class = "row">
-
-        <div class = 'col-md-6'>
-
-          <div class = "row">
-            <div class="filter-slider">
-
-              <div class = 'col-md-6'>
-                <div class = "filer-slider-item">
-    <!-- A priori la div ci dessous n'est pas utile -->
-                  <div class = "filter-box">
-
-                    <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region.name %> </strong></h5>
-                    <div class="filters">
-                      <ul class="text-center">
-                        <li>
-                          <h3><i class="fa fa-plane"></i> Take-off time</h3>
-                        </li>
-                        <li>
-                          <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider submit-on-change",
-                          data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class = 'col-md-6'>
-                <div class="filter-slider-item">
-                  <div class = "filter-box">
-                    <h5 class = "text-center" > From <strong> <%= @region.name %> </strong> to <strong> <%= @city_real_name %></strong></h5>
-                    <div class="filters">
-                      <ul class="text-center">
-                        <li>
-                          <h3><i class="fa fa-plane"></i> Take-off time</h3>
-                        </li>
-
-                        <li>
-                          <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider submit-on-change",
-                          data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class = 'col-md-6 left-border'>
-          <div class="filter-buttons">
-
-            <div class = "row">
-              <h5 class = "text-center" > Possible arrival and return <strong>cities </strong></h5>
-            </div>
-
-            <div class = "row">
-              <% @region_airports.each do |airport| %>
-                <div class = "col-md-3 content-center">
-                  <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city="<%= airport%>"><%= airport%></div>
-                </div>
-              <% end %>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="row">
-        <div class ="text-center filter-apply">
-          <%= hidden_field_tag 'selected-cities', params['selected-cities'], class: "submit-on-change" %>
-          <%# submit_tag "Apply filters", class: "btn-brand" %>
-        </div>
-      </div>
-
-    </div>
-
-  <% end %>
 </div>
 
 
