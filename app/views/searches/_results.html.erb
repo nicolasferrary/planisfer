@@ -59,7 +59,7 @@
         </div>
 
         <div>
-          <%= link_to "javascript:showhide('filters')" do%>
+          <%= link_to "javascript:showhide('filters')", class = "box-select-all-flights" do%>
             <div class="text-center" id="all-filters">
               <p class="<%= 'hidden' if @status == 'block' %>" id="see-filters"><strong>Edit search criteria</strong> <%= image_tag "arrow.png", class: "floating arrow-img-filter" %></p>
               <p class="<%= 'hidden' if @status == 'none' %>" id="hide-filters"><strong>Hide filters</strong><%= image_tag "arrow_up.png", class: "floating arrow-img-filter" %></p>
