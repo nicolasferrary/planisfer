@@ -37,11 +37,27 @@
   margin-bottom: 0px;
 }
 
+#recommended_car_price{
+  background: $secondary-color;
+  padding: 6px 18px;
+  color: white;
+  position: absolute;
+  font-size: 17px;
+  border-radius: 0;
+  left: 15px;
+  width: 95px;
+  height: 35px;
+  p{
+    margin-bottom: 0px;
+  }
+}
+
 
 // Le Wagon UI cards
 
 .card {
   height: 175px;
+  width: 350px;
   position: relative;
   margin-bottom: 20px;
   color: #333333;
@@ -170,3 +186,31 @@
   color: white;
   position: relative;
 }
+
+.recommendation-box{
+  border-bottom: 1px solid #E6E6E6;
+  border-top: 1px solid #E6E6E6;
+  margin-left: 0px;
+  margin: auto 0 50px 0;
+  padding-top: 15px;
+  h4 {
+    color: #404040;
+  }
+  span{
+    font-size: 12px;
+  }
+  ul {
+    padding-left: 20px;
+  }
+}
+
+.car-page-title{
+  margin-bottom: 20px;
+  h3 {
+  font-size: 23px;
+  color: #404040;
+  margin-top: 11px;
+  }
+}
+
+

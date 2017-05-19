@@ -1,71 +1,91 @@
 <div class="page-banner text-center">
   <div class="page-banner-title">
-      <div class = "col-md-12 title-col">
-        <span> <%= link_to root_path do %>
-          <%= image_tag "blue_logo_no_word.png", class: "logo"%>
-        <% end %> </span>
-        <span class ="brand-name">Planisfer</span>
-        <span class = "banner2-title">Explore <%= @region.name %> your own way!</span> <span class = "banner2-title">Let's choose your car </span>
-      </div>
+    <div class = "col-md-12 title-col">
+      <span> <%= link_to root_path do %>
+        <%= image_tag "blue_logo_no_word.png", class: "logo"%>
+      <% end %> </span>
+      <span class ="brand-name">Planisfer</span>
+      <span class = "banner2-title">Explore <%= @region.name %> your own way!</span> <span class = "banner2-title">Let's choose your car </span>
     </div>
+  </div>
   <span class = "booking-status">
     <%= render 'shared/booking_status', :status => 3 %>
   </span>
 </div>
 
 
+<div class="container-fluid page-result">
+
+  <div class="col-xs-12 col-md-8 car-left-padding">
+
+    <div class = "row">
+      <div class = "car-page-title text-center">
+        <h3> OUR RECOMMENDATION </h3>
+      </div>
+    </div>
+    <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:mini][@mini_index]})), method: :put, class: 'tabLink result-card' do %>
+      <div class = "row recommendation-box">
+        <div class = "col-md-4">
+          <h4> <%= @recommended_car.car.name %> <span>or similar</span></h4>
+          <ul>
+            <li> The cheapeast car (except mini cars)</li>
+            <li> Rented by <%= @recommended_car.company %>, a well established rental company in Europe</li>
+          </ul>
+          <div id = "recommended_car_price">
+            <p> <%= money_without_cents_and_with_symbol(@car_selection[:mini][@mini_index].price) %></p>
+          </div>
+        </div>
+
+        <div class = "col-md-8 text-center">
+          <%= image_tag @recommended_car.car.image_url %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class = "row">
+      <div class = "car-page-title text-center">
+        <h3>THE BEST CARS FOR EACH CATEGORY </h3>
+        <h5 id = "car-recap-text"> <%= @pick_up_airport.cityname%> <%= @pick_up_airport.name%> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  <span class="fa fa-long-arrow-right car-selection-arrow" aria-hidden="true"></span> <%= @drop_off_airport.cityname%> <%= @drop_off_airport.name %> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %>
+          <span>
+            <%= link_to "javascript:showhide('modify')", class: "modify-search-link", id: "car-modify-link" do%>
+              <span class="<%= 'hidden' if @status == 'modify' %>" id="modify-search"> Modify search </span>
+            <% end  %>
+          </span>
+        </h5>
+
+      </div>
+    </div>
+
+    <div class = "row">
+      <%= render "car_form" %>
+    </div>
+
+    <div class = "row">
+      <div id = "car-cards-partial">
+        <%= render "car_cards" %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-xs-12 col-md-4">
+    <%= render "shared/recap" %>
+  </div>
+
+</div>
+
+
 <% # début du wrapper %>
 <div class = "card-wrapper">
   <% # début du container %>
-  <div class="container">
+  <div class="container-fluid">
 
     <div class="row">
       <% # Début case bootstrap formulaire et cards %>
       <div class="col-xs-12 col-sm-8">
 
         <div class = "row">
-          <div id="TitleShow" class = "titlepadding">
-            <h3>THE BEST CARS FOR EACH CATEGORY </h3>
-            <h5 id = "car-recap-text"> <%= @pick_up_airport.cityname%> <%= @pick_up_airport.name%> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  <span class="fa fa-long-arrow-right car-selection-arrow" aria-hidden="true"></span> <%= @drop_off_airport.cityname%> <%= @drop_off_airport.name %> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %> </h5>
-            <%= link_to "javascript:showhide('modify')", class: "modify-search-link" do%>
-              <div>
-                <h5 class="<%= 'hidden' if @status == 'modify' %>" id="modify-search"> Modify search </h5>
-              </div>
-            <% end  %>
-          </div>
-        </div>
 
-<!--         <div class = "row">
-          <div class = "car-recap-row">
-            <div class = "col-xs-12 col-sm-3">
-              <h4> SELECT YOUR CAR </h4>
-            </div>
-            <div class = "col-xs-12 col-sm-6">
-              <h5 id = "car-recap-text"> <%= Airport.find_by_iata(@pick_up_location).name%> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  <span class="fa fa-long-arrow-right car-selection-arrow" aria-hidden="true"></span> <%= Airport.find_by_iata(@drop_off_location).name %> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %> </h5>
-            </div>
-            <div class = "col-xs-12 col-sm-3">
-              <%= link_to "javascript:showhide('modify')", class: "modify-search-link" do%>
-                <div>
-                  <h5 class="<%= 'hidden' if @status == 'modify' %>" id="modify-search"> Modify search </h5>
-                </div>
-              <% end  %>
-            </div>
-          </div>
-        </div> -->
-
-
-
-
-        <% #Début row titre cards %>
-  <!--       <div id="TitleShow">
-          <h4>THE BEST CARS PER CATEGORY </h4>
-        </div> -->
-        <% #Fin row titre cards %>
-
-        <%= render "car_form" %>
-
-        <div id = "car-cards-partial">
-          <%= render "car_cards" %>
         </div>
 
       </div>
@@ -73,9 +93,7 @@
 
 
       <% # Début case bootstrap Carnet de voyage %>
-      <div class="col-xs-12 col-sm-4">
-        <%= render "shared/recap" %>
-      </div>
+
       <% #Fin case bootstrap Carnet de voyage  %>
 
     </div>

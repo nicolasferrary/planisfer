@@ -7,7 +7,7 @@
         <div class = "col-xs-8">
           <h4>Your roadtrip in <%= @trip.round_trip_flight.region.name %></h4>
         </div>
-        <div class = "col-xs-4">
+        <div class = "col-xs-4" id = "number-travelers">
          <%= @trip.nb_travelers%> traveler<%='s' unless @trip.nb_travelers == 1%>
         </div>
       </div>
@@ -28,7 +28,7 @@
           <%= link_to trip_path(@trip, @options.merge({:car_rental_id => nil})), method: :put, class: "modify-search-link" do %>
             <div class = "included-checkbox">
               <i class="fa fa-check-square-o" aria-hidden="true"></i>
-              <span>Car</span>
+              <span> <%= @trip.car_rental.car.name %> or similar</span>
             </div>
           <% end %>
         <% end %>
@@ -69,7 +69,7 @@
           <%= @trip.starts_on.strftime("%b %e")%>
         </div>
         <div class = "origin-and-destination">
-          <span> <%= @trip.city.name %></span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span>
+          <span> <%= Constants::AIRPORTS[@trip.city.name] %> <span class="light-data"> <%= @trip.round_trip_flight.flight1_origin_airport_iata %></span></span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span><%= @trip.arrival_city %> <span class="light-data"><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span></span>
         </div>
         <div class = "times">
           <span><%= @trip.round_trip_flight.flight1_take_off_at.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight1_landing_at.strftime("%H:%M") %></span>
@@ -95,7 +95,7 @@
           <%= @trip.returns_on.strftime("%B %d")%>
         </div>
         <div class = "origin-and-destination">
-          <span> <%= @trip.round_trip_flight.flight2_origin_airport_iata %> </span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span> <%= @trip.city.name %></span>
+          <span> <%= @trip.return_city %> <span class="light-data"><%= @trip.round_trip_flight.flight2_origin_airport_iata %> </span></span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span> <%= Constants::AIRPORTS[@trip.city.name] %> <span class="light-data"> <%= @trip.round_trip_flight.flight2_destination_airport_iata %></span></span>
         </div>
         <div class = "times">
           <span><%= @trip.round_trip_flight.flight2_take_off_at.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight2_landing_at.strftime("%H:%M") %></span>

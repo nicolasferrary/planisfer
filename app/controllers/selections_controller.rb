@@ -70,6 +70,7 @@ class SelectionsController < ApplicationController
     @region = @trip.round_trip_flight.region
     @region_airports = @region.airports.map { |airport_iata| Airport.find_by_iata(airport_iata).name}
     @car_selection = get_best_cars_per_category(@car_rentals)
+    @recommended_car = get_recommended_car(@car_selection)
     @pick_up_location = params[:pick_up_location]
     @drop_off_location = params[:drop_off_location]
     @pick_up_date_time = params[:pick_up_date_time]
@@ -250,6 +251,17 @@ class SelectionsController < ApplicationController
     cars = rentals.select {|rental| rental.car.category == category unless rental.car.nil?}
     sorted_cars = cars.sort_by { |rental| rental.price }
     # unique_sorted_cars = sorted_cars.uniq {|rental| rental.car}
+  end
+
+  def get_recommended_car(car_selection)
+    cheapest_per_cat = []
+    car_selection = car_selection.reject {|category, car_rentals| category == :mini}
+    car_selection = car_selection.reject {|category, car_rentals| car_rentals == []}
+    car_selection.each do |category, car_rentals|
+      cheapest_per_cat << car_selection[category].first
+    end
+    sorted_cheapest_per_category = cheapest_per_cat.sort_by { |rental| rental.price }
+    recommended_car = sorted_cheapest_per_category.first
   end
 
 end
