@@ -10,7 +10,7 @@
       </div>
     </div>
   <span class = "booking-status">
-    <%= render 'shared/booking_status' %>
+    <%= render 'shared/booking_status', :status => 2 %>
   </span>
 </div>
 
@@ -391,8 +391,7 @@
 
   <script>
     $(document).ready(function() {
-      $('#flight-card-link').on('click', function(event) {
-
+      $('.result-card').on('click', function(event) {
         setTimeout(function() {
           $('#car1').removeClass('hidden');
         }, 500)

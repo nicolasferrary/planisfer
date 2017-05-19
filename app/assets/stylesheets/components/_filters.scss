@@ -23,11 +23,11 @@
 
 
 #filters {
-  background: white;
+  background: rgba($brand-primary, .02);
   padding: 20px;
-  margin:-5px 10% 25px 10%;
-  border-bottom: 1px solid #E6E6E6;
-  border-top: 1px solid #E6E6E6;
+  margin:-25px 1% 25px 1%;
+  // border-bottom: 1px solid #E6E6E6;
+  // border-top: 1px solid #E6E6E6;
 }
 
 
@@ -80,7 +80,7 @@
   opacity:1;
   background-color: $brand-primary;
   color: white;
-  border: none;
+  border: 1px solid #00CECB;
 }
 .city-selected:hover{
   opacity: 0.6;
