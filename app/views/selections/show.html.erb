@@ -1,22 +1,23 @@
-
-<% # bandeau du haut %>
-<div class="flight-ticket-title text-center">
-    <div class="banner-content">
-    <%= link_to root_path do %>
-    <%= image_tag "logo.png", class:"logo-1"%>
-    <% end %>
-  </div>
-  <h1 class="">Select a car</h1>
+<div class="page-banner text-center">
+  <div class="page-banner-title">
+      <div class = "col-md-12 title-col">
+        <span> <%= link_to root_path do %>
+          <%= image_tag "blue_logo_no_word.png", class: "logo"%>
+        <% end %> </span>
+        <span class ="brand-name">Planisfer</span>
+        <span class = "banner2-title">Explore <%= @region.name %> your own way!</span> <span class = "banner2-title">Let's choose your car </span>
+      </div>
+    </div>
+  <span class = "booking-status">
+    <%= render 'shared/booking_status', :status => 3 %>
+  </span>
 </div>
-<% # Fin du bandeau du haut %>
+
 
 <% # début du wrapper %>
 <div class = "card-wrapper">
   <% # début du container %>
   <div class="container">
-
-
-
 
     <div class="row">
       <% # Début case bootstrap formulaire et cards %>

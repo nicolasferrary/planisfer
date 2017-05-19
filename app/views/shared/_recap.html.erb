@@ -18,9 +18,19 @@
     <div class = "row">
       <div class = "col-xs-12">
       <p>What's included?</p>
-        <p><i class="fa fa-check-square-o" aria-hidden="true"> Flights</i></p>
+        <%= link_to search_path(@search), data: {confirm: 'Are you sure you want to select another flight?', commit: 'Sure!'}, class: "modify-search-link" do %>
+          <div class = "included-checkbox">
+            <i class="fa fa-check-square-o" aria-hidden="true"> </i>
+            <span>Flights</span>
+          </div>
+        <% end %>
         <% if !@trip.car_rental.nil? %>
-          <p> <i class="fa fa-check-square-o" aria-hidden="true"> Car </i></p>
+          <%= link_to trip_path(@trip, @options.merge({:car_rental_id => nil})), method: :put, class: "modify-search-link" do %>
+            <div class = "included-checkbox">
+              <i class="fa fa-check-square-o" aria-hidden="true"></i>
+              <span>Car</span>
+            </div>
+          <% end %>
         <% end %>
  <!--        <p><i class="fa fa-check-square-o" aria-hidden="true"> Personal assistant </i></p> -->
       </div>
@@ -92,9 +102,6 @@
         </div>
         <div class = "carrier">
           <%= Constants::AIRLINES[@trip.round_trip_flight.carrier2] %>
-          <%= link_to search_path(@search) do %>
-          <i class="fa fa-pencil-square-o change" aria-hidden="true">Change flights</i>
-        <% end %>
         </div>
         <hr id="hr-title">
       </div>
@@ -145,9 +152,6 @@
             <span><%= @trip.car_rental.car.name %></span> <span> <%= image_tag "carlogos/" + @trip.car_rental.company.downcase + ".png", height: 15, width: "auto"%> </span>
           </div>
           <div class= "car-times">or similar</div>
-          <%= link_to trip_path(@trip, @options.merge({:car_rental_id => nil})), method: :put do %>
-            <i class="fa fa-trash remove" aria-hidden="true"> Remove cars</i>
-          <% end %>
         <% end %>
       </div>
       <% #End of content bootstrap col %>
