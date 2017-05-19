@@ -1,14 +1,5 @@
 $('#page-result-container').html('<%= j render "results" %>')
-    $(document).ready(function() {
-      $('.slider').on('click', function() {
-        $('#searchForm').submit();
-      })
 
-      $('.filtered-city').on('click', function() {
-        setTimeout(function() {
-          $('#searchForm').submit();
-        }, 100)
-      })
 
       var handler = Gmaps.build('Google');
       handler.buildMap({
@@ -127,110 +118,12 @@ $('#page-result-container').html('<%= j render "results" %>')
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
       })
-      $("#more-flights").click(function() {
-        $("#see-more-flights").toggleClass("hidden");
-        $("#hide-more-flights").toggleClass("hidden");
-        $(".the-hidden-results").toggleClass("hidden");
-      })
-    });
 
 
-    $(document).ready(function() {
-      $('.filtered-city').on('click', function(event) {
-        $(this).toggleClass('city-selected');
-        update_form_selected_cities();
-      });
-      $(".filtered-city").removeClass("city-selected");
-      <% @selected_cities.each do |city| %>
-      $(".filtered-city[data-city=<%= city %>]").addClass("city-selected");
-      <% end %>
-    });
-    function update_form_selected_cities() {
-      var selected_cities = "";
-      $(".city-selected").each(function( index ) {
-        selected_cities = selected_cities + $(this).text() + ",";
-      });
-      selected_cities = selected_cities.slice(0,-1); //remove last coma
-      $('#selected-cities').val(selected_cities);
-    }
-    function showhide(id) {
-      var e = document.getElementById(id);
-      if ($('#' + e.id).hasClass('not-displayed')) {
-        $("#more-flights").addClass("hidden");
-        $('#' + e.id).slideDown('slow');
-        $('#' + e.id).removeClass('not-displayed')
-        $("#see-filters").addClass("hidden");
-        $("#hide-filters").removeClass("hidden");
-      } else {
-        $('#' + e.id).slideUp('slow');
-        $('#' + e.id).addClass('not-displayed')
-        $("#see-filters").removeClass("hidden");
-        $("#hide-filters").addClass("hidden");
-        $("#more-flights").removeClass("hidden");
-      };
-    };
-
-    $('#flight1_range, #flight2_range').slider({
-      formatter: function(value) {
-        if (value < 12){
-          return value + 'am';
-        }
-        else if (value == 12){
-          return "noon";
-        }
-        else {
-          return value - 12 +'pm';
-        }
-      }
-    });
 
 
-    $(document).ready(function() {
-      $('#flight-card-link').on('click', function(event) {
-
-        setTimeout(function() {
-          $('#car1').removeClass('hidden');
-        }, 500)
-        setTimeout(function() {
-          $('#car2').removeClass('hidden');
-          $('#car5').removeClass('hidden');
-        }, 1000)
-        setTimeout(function() {
-          $('#car7').removeClass('hidden');
-        }, 1300)
-        setTimeout(function() {
-          $('#car12').removeClass('hidden');
-          $('#car10').removeClass('hidden');
-        }, 2100)
-         setTimeout(function() {
-          $('#car6').removeClass('hidden');
-        }, 2400)
-         setTimeout(function() {
-          $('#car11').removeClass('hidden');
-          $('#car3').removeClass('hidden');
-          $('#car8').removeClass('hidden');
-        }, 3000)
-         setTimeout(function() {
-          $('#car4').removeClass('hidden');
-        }, 3300)
-         setTimeout(function() {
-          $('#car9').removeClass('hidden');
-        }, 4000)
 
 
-        setTimeout(function() {
-          $('#wait1').addClass('hidden');
-          $('#text2').removeClass('light');
-          $('#text1').addClass('light');
-          $('#checked1').removeClass('hidden');
-        }, 3000)
 
-        setTimeout(function() {
-          $('#wait2').addClass('hidden');
-          $('#text2').addClass('light');
-          $('#text3').removeClass('light');
-          $('#checked2').removeClass('hidden');
-        }, 7000)
 
-      })
-    })
+
