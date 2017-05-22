@@ -46,6 +46,8 @@ class SelectionsController < ApplicationController
       @best_car_rentals << best_category_cars
     end
     @best_car_rentals = @best_car_rentals.flatten
+    @car_margin = 1.1
+    @best_car_rentals = apply_car_margin(@best_car_rentals, @car_margin)
     @best_car_rentals.each do |car_rental|
       car_rental.selection = @selection
       car_rental.save
@@ -272,6 +274,13 @@ class SelectionsController < ApplicationController
     drop_off = Time.parse(string_drop_off)
     pick_up = Time.parse(string_pick_up)
     nb_days = ((drop_off - pick_up).fdiv(24 * 60 * 60) + 1).to_i
+  end
+
+  def apply_car_margin(best_car_rentals, car_margin)
+    best_car_rentals.each do |rental|
+      rental.price = rental.price * car_margin
+    end
+    best_car_rentals
   end
 
 end

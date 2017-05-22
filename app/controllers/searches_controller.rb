@@ -19,7 +19,8 @@ class SearchesController < ApplicationController
     @all_region_airports = define_all_airports(@region)
 
     @trips = get_trips_for(@starts_on, @returns_on, @nb_travelers, @city, @search, @all_region_airports)
-
+    @flight_margin = 1.05
+    @trips = apply_flight_margin(@trips, @flight_margin)
     redirect_to search_path(@search)
 
   end
@@ -476,6 +477,14 @@ class SearchesController < ApplicationController
       colours[airport] = "colour-code-#{index}"
     end
     colours
+  end
+
+  def apply_flight_margin(trips, flight_margin)
+    trips.each do |trip|
+      trip.price = trip.price * flight_margin
+      trip.save
+    end
+    trips
   end
 
 
