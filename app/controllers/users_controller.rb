@@ -23,12 +23,12 @@ class UsersController < ApplicationController
     # Worldia : Add user to quote
     @quote_id = params[:quote_id]
     worldia_add_user_to_quote(@user, @quote_id)
-
-    #Worldia : Add passengers to quote
-    worldia_add_passengers_to_quote(@passengers, @quote_id)
-
-    #Worldia : Create payment
-    worldia_create_payment(@quote_id)
+#TODO
+    # #Worldia : Add passengers to quote
+    # worldia_add_passengers_to_quote(@passengers, @quote_id)
+#TODO
+    # #Worldia : Create payment
+    # worldia_create_payment(@quote_id)
 
     redirect_to new_order_payment_path(@order, trip_id: @trip.id, status: "OK")
   end

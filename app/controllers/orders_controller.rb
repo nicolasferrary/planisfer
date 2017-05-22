@@ -10,9 +10,10 @@ class OrdersController < ApplicationController
     @order = Order.where(state: 'paid').find(params[:id])
     @trip = Trip.find(params[:trip_id])
     @user = @order.user
-    @quote_id = params([:quote_id])
-    #Worldia : validate payment
-    worldia_validate_payment(@quote_id)
+#TOdo
+    # @quote_id = params([:quote_id])
+    # #Worldia : validate payment
+    # worldia_validate_payment(@quote_id)
   end
 
   private

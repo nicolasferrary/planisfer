@@ -75,6 +75,7 @@ class SelectionsController < ApplicationController
     @drop_off_location = params[:drop_off_location]
     @pick_up_date_time = params[:pick_up_date_time]
     @drop_off_date_time = params[:drop_off_date_time]
+    @nb_days = calculate_nb_days(@pick_up_date_time, @drop_off_date_time)
     set_indexes
     # @car_selection is a hash of arrays of instances of car_rentals (up to 5 instances per car category)
 
@@ -95,6 +96,7 @@ class SelectionsController < ApplicationController
     @pick_up_airport = Airport.find_by_iata(@pick_up_location)
     @drop_off_airport = Airport.find_by_iata(@drop_off_location)
 
+    @trip.car_rental.nil? ? @recap_opacity = 1 : @recap_opacity = 0
 
     respond_to do |format|
       format.html {}
@@ -262,6 +264,14 @@ class SelectionsController < ApplicationController
     end
     sorted_cheapest_per_category = cheapest_per_cat.sort_by { |rental| rental.price }
     recommended_car = sorted_cheapest_per_category.first
+  end
+
+  def calculate_nb_days(pick_up_date_time, drop_off_date_time)
+    string_drop_off = Time.parse(drop_off_date_time).strftime("%Y %B %e")
+    string_pick_up = Time.parse(pick_up_date_time).strftime("%Y %B %e")
+    drop_off = Time.parse(string_drop_off)
+    pick_up = Time.parse(string_pick_up)
+    nb_days = ((drop_off - pick_up).fdiv(24 * 60 * 60) + 1).to_i
   end
 
 end
