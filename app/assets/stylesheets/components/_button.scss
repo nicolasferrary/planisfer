@@ -50,6 +50,28 @@
   }
 }
 
+.btn-circle-small{
+  color: $gray !important;
+  border: 1px solid $gray !important;
+  border-radius: 50% !important;
+  widows: 30px !important;
+  height: 30px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 0px;
+  &:hover {
+    border: 1px solid $brand-color !important;
+    color: $brand-color !important;
+  }
+  &.active {
+    background-color: $brand-color;
+    color: white !important;
+    border: 1px solid $brand-color !important;
+  }
+}
+
 .payement-button{
   position: relative;
   top: 25px;

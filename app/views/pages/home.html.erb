@@ -241,41 +241,50 @@
                   </div> <!-- fin de group -->
                 </div>
 
-                <div class = "with-children hidden" id = "children-form">
-                  <div class = "row">
-                    <h3 class = "text-center">Children <span style= "font-weight: lighter"> (2-11) </span> </h3>
+                <div class = "raw with-children hidden" id = "children-form">
+
+                  <div class = "col-md-6 children-padding">
+
+                    <div class = "row">
+                      <h3 class = "text-center">Children <span style= "font-weight: lighter"> (2-11) </span> </h3>
+                    </div>
+
+                    <div class = "row">
+                      <div class="group" data-toggle="buttons">
+                        <div class="travelers-btn-container">
+                          <% Constants::TRAVELERS.each do |number, text| %>
+                            <div class = "col-xs-4 radio-button-padding">
+                              <label class="btn btn-circle-small">
+                                <input type="radio" name="nb_travelers" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
+                              </label>
+                            </div>
+                          <% end %>
+                        </div> <!-- fin travelers-btn-container -->
+                      </div> <!-- fin de group -->
+                    </div>
+
                   </div>
 
-                  <div class = "row">
-                    <div class="group" data-toggle="buttons">
-                      <div class="travelers-btn-container">
-                        <% Constants::TRAVELERS.each do |number, text| %>
-                          <div class = "col-xs-2 radio-button-padding">
-                            <label class="btn btn-circle">
-                              <input type="radio" name="nb_travelers" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
-                            </label>
-                          </div>
-                        <% end %>
-                      </div> <!-- fin travelers-btn-container -->
-                    </div> <!-- fin de group -->
-                  </div>
+                  <div class = "col-md-6 infant-padding">
 
-                  <div class = "row">
-                    <h3 class = "text-center">Infants <span style= "font-weight: lighter"> (<2) </span> </h3>
-                  </div>
+                    <div class = "row">
+                      <h3 class = "text-center">Infants <span style= "font-weight: lighter"> (<%= "<2" %>) </span> </h3>
+                    </div>
 
-                  <div class = "row">
-                    <div class="group" data-toggle="buttons">
-                      <div class="travelers-btn-container">
-                        <% Constants::TRAVELERS.each do |number, text| %>
-                          <div class = "col-xs-2 radio-button-padding">
-                            <label class="btn btn-circle">
-                              <input type="radio" name="nb_travelers" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
-                            </label>
-                          </div>
-                        <% end %>
-                      </div> <!-- fin travelers-btn-container -->
-                    </div> <!-- fin de group -->
+                    <div class = "row">
+                      <div class="group" data-toggle="buttons">
+                        <div class="travelers-btn-container">
+                          <% Constants::TRAVELERS.each do |number, text| %>
+                            <div class = "col-xs-4 radio-button-padding">
+                              <label class="btn btn-circle-small">
+                                <input type="radio" name="nb_travelers" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
+                              </label>
+                            </div>
+                          <% end %>
+                        </div> <!-- fin travelers-btn-container -->
+                      </div> <!-- fin de group -->
+                    </div>
+
                   </div>
 
                 </div>
