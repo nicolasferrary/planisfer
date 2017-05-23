@@ -17,21 +17,21 @@
 <div class = "recap-box">
   <div class = "row">
     <div class = "col-xs-12">
-      <div class = "col-md-5 no-padding">
+      <div class = "col-md-6 no-padding">
         <p>What's included?</p>
       </div>
-      <div class = "col-md-7">
+      <div class = "col-md-6 no-padding">
         <%= link_to search_path(@search), data: {confirm: 'Are you sure you want to select another flight?', commit: 'Sure!'}, class: "modify-search-link" do %>
           <div class = "included-checkbox">
-            <i class="fa fa-check-square-o" aria-hidden="true"> </i>
             <span>Flights</span>
+            <i class="fa fa-check-square-o" aria-hidden="true"> </i>
           </div>
         <% end %>
         <% if !@trip.car_rental.nil? %>
           <%= link_to trip_path(@trip, @options.merge({:car_rental_id => nil})), method: :put, class: "modify-search-link" do %>
             <div class = "included-checkbox">
-              <i class="fa fa-check-square-o" aria-hidden="true"></i>
               <span> <%= @trip.car_rental.car.name %> or similar</span>
+              <i class="fa fa-check-square-o" aria-hidden="true"></i>
             </div>
           <% end %>
         <% end %>
