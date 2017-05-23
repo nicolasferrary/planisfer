@@ -232,8 +232,8 @@
                     <div class="travelers-btn-container">
                       <% Constants::TRAVELERS.each do |number, text| %>
                         <div class = "col-xs-2 radio-button-padding">
-                          <label class="btn btn-circle">
-                            <input type="radio" name="nb_travelers" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
+                          <label class="btn btn-circle radio-b">
+                            <input type="radio" class = 'radio-butt' name="nb_adults" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
                           </label>
                         </div>
                       <% end %>
@@ -254,8 +254,8 @@
                         <div class="travelers-btn-container">
                           <% Constants::TRAVELERS.each do |number, text| %>
                             <div class = "col-xs-4 radio-button-padding">
-                              <label class="btn btn-circle-small">
-                                <input type="radio" name="nb_travelers" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
+                              <label class="btn btn-circle-small radio-b">
+                                <input type="radio" name="nb_children" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
                               </label>
                             </div>
                           <% end %>
@@ -276,8 +276,8 @@
                         <div class="travelers-btn-container">
                           <% Constants::TRAVELERS.each do |number, text| %>
                             <div class = "col-xs-4 radio-button-padding">
-                              <label class="btn btn-circle-small">
-                                <input type="radio" name="nb_travelers" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
+                              <label class="btn btn-circle-small radio-b">
+                                <input type="radio" name="nb_infants" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
                               </label>
                             </div>
                           <% end %>
@@ -499,9 +499,37 @@
     $(".no-children").addClass('hidden')
     $('#' + e.id).slideDown('slow');
     $('#' + e.id).removeClass('hidden')
-
   };
+
 </script>
+
+
+<script>
+// bind to retrieve old status
+$(".radio-b").mousedown(function() {
+      var radio = $(this).find('input[type="radio"]')[0]
+      var label = $(this)
+    // if it was checked before
+    if(radio.checked) {
+        // bind event to reset state after click is completed
+        $(this).mouseup(function() {
+
+            // bind param, because "this" will point somewhere else in setTimeout
+            // apparently if you do it immediatelly, it will be overriden, hence wait a tiny bit
+            setTimeout(function() {
+              console.log(this)
+                radio.checked = false;
+                label.removeClass("active")
+            }, 5);
+            // don't handle mouseup anymore unless bound again
+            $(this).unbind('mouseup');
+        });
+    }
+});
+</script>
+
+
+
 
 <script>
   $(document).ready(function() {

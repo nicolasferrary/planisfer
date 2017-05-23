@@ -3,22 +3,33 @@ class SearchesController < ApplicationController
   def create
 
     @region = Region.find_by_name(params[:region])
-    @search = Search.new(city: params[:city], starts_on: params[:starts_on], returns_on: params[:returns_on], nb_travelers: params[:nb_travelers])
+    @search = Search.new(city: params[:city], starts_on: params[:starts_on], returns_on: params[:returns_on], nb_adults: params[:nb_adults] || 0, nb_children: params[:nb_children] || 0, nb_infants: params[:nb_infants] || 0)
     @search.region = @region
-
-    unless @search.save
-      flash[:search_error] = "Please fill empty fields"
+    if @search.nb_adults + @search.nb_children + @search.nb_infants == 0
+      flash[:search_error] = "Please select at least one passenger"
       return redirect_to root_path
+    else
+      unless @search.save
+        if @search.nb_adults < @search.nb_infants
+          flash[:search_error] = "Number of infants can not be higher than number of adults"
+        else
+          flash[:search_error] = "Please fill empty fields"
+        end
+        return redirect_to root_path
+      end
     end
+
 
     @city = City.create(params[:city])
     @region_name = @search.region.name
     @starts_on = params[:starts_on]
     @returns_on = params[:returns_on]
-    @nb_travelers = params[:nb_travelers]
+    @nb_adults = @search.nb_adults
+    @nb_children = @search.nb_children
+    @nb_infants = @search.nb_infants
     @all_region_airports = define_all_airports(@region)
 
-    @trips = get_trips_for(@starts_on, @returns_on, @nb_travelers, @city, @search, @all_region_airports)
+    @trips = get_trips_for(@starts_on, @returns_on, @nb_adults, @nb_children, @nb_infants, @city, @search, @all_region_airports)
     @flight_margin = 1.05
     @trips = apply_flight_margin(@trips, @flight_margin)
     redirect_to search_path(@search)
@@ -35,7 +46,7 @@ class SearchesController < ApplicationController
     #@airport_colours is a hash that gives a colour code to each city in @region_airports
     @airport_colours = define_colours(@region_airports)
     @selected_airports = @region_airports
-    @nb_travelers = @search.nb_travelers
+    @nb_travelers = @search.nb_adults.to_i + @search.nb_children.to_i + @search.nb_infants.to_i
     @passengers_title = passengers(@nb_travelers)
     @city_name = @search.city
     @city_real_name = Constants::AIRPORTS[@city_name]
@@ -230,7 +241,7 @@ class SearchesController < ApplicationController
 
 # @latitude = Geocoder.search("Faro, Portugal")[0].data["geometry"]["location"]["lat"]
 
-  def get_trips_for(starts_on, returns_on, nb_travelers, city, search, all_region_airports)
+  def get_trips_for(starts_on, returns_on, nb_adults, nb_children, nb_infants, city, search, all_region_airports)
     trips = []
     rtfs = []
     # create rtf for routes with same landing and departure airports in destination region and add them to rtfs
@@ -260,7 +271,9 @@ class SearchesController < ApplicationController
         destination: airport.iata,
         departure: starts_on,
         return: returns_on,
-        nb_travelers: nb_travelers,
+        nb_adults: nb_adults,
+        nb_children: nb_children,
+        nb_infants: nb_infants,
         region: search.region.name
       }
       @data = (Avion::SmartQPXAgent.new(options).obtain_offers)
@@ -288,7 +301,9 @@ class SearchesController < ApplicationController
         origin: city.name,
         destination: airport.iata,
         departure: starts_on,
-        nb_travelers: nb_travelers,
+        nb_adults: nb_adults,
+        nb_children: nb_children,
+        nb_infants: nb_infants,
         region: search.region.name
       }
       @data1 = (Avion::SmartQPXAgent.new(options1).obtain_offers)
@@ -305,7 +320,9 @@ class SearchesController < ApplicationController
         origin: airport.iata,
         destination: city.name,
         departure: returns_on,
-        nb_travelers: nb_travelers,
+        nb_adults: nb_adults,
+        nb_children: nb_children,
+        nb_infants: nb_infants,
         region: search.region.name
       }
       @data2 = (Avion::SmartQPXAgent.new(options2).obtain_offers)
@@ -336,7 +353,7 @@ class SearchesController < ApplicationController
 
     #create trips with rtf
     rtfs.each do |rtf|
-      trip = Trip.create(starts_on, returns_on, nb_travelers, city, rtf, search)
+      trip = Trip.create(starts_on, returns_on, nb_adults, nb_children, nb_infants, city, rtf, search)
       trips << trip
     end
 

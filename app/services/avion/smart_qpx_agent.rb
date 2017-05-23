@@ -9,7 +9,9 @@ module Avion
       @destination = args[:destination]
       @departure = args[:departure]
       @return = args[:return]
-      @nb_travelers = args[:nb_travelers]
+      @nb_adults = args[:nb_adults]
+      @nb_children = args[:nb_children]
+      @nb_infants = args[:nb_infants]
     end
 
     def obtain_offers
@@ -18,7 +20,9 @@ module Avion
           destination: @destination,
           departure: @departure,
           return: @return,
-          nb_travelers: @nb_travelers,
+          nb_adults: @nb_adults,
+          nb_children: @nb_children,
+          nb_infants: @nb_infants,
           nb_solutions: 5,
           api_key: ENV['AMADEUS_SANDBOX_API_KEY']
         ).make_request
