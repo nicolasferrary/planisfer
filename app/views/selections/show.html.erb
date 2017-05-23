@@ -75,8 +75,8 @@
   </div>
 
   <div class="col-xs-12 col-md-4">
-    <div id = "recap-zone">
-      <%= render "shared/recap", :opacity => @recap_opacity %>
+    <div id = "recap-zone" class = "<%= 'recap-opacity' if @recap_opacity == 1 %>">
+      <%= render "shared/recap"%>
     </div>
   </div>
 
@@ -118,7 +118,7 @@
 
   <script>
     $(document).ready(function() {
-      $('.card').mouseover('click', function(e) {
+      $('.card').mouseenter('click', function(e) {
         e.preventDefault();
         $('.card.selected').removeClass('selected');
         $(this).addClass('selected');
@@ -126,12 +126,12 @@
     });
 
     $(document).ready(function() {
-      $('#recap-zone').mouseover('click', function(e) {
+      $('#recap-zone').mouseenter('click', function(e) {
         e.preventDefault();
         $(this).removeClass('recap-opacity');
         $('#car-zone').addClass('recap-opacity');
       })
-      $('#car-zone').mouseover('click', function(e) {
+      $('#car-zone').mouseenter('click', function(e) {
         e.preventDefault();
         $(this).removeClass('recap-opacity');
         $('#recap-zone').addClass('recap-opacity');
