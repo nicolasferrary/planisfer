@@ -118,7 +118,7 @@
 
   <script>
     $(document).ready(function() {
-      $('.card').mouseenter('click', function(e) {
+      $('.card').mouseenter(function(e) {
         e.preventDefault();
         $('.card.selected').removeClass('selected');
         $(this).addClass('selected');
@@ -126,15 +126,15 @@
     });
 
     $(document).ready(function() {
-      $('#recap-zone').mouseenter('click', function(e) {
+      $('#recap-zone').mouseenter(function(e) {
         e.preventDefault();
         $(this).removeClass('recap-opacity');
         $('#car-zone').addClass('recap-opacity');
       })
-      $('#car-zone').mouseenter('click', function(e) {
+      $('#recap-zone').mouseleave(function(e) {
         e.preventDefault();
-        $(this).removeClass('recap-opacity');
-        $('#recap-zone').addClass('recap-opacity');
+        $('#car-zone').removeClass('recap-opacity');
+        $(this).addClass('recap-opacity');
       })
     });
 
