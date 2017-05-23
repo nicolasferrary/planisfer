@@ -67,12 +67,17 @@ class SelectionsController < ApplicationController
   def show
     @trip = Trip.find(params[:trip_id])
     @search = @trip.search
+    @nb_travelers = @search.nb_adults.to_i + @search.nb_children.to_i + @search.nb_infants.to_i
     @selection = Selection.find(params[:id])
     @car_rentals = CarRental.where(selection_id: @selection.id)
     @region = @trip.round_trip_flight.region
     @region_airports = @region.airports.map { |airport_iata| Airport.find_by_iata(airport_iata).name}
+
     @car_selection = get_best_cars_per_category(@car_rentals)
     @recommended_car = get_recommended_car(@car_selection)
+    @main_car = @trip.car_rental || @recommended_car
+    @main_car_title = define_title(@trip)
+
     @pick_up_location = params[:pick_up_location]
     @drop_off_location = params[:drop_off_location]
     @pick_up_date_time = params[:pick_up_date_time]
@@ -281,6 +286,10 @@ class SelectionsController < ApplicationController
       rental.price = rental.price * car_margin
     end
     best_car_rentals
+  end
+
+  def define_title(trip)
+    trip.car_rental.nil? ? "OUR RECOMMENDATION" : "YOUR SELECTION"
   end
 
 end

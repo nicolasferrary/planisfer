@@ -8,7 +8,7 @@
           <h4>Your roadtrip in <%= @trip.round_trip_flight.region.name %></h4>
         </div>
         <div class = "col-xs-4" id = "number-travelers">
-         <%= @trip.nb_travelers%> traveler<%='s' unless @trip.nb_travelers == 1%>
+         <%= @nb_travelers%> traveler<%='s' unless @nb_travelers == 1%>
         </div>
       </div>
     </div>
@@ -36,25 +36,8 @@
       </div>
     </div>
 
-    <% # Beg of row 9 %>
-    <div class = "row">
-      <% #Beg of booking button bootstrap col %>
-      <div class = "col-sm-12">
-        <div class = "text-center price-and-book">
-          <span class = "booking-price"><%= money_without_cents_and_with_symbol(@trip.price.round)%></span>
-          <span>
-            <%= form_tag orders_path do %>
-              <%= hidden_field_tag 'trip_id', @trip.id %>
-              <%= submit_tag 'BOOK', class: 'btn-brand' %>
-            <% end %>
-          </span>
-        </div>
-      </div>
-      <% #End of booking button bootstrap col %>
-    </div>
-
     <hr id="hr-title">
-    <% # End of row 9 %>
+
 
     <% # Beg of row 3 %>
     <div class = "row">
@@ -67,15 +50,16 @@
       <div class = "col-sm-10">
         <div class = "date">
           <%= @trip.starts_on.strftime("%b %e")%>
+          <span class = "carrier">
+            <%= Constants::AIRLINES[@trip.round_trip_flight.carrier1] %>
+          </span>
         </div>
+
         <div class = "origin-and-destination">
           <span> <%= Constants::AIRPORTS[@trip.city.name] %> <span class="light-data"> <%= @trip.round_trip_flight.flight1_origin_airport_iata %></span></span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span><%= @trip.arrival_city %> <span class="light-data"><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span></span>
         </div>
         <div class = "times">
           <span><%= @trip.round_trip_flight.flight1_take_off_at.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight1_landing_at.strftime("%H:%M") %></span>
-        </div>
-        <div class = "carrier">
-          <%= Constants::AIRLINES[@trip.round_trip_flight.carrier1] %>
         </div>
         <hr id="hr-content">
       </div>
@@ -93,15 +77,15 @@
       <div class = "col-sm-10">
         <div class = "date">
           <%= @trip.returns_on.strftime("%B %d")%>
+          <span class = "carrier">
+            <%= Constants::AIRLINES[@trip.round_trip_flight.carrier2] %>
+          </span>
         </div>
         <div class = "origin-and-destination">
           <span> <%= @trip.return_city %> <span class="light-data"><%= @trip.round_trip_flight.flight2_origin_airport_iata %> </span></span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span> <%= Constants::AIRPORTS[@trip.city.name] %> <span class="light-data"> <%= @trip.round_trip_flight.flight2_destination_airport_iata %></span></span>
         </div>
         <div class = "times">
           <span><%= @trip.round_trip_flight.flight2_take_off_at.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight2_landing_at.strftime("%H:%M") %></span>
-        </div>
-        <div class = "carrier">
-          <%= Constants::AIRLINES[@trip.round_trip_flight.carrier2] %>
         </div>
         <hr id="hr-title">
       </div>
@@ -139,11 +123,11 @@
         <% else %>
 
           <div class = "date">
-            <span> <%= Time.zone.parse(@pick_up_date_time).strftime("%b %e")%></span><span><%= Time.zone.parse(@drop_off_date_time).strftime("%b %e") %></span>
+            <span> <%= Time.zone.parse(@pick_up_date_time).strftime("%b %e")%> <span style= "font-size: 10px"> <%= Time.zone.parse(@pick_up_date_time).strftime("%I %P")%></span></span><span><%= Time.zone.parse(@drop_off_date_time).strftime("%b %e") %> <span style= "font-size: 10px"><%= Time.zone.parse(@drop_off_date_time).strftime("%I %P")%></span></span>
           </div>
-          <div class = "origin-and-destination">
-            <span class = "car-times"> <%= Time.zone.parse(@pick_up_date_time).strftime("%I %P")%></span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span class = "car-times"><%= Time.zone.parse(@drop_off_date_time).strftime("%I %P")%></span>
-          </div>
+ <!--          <div class = "origin-and-destination">
+            <span class = "car-times"> </span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span class = "car-times"></span>
+          </div> -->
           <div class = "times">
             <span><%= Airport.find_by_iata(@pick_up_location).cityname %></span><span><%= Airport.find_by_iata(@drop_off_location).cityname %></span>
           </div>
@@ -157,6 +141,27 @@
       <% #End of content bootstrap col %>
     </div>
     <% # End of row 5 %>
+
+    <hr id="hr-title">
+
+    <% # Beg of row 9 %>
+    <div class = "row">
+      <% #Beg of booking button bootstrap col %>
+      <div class = "col-sm-12">
+        <div class = "text-center price-and-book">
+          <span class = "booking-price"><%= money_without_cents_and_with_symbol(@trip.price.round)%></span>
+          <span>
+            <%= form_tag orders_path do %>
+              <%= hidden_field_tag 'trip_id', @trip.id %>
+              <%= submit_tag 'BOOK', class: 'btn-brand' %>
+            <% end %>
+          </span>
+        </div>
+      </div>
+      <% #End of booking button bootstrap col %>
+    </div>
+    <% # End of row 9 %>
+
   </div>
 
 
