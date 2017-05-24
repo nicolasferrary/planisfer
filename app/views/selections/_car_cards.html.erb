@@ -14,7 +14,8 @@
         </div>
         <div class="card-background mini-background">
         </div>
-         <a tabindex="0" class="btn btn-lg btn-danger popover-link" role="button" data-toggle="popover" data-trigger="focus" id="example"></a>
+
+         <a tabindex="0" role="button" class="popover-link"  data-html="true" data-content: <%= "#{render 'car_popover'}" %> data-toggle="popover"></a>
       </div>
     </div>
   <% end %>
@@ -292,14 +293,15 @@
 </div>
 <% # Fin de la row de cards%>
 
+<%= render 'car_popover' %>
+
 <% content_for(:after_js) do %>
 
   <script>
-    $('#example').popover({
+    $('.popover-link').popover({
     html : true,
     title: "This is a test",
-    content: "<b>hello popover world</b>",
-    placement: 'top',
+    placement: 'auto top',
     trigger: 'hover',
   })
   </script>
