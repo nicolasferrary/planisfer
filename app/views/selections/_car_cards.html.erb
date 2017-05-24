@@ -1,5 +1,112 @@
 <% #Début de la row de cards%>
 <div class="row">
+
+
+  <% if @car_selection[:mini][@mini_index] %>
+    <div class="col-xs-12 col-sm-6">
+      <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:mini][@mini_index]})), method: :put, class: 'tabLink result-card' do %>
+        <div class="car-card center-block">
+          <div class = "car-card-title">
+            <span>Mini</span>
+            <span class = "car-title-price">
+              <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:mini][0].price) %></span>
+            </span>
+          </div>
+          <div class="card-background mini-background">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @car_selection[:economy][@economy_index] %>
+    <div class="col-xs-12 col-sm-6">
+      <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:economy][@economy_index]})), method: :put, class: 'tabLink result-card' do %>
+        <div class="car-card center-block">
+          <div class = "car-card-title">
+            <span>Economy</span>
+            <span class = "car-title-price">
+              <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:economy][0].price) %></span>
+            </span>
+          </div>
+          <div class="card-background economy-background">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @car_selection[:compact][@compact_index] %>
+    <div class="col-xs-12 col-sm-6">
+      <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:compact][@compact_index]})), method: :put, class: 'tabLink result-card' do %>
+        <div class="car-card center-block">
+          <div class = "car-card-title">
+            <span>Compact</span>
+            <span class = "car-title-price">
+              <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:compact][0].price) %></span>
+            </span>
+          </div>
+          <div class="card-background compact-background">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @car_selection[:intermediate][@intermediate_index] %>
+    <div class="col-xs-12 col-sm-6">
+      <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:intermediate][@intermediate_index]})), method: :put, class: 'tabLink result-card' do %>
+        <div class="car-card center-block">
+          <div class = "car-card-title">
+            <span>Intermediate</span>
+            <span class = "car-title-price">
+              <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:intermediate][0].price) %></span>
+            </span>
+          </div>
+          <div class="card-background intermediate-background">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @car_selection[:fullsize][@fullsize_index] %>
+    <div class="col-xs-12 col-sm-6">
+      <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:fullsize][@fullsize_index]})), method: :put, class: 'tabLink result-card' do %>
+        <div class="car-card center-block">
+          <div class = "car-card-title">
+            <span>Fullsize</span>
+            <span class = "car-title-price">
+              <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:fullsize][0].price) %></span>
+            </span>
+          </div>
+          <div class="card-background fullsize-background">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @car_selection[:premium][@premium_index] %>
+    <div class="col-xs-12 col-sm-6">
+      <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:premium][@premium_index]})), method: :put, class: 'tabLink result-card' do %>
+        <div class="car-card center-block">
+          <div class = "car-card-title">
+            <span>Premium</span>
+            <span class = "car-title-price">
+              <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:premium][0].price) %></span>
+            </span>
+          </div>
+          <div class="card-background premium-background">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+
+<% # OUT FROM HERE%>
+
     <% # Début de la première card %>
 <% if @car_selection[:mini][@mini_index] %>
   <div class="col-xs-12 col-sm-6">

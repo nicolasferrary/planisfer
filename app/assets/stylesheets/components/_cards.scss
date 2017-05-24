@@ -71,6 +71,8 @@
   justify-content: space-around;
 }
 
+
+
 .card-image{
   position: absolute;
   bottom: 10px;
@@ -224,4 +226,66 @@
   }
 }
 
+.car-card{
+  height: 230px;
+  width: 350px;
+  position: relative;
+  margin-bottom: 20px;
+  color: #333333;
+  border-radius: 5px;
+  text-decoration: none;
+  box-shadow: 1px 1px 1px #c7c7c7;
+  background: white;
+  span{
+    color: $orange;
+  }
+}
+
+.car-card-title{
+  padding: 5px 5px 0 5px;
+}
+
+.car-card.selected {
+  box-shadow: 1px 1px 1px #5d5d5d;
+  .card-price {
+    background-color: $brand-color;
+  }
+}
+
+.card-background{
+  background-size: cover;
+  height: 85%;
+  width: 350px;
+  position: absolute;
+  bottom: 0px;
+  border-radius: 0 0 5px 5px;
+}
+
+.mini-background{
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('mini.jpg');
+}
+
+.economy-background{
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('economy.jpg');
+}
+
+.compact-background{
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('compact.jpg');
+}
+
+.intermediate-background{
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('intermediate.jpg');
+}
+
+.fullsize-background{
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('fullsize.jpg');
+}
+
+.premium-background{
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('premium.jpg');
+}
+
+.car-title-price{
+  float:right;
+}
 
