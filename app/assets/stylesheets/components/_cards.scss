@@ -41,12 +41,12 @@
   background: $secondary-color;
   padding: 6px 18px;
   color: white;
-  position: absolute;
   font-size: 17px;
   border-radius: 0;
-  right: 0px;
   width: 95px;
   height: 35px;
+  position: absolute;
+  bottom: 7px;
 }
 
 #recommended_car_price.selected{
@@ -190,17 +190,17 @@
 }
 
 .recommendation-box{
+  position: relative;
   border-bottom: 1px solid #E6E6E6;
   border-top: 1px solid #E6E6E6;
   margin-left: 0px;
   margin: auto 0 50px 0;
-  padding-top: 15px;
   color: #333333;
   border-radius: 5px;
   text-decoration: none;
   box-shadow: 1px 1px 1px #c7c7c7;
   background: white;
-  padding: 15px;
+  padding: 15px 15px 5px 15px;
   h4 {
     color: $orange;
   }
@@ -209,6 +209,7 @@
   }
   ul {
     padding-left: 20px;
+    font-size: 14px;
   }
 }
 
@@ -261,6 +262,12 @@
   border-radius: 0 0 5px 5px;
 }
 
+.main-background{
+  height: 200px;
+  position: static;
+  float: right;
+}
+
 .mini-background{
   background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('mini.jpg');
 }
@@ -287,5 +294,9 @@
 
 .car-title-price{
   float:right;
+}
+
+.no-relative-position{
+  position: static;
 }
 

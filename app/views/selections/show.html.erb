@@ -30,18 +30,18 @@
 
         <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@main_car})), method: :put, class: 'tabLink result-card' do %>
           <div class = "row recommendation-box selected">
-            <div class = "col-md-4">
+            <div class = "col-md-4 no-relative-position">
               <h4> <%= @main_car.car.name %> <span>or similar</span></h4>
               <ul>
                 <li> Rented by <%= @main_car.company %>, a well established rental company in Europe</li>
                 <li> <%= @main_car.car.category %> category</li>
                 <li> € <%= (@main_car.price.to_f.fdiv(@nb_days)).ceil %> per day </li>
               </ul>
+              <div id = "recommended_car_price" class = "selected"> <%= money_without_cents_and_with_symbol(@main_car.price) %>
+              </div>
             </div>
             <div class = "col-md-8 text-center">
-              <div class = "price-and-photo">
-                <span id = "recommended_car_price" class = "selected"> <%= money_without_cents_and_with_symbol(@main_car.price) %></span>
-                <div> <%= image_tag @main_car.car.image_url %></div>
+              <div class = "card-background main-background <%= @main_car.car.category.downcase%>-background">
               </div>
 
             </div>
