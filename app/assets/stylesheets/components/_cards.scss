@@ -200,7 +200,6 @@
   text-decoration: none;
   box-shadow: 1px 1px 1px #c7c7c7;
   background: white;
-  padding: 15px 15px 5px 15px;
   h4 {
     color: $orange;
   }
@@ -219,7 +218,6 @@
 
 
 .car-page-title{
-  margin-bottom: 20px;
   h3 {
   font-size: 23px;
   color: #404040;
@@ -263,9 +261,10 @@
 }
 
 .main-background{
-  height: 200px;
   position: static;
   float: right;
+  border-radius: 0 5px 5px 0;
+  height: 100%
 }
 
 .mini-background{
@@ -300,3 +299,11 @@
   position: static;
 }
 
+
+.main-photo-container{
+  height: 200px;
+}
+
+#main-car-container{
+  max-width: 700px;
+}
