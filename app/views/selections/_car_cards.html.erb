@@ -2,20 +2,20 @@
 <div class="row">
 
 
+
   <% if @car_selection[:mini][@mini_index] %>
     <div class="col-xs-12 col-sm-6">
-      <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:mini][@mini_index]})), method: :put, class: 'tabLink result-card' do %>
-        <div class="car-card center-block">
-          <div class = "car-card-title">
-            <span>Mini</span>
-            <span class = "car-title-price">
-              <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:mini][0].price) %></span>
-            </span>
-          </div>
-          <div class="card-background mini-background">
-          </div>
+      <div class="car-card center-block">
+        <div class = "car-card-title">
+          <span>Mini</span>
+          <span class = "car-title-price">
+            <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:mini][0].price) %></span>
+          </span>
         </div>
-      <% end %>
+        <div class="card-background mini-background">
+        </div>
+         <a tabindex="0" class="btn btn-lg btn-danger popover-link" role="button" data-toggle="popover" data-trigger="focus" id="example"></a>
+      </div>
     </div>
   <% end %>
 
@@ -292,6 +292,18 @@
 </div>
 <% # Fin de la row de cards%>
 
+<% content_for(:after_js) do %>
+
+  <script>
+    $('#example').popover({
+    html : true,
+    title: "This is a test",
+    content: "<b>hello popover world</b>",
+    placement: 'top',
+    trigger: 'hover',
+  })
+  </script>
+<% end  %>
 
 
 

@@ -307,3 +307,14 @@
 #main-car-container{
   max-width: 700px;
 }
+
+.popover-link{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index:2;
+  background: black;
+  opacity: 0;
+}
