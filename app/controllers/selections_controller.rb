@@ -104,6 +104,9 @@ class SelectionsController < ApplicationController
     @drop_off_airport = Airport.find_by_iata(@drop_off_location)
 
     @trip.car_rental.nil? ? @recap_opacity = 1 : @recap_opacity = 0
+    @categories = ["Mini", "Economy", "Compact", "Intermediate", "Fullsize", "Premium"]
+    @popover_partials = create_partial_array
+
 
     respond_to do |format|
       format.html {}
@@ -290,6 +293,14 @@ class SelectionsController < ApplicationController
 
   def define_title(trip)
     trip.car_rental.nil? ? "OUR RECOMMENDATION" : "YOUR SELECTION"
+  end
+
+  def create_partial_array
+    popover_partials = {}
+    @categories.each do |cat|
+      popover_partials[cat.downcase] = render_to_string(:partial => "car_popover", :locals => { :pop_cat => cat.downcase})
+    end
+    popover_partials
   end
 
 end

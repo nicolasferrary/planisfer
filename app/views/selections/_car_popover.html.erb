@@ -1,4 +1,4 @@
-<% @car_selection[:mini].each_with_index do |rental, index| %>
+<% @car_selection[pop_cat.to_sym].each_with_index do |rental, index| %>
   <% # inclure un link to %>
 
     <div class="cardContainer popover-card-container <%= 'selected' if index == 0 %>" >

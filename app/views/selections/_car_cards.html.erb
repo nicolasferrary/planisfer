@@ -1,8 +1,6 @@
 <% #Début de la row de cards%>
 <div class="row">
 
-
-
   <% if @car_selection[:mini][@mini_index] %>
     <div class="col-xs-12 col-sm-6">
       <div class="car-card center-block">
@@ -14,7 +12,8 @@
         </div>
         <div class="card-background mini-background">
         </div>
-        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" => "#{render 'car_popover'}") %>
+        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["mini"] )
+        %>
       </div>
     </div>
   <% end %>
@@ -291,10 +290,6 @@
   <% # Fin de la 6e card %>
 </div>
 <% # Fin de la row de cards%>
-
-<div>
-  <%= render 'car_popover'%>
-</div>
 
 
 <% content_for(:after_js) do %>
