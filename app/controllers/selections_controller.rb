@@ -83,11 +83,8 @@ class SelectionsController < ApplicationController
     @pick_up_date_time = params[:pick_up_date_time]
     @drop_off_date_time = params[:drop_off_date_time]
     @nb_days = calculate_nb_days(@pick_up_date_time, @drop_off_date_time)
-    set_indexes
-    # @car_selection is a hash of arrays of instances of car_rentals (up to 5 instances per car category)
 
     @times = ["6 AM", "7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM", "10 PM" ]
-    @photo_params = surounding_params(@car_rentals)
 
     @status = "none"
 
@@ -157,107 +154,6 @@ class SelectionsController < ApplicationController
     best_cars = unique_sorted_cars.first(5)
   end
 
-  def define_category_index
-    category_index = {
-      :mini => params[:mini_index].to_i || 0,
-      :economy => 0,
-      :compact => 0,
-      :intermediate => 0,
-      :fullsize => 0,
-      :premium => 0,
-    }
-  end
-
-  def surounding_params(car_rentals)
-    mini_max_param = [4, number_rentals(car_rentals, "Mini")-1].min
-    economy_max_param = [4, number_rentals(car_rentals, "Economy")-1].min
-    compact_max_param = [4, number_rentals(car_rentals, "Compact")-1].min
-    intermediate_max_param = [4, number_rentals(car_rentals, "Intermediate")-1].min
-    fullsize_max_param = [4, number_rentals(car_rentals, "Fullsize")-1].min
-    premium_max_param = [4, number_rentals(car_rentals, "Premium")-1].min
-
-    photo_params = {}
-
-    # define next params
-    if params[:mini_index].to_i == mini_max_param
-      photo_params[:next_mini] = 0
-    else
-      photo_params[:next_mini] = params[:mini_index].to_i + 1
-    end
-    if params[:economy_index].to_i == economy_max_param
-      photo_params[:next_economy] = 0
-    else
-      photo_params[:next_economy] = params[:economy_index].to_i + 1
-    end
-    if params[:compact_index].to_i == compact_max_param
-      photo_params[:next_compact] = 0
-    else
-      photo_params[:next_compact] = params[:compact_index].to_i + 1
-    end
-     if params[:intermediate_index].to_i == intermediate_max_param
-      photo_params[:next_intermediate] = 0
-    else
-      photo_params[:next_intermediate] = params[:intermediate_index].to_i + 1
-    end
-     if params[:fullsize_index].to_i == fullsize_max_param
-      photo_params[:next_fullsize] = 0
-    else
-      photo_params[:next_fullsize] = params[:fullsize_index].to_i + 1
-    end
-     if params[:premium_index].to_i == premium_max_param
-      photo_params[:next_premium] = 0
-    else
-      photo_params[:next_premium] = params[:premium_index].to_i + 1
-    end
-
-    # define previous params
-    if params[:mini_index].to_i == 0 || nil
-      photo_params[:previous_mini] = mini_max_param
-    else
-      photo_params[:previous_mini] = params[:mini_index].to_i - 1
-    end
-    if params[:economy_index].to_i == 0 || nil
-      photo_params[:previous_economy] = economy_max_param
-    else
-      photo_params[:previous_economy] = params[:economy_index].to_i - 1
-    end
-    if params[:compact_index].to_i == 0 || nil
-      photo_params[:previous_compact] = compact_max_param
-    else
-      photo_params[:previous_compact] = params[:compact_index].to_i - 1
-    end
-    if params[:intermediate_index].to_i == 0 || nil
-      photo_params[:previous_intermediate] = intermediate_max_param
-    else
-      photo_params[:previous_intermediate] = params[:intermediate_index].to_i - 1
-    end
-    if params[:fullsize_index].to_i == 0 || nil
-      photo_params[:previous_fullsize] = fullsize_max_param
-    else
-      photo_params[:previous_fullsize] = params[:fullsize_index].to_i - 1
-    end
-    if params[:premium_index].to_i == 0 || nil
-      photo_params[:previous_premium] = premium_max_param
-    else
-      photo_params[:previous_premium] = params[:premium_index].to_i - 1
-    end
-
-    photo_params
-  end
-
-  def number_rentals(rentals, category)
-    unique_sorted_cars = get_unique_sorted_cars(rentals, category)
-    unique_sorted_cars.count
-  end
-
-  def set_indexes
-    @mini_index = params[:mini_index].to_i || 0
-    @economy_index = params[:economy_index].to_i || 0
-    @compact_index = params[:compact_index].to_i || 0
-    @intermediate_index = params[:intermediate_index].to_i || 0
-    @fullsize_index = params[:fullsize_index].to_i || 0
-    @premium_index = params[:premium_index].to_i || 0
-  end
 
   def get_unique_sorted_cars(rentals, category)
     cars = rentals.select {|rental| rental.car.category == category unless rental.car.nil?}

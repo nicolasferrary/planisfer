@@ -6,7 +6,8 @@ class PaymentsController < ApplicationController
 
   def new
     @trip = Trip.find(params[:trip_id])
-    @default_values = define_default_values(@order, @trip.nb_travelers)
+    @nb_travelers = @trip.nb_adults.to_i + @trip.nb_children.to_i + @trip.nb_infants.to_i
+    @default_values = define_default_values(@order, @nb_travelers)
     @status = check_status
     # Create a component for worldia
     @component = worldia_create_component(@trip)

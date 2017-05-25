@@ -189,7 +189,7 @@
 
 </div>
 
-<%= render 'car_wait_modal', modal_name: "car_wait_modal" %>
+<%= render 'car_wait_modal', {modal_name: "car_wait_modal", trip: @trip} %>
 
 
 
@@ -228,17 +228,9 @@
         },
         internal: { id: 'map' }}, function() {
           markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
-          // for (var i = 0; i < markers.length; i++) {
-          //   marker = markers[i];
-          //   marker.getServiceObject().addListener('mouseover', function() {
-          //     marker.infowindow.render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => this});
-          //   });
           handler.bounds.extendWith(markers);
-          // handler.getMap().setZoom(7);
           handler.fitMapToBounds();
-          // Set zoom when loading the page when there is one marker
-          // The closer to 15, the higher in the sky
-          // handler.getMap().setZoom(7);
+
       });
 
 
@@ -260,42 +252,12 @@
               markers[i].setMap(null);
               handler.removeMarkers(markers);
             }
-            // markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
-            // handler.addMarker(result);
             markers = handler.addMarkers(result);
-            // for(var i = 0; i < markers.length; i++){
-            //   m = Gmaps.map.markers[i];
-            //   function(m){
-            //     if (m.serviceObject.id == 1) {
-            //       m.panTo();
-            //       m.serviceObject.setZIndex(99);
-            //     else m.serviceObject.setZIndex(1);
-            //     }
-            //   }
-            // }
-
-            // Gmaps.mapMarker = function() {
-            //   $.each(Gmaps.store.markers, function() {
-            //     if (this.serviceObject.id == 1) {
-            //       this.panTo();
-            //       this.serviceObject.setZIndex(99);
-            //     else this.serviceObject.setZIndex();
-            //     }
-            //   });
-            // }
-          // Trying to change zindex of airports
-          // var zInd = markers.length;
-          // markers[zInd] = handler.addMarker(result);
-          // lastmarker.setZIndex(zIndex:MAX_ZINDEX);
           }
         })
 
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
-
-        // The closer to 0, the higher in the sky
-        // handler.getMap().setZoom(7);
-
       })
 
       $('.result-card').mouseleave('click', function(e) {
@@ -306,6 +268,22 @@
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
       })
+
+      $('#car_wait_modal').on('show.bs.modal', function(e) {
+        //get data-id attribute of the clicked element
+        var tripId = $(e.relatedTarget).data('trip-id');
+        $('.no-car-link').on('click', function(event){
+          console.log(tripId);
+          //populate the hidden field tag in the form of the modal
+
+
+          // link.val('hello');
+          $('.no-car-link').attr('href', '/orders/?trip_id=' + tripId);
+          var link = $('.no-car-link').attr('href');
+          console.log(link);
+        });
+      });
+
 
       $('.poi-card').mouseenter('click', function(e) {
         e.preventDefault();

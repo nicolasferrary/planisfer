@@ -7,6 +7,14 @@
       <div class="modal-body background">
 
         <div class = "row">
+          <div class = "col-md-12">
+            <%= link_to orders_path(:trip_id => nil), method: :post, class: 'no-car-link' do %>
+              <p>I don't need to rent a car</p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class = "row">
           <div class = 'modal-row'>
             <div class = "col-md-10">
               <span id = "text1">Contacting car rental companies</span>

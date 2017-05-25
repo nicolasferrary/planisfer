@@ -23,7 +23,7 @@
                 <h4>Your roadtrip in <%= @trip.round_trip_flight.region.name %></h4>
               </div>
               <div class = "col-x-3">
-               <%= @trip.nb_travelers%> traveler<%='s' unless @trip.nb_travelers == 1%>
+               <%= @nb_travelers%> traveler<%='s' unless @nb_travelers == 1%>
               </div>
             </div>
           </div>
@@ -173,7 +173,7 @@
             </div>
 
             <div class = "<%= 'not-displayed' if @status == 'OK' %>">
-              <% for num in (1..@trip.nb_travelers) %>
+              <% for num in (1..@nb_travelers) %>
                 <div class = "row">
                   <div class = "passenger-row">
 
