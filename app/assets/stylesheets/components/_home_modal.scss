@@ -61,3 +61,23 @@
 .sub-checkbox{
   margin-right: -15px;
 }
+
+.no-car-link{
+  color: $orange;
+  float: right;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.no-car-link:hover{
+  text-decoration: none;
+}
+.no-car-link:visited{
+  text-decoration: none;
+}
+.no-car-link:active{
+  text-decoration: none;
+}
+.no-car-link:focus{
+  text-decoration: none;
+}

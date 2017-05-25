@@ -273,14 +273,7 @@
         //get data-id attribute of the clicked element
         var tripId = $(e.relatedTarget).data('trip-id');
         $('.no-car-link').on('click', function(event){
-          console.log(tripId);
-          //populate the hidden field tag in the form of the modal
-
-
-          // link.val('hello');
-          $('.no-car-link').attr('href', '/orders/?trip_id=' + tripId);
-          var link = $('.no-car-link').attr('href');
-          console.log(link);
+          $(this).attr('href', '/orders/?trip_id=' + tripId);
         });
       });
 

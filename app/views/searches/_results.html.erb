@@ -1,5 +1,4 @@
 <div class="row" id="see-flights">
-<%= submit_tag "test", class: "btn-brand btn-big", id: "search-button", 'data-toggle' => "modal", 'data-target' => '#car_wait_modal', 'data-trip-id' => "765" %>
   <% @trips_selection.each_with_index do |trip, index| %>
     <%= link_to selections_path(:trip_id => trip.id), class: 'tabLink result-card', 'data-toggle' => "modal", 'data-trip-id' => trip.id, 'data-target' => '#car_wait_modal',method: :post, data: {trip_id: trip.id, colours: @airport_colours} do %>
       <div class="cardContainer <%= 'selected' if index == 0 %> <%= 'hidden the-hidden-results' if index > 2 %>" >
