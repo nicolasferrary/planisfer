@@ -30,12 +30,15 @@
 
 .card-price{
   background: $secondary-color;
-  padding: 6px 18px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  text-align: center;
   color: white;
   position: absolute;
   right: 0px;
   font-size: 17px;
   border-radius: 0;
+  width: 75px;
 }
 
 .flight-card-price {
