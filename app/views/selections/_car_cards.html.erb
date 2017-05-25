@@ -1,7 +1,7 @@
 <% #Début de la row de cards%>
 <div class="row">
 
-  <% if @car_selection[:mini][@mini_index] %>
+  <% if @car_selection[:mini] != [] %>
     <div class="col-xs-12 col-sm-6">
       <div class="car-card center-block">
         <div class = "car-card-title">
@@ -12,13 +12,12 @@
         </div>
         <div class="card-background mini-background">
         </div>
-        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["mini"] )
-        %>
+        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["mini"] ) %>
       </div>
     </div>
   <% end %>
 
-  <% if @car_selection[:economy][@economy_index] %>
+  <% if @car_selection[:economy] != [] %>
     <div class="col-xs-12 col-sm-6">
       <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:economy][@economy_index]})), method: :put, class: 'tabLink result-card' do %>
         <div class="car-card center-block">
@@ -30,12 +29,13 @@
           </div>
           <div class="card-background economy-background">
           </div>
+          <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["economy"] ) %>
         </div>
       <% end %>
     </div>
   <% end %>
 
-  <% if @car_selection[:compact][@compact_index] %>
+  <% if @car_selection[:copact] != [] %>
     <div class="col-xs-12 col-sm-6">
       <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:compact][@compact_index]})), method: :put, class: 'tabLink result-card' do %>
         <div class="car-card center-block">
@@ -47,12 +47,13 @@
           </div>
           <div class="card-background compact-background">
           </div>
+          <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["compact"] ) %>
         </div>
       <% end %>
     </div>
   <% end %>
 
-  <% if @car_selection[:intermediate][@intermediate_index] %>
+  <% if @car_selection[:intermediate] != [] %>
     <div class="col-xs-12 col-sm-6">
       <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:intermediate][@intermediate_index]})), method: :put, class: 'tabLink result-card' do %>
         <div class="car-card center-block">
@@ -64,12 +65,13 @@
           </div>
           <div class="card-background intermediate-background">
           </div>
+          <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["intermediate"] ) %>
         </div>
       <% end %>
     </div>
   <% end %>
 
-  <% if @car_selection[:fullsize][@fullsize_index] %>
+  <% if @car_selection[:fullsize] != [] %>
     <div class="col-xs-12 col-sm-6">
       <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:fullsize][@fullsize_index]})), method: :put, class: 'tabLink result-card' do %>
         <div class="car-card center-block">
@@ -81,12 +83,13 @@
           </div>
           <div class="card-background fullsize-background">
           </div>
+          <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["fullsize"] ) %>
         </div>
       <% end %>
     </div>
   <% end %>
 
-  <% if @car_selection[:premium][@premium_index] %>
+  <% if @car_selection[:premium] != [] %>
     <div class="col-xs-12 col-sm-6">
       <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:premium][@premium_index]})), method: :put, class: 'tabLink result-card' do %>
         <div class="car-card center-block">
@@ -98,6 +101,7 @@
           </div>
           <div class="card-background premium-background">
           </div>
+          <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["premium"] ) %>
         </div>
       <% end %>
     </div>

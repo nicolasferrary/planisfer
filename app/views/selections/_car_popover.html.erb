@@ -1,5 +1,6 @@
 <% @car_selection[pop_cat.to_sym].each_with_index do |rental, index| %>
-  <% # inclure un link to %>
+
+  <%= link_to trip_path(@trip, @options.merge({:car_rental_id => rental.id})), method: :put, class: 'tabLink result-card' do %>
 
     <div class="cardContainer popover-card-container <%= 'selected' if index == 0 %>" >
       <div class = "card-description popover-card-desc">
@@ -14,5 +15,5 @@
 
     </div>
 
-  <% # end du link to %>
+  <% end %>
 <% end %>
