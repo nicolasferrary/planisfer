@@ -14,7 +14,7 @@
         </div>
         <div class="card-background mini-background">
         </div>
-        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "top", :"data-trigger" => "hover", :"data-content" => "#{render 'car_popover'}") %>
+        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "top", :"data-trigger" => "manual", :"data-content" => "#{render 'car_popover'}") %>
       </div>
     </div>
   <% end %>
@@ -300,11 +300,28 @@
 <% content_for(:after_js) do %>
 
   <script>
-    $(function () {
+    $(document).ready(function() {
       $('.popover-link').popover({ html : true });
+      $('.popover-link').mouseenter(function(){
+        var _this = this;
+        $(this).popover('show');
+        $(".popover").on("mouseleave", function () {
+          $(_this).popover('hide');
       });
+      });
+      $('.popover-link').mouseleave(function(){
+        var _this = this;
+        setTimeout(function () {
+          if (!$(".popover:hover").length) {
+              $(_this).popover("hide");
+          }
+        }, 300);
+      });
+    });
   </script>
 <% end  %>
 
-
+$('.result-card').mouseenter('click', function(e) {
+        e.preventDefault();
+        $('.cardContainer.selected').removeClass('selected');
 
