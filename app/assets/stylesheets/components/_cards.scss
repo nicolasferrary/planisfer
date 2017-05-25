@@ -17,25 +17,36 @@
   position: relative;
 }
 
+.popover-card-container{
+  width: 350px;
+  margin-bottom: 5px;
+  height: 50px;
+}
+
 .card-description p{
   margin-top: 10px;
 }
 
 
-.card-price {
+.card-price{
   background: $secondary-color;
   padding: 6px 18px;
   color: white;
   position: absolute;
-  top: 9px;
   right: 0px;
   font-size: 17px;
   border-radius: 0;
 }
 
+.flight-card-price {
+  top: 9px;
+}
+
 .card-price p{
   margin-bottom: 0px;
 }
+
+
 
 #recommended_car_price{
   background: $secondary-color;
@@ -126,8 +137,7 @@
 
 .company-logo{
   position: absolute;
-  bottom: 2px;
-  right: 10px;
+  left: 10px;
 }
 
 .seats-infos{
@@ -235,13 +245,13 @@
   text-decoration: none;
   box-shadow: 1px 1px 1px #c7c7c7;
   background: white;
-  span{
-    color: $orange;
-  }
 }
 
 .car-card-title{
   padding: 5px 5px 0 5px;
+  span{
+    color: $orange;
+  }
 }
 
 .car-card.selected {
@@ -317,4 +327,18 @@
   z-index:2;
   background: black;
   opacity: 0;
+}
+
+.car-popover-logo{
+  position: absolute;
+  left: 0;
+}
+
+.popover-car-logo-container{
+  width: 60px;
+  height: 25px;
+}
+
+.popover-card-desc{
+  align-items: center;
 }

@@ -1,3 +1,18 @@
-<div>
-<p>is this working?</p>
-</div>
+<% @car_selection[:mini].each_with_index do |rental, index| %>
+  <% # inclure un link to %>
+
+    <div class="cardContainer popover-card-container <%= 'selected' if index == 0 %>" >
+      <div class = "card-description popover-card-desc">
+        <span class = "popover-car-logo-container"><%= image_tag "carlogos/" + rental.company.downcase + ".png", height: 25, width: "auto", class: "company-logo" %></span>
+        <span class = "car-popover-name">
+        <%= rental.car.name %> <span class="light-data"> or similar</span>
+        </span>
+        <span class="card-price">
+          <%= money_without_cents_and_with_symbol(rental.price.round) %>
+        </span> <!-- fin card-price -->
+      </div>
+
+    </div>
+
+  <% # end du link to %>
+<% end %>
