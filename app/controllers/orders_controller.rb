@@ -34,8 +34,10 @@ class OrdersController < ApplicationController
     @user = @order.user
 #TOdo
     @quote_id = params[:quote_id]
-    #Worldia : validate payment
-    worldia_validate_payment(@quote_id)
+
+# UNCOMMENT TO LAUNCH WORLDIA CALLS
+    # # Worldia : validate payment
+    # worldia_validate_payment(@quote_id)
   end
 
   private
