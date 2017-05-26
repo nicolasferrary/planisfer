@@ -99,6 +99,7 @@ class SelectionsController < ApplicationController
 
     @pick_up_airport = Airport.find_by_iata(@pick_up_location)
     @drop_off_airport = Airport.find_by_iata(@drop_off_location)
+    @main_car_airports_titles = [define_airport_title(@pick_up_airport), define_airport_title(@drop_off_airport)]
 
     @trip.car_rental.nil? ? @recap_opacity = 1 : @recap_opacity = 0
     @categories = ["Mini", "Economy", "Compact", "Intermediate", "Fullsize", "Premium"]
@@ -197,6 +198,14 @@ class SelectionsController < ApplicationController
       popover_partials[cat.downcase] = render_to_string(:partial => "car_popover", :locals => { :pop_cat => cat.downcase})
     end
     popover_partials
+  end
+
+  def define_airport_title(airport)
+    if airport.cityname == airport.name
+      return "#{airport.cityname} airport"
+    else
+      return "#{airport.cityname} #{airport.name} airport"
+    end
   end
 
 end

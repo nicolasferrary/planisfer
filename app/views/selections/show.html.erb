@@ -26,7 +26,7 @@
               <h3> <%= @main_car_title %> </h3>
             </div>
 
-            <h5 id = "car-recap-text"> <%= @pick_up_airport.cityname%> <%= @pick_up_airport.name%> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  <span class="fa fa-long-arrow-right car-selection-arrow" aria-hidden="true"></span> <%= @drop_off_airport.cityname%> <%= @drop_off_airport.name %> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %>
+            <h5 id = "car-recap-text"> <%= @main_car_airports_titles[0] %> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  <span class="fa fa-long-arrow-right car-selection-arrow" aria-hidden="true"></span> <%= @main_car_airports_titles[1] %> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %>
             </h5>
 
 
