@@ -6,6 +6,7 @@ class PaymentsController < ApplicationController
 
   def new
     @trip = Trip.find(params[:trip_id])
+    @region = @trip.search.region
 
     @pick_up_location = params[:options][:pick_up_location]
     @drop_off_location = params[:options][:drop_off_location]

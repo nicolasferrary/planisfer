@@ -6,7 +6,7 @@
         <%= image_tag "blue_logo_no_word.png", class: "logo"%>
       <% end %> </span>
       <span class ="brand-name">Planisfer</span>
-      <span class = "banner2-title">Let's now finalize the payment of your trip</span>
+      <span class = "banner2-title">Let's finalize your trip to <%= @region.name %></span>
     </div>
   </div>
   <span class = "booking-status">
@@ -59,7 +59,13 @@
                 </div>
               </div>
             </div>
-            <hr id="hr-content">
+
+            <div class = "row">
+              <div class = "col-sm-12" >
+                <hr id="hr-payment-form">
+              </div>
+            </div>
+
           <% end %>
 
 
