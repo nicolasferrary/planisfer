@@ -15,7 +15,7 @@
 
 <div class = "recap-box">
 
-  <% if modifiable == true %>
+  <% if payment_page == false %>
 
     <div class = "row">
       <div class = "col-xs-12 vertical-align">
@@ -148,7 +148,14 @@
     <% #Beg of content bootstrap col %>
     <div class = "col-sm-10">
       <% if @trip.car_rental.nil? %>
-        <p class = "select-car-text">Click on a car to add it to your roadtrip</p>
+        <% if payment_page == false %>
+          <p class = "select-car-text">Click on a car to add it to your roadtrip</p>
+        <% else %>
+          <%= link_to selections_path(:trip_id => @trip.id), 'data-toggle' => "modal", 'data-target' => '#car_wait_modal', method: :post do %>
+            <p class = "select-car-text">Click here to add a car</p>
+          <% end %>
+        <% end %>
+
       <% else %>
 
         <div class = "date">
@@ -177,9 +184,9 @@
     <div class = "row">
       <% #Beg of booking button bootstrap col %>
       <div class = "col-sm-12">
-        <div class = "text-center price-and-book <%= 'right-float' if modifiable == false %>">
+        <div class = "text-center price-and-book <%= 'right-float' if payment_page == true %>">
           <span class = "booking-price"><%= money_without_cents_and_with_symbol(@trip.price.round)%></span>
-          <% if modifiable == true %>
+          <% if payment_page == false %>
             <span>
               <%= form_tag orders_path do %>
                 <%= hidden_field_tag 'trip_id', @trip.id %>
@@ -197,3 +204,5 @@
     </div>
   <% # End of row 9 %>
 </div>
+
+<%= render 'searches/car_wait_modal', {modal_name: "car_wait_modal", trip: @trip} %>
