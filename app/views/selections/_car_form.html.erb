@@ -17,7 +17,7 @@
               <%= image_tag "car.png", width: "30px", height: "auto", class: "car form-icon" %>
             </div>
             <div class = "col-md-6">
-              <%= select_tag :pick_up_location, options_for_select(@region_airports, Constants::CITY_REGION[@pick_up_location]), class: "form-control car-form-item", prompt: "Airports where you can pick-up a car" %>
+              <%= select_tag :pick_up_location, options_for_select(@region_airports, @main_car_airports_titles[0]), class: "form-control car-form-item", prompt: "Airports where you can pick-up a car" %>
             </div>
             <div class = "col-md-5">
               <%= text_field_tag :pick_up_date_time, Time.zone.parse(@pick_up_date_time).strftime("%Y %b %e - %I %P"), "class" => 'form-control car-datepicker car-form-item', "id" => 'datetimepicker'%>
@@ -32,7 +32,7 @@
               <%= image_tag "flipped-car.png", width: "30px", height: "auto", class: "car" %>
             </div>
             <div class = "col-md-6">
-              <%= select_tag :drop_off_location, options_for_select(@region_airports, Constants::CITY_REGION[@trip.round_trip_flight.flight2_origin_airport_iata]), class: "form-control car-form-item", prompt: "Airports where you can drop-off a car" %>
+              <%= select_tag :drop_off_location, options_for_select(@region_airports, @main_car_airports_titles[1], class: "form-control car-form-item", prompt: "Airports where you can drop-off a car" %>
             </div>
             <div class = "col-md-5">
               <%= text_field_tag :drop_off_date_time, Time.zone.parse(@drop_off_date_time).strftime("%Y %b %e - %I %P"), "class" => 'form-control car-datepicker car-form-item', "id" => 'datetimepicker2'%>

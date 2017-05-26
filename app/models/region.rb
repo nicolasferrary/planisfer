@@ -6,10 +6,9 @@ class Region < ApplicationRecord
 
 
 
- def self.create(name)
+ def create
   region = Region.new(name: name)
   region.save
   region
  end
-
 end
