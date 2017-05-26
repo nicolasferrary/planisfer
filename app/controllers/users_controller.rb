@@ -36,7 +36,8 @@ class UsersController < ApplicationController
       :drop_off_date_time => params[:drop_off_date_time],
     }
 
-    redirect_to new_order_payment_path(@order, trip_id: @trip.id, status: "OK", options: @options)
+    redirect_to new_order_payment_path(@order, trip_id: @trip.id, status: "OK", options: @options, quote_id: @quote_id)
+    # Problem here. As I am recreating a new payment, I am launching a new creation request to Worldia
   end
 
   def update
@@ -57,7 +58,7 @@ class UsersController < ApplicationController
     json = {
     "customerId": user.id
     }.to_json
-    response = RestClient.patch(url, json, {:content_type => 'application/json'})
+    RestClient.patch(url, json, {:content_type => 'application/json'})
   end
 
   def worldia_add_passengers_to_quote(passengers, quote_id, nb_travelers)
@@ -71,15 +72,14 @@ class UsersController < ApplicationController
       passenger_hash = {
         "dateOfBirth": "1900-01-01",
         "title": passengers["#{num}"][:title],
-        "firstName": passengers["#{num}"][:title],
+        "firstName": passengers["#{num}"][:first_name],
         "lastName": passengers["#{num}"][:name]
         }
         request_hash[:pax] << passenger_hash
     end
 
     json = request_hash.to_json
-    response = RestClient.put url, json, {:content_type => 'application/json'}
-    raise
+    RestClient.put url, json, {:content_type => 'application/json'}
   end
 
   def worldia_create_payment(quote_id)
@@ -88,7 +88,7 @@ class UsersController < ApplicationController
       "insuranceMethod": "NO_INSURANCE",
       "paymentMethod":"phone"
       }.to_json
-    response = RestClient.put(url, json, {:content_type => 'application/json'})
+    RestClient.put(url, json, {:content_type => 'application/json'})
   end
 
 end
