@@ -7,7 +7,8 @@ class UsersController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @user = User.new()
     @passengers = {}
-      for num in (1..@trip.nb_travelers)
+    @nb_travelers = @trip.nb_adults + @trip.nb_children + @trip.nb_infants
+      for num in (1..@nb_travelers)
         @passengers["#{num}"] = {
           title: params[:title_pax]["#{num}"],
           first_name: params[:first_name_pax]["#{num}"],
@@ -19,16 +20,15 @@ class UsersController < ApplicationController
     @user.save
     @order.user = @user
     @order.save
-
     # Worldia : Add user to quote
     @quote_id = params[:quote_id]
     worldia_add_user_to_quote(@user, @quote_id)
+
+    #Worldia : Add passengers to quote
+    worldia_add_passengers_to_quote(@passengers, @quote_id, @nb_travelers)
 #TODO
-    # #Worldia : Add passengers to quote
-    # worldia_add_passengers_to_quote(@passengers, @quote_id)
-#TODO
-    # #Worldia : Create payment
-    # worldia_create_payment(@quote_id)
+    #Worldia : Create payment
+    worldia_create_payment(@quote_id)
 
     redirect_to new_order_payment_path(@order, trip_id: @trip.id, status: "OK")
   end
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
     response = RestClient.patch(url, json, {:content_type => 'application/json'})
   end
 
-  def worldia_add_passengers_to_quote(passengers, quote_id)
+  def worldia_add_passengers_to_quote(passengers, quote_id, nb_travelers)
     url = "https://www.worldia.com/api/v1/checkout/#{quote_id}/select_pax"
     # json = {
     #   "comments": [{"comment":""}],
@@ -72,12 +72,12 @@ class UsersController < ApplicationController
     #   }.to_json
 
     request_hash = {
-      "comments": [{"comment":""}],
+      "comments": [{"comment":"No comment"}],
       "pax":[]
     }
-    for num in (1..@trip.nb_travelers)
+    for num in (1..nb_travelers)
       passenger_hash = {
-        "dateOfBirth": "",
+        "dateOfBirth": "1900-01-01",
         "title": passengers["#{num}"][:title],
         "firstName": passengers["#{num}"][:title],
         "lastName": passengers["#{num}"][:name]
@@ -86,8 +86,7 @@ class UsersController < ApplicationController
     end
 
     json = request_hash.to_json
-
-    RestClient.put url, json, {:content_type => 'application/json'}
+    response = RestClient.put url, json, {:content_type => 'application/json'}
   end
 
   # def worldia_pax_hash(passengers)
@@ -111,7 +110,7 @@ class UsersController < ApplicationController
       "insuranceMethod": "NO_INSURANCE",
       "paymentMethod":"phone"
       }.to_json
-    RestClient.put(url, json, {:content_type => 'application/json'})
+    response = RestClient.put(url, json, {:content_type => 'application/json'})
   end
 
 end

@@ -216,7 +216,7 @@
         <% end %>
 
         <div class = "travel-infos-box">
-          <%=form_tag order_payments_path(@order, :trip_id => @trip.id) do %>
+          <%=form_tag order_payments_path(@order, :trip_id => @trip.id, :quote_id => @quote_id) do %>
             <div class = "travel-infos-title">
               <h4 class = "<%= 'light' if @status == 'none' %>">2. Payment</h4>
             </div>

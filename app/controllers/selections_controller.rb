@@ -204,7 +204,7 @@ class SelectionsController < ApplicationController
     if airport.cityname == airport.name
       return "#{airport.cityname} airport"
     else
-      return "#{airport.cityname} #{airport.name} airport"
+      return "#{airport.cityname} (#{airport.name}) airport"
     end
   end
 

@@ -19,11 +19,12 @@ class PaymentsController < ApplicationController
     # #Add component to quote
     @variation_id = component_variation["id"]
     @quote_id = quote["id"]
-    worldia_add_component_to_quote(@quote_id, @variation_id)
+    quote_with_comp = worldia_add_component_to_quote(@quote_id, @variation_id)
   end
 
   def create
     @trip = Trip.find(params[:trip_id])
+    @quote_id = params[:quote_id]
     customer = Stripe::Customer.create(
       source: params[:stripeToken],
       email:  params[:stripeEmail]
@@ -37,7 +38,7 @@ class PaymentsController < ApplicationController
     )
 
     @order.update(payment: charge.to_json, state: 'paid')
-    redirect_to order_path(@order, trip_id: @trip.id)
+    redirect_to order_path(@order, trip_id: @trip.id, quote_id: @quote_id)
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
@@ -135,8 +136,8 @@ class PaymentsController < ApplicationController
     }
     json = request_hash.to_json
     url = "https://www.worldia.com/api/v1/carts/#{quote_id}/items/"
-    RestClient.post url, json, {:content_type => 'application/json'}
-
+    response = RestClient.post url, json, {:content_type => 'application/json'}
+    hash_response = JSON.parse(response.body)
   end
 
 
