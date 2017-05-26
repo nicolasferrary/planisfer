@@ -6,6 +6,12 @@ class PaymentsController < ApplicationController
 
   def new
     @trip = Trip.find(params[:trip_id])
+
+    @pick_up_location = params[:options][:pick_up_location]
+    @drop_off_location = params[:options][:drop_off_location]
+    @pick_up_date_time = params[:options][:pick_up_date_time]
+    @drop_off_date_time = params[:options][:drop_off_date_time]
+
     @nb_travelers = @trip.nb_adults.to_i + @trip.nb_children.to_i + @trip.nb_infants.to_i
     @default_values = define_default_values(@order, @nb_travelers)
     @status = check_status

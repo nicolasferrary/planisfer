@@ -3,7 +3,14 @@ class OrdersController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @options = params[:options]
     @order  = Order.create!(trip_sku: @trip.sku, amount: @trip.price, state: 'pending')
-    redirect_to new_order_payment_path(@order, trip_id: @trip.id)
+    @options = {
+      :trip_id => @trip.id,
+      :pick_up_location => params[:pick_up_location],
+      :drop_off_location => params[:drop_off_location],
+      :pick_up_date_time => params[:pick_up_date_time],
+      :drop_off_date_time => params[:drop_off_date_time],
+    }
+    redirect_to new_order_payment_path(@order, trip_id: @trip.id, options: @options)
   end
 
   def show

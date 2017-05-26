@@ -78,6 +78,7 @@ class SelectionsController < ApplicationController
     @main_car = @trip.car_rental || @recommended_car
     @main_car_title = define_title(@trip)
 
+
     @pick_up_location = params[:pick_up_location]
     @drop_off_location = params[:drop_off_location]
     @pick_up_date_time = params[:pick_up_date_time]

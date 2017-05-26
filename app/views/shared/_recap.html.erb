@@ -1,5 +1,3 @@
-
-
 <% # Beg of row 1 %>
 <div class = "title-background">
   <div class = "row">
@@ -14,32 +12,58 @@
   </div>
 </div>
 <% # End of row 1 %>
+
 <div class = "recap-box">
-  <div class = "row">
-    <div class = "col-xs-12 vertical-align">
-      <div class = "col-md-6 no-padding">
-        <p>What's included?</p>
+
+  <% if modifiable == true %>
+
+    <div class = "row">
+      <div class = "col-xs-12 vertical-align">
+        <div class = "col-md-6 no-padding">
+          <p>What's included?</p>
+        </div>
+        <div class = "col-md-6 no-padding">
+          <%= link_to search_path(@search), data: {confirm: 'Are you sure you want to select another flight?', commit: 'Sure!'}, class: "modify-search-link" do %>
+            <div class = "included-checkbox">
+              <span>Flights</span>
+              <i class="fa fa-check-square-o" aria-hidden="true"> </i>
+            </div>
+          <% end %>
+          <% if !@trip.car_rental.nil? %>
+            <%= link_to trip_path(@trip, @options.merge({:car_rental_id => nil})), method: :put, class: "modify-search-link" do %>
+              <div class = "included-checkbox">
+                <span> <%= @trip.car_rental.car.name %> or similar</span>
+                <i class="fa fa-check-square-o" aria-hidden="true"></i>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
       </div>
-      <div class = "col-md-6 no-padding">
-        <%= link_to search_path(@search), data: {confirm: 'Are you sure you want to select another flight?', commit: 'Sure!'}, class: "modify-search-link" do %>
+    </div>
+
+  <% else %>
+
+    <div class = "row">
+      <div class = "col-xs-12 vertical-align">
+        <div class = "col-md-6 no-padding">
+          <p>What's included?</p>
+        </div>
+        <div class = "col-md-6 no-padding">
           <div class = "included-checkbox">
             <span>Flights</span>
             <i class="fa fa-check-square-o" aria-hidden="true"> </i>
           </div>
-        <% end %>
-        <% if !@trip.car_rental.nil? %>
-          <%= link_to trip_path(@trip, @options.merge({:car_rental_id => nil})), method: :put, class: "modify-search-link" do %>
+          <% if !@trip.car_rental.nil? %>
             <div class = "included-checkbox">
               <span> <%= @trip.car_rental.car.name %> or similar</span>
               <i class="fa fa-check-square-o" aria-hidden="true"></i>
             </div>
           <% end %>
-        <% end %>
+        </div>
       </div>
-
-<!--        <p><i class="fa fa-check-square-o" aria-hidden="true"> Personal assistant </i></p> -->
     </div>
-  </div>
+
+  <% end %>
 
   <hr id="hr-title">
 
@@ -150,25 +174,26 @@
   <hr id="hr-title">
 
   <% # Beg of row 9 %>
-  <div class = "row">
-    <% #Beg of booking button bootstrap col %>
-    <div class = "col-sm-12">
-      <div class = "text-center price-and-book">
-        <span class = "booking-price"><%= money_without_cents_and_with_symbol(@trip.price.round)%></span>
-        <span>
-          <%= form_tag orders_path do %>
-            <%= hidden_field_tag 'trip_id', @trip.id %>
-            <%= submit_tag 'BOOK', class: 'btn-brand' %>
+    <div class = "row">
+      <% #Beg of booking button bootstrap col %>
+      <div class = "col-sm-12">
+        <div class = "text-center price-and-book <%= 'right-float' if modifiable == false %>">
+          <span class = "booking-price"><%= money_without_cents_and_with_symbol(@trip.price.round)%></span>
+          <% if modifiable == true %>
+            <span>
+              <%= form_tag orders_path do %>
+                <%= hidden_field_tag 'trip_id', @trip.id %>
+                <%= hidden_field_tag 'pick_up_location', @pick_up_location %>
+                <%= hidden_field_tag 'drop_off_location', @drop_off_location %>
+                <%= hidden_field_tag 'pick_up_date_time', @pick_up_date_time %>
+                <%= hidden_field_tag 'drop_off_date_time', @drop_off_date_time %>
+                <%= submit_tag 'BOOK', class: 'btn-brand' %>
+              <% end %>
+            </span>
           <% end %>
-        </span>
+        </div>
       </div>
+      <% #End of booking button bootstrap col %>
     </div>
-    <% #End of booking button bootstrap col %>
-  </div>
   <% # End of row 9 %>
-
-
-
-
-
-
+</div>
