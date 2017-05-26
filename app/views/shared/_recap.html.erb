@@ -151,7 +151,7 @@
         <% if payment_page == false %>
           <p class = "select-car-text">Click on a car to add it to your roadtrip</p>
         <% else %>
-          <%= link_to selections_path(:trip_id => @trip.id), 'data-toggle' => "modal", 'data-target' => '#car_wait_modal', method: :post do %>
+          <%= link_to selections_path(:trip_id => @trip.id), 'data-toggle' => "modal", 'data-target' => '#car_wait_modal', method: :post, id: 'to-car-link' do %>
             <p class = "select-car-text">Click here to add a car</p>
           <% end %>
         <% end %>
@@ -206,3 +206,56 @@
 </div>
 
 <%= render 'searches/car_wait_modal', {modal_name: "car_wait_modal", trip: @trip} %>
+
+<% content_for(:after_js) do %>
+  <script>
+    $(document).ready(function() {
+      $('#to-car-link').on('click', function(event) {
+        setTimeout(function() {
+          $('#car1').removeClass('hidden');
+        }, 500)
+        setTimeout(function() {
+          $('#car2').removeClass('hidden');
+          $('#car5').removeClass('hidden');
+        }, 1000)
+        setTimeout(function() {
+          $('#car7').removeClass('hidden');
+        }, 1300)
+        setTimeout(function() {
+          $('#car12').removeClass('hidden');
+          $('#car10').removeClass('hidden');
+        }, 2100)
+         setTimeout(function() {
+          $('#car6').removeClass('hidden');
+        }, 2400)
+         setTimeout(function() {
+          $('#car11').removeClass('hidden');
+          $('#car3').removeClass('hidden');
+          $('#car8').removeClass('hidden');
+        }, 3000)
+         setTimeout(function() {
+          $('#car4').removeClass('hidden');
+        }, 3300)
+         setTimeout(function() {
+          $('#car9').removeClass('hidden');
+        }, 4000)
+
+
+        setTimeout(function() {
+          $('#wait1').addClass('hidden');
+          $('#text2').removeClass('light');
+          $('#text1').addClass('light');
+          $('#checked1').removeClass('hidden');
+        }, 3000)
+
+        setTimeout(function() {
+          $('#wait2').addClass('hidden');
+          $('#text2').addClass('light');
+          $('#text3').removeClass('light');
+          $('#checked2').removeClass('hidden');
+        }, 7000)
+
+      })
+    })
+  </script>
+<% end %>
