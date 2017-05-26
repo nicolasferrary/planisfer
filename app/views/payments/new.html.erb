@@ -72,6 +72,10 @@
           <div class = "row">
             <%= hidden_field_tag 'trip_id', @trip.id %>
             <%= hidden_field_tag 'status', "OK" %>
+            <%= hidden_field_tag 'pick_up_location', @pick_up_location %>
+            <%= hidden_field_tag 'drop_off_location', @drop_off_location %>
+            <%= hidden_field_tag 'pick_up_date_time', @pick_up_date_time %>
+            <%= hidden_field_tag 'drop_off_date_time', @drop_off_date_time %>
             <%= submit_tag 'Next', class: 'btn-brand next-button', id: "next-action" %>
           </div>
         </div>

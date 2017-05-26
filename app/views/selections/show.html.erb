@@ -61,10 +61,6 @@
       </div>
 
       <div class = "row">
-        <%= render "car_form" %>
-      </div>
-
-      <div class = "row">
         <div id = "car-cards-partial">
           <%= render "car_cards" %>
         </div>
@@ -74,6 +70,10 @@
         <%= link_to "javascript:showhide('modify')", class: "modify-search-link" do%>
           <h5 class="<%= 'hidden' if @status == 'modify' %>" id="modify-search"> Change search criteria </h5>
         <% end  %>
+      </div>
+
+      <div class = "row">
+        <%= render "car_form" %>
       </div>
 
     </div>

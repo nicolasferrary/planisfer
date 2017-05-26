@@ -20,17 +20,23 @@ class UsersController < ApplicationController
     @user.save
     @order.user = @user
     @order.save
+
     # Worldia : Add user to quote
     @quote_id = params[:quote_id]
     worldia_add_user_to_quote(@user, @quote_id)
-
     #Worldia : Add passengers to quote
     worldia_add_passengers_to_quote(@passengers, @quote_id, @nb_travelers)
-#TODO
     #Worldia : Create payment
     worldia_create_payment(@quote_id)
 
-    redirect_to new_order_payment_path(@order, trip_id: @trip.id, status: "OK")
+     @options = {
+      :pick_up_location => params[:pick_up_location],
+      :drop_off_location => params[:drop_off_location],
+      :pick_up_date_time => params[:pick_up_date_time],
+      :drop_off_date_time => params[:drop_off_date_time],
+    }
+
+    redirect_to new_order_payment_path(@order, trip_id: @trip.id, status: "OK", options: @options)
   end
 
   def update
@@ -56,20 +62,6 @@ class UsersController < ApplicationController
 
   def worldia_add_passengers_to_quote(passengers, quote_id, nb_travelers)
     url = "https://www.worldia.com/api/v1/checkout/#{quote_id}/select_pax"
-    # json = {
-    #   "comments": [{"comment":""}],
-    #   "pax": [{
-    #     "dateOfBirth": "1972-04-24",
-    #     "title": "Mr",
-    #     "firstName": "John",
-    #     "lastName": "Smith"
-    #     },{
-    #     "dateOfBirth": "1972-04-24",
-    #     "title": "Mr",
-    #     "firstName": "John",
-    #     "lastName": "Smith"
-    #     }]
-    #   }.to_json
 
     request_hash = {
       "comments": [{"comment":"No comment"}],
@@ -87,22 +79,8 @@ class UsersController < ApplicationController
 
     json = request_hash.to_json
     response = RestClient.put url, json, {:content_type => 'application/json'}
+    raise
   end
-
-  # def worldia_pax_hash(passengers)
-  #   pax_hash = {}
-  #   pax_hash["comments"] = [{"comment" => ""}]
-  #   pax_hash["pax"] = []
-  #   for num in (1..@trip.nb_travelers)
-  #     pass_hash = {}
-  #     pass_hash["dateOfBirth"] = ""
-  #     pass_hash["title"] = passengers["#{num}"][:title]
-  #     pass_hash["firstName"] = passengers["#{num}"][:title]
-  #     pass_hash["lastName"] = passengers["#{num}"][:name]
-  #     pax_hash["pax"] << pass_hash
-  #   end
-  #   pax_hash
-  # end
 
   def worldia_create_payment(quote_id)
     url = "https://www.worldia.com/api/v1/checkout/#{quote_id}/select_options"

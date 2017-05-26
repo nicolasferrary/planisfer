@@ -18,20 +18,17 @@ class OrdersController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @user = @order.user
 #TOdo
-    # @quote_id = params[:quote_id]
-    # #Worldia : validate payment
-    # worldia_validate_payment(@quote_id)
+    @quote_id = params[:quote_id]
+    #Worldia : validate payment
+    worldia_validate_payment(@quote_id)
   end
 
   private
 
   def worldia_validate_payment(quote_id)
     url = "https://www.worldia.com/api/v1/checkout/#{quote_id}/complete"
-    request_hash = {"test": "test"
-      }
-    json = request_hash.to_json
+    json = {}.to_json
     response = RestClient.post url, json, {:content_type => 'application/json'}
-    raise
   end
 
 end

@@ -33,7 +33,6 @@ class SelectionsController < ApplicationController
     @selection.save
     @search = @trip.search
     @region = @trip.round_trip_flight.region
-    @region_airports = @region.airports.map { |airport_iata| Airport.find_by_iata(airport_iata).name}
     @currency = 'EUR'
 
     # Launch requests
@@ -71,7 +70,7 @@ class SelectionsController < ApplicationController
     @selection = Selection.find(params[:id])
     @car_rentals = CarRental.where(selection_id: @selection.id)
     @region = @trip.round_trip_flight.region
-    @region_airports = @region.airports.map { |airport_iata| Airport.find_by_iata(airport_iata).name}
+    # @region_airports = @region.airports.map { |airport_iata| define_airport_title(airport_iata)}
 
     @car_selection = get_best_cars_per_category(@car_rentals)
     @recommended_car = get_recommended_car(@car_selection)
@@ -101,7 +100,6 @@ class SelectionsController < ApplicationController
     @pick_up_airport = Airport.find_by_iata(@pick_up_location)
     @drop_off_airport = Airport.find_by_iata(@drop_off_location)
     @main_car_airports_titles = [define_airport_title(@pick_up_airport), define_airport_title(@drop_off_airport)]
-
     @trip.car_rental.nil? ? @recap_opacity = 1 : @recap_opacity = 0
     @categories = ["Mini", "Economy", "Compact", "Intermediate", "Fullsize", "Premium"]
     @popover_partials = create_partial_array

@@ -22,10 +22,17 @@ class PaymentsController < ApplicationController
     component_variation = worldia_gather_variation(@code, @trip)
     # Create a quote
     quote = worldia_create_quote(@trip)
-    # #Add component to quote
+    # Add component to quote
     @variation_id = component_variation["id"]
     @quote_id = quote["id"]
     quote_with_comp = worldia_add_component_to_quote(@quote_id, @variation_id)
+    @options = {
+      :trip_id => @trip.id,
+      :pick_up_location => @pick_up_location,
+      :drop_off_location => @drop_off_location,
+      :pick_up_date_time => @pick_up_date_time,
+      :drop_off_date_time => @drop_off_date_time,
+    }
   end
 
   def create
