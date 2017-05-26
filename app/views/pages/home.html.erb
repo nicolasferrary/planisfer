@@ -7,7 +7,7 @@
           <%= image_tag "blue_logo_no_word.png", class: "logo"%>
         <% end %> </span>
         <span class ="brand-name">Planisfer</span>
-        <span class = "banner2-title">Your personal trip builder</span>
+        <span class = "banner2-title">Your personal trip planner</span>
       </div>
     </div>
   </div>
@@ -17,16 +17,13 @@
     <div class = "col-md-8">
       <div class = "home-text">
         <h2 class="home-main-title"><strong>Explore the world your own way</strong></h2>
-        <%= link_to "javascript:showhide('how')", class: "how-link" do%>
-   <!--        <span class = "how-it-works">How it works</span> -->
-        <% end %>
       </div>
       <div class = "row">
 
         <div class = "col-xs-10 col-xs-offset-1">
           <div class = "how-icons" id="how">
             <div class = "row">
-              <div class = "col-md-4 text-center">
+              <div class = "col-md-3 text-center">
                 <p class="how-to-badge">1</p>
                 <p><strong>Select a destination</strong></p>
               </div>
@@ -38,13 +35,16 @@
                   <p><strong>Explore its landmarks & hidden gems</strong></p>
                 </div>
               </div> -->
-
-              <div class = "col-md-4 text-center">
+              <div class = "col-md-3 text-center">
                 <p class="how-to-badge">2</p>
-                <p><strong>Book your flights and car</strong></p>
+                <p><strong>Book your flights</strong></p>
               </div>
-              <div class = "col-md-4 text-center">
+              <div class = "col-md-3 text-center">
                 <p class="how-to-badge">3</p>
+                <p><strong>Book a car</strong></p>
+              </div>
+              <div class = "col-md-3 text-center">
+                <p class="how-to-badge">4</p>
                 <p><strong>Plan the details of your trip</strong></p>
               </div>
             </div>
@@ -174,6 +174,13 @@
                   </span>
                 </span>
               </a>
+              <a class="block sm destination" id = "more-to-come">
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext"> <p>Stay tuned! </p> <p>More destinations to come soon ...</p></span>
+                  </span>
+                </span>
+              </a>
 
             </div> <!-- fin du blocks -->
           </div> <!-- fin du trending -->
@@ -183,6 +190,7 @@
     </div>
 
     <div class = "col-md-4">
+
       <div class="sticky-form">
         <div class="form-post">
           <h1>Start building your trip</h1>
@@ -190,36 +198,113 @@
             <p class="red-message"><%= flash[:search_error] %></p>
           <% end %>
           <%=form_tag searches_path, :controller => 'searches', method: :post, id: "new_result" do %>
+
             <div class="row">
               <div class="col-xs-12">
               <%= select_tag :city, options_from_collection_for_select(Airport.where(category: "city"),:iata, :content), class: "js-airports-list input-lg form-control", :prompt => "From" %>
               </div>
-              <br>
-              <br>
+            </div>
+
+            <div class="row">
               <div class="col-xs-12">
                 <%= select_tag  :region, options_from_collection_for_select(Region.all.order('name ASC'), :name, :name), class: "input-lg form-control", prompt: "To" %>
               </div>
+            </div>
+
+            <div class="row">
               <div class="col-xs-6">
                 <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'input-lg form-control datepicker text-center'%>
               </div>
               <div class="col-xs-6">
                 <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => ' input-lg form-control datepicker text-center' %>
               </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 padding-travelers-box">
+                <div class = "row">
+                  <h3 class = "text-center no-children">Number of travelers</h3>
+                  <h3 class = "text-center hidden with-children">Adults</h3>
+                </div>
+
+                <div class = "row">
+                  <div class="group" data-toggle="buttons">
+                    <div class="travelers-btn-container">
+                      <% Constants::TRAVELERS.each do |number, text| %>
+                        <div class = "col-xs-2 radio-button-padding">
+                          <label class="btn btn-circle radio-b">
+                            <input type="radio" class = 'radio-butt' name="nb_adults" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
+                          </label>
+                        </div>
+                      <% end %>
+                    </div> <!-- fin travelers-btn-container -->
+                  </div> <!-- fin de group -->
+                </div>
+
+                <div class = "raw with-children hidden" id = "children-form">
+
+                  <div class = "col-md-6 children-padding">
+
+                    <div class = "row">
+                      <h3 class = "text-center">Children <span style= "font-weight: lighter"> (2-11) </span> </h3>
+                    </div>
+
+                    <div class = "row">
+                      <div class="group" data-toggle="buttons">
+                        <div class="travelers-btn-container">
+                          <% Constants::TRAVELERS.each do |number, text| %>
+                            <div class = "col-xs-4 radio-button-padding">
+                              <label class="btn btn-circle-small radio-b">
+                                <input type="radio" name="nb_children" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
+                              </label>
+                            </div>
+                          <% end %>
+                        </div> <!-- fin travelers-btn-container -->
+                      </div> <!-- fin de group -->
+                    </div>
+
+                  </div>
+
+                  <div class = "col-md-6 infant-padding">
+
+                    <div class = "row">
+                      <h3 class = "text-center">Infants <span style= "font-weight: lighter"> (<%= "<2" %>) </span> </h3>
+                    </div>
+
+                    <div class = "row">
+                      <div class="group" data-toggle="buttons">
+                        <div class="travelers-btn-container">
+                          <% Constants::TRAVELERS.each do |number, text| %>
+                            <div class = "col-xs-4 radio-button-padding">
+                              <label class="btn btn-circle-small radio-b">
+                                <input type="radio" name="nb_infants" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
+                              </label>
+                            </div>
+                          <% end %>
+                        </div> <!-- fin travelers-btn-container -->
+                      </div> <!-- fin de group -->
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div class = "row">
+                  <%= link_to "javascript:showhide('children-form')" do%>
+                    <h4 id = "children-link">Children under 12?</h4>
+                  <% end %>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class = "row">
               <div class="col-xs-12">
-                <h3 class = "text-center">Number of travelers</h3>
-                <div class="group" data-toggle="buttons">
-                  <div class="travelers-btn-container">
-                    <% Constants::TRAVELERS.each do |number, text| %>
-                      <label class="btn btn-circle">
-                        <input type="radio" name="nb_travelers" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
-                      </label>
-                    <% end %>
-                  </div> <!-- fin travelers-btn-container -->
-                </div> <!-- fin de group -->
                 <%= submit_tag "SEARCH", class: "btn-brand btn-big", id: "search-button", 'data-toggle' => "modal", 'data-target' => '#wait_modal' %>
               </div> <!-- fin du col -->
-            <%end%>
-          </div> <!-- fin du row -->
+            </div>
+          <%end%>
         </div> <!-- fin du form-post -->
       </div> <!-- fin de sticky-form -->
     </div>
@@ -282,7 +367,7 @@
 
   <!-- END OF MODALS  -->
 
-  <div class="col-xs-12 padding-off">
+  <div class="col-xs-12">
 <!--     <div class="banner-content text-center">
       <h1 class="banner2-title" id="why"><strong>Why use Planisfer </strong></h1>
     </div> -->
@@ -406,79 +491,106 @@
 </script>
 
 <script>
+
   function showhide(id) {
     var e = document.getElementById(id);
-    if ($('#' + e.id).hasClass('not-displayed')) {
-      $('#' + e.id).slideDown('slow');
-      $('#' + e.id).removeClass('not-displayed')
-    } else {
-      $('#' + e.id).slideUp('slow');
-      $('#' + e.id).addClass('not-displayed')
-    };
+    $("#children-link").addClass('hidden')
+    $(".with-children").removeClass('hidden')
+    $(".no-children").addClass('hidden')
+    $('#' + e.id).slideDown('slow');
+    $('#' + e.id).removeClass('hidden')
   };
 
-  </script>
-
-  <script>
-    $(document).ready(function() {
-      $('#search-button').on('click', function(event) {
-
-        setTimeout(function() {
-          $('#airline1').removeClass('hidden');
-        }, 500)
-        setTimeout(function() {
-          $('#airline2').removeClass('hidden');
-          $('#airline5').removeClass('hidden');
-        }, 1000)
-        setTimeout(function() {
-          $('#airline7').removeClass('hidden');
-        }, 1300)
-        setTimeout(function() {
-          $('#airline12').removeClass('hidden');
-          $('#airline10').removeClass('hidden');
-        }, 2100)
-         setTimeout(function() {
-          $('#airline6').removeClass('hidden');
-        }, 2400)
-         setTimeout(function() {
-          $('#airline11').removeClass('hidden');
-          $('#airline3').removeClass('hidden');
-          $('#airline8').removeClass('hidden');
-        }, 3000)
-         setTimeout(function() {
-          $('#airline4').removeClass('hidden');
-        }, 3300)
-         setTimeout(function() {
-          $('#airline9').removeClass('hidden');
-        }, 4000)
+</script>
 
 
-        setTimeout(function() {
-          $('#wait1').addClass('hidden');
-          $('#text2').removeClass('light');
-          $('#text1').addClass('light');
-          $('#checked1').removeClass('hidden');
-        }, 1000)
+<script>
+// bind to retrieve old status
+$(".radio-b").mousedown(function() {
+      var radio = $(this).find('input[type="radio"]')[0]
+      var label = $(this)
+    // if it was checked before
+    if(radio.checked) {
+        // bind event to reset state after click is completed
+        $(this).mouseup(function() {
 
-        setTimeout(function() {
-          $('#wait2').addClass('hidden');
-          $('#text2').addClass('light');
-          $('#text3').removeClass('light');
-          $('#text3bis').removeClass('light');
-          $('#checked2').removeClass('hidden');
-        }, 3000)
+            // bind param, because "this" will point somewhere else in setTimeout
+            // apparently if you do it immediatelly, it will be overriden, hence wait a tiny bit
+            setTimeout(function() {
+              console.log(this)
+                radio.checked = false;
+                label.removeClass("active")
+            }, 5);
+            // don't handle mouseup anymore unless bound again
+            $(this).unbind('mouseup');
+        });
+    }
+});
+</script>
 
-        setTimeout(function() {
-          $('#wait3').addClass('hidden');
-          $('#text4').removeClass('light');
-          $('#text2').addClass('light');
-          $('#text3bis').addClass('light');
-          $('#checked3').removeClass('hidden');
-        }, 5000)
 
-      })
+
+
+<script>
+  $(document).ready(function() {
+    $('#search-button').on('click', function(event) {
+
+      setTimeout(function() {
+        $('#airline1').removeClass('hidden');
+      }, 500)
+      setTimeout(function() {
+        $('#airline2').removeClass('hidden');
+        $('#airline5').removeClass('hidden');
+      }, 1000)
+      setTimeout(function() {
+        $('#airline7').removeClass('hidden');
+      }, 1300)
+      setTimeout(function() {
+        $('#airline12').removeClass('hidden');
+        $('#airline10').removeClass('hidden');
+      }, 2100)
+       setTimeout(function() {
+        $('#airline6').removeClass('hidden');
+      }, 2400)
+       setTimeout(function() {
+        $('#airline11').removeClass('hidden');
+        $('#airline3').removeClass('hidden');
+        $('#airline8').removeClass('hidden');
+      }, 3000)
+       setTimeout(function() {
+        $('#airline4').removeClass('hidden');
+      }, 3300)
+       setTimeout(function() {
+        $('#airline9').removeClass('hidden');
+      }, 4000)
+
+
+      setTimeout(function() {
+        $('#wait1').addClass('hidden');
+        $('#text2').removeClass('light');
+        $('#text1').addClass('light');
+        $('#checked1').removeClass('hidden');
+      }, 1000)
+
+      setTimeout(function() {
+        $('#wait2').addClass('hidden');
+        $('#text2').addClass('light');
+        $('#text3').removeClass('light');
+        $('#text3bis').removeClass('light');
+        $('#checked2').removeClass('hidden');
+      }, 3000)
+
+      setTimeout(function() {
+        $('#wait3').addClass('hidden');
+        $('#text4').removeClass('light');
+        $('#text2').addClass('light');
+        $('#text3bis').addClass('light');
+        $('#checked3').removeClass('hidden');
+      }, 5000)
+
     })
-  </script>
+  })
+</script>
 
 
 <% end %>

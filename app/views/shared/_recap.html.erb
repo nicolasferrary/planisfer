@@ -1,156 +1,261 @@
-
-
-  <% # Beg of row 1 %>
-  <div class = "title-background">
-    <div class = "row">
-      <div class = "recap-title">
-        <div class = "col-xs-8">
-          <h4>Your roadtrip in <%= @trip.round_trip_flight.region.name %></h4>
-        </div>
-        <div class = "col-xs-4">
-         <%= @trip.nb_travelers%> traveler<%='s' unless @trip.nb_travelers == 1%>
-        </div>
+<% # Beg of row 1 %>
+<div class = "title-background">
+  <div class = "row">
+    <div class = "recap-title">
+      <div class = "col-xs-8">
+        <h4>Your roadtrip in <%= @trip.round_trip_flight.region.name %></h4>
+      </div>
+      <div class = "col-xs-4" id = "number-travelers">
+       <%= @nb_travelers%> traveler<%='s' unless @nb_travelers == 1%>
       </div>
     </div>
   </div>
-  <% # End of row 1 %>
-  <div class = "recap-box">
+</div>
+<% # End of row 1 %>
+
+<div class = "recap-box">
+
+  <% if payment_page == false %>
+
     <div class = "row">
-      <div class = "col-xs-12">
-      <p>What's included?</p>
-        <p><i class="fa fa-check-square-o" aria-hidden="true"> Flights</i></p>
-        <% if !@trip.car_rental.nil? %>
-          <p> <i class="fa fa-check-square-o" aria-hidden="true"> Car </i></p>
-        <% end %>
- <!--        <p><i class="fa fa-check-square-o" aria-hidden="true"> Personal assistant </i></p> -->
+      <div class = "col-xs-12 vertical-align">
+        <div class = "col-md-6 no-padding">
+          <p>What's included?</p>
+        </div>
+        <div class = "col-md-6 no-padding">
+          <%= link_to search_path(@search), data: {confirm: 'Are you sure you want to select another flight?', commit: 'Sure!'}, class: "modify-search-link" do %>
+            <div class = "included-checkbox">
+              <span>Flights</span>
+              <i class="fa fa-check-square-o" aria-hidden="true"> </i>
+            </div>
+          <% end %>
+          <% if !@trip.car_rental.nil? %>
+            <%= link_to trip_path(@trip, @options.merge({:car_rental_id => nil})), method: :put, class: "modify-search-link" do %>
+              <div class = "included-checkbox">
+                <span> <%= @trip.car_rental.car.name %> or similar</span>
+                <i class="fa fa-check-square-o" aria-hidden="true"></i>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
 
-    <% # Beg of row 9 %>
+  <% else %>
+
+    <div class = "row">
+      <div class = "col-xs-12 vertical-align">
+        <div class = "col-md-6 no-padding">
+          <p>What's included?</p>
+        </div>
+        <div class = "col-md-6 no-padding">
+          <div class = "included-checkbox">
+            <span>Flights</span>
+            <i class="fa fa-check-square-o" aria-hidden="true"> </i>
+          </div>
+          <% if !@trip.car_rental.nil? %>
+            <div class = "included-checkbox">
+              <span> <%= @trip.car_rental.car.name %> or similar</span>
+              <i class="fa fa-check-square-o" aria-hidden="true"></i>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+
+  <hr id="hr-title">
+
+
+  <% # Beg of row 3 %>
+  <div class = "row">
+    <% #Beg of icon bootstrap col %>
+    <div class = "col-sm-2">
+      <%= image_tag "flight.png", height: "30px", width: "auto" %>
+    </div>
+    <% #End of icon bootstrap col %>
+    <% #Beg of content bootstrap col %>
+    <div class = "col-sm-10">
+      <div class = "date">
+        <%= @trip.starts_on.strftime("%b %e")%>
+        <span class = "carrier">
+          <%= Constants::AIRLINES[@trip.round_trip_flight.carrier1] %>
+        </span>
+      </div>
+
+      <div class = "origin-and-destination">
+        <span class = "side-item"> <%= Constants::AIRPORTS[@trip.city.name] %> <span class="light-data"> <%= @trip.round_trip_flight.flight1_origin_airport_iata %></span></span> <span class="fa fa-long-arrow-right middle-arrow" aria-hidden="true"></span><span class = "side-item right-item"><%= @trip.arrival_city %> <span class="light-data"><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span></span>
+      </div>
+      <div class = "times">
+        <span><%= @trip.round_trip_flight.flight1_take_off_at.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight1_landing_at.strftime("%H:%M") %></span>
+      </div>
+      <hr id="hr-content">
+    </div>
+    <% #End of content bootstrap col %>
+  </div>
+  <% # End of row 3 %>
+  <% # Beg of row 4 %>
+  <div class = "row">
+    <% #Beg of icon bootstrap col %>
+    <div class = "col-sm-2">
+
+    </div>
+    <% #End of icon bootstrap col %>
+    <% #Beg of content bootstrap col %>
+    <div class = "col-sm-10">
+      <div class = "date">
+        <%= @trip.returns_on.strftime("%B %d")%>
+        <span class = "carrier">
+          <%= Constants::AIRLINES[@trip.round_trip_flight.carrier2] %>
+        </span>
+      </div>
+      <div class = "origin-and-destination">
+        <span class = "side-item"> <%= @trip.return_city %> <span class="light-data"><%= @trip.round_trip_flight.flight2_origin_airport_iata %> </span></span> <span class="fa fa-long-arrow-right middle-arrow" aria-hidden="true"></span><span class = "side-item right-item"> <%= Constants::AIRPORTS[@trip.city.name] %> <span class="light-data"> <%= @trip.round_trip_flight.flight2_destination_airport_iata %></span></span>
+      </div>
+      <div class = "times">
+        <span><%= @trip.round_trip_flight.flight2_take_off_at.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight2_landing_at.strftime("%H:%M") %></span>
+      </div>
+      <hr id="hr-title">
+    </div>
+    <% #End of content bootstrap col %>
+  </div>
+  <% # End of row 4 %>
+
+  <% # Beg of row 10 %>
+  <div class = "row">
+    <% #Beg of icon bootstrap col %>
+    <div class = "col-sm-2">
+
+    </div>
+    <% #End of icon bootstrap col %>
+    <% #Beg of content bootstrap col %>
+    <div class = "col-sm-10">
+
+    </div>
+    <% #End of content bootstrap col %>
+  </div>
+  <% # End of row 10 %>
+
+  <% # Beg of row 5 %>
+  <div class = "row">
+    <% #Beg of icon bootstrap col %>
+    <% # On pourra mettre un if else avec la photo de la voiture choisie %>
+    <div class = "col-sm-2">
+        <%= image_tag "car.png", width: "30px", height: "auto", class: "car" %>
+    </div>
+    <% #End of icon bootstrap col %>
+    <% #Beg of content bootstrap col %>
+    <div class = "col-sm-10">
+      <% if @trip.car_rental.nil? %>
+        <% if payment_page == false %>
+          <p class = "select-car-text">Click on a car to add it to your roadtrip</p>
+        <% else %>
+          <%= link_to selections_path(:trip_id => @trip.id), 'data-toggle' => "modal", 'data-target' => '#car_wait_modal', method: :post, id: 'to-car-link' do %>
+            <p class = "select-car-text">Click here to add a car</p>
+          <% end %>
+        <% end %>
+
+      <% else %>
+
+        <div class = "date">
+          <span> <%= Time.zone.parse(@pick_up_date_time).strftime("%b %e")%> <span style= "font-size: 10px"> <%= Time.zone.parse(@pick_up_date_time).strftime("%I %P")%></span></span><span><%= Time.zone.parse(@drop_off_date_time).strftime("%b %e") %> <span style= "font-size: 10px"><%= Time.zone.parse(@drop_off_date_time).strftime("%I %P")%></span></span>
+        </div>
+<!--          <div class = "origin-and-destination">
+          <span class = "car-times"> </span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span class = "car-times"></span>
+        </div> -->
+        <div class = "times">
+          <span class = "side-item"><%= Airport.find_by_iata(@pick_up_location).cityname %></span><span class="fa fa-long-arrow-right middle-arrow" aria-hidden="true"></span><span class = "side-item right-item"><%= Airport.find_by_iata(@drop_off_location).cityname %></span>
+        </div>
+
+        <div class = "car-details">
+          <span><%= @trip.car_rental.car.name %> <span style= "font-size: 10px"> or similar</span></span> <span> <%= image_tag "carlogos/" + @trip.car_rental.company.downcase + ".png", height: 15, width: "auto"%> </span>
+        </div>
+        <div class= "car-times"></div>
+      <% end %>
+    </div>
+    <% #End of content bootstrap col %>
+  </div>
+  <% # End of row 5 %>
+
+  <hr id="hr-title">
+
+  <% # Beg of row 9 %>
     <div class = "row">
       <% #Beg of booking button bootstrap col %>
       <div class = "col-sm-12">
-        <div class = "text-center price-and-book">
+        <div class = "text-center price-and-book <%= 'right-float' if payment_page == true %>">
           <span class = "booking-price"><%= money_without_cents_and_with_symbol(@trip.price.round)%></span>
-          <span>
-            <%= form_tag orders_path do %>
-              <%= hidden_field_tag 'trip_id', @trip.id %>
-              <%= submit_tag 'BOOK', class: 'btn-brand' %>
-            <% end %>
-          </span>
+          <% if payment_page == false %>
+            <span>
+              <%= form_tag orders_path do %>
+                <%= hidden_field_tag 'trip_id', @trip.id %>
+                <%= hidden_field_tag 'pick_up_location', @pick_up_location %>
+                <%= hidden_field_tag 'drop_off_location', @drop_off_location %>
+                <%= hidden_field_tag 'pick_up_date_time', @pick_up_date_time %>
+                <%= hidden_field_tag 'drop_off_date_time', @drop_off_date_time %>
+                <%= submit_tag 'BOOK', class: 'btn-brand' %>
+              <% end %>
+            </span>
+          <% end %>
         </div>
       </div>
       <% #End of booking button bootstrap col %>
     </div>
+  <% # End of row 9 %>
+</div>
 
-    <hr id="hr-title">
-    <% # End of row 9 %>
+<%= render 'searches/car_wait_modal', {modal_name: "car_wait_modal", trip: @trip} %>
 
-    <% # Beg of row 3 %>
-    <div class = "row">
-      <% #Beg of icon bootstrap col %>
-      <div class = "col-sm-2">
-        <%= image_tag "flight.png", height: "30px", width: "auto" %>
-      </div>
-      <% #End of icon bootstrap col %>
-      <% #Beg of content bootstrap col %>
-      <div class = "col-sm-10">
-        <div class = "date">
-          <%= @trip.starts_on.strftime("%b %e")%>
-        </div>
-        <div class = "origin-and-destination">
-          <span> <%= @trip.city.name %></span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span>
-        </div>
-        <div class = "times">
-          <span><%= @trip.round_trip_flight.flight1_take_off_at.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight1_landing_at.strftime("%H:%M") %></span>
-        </div>
-        <div class = "carrier">
-          <%= Constants::AIRLINES[@trip.round_trip_flight.carrier1] %>
-        </div>
-        <hr id="hr-content">
-      </div>
-      <% #End of content bootstrap col %>
-    </div>
-    <% # End of row 3 %>
-    <% # Beg of row 4 %>
-    <div class = "row">
-      <% #Beg of icon bootstrap col %>
-      <div class = "col-sm-2">
+<% content_for(:after_js) do %>
+  <script>
+    $(document).ready(function() {
+      $('#to-car-link').on('click', function(event) {
+        setTimeout(function() {
+          $('#car1').removeClass('hidden');
+        }, 500)
+        setTimeout(function() {
+          $('#car2').removeClass('hidden');
+          $('#car5').removeClass('hidden');
+        }, 1000)
+        setTimeout(function() {
+          $('#car7').removeClass('hidden');
+        }, 1300)
+        setTimeout(function() {
+          $('#car12').removeClass('hidden');
+          $('#car10').removeClass('hidden');
+        }, 2100)
+         setTimeout(function() {
+          $('#car6').removeClass('hidden');
+        }, 2400)
+         setTimeout(function() {
+          $('#car11').removeClass('hidden');
+          $('#car3').removeClass('hidden');
+          $('#car8').removeClass('hidden');
+        }, 3000)
+         setTimeout(function() {
+          $('#car4').removeClass('hidden');
+        }, 3300)
+         setTimeout(function() {
+          $('#car9').removeClass('hidden');
+        }, 4000)
 
-      </div>
-      <% #End of icon bootstrap col %>
-      <% #Beg of content bootstrap col %>
-      <div class = "col-sm-10">
-        <div class = "date">
-          <%= @trip.returns_on.strftime("%B %d")%>
-        </div>
-        <div class = "origin-and-destination">
-          <span> <%= @trip.round_trip_flight.flight2_origin_airport_iata %> </span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span> <%= @trip.city.name %></span>
-        </div>
-        <div class = "times">
-          <span><%= @trip.round_trip_flight.flight2_take_off_at.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight2_landing_at.strftime("%H:%M") %></span>
-        </div>
-        <div class = "carrier">
-          <%= Constants::AIRLINES[@trip.round_trip_flight.carrier2] %>
-          <%= link_to search_path(@search) do %>
-          <i class="fa fa-pencil-square-o change" aria-hidden="true">Change flights</i>
-        <% end %>
-        </div>
-        <hr id="hr-title">
-      </div>
-      <% #End of content bootstrap col %>
-    </div>
-    <% # End of row 4 %>
 
-    <% # Beg of row 10 %>
-    <div class = "row">
-      <% #Beg of icon bootstrap col %>
-      <div class = "col-sm-2">
+        setTimeout(function() {
+          $('#wait1').addClass('hidden');
+          $('#text2').removeClass('light');
+          $('#text1').addClass('light');
+          $('#checked1').removeClass('hidden');
+        }, 3000)
 
-      </div>
-      <% #End of icon bootstrap col %>
-      <% #Beg of content bootstrap col %>
-      <div class = "col-sm-10">
+        setTimeout(function() {
+          $('#wait2').addClass('hidden');
+          $('#text2').addClass('light');
+          $('#text3').removeClass('light');
+          $('#checked2').removeClass('hidden');
+        }, 7000)
 
-      </div>
-      <% #End of content bootstrap col %>
-    </div>
-    <% # End of row 10 %>
-
-    <% # Beg of row 5 %>
-    <div class = "row">
-      <% #Beg of icon bootstrap col %>
-      <% # On pourra mettre un if else avec la photo de la voiture choisie %>
-      <div class = "col-sm-2">
-          <%= image_tag "car.png", width: "30px", height: "auto", class: "car" %>
-      </div>
-      <% #End of icon bootstrap col %>
-      <% #Beg of content bootstrap col %>
-      <div class = "col-sm-10">
-        <% if @trip.car_rental.nil? %>
-          <p class = "select-car-text">Click on a car to add it to your roadtrip</p>
-        <% else %>
-
-          <div class = "date">
-            <span> <%= Time.zone.parse(@pick_up_date_time).strftime("%b %e")%></span><span><%= Time.zone.parse(@drop_off_date_time).strftime("%b %e") %></span>
-          </div>
-          <div class = "origin-and-destination">
-            <span class = "car-times"> <%= Time.zone.parse(@pick_up_date_time).strftime("%I %P")%></span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span class = "car-times"><%= Time.zone.parse(@drop_off_date_time).strftime("%I %P")%></span>
-          </div>
-          <div class = "times">
-            <span><%= Airport.find_by_iata(@pick_up_location).cityname %></span><span><%= Airport.find_by_iata(@drop_off_location).cityname %></span>
-          </div>
-
-          <div class = "car-details">
-            <span><%= @trip.car_rental.car.name %></span> <span> <%= image_tag "carlogos/" + @trip.car_rental.company.downcase + ".png", height: 15, width: "auto"%> </span>
-          </div>
-          <div class= "car-times">or similar</div>
-          <%= link_to trip_path(@trip, @options.merge({:car_rental_id => nil})), method: :put do %>
-            <i class="fa fa-trash remove" aria-hidden="true"> Remove cars</i>
-          <% end %>
-        <% end %>
-      </div>
-      <% #End of content bootstrap col %>
-    </div>
-    <% # End of row 5 %>
-  </div>
+      })
+    })
+  </script>
+<% end %>

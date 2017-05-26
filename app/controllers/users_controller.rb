@@ -7,7 +7,8 @@ class UsersController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @user = User.new()
     @passengers = {}
-      for num in (1..@trip.nb_travelers)
+    @nb_travelers = @trip.nb_adults + @trip.nb_children + @trip.nb_infants
+      for num in (1..@nb_travelers)
         @passengers["#{num}"] = {
           title: params[:title_pax]["#{num}"],
           first_name: params[:first_name_pax]["#{num}"],
@@ -20,17 +21,24 @@ class UsersController < ApplicationController
     @order.user = @user
     @order.save
 
-    # Worldia : Add user to quote
-    @quote_id = params[:quote_id]
-    worldia_add_user_to_quote(@user, @quote_id)
+# UNCOMMENT TO LAUNCH WORLDIA CALLS
+    # # Worldia : Add user to quote
+    # @quote_id = params[:quote_id]
+    # worldia_add_user_to_quote(@user, @quote_id)
+    # #Worldia : Add passengers to quote
+    # worldia_add_passengers_to_quote(@passengers, @quote_id, @nb_travelers)
+    # #Worldia : Create payment
+    # worldia_create_payment(@quote_id)
 
-    #Worldia : Add passengers to quote
-    worldia_add_passengers_to_quote(@passengers, @quote_id)
+     @options = {
+      :pick_up_location => params[:pick_up_location],
+      :drop_off_location => params[:drop_off_location],
+      :pick_up_date_time => params[:pick_up_date_time],
+      :drop_off_date_time => params[:drop_off_date_time],
+    }
 
-    #Worldia : Create payment
-    worldia_create_payment(@quote_id)
-
-    redirect_to new_order_payment_path(@order, trip_id: @trip.id, status: "OK")
+    redirect_to new_order_payment_path(@order, trip_id: @trip.id, status: "OK", options: @options, quote_id: @quote_id)
+    # Problem here. As I am recreating a new payment, I am launching a new creation request to Worldia
   end
 
   def update
@@ -51,59 +59,29 @@ class UsersController < ApplicationController
     json = {
     "customerId": user.id
     }.to_json
-    response = RestClient.patch(url, json, {:content_type => 'application/json'})
+    RestClient.patch(url, json, {:content_type => 'application/json'})
   end
 
-  def worldia_add_passengers_to_quote(passengers, quote_id)
+  def worldia_add_passengers_to_quote(passengers, quote_id, nb_travelers)
     url = "https://www.worldia.com/api/v1/checkout/#{quote_id}/select_pax"
-    # json = {
-    #   "comments": [{"comment":""}],
-    #   "pax": [{
-    #     "dateOfBirth": "1972-04-24",
-    #     "title": "Mr",
-    #     "firstName": "John",
-    #     "lastName": "Smith"
-    #     },{
-    #     "dateOfBirth": "1972-04-24",
-    #     "title": "Mr",
-    #     "firstName": "John",
-    #     "lastName": "Smith"
-    #     }]
-    #   }.to_json
 
     request_hash = {
-      "comments": [{"comment":""}],
+      "comments": [{"comment":"No comment"}],
       "pax":[]
     }
-    for num in (1..@trip.nb_travelers)
+    for num in (1..nb_travelers)
       passenger_hash = {
-        "dateOfBirth": "",
+        "dateOfBirth": "1900-01-01",
         "title": passengers["#{num}"][:title],
-        "firstName": passengers["#{num}"][:title],
+        "firstName": passengers["#{num}"][:first_name],
         "lastName": passengers["#{num}"][:name]
         }
         request_hash[:pax] << passenger_hash
     end
 
     json = request_hash.to_json
-
     RestClient.put url, json, {:content_type => 'application/json'}
   end
-
-  # def worldia_pax_hash(passengers)
-  #   pax_hash = {}
-  #   pax_hash["comments"] = [{"comment" => ""}]
-  #   pax_hash["pax"] = []
-  #   for num in (1..@trip.nb_travelers)
-  #     pass_hash = {}
-  #     pass_hash["dateOfBirth"] = ""
-  #     pass_hash["title"] = passengers["#{num}"][:title]
-  #     pass_hash["firstName"] = passengers["#{num}"][:title]
-  #     pass_hash["lastName"] = passengers["#{num}"][:name]
-  #     pax_hash["pax"] << pass_hash
-  #   end
-  #   pax_hash
-  # end
 
   def worldia_create_payment(quote_id)
     url = "https://www.worldia.com/api/v1/checkout/#{quote_id}/select_options"

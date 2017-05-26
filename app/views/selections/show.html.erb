@@ -1,70 +1,104 @@
-
-<% # bandeau du haut %>
-<div class="flight-ticket-title text-center">
-    <div class="banner-content">
-    <%= link_to root_path do %>
-    <%= image_tag "logo.png", class:"logo-1"%>
-    <% end %>
+<div class="page-banner text-center">
+  <div class="page-banner-title">
+    <div class = "col-md-12 title-col">
+      <span> <%= link_to root_path do %>
+        <%= image_tag "blue_logo_no_word.png", class: "logo"%>
+      <% end %> </span>
+      <span class ="brand-name">Planisfer</span>
+      <span class = "banner2-title">Explore <%= @region.name %> your own way!</span> <span class = "banner2-title">Let's choose your car </span>
+    </div>
   </div>
-  <h1 class="">Select a car</h1>
+  <span class = "booking-status">
+    <%= render 'shared/booking_status', :status => 3 %>
+  </span>
 </div>
-<% # Fin du bandeau du haut %>
+
+
+<div class="container-fluid page-result">
+
+  <div class="col-xs-12 col-md-8 car-left-padding">
+    <div id = "car-zone" class = "<%= 'recap-opacity' if @recap_opacity == 0 %>">
+
+      <div class = "row">
+        <div class = "col-xs-12">
+          <div id = "main-car-container" class = "center-block">
+            <div class = "car-page-title text-center">
+              <h3> <%= @main_car_title %> </h3>
+            </div>
+
+            <h5 id = "car-recap-text"> <%= @main_car_airports_titles[0] %> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  <span class="fa fa-long-arrow-right car-selection-arrow" aria-hidden="true"></span> <%= @main_car_airports_titles[1] %> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %>
+            </h5>
+
+
+            <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@main_car})), method: :put, class: 'tabLink result-card' do %>
+              <div class = "row recommendation-box selected">
+                <div class = "col-md-6 no-relative-position">
+                  <h4> <%= @main_car.car.name %> <span>or similar</span></h4>
+                  <ul>
+                    <li> Rented by <%= @main_car.company %>, a well established rental company in Europe</li>
+                    <li> <%= @main_car.car.category %> category</li>
+                    <li> € <%= (@main_car.price.to_f.fdiv(@nb_days)).ceil %> per day </li>
+                  </ul>
+                  <div id = "recommended_car_price" class = "selected"> <%= money_without_cents_and_with_symbol(@main_car.price) %>
+                  </div>
+                </div>
+                <div class = "col-md-6 text-center no-padding">
+                  <div class = "main-photo-container">
+                    <div class = "card-background main-background <%= @main_car.car.category.downcase%>-background">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class = "row">
+        <div class = "car-page-title text-center">
+          <h3>OTHER CARS, RANKED BY CATEGORY </h3>
+        </div>
+      </div>
+
+      <div class = "row">
+        <div id = "car-cards-partial">
+          <%= render "car_cards" %>
+        </div>
+      </div>
+
+      <div class = "row">
+        <%= link_to "javascript:showhide('modify')", class: "modify-search-link" do%>
+          <h5 class="<%= 'hidden' if @status == 'modify' %>" id="modify-search"> Change search criteria </h5>
+        <% end  %>
+      </div>
+
+      <div class = "row">
+        <%= render "car_form" %>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-md-4">
+    <div id = "recap-zone" class = "<%= 'recap-opacity' if @recap_opacity == 1 %>">
+      <%= render "shared/recap", :payment_page => false%>
+    </div>
+  </div>
+
+</div>
+
 
 <% # début du wrapper %>
 <div class = "card-wrapper">
   <% # début du container %>
-  <div class="container">
-
-
-
+  <div class="container-fluid">
 
     <div class="row">
       <% # Début case bootstrap formulaire et cards %>
       <div class="col-xs-12 col-sm-8">
 
         <div class = "row">
-          <div id="TitleShow" class = "titlepadding">
-            <h3>THE BEST CARS FOR EACH CATEGORY </h3>
-            <h5 id = "car-recap-text"> <%= @pick_up_airport.cityname%> <%= @pick_up_airport.name%> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  <span class="fa fa-long-arrow-right car-selection-arrow" aria-hidden="true"></span> <%= @drop_off_airport.cityname%> <%= @drop_off_airport.name %> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %> </h5>
-            <%= link_to "javascript:showhide('modify')", class: "modify-search-link" do%>
-              <div>
-                <h5 class="<%= 'hidden' if @status == 'modify' %>" id="modify-search"> Modify search </h5>
-              </div>
-            <% end  %>
-          </div>
-        </div>
 
-<!--         <div class = "row">
-          <div class = "car-recap-row">
-            <div class = "col-xs-12 col-sm-3">
-              <h4> SELECT YOUR CAR </h4>
-            </div>
-            <div class = "col-xs-12 col-sm-6">
-              <h5 id = "car-recap-text"> <%= Airport.find_by_iata(@pick_up_location).name%> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  <span class="fa fa-long-arrow-right car-selection-arrow" aria-hidden="true"></span> <%= Airport.find_by_iata(@drop_off_location).name %> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %> </h5>
-            </div>
-            <div class = "col-xs-12 col-sm-3">
-              <%= link_to "javascript:showhide('modify')", class: "modify-search-link" do%>
-                <div>
-                  <h5 class="<%= 'hidden' if @status == 'modify' %>" id="modify-search"> Modify search </h5>
-                </div>
-              <% end  %>
-            </div>
-          </div>
-        </div> -->
-
-
-
-
-        <% #Début row titre cards %>
-  <!--       <div id="TitleShow">
-          <h4>THE BEST CARS PER CATEGORY </h4>
-        </div> -->
-        <% #Fin row titre cards %>
-
-        <%= render "car_form" %>
-
-        <div id = "car-cards-partial">
-          <%= render "car_cards" %>
         </div>
 
       </div>
@@ -72,9 +106,7 @@
 
 
       <% # Début case bootstrap Carnet de voyage %>
-      <div class="col-xs-12 col-sm-4">
-        <%= render "shared/recap" %>
-      </div>
+
       <% #Fin case bootstrap Carnet de voyage  %>
 
     </div>
@@ -91,13 +123,25 @@
 
   <script>
     $(document).ready(function() {
-      $('.card').mouseover('click', function(e) {
+      $('.card').mouseenter(function(e) {
         e.preventDefault();
         $('.card.selected').removeClass('selected');
         $(this).addClass('selected');
       })
     });
 
+    $(document).ready(function() {
+      $('#recap-zone').mouseenter(function(e) {
+        e.preventDefault();
+        $(this).removeClass('recap-opacity');
+        $('#car-zone').addClass('recap-opacity');
+      })
+      $('#recap-zone').mouseleave(function(e) {
+        e.preventDefault();
+        $('#car-zone').removeClass('recap-opacity');
+        $(this).addClass('recap-opacity');
+      })
+    });
 
   </script>
 

@@ -1,0 +1,18 @@
+.booking-status-item{
+  text-align: center;
+  p {
+    font-size: 11px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  margin: 0 10px;
+  width: 75px;
+}
+
+.opacity{
+  opacity: 0.5;
+}
+
+.underline{
+  border-bottom: 2px solid $brand-color;
+}

@@ -5,7 +5,7 @@
 
 .page-result{
   // background: #F5F5F5;
-  padding-top: 20px;
+  padding-top: 60px;
 }
 
 .flexbox {
@@ -66,38 +66,6 @@
   font-size: 23px;
   color: #333333;
 }
-
-
-#more-flights {
-  color: $brand-color;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-a.box-select-all-flights {
-  text-decoration: none;
-}
-
-#more-flights p{
-  color: $brand-color;
-  text-decoration: none;
-  margin: 0 0 30px;
-}
-
-#more-flights:hover {
-  text-decoration: none;
-}
-
-.box-select-all-flights {
-  text-decoration: none;
-  display: flex;
-  justify-content: space-around;
-}
-
-.box-select-all-flights:hover {
-  text-decoration: none;
-}
-
 
 .info-label-go {
   font-weight: bolder;
@@ -189,4 +157,56 @@ a.box-select-all-flights {
 #price-for{
   float:right;
   font-size: 12px;
+}
+
+.edit-links{
+  display:flex;
+  justify-content: space_between;
+  align-items: center;
+}
+
+#all-flights{
+  float:right;
+  margin-right: 10px;
+  text-decoration: none
+}
+
+#all-flights p{
+  color: $brand-color;
+  text-decoration: none;
+  margin: 0 0 30px;
+  float: right;
+}
+
+
+#all-flights:hover {
+  text-decoration: none;
+}
+
+
+
+#more-flights {
+  color: $brand-color;
+  text-decoration: none;
+  cursor: pointer;
+  margin-left: 10px;
+  float: left;
+}
+
+
+#more-flights p{
+  color: $brand-color;
+  text-decoration: none;
+  margin: 0 0 30px;
+  float: right;
+}
+
+
+#more-flights:hover {
+  text-decoration: none;
+}
+
+.car-left-padding{
+  padding-left: 60px;
+  padding-right: 60px;
 }

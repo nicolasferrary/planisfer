@@ -18,7 +18,7 @@
 
 
 .how-icons{
-  border-bottom: 1px solid #E6E6E6;
+  // border-bottom: 1px solid #E6E6E6;
   padding-bottom: 30px;
   // margin-bottom: 50px;
 }
@@ -37,7 +37,11 @@
   border-radius: 50%;
   background: $brand-color;
   margin: auto;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.booking-status-badge{
+  font-size: 13px;
 }
 
 .legends{
@@ -54,6 +58,10 @@
 
 .small-airline-logo{
   width: 40px;
+}
+
+.small-car-logo{
+  width: 60px;
 }
 
 

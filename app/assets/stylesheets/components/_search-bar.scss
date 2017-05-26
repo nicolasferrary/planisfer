@@ -4,10 +4,7 @@
   border-radius: 0px;
   box-shadow: 6px 1px 4px rgba(0,0,0,0.2);
   border: white 1px solid;
-
-
   opacity: 1;
-
   h3 {
   font-size: 17px;
   font-weight: bolder;
@@ -46,9 +43,6 @@
 
 #new_result {
   height: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
   border-radius: 10px;
 }
 
@@ -159,7 +153,7 @@ car.datepicker{
 
 #car-recap-text{
   text-align: center;
-  padding-top: 4px;
+  margin-bottom: 25px;
 }
 
 .car-recap-row{
@@ -167,3 +161,16 @@ car.datepicker{
   vertical-align: center;
 }
 
+#children-link{
+  font-size: 13px;
+}
+
+.padding-travelers-box{
+  padding: 0 30px 0 30px;
+}
+
+#hr-payment-form{
+  border: grey 0.1px solid;
+  opacity: 0.5;
+  margin: 20px 0 20px 20px;
+}

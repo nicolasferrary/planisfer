@@ -33,7 +33,6 @@ class SelectionsController < ApplicationController
     @selection.save
     @search = @trip.search
     @region = @trip.round_trip_flight.region
-    @region_airports = @region.airports.map { |airport_iata| Airport.find_by_iata(airport_iata).name}
     @currency = 'EUR'
 
     # Launch requests
@@ -46,6 +45,8 @@ class SelectionsController < ApplicationController
       @best_car_rentals << best_category_cars
     end
     @best_car_rentals = @best_car_rentals.flatten
+    @car_margin = 1.1
+    @best_car_rentals = apply_car_margin(@best_car_rentals, @car_margin)
     @best_car_rentals.each do |car_rental|
       car_rental.selection = @selection
       car_rental.save
@@ -65,20 +66,26 @@ class SelectionsController < ApplicationController
   def show
     @trip = Trip.find(params[:trip_id])
     @search = @trip.search
+    @nb_travelers = @search.nb_adults.to_i + @search.nb_children.to_i + @search.nb_infants.to_i
     @selection = Selection.find(params[:id])
     @car_rentals = CarRental.where(selection_id: @selection.id)
     @region = @trip.round_trip_flight.region
-    @region_airports = @region.airports.map { |airport_iata| Airport.find_by_iata(airport_iata).name}
+    @region_airports = @region.airports.map { |iata| Airport.find_by_iata(iata)}
+    @region_airports = @region_airports.map { |airport| define_airport_title(airport)}
+
     @car_selection = get_best_cars_per_category(@car_rentals)
+    @recommended_car = get_recommended_car(@car_selection)
+    @main_car = @trip.car_rental || @recommended_car
+    @main_car_title = define_title(@trip)
+
+
     @pick_up_location = params[:pick_up_location]
     @drop_off_location = params[:drop_off_location]
     @pick_up_date_time = params[:pick_up_date_time]
     @drop_off_date_time = params[:drop_off_date_time]
-    set_indexes
-    # @car_selection is a hash of arrays of instances of car_rentals (up to 5 instances per car category)
+    @nb_days = calculate_nb_days(@pick_up_date_time, @drop_off_date_time)
 
     @times = ["6 AM", "7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM", "10 PM" ]
-    @photo_params = surounding_params(@car_rentals)
 
     @status = "none"
 
@@ -93,6 +100,10 @@ class SelectionsController < ApplicationController
 
     @pick_up_airport = Airport.find_by_iata(@pick_up_location)
     @drop_off_airport = Airport.find_by_iata(@drop_off_location)
+    @main_car_airports_titles = [define_airport_title(@pick_up_airport), define_airport_title(@drop_off_airport)]
+    @trip.car_rental.nil? ? @recap_opacity = 1 : @recap_opacity = 0
+    @categories = ["Mini", "Economy", "Compact", "Intermediate", "Fullsize", "Premium"]
+    @popover_partials = create_partial_array
 
 
     respond_to do |format|
@@ -144,112 +155,57 @@ class SelectionsController < ApplicationController
     best_cars = unique_sorted_cars.first(5)
   end
 
-  def define_category_index
-    category_index = {
-      :mini => params[:mini_index].to_i || 0,
-      :economy => 0,
-      :compact => 0,
-      :intermediate => 0,
-      :fullsize => 0,
-      :premium => 0,
-    }
-  end
-
-  def surounding_params(car_rentals)
-    mini_max_param = [4, number_rentals(car_rentals, "Mini")-1].min
-    economy_max_param = [4, number_rentals(car_rentals, "Economy")-1].min
-    compact_max_param = [4, number_rentals(car_rentals, "Compact")-1].min
-    intermediate_max_param = [4, number_rentals(car_rentals, "Intermediate")-1].min
-    fullsize_max_param = [4, number_rentals(car_rentals, "Fullsize")-1].min
-    premium_max_param = [4, number_rentals(car_rentals, "Premium")-1].min
-
-    photo_params = {}
-
-    # define next params
-    if params[:mini_index].to_i == mini_max_param
-      photo_params[:next_mini] = 0
-    else
-      photo_params[:next_mini] = params[:mini_index].to_i + 1
-    end
-    if params[:economy_index].to_i == economy_max_param
-      photo_params[:next_economy] = 0
-    else
-      photo_params[:next_economy] = params[:economy_index].to_i + 1
-    end
-    if params[:compact_index].to_i == compact_max_param
-      photo_params[:next_compact] = 0
-    else
-      photo_params[:next_compact] = params[:compact_index].to_i + 1
-    end
-     if params[:intermediate_index].to_i == intermediate_max_param
-      photo_params[:next_intermediate] = 0
-    else
-      photo_params[:next_intermediate] = params[:intermediate_index].to_i + 1
-    end
-     if params[:fullsize_index].to_i == fullsize_max_param
-      photo_params[:next_fullsize] = 0
-    else
-      photo_params[:next_fullsize] = params[:fullsize_index].to_i + 1
-    end
-     if params[:premium_index].to_i == premium_max_param
-      photo_params[:next_premium] = 0
-    else
-      photo_params[:next_premium] = params[:premium_index].to_i + 1
-    end
-
-    # define previous params
-    if params[:mini_index].to_i == 0 || nil
-      photo_params[:previous_mini] = mini_max_param
-    else
-      photo_params[:previous_mini] = params[:mini_index].to_i - 1
-    end
-    if params[:economy_index].to_i == 0 || nil
-      photo_params[:previous_economy] = economy_max_param
-    else
-      photo_params[:previous_economy] = params[:economy_index].to_i - 1
-    end
-    if params[:compact_index].to_i == 0 || nil
-      photo_params[:previous_compact] = compact_max_param
-    else
-      photo_params[:previous_compact] = params[:compact_index].to_i - 1
-    end
-    if params[:intermediate_index].to_i == 0 || nil
-      photo_params[:previous_intermediate] = intermediate_max_param
-    else
-      photo_params[:previous_intermediate] = params[:intermediate_index].to_i - 1
-    end
-    if params[:fullsize_index].to_i == 0 || nil
-      photo_params[:previous_fullsize] = fullsize_max_param
-    else
-      photo_params[:previous_fullsize] = params[:fullsize_index].to_i - 1
-    end
-    if params[:premium_index].to_i == 0 || nil
-      photo_params[:previous_premium] = premium_max_param
-    else
-      photo_params[:previous_premium] = params[:premium_index].to_i - 1
-    end
-
-    photo_params
-  end
-
-  def number_rentals(rentals, category)
-    unique_sorted_cars = get_unique_sorted_cars(rentals, category)
-    unique_sorted_cars.count
-  end
-
-  def set_indexes
-    @mini_index = params[:mini_index].to_i || 0
-    @economy_index = params[:economy_index].to_i || 0
-    @compact_index = params[:compact_index].to_i || 0
-    @intermediate_index = params[:intermediate_index].to_i || 0
-    @fullsize_index = params[:fullsize_index].to_i || 0
-    @premium_index = params[:premium_index].to_i || 0
-  end
 
   def get_unique_sorted_cars(rentals, category)
     cars = rentals.select {|rental| rental.car.category == category unless rental.car.nil?}
     sorted_cars = cars.sort_by { |rental| rental.price }
     # unique_sorted_cars = sorted_cars.uniq {|rental| rental.car}
+  end
+
+  def get_recommended_car(car_selection)
+    cheapest_per_cat = []
+    car_selection = car_selection.reject {|category, car_rentals| category == :mini}
+    car_selection = car_selection.reject {|category, car_rentals| car_rentals == []}
+    car_selection.each do |category, car_rentals|
+      cheapest_per_cat << car_selection[category].first
+    end
+    sorted_cheapest_per_category = cheapest_per_cat.sort_by { |rental| rental.price }
+    recommended_car = sorted_cheapest_per_category.first
+  end
+
+  def calculate_nb_days(pick_up_date_time, drop_off_date_time)
+    string_drop_off = Time.parse(drop_off_date_time).strftime("%Y %B %e")
+    string_pick_up = Time.parse(pick_up_date_time).strftime("%Y %B %e")
+    drop_off = Time.parse(string_drop_off)
+    pick_up = Time.parse(string_pick_up)
+    nb_days = ((drop_off - pick_up).fdiv(24 * 60 * 60) + 1).to_i
+  end
+
+  def apply_car_margin(best_car_rentals, car_margin)
+    best_car_rentals.each do |rental|
+      rental.price = rental.price * car_margin
+    end
+    best_car_rentals
+  end
+
+  def define_title(trip)
+    trip.car_rental.nil? ? "OUR RECOMMENDATION" : "YOUR SELECTION"
+  end
+
+  def create_partial_array
+    popover_partials = {}
+    @categories.each do |cat|
+      popover_partials[cat.downcase] = render_to_string(:partial => "car_popover", :locals => { :pop_cat => cat.downcase})
+    end
+    popover_partials
+  end
+
+  def define_airport_title(airport)
+    if airport.cityname == airport.name
+      return "#{airport.cityname} airport"
+    else
+      return "#{airport.cityname} (#{airport.name}) airport"
+    end
   end
 
 end

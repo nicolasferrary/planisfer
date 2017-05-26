@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170516073851) do
+ActiveRecord::Schema.define(version: 20170523073438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,10 +131,12 @@ ActiveRecord::Schema.define(version: 20170516073851) do
     t.date     "returns_on"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.integer  "nb_travelers"
+    t.integer  "nb_adults"
     t.string   "flight1_range"
     t.string   "flight2_range"
     t.integer  "region_id"
+    t.integer  "nb_children"
+    t.integer  "nb_infants"
     t.index ["region_id"], name: "index_searches_on_region_id", using: :btree
   end
 
@@ -152,7 +154,7 @@ ActiveRecord::Schema.define(version: 20170516073851) do
   create_table "trips", force: :cascade do |t|
     t.date     "starts_on"
     t.date     "returns_on"
-    t.integer  "nb_travelers"
+    t.integer  "nb_adults"
     t.integer  "city_id"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
@@ -165,6 +167,8 @@ ActiveRecord::Schema.define(version: 20170516073851) do
     t.string   "sku"
     t.string   "arrival_city"
     t.string   "return_city"
+    t.integer  "nb_children"
+    t.integer  "nb_infants"
     t.index ["car_rental_id"], name: "index_trips_on_car_rental_id", using: :btree
     t.index ["city_id"], name: "index_trips_on_city_id", using: :btree
     t.index ["round_trip_flight_id"], name: "index_trips_on_round_trip_flight_id", using: :btree

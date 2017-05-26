@@ -1,10 +1,13 @@
-$('#page-result-container').html('<%= j render "results" %>');
+$('#page-result-container').html('<%= j render "results" %>')
+
 var handler = Gmaps.build('Google');
+
 handler.buildMap({
   provider: {
     scrollwheel: false,
     styles: [
-      {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},
+      {"featureType":"administrative","elementType":"labels.text","stylers":[{"color":"#444444"}, {"visibility":"off"}]},
+      // {"featureType":"administrative.province","elementType":"labels.text","stylers":[{"color":"#444444"}, {"visibility":"on"}]},
       {"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},
       {"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},
       {"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},
@@ -14,42 +17,105 @@ handler.buildMap({
       {"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
     ]
   },
-  internal: { id: 'map' } }, function() {
-  markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
-  handler.bounds.extendWith(markers);
-  // handler.getMap().setZoom(7);
-  handler.fitMapToBounds();
-
-  // Set zoom when loading the page when there is one marker
-  // The closer to 15, the higher in the sky
-  // handler.getMap().setZoom(7);
-
+  internal: { id: 'map' }}, function() {
+    markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
+    // for (var i = 0; i < markers.length; i++) {
+    //   marker = markers[i];
+    //   marker.getServiceObject().addListener('mouseover', function() {
+    //     marker.infowindow.render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => this});
+    //   });
+    handler.bounds.extendWith(markers);
+    // handler.getMap().setZoom(7);
+    handler.fitMapToBounds();
+    // Set zoom when loading the page when there is one marker
+    // The closer to 15, the higher in the sky
+    // handler.getMap().setZoom(7);
 });
+
+
+
 $('.result-card').mouseenter('click', function(e) {
   e.preventDefault();
   $('.cardContainer.selected').removeClass('selected');
   $(this).children('.cardContainer').addClass('selected');
-  var roundTripFlightId = $(this).data('round-trip-flight-id');
-
+  var tripId = $(this).data('trip-id');
+  var colours = $(this).data('colours');
+  //
   $.ajax({
     type: "GET",
-    url: '/round_trip_flights/' + roundTripFlightId + '/refresh_map',
+    url: '/trips/' + tripId + '/refresh_map',
+    data: {airport_colours: colours},
     dataType: "json",
-    success: function(result){
+    success: function(result) {
       for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
         handler.removeMarkers(markers);
       }
-      markers = [];
+      // markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
+      // handler.addMarker(result);
       markers = handler.addMarkers(result);
-      handler.bounds.extendWith(markers);
+      // for(var i = 0; i < markers.length; i++){
+      //   m = Gmaps.map.markers[i];
+      //   function(m){
+      //     if (m.serviceObject.id == 1) {
+      //       m.panTo();
+      //       m.serviceObject.setZIndex(99);
+      //     else m.serviceObject.setZIndex(1);
+      //     }
+      //   }
+      // }
+
+      // Gmaps.mapMarker = function() {
+      //   $.each(Gmaps.store.markers, function() {
+      //     if (this.serviceObject.id == 1) {
+      //       this.panTo();
+      //       this.serviceObject.setZIndex(99);
+      //     else this.serviceObject.setZIndex();
+      //     }
+      //   });
+      // }
+    // Trying to change zindex of airports
+    // var zInd = markers.length;
+    // markers[zInd] = handler.addMarker(result);
+    // lastmarker.setZIndex(zIndex:MAX_ZINDEX);
     }
   })
+
+  handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
-  handler.getMap().setZoom(5);
+
+  // The closer to 0, the higher in the sky
+  // handler.getMap().setZoom(7);
+
 })
-$("#more-flights").click(function() {
-  $("#see-more-flights").toggleClass("hidden");
-  $("#hide-more-flights").toggleClass("hidden");
-  $(".the-hidden-results").toggleClass("hidden");
-});
+
+$('.result-card').mouseleave('click', function(e) {
+  e.preventDefault();
+  var tripId = $(this).data('trip-id');
+  handler.removeMarkers(markers);
+  markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
+  handler.bounds.extendWith(markers);
+  handler.fitMapToBounds();
+})
+
+$('.poi-card').mouseenter('click', function(e) {
+  e.preventDefault();
+  var poiId = $(this).data('poi');
+  var regionId = $(this).data('region');
+  $.ajax({
+    type: "GET",
+    url: '/pois/' + poiId + '/highlight_poi',
+    data: {region_id: regionId},
+    dataType: "json",
+    success: function(result) {
+      // console.log('test')
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+        handler.removeMarkers(markers);
+      }
+      markers = handler.addMarkers(result);
+    }
+  })
+  handler.bounds.extendWith(markers);
+  handler.fitMapToBounds();
+})

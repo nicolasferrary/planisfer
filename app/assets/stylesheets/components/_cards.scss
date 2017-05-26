@@ -17,20 +17,32 @@
   position: relative;
 }
 
+.popover-card-container{
+  width: 350px;
+  margin-bottom: 5px;
+  height: 50px;
+}
+
 .card-description p{
   margin-top: 10px;
 }
 
 
-.card-price {
+.card-price{
   background: $secondary-color;
-  padding: 6px 18px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  text-align: center;
   color: white;
   position: absolute;
-  top: 9px;
   right: 0px;
   font-size: 17px;
   border-radius: 0;
+  width: 75px;
+}
+
+.flight-card-price {
+  top: 9px;
 }
 
 .card-price p{
@@ -38,10 +50,28 @@
 }
 
 
+
+#recommended_car_price{
+  background: $secondary-color;
+  padding: 6px 18px;
+  color: white;
+  font-size: 17px;
+  border-radius: 0;
+  width: 95px;
+  height: 35px;
+  position: absolute;
+  bottom: 7px;
+}
+
+#recommended_car_price.selected{
+  background-color: $brand-color;
+}
+
 // Le Wagon UI cards
 
 .card {
   height: 175px;
+  width: 350px;
   position: relative;
   margin-bottom: 20px;
   color: #333333;
@@ -54,6 +84,8 @@
   align-items: center;
   justify-content: space-around;
 }
+
+
 
 .card-image{
   position: absolute;
@@ -108,8 +140,7 @@
 
 .company-logo{
   position: absolute;
-  bottom: 2px;
-  right: 10px;
+  left: 10px;
 }
 
 .seats-infos{
@@ -169,4 +200,152 @@
   background-size: cover !important;
   color: white;
   position: relative;
+}
+
+.recommendation-box{
+  position: relative;
+  border-bottom: 1px solid #E6E6E6;
+  border-top: 1px solid #E6E6E6;
+  margin-left: 0px;
+  margin: auto 0 50px 0;
+  color: #333333;
+  border-radius: 5px;
+  text-decoration: none;
+  box-shadow: 1px 1px 1px #c7c7c7;
+  background: white;
+  h4 {
+    color: $orange;
+  }
+  span{
+    font-size: 12px;
+  }
+  ul {
+    padding-left: 20px;
+    font-size: 14px;
+  }
+}
+
+.recommendation-box.selected {
+  box-shadow: 1px 1px 1px #5d5d5d;
+}
+
+
+.car-page-title{
+  h3 {
+  font-size: 23px;
+  color: #404040;
+  margin-top: 11px;
+  }
+}
+
+.car-card{
+  height: 230px;
+  width: 350px;
+  position: relative;
+  margin-bottom: 20px;
+  color: #333333;
+  border-radius: 5px;
+  text-decoration: none;
+  box-shadow: 1px 1px 1px #c7c7c7;
+  background: white;
+}
+
+.car-card-title{
+  padding: 5px 5px 0 5px;
+  span{
+    color: $orange;
+  }
+}
+
+.car-card.selected {
+  box-shadow: 1px 1px 1px #5d5d5d;
+  .card-price {
+    background-color: $brand-color;
+  }
+}
+
+.card-background{
+  background-size: cover;
+  height: 85%;
+  width: 350px;
+  position: absolute;
+  bottom: 0px;
+  border-radius: 0 0 5px 5px;
+}
+
+.main-background{
+  position: static;
+  float: right;
+  border-radius: 0 5px 5px 0;
+  height: 100%
+}
+
+.mini-background{
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('mini.jpg');
+}
+
+.economy-background{
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('economy.jpg');
+}
+
+.compact-background{
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('compact.jpg');
+}
+
+.intermediate-background{
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('intermediate.jpg');
+}
+
+.fullsize-background{
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('fullsize.jpg');
+}
+
+.premium-background{
+  background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('premium.jpg');
+}
+
+.car-title-price{
+  float:right;
+}
+
+.no-relative-position{
+  position: static;
+}
+
+
+.main-photo-container{
+  height: 200px;
+}
+
+#main-car-container{
+  max-width: 700px;
+}
+
+.popover-link{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index:2;
+  background: black;
+  opacity: 0;
+}
+
+.car-popover-logo{
+  position: absolute;
+  left: 0;
+}
+
+.popover-car-logo-container{
+  width: 60px;
+  height: 25px;
+}
+
+.popover-card-desc{
+  align-items: center;
+}
+
+.popover{
+  max-width: 110%
 }

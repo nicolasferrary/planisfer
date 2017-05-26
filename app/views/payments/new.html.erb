@@ -1,249 +1,135 @@
 <% # bandeau du haut %>
-<div class="flight-ticket-title text-center">
-    <div class="banner-content">
-    <%= link_to root_path do %>
-    <%= image_tag "logo.png", class:"logo-1"%>
-    <% end %>
-  </div>
-  <h1 class="">Book your flights<%= ', car' unless @trip.car_rental.nil? %> and personal assistant </h1>
-</div>
-<% # Fin du bandeau du haut %>
-
-<div class = "infos-wrapper">
-  <div class="container">
-    <div class="row">
-      <% # Début du recap %>
-      <div class="col-xs-12 col-sm-4">
-
-        <% # Beg of row 1 %>
-        <div class = "title-background">
-          <div class = "row">
-            <div class = "recap-title">
-              <div class = "col-xs-8">
-                <h4>Your roadtrip in <%= @trip.round_trip_flight.region.name %></h4>
-              </div>
-              <div class = "col-x-3">
-               <%= @trip.nb_travelers%> traveler<%='s' unless @trip.nb_travelers == 1%>
-              </div>
-            </div>
-          </div>
-        </div>
-        <% # End of row 1 %>
-        <div class = "recap-box">
-          <div class = "row">
-            <div class = "col-xs-12 col-sm-9">
-              <p><i class="fa fa-check-square-o" aria-hidden="true"> Flights</i></p>
-              <% if !@trip.car_rental.nil? %>
-                <p> <i class="fa fa-check-square-o" aria-hidden="true"> Car </i></p>
-              <% end %>
-              <p><i class="fa fa-check-square-o" aria-hidden="true"> Personal travel assistant (offered) </i></p>
-            </div>
-            <div class = "col-xs-12 col-sm-3">
-                 <div class = "text-center price-and-book">
-                <span class = "booking-price price-top"><%= money_without_cents_and_with_symbol(@trip.price.round)%></span>
-              </div>
-            </div>
-          </div>
-
-          <hr id="hr-title">
-
-          <% # Beg of row 3 %>
-          <div class = "row">
-            <% #Beg of icon bootstrap col %>
-            <div class = "col-sm-2">
-              <%= image_tag "flight.png", height: "30px", width: "auto" %>
-            </div>
-            <% #End of icon bootstrap col %>
-            <% #Beg of content bootstrap col %>
-            <div class = "col-sm-10">
-              <div class = "date">
-                <%= @trip.starts_on.strftime("%b %e")%>
-              </div>
-              <div class = "origin-and-destination">
-                <span> <%= @trip.city.name %></span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span>
-              </div>
-              <div class = "times">
-                <span><%= @trip.round_trip_flight.flight1_take_off_at.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight1_landing_at.strftime("%H:%M") %></span>
-              </div>
-              <div class = "carrier">
-                <%= Constants::AIRLINES[@trip.round_trip_flight.carrier1] %>
-              </div>
-              <hr id="hr-content">
-            </div>
-            <% #End of content bootstrap col %>
-          </div>
-          <% # End of row 3 %>
-          <% # Beg of row 4 %>
-          <div class = "row">
-            <% #Beg of icon bootstrap col %>
-            <div class = "col-sm-2">
-
-            </div>
-            <% #End of icon bootstrap col %>
-            <% #Beg of content bootstrap col %>
-            <div class = "col-sm-10">
-              <div class = "date">
-                <%= @trip.returns_on.strftime("%B %d")%>
-              </div>
-              <div class = "origin-and-destination">
-                <span> <%= @trip.round_trip_flight.flight2_origin_airport_iata %> </span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span> <%= @trip.city.name %></span>
-              </div>
-              <div class = "times">
-                <span><%= @trip.round_trip_flight.flight2_take_off_at.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight2_landing_at.strftime("%H:%M") %></span>
-              </div>
-              <div class = "carrier">
-                <%= Constants::AIRLINES[@trip.round_trip_flight.carrier2] %>
-              </div>
-              <hr id="hr-title">
-            </div>
-            <% #End of content bootstrap col %>
-          </div>
-          <% # End of row 4 %>
-
-          <% # Beg of row 5 %>
-          <div class = "row">
-            <% #Beg of icon bootstrap col %>
-            <% # On pourra mettre un if else avec la photo de la voiture choisie %>
-            <div class = "col-sm-2">
-                <%= image_tag "car.png", width: "30px", height: "auto", class: "car" %>
-            </div>
-            <% #End of icon bootstrap col %>
-            <% #Beg of content bootstrap col %>
-            <div class = "col-sm-10">
-              <% if @trip.car_rental.nil? %>
-              <% else %>
-                <div class = "date">
-                  <span> <%= @trip.car_rental.pick_up_date_time.strftime("%b %e")%></span><span><%= @trip.car_rental.drop_off_date_time.strftime("%b %e") %></span>
-                </div>
-                <div class = "origin-and-destination">
-                  <span class = "car-times"> <%= @trip.car_rental.pick_up_date_time.strftime("%I %P")%></span> <span class="fa fa-long-arrow-right" aria-hidden="true"></span><span class = "car-times"><%= @trip.car_rental.drop_off_date_time.strftime("%I %P")%></span>
-                </div>
-                <div class = "times">
-                  <span><%= Airport.find_by_iata(@trip.car_rental.pick_up_location).cityname %></span><span><%= Airport.find_by_iata(@trip.car_rental.drop_off_location).cityname %></span>
-                </div>
-
-                <div class = "car-details">
-                  <span><%= @trip.car_rental.car.name %></span> <span> <%= image_tag "carlogos/" + @trip.car_rental.company.downcase + ".png", height: 15, width: "auto"%> </span>
-                </div>
-                <div class= "car-times">or similar</div>
-              <% end %>
-              <hr id="hr-title">
-            </div>
-            <% #End of content bootstrap col %>
-          </div>
-          <% # End of row 5 %>
-
-          <div>
-            <div class = "row">
-              <div class = "col-sm-2">
-                  <%= image_tag "Itinerary.png", width: "30px", height: "auto", class: "car" %>
-              </div>
-              <div class = "col-sm-10">
-                <div class = "date">
-                  <p> Personal travel assistant</p>
-                </div>
-                <ul>
-                  <li> Assistance in French or in English to help you plan your trip</li>
-                  <li> A suggestion of itinerary, hotel and activities based on your wishes</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-      <% # Find du recap %>
-      <% # Début de la colonne infos perso et paiement %>
-
-      <div class="col-xs-12 col-sm-8">
-        <%=form_tag users_path(:order_id => @order.id, :quote_id => @quote_id), method: :post do %>
-          <div class = "travel-infos-box">
-            <div class = "travel-infos-title">
-              <div class = "row">
-                <div class = "col-sm-6">
-                  <h4 class = "<%= 'light' if @status == 'OK' %>">1. Who is traveling</h4>
-                </div>
-                <div class = col-sm-6>
-                  <%= link_to new_order_payment_path(:trip_id => @trip.id, :order => @order) do%>
-                    <p class = "edit <%= 'not-displayed' if @status == 'none' %>"> Edit </p>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-
-            <div class = "<%= 'not-displayed' if @status == 'OK' %>">
-              <% for num in (1..@trip.nb_travelers) %>
-                <div class = "row">
-                  <div class = "passenger-row">
-
-                    <div class = "col-sm-3" >
-                      <p class = "infos-left-text">Passenger <%= num %></p>
-                    </div>
-
-                    <div class = "col-sm-2">
-                      <%= select_tag "title_pax[#{num}]", options_for_select(["Mr", "Mrs"], @default_values["#{num}"][:title]), prompt: "Title", class: "form-control grey" %>
-                    </div>
-                    <div class = "col-sm-3">
-                      <%= text_field_tag "first_name_pax[#{num}]", @default_values["#{num}"][:first_name], placeholder: "First name", class: "form-control"  %>
-                    </div>
-                    <div class = "col-sm-4">
-                      <%= text_field_tag "name_pax[#{num}]", @default_values["#{num}"][:name], placeholder: "Name", class: "form-control" %>
-                    </div>
-                  </div>
-                </div>
-                <hr id="hr-content">
-              <% end %>
-
-
-              <div class = "row">
-                <div class = "email-row">
-                  <div class = "col-sm-8" >
-                    <p class = "infos-left-text">Please send my travel documents to this e-mail address</p>
-                  </div>
-                  <div class = "col-sm-4" >
-                    <%= text_field_tag "email", @default_values[:email], placeholder: "Email", class: "form-control" %>
-                  </div>
-                </div>
-              </div>
-              <div class = "row">
-                <%= hidden_field_tag 'trip_id', @trip.id %>
-                <%= hidden_field_tag 'status', "OK" %>
-                <%= submit_tag 'Next', class: 'btn-brand next-button', id: "next-action" %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-
-        <div class = "travel-infos-box">
-          <%=form_tag order_payments_path(@order, :trip_id => @trip.id) do %>
-            <div class = "travel-infos-title">
-              <h4 class = "<%= 'light' if @status == 'none' %>">2. Payment</h4>
-            </div>
-            <div class = "<%= 'not-displayed' if @status == 'none' %>">
-              <div class = "row">
-                <div class="col-sm-9">
-                  <p>Total: <%= humanized_money_with_symbol(@order.amount) %></p>
-                  <p>Everything seems alright? Great! Looks like you can book.</p>
-                </div>
-                <div class="col-sm-3">
-                  <div class = "payement-button">
-                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                    data-name="Securized payment"
-                    data-email="<%= @default_values[:email] %>"
-                    data-description="<%= @order.trip_sku %>"
-                    data-amount="<%= @order.amount_cents %>"
-                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                    data-currency="<%= @order.amount.currency %>">
-                    </script>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
+<div class="page-banner text-center">
+  <div class="page-banner-title">
+    <div class = "col-md-12 title-col">
+      <span> <%= link_to root_path do %>
+        <%= image_tag "blue_logo_no_word.png", class: "logo"%>
+      <% end %> </span>
+      <span class ="brand-name">Planisfer</span>
+      <span class = "banner2-title">Let's finalize your trip to <%= @region.name %></span>
     </div>
   </div>
+  <span class = "booking-status">
+    <% if @trip.car_rental.nil? %>
+      <%= render 'shared/booking_status', :status => 2 %>
+    <% else %>
+       <%= render 'shared/booking_status', :status => 3 %>
+    <% end %>
+  </span>
 </div>
+
+<% # Fin du bandeau du haut %>
+
+<div class="container-fluid page-result">
+
+  <div class="col-xs-12 col-md-8 car-left-padding">
+    <% # beginning of user form %>
+    <%=form_tag users_path(:order_id => @order.id, :quote_id => @quote_id), method: :post do %>
+      <div class = "travel-infos-box">
+        <div class = "travel-infos-title">
+          <div class = "row">
+            <div class = "col-sm-6">
+              <h4 class = "<%= 'light' if @status == 'OK' %>">1. Who is traveling</h4>
+            </div>
+            <div class = col-sm-6>
+              <%= link_to new_order_payment_path(:trip_id => @trip.id, :order => @order) do%>
+                <p class = "edit <%= 'not-displayed' if @status == 'none' %>"> Edit </p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class = "<%= 'not-displayed' if @status == 'OK' %>">
+          <% for num in (1..@nb_travelers) %>
+            <div class = "row">
+              <div class = "passenger-row">
+
+                <div class = "col-sm-3" >
+                  <p class = "infos-left-text">Passenger <%= num %></p>
+                </div>
+
+                <div class = "col-sm-2">
+                  <%= select_tag "title_pax[#{num}]", options_for_select(["Mr", "Mrs"], @default_values["#{num}"][:title]), prompt: "Title", class: "form-control grey" %>
+                </div>
+                <div class = "col-sm-3">
+                  <%= text_field_tag "first_name_pax[#{num}]", @default_values["#{num}"][:first_name], placeholder: "First name", class: "form-control"  %>
+                </div>
+                <div class = "col-sm-4">
+                  <%= text_field_tag "name_pax[#{num}]", @default_values["#{num}"][:name], placeholder: "Name", class: "form-control" %>
+                </div>
+              </div>
+            </div>
+
+            <div class = "row">
+              <div class = "col-sm-12" >
+                <hr id="hr-payment-form">
+              </div>
+            </div>
+
+          <% end %>
+
+
+          <div class = "row">
+            <div class = "email-row">
+              <div class = "col-sm-8" >
+                <p class = "infos-left-text">Please send my travel documents to this e-mail address</p>
+              </div>
+              <div class = "col-sm-4" >
+                <%= text_field_tag "email", @default_values[:email], placeholder: "Email", class: "form-control" %>
+              </div>
+            </div>
+          </div>
+          <div class = "row">
+            <%= hidden_field_tag 'trip_id', @trip.id %>
+            <%= hidden_field_tag 'status', "OK" %>
+            <%= hidden_field_tag 'pick_up_location', @pick_up_location %>
+            <%= hidden_field_tag 'drop_off_location', @drop_off_location %>
+            <%= hidden_field_tag 'pick_up_date_time', @pick_up_date_time %>
+            <%= hidden_field_tag 'drop_off_date_time', @drop_off_date_time %>
+            <%= submit_tag 'Next', class: 'btn-brand next-button', id: "next-action" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <% # end of user form %>
+
+    <% # beginning of payment form %>
+    <div class = "travel-infos-box">
+      <%=form_tag order_payments_path(@order, :trip_id => @trip.id, :quote_id => @quote_id) do %>
+        <div class = "travel-infos-title">
+          <h4 class = "<%= 'light' if @status == 'none' %>">2. Payment</h4>
+        </div>
+        <div class = "<%= 'not-displayed' if @status == 'none' %>">
+          <div class = "row">
+            <div class="col-sm-9">
+              <p>Total: <%= humanized_money_with_symbol(@order.amount) %></p>
+              <p>Everything seems alright? Great! Looks like you can book.</p>
+            </div>
+            <div class="col-sm-3">
+              <div class = "payement-button">
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                data-name="Securized payment"
+                data-email="<%= @default_values[:email] %>"
+                data-description="<%= @order.trip_sku %>"
+                data-amount="<%= @order.amount_cents %>"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-currency="<%= @order.amount.currency %>">
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+    <% # end of payment form %>
+
+  </div>
+
+  <div class="col-xs-12 col-md-4">
+    <%= render "shared/recap", :payment_page => true %>
+  </div>
+
+</div>
+

@@ -1,191 +1,131 @@
 <% #Début de la row de cards%>
 <div class="row">
-  <% # Début de la première card %>
-  <div id = "mini">
-    <% if @car_selection[:mini][@mini_index] %>
-      <div class="col-xs-12 col-sm-6">
-        <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:mini][@mini_index]})), method: :put, class: 'tabLink result-card' do %>
-          <div class="card <%= 'selected' unless params[:economy_index] || params[:compact_index] || params[:intermediate_index] || params[:fullsize_index] || params[:premium_index] %>">
-            <% if !@car_selection[:mini][@mini_index].car.image_url.nil? %>
-              <%= image_tag @car_selection[:mini][@mini_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
-            <% end %>
-            <div class="card-name"> <%= @car_selection[:mini][@mini_index].car.name %><span class="light-data"> or similar </span>
-            </div>
-            <div class = "card-price">
-              <p> <%= money_without_cents_and_with_symbol(@car_selection[:mini][@mini_index].price) %></p>
-            </div>
-            <%= link_to selection_path(@selection, @options.merge(:mini_index => @photo_params[:next_mini])), remote: true, class: "more-photos" do %>
-              <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
-            <% end %>
-            <%= link_to selection_path(@selection, @options.merge(:mini_index => @photo_params[:previous_mini])), remote: true, class: "previous-photos" do %>
-              <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
-            <% end %>
-            <div class="card-category">
-              <p><%= @car_selection[:mini][@mini_index].car.category %></p>
-            </div>
-            <div class = "card-infos">
-              <%= image_tag "carlogos/" + @car_selection[:mini][@mini_index].company.downcase + ".png", height: 25, width: "auto", class: "company-logo" %>
-            </div>
-           <!--  <a class="card-link" href="#" ></a> -->
-          </div>
-        <% end %>
+
+  <% if @car_selection[:mini] != [] %>
+    <div class="col-xs-12 col-sm-6">
+      <div class="car-card center-block">
+        <div class = "car-card-title">
+          <span>Mini</span>
+          <span class = "car-title-price">
+            <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:mini][0].price) %></span>
+          </span>
+        </div>
+        <div class="card-background mini-background">
+        </div>
+        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["mini"] ) %>
       </div>
-    <% end %>
-  <% # Fin de la première card %>
-  </div>
-  <% # début de la 2eme card %>
-  <% if @car_selection[:economy][@economy_index] %>
-    <div class="col-xs-12 col-sm-6">
-      <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:economy][@economy_index]})), method: :put, class: 'tabLink result-card' do %>
-        <div class="card <%= "selected" if params[:economy_index] %>" >
-          <% if !@car_selection[:economy][@economy_index].car.image_url.nil? %>
-            <%= image_tag @car_selection[:economy][@economy_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
-          <% end %>
-          <div class="card-name"> <%= @car_selection[:economy][@economy_index].car.name %><span class="light-data"> or similar </span>
-          </div>
-          <div class = "card-price">
-            <p> <%= money_without_cents_and_with_symbol(@car_selection[:economy][@economy_index].price) %></p>
-          </div>
-          <%= link_to selection_path(@selection, @options.merge(:economy_index => @photo_params[:next_economy])), remote: true, class: "more-photos" do %>
-            <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
-          <% end %>
-          <%= link_to selection_path(@selection, @options.merge(:economy_index => @photo_params[:previous_economy])), remote: true, class: "previous-photos" do %>
-            <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
-          <% end %>
-          <div class="card-category">
-            <p><%= @car_selection[:economy][@economy_index].car.category %></p>
-          </div>
-          <div class = "card-infos">
-            <%= image_tag "carlogos/" + @car_selection[:economy][@economy_index].company.downcase + ".png", height: 25, width: "auto", class: "company-logo" %>
-          </div>
-        </div>
-      <% end %>
     </div>
   <% end %>
-  <% # fin de la 2eme card %>
-  <% # Début de la 3e card %>
-  <% if @car_selection[:compact][@compact_index] %>
+
+  <% if @car_selection[:economy] != [] %>
     <div class="col-xs-12 col-sm-6">
-      <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:compact][@compact_index]})), method: :put, class: 'tabLink result-card' do %>
-        <div class="card <%= "selected" if params[:compact_index] %>">
-          <% if !@car_selection[:compact][@compact_index].car.image_url.nil? %>
-            <%= image_tag @car_selection[:compact][@compact_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
-          <% end %>
-          <div class="card-name"> <%= @car_selection[:compact][@compact_index].car.name %><span class="light-data"> or similar </span>
-          </div>
-          <div class = "card-price">
-            <p> <%= money_without_cents_and_with_symbol(@car_selection[:compact][@compact_index].price) %></p>
-          </div>
-          <%= link_to selection_path(@selection, @options.merge(:compact_index => @photo_params[:next_compact])), remote: true, class: "more-photos" do %>
-            <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
-          <% end %>
-          <%= link_to selection_path(@selection, @options.merge(:compact_index => @photo_params[:previous_compact])), remote: true, class: "previous-photos" do %>
-            <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
-          <% end %>
-          <div class="card-category">
-            <p><%= @car_selection[:compact][@compact_index].car.category %></p>
-          </div>
-          <div class = "card-infos">
-            <%= image_tag "carlogos/" + @car_selection[:compact][@compact_index].company.downcase + ".png", height: 25, width: "auto", class: "company-logo" %>
-          </div>
+      <div class="car-card center-block">
+        <div class = "car-card-title">
+          <span>Economy</span>
+          <span class = "car-title-price">
+            <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:economy][0].price) %></span>
+          </span>
         </div>
-      <% end %>
+        <div class="card-background economy-background">
+        </div>
+        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["economy"] ) %>
+      </div>
     </div>
   <% end %>
-  <% # Fin de la 3e card %>
-  <% # Début de la 4e card %>
-  <% if @car_selection[:intermediate][@intermediate_index] %>
+
+  <% if @car_selection[:compact] != [] %>
     <div class="col-xs-12 col-sm-6">
-      <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:intermediate][@intermediate_index]})), method: :put, class: 'tabLink result-card' do %>
-        <div class="card <%= "selected" if params[:intermediate_index] %>">
-          <% if !@car_selection[:intermediate][@intermediate_index].car.image_url.nil? %>
-            <%= image_tag @car_selection[:intermediate][@intermediate_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
-          <% end %>
-          <div class="card-name"> <%= @car_selection[:intermediate][@intermediate_index].car.name %><span class="light-data"> or similar </span>
-          </div>
-          <div class = "card-price">
-            <p> <%= money_without_cents_and_with_symbol(@car_selection[:intermediate][@intermediate_index].price) %></p>
-          </div>
-          <%= link_to selection_path(@selection, @options.merge(:intermediate_index => @photo_params[:next_intermediate])), remote: true, class: "more-photos" do %>
-            <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
-          <% end %>
-          <%= link_to selection_path(@selection, @options.merge(:intermediate_index => @photo_params[:previous_intermediate])), remote: true, class: "previous-photos" do %>
-            <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
-          <% end %>
-          <div class="card-category">
-            <p><%= @car_selection[:intermediate][@intermediate_index].car.category %></p>
-          </div>
-          <div class = "card-infos">
-            <%= image_tag "carlogos/" + @car_selection[:intermediate][@intermediate_index].company.downcase + ".png", height: 25, width: "auto", class: "company-logo" %>
-          </div>
+      <div class="car-card center-block">
+        <div class = "car-card-title">
+          <span>Compact</span>
+          <span class = "car-title-price">
+            <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:compact][0].price) %></span>
+          </span>
         </div>
-      <% end %>
+        <div class="card-background compact-background">
+        </div>
+        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["compact"] ) %>
+      </div>
     </div>
   <% end %>
-  <% # Fin de la 4e card %>
-  <% # Début de la 5e card %>
-  <% if @car_selection[:fullsize][@fullsize_index] %>
+
+  <% if @car_selection[:intermediate] != [] %>
     <div class="col-xs-12 col-sm-6">
-      <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:fullsize][@fullsize_index]})), method: :put, class: 'tabLink result-card' do %>
-        <div class="card <%= "selected" if params[:fullsize_index] %>">
-          <% if !@car_selection[:fullsize][@fullsize_index].car.image_url.nil? %>
-            <%= image_tag @car_selection[:fullsize][@fullsize_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
-          <% end %>
-          <div class="card-name"> <%= @car_selection[:fullsize][@fullsize_index].car.name %><span class="light-data"> or similar </span>
-          </div>
-          <div class = "card-price">
-            <p> <%= money_without_cents_and_with_symbol(@car_selection[:fullsize][@fullsize_index].price) %></p>
-          </div>
-          <%= link_to selection_path(@selection, @options.merge(:fullsize_index => @photo_params[:next_fullsize])), remote: true, class: "more-photos" do %>
-            <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
-          <% end %>
-          <%= link_to selection_path(@selection, @options.merge(:fullsize_index => @photo_params[:previous_fullsize])), remote: true, class: "previous-photos" do %>
-            <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
-          <% end %>
-          <div class="card-category">
-            <p><%= @car_selection[:fullsize][@fullsize_index].car.category %></p>
-          </div>
-          <div class = "card-infos">
-            <%= image_tag "carlogos/" + @car_selection[:fullsize][@fullsize_index].company.downcase + ".png", height: 25, width: "auto", class: "company-logo" %>
-          </div>
+      <div class="car-card center-block">
+        <div class = "car-card-title">
+          <span>Intermediate</span>
+          <span class = "car-title-price">
+            <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:intermediate][0].price) %></span>
+          </span>
         </div>
-      <% end %>
+        <div class="card-background intermediate-background">
+        </div>
+        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["intermediate"] ) %>
+      </div>
     </div>
   <% end %>
-  <% # Fin de la 5e card %>
-  <% # Début de la 6e card %>
-  <% if @car_selection[:premium][@premium_index] %>
+
+  <% if @car_selection[:fullsize] != [] %>
     <div class="col-xs-12 col-sm-6">
-      <%= link_to trip_path(@trip, @options.merge({:car_rental_id =>@car_selection[:premium][@premium_index]})), method: :put, class: 'tabLink result-card' do %>
-        <div class="card <%= "selected" if params[:premium_index_index] %>">
-          <% if !@car_selection[:premium][@premium_index].car.image_url.nil? %>
-            <%= image_tag @car_selection[:premium][@premium_index].car.image_url, height: 130, width: "auto", class: "card-image" %>
-          <% end %>
-          <div class="card-name"> <%= @car_selection[:premium][@premium_index].car.name %><span class="light-data"> or similar </span>
-          </div>
-          <div class = "card-price">
-            <p> <%= money_without_cents_and_with_symbol(@car_selection[:premium][@premium_index].price) %></p>
-          </div>
-          <%= link_to selection_path(@selection, @options.merge(:premium_index => @photo_params[:next_premium])), remote: true, class: "more-photos" do %>
-            <%= image_tag "arrow_right.png", class: "clickable-arrow" %>
-          <% end %>
-          <%= link_to selection_path(@selection, @options.merge(:premium_index => @photo_params[:previous_premium])), remote: true, class: "previous-photos" do %>
-            <%= image_tag "arrow_left.png", class: "clickable-arrow" %>
-          <% end %>
-          <div class="card-category">
-            <p><%= @car_selection[:premium][@premium_index].car.category %></p>
-          </div>
-          <div class = "card-infos">
-            <%= image_tag "carlogos/" + @car_selection[:premium][@premium_index].company.downcase + ".png", height: 25, width: "auto", class: "company-logo" %>
-          </div>
+      <div class="car-card center-block">
+        <div class = "car-card-title">
+          <span>Fullsize</span>
+          <span class = "car-title-price">
+            <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:fullsize][0].price) %></span>
+          </span>
         </div>
-      <% end %>
+        <div class="card-background fullsize-background">
+        </div>
+        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["fullsize"] ) %>
+      </div>
     </div>
   <% end %>
-  <% # Fin de la 6e card %>
+
+  <% if @car_selection[:premium] != [] %>
+    <div class="col-xs-12 col-sm-6">
+      <div class="car-card center-block">
+        <div class = "car-card-title">
+          <span>Premium</span>
+          <span class = "car-title-price">
+            <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:premium][0].price) %></span>
+          </span>
+        </div>
+        <div class="card-background premium-background">
+        </div>
+        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["premium"] ) %>
+      </div>
+    </div>
+  <% end %>
 </div>
-<% # Fin de la row de cards%>
 
+<% content_for(:after_js) do %>
 
+  <script>
+    $(document).ready(function() {
+      $('.popover-link').popover({ html : true});
+      $('.popover-link').mouseenter(function(){
+        var _this = this;
+        $(this).popover('show');
+        $('.car-result-card').mouseenter('click', function(e) {
+          e.preventDefault();
+          $('.cardContainer.selected').removeClass('selected');
+          $(this).children('.cardContainer').addClass('selected');
+        });
+        $(".popover").on("mouseleave", function () {
+          $(_this).popover('hide');
+      });
+      });
+      $('.popover-link').mouseleave(function(){
+        var _this = this;
+        setTimeout(function () {
+          if (!$(".popover:hover").length) {
+              $(_this).popover("hide");
+          }
+        }, 300);
+      });
+    });
+
+  </script>
+<% end  %>
 
 

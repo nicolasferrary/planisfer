@@ -1,124 +1,197 @@
 
-<div class="flight-ticket-title text-center">
-  <div class="banner-content">
-    <%= link_to root_path do %>
-    <%= image_tag "logo.png", class:"logo-1"%>
-    <% end %>
-  </div>
-  <h1 class="">Your research for <%= @region.name%> </h1>
-</div>
-
-<div>
-  <%= link_to "javascript:showhide('filters')", class: "box-select-all-flights" do%>
-    <div class="text-center" id="all-filters">
-      <p class="<%= 'hidden' if @status == 'block' %>" id="see-filters"><strong>Edit search</strong> <%= image_tag "arrow.png", class: "floating arrow-img-filter" %></p>
-      <p class="<%= 'hidden' if @status == 'none' %>" id="hide-filters"><strong>Hide filters</strong><%= image_tag "arrow_up.png", class: "floating arrow-img-filter" %></p>
+<div class="page-banner text-center">
+  <div class="page-banner-title">
+      <div class = "col-md-12 title-col">
+        <span> <%= link_to root_path do %>
+          <%= image_tag "blue_logo_no_word.png", class: "logo"%>
+        <% end %> </span>
+        <span class ="brand-name">Planisfer</span>
+        <span class = "banner2-title">Welcome to <%= @region.name %>!</span> <span class = "banner2-title">Let's first book your flights</span>
+      </div>
     </div>
-  <% end  %>
+  <span class = "booking-status">
+    <%= render 'shared/booking_status', :status => 2 %>
+  </span>
 </div>
 
-<!-- ouverture filters -->
-<div class= "page-result <%= 'not-displayed' if @status == 'none' %>" id="filters">
-  <%=form_tag search_path(@search), method: :get, remote: true, id: "searchForm" do %>
-  <!-- ouverture row -->
+<div class="container-fluid page-result">
+  <!-- part with tab and the result -->
+  <div class="col-xs-12 col-md-6">
+    <!-- part with tab showing best results by airports -->
+    <div class="displayTrips">
+      <div class = "row">
+        <div id="TitleShow">
+          <h3>CHEAPEST DIRECT FLIGHTS </h3>
+          <p> From <strong><%= @starts_on.strftime("%B %e") %></strong> - To <strong><%= @returns_on.strftime("%B %e") %></strong></p>
+          <span id="price-for"> Price for <%= @passengers_title %></span>
+        </div>
+      </div>
 
-
-    <div class = "container-fluid">
+      <!-- Price lists and map-->
+      <div id="page-result-container">
+        <%= render "results" %>
+      </div>
 
       <div class = "row">
 
-        <div class = 'col-md-6'>
-
-          <div class = "row">
-            <div class="filter-slider">
-
-              <div class = 'col-md-6'>
-                <div class = "filer-slider-item">
-    <!-- A priori la div ci dessous n'est pas utile -->
-                  <div class = "filter-box">
-
-                    <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region.name %> </strong></h5>
-                    <div class="filters">
-                      <ul class="text-center">
-                        <li>
-                          <h3><i class="fa fa-plane"></i> Take-off time</h3>
-                        </li>
-                        <li>
-                          <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider submit-on-change",
-                          data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class = 'col-md-6'>
-                <div class="filter-slider-item">
-                  <div class = "filter-box">
-                    <h5 class = "text-center" > From <strong> <%= @region.name %> </strong> to <strong> <%= @city_real_name %></strong></h5>
-                    <div class="filters">
-                      <ul class="text-center">
-                        <li>
-                          <h3><i class="fa fa-plane"></i> Take-off time</h3>
-                        </li>
-
-                        <li>
-                          <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider submit-on-change",
-                          data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
+        <div id = "all-flights">
+          <%= link_to "javascript:showhide('filters')" do%>
+            <p class="<%= 'hidden' if @status == 'block' %>" id="see-filters"><strong>Change search criteria</strong></p>
+            <p class="<%= 'hidden' if @status == 'none' %>" id="hide-filters"><strong>Hide filters</strong></p>
+          <% end  %>
         </div>
 
-
-        <div class = 'col-md-6 left-border'>
-          <div class="filter-buttons">
-
-            <div class = "row">
-              <h5 class = "text-center" > Possible arrival and return <strong>cities </strong></h5>
-            </div>
-
-            <div class = "row">
-              <% @region_airports.each do |airport| %>
-                <div class = "col-md-3 content-center">
-                  <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city="<%= airport%>"><%= airport%></div>
-                </div>
-              <% end %>
-
-            </div>
-
-          </div>
-
+        <div id="more-flights">
+          <span id="see-more-flights"><strong>See more flights</strong></span>
+          <span class="hidden" id="hide-more-flights"><strong>See less flights</strong></span>
         </div>
 
       </div>
 
-      <div class="row">
-        <div class ="text-center filter-apply">
-          <%= hidden_field_tag 'selected-cities', params['selected-cities'], class: "submit-on-change" %>
-          <%# submit_tag "Apply filters", class: "btn-brand" %>
+
+      <div class = "row">
+                <!-- ouverture filters -->
+        <div class= "<%= 'not-displayed' if @status == 'none' %>" id="filters">
+          <%=form_tag search_path(@search), method: :get, remote: true, id: "searchForm" do %>
+          <!-- ouverture row -->
+
+
+            <div class = "container-fluid">
+
+              <div class = "row">
+
+                <div class = 'row'>
+
+                  <div class = "row">
+                    <div class="filter-slider">
+
+                      <div class = 'col-md-6'>
+                        <div class = "filer-slider-item">
+            <!-- A priori la div ci dessous n'est pas utile -->
+                          <div class = "filter-box">
+
+                            <h5 class = "text-center" > From <strong> <%= @city_real_name%> </strong> to <strong> <%= @region.name %> </strong></h5>
+                            <div class="filters">
+                              <ul class="text-center">
+                                <li>
+                                  <h3><i class="fa fa-plane"></i> Take-off time</h3>
+                                </li>
+                                <li>
+                                  <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider submit-on-change",
+                                  data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class = 'col-md-6'>
+                        <div class="filter-slider-item">
+                          <div class = "filter-box">
+                            <h5 class = "text-center" > From <strong> <%= @region.name %> </strong> to <strong> <%= @city_real_name %></strong></h5>
+                            <div class="filters">
+                              <ul class="text-center">
+                                <li>
+                                  <h3><i class="fa fa-plane"></i> Take-off time</h3>
+                                </li>
+
+                                <li>
+                                  <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider submit-on-change",
+                                  data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <div class = 'row'>
+                  <div class="filter-buttons">
+
+                    <div class = "row">
+                      <h5 class = "airport-filter" > Possible arrival and return <strong>cities </strong></h5>
+                    </div>
+
+                    <div class = "row">
+                      <% @region_airports.each do |airport| %>
+                        <div class = "col-md-3 content-center">
+                          <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city="<%= airport%>"><%= airport%></div>
+                        </div>
+                      <% end %>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class ="text-center filter-apply">
+                  <%= hidden_field_tag 'selected-cities', params['selected-cities'], class: "submit-on-change" %>
+                  <%# submit_tag "Apply filters", class: "btn-brand" %>
+                </div>
+              </div>
+
+            </div>
+
+          <% end %>
         </div>
       </div>
 
+    </div> <!-- fin du displaytrips -->
+
+
+    <div class = "row">
+
+      <div id="poi-title">
+        <h3>PLANISFER TRAVELERS' FAVOURITES IN <%= @region.name.upcase%> </h3>
+      </div>
+
+      <div class="col-md-12">
+        <div class="trending text-center" id="trendy-destination">
+          <div class="blocks">
+            <% @region.pois.each do |poi| %>
+              <span class="block xsm destination" data-toggle="modal" data-target="#modal_1">
+                <%= image_tag "#{@region.name.downcase}/#{poi.downcase}.jpg", class:"dest-image"%>
+                <span class="box poi-card" data-poi = "<%= Poi.find_by_name(poi.strip).id %>"  data-region = "<%= @region.id %>">
+                  <span class="text in-box">
+                    <span class="primarytext"> <%= poi %></span>
+                  </span>
+                </span>
+              </span>
+            <% end %>
+          </div> <!-- fin du blocks -->
+        </div> <!-- fin du trending -->
+      </div> <!-- fin du 2e col-xs-12 principal -->
     </div>
 
-  <% end %>
+  </div>
+
+  <div class="col-xs-12 col-md-6">
+    <div class = "legends">
+      <img><%= image_tag "dot_marker.png", class: "legend_highlight"%> Planisfer travelers' favourite destinations </img>
+      <img><%= image_tag "airport-colour-code-1.svg", class: "legend_airport" %> Airports </img>
+    </div>
+    <div class="airport-map">
+      <div id="map", style="width: 100%; height: 600px;"></div>
+    </div>
+  </div>
+
 </div>
 
+<%= render 'car_wait_modal', {modal_name: "car_wait_modal", trip: @trip} %>
 
-  <!-- Price lists and map-->
-  <div id="page-result-container">
-    <%= render "results" %>
-  </div>
+
 
 
 <% content_for(:after_js) do %>
@@ -137,11 +210,13 @@
       })
 
       var handler = Gmaps.build('Google');
+
       handler.buildMap({
         provider: {
           scrollwheel: false,
           styles: [
-            {"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},
+            {"featureType":"administrative","elementType":"labels.text","stylers":[{"color":"#444444"}, {"visibility":"off"}]},
+            // {"featureType":"administrative.province","elementType":"labels.text","stylers":[{"color":"#444444"}, {"visibility":"on"}]},
             {"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},
             {"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},
             {"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},
@@ -153,20 +228,12 @@
         },
         internal: { id: 'map' }}, function() {
           markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
-          // for (var i = 0; i < markers.length; i++) {
-          //   marker = markers[i];
-          //   marker.getServiceObject().addListener('mouseover', function() {
-          //     marker.infowindow.render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => this});
-          //   });
-          // }
           handler.bounds.extendWith(markers);
-          // handler.getMap().setZoom(7);
           handler.fitMapToBounds();
-          // Set zoom when loading the page when there is one marker
-          // The closer to 15, the higher in the sky
-          // handler.getMap().setZoom(7);
 
-        });
+      });
+
+
 
       $('.result-card').mouseenter('click', function(e) {
         e.preventDefault();
@@ -185,42 +252,12 @@
               markers[i].setMap(null);
               handler.removeMarkers(markers);
             }
-            // markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
-            // handler.addMarker(result);
             markers = handler.addMarkers(result);
-            // for(var i = 0; i < markers.length; i++){
-            //   m = Gmaps.map.markers[i];
-            //   function(m){
-            //     if (m.serviceObject.id == 1) {
-            //       m.panTo();
-            //       m.serviceObject.setZIndex(99);
-            //     else m.serviceObject.setZIndex(1);
-            //     }
-            //   }
-            // }
-
-            // Gmaps.mapMarker = function() {
-            //   $.each(Gmaps.store.markers, function() {
-            //     if (this.serviceObject.id == 1) {
-            //       this.panTo();
-            //       this.serviceObject.setZIndex(99);
-            //     else this.serviceObject.setZIndex();
-            //     }
-            //   });
-            // }
-          // Trying to change zindex of airports
-          // var zInd = markers.length;
-          // markers[zInd] = handler.addMarker(result);
-          // lastmarker.setZIndex(zIndex:MAX_ZINDEX);
           }
         })
 
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
-
-        // The closer to 0, the higher in the sky
-        // handler.getMap().setZoom(7);
-
       })
 
       $('.result-card').mouseleave('click', function(e) {
@@ -231,6 +268,15 @@
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
       })
+
+      $('#car_wait_modal').on('show.bs.modal', function(e) {
+        //get data-id attribute of the clicked element
+        var tripId = $(e.relatedTarget).data('trip-id');
+        $('.no-car-link').on('click', function(event){
+          $(this).attr('href', '/orders/?trip_id=' + tripId);
+        });
+      });
+
 
       $('.poi-card').mouseenter('click', function(e) {
         e.preventDefault();
@@ -253,10 +299,6 @@
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
       })
-
-
-
-
       $("#more-flights").click(function() {
         $("#see-more-flights").toggleClass("hidden");
         $("#hide-more-flights").toggleClass("hidden");
@@ -290,6 +332,7 @@
     function showhide(id) {
       var e = document.getElementById(id);
       if ($('#' + e.id).hasClass('not-displayed')) {
+        $("#more-flights").addClass("hidden");
         $('#' + e.id).slideDown('slow');
         $('#' + e.id).removeClass('not-displayed')
         $("#see-filters").addClass("hidden");
@@ -299,25 +342,76 @@
         $('#' + e.id).addClass('not-displayed')
         $("#see-filters").removeClass("hidden");
         $("#hide-filters").addClass("hidden");
+        $("#more-flights").removeClass("hidden");
       };
     };
 
     $('#flight1_range, #flight2_range').slider({
-  formatter: function(value) {
-    if (value < 12){
-      return value + 'am';
-    }
-    else if (value == 12){
-      return "noon";
-    }
-    else {
-      return value - 12 +'pm';
-    }
-  }
-});
+      formatter: function(value) {
+        if (value < 12){
+          return value + 'am';
+        }
+        else if (value == 12){
+          return "noon";
+        }
+        else {
+          return value - 12 +'pm';
+        }
+      }
+    });
 
   </script>
 
+  <script>
+    $(document).ready(function() {
+      $('.result-card').on('click', function(event) {
+        setTimeout(function() {
+          $('#car1').removeClass('hidden');
+        }, 500)
+        setTimeout(function() {
+          $('#car2').removeClass('hidden');
+          $('#car5').removeClass('hidden');
+        }, 1000)
+        setTimeout(function() {
+          $('#car7').removeClass('hidden');
+        }, 1300)
+        setTimeout(function() {
+          $('#car12').removeClass('hidden');
+          $('#car10').removeClass('hidden');
+        }, 2100)
+         setTimeout(function() {
+          $('#car6').removeClass('hidden');
+        }, 2400)
+         setTimeout(function() {
+          $('#car11').removeClass('hidden');
+          $('#car3').removeClass('hidden');
+          $('#car8').removeClass('hidden');
+        }, 3000)
+         setTimeout(function() {
+          $('#car4').removeClass('hidden');
+        }, 3300)
+         setTimeout(function() {
+          $('#car9').removeClass('hidden');
+        }, 4000)
+
+
+        setTimeout(function() {
+          $('#wait1').addClass('hidden');
+          $('#text2').removeClass('light');
+          $('#text1').addClass('light');
+          $('#checked1').removeClass('hidden');
+        }, 3000)
+
+        setTimeout(function() {
+          $('#wait2').addClass('hidden');
+          $('#text2').addClass('light');
+          $('#text3').removeClass('light');
+          $('#checked2').removeClass('hidden');
+        }, 7000)
+
+      })
+    })
+  </script>
 
 <% end %>
 
