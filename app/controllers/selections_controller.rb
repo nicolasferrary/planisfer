@@ -70,7 +70,8 @@ class SelectionsController < ApplicationController
     @selection = Selection.find(params[:id])
     @car_rentals = CarRental.where(selection_id: @selection.id)
     @region = @trip.round_trip_flight.region
-    @region_airports = @region.airports.map { |airport| define_airport_title(airport)}
+    @region_airports = @region.airports.map { |iata| Airport.find_by_iata(iata)}
+    @region_airports = @region_airports.map { |airport| define_airport_title(airport)}
 
     @car_selection = get_best_cars_per_category(@car_rentals)
     @recommended_car = get_recommended_car(@car_selection)

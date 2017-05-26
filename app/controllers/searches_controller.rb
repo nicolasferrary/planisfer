@@ -27,7 +27,7 @@ class SearchesController < ApplicationController
     @nb_adults = @search.nb_adults
     @nb_children = @search.nb_children
     @nb_infants = @search.nb_infants
-    @all_region_airports = @region.airports
+    @all_region_airports = define_all_airports(@region)
 
     @trips = get_trips_for(@starts_on, @returns_on, @nb_adults, @nb_children, @nb_infants, @city, @search, @all_region_airports)
     @flight_margin = 1.05
@@ -470,7 +470,14 @@ class SearchesController < ApplicationController
   #   end
   # end
 
-
+  def define_all_airports(region)
+    all_region_airports =[]
+    region.airports.each do |airport_iata|
+      airport = Airport.find_by_iata(airport_iata)
+      all_region_airports << airport
+    end
+    all_region_airports
+  end
 
   def define_airports(trips)
     #Sets are a bit like array except they remove duplicates

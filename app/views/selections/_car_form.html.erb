@@ -32,7 +32,7 @@
               <%= image_tag "flipped-car.png", width: "30px", height: "auto", class: "car" %>
             </div>
             <div class = "col-md-6">
-              <%= select_tag :drop_off_location, options_for_select(@region_airports, @main_car_airports_titles[1], class: "form-control car-form-item", prompt: "Airports where you can drop-off a car" %>
+              <%= select_tag :drop_off_location, options_for_select(@region_airports, @main_car_airports_titles[1]), class: "form-control car-form-item", prompt: "Airports where you can drop-off a car" %>
             </div>
             <div class = "col-md-5">
               <%= text_field_tag :drop_off_date_time, Time.zone.parse(@drop_off_date_time).strftime("%Y %b %e - %I %P"), "class" => 'form-control car-datepicker car-form-item', "id" => 'datetimepicker2'%>
