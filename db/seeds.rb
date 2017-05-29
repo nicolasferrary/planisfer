@@ -13,7 +13,7 @@ RoundTripFlight.destroy_all
 # Selection.destroy_all
 
 
-# Airport.destroy_all
+Airport.destroy_all
 Poi.destroy_all
 Search.destroy_all
 Region.destroy_all
