@@ -2,7 +2,6 @@ class CarRental < ApplicationRecord
 
   monetize :price_cents
 
-  belongs_to :car
   has_many :trips
   belongs_to :selection
 
@@ -18,11 +17,12 @@ class CarRental < ApplicationRecord
       car_rental.pick_up_date_time = pick_up_date_time
       car_rental.drop_off_date_time = drop_off_date_time
       car_rental.company = extract_company_from_sabre(data_rental)
-      car_rental.car = extract_car_from_sabre(data_rental)
+      sipp = data_rental["VehAvailCore"]["RentalRate"]["Vehicle"]["VehType"][0]
+      car_rental.category = extract_category_from_sabre(data_rental, sipp)
+      car_rental.car_name = extract_car_name_from_sipp(sipp)
       car_rental.save
       car_rental
     end
-
 
     def extract_price_from_sabre(data_rental)
       data_rental["VehAvailCore"]["VehicleCharges"]["VehicleCharge"]["TotalCharge"]["Amount"].to_f
@@ -44,11 +44,10 @@ class CarRental < ApplicationRecord
       data_rental["Vendor"]["CompanyShortName"]
     end
 
-    def extract_car_from_sabre(data_rental)
-      sipp = data_rental["VehAvailCore"]["RentalRate"]["Vehicle"]["VehType"]
-      cars = Car.where(sipp: sipp)
-      car = cars.sample
+    def extract_category_from_sabre(data_rental, sipp)
+      category = extract_category(sipp)
     end
+
 
     def extract_company_from_sabre(data_rental)
       data_rental["Vendor"]["CompanyShortName"]
@@ -65,7 +64,9 @@ class CarRental < ApplicationRecord
       car_rental.pick_up_date_time = pick_up_date_time
       car_rental.drop_off_date_time = drop_off_date_time
       car_rental.company = extract_company_from_amadeus(result)
-      car_rental.car = extract_car_from_amadeus(result_car)
+      sipp = result_car["vehicle_info"]["acriss_code"]
+      car_rental.category = extract_category_from_amadeus(result_car, sipp)
+      car_rental.car_name = extract_car_name_from_sipp(sipp)
       car_rental.save
       car_rental
     end
@@ -86,25 +87,40 @@ class CarRental < ApplicationRecord
       result["provider"]["company_name"]
     end
 
-    def extract_car_from_amadeus(result_car)
-      sipp = result_car["vehicle_info"]["acriss_code"]
-      cars = Car.where(sipp: sipp)
-      if cars != []
-        car = cars.sample
-        if car.image_url.nil?
-          car.image_url = extract_image_from_amadeus(result_car)
-          car.save
-        end
+    def extract_category_from_amadeus(result_car, sipp)
+      category = extract_category(sipp)
+    end
+
+    def extract_car_name_from_sipp(sipp)
+      if !Constants::CAR_NAME[sipp.first(2)].nil?
+        Constants::CAR_NAME[sipp.first(2)][0]
+      else
+      return "unknown car"
       end
-      car
     end
 
-    def extract_image_from_amadeus(result_car)
-      result_car["images"][0]["url"] unless result_car["images"].nil?
-    end
 
-    def extract_company_from_amadeus(result)
-      result["provider"]["company_name"]
+    def extract_category(sipp)
+      sipp_to_category = {
+        "M" => "Mini",
+        "N" => "Mini",
+        "E" => "Economy",
+        "H" => "Economy",
+        "C" => "Compact",
+        "D" => "Compact",
+        "I" => "Intermediate",
+        "J" => "Intermediate",
+        "S" => "Intermediate",
+        "R" => "Intermediate",
+        "F" => "Fullsize",
+        "G" => "Fullsize",
+        "P" => "Premium",
+        "L" => "Premium",
+        "W" => "Premium",
+        "O" => "Fullsize",
+        "X" => "Special",
+      }
+      category = sipp_to_category[sipp[0]]
     end
 
   end
