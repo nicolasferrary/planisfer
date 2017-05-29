@@ -232,11 +232,10 @@
           handler.fitMapToBounds();
 
           for (var i = 0; i < markers.length; i++) {
-            var testmarker = markers[i];
-            console.log(testmarker.serviceObject.title);
+            var selectedMarker = markers[i];
             //create an options object
-            var testTooltipHtml = testmarker.serviceObject.title ;
-            var tooltipOptions={ marker:testmarker, content:testTooltipHtml};
+            var testTooltipHtml = selectedMarker.serviceObject.title ;
+            var tooltipOptions={ marker:selectedMarker, content:testTooltipHtml};
             // create the tooltip
             var tooltip = new Tooltip(tooltipOptions);
           }
@@ -423,10 +422,8 @@
   </script>
 
   <script>
-
   // create a constructor
     function Tooltip(options) {
-
       // Now initialize all properties.
       this.marker_ = options.marker;
       this.content_ = options.content;
@@ -477,6 +474,7 @@
     // Retrieve the coordinates of the marker
     // in latlngs and convert them to pixels coordinates.
     // We'll use these coordinates to place the DIV.
+    console.log(this.marker_.serviceObject.position)
     var ne = overlayProjection.fromLatLngToDivPixel(this.marker_.serviceObject.position);
     // Position the DIV.
     var div = this.div_;
