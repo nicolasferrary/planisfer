@@ -1,29 +1,26 @@
 .modal-body {
   padding-left: 55px;
   padding-right: 55px;
+  p{
+    margin-top: 25px;
+  }
 }
 
-.modal-content-destination {
-  width: 750px;
+.home-modal{
+  width: 80%;
 }
+
 
 .img-slider {
+  height: 250px;
+  width: 100%;
+  background-size: cover !important;
   padding-bottom: 15px;
 }
 
-.modal-lg {
-    margin-right: 315px;
+.slider-img-container{
+  margin-bottom: 25px;
 }
-
-.img-slider {
-  width: 500px;
-  height: 350px;
-}
-
-.slider-images {
-  padding-left: 47px;
-}
-
 
 .modal-row{
   margin-top: 50px;

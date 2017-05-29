@@ -2,7 +2,7 @@ module Constants
 
   DESTINATIONS = {
     "Croatia" => {
-        "title" => "Discover Croatia",
+        "title" => "Croatia",
         "text" => "If your Mediterranean fantasies feature balmy days by sapphire waters in the shade of ancient walled towns, Croatia is the place to turn them into reality.",
         "image_1" => "croatia/krka.jpg",
         "image_2" => "croatia/plitvice.jpg",
@@ -19,7 +19,7 @@ module Constants
                   },
 
     "Greece" => {
-        "title" => "Discover Greece",
+        "title" => "Greece",
         "text" => "In Mainland Greece, you’ll find unspoilt fishing villages full of tranquil charm or fulfilling city break. Enjoy a wealth of archaeological sites, fascinating culture, spectacular coastline and picture-perfect scenery!",
         "image_1" => "greece/athenes.jpg",
         "image_2" => "greece/corfu.jpg",
@@ -42,7 +42,7 @@ module Constants
                   },
 
     "Romania" => {
-        "title" => "Discover Romania",
+        "title" => "Romania",
         "text" => "This country will fascinate you with its humble beauty, its gorgeous Carpathian mountains, and wonderful frescoes of ancient Orthodox monasteries. The best thing about it might be its magnificent medieval castles; according to legend, Count Dracula lived in one of them.",
         "image_1" => "romania/bucegi.jpg",
         "image_2" => "romania/carpates.jpg",
@@ -58,15 +58,15 @@ module Constants
         "title_image_6" => "Sinaia",
                   },
 
-    "South-of-france" => {
-        "title" => "Discover South of France",
+    "South of France" => {
+        "title" => "South of France",
         "text" => "The South of France is a heady mix of Roman remains and Modernist masterpieces, busy beaches and unspoilt coves, exquisite restaurants and tourist traps. ",
-        "image_1" => "south-of-france/aix.jpg",
-        "image_2" => "south-of-france/antibes.jpg",
-        "image_3" => "south-of-france/calanques.jpg",
-        "image_4" => "south-of-france/cannes.jpg",
-        "image_5" => "south-of-france/aix2.jpg",
-        "image_6" => "south-of-france/saint-tropez.jpg",
+        "image_1" => "South of France/aix.jpg",
+        "image_2" => "South of France/antibes.jpg",
+        "image_3" => "South of France/calanques.jpg",
+        "image_4" => "South of France/cannes.jpg",
+        "image_5" => "South of France/aix2.jpg",
+        "image_6" => "South of France/saint-tropez.jpg",
         "title_image_1" => "Mont Sainte Victoire",
         "title_image_2" => "Antibes",
         "title_image_3" => "Les Calanques",
@@ -76,7 +76,7 @@ module Constants
                   },
 
     "Corsica" => {
-        "title" => "Discover Corsica",
+        "title" => "Corsica",
         "text" => "A veritable miniature continent, Corsica offers its visitors 9 touristic regions that are diverse and varied, all in one destination. You are sure to feel like you are a million miles away.",
         "image_1" => "corsica/bonifacio.jpg",
         "image_2" => "corsica/calvi.jpg",
@@ -93,7 +93,7 @@ module Constants
                   },
 
     "Portugal" => {
-        "title" => "Discover Portugal",
+        "title" => "Portugal",
         "text" => "Medieval castles, cobblestone villages, captivating cities and golden beaches: the Portugal experience can be many things. History, great food and idyllic scenery are just the beginning…",
         "image_1" => "portugal/algarve.jpg",
         "image_2" => "portugal/belem.jpg",
@@ -116,7 +116,7 @@ module Constants
                   },
 
     "Scotland" => {
-        "title" => "Discover Scotland",
+        "title" => "Scotland",
         "text" => "Despite its small size, Scotland has many treasures crammed into its compact territory – big skies, lonely landscapes, spectacular wildlife, superb seafood and hospitable, down-to-earth people.",
         "image_1" => "scotland/beef.jpg",
         "image_2" => "scotland/bridge.jpg",
@@ -133,7 +133,7 @@ module Constants
                   },
 
     "Ireland" => {
-        "title" => "Discover Ireland",
+        "title" => "Ireland",
         "text" => "Ireland’s dramatic land, sky and seascapes will take your breath away : the magical castles, enchanted ruins, ancient archaeology and thousands of miles of windswept coastline, with some of the most beautiful beaches, highest sea cliffs and biggest waves in Europe.",
         "image_1" => "ireland/dublin.jpg",
         "image_2" => "ireland/connemara.jpg",
@@ -268,7 +268,7 @@ module Constants
    "Greece" => "Greece",
    "Portugal" => "Portugal",
    "Croatia" => "Croatia",
-   "South-of-France" => "South-of-France",
+   "South of France" => "South of France",
    "Central-EU" => "Central-EU",
    "Baltic States" => "Baltic States",
    "Scandinavia" => "Scandinavia",
@@ -286,7 +286,7 @@ module Constants
     "Greece" => ["ATH", "HER", "JTR", "JMK"],
     "Portugal" => ["LIS", "FAO", "OPO", "BJZ"],
     "Croatia" => ["SPU", "DBV", "ZAG", "ZAD"] ,
-    "South-of-France" => ["NCE", "MRS", "TLS", "BIQ"],
+    "South of France" => ["NCE", "MRS", "TLS", "BIQ"],
     "Central-EU" => ["VIE", "BUD", "WAW", "PRG"],
     "Baltic States" => ["TLL", "RIX", "VNO", "KUN"],
     "Scandinavia" => ["CPH", "OSL", "ARN", "HEL"],
