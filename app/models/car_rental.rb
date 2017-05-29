@@ -64,7 +64,7 @@ class CarRental < ApplicationRecord
       car_rental.pick_up_date_time = pick_up_date_time
       car_rental.drop_off_date_time = drop_off_date_time
       car_rental.company = extract_company_from_amadeus(result)
-      sipp = result_car["vehicle_info"]["acriss_code"][0]
+      sipp = result_car["vehicle_info"]["acriss_code"]
       car_rental.category = extract_category_from_amadeus(result_car, sipp)
       car_rental.car_name = extract_car_name_from_sipp(sipp)
       car_rental.save
@@ -92,7 +92,11 @@ class CarRental < ApplicationRecord
     end
 
     def extract_car_name_from_sipp(sipp)
-      Constants::CAR_NAME[sipp.first(2)][0]
+      if !Constants::CAR_NAME[sipp.first(2)].nil?
+        Constants::CAR_NAME[sipp.first(2)][0]
+      else
+      return "unknown car"
+      end
     end
 
 
