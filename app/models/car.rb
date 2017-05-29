@@ -1,5 +1,4 @@
 class Car < ApplicationRecord
-  has_many :car_rentals, dependent: :destroy
 
   class << self
 
@@ -21,7 +20,7 @@ class Car < ApplicationRecord
         car.save
       end
     end
-    
+
     def extract_category(sipp)
       sipp_to_category = {
         "M" => "Mini",

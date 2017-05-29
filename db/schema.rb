@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170529074651) do
+ActiveRecord::Schema.define(version: 20170529085946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,25 +35,14 @@ ActiveRecord::Schema.define(version: 20170529074651) do
     t.datetime "drop_off_date_time"
     t.integer  "driver_age"
     t.string   "company"
-    t.integer  "car_id"
     t.string   "deep_link_url"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.integer  "selection_id"
     t.integer  "price_cents",        default: 0, null: false
-    t.index ["car_id"], name: "index_car_rentals_on_car_id", using: :btree
-    t.index ["selection_id"], name: "index_car_rentals_on_selection_id", using: :btree
-  end
-
-  create_table "cars", force: :cascade do |t|
-    t.string   "name"
     t.string   "category"
-    t.integer  "doors"
-    t.integer  "seats"
-    t.string   "image_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "sipp"
+    t.string   "car_name"
+    t.index ["selection_id"], name: "index_car_rentals_on_selection_id", using: :btree
   end
 
   create_table "orders", force: :cascade do |t|
@@ -179,7 +168,6 @@ ActiveRecord::Schema.define(version: 20170529074651) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "car_rentals", "cars"
   add_foreign_key "car_rentals", "selections"
   add_foreign_key "orders", "users"
   add_foreign_key "round_trip_flights", "regions"

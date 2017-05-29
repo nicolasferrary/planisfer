@@ -6,7 +6,7 @@
       <div class = "card-description popover-card-desc">
         <span class = "popover-car-logo-container"><%= image_tag "carlogos/" + rental.company.downcase + ".png", height: 25, width: "auto", class: "company-logo" %></span>
         <span class = "car-popover-name">
-        <%= rental.car.name %> <span class="light-data"> or similar</span>
+        <%= rental.car_name %> <span class="light-data"> or similar</span>
         </span>
         <span class="card-price">
           <%= money_without_cents_and_with_symbol(rental.price.round) %>

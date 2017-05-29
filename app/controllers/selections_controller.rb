@@ -157,9 +157,8 @@ class SelectionsController < ApplicationController
 
 
   def get_unique_sorted_cars(rentals, category)
-    cars = rentals.select {|rental| rental.car.category == category unless rental.car.nil?}
+    cars = rentals.select {|rental| rental.category == category}
     sorted_cars = cars.sort_by { |rental| rental.price }
-    # unique_sorted_cars = sorted_cars.uniq {|rental| rental.car}
   end
 
   def get_recommended_car(car_selection)

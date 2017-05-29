@@ -32,7 +32,7 @@
           <% if !@trip.car_rental.nil? %>
             <%= link_to trip_path(@trip, @options.merge({:car_rental_id => nil})), method: :put, class: "modify-search-link" do %>
               <div class = "included-checkbox">
-                <span> <%= @trip.car_rental.car.name %> or similar</span>
+                <span> <%= @trip.car_rental.car_name %> or similar</span>
                 <i class="fa fa-check-square-o" aria-hidden="true"></i>
               </div>
             <% end %>
@@ -55,7 +55,7 @@
           </div>
           <% if !@trip.car_rental.nil? %>
             <div class = "included-checkbox">
-              <span> <%= @trip.car_rental.car.name %> or similar</span>
+              <span> <%= @trip.car_rental.car_name %> or similar</span>
               <i class="fa fa-check-square-o" aria-hidden="true"></i>
             </div>
           <% end %>
@@ -169,7 +169,7 @@
         </div>
 
         <div class = "car-details">
-          <span><%= @trip.car_rental.car.name %> <span style= "font-size: 10px"> or similar</span></span> <span> <%= image_tag "carlogos/" + @trip.car_rental.company.downcase + ".png", height: 15, width: "auto"%> </span>
+          <span><%= @trip.car_rental.car_name %> <span style= "font-size: 10px"> or similar</span></span> <span> <%= image_tag "carlogos/" + @trip.car_rental.company.downcase + ".png", height: 15, width: "auto"%> </span>
         </div>
         <div class= "car-times"></div>
       <% end %>
