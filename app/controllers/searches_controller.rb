@@ -423,6 +423,7 @@ class SearchesController < ApplicationController
       @poi = poi
       marker.lat poi.latitude
       marker.lng poi.longitude
+      marker.title poi.name
 
       marker.infowindow render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => poi})
       # marker.json { :id => poi.id }
