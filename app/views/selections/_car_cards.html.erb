@@ -10,7 +10,7 @@
             <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:mini][0].price) %></span>
           </span>
         </div>
-        <div class="card-background mini-background">
+        <div style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("mini.jpg") %>)'; class = "card-background">
         </div>
         <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["mini"] ) %>
       </div>
@@ -26,7 +26,7 @@
             <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:economy][0].price) %></span>
           </span>
         </div>
-        <div class="card-background economy-background">
+        <div style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("economy.jpg") %>)'; class = "card-background">
         </div>
         <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["economy"] ) %>
       </div>
@@ -42,7 +42,7 @@
             <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:compact][0].price) %></span>
           </span>
         </div>
-        <div class="card-background compact-background">
+        <div style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("compact.jpg") %>)'; class = "card-background">
         </div>
         <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["compact"] ) %>
       </div>
@@ -58,7 +58,7 @@
             <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:intermediate][0].price) %></span>
           </span>
         </div>
-        <div class="card-background intermediate-background">
+        <div style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("intermediate.jpg") %>)'; class = "card-background">
         </div>
         <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["intermediate"] ) %>
       </div>
@@ -74,7 +74,7 @@
             <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:fullsize][0].price) %></span>
           </span>
         </div>
-        <div class="card-background fullsize-background">
+        <div style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("fullsize.jpg") %>)'; class = "card-background">
         </div>
         <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["fullsize"] ) %>
       </div>
@@ -90,7 +90,7 @@
             <span style= "font-size: 10px"> From </span> <span><%= money_without_cents_and_with_symbol(@car_selection[:premium][0].price) %></span>
           </span>
         </div>
-        <div class="card-background premium-background">
+        <div style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("premium.jpg") %>)'; class = "card-background">
         </div>
         <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["premium"] ) %>
       </div>
