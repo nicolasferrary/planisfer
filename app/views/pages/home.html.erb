@@ -57,7 +57,7 @@
         <div class="col-md-12">
           <div class="trending text-center" id="trendy-destination">
             <div class="blocks">
-              <a class="block sm destination" data-toggle="modal" data-target="#modal_1">
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_2">
                 <%= image_tag "croatie.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">
@@ -66,7 +66,7 @@
                 </span>
               </a>
 
-              <a class="block lg destination" data-toggle="modal" data-target="#modal_2">
+              <a class="block lg destination" data-toggle="modal" data-target="#modal_1">
                 <%= image_tag "greece.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">
@@ -74,8 +74,8 @@
                   </span>
                 </span>
               </a>
-              <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
-                <%= image_tag "ireland/ring of kerry.jpg", class:"dest-image"%>
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_7">
+                <%= image_tag "ireland/ring-of-kerry.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">
                     <span class="primarytext">Ireland</span>
@@ -87,13 +87,13 @@
                 <%= image_tag "france.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">
-                    <span class="primarytext">South-of-France</span>
+                    <span class="primarytext">South of France</span>
                   </span>
                 </span>
               </a>
 
               <a class="block sm destination" data-toggle="modal" data-target="#modal_5">
-                <%= image_tag "corsica/cap corse.jpg", class:"dest-image"%>
+                <%= image_tag "corsica/cap-corse.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">
                     <span class="primarytext">Corsica</span>
@@ -108,7 +108,7 @@
                   </span>
                 </span>
               </a>
-              <a class="block sm destination" data-toggle="modal" data-target="#modal_7">
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
                 <%= image_tag "scotland.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">
@@ -126,7 +126,7 @@
                 </span>
               </a>
 
-              <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_10">
                 <%= image_tag "andalucia/granada.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">
@@ -134,31 +134,31 @@
                   </span>
                 </span>
               </a>
-              <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
-                <%= image_tag "north of italy/tuscany.jpg", class:"dest-image"%>
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_12">
+                <%= image_tag "north-of-italy/tuscany.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">
-                    <span class="primarytext">Northern Italy</span>
+                    <span class="primarytext">North of Italy</span>
                   </span>
                 </span>
               </a>
-              <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
-                <%= image_tag "northern spain/costa brava.jpg", class:"dest-image"%>
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_9">
+                <%= image_tag "northern-spain/costa-brava.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">
                     <span class="primarytext">Northern Spain</span>
                   </span>
                 </span>
               </a>
-              <a class="block lg destination" data-toggle="modal" data-target="#modal_8">
-                <%= image_tag "sardinia/golfo di orosei.jpg", class:"dest-image"%>
+              <a class="block lg destination" data-toggle="modal" data-target="#modal_14">
+                <%= image_tag "sardinia/golfo-di-orosei.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">
                     <span class="primarytext">Sardinia</span>
                   </span>
                 </span>
               </a>
-              <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_13">
                 <%= image_tag "sicily/ragusa.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">
@@ -166,11 +166,11 @@
                   </span>
                 </span>
               </a>
-              <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
-                <%= image_tag "south of italy/puglie.jpg", class:"dest-image"%>
+              <a class="block sm destination" data-toggle="modal" data-target="#modal_11">
+                <%= image_tag "south-of-italy/puglie.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">
-                    <span class="primarytext">Southern Italy</span>
+                    <span class="primarytext">South of Italy</span>
                   </span>
                 </span>
               </a>
@@ -316,53 +316,9 @@
 
   <!-- CALLS OF MODALS -->
 
-    <%# FIRST PART %>
-    <%= render 'slider',
-    this_region: "Croatia",
-    modal_name: 'modal_1' %>
-    <%# END of FIRST PART %>
-
-    <%# PART 2 %>
-    <%= render 'slider',
-    this_region: "Greece",
-    modal_name: 'modal_2' %>
-    <%# END OF PART 2 %>
-
-    <%# PART 3 %>
-    <%= render 'slider',
-    this_region: "Romania",
-    modal_name: 'modal_3' %>
-    <%# END OF PART 3 %>
-
-    <%# PART 4 %>
-    <%= render 'slider',
-    this_region: "South-of-france",
-    modal_name: 'modal_4' %>
-    <%# END OF PART 4 %>
-
-    <%# PART 5 %>
-    <%= render 'slider',
-    this_region: "Corsica",
-    modal_name: 'modal_5' %>
-    <%# END OF PART 5 %>
-
-    <%# PART 6 %>
-    <%= render 'slider',
-    this_region: "Portugal",
-    modal_name: 'modal_6' %>
-    <%# END OF PART 6 %>
-
-    <%# PART 7 %>
-    <%= render 'slider',
-    this_region: "Scotland",
-    modal_name: 'modal_7' %>
-    <%# END OF PART 7 %>
-
-    <%# PART 8 %>
-    <%= render 'slider',
-    this_region: "Ireland",
-    modal_name: 'modal_8' %>
-    <%# END OF PART 8 %>
+  <% for num in (0..Region.count - 1) %>
+    <%= render 'slider', this_region: Region.all[num], modal_name: "modal_#{num +1}" %>
+  <% end %>
 
 
   <!-- END OF MODALS  -->

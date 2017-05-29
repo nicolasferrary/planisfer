@@ -1,20 +1,20 @@
 <!-- Open the modal -->
 
 <div class="modal fade bs-example-modal-lg" id="<%= modal_name %>" tabindex="-1" role="dialog" aria-labelledby="<%= modal_name %>">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog home-modal" role="document">
     <div class="modal-content">
       <div class="modal-content-destination">
-        <div class="modal-header">
 
+        <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title text-center" id="myModalLabel">
-            <%= Constants::DESTINATIONS[this_city]["title"] %>
+            <%= this_region.name%>
           </h4>
         </div>
-        <div class="modal-body">
-          <p> <%= Constants::DESTINATIONS[this_city]["text"] %> </p>
 
-          <br>
+        <div class="modal-body text-center">
+          <p><%= this_region.description %></p>
+
 
           <!-- Beginning of the slider -->
 
@@ -35,39 +35,19 @@
               <label for="img06"></label>
               <label for="img07"></label>
               <div class="slider-images">
-                 <figure>
-
-                   <%= image_tag Constants::DESTINATIONS[this_city]["image_1"], :width => 500, :height => 450, :class => "img-slider" %>
-                   <p> <%= Constants::DESTINATIONS[this_city]["title_image_1"] %> </p>
-                 </figure>
-
-                 <figure>
-                   <figcaption></figcaption>
-                   <%= image_tag Constants::DESTINATIONS[this_city]["image_2"],:class => "img-slider" %>
-                   <p> <%= Constants::DESTINATIONS[this_city]["title_image_2"] %> </p>
-                 </figure
-                ><figure>
-                   <figcaption></figcaption>
-                   <%= image_tag Constants::DESTINATIONS[this_city]["image_3"], :class => "img-slider" %>
-                   <p> <%= Constants::DESTINATIONS[this_city]["title_image_3"] %> </p>
-                 </figure
-                 </figure
-                ><figure>
-                    <figcaption></figcaption>
-                    <%= image_tag Constants::DESTINATIONS[this_city]["image_4"], :class => "img-slider" %>
-                    <p> <%= Constants::DESTINATIONS[this_city]["title_image_4"] %> </p>
-                 </figure
-                 </figure>
-                 <figure>
-                    <figcaption></figcaption>
-                    <%= image_tag Constants::DESTINATIONS[this_city]["image_5"], :class => "img-slider" %>
-                    <p> <%= Constants::DESTINATIONS[this_city]["title_image_5"] %> </p>
-                 </figure
-                ><figure>
-                    <figcaption></figcaption>
-                    <%= image_tag Constants::DESTINATIONS[this_city]["image_6"],:class => "img-slider" %>
-                    <p> <%= Constants::DESTINATIONS[this_city]["title_image_6"] %> </p>
-                 </figure>
+                <figure>
+                  <div class = "row">
+                    <% for num in (0..this_region.pois.count - 1) %>
+                      <div class = "col-md-6">
+                        <div class = "center-block slider-img-container">
+                          <h5> <%= this_region.pois[num] %> </h5>
+                          <div style='background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), url(<%= image_path("#{this_region.name.downcase.gsub(/\ /, '-')}/#{this_region.pois[num].downcase.gsub(/\ /, '-')}.jpg") %>)'; class = "img-slider">
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </figure>
               </div>
             </div>
           </form>
