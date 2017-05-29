@@ -44,7 +44,7 @@
                 </div>
                 <div class = "col-md-6 text-center no-padding">
                   <div class = "main-photo-container">
-                    <div class = "card-background main-background <%= @main_car.category.downcase%>-background">
+                    <div style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{ @main_car.category.downcase}.jpg") %>)'; class = "card-background main-background">
                     </div>
                   </div>
                 </div>
