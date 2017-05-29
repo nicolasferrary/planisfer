@@ -9,7 +9,7 @@ require 'csv'
 
 # Trip.destroy_all
 # RoundTripFlight.destroy_all
-# # City.destroy_all
+City.destroy_all
 # CarRental.destroy_all
 # Selection.destroy_all
 

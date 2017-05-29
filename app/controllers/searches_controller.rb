@@ -244,27 +244,6 @@ class SearchesController < ApplicationController
   def get_trips_for(starts_on, returns_on, nb_adults, nb_children, nb_infants, city, search, all_region_airports)
     trips = []
     rtfs = []
-    # create rtf for routes with same landing and departure airports in destination region and add them to rtfs
-      # Launch one request
-      # Stock results in @data
-      # Create rtfs with @data
-      # Put each rtf in rtfs
-    # same for routes with different airports
-      # outbounds =[]
-      #inbounds = []
-      # For each airport, do
-        #launch two requests
-        # Stock results in @data1 and @data2
-        # Mettre chaque flight de @data 1 dans outbounds
-        # Mettre chaque flight de @data2 dans inbounds
-      #end
-      # Pour chaque flight de @data 1, prendre chaque flight de @data 2 et créer un complex round trip flight
-      # Put the rtf in rtfs
-    # Create trips for each rtf
-
-    # create rtf for routes with same landing and departure airports in destination region and add them to rtfs
-
-      # Launch one return request per airport, then create rtfs and stck them in rtfs
     all_region_airports.each do |airport|
       options = {
         origin: city.name,
