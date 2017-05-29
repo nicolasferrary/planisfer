@@ -85,7 +85,7 @@
       </div>
 
       <div class = "origin-and-destination">
-        <span class = "side-item"> <%= Constants::AIRPORTS[@trip.city.name] %> <span class="light-data"> <%= @trip.round_trip_flight.flight1_origin_airport_iata %></span></span> <span class="fa fa-long-arrow-right middle-arrow" aria-hidden="true"></span><span class = "side-item right-item"><%= @trip.arrival_city %> <span class="light-data"><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span></span>
+        <span class = "side-item"> <%= Constants::AIRPORTS[@trip.city] %> <span class="light-data"> <%= @trip.round_trip_flight.flight1_origin_airport_iata %></span></span> <span class="fa fa-long-arrow-right middle-arrow" aria-hidden="true"></span><span class = "side-item right-item"><%= @trip.arrival_city %> <span class="light-data"><%= @trip.round_trip_flight.flight1_destination_airport_iata %></span></span>
       </div>
       <div class = "times">
         <span><%= @trip.round_trip_flight.flight1_take_off_at.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight1_landing_at.strftime("%H:%M") %></span>
@@ -111,7 +111,7 @@
         </span>
       </div>
       <div class = "origin-and-destination">
-        <span class = "side-item"> <%= @trip.return_city %> <span class="light-data"><%= @trip.round_trip_flight.flight2_origin_airport_iata %> </span></span> <span class="fa fa-long-arrow-right middle-arrow" aria-hidden="true"></span><span class = "side-item right-item"> <%= Constants::AIRPORTS[@trip.city.name] %> <span class="light-data"> <%= @trip.round_trip_flight.flight2_destination_airport_iata %></span></span>
+        <span class = "side-item"> <%= @trip.return_city %> <span class="light-data"><%= @trip.round_trip_flight.flight2_origin_airport_iata %> </span></span> <span class="fa fa-long-arrow-right middle-arrow" aria-hidden="true"></span><span class = "side-item right-item"> <%= Constants::AIRPORTS[@trip.city] %> <span class="light-data"> <%= @trip.round_trip_flight.flight2_destination_airport_iata %></span></span>
       </div>
       <div class = "times">
         <span><%= @trip.round_trip_flight.flight2_take_off_at.strftime("%H:%M") %></span><span><%= @trip.round_trip_flight.flight2_landing_at.strftime("%H:%M") %></span>

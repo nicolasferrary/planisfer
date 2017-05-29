@@ -20,7 +20,7 @@ class SearchesController < ApplicationController
     end
 
 
-    @city = City.create(params[:city])
+    @city = params[:city]
     @region_name = @search.region.name
     @starts_on = params[:starts_on]
     @returns_on = params[:returns_on]
@@ -28,7 +28,6 @@ class SearchesController < ApplicationController
     @nb_children = @search.nb_children
     @nb_infants = @search.nb_infants
     @all_region_airports = define_all_airports(@region)
-
     @trips = get_trips_for(@starts_on, @returns_on, @nb_adults, @nb_children, @nb_infants, @city, @search, @all_region_airports)
     @flight_margin = 1.05
     @trips = apply_flight_margin(@trips, @flight_margin)
@@ -246,7 +245,7 @@ class SearchesController < ApplicationController
     rtfs = []
     all_region_airports.each do |airport|
       options = {
-        origin: city.name,
+        origin: city,
         destination: airport.iata,
         departure: starts_on,
         return: returns_on,
@@ -277,7 +276,7 @@ class SearchesController < ApplicationController
     # For each airport launch 2 requests and stock data in outbounds and inbounds arrays
     all_region_airports.each do |airport|
       options1 = {
-        origin: city.name,
+        origin: city,
         destination: airport.iata,
         departure: starts_on,
         nb_adults: nb_adults,
@@ -297,7 +296,7 @@ class SearchesController < ApplicationController
 
       options2 = {
         origin: airport.iata,
-        destination: city.name,
+        destination: city,
         departure: returns_on,
         nb_adults: nb_adults,
         nb_children: nb_children,

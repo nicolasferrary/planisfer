@@ -4,11 +4,9 @@ class Trip < ApplicationRecord
 
   belongs_to :round_trip_flight
   belongs_to :car_rental, optional: true
-  belongs_to :city
   belongs_to :search
   validates :starts_on, presence: true
   validates :returns_on, presence: true
-  validates :city_id, presence: true
   validates :round_trip_flight, presence: true
 
 
@@ -33,7 +31,7 @@ class Trip < ApplicationRecord
     private
 
     def build_sku(trip)
-      "Trip from #{trip.city.name} to #{trip.search.region.name} - #{trip.search.nb_adults} adults, #{trip.search.nb_children} children and #{trip.search.nb_infants} infants"
+      "Trip from #{trip.city} to #{trip.search.region.name} - #{trip.search.nb_adults} adults, #{trip.search.nb_children} children and #{trip.search.nb_infants} infants"
     end
 
   end
