@@ -216,9 +216,6 @@
   h4 {
     color: $orange;
   }
-  span{
-    font-size: 12px;
-  }
   ul {
     padding-left: 20px;
     font-size: 14px;
@@ -348,4 +345,8 @@
 
 .popover{
   max-width: 110%
+}
+
+.similar{
+  font-size: 12px;
 }

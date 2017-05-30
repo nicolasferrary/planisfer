@@ -1,19 +1,47 @@
 <% @car_selection[pop_cat.to_sym].each_with_index do |rental, index| %>
 
-  <%= link_to trip_path(@trip, @options.merge({:car_rental_id => rental.id})), method: :put, class: 'tabLink car-result-card' do %>
-
-    <div class="cardContainer popover-card-container <%= 'selected' if index == 0 %>" >
-      <div class = "card-description popover-card-desc">
-        <span class = "popover-car-logo-container"><%= image_tag "carlogos/" + rental.company.downcase + ".png", height: 25, width: "auto", class: "company-logo" %></span>
-        <span class = "car-popover-name">
-        <%= rental.car_name %> <span class="light-data"> or similar</span>
-        </span>
-        <span class="card-price">
-          <%= money_without_cents_and_with_symbol(rental.price.round) %>
-        </span> <!-- fin card-price -->
-      </div>
-
+  <div class="cardContainer popover-card-container <%= 'selected' if index == 0 %>" >
+    <div class = "card-description popover-card-desc">
+      <span class = "popover-car-logo-container"><%= image_tag "carlogos/" + rental.company.downcase + ".png", height: 25, width: "auto", class: "company-logo" %></span>
+      <span class = "car-popover-name">
+      <%= rental.car_name %> <span class="light-data"> or similar</span>
+      </span>
+      <span class="card-price">
+        <%= money_without_cents_and_with_symbol(rental.price.round) %>
+      </span> <!-- fin card-price -->
     </div>
 
-  <% end %>
+  </div>
+
+  <div class = 'hidden' id = 'index'>
+    <%= link_to trip_path(@trip, @options.merge({:car_rental_id => rental.id})), method: :put, class: 'tabLink car-result-card' do %>
+
+      <div class = "row recommendation-box selected">
+        <div class = "col-md-12 no-relative-position">
+          <h4> <%= rental.car_name %> <span class = "similar">or similar</span></h4>
+          <ul>
+            <li> Rented by <%= rental.company %>, a well established rental company in Europe</li>
+            <li> <%= rental.category %> category</li>
+            <li> € <%= (rental.price.to_f.fdiv(@nb_days)).ceil %> per day </li>
+          </ul>
+          <div class = "text-center price-and-book">
+            <span class = "booking-price"><%= money_without_cents_and_with_symbol(rental.price)%></span>
+            <span class = 'btn-brand select_this_car'>
+              SELECT THIS CAR
+            </span>
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+<% end %>
+
+
+<% content_for(:after_js) do %>
+
+  <script>
+
+  </script>
+
 <% end %>

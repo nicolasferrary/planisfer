@@ -51,6 +51,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position:relative;
+  bottom: -15px;
 }
 
 .times{
@@ -109,7 +111,7 @@ color: $brand-color;
   font-family: Montserrat;
   font-size: 27px;
   font-weight: bolder;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .price-top{
