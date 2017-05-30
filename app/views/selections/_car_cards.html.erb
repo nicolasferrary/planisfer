@@ -111,6 +111,11 @@
           $('.cardContainer.selected').removeClass('selected');
           $(this).children('.cardContainer').addClass('selected');
         });
+        $('.car-result-card').on('click', function(e) {
+          e.preventDefault();
+          $('.popover-card-container').addClass('hidden');
+          $(this).children('.popover-card-link').removeClass('hidden');
+        });
         $(".popover").on("mouseleave", function () {
           $(_this).popover('hide');
       });
@@ -126,6 +131,13 @@
     });
 
   </script>
+
+  <script>
+    $(document).ready(function() {
+
+    });
+  </script>
+
 <% end  %>
 
 
