@@ -2,35 +2,36 @@ $('#page-result-container').html('<%= j render "results" %>')
 
 var handler = Gmaps.build('Google');
 
-handler.buildMap({
-  provider: {
-    scrollwheel: false,
-    styles: [
-      {"featureType":"administrative","elementType":"labels.text","stylers":[{"color":"#444444"}, {"visibility":"off"}]},
-      // {"featureType":"administrative.province","elementType":"labels.text","stylers":[{"color":"#444444"}, {"visibility":"on"}]},
-      {"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},
-      {"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},
-      {"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},
-      {"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},
-      {"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},
-      {"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},
-      {"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
-    ]
-  },
-  internal: { id: 'map' }}, function() {
-    markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
-    // for (var i = 0; i < markers.length; i++) {
-    //   marker = markers[i];
-    //   marker.getServiceObject().addListener('mouseover', function() {
-    //     marker.infowindow.render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => this});
-    //   });
-    handler.bounds.extendWith(markers);
-    // handler.getMap().setZoom(7);
-    handler.fitMapToBounds();
-    // Set zoom when loading the page when there is one marker
-    // The closer to 15, the higher in the sky
-    // handler.getMap().setZoom(7);
-});
+  handler.buildMap({
+    provider: {
+      scrollwheel: false,
+      styles: [
+        {"featureType":"administrative","elementType":"labels.text","stylers":[{"color":"#444444"}, {"visibility":"off"}]},
+        // {"featureType":"administrative.province","elementType":"labels.text","stylers":[{"color":"#444444"}, {"visibility":"on"}]},
+        {"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},
+        {"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},
+        {"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},
+        {"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},
+        {"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},
+        {"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},
+        {"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
+      ]
+    },
+    internal: { id: 'map' }}, function() {
+      markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+
+      for (var i = 0; i < markers.length; i++) {
+        var selectedMarker = markers[i];
+        //create an options object
+        var testTooltipHtml = selectedMarker.serviceObject.title ;
+        var tooltipOptions={ marker:selectedMarker, content:testTooltipHtml};
+        // create the tooltip
+        var tooltip = new Tooltip(tooltipOptions);
+      }
+    },
+  );
 
 
 
@@ -51,42 +52,12 @@ $('.result-card').mouseenter('click', function(e) {
         markers[i].setMap(null);
         handler.removeMarkers(markers);
       }
-      // markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
-      // handler.addMarker(result);
       markers = handler.addMarkers(result);
-      // for(var i = 0; i < markers.length; i++){
-      //   m = Gmaps.map.markers[i];
-      //   function(m){
-      //     if (m.serviceObject.id == 1) {
-      //       m.panTo();
-      //       m.serviceObject.setZIndex(99);
-      //     else m.serviceObject.setZIndex(1);
-      //     }
-      //   }
-      // }
-
-      // Gmaps.mapMarker = function() {
-      //   $.each(Gmaps.store.markers, function() {
-      //     if (this.serviceObject.id == 1) {
-      //       this.panTo();
-      //       this.serviceObject.setZIndex(99);
-      //     else this.serviceObject.setZIndex();
-      //     }
-      //   });
-      // }
-    // Trying to change zindex of airports
-    // var zInd = markers.length;
-    // markers[zInd] = handler.addMarker(result);
-    // lastmarker.setZIndex(zIndex:MAX_ZINDEX);
     }
   })
 
   handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
-
-  // The closer to 0, the higher in the sky
-  // handler.getMap().setZoom(7);
-
 })
 
 $('.result-card').mouseleave('click', function(e) {
@@ -119,3 +90,69 @@ $('.poi-card').mouseenter('click', function(e) {
   handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
 })
+
+// create a constructor
+function Tooltip(options) {
+  // Now initialize all properties.
+  this.marker_ = options.marker;
+  this.content_ = options.content;
+  this.map_ = options.marker.serviceObject.map;
+  this.cssClass_ = options.cssClass||null;
+  // We define a property to hold the content's
+  // div. We'll actually create this div
+  // upon receipt of the add() method so we'll
+  // leave it null for now.
+  this.div_ = null;
+  //Explicitly call setMap on this overlay
+  this.setMap(this.map_);
+  var me = this;
+  // Show tooltip on mouseover event.
+  me.show();
+  // Hide tooltip on mouseout event.
+
+}
+
+// Now we extend google.maps.OverlayView()
+Tooltip.prototype = new google.maps.OverlayView();
+// onAdd is one of the functions that we must implement,
+// it will be called when the map is ready for the overlay to be attached.
+Tooltip.prototype.onAdd = function() {
+  // Create the DIV and set some basic attributes.
+  var div = document.createElement('DIV');
+  div.style.position = "absolute";
+  // Hide tooltip
+  // div.style.visibility = "hidden";
+  if(this.cssClass_)
+  div.className += " "+this.cssClass_;
+  //Attach content to the DIV.
+  div.innerHTML = this.content_;
+  // Set the overlay's div_ property to this DIV
+  this.div_ = div;
+  // We add an overlay to a map via one of the map's panes.
+  // We'll add this overlay to the floatPane pane.
+  var panes = this.getPanes();
+  panes.floatPane.appendChild(this.div_);
+}
+
+// We here implement draw
+Tooltip.prototype.draw = function() {
+// Position the overlay. We use the position of the marker
+// to peg it to the correct position, just northeast of the marker.
+// We need to retrieve the projection from this overlay to do this.
+var overlayProjection = this.getProjection();
+// Retrieve the coordinates of the marker
+// in latlngs and convert them to pixels coordinates.
+// We'll use these coordinates to place the DIV.
+console.log(this.marker_.serviceObject.position)
+var ne = overlayProjection.fromLatLngToDivPixel(this.marker_.serviceObject.position);
+// Position the DIV.
+var div = this.div_;
+div.style.left = ne.x + 'px';
+div.style.top = ne.y + 'px';
+}
+
+Tooltip.prototype.show = function() {
+  if (this.div_) {
+    this.div_.style.visibility = "visible";
+  }
+}

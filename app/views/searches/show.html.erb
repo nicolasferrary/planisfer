@@ -238,7 +238,8 @@
             var tooltipOptions={ marker:selectedMarker, content:testTooltipHtml};
             // create the tooltip
             var tooltip = new Tooltip(tooltipOptions);
-          }
+          };
+
         },
       );
 
@@ -302,10 +303,15 @@
               handler.removeMarkers(markers);
             }
             markers = handler.addMarkers(result);
+            var marker = markers[0];
+            new google.maps.event.trigger( marker.serviceObject, 'click' );
           }
         })
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
+
+
+
       })
       $("#more-flights").click(function() {
         $("#see-more-flights").toggleClass("hidden");
@@ -481,21 +487,11 @@
     div.style.left = ne.x + 'px';
     div.style.top = ne.y + 'px';
     }
-    // We here implement onRemove
-    // Tooltip.prototype.onRemove = function() {
-    // this.div_.parentNode.removeChild(this.div_);
-    // }
 
-    // Note that the visibility property must be a string enclosed in quotes
-    // Tooltip.prototype.hide = function() {
-    // if (this.div_) {
-    // this.div_.style.visibility = "hidden";
-    // }
-    // }
     Tooltip.prototype.show = function() {
-    if (this.div_) {
-    this.div_.style.visibility = "visible";
-    }
+      if (this.div_) {
+        this.div_.style.visibility = "visible";
+      }
     }
 
   </script>

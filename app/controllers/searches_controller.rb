@@ -31,7 +31,7 @@ class SearchesController < ApplicationController
     @trips = get_trips_for(@starts_on, @returns_on, @nb_adults, @nb_children, @nb_infants, @city, @search, @all_region_airports)
     @flight_margin = 1.05
     @trips = apply_flight_margin(@trips, @flight_margin)
-    redirect_to search_path(@search, all_airports: @all_region_airports)
+    redirect_to search_path(@search)
 
   end
 
@@ -126,7 +126,7 @@ class SearchesController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @region = @trip.search.region
     @pois = define_pois(@region)
-    @initial_markers = build_markers(@pois)
+    @initial_markers = build_markers(@pois, [])
     @destination_iata = @trip.round_trip_flight.flight1_destination_airport_iata
     @return_iata = @trip.round_trip_flight.flight2_origin_airport_iata
     @destination_airport = Airport.find_by_iata(@destination_iata)
@@ -170,16 +170,10 @@ class SearchesController < ApplicationController
     @selected_poi = Poi.find(params[:poi_id])
     @pois_except_selected = @pois.delete_if {|poi| poi == @selected_poi }
 
-    @non_highlighted_markers = build_markers(@pois_except_selected)
+    @markers_except_selected = build_markers(@pois_except_selected, [])
+    @selected_poi_marker = build_markers(@selected_poi, [])
 
-    render json: @non_highlighted_markers.concat([
-      {
-        lat: @selected_poi.latitude,
-        lng: @selected_poi.longitude,
-        infowindow: render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => @selected_poi}),
-        picture: { url: view_context.image_url("orange-camera.svg"), width: 40, height: 44 }
-      }
-      ]).to_json
+    render json: (@selected_poi_marker + @markers_except_selected).to_json
 
   end
 
