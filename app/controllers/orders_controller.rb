@@ -39,6 +39,10 @@ class OrdersController < ApplicationController
 # UNCOMMENT TO LAUNCH WORLDIA CALLS
     # # Worldia : validate payment
     # worldia_validate_payment(@quote_id)
+    @trip_airports = define_trip_airports(@trip)
+    @pois = define_pois(@region)
+    @initial_markers = build_markers(@pois, @trip_airports)
+
   end
 
   private
@@ -106,6 +110,52 @@ class OrdersController < ApplicationController
     url = "https://www.worldia.com/api/v1/checkout/#{quote_id}/complete"
     json = {}.to_json
     response = RestClient.post url, json, {:content_type => 'application/json'}
+  end
+
+  def define_pois(region)
+    @pois = []
+    @region.pois.each do |poi_name|
+      poi = Poi.find_by_name(poi_name.strip)
+      @pois << poi
+    end
+    @pois
+  end
+
+  def define_trip_airports(trip)
+    arrival_iata = trip.round_trip_flight.flight1_destination_airport_iata
+    return_iata = trip.round_trip_flight.flight2_origin_airport_iata
+    arrival_airport = Airport.find_by_iata(arrival_iata)
+    return_airport = Airport.find_by_iata(return_iata)
+    airports = [arrival_airport, return_airport]
+  end
+
+  def build_markers(pois, airports)
+    pois_markers = Gmaps4rails.build_markers(pois) do |poi, marker|
+      @poi = poi
+      marker.lat poi.latitude
+      marker.lng poi.longitude
+      marker.title poi.name
+
+      marker.infowindow render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => poi})
+      # marker.json { :id => poi.id }
+      marker.picture({
+                  :url => view_context.image_url("dot_marker.svg"),
+                  :width   => 39,
+                  :height  => 34,
+                 })
+    end
+    airports_markers = Gmaps4rails.build_markers(airports) do |airport, marker|
+      marker.lat airport.coordinates.gsub(/\:(.*)/, '').to_f
+      marker.lng airport.coordinates.gsub(/(.*)\:/, '').to_f
+      marker.infowindow airport.cityname + " airport"
+      marker.title ""
+      marker.picture({
+        :url => view_context.image_url("airport-black.svg"),
+        :width   => 70,
+        :height  => 35,
+      })
+    end
+    markers = pois_markers + airports_markers
   end
 
 end

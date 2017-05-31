@@ -32,6 +32,15 @@
         <%= render 'shared/favourites', :region => @region %>
       </div>
 
+      <div class = "legends">
+        <img><%= image_tag "dot_marker.png", class: "legend_highlight"%> Planisfer travelers' favourite destinations </img>
+        <img><%= image_tag "airport-black.svg", class: "legend_airport" %> Your airports </img>
+      </div>
+      <div class="airport-map">
+        <div id="map", style="width: 100%; height: 500px;"></div>
+      </div>
+
+
     </div>
 
     <div class = 'col-md-4'>
@@ -63,4 +72,115 @@
 
   </div>
 </div>
+
+<% content_for(:after_js) do %>
+
+  <script>
+    $(document).ready(function() {
+      var handler = Gmaps.build('Google');
+
+      handler.buildMap({
+        provider: {
+          scrollwheel: false,
+          styles: [
+            {"featureType":"administrative","elementType":"labels.text","stylers":[{"color":"#444444"}, {"visibility":"off"}]},
+            // {"featureType":"administrative.province","elementType":"labels.text","stylers":[{"color":"#444444"}, {"visibility":"on"}]},
+            {"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},
+            {"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},
+            {"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},
+            {"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},
+            {"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},
+            {"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},
+            {"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}
+          ]
+        },
+        internal: { id: 'map' }}, function() {
+          markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+
+          for (var i = 0; i < markers.length; i++) {
+            var selectedMarker = markers[i];
+            //create an options object
+            var testTooltipHtml = selectedMarker.serviceObject.title ;
+            var tooltipOptions={ marker:selectedMarker, content:testTooltipHtml};
+            // create the tooltip
+            var tooltip = new Tooltip(tooltipOptions);
+          };
+
+        },
+      );
+    });
+  </script>
+
+  <script>
+  // create a constructor
+    function Tooltip(options) {
+      // Now initialize all properties.
+      this.marker_ = options.marker;
+      this.content_ = options.content;
+      this.map_ = options.marker.serviceObject.map;
+      this.cssClass_ = options.cssClass||null;
+      // We define a property to hold the content's
+      // div. We'll actually create this div
+      // upon receipt of the add() method so we'll
+      // leave it null for now.
+      this.div_ = null;
+      //Explicitly call setMap on this overlay
+      this.setMap(this.map_);
+      var me = this;
+      // Show tooltip on mouseover event.
+      me.show();
+      // Hide tooltip on mouseout event.
+
+    }
+
+    // Now we extend google.maps.OverlayView()
+    Tooltip.prototype = new google.maps.OverlayView();
+    // onAdd is one of the functions that we must implement,
+    // it will be called when the map is ready for the overlay to be attached.
+    Tooltip.prototype.onAdd = function() {
+      // Create the DIV and set some basic attributes.
+      var div = document.createElement('DIV');
+      div.style.position = "absolute";
+      // Hide tooltip
+      // div.style.visibility = "hidden";
+      if(this.cssClass_)
+      div.className += " "+this.cssClass_;
+      //Attach content to the DIV.
+      div.innerHTML = this.content_;
+      // Set the overlay's div_ property to this DIV
+      this.div_ = div;
+      // We add an overlay to a map via one of the map's panes.
+      // We'll add this overlay to the floatPane pane.
+      var panes = this.getPanes();
+      panes.floatPane.appendChild(this.div_);
+    }
+
+    // We here implement draw
+    Tooltip.prototype.draw = function() {
+    // Position the overlay. We use the position of the marker
+    // to peg it to the correct position, just northeast of the marker.
+    // We need to retrieve the projection from this overlay to do this.
+    var overlayProjection = this.getProjection();
+    // Retrieve the coordinates of the marker
+    // in latlngs and convert them to pixels coordinates.
+    // We'll use these coordinates to place the DIV.
+    console.log(this.marker_.serviceObject.position)
+    var ne = overlayProjection.fromLatLngToDivPixel(this.marker_.serviceObject.position);
+    // Position the DIV.
+    var div = this.div_;
+    div.style.left = ne.x + 'px';
+    div.style.top = ne.y + 'px';
+    }
+
+    Tooltip.prototype.show = function() {
+      if (this.div_) {
+        this.div_.style.visibility = "visible";
+      }
+    }
+
+  </script>
+
+<% end %>
 
