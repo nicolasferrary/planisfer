@@ -15,22 +15,85 @@
 
 <div class = 'container-fluid planning-page'>
   <div class = "row" id = "planning-page-subtitle">
-    <h4>Congrats! Your transports   are booked. You can now plan all the details for a fantastic trip in <%= @region.name %>. </h4>
+    <h4>Congrats! Your transports are booked. You can now plan all the details for a fantastic trip in <%= @region.name %>. </h4>
   </div>
 
   <div class = 'row'>
     <div class = 'col-md-8'>
-      <div class = 'row'>
+
+      <div id="poi-title">
+        <h3>MOST UPVOTED TRIPS IN <%= @region.name.upcase%> </h3>
+      </div>
+
+      <div class = 'row upvoted-trips'>
 
         <div class = 'col-md-6'>
           <div class = 'traveler-card'>
-            card 1
+
+            <div class="trip-card">
+              <div class="card trip-card">
+                <div class="trip-length">Nicolas' trip - 10 days</div>
+                <div class="trip-map">
+                  <%= image_tag "trip-nico.png" %>
+                </div>
+
+                <div class = "trip-card-content">
+                  <h5>My top 3</h5>
+                  <ul>
+                  <li class = 'trip-content'>
+                    Alhambra palace in Granada
+                  </li>
+                  <li class = 'trip-content'>
+                    White villages
+                  </li>
+                  <li class = 'trip-content'>
+                    Hotel Molino close to Ronda
+                  </li>
+                  </ul>
+                </div>
+                <%= image_tag 'nicolas.jpg', class: "card-user avatar"%>
+                <div class='product-upvote'>
+                  <span class="product-arrow"></span>
+                  <span class='product-count'> <span style= "font-weight: bold">37</span> travelers upvoted this trip</span>
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
 
         <div class = 'col-md-6'>
           <div class = 'traveler-card'>
-            card 2
+            <div class="trip-card">
+              <div class="card trip-card">
+                <div class="trip-length">Marine's trip - 8 days</div>
+                <div class="trip-map">
+                  <%= image_tag "trip-nico.png" %>
+                </div>
+
+                <div class = "trip-card-content">
+                  <h5>My top 3</h5>
+                  <ul>
+                  <li class = 'trip-content'>
+                    Flamenco shows
+                  </li>
+                  <li class = 'trip-content'>
+                    White villages
+                  </li>
+                  <li class = 'trip-content'>
+                    Cordoba and its tapas bars
+                  </li>
+                  </ul>
+                </div>
+                <%= image_tag 'marine.jpg', class: "card-user avatar"%>
+                <div class='product-upvote'>
+                  <span class="product-arrow"></span>
+                  <span class='product-count'> <span style= "font-weight: bold">95</span> travelers upvoted this trip</span>
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
       </div>
