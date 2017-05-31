@@ -20,26 +20,32 @@
 
   <div class = 'row'>
     <div class = 'col-md-8'>
-      <div class = 'traveler-card'>
-        card 1
+      <div class = 'row'>
+
+        <div class = 'col-md-6'>
+          <div class = 'traveler-card'>
+            card 1
+          </div>
+        </div>
+
+        <div class = 'col-md-6'>
+          <div class = 'traveler-card'>
+            card 2
+          </div>
+        </div>
       </div>
 
-      <div class = 'traveler-card'>
-        card 2
-      </div>
-
-      <div>
+      <div class = 'row'>
         <%= render 'shared/favourites', :region => @region %>
       </div>
 
+      <div class="airport-map">
+        <div id="map", style="width: 100%; height: 500px;"></div>
+      </div>
       <div class = "legends">
         <img><%= image_tag "dot_marker.png", class: "legend_highlight"%> Planisfer travelers' favourite destinations </img>
         <img><%= image_tag "airport-black.svg", class: "legend_airport" %> Your airports </img>
       </div>
-      <div class="airport-map">
-        <div id="map", style="width: 100%; height: 500px;"></div>
-      </div>
-
 
     </div>
 
@@ -111,6 +117,31 @@
         },
       );
     });
+
+    $('.poi-card').mouseenter('click', function(e) {
+      e.preventDefault();
+      var poiId = $(this).data('poi');
+      var regionId = $(this).data('region');
+      $.ajax({
+        type: "GET",
+        url: '/pois/' + poiId + '/highlight_poi',
+        data: {region_id: regionId},
+        dataType: "json",
+        success: function(result) {
+          // console.log('test')
+          for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
+            handler.removeMarkers(markers);
+          }
+          markers = handler.addMarkers(result);
+          var marker = markers[0];
+          new google.maps.event.trigger( marker.serviceObject, 'click' );
+        }
+      })
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+    })
+
   </script>
 
   <script>
