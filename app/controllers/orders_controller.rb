@@ -32,8 +32,9 @@ class OrdersController < ApplicationController
     @order = Order.where(state: 'paid').find(params[:id])
     @trip = Trip.find(params[:trip_id])
     @user = @order.user
-#TOdo
     @quote_id = params[:quote_id]
+
+    @region = @trip.search.region
 
 # UNCOMMENT TO LAUNCH WORLDIA CALLS
     # # Worldia : validate payment
