@@ -34,7 +34,7 @@
               <div class="card trip-card">
                 <div class="trip-length">Nicolas' trip - 10 days</div>
                 <div class="trip-map">
-                  <%= image_tag "trip-nico.png" %>
+                  <%= image_tag "trip-nico.png", class: "trip-map-picture" %>
                 </div>
 
                 <div class = "trip-card-content">
@@ -54,7 +54,7 @@
                 <%= image_tag 'nicolas.jpg', class: "card-user avatar"%>
                 <div class='product-upvote'>
                   <span class="product-arrow"></span>
-                  <span class='product-count'> <span style= "font-weight: bold">37</span> travelers upvoted this trip</span>
+                  <span class='product-count'> <span style= "font-weight: bold">37</span> travelers</span>
                 </div>
 
               </div>
@@ -69,7 +69,7 @@
               <div class="card trip-card">
                 <div class="trip-length">Marine's trip - 8 days</div>
                 <div class="trip-map">
-                  <%= image_tag "trip-nico.png" %>
+                  <%= image_tag "trip-nico.png", class: "trip-map-picture" %>
                 </div>
 
                 <div class = "trip-card-content">
@@ -89,7 +89,7 @@
                 <%= image_tag 'marine.jpg', class: "card-user avatar"%>
                 <div class='product-upvote'>
                   <span class="product-arrow"></span>
-                  <span class='product-count'> <span style= "font-weight: bold">95</span> travelers upvoted this trip</span>
+                  <span class='product-count'> <span style= "font-weight: bold">95</span> travelers</span>
                 </div>
 
               </div>
@@ -114,28 +114,48 @@
 
     <div class = 'col-md-4'>
 
-      <%= form_tag user_path(@user, :order_id => @order.id, :trip_id => @trip.id), method: :patch do %>
-        <div class = "row">
-          <div class = "col-xs-12">
-            <p class = "infos-left-text">Not sure what to do in <%= @trip.round_trip_flight.region.name %>? Need some help to find the best hotels?</p>
-            <p class = "infos-left-text">Our experts can help you prepare your trip. </p>
-            <% if @order.user.phone.nil? %>
-              <p class = "infos-left-text">Just let us know when you would like us to ca  ll you. </p>
-              <div class = "col-sm-4" >
-                <%= text_field_tag :phone, nil, placeholder: "Phone number", class: "form-control" %>
+    <div class="sticky-form">
+        <div class="form-post">
+          <h1>Our travel coaches are here to help</h1>
+          <% if flash[:search_error] %>
+            <p class="red-message"><%= flash[:search_error] %></p>
+          <% end %>
+
+            <div class="row text-center">
+              <div class = 'col-xs-12'>
+                <p>Not sure what to visit in <%= @region.name %>? <br> Need some help to find the best hotels? <br> Don't hesitate to reach out</p>
               </div>
-              <div class = "col-sm-4" >
-                <%= text_field_tag :contact_time, nil, placeholder: "Tell us when is the best time for us to call you", class: "form-control" %>
+            </div>
+
+            <%= form_tag user_path(@user, :order_id => @order.id, :trip_id => @trip.id), method: :patch do %>
+              <div class = "row">
+                <div class = 'email-form'>
+                  <div class="col-md-8">
+                    <% if @user.call_time.nil? %>
+                      <%= text_field_tag :contact_time, nil, placeholder: "Email us", class: "form-control high-form", id:"text_field" %>
+                    <% else %>
+                      <%= text_field_tag :contact_time, nil, placeholder: "Thanks! We 'll get back soon.", class: "form-control high-form", id:"text_field" %>
+                   <% end %>
+
+                  </div>
+
+                  <div class="col-md-4">
+                    <%= submit_tag 'SEND', class: 'btn-brand next-button', id: 'send-button' %>
+                  </div>
+                </div>
+
               </div>
-              <div class = "col-sm-4" >
-                <%= submit_tag 'Confirm', class: 'btn-brand next-button' %>
-              </div>
-            <% else %>
-              <p>Thank you. Let's talk soon.</p>
             <% end %>
-          </div>
-        </div>
-      <% end %>
+
+            <div class = "row">
+              <div class="col-xs-12 text-center">
+                <p>Or give us a call at 00 33 6 30 87 20 04</p>
+                <p>We'd love to talk and help you continue plan your trip</p>
+              </div>
+            </div>
+
+        </div> <!-- fin du form-post -->
+      </div> <!-- fin de sticky-form -->
 
     </div>
 
@@ -275,6 +295,7 @@
     }
 
   </script>
+
 
 <% end %>
 

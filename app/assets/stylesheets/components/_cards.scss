@@ -353,7 +353,7 @@
 
 .trip-card {
   width: 430px;
-  height: 210px;
+  height: 225px;
   margin-bottom: 0px;
 }
 
@@ -374,7 +374,7 @@
   position: absolute;
   top: 70px;
   right: 10px;
-  width: 230px;
+  width: 185px;
   font-size: 14px;
   h5{
     margin-top: 0;
@@ -400,4 +400,8 @@
 
 .upvoted-trips{
   margin-bottom: 20px;
+}
+
+.trip-map-picture{
+  height: 144px;
 }

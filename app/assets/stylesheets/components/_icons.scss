@@ -70,14 +70,12 @@
 }
 
 .product-upvote {
-  padding-right: 20px;
   transition: all 0.15s ease;
   font-size: 14px;
   line-height: 20px;
   position: absolute;
-  bottom: 3px;
-  left: 10px;
-  width: 100%;
+  top: 20px;
+  right: 5px;
   display: flex;
 }
 .product-count {
