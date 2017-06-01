@@ -350,3 +350,58 @@
 .similar{
   font-size: 12px;
 }
+
+.trip-card {
+  width: 430px;
+  height: 225px;
+  margin-bottom: 0px;
+}
+
+.trip-length{
+  position: absolute;
+  top: 20px;
+  left: 80px;
+  color: $orange;
+}
+
+.trip-map{
+  position: absolute;
+  top: 70px;
+  left: 10px;
+}
+
+.trip-card-content{
+  position: absolute;
+  top: 70px;
+  right: 10px;
+  width: 185px;
+  font-size: 14px;
+  h5{
+    margin-top: 0;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #E6E6E6;
+  }
+  ul{
+    padding-left: 20px;
+  }
+}
+
+.card-user {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.avatar {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.upvoted-trips{
+  margin-bottom: 20px;
+}
+
+.trip-map-picture{
+  height: 144px;
+}

@@ -68,3 +68,27 @@
 .airline-opacity{
   opacity: 0.5;
 }
+
+.product-upvote {
+  transition: all 0.15s ease;
+  font-size: 14px;
+  line-height: 20px;
+  position: absolute;
+  top: 20px;
+  right: 5px;
+  display: flex;
+}
+.product-count {
+  margin: 1px 3px 0;
+  color: $brand-color;
+}
+.product-arrow {
+  transition: all 0.15s ease;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid transparent;
+  border-bottom: 9px solid $brand-color;
+  border-radius: 2px;
+}
