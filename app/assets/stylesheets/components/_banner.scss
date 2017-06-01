@@ -1,11 +1,8 @@
 .banner {
   color: white;
-  text-align: center;
   height: 100vh;
   background-size: cover !important;
   display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
 }
 
@@ -201,4 +198,8 @@ a {
 
 .logo-1 {
   width: 54px;
+}
+
+.white {
+  color:white;
 }
