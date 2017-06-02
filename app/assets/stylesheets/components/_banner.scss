@@ -2,7 +2,6 @@
   color: white;
   height: 100vh;
   background-size: cover !important;
-  display: flex;
   position: relative;
 }
 
@@ -37,6 +36,16 @@
   margin-right: 15px;
 }
 
+.non-logged-banner-title{
+  h1 {
+  font-weight: bolder;
+  margin-top: 0px;
+  }
+  height: 70px;
+  padding-top:17px;
+  background-color: rgba(0,0,0,0.2)
+}
+
 .page-banner-title {
   h1 {
   font-weight: bolder;
@@ -50,12 +59,12 @@
 
 
 
-.arrow-img {
-  width: 30px;
-  position: absolute;
-  margin-left: 180px;
-  margin-top: 30em;
-  color: white;
+.small-arrow {
+  width: 15px;
+  // position: absolute;
+  margin-left: 10px;
+  // margin-top: 30em;
+  // color: white;
 }
 
 
@@ -82,7 +91,6 @@ a {
 .home-text{
   margin-top: 70px;
   margin-bottom: 45px;
-  padding-left: 17px;
   text-align:center,
 }
 
@@ -202,4 +210,22 @@ a {
 
 .white {
   color:white;
+}
+
+#advantages{
+  width: 85%;
+  margin-right: auto;
+  margin-left: auto;
+  h3 {
+    padding-bottom: 7px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid white;
+  }
+  p{
+    padding-left:20px;
+  }
+}
+
+.small-height{
+  height: 70px;
 }
