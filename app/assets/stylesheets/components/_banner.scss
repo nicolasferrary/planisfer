@@ -216,10 +216,9 @@ a {
   width: 85%;
   margin-right: auto;
   margin-left: auto;
-  h3 {
+  h4 {
     padding-bottom: 7px;
     margin-bottom: 20px;
-    border-bottom: 1px solid white;
   }
   p{
     padding-left:20px;
@@ -237,4 +236,10 @@ a {
 }
 .log-out:hover{
   text-decoration: none;
+}
+
+.bottom-row{
+  position: absolute;
+  bottom: 10px;
+  margin-left:25%;
 }

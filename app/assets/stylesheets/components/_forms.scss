@@ -8,3 +8,63 @@
   margin-bottom: 20px;
   overflow: auto
 }
+
+#member-form{
+  margin-top: 150px;
+}
+
+.member-form-post{
+  padding: 0 0 100px 0;
+  border: none;
+}
+
+
+.tabs {
+  display: flex;
+  h4{
+    font-size:14px;
+  }
+}
+.tabs a {
+  color: white;
+}
+.tabs a:hover {
+  cursor: pointer;
+  text-decoration: none;
+  opacity: 0.8;
+}
+.tabs h3 {
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 0;
+}
+.tabs p {
+  opacity: 0.5;
+  margin-bottom: 0;
+}
+.tab {
+  background: rgb(250, 250, 250);
+  opacity: 0.5;
+  flex: 0 0 50%;
+  text-align: center;
+}
+
+.tab.active {
+  background: rgb(250, 250, 250);
+  opacity: 1;
+  color: black;
+  h4{
+    font-size: 16px;
+    font-weight: bolder;
+  }
+}
+
+.member-input{
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.member-inputs{
+  padding-top:40px;
+}

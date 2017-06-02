@@ -1,5 +1,6 @@
 .form-post {
   background: rgb(250, 250, 250);
+  opacity: 0.9;
   padding: 20px;
   border-radius: 0px;
   box-shadow: 6px 1px 4px rgba(0,0,0,0.2);
@@ -9,15 +10,14 @@
   font-size: 17px;
   font-weight: bolder;
   }
+  h1 {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 25px;
+    margin-bottom: 25px;
+  }
 }
 
-.form-post h1 {
-  text-align: center;
-  font-weight: bolder;
-  font-size: 25px;
-  margin-bottom: 25px;
-
-}
 
 .input-lg {
   height: 46px;
