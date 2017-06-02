@@ -1,4 +1,4 @@
-<% if @logged_in == false %>
+<%# if @logged_in == false %>
   <div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url(<%= image_path("background.jpg") %>);">
 
     <div class = "row">
@@ -10,6 +10,18 @@
             <% end %> </span>
             <span class ="brand-name white">Planisfer</span>
             <span class = "banner2-title white">Explore the world your own way</span>
+            <% if member_signed_in? %>
+
+              <%= link_to destroy_member_session_path, method: :delete, class: 'log-out' do %>
+                <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+              <% end %>
+
+            <% else %>
+
+              <!-- Login text link -->
+              <%= link_to t(".sign_in", default: "Login"), new_member_session_path, class: "" %>
+
+            <% end %>
           </div>
         </div>
       </div>
@@ -175,7 +187,7 @@
   </div>
 
 
-<% else %>
+<%# else %>
   <div class = "container">
 
     <div class = "row">
@@ -362,7 +374,7 @@
     </div>
   </div>
 
-<% end %>
+<%# end %>
 
 <%= render 'wait_modal', modal_name: "wait_modal" %>
 

@@ -29,6 +29,8 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem 'money-rails'
 gem 'stripe'
 
+gem 'devise'
+
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
