@@ -1,15 +1,88 @@
-<h2>Log in</h2>
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url(<%= image_path("background.jpg") %>);">
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email, required: false, autofocus: true %>
-    <%= f.input :password, required: false %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+    <div class = "row">
+      <div class="non-logged-banner-title">
+        <div class = 'container'>
+          <div class = "col-xs-12 title-col">
+            <span> <%= link_to root_path do %>
+              <%= image_tag "logo_no_word.png", class: "logo"%>
+            <% end %> </span>
+            <span class ="brand-name white">Planisfer</span>
+            <span class = "banner2-title white">Explore the world your own way</span>
+            <% if member_signed_in? %>
+
+              <%= link_to destroy_member_session_path, method: :delete, class: 'log-out' do %>
+                <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+              <% end %>
+
+            <% else %>
+
+              <!-- Login text link -->
+              <%= link_to t(".sign_in", default: "Login"), new_member_session_path, class: "" %>
+
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class = "container">
+
+      <div class = "row">
+
+        <div class = "col-md-8">
+          <div class = "home-text">
+            <h2 class="home-main-title white"><strong>Planisfer is a club of travelers who share a passion for exploring the world</strong></h2>
+          </div>
+          <div class = "" id = "advantages">
+            <h3 class = "white"><strong>Members' exclusive advantages</strong></h3>
+            <p class ="white">Members share tips on their favourite countries</p>
+            <p class ="white">Get access to unique tools to book complex itineraries, at the best price, including multi-destination flights</p>
+            <p class ="white">Talk to a travel coach to help you plan the details of your trip</p>
+          </div>
+
+        </div>
+
+        <div class = "col-md-4">
+
+          <div class="sticky-form">
+            <div class="form-post">
+              <h1>Log in</h1>
+              <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <div class="form-inputs">
+                  <%= f.input :email, required: false, autofocus: true %>
+                  <%= f.input :password, required: false %>
+                  <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+                </div>
+
+                <div class="form-actions">
+                  <%= f.button :submit, "Log in" %>
+                </div>
+              <% end %>
+            </div> <!-- fin du form-post -->
+          </div> <!-- fin de sticky-form -->
+        </div>
+      </div>
+
+      <div class = "row">
+        <div class = "col-md-8 text-center">
+          <h4 class = "white"><strong>Start exploring members' favourite destinations</strong><span> <%= image_tag 'arrow.png', class: 'small-arrow' %></span></h4>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
+  <div class = 'container'>
+    <div class = "row">
+      <div class="col-md-8">
+        <%= render 'shared/destinations'%>
+      </div> <!-- fin du 2e col-xs-12 principal -->
+    </div>
   </div>
-<% end %>
 
 <%= render "devise/shared/links" %>
