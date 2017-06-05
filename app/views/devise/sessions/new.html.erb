@@ -1,0 +1,146 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url(<%= image_path("background.jpg") %>);">
+
+  <div class = "row">
+    <div class="non-logged-banner-title">
+      <div class = 'container'>
+        <div class = "col-xs-12 title-col">
+          <span> <%= link_to root_path do %>
+            <%= image_tag "logo_no_word.png", class: "logo"%>
+          <% end %> </span>
+          <span class ="brand-name white">Planisfer</span>
+          <span class = "banner2-title white">Explore the world your own way</span>
+          <% if member_signed_in? %>
+
+            <%= link_to destroy_member_session_path, method: :delete, class: 'log-out white' do %>
+              <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class = "container">
+
+    <div class = "row">
+
+      <div class = "col-md-7">
+        <div class = "home-text">
+          <h2 class="home-main-title white"><strong>Planisfer is a club of travelers who share a passion for exploring the world</strong></h2>
+        </div>
+        <div class = "" id = "advantages">
+          <h4 class ="white">Unique technologies to book complex itineraries, at the best price, including multi-destination flights</h4>
+          <h4 class ="white">Members share tips on their favourite countries</h4>
+          <h4 class ="white">Travel coaches can help you plan the details of your trip</h4>
+        </div>
+
+      </div>
+
+      <div class = "col-md-4 col-md-offset-1">
+
+        <div class="sticky-form" id = "member-form">
+          <div class="tabs">
+            <a class="tab <%= 'active' unless params[:referrer] %>" href="#" id="log-in-tab">
+              <h4>Log in</h4>
+            </a>
+            <a class="tab <%= 'active' if params[:referrer] %>" href="#" id="sign-up-tab">
+              <h4>Become a member</h4>
+            </a>
+          </div>
+
+          <div class = 'form-post referral-form-post light-opacity <%= 'hidden' unless params[:referrer] %>' id = 'referral-form'>
+            <%= form_tag check_referrer_path, method: :get do %>
+              <div class="form-inputs member-inputs">
+                <% if flash[:referrer_error] %>
+                  <p class="red-message member-input text-center no-referral"><%= flash[:referrer_error] %></p>
+                <% end %>
+                <%= text_field_tag :email, nil, placeholder: "Your referrer's email", "class" => 'form-control member-input'%>
+              </div>
+
+              <div class="form-actions">
+                <%= submit_tag "Confirm", class: 'btn-brand member-btn referral-btn' %>
+              </div>
+
+              <div class = 'referral-form-text member-input text-center'>
+                <p> We'd love to have you join the club.</p>
+                <p>All you need is an existing member to refer you.</p>
+                <p>
+                Not sure if some of your friends are members? Ask them on Facebook.</p>
+                <div class="fb-share-button" data-href="http://www.planisfer.space/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.planisfer.space%2F&amp;src=sdkpreparse">Demander</a></div>
+              </div>
+
+            <% end %>
+          </div>
+
+          <div class="form-post member-form-post light-opacity<%= 'hidden' if params[:referrer] %>" id = 'sign-in-form'>
+            <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="form-inputs member-inputs">
+                <%= f.input :email, required: false, autofocus: true, label: false, placeholder: 'Email', :input_html => { :class => 'form-control member-input' } %>
+                <%= f.input :password, required: false, label: false, placeholder: 'Password', :input_html => { :class => 'form-control member-input' } %>
+              </div>
+
+              <div class="form-actions">
+                <%= f.submit "Log in", class: 'btn-brand member-btn' %>
+              </div>
+            <% end %>
+          </div> <!-- fin du form-post -->
+
+        </div> <!-- fin de sticky-form -->
+      </div>
+    </div>
+
+
+    <div class = "row bottom-row">
+      <div class = "col-md-12 text-center">
+        <h4 class = "white"><strong>Start exploring members' favourite destinations</strong><span> <%= image_tag 'arrow.png', class: 'small-arrow' %></span></h4>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+  <div class = 'container'>
+    <div class = "row">
+      <div class="col-md-8">
+        <%= render 'shared/destinations'%>
+      </div> <!-- fin du 2e col-xs-12 principal -->
+    </div>
+  </div>
+
+
+
+<% content_for(:after_js) do %>
+  <script>
+     $(document).ready(function() {
+      $('#sign-up-tab').on('click', function(e) {
+        e.preventDefault();
+        $('#log-in-tab').removeClass('active');
+        $(this).addClass('active');
+        $('#referral-form').removeClass('hidden');
+        $('#sign-in-form').addClass('hidden');
+      })
+      $('#log-in-tab').on('click', function(e) {
+        e.preventDefault();
+        $('#sign-up-tab').removeClass('active');
+        $(this).addClass('active');
+        $('#sign-in-form').removeClass('hidden');
+        $('#referral-form').addClass('hidden');
+      })
+     })
+  </script>
+<% end %>
+

@@ -8,3 +8,99 @@
   margin-bottom: 20px;
   overflow: auto
 }
+
+#member-form{
+  margin-top: 135px;
+}
+
+.member-form-post{
+  padding: 0 0 100px 0;
+  border: none;
+}
+
+.referral-form-post{
+  padding: 0 0 20px 0;
+  border: none;
+}
+
+.sign-up-form-post{
+  padding: 0 0 60px 0;
+  border: none;
+}
+
+
+.tabs {
+  display: flex;
+  h4{
+    font-size:14px;
+  }
+}
+.tabs a {
+  color: white;
+}
+.tabs a:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+.tabs a:visited{
+  text-decoration: none;
+}
+.tabs a:focus{
+  text-decoration: none;
+}
+
+
+
+.tabs h3 {
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 0;
+}
+.tabs p {
+  opacity: 0.5;
+  margin-bottom: 0;
+}
+.tab {
+  background: #939CA2;
+  opacity: 0.9;
+  flex: 0 0 50%;
+  text-align: center;
+}
+
+.tab.active {
+  background: rgb(250, 250, 250);
+  color: black;
+  h4{
+    font-size: 16px;
+    font-weight: bolder;
+  }
+}
+
+.member-input{
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.member-inputs{
+  padding-top:40px;
+}
+
+.referral-form-text{
+  color: $headings-color;
+  padding-top: 75px;
+}
+
+.referral-conf-text{
+  color: $headings-color;
+  padding-top: 30px;
+  margin-bottom: -20px;
+}
+
+.no-referral{
+  margin-bottom: 25px;
+}
+
+.light-opacity{
+  opacity:0.9
+}
