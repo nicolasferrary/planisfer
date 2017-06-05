@@ -38,15 +38,7 @@
     <div class = "row">
 
       <div class = "col-md-7">
-        <div class = "home-text">
-          <h2 class="home-main-title white"><strong>Planisfer is a club of travelers who share a passion for exploring the world</strong></h2>
-        </div>
-        <div class = "" id = "advantages">
-          <h4 class ="white">Unique technologies to book complex itineraries, at the best price, including multi-destination flights</h4>
-          <h4 class ="white">Members share tips on their favourite countries</h4>
-          <h4 class ="white">Travel coaches can help you plan the details of your trip</h4>
-        </div>
-
+        <%= render 'devise/shared/membership_main_text' %>
       </div>
 
       <div class = "col-md-4 col-md-offset-1">
@@ -63,7 +55,11 @@
 
           <div class = 'form-post referral-form-post light-opacity <%= 'hidden' unless params[:referrer] %>' id = 'referral-form'>
             <%= form_tag check_referrer_path, method: :get do %>
-              <div class="form-inputs member-inputs">
+              <div class = 'referral-form-text member-input text-center'>
+                <p> We'd love to have you join the club.</p>
+                <p>All you need is an existing member to refer you.</p>
+              </div>
+              <div class="form-inputs referrer-input">
                 <% if flash[:referrer_error] %>
                   <p class="red-message member-input text-center no-referral"><%= flash[:referrer_error] %></p>
                 <% end %>
@@ -74,11 +70,9 @@
                 <%= submit_tag "Confirm", class: 'btn-brand member-btn referral-btn' %>
               </div>
 
-              <div class = 'referral-form-text member-input text-center'>
-                <p> We'd love to have you join the club.</p>
-                <p>All you need is an existing member to refer you.</p>
+              <div class = 'facebook-form-text member-input text-center'>
                 <p>
-                Not sure if some of your friends are members? Ask them on Facebook.</p>
+                Some of your friends might me members already? Ask them on Facebook.</p>
                 <div class="fb-share-button" data-href="http://www.planisfer.space/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.planisfer.space%2F&amp;src=sdkpreparse">Demander</a></div>
               </div>
 
@@ -105,10 +99,7 @@
 
     <div class = "row bottom-row">
       <div class = "col-md-12 text-center">
-        <a href="#trendy-destination" id = 'trendy-destination'>
-          <span><h4 class = "white"><strong>Start exploring members' favourite destinations</strong></h4></span>
-          <span><%= image_tag "arrow.png", class: "floating small-arrow" %></span>
-        </a>
+        <%= render 'devise/shared/explore_link' %>
       </div>
     </div>
 

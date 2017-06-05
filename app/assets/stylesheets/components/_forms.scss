@@ -86,9 +86,13 @@
   padding-top:40px;
 }
 
+.referrer-input{
+  padding-top:20px;
+}
+
 .referral-form-text{
   color: $headings-color;
-  padding-top: 75px;
+  padding-top: 25px;
 }
 
 .referral-conf-text{
@@ -103,4 +107,9 @@
 
 .light-opacity{
   opacity:0.9
+}
+
+.facebook-form-text{
+  color: $headings-color;
+  padding-top: 75px;
 }
