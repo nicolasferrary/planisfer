@@ -43,6 +43,15 @@
   text-decoration: none;
   opacity: 0.8;
 }
+.tabs a:visited{
+  text-decoration: none;
+}
+.tabs a:focus{
+  text-decoration: none;
+}
+
+
+
 .tabs h3 {
   font-size: 17px;
   font-weight: bold;
@@ -53,15 +62,14 @@
   margin-bottom: 0;
 }
 .tab {
-  background: rgb(250, 250, 250);
-  opacity: 0.5;
+  background: #939CA2;
+  opacity: 0.9;
   flex: 0 0 50%;
   text-align: center;
 }
 
 .tab.active {
   background: rgb(250, 250, 250);
-  opacity: 1;
   color: black;
   h4{
     font-size: 16px;
@@ -92,4 +100,8 @@
 
 .no-referral{
   margin-bottom: 25px;
+}
+
+.light-opacity{
+  opacity:0.9
 }
