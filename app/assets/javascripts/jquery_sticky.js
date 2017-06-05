@@ -10,6 +10,12 @@
 //              It will only set the 'top' and 'position' of your element, you
 //              might need to adjust the width in some cases.
 
+ (function() {
+    if($(window).width() <= 1024){
+      $('#member-form').removeClass('sticky-form');
+    }
+  })
+
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
