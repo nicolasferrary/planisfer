@@ -87,6 +87,9 @@
     </div>
   </div>
 
+  <% for num in (0..Region.count - 1) %>
+    <%= render 'pages/slider', this_region: Region.all[num], modal_name: "modal_#{num +1}" %>
+  <% end %>
 
 
 
