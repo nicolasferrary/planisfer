@@ -12,7 +12,6 @@
 
  (function() {
     if($(window).width() <= 1024){
-      console.log('test');
       $('#member-form').removeClass('sticky-form');
     }
   })
