@@ -10,11 +10,21 @@
 }
 
 #member-form{
-  margin-top: 150px;
+  margin-top: 80px;
 }
 
 .member-form-post{
   padding: 0 0 100px 0;
+  border: none;
+}
+
+.referral-form-post{
+  padding: 0 0 20px 0;
+  border: none;
+}
+
+.sign-up-form-post{
+  padding: 0 0 60px 0;
   border: none;
 }
 
@@ -67,4 +77,19 @@
 
 .member-inputs{
   padding-top:40px;
+}
+
+.referral-form-text{
+  color: $headings-color;
+  padding-top: 75px;
+}
+
+.referral-conf-text{
+  color: $headings-color;
+  padding-top: 30px;
+  margin-bottom: -20px;
+}
+
+.no-referral{
+  margin-bottom: 25px;
 }

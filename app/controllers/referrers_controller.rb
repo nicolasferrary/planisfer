@@ -11,7 +11,7 @@ class ReferrersController < ApplicationController
     if @referrers_emails.include?(@referral_email)
       return redirect_to new_member_registration_path(referrer: "checked")
     else
-      flash[:search_error] = "This person does not seem to be a Planisfer member."
+      flash[:referrer_error] = "This person does not seem to be a Planisfer member."
       return redirect_to new_member_session_path(referrer: 'wrong_credentials')
     end
 
