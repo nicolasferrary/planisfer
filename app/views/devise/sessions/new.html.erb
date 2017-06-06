@@ -56,8 +56,8 @@
           <div class = 'form-post referral-form-post light-opacity <%= 'hidden' unless params[:referrer] %>' id = 'referral-form'>
             <%= form_tag check_referrer_path, method: :get do %>
               <div class = 'referral-form-text member-input text-center'>
-                <p> We'd love to have you join the club.</p>
-                <p>All you need is an existing member to refer you.</p>
+                <p> Planisfer is a club of travelers who share a passion for exploring the world</p>
+                <p>You need to be referred by an existing member to join</p>
               </div>
               <div class="form-inputs referrer-input">
                 <% if flash[:referrer_error] %>
@@ -72,7 +72,10 @@
 
               <div class = 'facebook-form-text member-input text-center'>
                 <p>
-                Some of your friends might me members already? Ask them on Facebook.</p>
+                Looking for a referrer? </p>
+                <p>
+                Ask your Facebook friends if they use Planisfer</p>
+
                 <div class="fb-share-button" data-href="http://www.planisfer.space/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.planisfer.space%2F&amp;src=sdkpreparse">Demander</a></div>
               </div>
 
