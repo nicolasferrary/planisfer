@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170602092100) do
+ActiveRecord::Schema.define(version: 20170606093758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,10 @@ ActiveRecord::Schema.define(version: 20170602092100) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "first_name"
+    t.string   "name"
+    t.text     "question"
+    t.text     "passengers"
     t.index ["email"], name: "index_members_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true, using: :btree
   end
@@ -69,8 +73,8 @@ ActiveRecord::Schema.define(version: 20170602092100) do
     t.json     "payment"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-    t.integer  "user_id"
-    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
+    t.integer  "member_id"
+    t.index ["member_id"], name: "index_orders_on_member_id", using: :btree
   end
 
   create_table "pois", force: :cascade do |t|
@@ -174,19 +178,8 @@ ActiveRecord::Schema.define(version: 20170602092100) do
     t.index ["search_id"], name: "index_trips_on_search_id", using: :btree
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "mail"
-    t.string   "first_name"
-    t.string   "name"
-    t.string   "phone"
-    t.string   "call_time"
-    t.text     "passengers"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   add_foreign_key "car_rentals", "selections"
-  add_foreign_key "orders", "users"
+  add_foreign_key "orders", "members"
   add_foreign_key "round_trip_flights", "regions"
   add_foreign_key "searches", "regions"
   add_foreign_key "trips", "car_rentals"

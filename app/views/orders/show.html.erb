@@ -127,14 +127,14 @@
               </div>
             </div>
 
-            <%= form_tag user_path(@user, :order_id => @order.id, :trip_id => @trip.id), method: :patch do %>
+            <%= form_tag order_path(@order, :trip_id => @trip.id), method: :patch do %>
               <div class = "row">
                 <div class = 'email-form'>
                   <div class="col-md-8">
-                    <% if @user.call_time.nil? %>
-                      <%= text_field_tag :contact_time, nil, placeholder: "Email us", class: "form-control high-form", id:"text_field" %>
+                    <% if @order.question.nil? %>
+                      <%= text_field_tag :question, nil, placeholder: "Email us", class: "form-control high-form", id:"text_field" %>
                     <% else %>
-                      <%= text_field_tag :contact_time, nil, placeholder: "Thanks! We 'll get back soon.", class: "form-control high-form", id:"text_field" %>
+                      <%= text_field_tag :question, nil, placeholder: "Thanks! We 'll get back soon.", class: "form-control high-form", id:"text_field" %>
                    <% end %>
 
                   </div>

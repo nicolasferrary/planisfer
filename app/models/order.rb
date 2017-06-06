@@ -1,4 +1,4 @@
 class Order < ApplicationRecord
   monetize :amount_cents
-  belongs_to :user, optional: true
+  belongs_to :member, optional: true
 end

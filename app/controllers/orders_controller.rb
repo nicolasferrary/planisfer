@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
   def show
     @order = Order.where(state: 'paid').find(params[:id])
     @trip = Trip.find(params[:trip_id])
-    @user = @order.user
+    @member = @order.member
     @quote_id = params[:quote_id]
 
     @region = @trip.search.region
@@ -43,6 +43,14 @@ class OrdersController < ApplicationController
     @pois = define_pois(@region)
     @initial_markers = build_markers(@pois, @trip_airports)
 
+  end
+
+  def update
+    @order = Order.find(params[:order_id])
+    @trip = Trip.find(params[:trip_id])
+    @order.question = params[:question]
+    @order.save
+    redirect_to order_path(@order, trip_id: @trip.id)
   end
 
   private
