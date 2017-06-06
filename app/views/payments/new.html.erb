@@ -24,7 +24,7 @@
 
   <div class="col-xs-12 col-md-8 car-left-padding">
     <% # beginning of user form %>
-    <%= form_tag member_path(current_member, :order_id => @order.id, :trip_id => @trip.id), method: :patch do %>
+    <%= form_tag member_registration_path(current_member, :order_id => @order.id, :trip_id => @trip.id), method: :patch do %>
       <div class = "travel-infos-box">
         <div class = "travel-infos-title">
           <div class = "row">
