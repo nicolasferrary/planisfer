@@ -24,7 +24,7 @@
 
   <div class="col-xs-12 col-md-8 car-left-padding">
     <% # beginning of user form %>
-    <%= form_tag member_registration_path(current_member, :order_id => @order.id, :trip_id => @trip.id), method: :patch do %>
+    <%= form_tag order_path(@order, :trip_id => @trip.id), method: :patch do %>
       <div class = "travel-infos-box">
         <div class = "travel-infos-title">
           <div class = "row">
@@ -75,7 +75,7 @@
                 <p class = "infos-left-text">Please send my travel documents to this e-mail address</p>
               </div>
               <div class = "col-sm-4" >
-                <%= text_field_tag "email", @default_values[:email], placeholder: "Email", class: "form-control" %>
+                <%= text_field_tag "email", current_member.email, placeholder: "Email", class: "form-control" %>
               </div>
             </div>
           </div>

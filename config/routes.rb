@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :round_trip_flights, only: [:create]
   resources :selections, only: [:create, :show]
   resources :airports
-  resources :orders, only: [:show, :create] do
+  resources :orders, only: [:show, :create, :update] do
     resources :payments, only: [:new, :create]
   end
   resources :users, only: [:create, :update]

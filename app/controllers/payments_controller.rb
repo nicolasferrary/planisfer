@@ -59,17 +59,17 @@ class PaymentsController < ApplicationController
 
   def define_default_values(order, nb)
     default_values ={}
-    if !order.member.nil?
-      default_values[:email] = order.member.mail
+    if !order.mail.nil?
+      default_values[:email] = order.mail
     else
       default_values[:email] = nil
     end
     for num in (1..nb)
       default_values["#{num}"] = {}
-      if !order.member.nil?
-        default_values["#{num}"][:title] = order.member.passengers["#{num}"][:title]
-        default_values["#{num}"][:first_name] = order.member.passengers["#{num}"][:first_name]
-        default_values["#{num}"][:name] = order.member.passengers["#{num}"][:name]
+      if !order.passengers.nil?
+        default_values["#{num}"][:title] = order.passengers["#{num}"][:title]
+        default_values["#{num}"][:first_name] = order.passengers["#{num}"][:first_name]
+        default_values["#{num}"][:name] = order.passengers["#{num}"][:name]
       else
         default_values["#{num}"][:title] = nil
         default_values["#{num}"][:first_name] = nil
