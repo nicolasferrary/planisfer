@@ -127,7 +127,7 @@
               </div>
             </div>
 
-            <%= form_tag order_path(@order, :trip_id => @trip.id), method: :patch do %>
+            <%= form_tag add_question_path, method: :get do %>
               <div class = "row">
                 <div class = 'email-form'>
                   <div class="col-md-8">
@@ -140,6 +140,8 @@
                   </div>
 
                   <div class="col-md-4">
+                    <%= hidden_field_tag 'trip_id', @trip.id %>
+                    <%= hidden_field_tag 'order_id', @order.id %>
                     <%= submit_tag 'SEND', class: 'btn-brand next-button', id: 'send-button' %>
                   </div>
                 </div>

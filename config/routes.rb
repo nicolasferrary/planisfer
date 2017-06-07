@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:show, :create, :update] do
     resources :payments, only: [:new, :create]
   end
+  get :add_question, to: "orders#add_question_to_order"
   resources :users, only: [:create, :update]
   resources :pois, only: [:show] do
     get :highlight_poi, to: "searches#highlight_poi"
