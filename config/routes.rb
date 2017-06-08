@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :members
+  devise_for :members,
+    controllers: { omniauth_callbacks: 'members/omniauth_callbacks' }
   get :check_referrer, to: "referrers#check"
   root to: 'pages#home'
   resources :searches, only: [:create, :show]
@@ -13,7 +14,6 @@ Rails.application.routes.draw do
     resources :payments, only: [:new, :create]
   end
   get :add_question, to: "orders#add_question_to_order"
-  resources :users, only: [:create, :update]
   resources :pois, only: [:show] do
     get :highlight_poi, to: "searches#highlight_poi"
   end

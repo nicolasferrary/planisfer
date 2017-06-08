@@ -13,7 +13,7 @@
 }
 
 .member-form-post{
-  padding: 0 0 100px 0;
+  padding: 20px 0 100px 0;
   border: none;
 }
 
@@ -81,10 +81,6 @@
   margin-left: auto;
 }
 
-.member-inputs{
-  padding-top:40px;
-}
-
 .referrer-input{
   padding-top:20px;
 }
@@ -115,4 +111,15 @@
 
 textarea.form-control{
   height: 100px;
+}
+
+.separator_with_text{
+  font-size: 1em;
+  color: $headings-color;
+  line-height: 40px;
+}
+
+.facebook-logo{
+  padding-right: 25px;
+  margin-left: -25px;
 }

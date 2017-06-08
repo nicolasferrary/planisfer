@@ -237,6 +237,7 @@
           data: {airport_colours: colours},
           dataType: "json",
           success: function(result) {
+            console.log(result);
             for (var i = 0; i < markers.length; i++) {
               markers[i].setMap(null);
               handler.removeMarkers(markers);
@@ -277,7 +278,6 @@
           data: {region_id: regionId},
           dataType: "json",
           success: function(result) {
-            // console.log('test')
             for (var i = 0; i < markers.length; i++) {
               markers[i].setMap(null);
               handler.removeMarkers(markers);
@@ -458,7 +458,6 @@
     // Retrieve the coordinates of the marker
     // in latlngs and convert them to pixels coordinates.
     // We'll use these coordinates to place the DIV.
-    console.log(this.marker_.serviceObject.position)
     var ne = overlayProjection.fromLatLngToDivPixel(this.marker_.serviceObject.position);
     // Position the DIV.
     var div = this.div_;
