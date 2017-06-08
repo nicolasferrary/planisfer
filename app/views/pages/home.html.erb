@@ -10,6 +10,8 @@
         <span class ="brand-name">Planisfer</span>
         <span class = "banner2-title">Explore the world your own way</span>
         <% if member_signed_in? %>
+          <% avatar_url = current_member.facebook_picture_url || "http://placehold.it/30x30" %>
+          <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <%= link_to destroy_member_session_path, method: :delete, class: 'log-out' do %>
             <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
           <% end %>
