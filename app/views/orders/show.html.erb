@@ -127,25 +127,44 @@
               </div>
             </div>
 
-            <%= form_tag user_path(@user, :order_id => @order.id, :trip_id => @trip.id), method: :patch do %>
+            <%= form_tag add_question_path, method: :get do %>
               <div class = "row">
                 <div class = 'email-form'>
                   <div class="col-md-8">
-                    <% if @user.call_time.nil? %>
-                      <%= text_field_tag :contact_time, nil, placeholder: "Email us", class: "form-control high-form", id:"text_field" %>
+                    <% if @order.question.nil? %>
+                      <%= text_field_tag :question, nil, placeholder: "Email us", class: "form-control high-form", id:"text_field" %>
                     <% else %>
-                      <%= text_field_tag :contact_time, nil, placeholder: "Thanks! We 'll get back soon.", class: "form-control high-form", id:"text_field" %>
+                      <%= text_field_tag :question, nil, placeholder: "Thanks! We 'll get back soon.", class: "form-control high-form", id:"text_field" %>
                    <% end %>
 
                   </div>
 
                   <div class="col-md-4">
+                    <%= hidden_field_tag 'trip_id', @trip.id %>
+                    <%= hidden_field_tag 'order_id', @order.id %>
                     <%= submit_tag 'SEND', class: 'btn-brand next-button', id: 'send-button' %>
                   </div>
                 </div>
 
               </div>
             <% end %>
+
+            <div class="modal fade" id="thanksModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header text-center">
+                    <h4 class="modal-title" id="myModalLabel">Thank you for contacting a travel coach</h4>
+                  </div>
+                  <div class="modal-body text-center  ">
+                    <p>He/she will get back to you in the next hours to help you plan the rest of your trip.</p>
+                    <p>In the meantime, feel free to continue exploring tips from other Planisfer members.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div class = "row">
               <div class="col-xs-12 text-center">
@@ -163,6 +182,12 @@
 </div>
 
 <% content_for(:after_js) do %>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#thanksModal').modal('show');
+    });
+  </script>
 
   <script>
     $(document).ready(function() {
