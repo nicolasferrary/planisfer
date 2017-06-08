@@ -30,6 +30,7 @@ gem 'money-rails'
 gem 'stripe'
 
 gem 'devise'
+gem 'omniauth-facebook'
 
 
 source 'https://rails-assets.org' do

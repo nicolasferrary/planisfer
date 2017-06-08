@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :members
+  devise_for :members,
+    controllers: { omniauth_callbacks: 'members/omniauth_callbacks' }
   get :check_referrer, to: "referrers#check"
   root to: 'pages#home'
   resources :searches, only: [:create, :show]
