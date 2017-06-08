@@ -1,5 +1,4 @@
 .high-form{
-  height:85px;
   width: 250px;
 }
 
@@ -112,4 +111,8 @@
 .facebook-form-text{
   color: $headings-color;
   padding-top: 75px;
+}
+
+textarea.form-control{
+  height: 100px;
 }

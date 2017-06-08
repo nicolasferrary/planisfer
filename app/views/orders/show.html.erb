@@ -132,9 +132,25 @@
                 <div class = 'email-form'>
                   <div class="col-md-8">
                     <% if @order.question.nil? %>
-                      <%= text_field_tag :question, nil, placeholder: "Email us", class: "form-control high-form", id:"text_field" %>
+                      <%= text_area_tag :question, nil, placeholder: "Ask any question you have on your trip and a travel coach will get back as soon as possible", class: "form-control high-form", id:"text_field" %>
                     <% else %>
                       <%= text_field_tag :question, nil, placeholder: "Thanks! We 'll get back soon.", class: "form-control high-form", id:"text_field" %>
+                      <div class="modal fade" id="thanksModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header text-center">
+                            <h4 class="modal-title" id="myModalLabel">Thank you for contacting a travel coach</h4>
+                          </div>
+                          <div class="modal-body text-center  ">
+                            <p>He/she will get back to you in the next hours to help you plan the rest of your trip.</p>
+                            <p>In the meantime, feel free to continue exploring tips from other Planisfer members.</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                    <% end %>
 
                   </div>
@@ -148,23 +164,6 @@
 
               </div>
             <% end %>
-
-            <div class="modal fade" id="thanksModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header text-center">
-                    <h4 class="modal-title" id="myModalLabel">Thank you for contacting a travel coach</h4>
-                  </div>
-                  <div class="modal-body text-center  ">
-                    <p>He/she will get back to you in the next hours to help you plan the rest of your trip.</p>
-                    <p>In the meantime, feel free to continue exploring tips from other Planisfer members.</p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <div class = "row">
               <div class="col-xs-12 text-center">

@@ -36,7 +36,9 @@ class SelectionsController < ApplicationController
     @currency = 'EUR'
 
     # Launch requests
-    @car_rentals = get_car_rentals_for_trip(@trip)
+    @unfiltered_car_rentals = get_car_rentals_for_trip(@trip)
+    # Exclude companies with hidden costs for fuel
+    @car_rentals = filter_companies(@unfiltered_car_rentals)
     # @car_rentals is an array of instances of car_rentals
     @categories = ["Mini", "Economy", "Compact", "Intermediate", "Fullsize", "Premium"]
     @best_car_rentals = []
@@ -205,6 +207,13 @@ class SelectionsController < ApplicationController
     else
       return "#{airport.cityname} (#{airport.name}) airport"
     end
+  end
+
+  def filter_companies(car_rentals)
+    if @region.name == "Andalucia" || @region.name == "Northern Spain"
+      car_rentals = car_rentals.delete_if { |rental| rental.company == "GOLDCAR" || rental.company == "GOLDCAR REN"}
+    end
+    car_rentals = car_rentals.delete_if { |rental| rental.company == "FOX RAC" || rental.company == "AUTO EUROPE" || rental.company == "ECONOMY"}
   end
 
 end
