@@ -2,7 +2,6 @@ class PagesController < ApplicationController
 
   def home
 
-    # @logged_in = false
 
     respond_to do |format|
       format.html {}
