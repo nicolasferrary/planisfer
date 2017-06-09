@@ -1,4 +1,8 @@
 @media only screen and (max-width: 1024px) {
+
+    .text-desktop{
+      display:none;
+    }
     #advantages {
       display: none;
     }
@@ -11,11 +15,15 @@
     .member-btn {
       margin-top: 0px;
     }
+    .form-post{
+      margin-bottom: 15px;
+    }
     .member-form-post {
       padding-bottom: 60px;
     }
     .home-text {
       margin-top: 20px;
+      margin-bottom: 0px;
     }
     .banner {
       height: 800px;
@@ -23,5 +31,29 @@
     .bottom-row{
       margin-left: 0px;
     }
+    .banner2-title{
+      font-size: 18px;
+    }
+    .non-logged-banner-title{
+      padding-left: 5px;
+    }
 
+    .referral-btn{
+      margin-top: 5px;
+    }
+
+    .bottom-row{
+      margin-right: 0px;
+    }
+
+    .home-banner-title{
+      margin-left: 5px;
+      border-bottom: none;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .text-mobile {
+      display: none;
+    }
 }
