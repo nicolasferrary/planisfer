@@ -368,13 +368,17 @@
   position: absolute;
   top: 70px;
   left: 10px;
+  padding-top: 30px;
+  span{
+    position: absolute;
+  }
 }
 
 .trip-card-content{
   position: absolute;
   top: 70px;
   right: 10px;
-  width: 185px;
+  width: 200px;
   font-size: 14px;
   h5{
     margin-top: 0;
@@ -404,4 +408,22 @@
 
 .trip-map-picture{
   height: 144px;
+}
+
+.itinerary-cities{
+  margin-left: 65px;
+  width: 120px;
+  p{
+    margin-bottom: 3px;
+    font-size: 14px;
+  }
+}
+
+.itinerary{
+  padding-top:25px;
+}
+
+.plus-minus{
+  position: absolute;
+  right: 5px;
 }
