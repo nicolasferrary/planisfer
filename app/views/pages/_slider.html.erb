@@ -13,7 +13,8 @@
         </div>
 
         <div class="modal-body text-center">
-          <p><%= this_region.description %></p>
+          <%= image_tag "heart.png", class:"favourite-heart heart-padded " %><span class = 'italic'> Planisfer members have left tips & suggestions of itineraries in <%= this_region.name %>. Get access to them, once your transports are booked. </span>
+          <p class = 'description'><%= this_region.description %></p>
 
 
           <!-- Beginning of the slider -->
