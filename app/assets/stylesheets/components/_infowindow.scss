@@ -1,5 +1,5 @@
 .poi-image {
-  width: 200px;
+  width: 250px;
   height: auto;
 }
 
@@ -18,4 +18,7 @@
 
 .description-list {
   padding-left: 12px;
+  li{
+    margin-bottom: 5px;
+  }
 }
