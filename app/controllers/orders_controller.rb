@@ -185,7 +185,7 @@ class OrdersController < ApplicationController
       marker.infowindow render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => poi})
       # marker.json { :id => poi.id }
       marker.picture({
-                  :url => view_context.image_url("dot_marker.svg"),
+                  :url => view_context.image_url("heart-small.png"),
                   :width   => 39,
                   :height  => 34,
                  })
