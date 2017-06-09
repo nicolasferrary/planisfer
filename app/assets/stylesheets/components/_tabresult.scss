@@ -126,13 +126,14 @@
   color: #bfbfbf;
 }
 
+
 .card-description {
   display: flex;
   flex: 1;
   &-item {
     flex: 0 0 35%;
     &:nth-child(2) {
-      flex: 0 0 35%;
+      flex: 0 0 0%;
     }
     span.hours {
       margin-right: 5px;

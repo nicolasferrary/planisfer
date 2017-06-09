@@ -14,6 +14,7 @@
     if($(window).width() <= 1024){
       $('#member-form').removeClass('sticky-form');
       $('.sticky-form').removeClass('sticky-form');
+      $('.airport-map').removeClass('airport-map');
     }
   })
 

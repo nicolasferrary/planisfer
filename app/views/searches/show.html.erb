@@ -6,10 +6,10 @@
           <%= image_tag "blue_logo_no_word.png", class: "logo"%>
         <% end %> </span>
         <span class ="brand-name">Planisfer</span>
-        <span class = "banner2-title">Welcome to <%= @region.name %>!</span> <span class = "banner2-title">Let's first book your flights</span>
+        <span class = "banner2-title">Welcome to <%= @region.name %>!</span>  <span class = "banner2-title">Let's first book your flights</span>
       </div>
     </div>
-  <span class = "booking-status">
+  <span class = "booking-status text-desktop">
     <%= render 'shared/booking_status', :status => 2 %>
   </span>
 </div>
@@ -65,7 +65,7 @@
                   <div class = "row">
                     <div class="filter-slider">
 
-                      <div class = 'col-md-6'>
+                      <div class = 'col-xs-12 col-md-6'>
                         <div class = "filer-slider-item">
             <!-- A priori la div ci dessous n'est pas utile -->
                           <div class = "filter-box">
@@ -86,7 +86,7 @@
                         </div>
                       </div>
 
-                      <div class = 'col-md-6'>
+                      <div class = 'col-xs-12 col-md-6'>
                         <div class="filter-slider-item">
                           <div class = "filter-box">
                             <h5 class = "text-center" > From <strong> <%= @region.name %> </strong> to <strong> <%= @city_real_name %></strong></h5>
@@ -151,7 +151,7 @@
     </div> <!-- fin du displaytrips -->
 
 
-    <div class = "row">
+    <div class = "row text-desktop">
       <%= render 'shared/favourites', :region => @region %>
     </div>
 
@@ -163,8 +163,12 @@
       <img><%= image_tag "airport-black.svg", class: "legend_airport" %> Airports </img>
     </div>
     <div class="airport-map">
-      <div id="map", style="width: 100%; height: 500px;"></div>
+      <div class = "mobile-airport-map" id="map", style="width: 100%; height: 500px;"></div>
     </div>
+  </div>
+
+  <div class = "row text-mobile">
+    <%= render 'shared/favourites', :region => @region %>
   </div>
 
 </div>

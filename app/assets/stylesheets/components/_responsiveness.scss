@@ -1,5 +1,4 @@
 @media only screen and (max-width: 1024px) {
-
     .text-desktop{
       display:none;
     }
@@ -37,22 +36,60 @@
     .non-logged-banner-title{
       padding-left: 5px;
     }
-
     .referral-btn{
       margin-top: 5px;
     }
-
     .bottom-row{
       margin-right: 0px;
     }
-
     .home-banner-title{
       margin-left: 5px;
       border-bottom: none;
     }
-
     .home-modal{
       width: auto;
+    }
+    .page-banner{
+      border-bottom: none;
+    }
+    .page-banner-title{
+      margin-left: 0px;
+      .banner2-title{
+        font-size: 12px;
+        padding-left: 10px;
+      }
+    }
+    .result-card{
+      font-size: 12px;
+    }
+    .card-price{
+      font-size: 12px;
+      width: 45px;
+    }
+    .page-result{
+      padding-top: 0px;
+      padding-right: 0px;
+    }
+    .cardContainer{
+      padding-left: 5px;
+    }
+    #all-flights{
+      font-size:14px;
+    }
+    #more-flights{
+      font-size:14px;
+    }
+    .legends{
+      font-size: 11px;
+    }
+    #poi-title{
+      span{
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+    .mobile-airport-map{
+      margin-bottom: 30px;
     }
 }
 
