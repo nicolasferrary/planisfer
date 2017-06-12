@@ -71,6 +71,10 @@
     }
     .cardContainer{
       padding-left: 5px;
+
+    }
+    .padding-for-mobile{
+      padding-top:50px;
     }
     #all-flights{
       font-size:14px;
@@ -137,7 +141,7 @@
       width: 300px;
     }
     .popover{
-      max-width: 180%;
+      max-width: 210%;
     }
     #recap-zone{
       margin-bottom: 50px;
@@ -173,7 +177,21 @@
     }
     .passenger-box-sizing{
       padding-right: 0px;
+      padding-left: 2px;
       font-size: 12px;
+    }
+    .flight-card-price{
+      top: 2px;
+    }
+    .card-description {
+      &-item {
+        &:nth-child(1) {
+          flex: 0 0 40%;
+        }
+        &:nth-child(3) {
+          flex: 0 0 40%;
+        }
+      }
     }
 }
 
