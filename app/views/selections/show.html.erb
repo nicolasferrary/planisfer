@@ -137,6 +137,14 @@
 
   <script>
     $(document).ready(function() {
+      if($(window).width() <= 1024){
+        $('.selected').removeClass('selected');
+      }
+    })
+  </script>
+
+  <script>
+    $(document).ready(function() {
       $('.card').mouseenter(function(e) {
         e.preventDefault();
         $('.card.selected').removeClass('selected');
