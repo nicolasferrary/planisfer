@@ -139,6 +139,7 @@ color: $brand-color;
 .vertical-align{
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .right-float{

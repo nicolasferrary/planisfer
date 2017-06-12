@@ -10,11 +10,13 @@
         <span class ="brand-name">Planisfer</span>
         <span class = "banner2-title">Explore the world your own way</span>
         <% if member_signed_in? %>
-          <% avatar_url = current_member.facebook_picture_url || "http://placehold.it/30x30" %>
-          <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
-          <%= link_to destroy_member_session_path, method: :delete, class: 'log-out' do %>
-            <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-          <% end %>
+          <div class = "text-desktop">
+            <% avatar_url = current_member.facebook_picture_url || "http://placehold.it/30x30" %>
+            <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+            <%= link_to destroy_member_session_path, method: :delete, class: 'log-out' do %>
+              <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>
@@ -22,54 +24,10 @@
 
   <div class = "row">
 
-    <div class = "col-md-8">
-      <div class = "home-text">
+    <div class = "col-md-4 col-md-push-8">
+      <div class = "home-text text-mobile">
         <h2 class="home-main-title"><strong>Prepare and book fully customized trips</strong></h2>
       </div>
-      <div class = "row">
-
-        <div class = "col-xs-10 col-xs-offset-1">
-          <div class = "how-icons" id="how">
-            <div class = "row">
-              <div class = "col-md-3 text-center">
-                <p class="how-to-badge">1</p>
-                <p><strong>Book your flights (return or multi-destination)</strong></p>
-              </div>
-              <!-- <div class = "col-md-5">
-                <div class = "text-center">
-                  <div class = "how-image-container" id = "image2">
-                    <div class="badge">2</div>
-                  </div>
-                  <p><strong>Explore its landmarks & hidden gems</strong></p>
-                </div>
-              </div> -->
-              <div class = "col-md-3 text-center">
-                <p class="how-to-badge">2</p>
-                <p><strong>Book your car</strong></p>
-              </div>
-              <div class = "col-md-3 text-center">
-                <p class="how-to-badge">3</p>
-                <p><strong>Personalize your trip with the tips of other travelers</strong></p>
-              </div>
-              <div class = "col-md-3 text-center">
-                <p class="how-to-badge">4</p>
-                <p><strong>Planisfer travel coaches are here to help</strong></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class = "row">
-        <div class="col-md-12">
-          <%= render 'shared/destinations' %>
-        </div> <!-- fin du 2e col-xs-12 principal -->
-      </div>
-
-    </div>
-
-    <div class = "col-md-4">
 
       <div class="sticky-form">
         <div class="form-post">
@@ -189,6 +147,74 @@
       </div> <!-- fin de sticky-form -->
     </div>
 
+    <div class = "col-md-8 col-md-pull-4">
+      <div class = "home-text text-desktop">
+        <h2 class="home-main-title"><strong>Prepare and book fully customized trips</strong></h2>
+      </div>
+      <div class = "row text-desktop">
+
+        <div class = "col-xs-10 col-xs-offset-1">
+          <div class = "how-icons" id="how">
+            <div class = "row">
+              <div class = "col-md-3 text-center">
+                <p class="how-to-badge">1</p>
+                <p><strong>Book your flights (return or multi-destination)</strong></p>
+              </div>
+              <div class = "col-md-3 text-center">
+                <p class="how-to-badge">2</p>
+                <p><strong>Book your car</strong></p>
+              </div>
+              <div class = "col-md-3 text-center">
+                <p class="how-to-badge">3</p>
+                <p><strong>Personalize your trip with the tips of other travelers</strong></p>
+              </div>
+              <div class = "col-md-3 text-center">
+                <p class="how-to-badge">4</p>
+                <p><strong>Planisfer travel coaches are here to help</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class = "row">
+        <div class="col-md-12">
+          <%= render 'shared/destinations' %>
+        </div> <!-- fin du 2e col-xs-12 principal -->
+      </div>
+
+      <div class = "row text-mobile">
+
+        <div class = "col-xs-10 col-xs-offset-1">
+          <div class = "how-icons" id="how">
+            <h4 class = "row text-mobile text-center">
+              How it works
+            </h4>
+            <div class = "row">
+              <div class = "col-xs-6 col-md-3 text-center how-to-element">
+                <p class="how-to-badge">1</p>
+                <p><strong>Book your flights (return or multi-destination)</strong></p>
+              </div>
+              <div class = "col-xs-6 col-md-3 text-center how-to-element">
+                <p class="how-to-badge">2</p>
+                <p><strong>Book your car</strong></p>
+              </div>
+              <div class = "col-xs-6 col-md-3 text-center how-to-element">
+                <p class="how-to-badge">3</p>
+                <p><strong>Personalize your trip with the tips of other travelers</strong></p>
+              </div>
+              <div class = "col-xs-6 col-md-3 text-center how-to-element">
+                <p class="how-to-badge">4</p>
+                <p><strong>Planisfer travel coaches are here to help</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 </div>
 
@@ -237,7 +263,7 @@
         <div class="footer text-center">
           <div class="container">
             <div class="row">
-              <div class="col-xs-4 col-xs-offset-4">
+              <div class="col-xs-12">
                 <div class="text-footer">
                   <ul class="list-unstyled list-inline">
                     <li>
@@ -247,8 +273,6 @@
                     </li>
                     <!-- <li> Mentions légales </li> -->
                   </ul>
-                  <br>
-                  Made with <i class="fa fa-heart"></i> @LeWagon
                 </div>
               </div>
             </div>
@@ -287,6 +311,16 @@
 
 
 <%= content_for :after_js do %>
+
+<script>
+  $(document).ready(function() {
+    if($(window).width() <= 1024){
+      $('.lg').removeClass('lg');
+      $('sticky-form').removeClass('sticky-form');
+    }
+  })
+</script>
+
 <script>
 
   $(document).ready(function() {
@@ -434,7 +468,6 @@ $(".radio-b").mousedown(function() {
     $("Andalucia").wrap('<span/>');
   })
 </script>
-
 
 <% end %>
 

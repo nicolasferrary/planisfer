@@ -1,4 +1,7 @@
 @media only screen and (max-width: 1024px) {
+    .text-desktop{
+      display:none;
+    }
     #advantages {
       display: none;
     }
@@ -11,11 +14,15 @@
     .member-btn {
       margin-top: 0px;
     }
+    .form-post{
+      margin-bottom: 15px;
+    }
     .member-form-post {
       padding-bottom: 60px;
     }
     .home-text {
       margin-top: 20px;
+      margin-bottom: 0px;
     }
     .banner {
       height: 800px;
@@ -23,5 +30,119 @@
     .bottom-row{
       margin-left: 0px;
     }
+    .banner2-title{
+      font-size: 18px;
+    }
+    .non-logged-banner-title{
+      padding-left: 5px;
+    }
+    .referral-btn{
+      margin-top: 5px;
+    }
+    .bottom-row{
+      margin-right: 0px;
+    }
+    .home-banner-title{
+      margin-left: 5px;
+      border-bottom: none;
+    }
+    .home-modal{
+      width: auto;
+    }
+    .page-banner{
+      border-bottom: none;
+    }
+    .page-banner-title{
+      margin-left: 0px;
+      .banner2-title{
+        font-size: 12px;
+        padding-left: 10px;
+      }
+    }
+    .result-card{
+      font-size: 12px;
+    }
+    .card-price{
+      font-size: 12px;
+      width: 45px;
+    }
+    .page-result{
+      padding-top: 0px;
+    }
+    .cardContainer{
+      padding-left: 5px;
+    }
+    #all-flights{
+      font-size:14px;
+    }
+    #more-flights{
+      font-size:14px;
+    }
+    .legends{
+      font-size: 11px;
+    }
+    #poi-title{
+      span{
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+    .mobile-airport-map{
+      margin-bottom: 30px;
+    }
+    .recap-opacity{
+      opacity: 1;
+    }
+    .car-left-padding{
+      margin-bottom: 50px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .main-background{
+      height: 50%;
+    }
+    .small-car-logo{
+      width: 40px;
+    }
+    #car-recap-text{
+      font-size: 14px;
+    }
+    .main-photo-container{
+      height: 100px;
+    }
 
+    .recommendation-box{
+      padding:5px;
+    }
+    .price-and-book{
+      bottom:0px;
+    }
+    .car-page-title h5{
+      font-size: 12px;
+    }
+    .car-card{
+      height: 120px;
+    }
+    .card-background{
+      height: 80%;
+    }
+    .car-cards-partial{
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+    .popover{
+      font-size: 12px;
+    }
+    .popover-card-container{
+      width: 300px;
+    }
+    .popover{
+      max-width: 180%;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .text-mobile {
+      display: none;
+    }
 }

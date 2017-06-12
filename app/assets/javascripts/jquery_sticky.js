@@ -13,8 +13,13 @@
  (function() {
     if($(window).width() <= 1024){
       $('#member-form').removeClass('sticky-form');
+      $('.sticky-form').removeClass('sticky-form');
+      $('.airport-map').removeClass('airport-map');
     }
   })
+
+
+
 
 (function (factory) {
     if (typeof define === 'function' && define.amd) {

@@ -1,4 +1,10 @@
 $(document).ready(function(){
+
+  if($(window).width() <= 1024){
+    $('.lg').removeClass('lg');
+    $('.sticky-form').removeClass('sticky-form');
+  }
+
   $(".sticky-form").sticky({topSpacing:40});
 });
 

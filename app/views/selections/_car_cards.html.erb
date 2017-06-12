@@ -2,7 +2,7 @@
 <div class="row">
 
   <% if @car_selection[:mini] != [] %>
-    <div class="col-xs-12 col-sm-6">
+    <div class="col-xs-6">
       <div class="car-card center-block">
         <div class = "car-card-title">
           <span>Mini</span>
@@ -12,13 +12,13 @@
         </div>
         <div style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("mini.jpg") %>)'; class = "card-background">
         </div>
-        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["mini"] ) %>
+        <%= link_to('' , '#car-partial-link', :class => "popover-link", :rel => "popover", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["mini"] ) %>
       </div>
     </div>
   <% end %>
 
   <% if @car_selection[:economy] != [] %>
-    <div class="col-xs-12 col-sm-6">
+    <div class="col-xs-6">
       <div class="car-card center-block">
         <div class = "car-card-title">
           <span>Economy</span>
@@ -28,13 +28,13 @@
         </div>
         <div style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("economy.jpg") %>)'; class = "card-background">
         </div>
-        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["economy"] ) %>
+        <%= link_to('' , '#car-partial-link', :class => "popover-link", :rel => "popover", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["economy"] ) %>
       </div>
     </div>
   <% end %>
 
   <% if @car_selection[:compact] != [] %>
-    <div class="col-xs-12 col-sm-6">
+    <div class="col-xs-6">
       <div class="car-card center-block">
         <div class = "car-card-title">
           <span>Compact</span>
@@ -44,13 +44,13 @@
         </div>
         <div style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("compact.jpg") %>)'; class = "card-background">
         </div>
-        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["compact"] ) %>
+        <%= link_to('' , '#car-partial-link', :class => "popover-link", :rel => "popover", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["compact"] ) %>
       </div>
     </div>
   <% end %>
 
   <% if @car_selection[:intermediate] != [] %>
-    <div class="col-xs-12 col-sm-6">
+    <div class="col-xs-6">
       <div class="car-card center-block">
         <div class = "car-card-title">
           <span>Intermediate</span>
@@ -60,13 +60,13 @@
         </div>
         <div style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("intermediate.jpg") %>)'; class = "card-background">
         </div>
-        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["intermediate"] ) %>
+        <%= link_to('' , '#car-partial-link', :class => "popover-link", :rel => "popover", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["intermediate"] ) %>
       </div>
     </div>
   <% end %>
 
   <% if @car_selection[:fullsize] != [] %>
-    <div class="col-xs-12 col-sm-6">
+    <div class="col-xs-6">
       <div class="car-card center-block">
         <div class = "car-card-title">
           <span>Fullsize</span>
@@ -76,13 +76,13 @@
         </div>
         <div style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("fullsize.jpg") %>)'; class = "card-background">
         </div>
-        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["fullsize"] ) %>
+        <%= link_to('' , '#car-partial-link', :class => "popover-link", :rel => "popover", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["fullsize"] ) %>
       </div>
     </div>
   <% end %>
 
   <% if @car_selection[:premium] != [] %>
-    <div class="col-xs-12 col-sm-6">
+    <div class="col-xs-6">
       <div class="car-card center-block">
         <div class = "car-card-title">
           <span>Premium</span>
@@ -92,7 +92,7 @@
         </div>
         <div style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("premium.jpg") %>)'; class = "card-background">
         </div>
-        <%= link_to('' , '#', :class => "popover-link", :rel => "popover", :"data-placement" => "right", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["premium"] ) %>
+        <%= link_to('' , '#car-partial-link', :class => "popover-link", :rel => "popover", :"data-trigger" => "manual", :"data-content" =>  @popover_partials["premium"] ) %>
       </div>
     </div>
   <% end %>
@@ -100,43 +100,6 @@
 
 <% content_for(:after_js) do %>
 
-  <script>
-    $(document).ready(function() {
-      $('.popover-link').popover({ html : true});
-      $('.popover-link').mouseenter(function(){
-        var _this = this;
-        $(this).popover('show');
-        $('.car-result-card').mouseenter('click', function(e) {
-          e.preventDefault();
-          $('.cardContainer.selected').removeClass('selected');
-          $(this).children('.cardContainer').addClass('selected');
-        });
-        $('.car-result-card').on('click', function(e) {
-          e.preventDefault();
-          $('.popover-card-container').addClass('hidden');
-          $(this).children('.popover-card-link').removeClass('hidden');
-        });
-        $(".popover").on("mouseleave", function () {
-          $(_this).popover('hide');
-      });
-      });
-      $('.popover-link').mouseleave(function(){
-        var _this = this;
-        setTimeout(function () {
-          if (!$(".popover:hover").length) {
-              $(_this).popover("hide");
-          }
-        }, 300);
-      });
-    });
-
-  </script>
-
-  <script>
-    $(document).ready(function() {
-
-    });
-  </script>
 
 <% end  %>
 

@@ -4,10 +4,10 @@
 
 <div class="col-md-12">
   <div class="trending text-center" id="trendy-destination">
-    <div class = "row">
-      <div class="blocks">
-        <% region.pois.each do |poi| %>
-          <div class = 'col-lg-4 col-sm-6'>
+    <div class="blocks center-block">
+      <% region.pois.each do |poi| %>
+        <div class = 'col-lg-4 col-sm-6 smaller-padding'>
+          <a href="#map">
             <span class="block xsm destination" data-toggle="modal" data-target="#modal_1">
               <%= image_tag "#{region.name.downcase.gsub(/\ /, '-')}/#{poi.downcase.gsub(/\ /, '-')}.jpg", class:"dest-image"%>
               <span class="box poi-card" data-poi = "<%= Poi.find_by_name(poi.strip).id %>"  data-region = "<%= region.id %>">
@@ -16,9 +16,22 @@
                 </span>
               </span>
             </span>
-          </div>
-        <% end %>
-      </div> <!-- fin du blocks -->
-    </div>
+          </a>
+        </div>
+      <% end %>
+    </div> <!-- fin du blocks -->
   </div> <!-- fin du trending -->
 </div> <!-- fin du 2e col-xs-12 principal -->
+
+<%= content_for :after_js do %>
+
+  <script>
+    $(document).ready(function() {
+      if($(window).width() <= 1024){
+        $('.block').removeClass('xsm');
+        $('.block').addClass('sm');
+      }
+    })
+  </script>
+
+<% end %>
