@@ -8,7 +8,7 @@
       <span class = "banner2-title">Let's plan the details of your trip to <%= @region.name %>!</span>
     </div>
   </div>
-  <span class = "booking-status">
+  <span class = "booking-status text-desktop">
     <%= render 'shared/booking_status', :status => 4 %>
   </span>
 </div>
@@ -34,7 +34,7 @@
               <div class="card trip-card">
                 <div class="trip-length">Nicolas' trip - 10 days</div>
                 <div class="trip-map">
-                  <span class = 'itinerary'> <%= image_tag 'road.png' %></span>
+                  <span class = 'itinerary'> <%= image_tag 'road.png', class: 'road-image' %></span>
                   <span class = "itinerary-cities">
                     <p>Ronda <span class = "plus-minus">++</span></p>
                     <p>White villages <span class = "plus-minus">++</span></p>
@@ -76,7 +76,7 @@
               <div class="card trip-card">
                 <div class="trip-length">Marine's trip - 8 days</div>
                 <div class="trip-map">
-                  <span class = 'itinerary'> <%= image_tag 'road.png' %></span>
+                  <span class = 'itinerary'> <%= image_tag 'road.png', class: 'road-image' %></span>
                   <span class = "itinerary-cities">
                     <p>x <span class = "plus-minus">++</span></p>
                     <p>x <span class = "plus-minus">++</span></p>
@@ -238,30 +238,6 @@
         },
       );
     });
-
-    $('.poi-card').mouseenter('click', function(e) {
-      e.preventDefault();
-      var poiId = $(this).data('poi');
-      var regionId = $(this).data('region');
-      $.ajax({
-        type: "GET",
-        url: '/pois/' + poiId + '/highlight_poi',
-        data: {region_id: regionId},
-        dataType: "json",
-        success: function(result) {
-          // console.log('test')
-          for (var i = 0; i < markers.length; i++) {
-            markers[i].setMap(null);
-            handler.removeMarkers(markers);
-          }
-          markers = handler.addMarkers(result);
-          var marker = markers[0];
-          new google.maps.event.trigger( marker.serviceObject, 'click' );
-        }
-      })
-      handler.bounds.extendWith(markers);
-      handler.fitMapToBounds();
-    })
 
   </script>
 
