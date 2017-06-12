@@ -32,7 +32,7 @@
               <h3> <%= @main_car_title %> </h3>
             </div>
 
-            <h5 id = "car-recap-text"> <%= @main_car_airports_titles[0] %> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  <span class="fa fa-long-arrow-right car-selection-arrow" aria-hidden="true"></span> <%= @main_car_airports_titles[1] %> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %>
+            <h5 id = "car-recap-text"> <%= @main_car_airports_titles[0] %> - <%= Time.parse(@pick_up_date_time).strftime('%b %d') %>  <span class="fa fa-long-arrow-right car-selection-arrow text-desktop" aria-hidden="true"></span> <br class = 'text-mobile'> <span class = 'text-mobile'> to </span> <br class = 'text-mobile'><%= @main_car_airports_titles[1] %> - <%= Time.parse(@drop_off_date_time).strftime('%b %d') %>
             </h5>
 
 

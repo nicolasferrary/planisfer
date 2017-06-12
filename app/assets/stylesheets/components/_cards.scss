@@ -226,6 +226,10 @@
   box-shadow: 1px 1px 1px #5d5d5d;
 }
 
+.popover-reco{
+  margin: auto;
+}
+
 
 .car-page-title{
   h3 {
@@ -267,6 +271,7 @@
   position: absolute;
   bottom: 0px;
   border-radius: 0 0 5px 5px;
+  background-position: center center;
 }
 
 .main-background{
@@ -312,6 +317,7 @@
 .main-photo-container{
   height: 200px;
   background-size: cover !important;
+  background-position: center center;
 }
 
 #main-car-container{
@@ -344,7 +350,7 @@
 }
 
 .popover{
-  max-width: 110%
+  max-width: 125%
 }
 
 .similar{
