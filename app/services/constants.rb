@@ -974,7 +974,7 @@ ONEWAYMARKUP = {
     "FIREFLY" => 300,
     "INTERRENT" => 300,
     "ACE" => 150,
-    "AUTO" => "EUROPE" => 300,
+    "AUTO EUROPE" => 300,
     "CENTAURO" => 300,
     "EUROMOBIL" => 300,
     "FOX RAC" => 300,
@@ -986,7 +986,7 @@ ONEWAYMARKUP = {
     "EASIRENT" => 300,
     "ADVANTAGE" => 300
   },
-  "Catalonia" => {
+  "Andalucia" => {
     "ALAMO" => 25,
     "ENTERPRISE" => 25,
     "EUROPCAR" => 0,
@@ -1000,7 +1000,7 @@ ONEWAYMARKUP = {
     "FIREFLY" => 300,
     "INTERRENT" => 300,
     "ACE" => 150,
-    "AUTO" => "EUROPE" => 300,
+    "Auto EUROPE" => 300,
     "CENTAURO" => 300,
     "EUROMOBIL" => 300,
     "FOX RAC" => 300,
@@ -1279,7 +1279,7 @@ ONEWAYMARKUP = {
     "EASIRENT" => 300,
     "ADVANTAGE" => 300
   },
-  "Romania" => {,
+  "Romania" => {
     "ALAMO" => 70,
     "ENTERPRISE" => 70,
     "EUROPCAR" => 300,
@@ -1306,7 +1306,7 @@ ONEWAYMARKUP = {
     "ADVANTAGE" => 300
   },
 
-  "Scotland" => {,
+  "Scotland" => {
     "ALAMO" => 300,
     "ENTERPRISE" => 300,
     "EUROPCAR" => 63,

@@ -220,8 +220,8 @@ class SelectionsController < ApplicationController
   def apply_one_way_markup(car_rentals, region)
     # pour chaque car_rental
     car_rentals.each do |rental|
-      if Constants::ONEWAYMARKUP['region.name'].keys.includes?(rental.company)
-        rental.price = rental.price + Constants::ONEWAYMARKUP['region.name']['rental.company']
+      if Constants::ONEWAYMARKUP[region.name].keys.include?(rental.company)
+        rental.price = rental.price.to_f + Constants::ONEWAYMARKUP[region.name][rental.company].to_f
         rental.save
       else
         car_rentals.delete(rental)
