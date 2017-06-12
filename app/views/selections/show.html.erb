@@ -16,6 +16,12 @@
 
 <div class="container-fluid page-result">
 
+  <div class="col-xs-12 <%= 'text-mobile' if !@trip.car_rental.nil?%> <%= 'hidden' if @trip.car_rental.nil? %>">
+    <div id = "recap-zone" class = "<%= 'recap-opacity' if @recap_opacity == 1 %>">
+      <%= render "shared/recap", :payment_page => false%>
+    </div>
+  </div>
+
   <div class="col-xs-12 col-md-8 car-left-padding">
     <div id = "car-zone" class = "<%= 'recap-opacity' if @recap_opacity == 0 %>">
 
@@ -116,7 +122,7 @@
     </div>
   </div>
 
-  <div class="col-xs-12 col-md-4">
+  <div class="col-xs-12 col-md-4 <%= 'text-desktop' if !@trip.car_rental.nil?%>">
     <div id = "recap-zone" class = "<%= 'recap-opacity' if @recap_opacity == 1 %>">
       <%= render "shared/recap", :payment_page => false%>
     </div>
@@ -124,35 +130,6 @@
 
 </div>
 
-
-<% # début du wrapper %>
-<div class = "card-wrapper">
-  <% # début du container %>
-  <div class="container-fluid">
-
-    <div class="row">
-      <% # Début case bootstrap formulaire et cards %>
-      <div class="col-xs-12 col-sm-8">
-
-        <div class = "row">
-
-        </div>
-
-      </div>
-      <% # Fin de la case bootstrap pour les formulaires et cards %>
-
-
-      <% # Début case bootstrap Carnet de voyage %>
-
-      <% #Fin case bootstrap Carnet de voyage  %>
-
-    </div>
-    <% # Find de la row %>
-
-  </div>
-  <% # Find du container %>
-</div>
- <% # Find du wrapper %>
 
 
 
@@ -224,6 +201,38 @@
       // $("#hide-filters").addClass("hidden");
     };
   };
+</script>
+
+<script>
+  $(document).ready(function() {
+    $('.popover-link').popover({ html : true, placement: "top"});
+    $('.popover-link').mouseenter(function(){
+      var _this = this;
+      $(this).popover('show');
+      $('.car-result-card').mouseenter('click', function(e) {
+        e.preventDefault();
+        $('.cardContainer.selected').removeClass('selected');
+        $(this).children('.popover-card-container').addClass('selected');
+      });
+      $('.car-result-card').on('click', function(e) {
+        e.preventDefault();
+        $('.popover-card-container').addClass('hidden');
+        $(this).children('.popover-card-link').removeClass('hidden');
+      });
+      $(".popover").on("mouseleave", function () {
+        $(_this).popover('hide');
+    });
+    });
+    $('.popover-link').mouseleave(function(){
+      var _this = this;
+      setTimeout(function () {
+        if (!$(".popover:hover").length) {
+            $(_this).popover("hide");
+        }
+      }, 300);
+    });
+  });
+
 </script>
 
 <% end %>
