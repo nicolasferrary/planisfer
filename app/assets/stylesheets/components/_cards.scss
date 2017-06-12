@@ -237,7 +237,6 @@
 
 .car-card{
   height: 230px;
-  width: 350px;
   position: relative;
   margin-bottom: 20px;
   color: #333333;
@@ -264,7 +263,7 @@
 .card-background{
   background-size: cover;
   height: 85%;
-  width: 350px;
+  width: 100%;
   position: absolute;
   bottom: 0px;
   border-radius: 0 0 5px 5px;
@@ -312,6 +311,7 @@
 
 .main-photo-container{
   height: 200px;
+  background-size: cover !important;
 }
 
 #main-car-container{

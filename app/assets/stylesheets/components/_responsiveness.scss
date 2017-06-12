@@ -68,7 +68,6 @@
     }
     .page-result{
       padding-top: 0px;
-      padding-right: 0px;
     }
     .cardContainer{
       padding-left: 5px;
@@ -102,8 +101,30 @@
     .main-background{
       height: 50%;
     }
+    .small-car-logo{
+      width: 40px;
+    }
+    #car-recap-text{
+      font-size: 14px;
+    }
+    .main-photo-container{
+      height: 100px;
+    }
+
+    .recommendation-box{
+      padding:5px;
+    }
+    .price-and-book{
+      bottom:0px;
+    }
+    .car-page-title h5{
+      font-size: 12px;
+    }
+    .car-card{
+      height: 120px;
+    }
     .card-background{
-      width: 175px;
+      height: 80%;
     }
 }
 
