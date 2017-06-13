@@ -215,6 +215,7 @@
   $(document).ready(function() {
     $('.popover-link').popover({ html : true, placement: "top"});
     $('.popover-link').mouseenter(function(){
+      $('popover').popover('hide');
       var _this = this;
       $(this).popover('show');
       $('.car-result-card').mouseenter('click', function(e) {
@@ -225,11 +226,13 @@
       $('.car-result-card').on('click', function(e) {
         e.preventDefault();
         $('.popover-card-container').addClass('hidden');
-        $(this).children('.popover-card-link').removeClass('hidden');
+        $(this).children('.popover-card-container').removeClass('hidden');
+        $(this).children('.popover-card-container').addClass('highcontainer');
+        $(this).children('.popover-card-container').children('.popover-card-link').removeClass('hidden');
       });
       $(".popover").on("mouseleave", function () {
         $(_this).popover('hide');
-    });
+      });
     });
     $('.popover-link').mouseleave(function(){
       var _this = this;
@@ -237,7 +240,7 @@
         if (!$(".popover:hover").length) {
             $(_this).popover("hide");
         }
-      }, 300);
+      }, 50);
     });
   });
 

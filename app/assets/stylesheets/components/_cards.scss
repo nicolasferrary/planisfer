@@ -18,9 +18,20 @@
 }
 
 .popover-card-container{
+
+  color: black;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  box-shadow: 1px 1px 1px #c7c7c7;
+  background: white;
+  padding: 15px;
   width: 400px;
   margin-bottom: 5px;
   height: 50px;
+}
+.popover-card-container {
+  height: auto;
 }
 
 .card-description p{
@@ -39,6 +50,10 @@
   font-size: 17px;
   border-radius: 0;
   width: 75px;
+}
+
+.popover-card-price{
+  position: relative;
 }
 
 .flight-card-price {
@@ -138,10 +153,6 @@
 //   font-size: 10px;
 //   }
 
-.company-logo{
-  position: absolute;
-  left: 10px;
-}
 
 .seats-infos{
   position: absolute;
@@ -227,7 +238,16 @@
 }
 
 .popover-reco{
-  margin: auto;
+  color: #333333;
+  text-decoration: none;
+  padding-top: 30px;
+  h4 {
+    color: $orange;
+  }
+  ul {
+    padding-left: 20px;
+    font-size: 14px;
+  }
 }
 
 
@@ -347,6 +367,7 @@
 
 .popover-card-desc{
   align-items: center;
+  justify-content: space-between;
 }
 
 .popover{
