@@ -3,56 +3,10 @@ class CarRental < ApplicationRecord
   monetize :price_cents
 
   has_many :trips
-  belongs_to :selection
+  belongs_to :selection, optional: true
 
 
   class << self
-
-    def create_from_sabre(data, data_rental, pick_up_date_time, drop_off_date_time)
-      car_rental = CarRental.new
-      car_rental.price = extract_price_from_sabre(data_rental)
-      car_rental.currency = extract_currency_from_sabre(data_rental)
-      car_rental.pick_up_location = extract_pick_up_address_from_sabre(data)
-      car_rental.drop_off_location = extract_drop_off_address_from_sabre(data)
-      car_rental.pick_up_date_time = pick_up_date_time
-      car_rental.drop_off_date_time = drop_off_date_time
-      car_rental.company = extract_company_from_sabre(data_rental)
-      sipp = data_rental["VehAvailCore"]["RentalRate"]["Vehicle"]["VehType"][0]
-      car_rental.category = extract_category_from_sabre(data_rental, sipp)
-      car_rental.car_name = extract_car_name_from_sipp(sipp)
-      car_rental.save
-      car_rental
-    end
-
-    def extract_price_from_sabre(data_rental)
-      data_rental["VehAvailCore"]["VehicleCharges"]["VehicleCharge"]["TotalCharge"]["Amount"].to_f
-    end
-
-    def extract_currency_from_sabre(data_rental)
-      data_rental["VehAvailCore"]["VehicleCharges"]["VehicleCharge"]["TotalCharge"]["CurrencyCode"]
-    end
-
-    def extract_pick_up_address_from_sabre(data)
-      data["VehRentalCore"]["LocationDetails"]["LocationCode"]
-    end
-
-    def extract_drop_off_address_from_sabre(data)
-      data["VehRentalCore"]["DropOffLocationDetails"]["LocationCode"]
-    end
-
-    def extract_company_from_sabre(data_rental)
-      data_rental["Vendor"]["CompanyShortName"]
-    end
-
-    def extract_category_from_sabre(data_rental, sipp)
-      category = extract_category(sipp)
-    end
-
-
-    def extract_company_from_sabre(data_rental)
-      data_rental["Vendor"]["CompanyShortName"]
-    end
-
 
 
     def create_from_amadeus(result, result_car, pick_up_date_time, drop_off_date_time)

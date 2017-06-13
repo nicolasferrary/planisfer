@@ -36,7 +36,7 @@ class SelectionsController < ApplicationController
     @currency = 'EUR'
 
     # Launch requests
-    @unfiltered_car_rentals = get_car_rentals_for_trip(@trip)
+    @unfiltered_car_rentals = get_car_rentals_for_trip(@trip, @region)
     # Exclude companies with hidden costs for fuel
     @car_rentals = filter_companies(@unfiltered_car_rentals)
     # @car_rentals is an array of instances of car_rentals
@@ -117,7 +117,7 @@ class SelectionsController < ApplicationController
 
   private
 
-  def get_car_rentals_for_trip(trip)
+  def get_car_rentals_for_trip(trip, region)
     if @pick_up_location == @drop_off_location
       #Launch Amadeus api
       options = {
@@ -129,15 +129,17 @@ class SelectionsController < ApplicationController
       }
       car_rentals = (Rental::SmartRentalAgent.new(options).obtain_rentals_amadeus)
     else
-      #Launch Sabre api
+      #Launch Amadeus api with origin location
       options = {
         pick_up_place: @pick_up_location,
-        drop_off_place: @drop_off_location,
+        drop_off_place: @pick_up_location,
         pick_up_date_time: @pick_up_date_time,
         drop_off_date_time: @drop_off_date_time,
         currency: @currency,
       }
-      car_rentals = (Rental::SmartRentalAgent.new(options).obtain_rentals_sabre)
+      car_rentals = (Rental::SmartRentalAgent.new(options).obtain_rentals_amadeus)
+      car_rentals = apply_one_way_markup(car_rentals, region)
+      car_rentals
     end
   end
 
@@ -214,6 +216,19 @@ class SelectionsController < ApplicationController
       car_rentals = car_rentals.delete_if { |rental| rental.company == "GOLDCAR" || rental.company == "GOLDCAR REN"}
     end
     car_rentals = car_rentals.delete_if { |rental| rental.company == "FOX RAC" || rental.company == "AUTO EUROPE" || rental.company == "ECONOMY"}
+  end
+
+  def apply_one_way_markup(car_rentals, region)
+    # pour chaque car_rental
+    filtered_rentals = []
+    car_rentals.each do |rental|
+      if Constants::ONEWAYMARKUP[region.name].keys.include?(rental.company)
+        rental.price = rental.price.to_f + Constants::ONEWAYMARKUP[region.name][rental.company].to_f
+        rental.save
+        filtered_rentals << rental
+      end
+    end
+    return filtered_rentals
   end
 
 end
