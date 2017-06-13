@@ -83,9 +83,9 @@
             <% end %>
           </div>
 
+          <div class="form-post member-form-post light-opacity text-center <%= 'hidden' if params[:referrer] %>" id = 'sign-in-form'>
             <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <div class="form-post member-form-post light-opacity text-center <%= 'hidden' if params[:referrer] %>" id = 'sign-in-form'>
-
+              <%= link_to "Sign in with Facebook", member_facebook_omniauth_authorize_path %>
               <div class="fb-login-button" data-width="324" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
 
               <div class = separator_with_text> or</div>
@@ -131,8 +131,8 @@
 
 <% content_for(:after_js) do %>
 
-  <script>
-    // This is called with the results from from FB.getLoginStatus().
+  <!-- <script>
+    // This is called with the results from FB.getLoginStatus().
     function statusChangeCallback(response) {
       console.log('statusChangeCallback');
       console.log(response);
@@ -205,7 +205,7 @@
           'Thanks for logging in, ' + response.name + '!';
       });
     }
-  </script>
+  </script> -->
 
   <script>
     $(document).ready(function() {
