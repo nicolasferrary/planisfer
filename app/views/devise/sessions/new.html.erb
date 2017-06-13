@@ -3,7 +3,7 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9";
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=1369013269801296";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
@@ -77,15 +77,18 @@
                 Looking for a referrer? </p>
                 <p>
                 Ask your Facebook friends if they use Planisfer</p>
-                <div class="fb-share-button facebook-button" data-href="http://www.planisfer.space/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore btn-brand facebook-link" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.planisfer.space%2F&amp"><i class="fa fa-facebook facebook-logo" aria-hidden="true"></i>Ask for a referrer</a></div>
+                <div class="fb-login-button facebook-button" data-href="http://www.planisfer.space/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore btn-brand facebook-link" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.planisfer.space%2F&amp"><i class="fa fa-facebook facebook-logo" aria-hidden="true"></i>Ask for a referrer</a></div>
               </div>
 
             <% end %>
           </div>
 
           <div class="form-post member-form-post light-opacity text-center <%= 'hidden' if params[:referrer] %>" id = 'sign-in-form'>
+
             <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <%= link_to "Sign in with Facebook", member_facebook_omniauth_authorize_path %>
+              <%= link_to member_facebook_omniauth_authorize_path do%>
+                <div class="fb-login-button" data-width="324" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="false"></div>
+              <% end %>
               <div class = separator_with_text> or</div>
               <div class="form-inputs">
                 <%= f.input :email, required: false, autofocus: true, label: false, placeholder: 'Email', :input_html => { :class => 'form-control member-input' } %>

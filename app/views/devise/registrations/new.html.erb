@@ -1,3 +1,12 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=1369013269801296";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url(<%= image_path("background.jpg") %>);">
 
   <div class = "row">
@@ -48,14 +57,17 @@
               <%= f.error_notification %>
 
               <div class = 'referral-conf-text member-input text-center'>
-                <p> Welcome to Planisfer and a whole new travel experience</p>
-                <p>Please create your credentials and start exploring</p>
+                <p> Welcome to Planisfer</p>
+                <p>Please create your credentials</p>
               </div>
 
-              <%= link_to "Sign up with Facebook", member_facebook_omniauth_authorize_path %>
-              <div class = separator_with_text> or</div>
+              <div class="form-inputs member-inputs text-center">
+                <%= link_to member_facebook_omniauth_authorize_path do%>
+                  <div class="fb-login-button" data-width="324" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                <% end %>
 
-              <div class="form-inputs member-inputs">
+                <div class = separator_with_text> or</div>
+
                 <%= f.input :email, required: false, autofocus: true, label: false, placeholder: 'Email', :input_html => { :class => 'form-control member-input' } %>
                 <%= f.input :password, required: false, label: false, placeholder: "Password - #{@minimum_password_length} characters minimum", :input_html => { :class => 'form-control member-input' }%>
                 <%= f.input :password_confirmation, required: true, label: false, placeholder: 'Confirm password', :input_html => { :class => 'form-control member-input' } %>
