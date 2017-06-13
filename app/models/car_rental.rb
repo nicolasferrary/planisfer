@@ -3,7 +3,7 @@ class CarRental < ApplicationRecord
   monetize :price_cents
 
   has_many :trips
-  belongs_to :selection
+  belongs_to :selection, optional: true
 
 
   class << self

@@ -138,7 +138,10 @@ class SelectionsController < ApplicationController
         currency: @currency,
       }
       car_rentals = (Rental::SmartRentalAgent.new(options).obtain_rentals_amadeus)
+
       car_rentals = apply_one_way_markup(car_rentals, region)
+      car_rentals
+
     end
   end
 
@@ -219,15 +222,15 @@ class SelectionsController < ApplicationController
 
   def apply_one_way_markup(car_rentals, region)
     # pour chaque car_rental
+    filtered_rentals = []
     car_rentals.each do |rental|
       if Constants::ONEWAYMARKUP[region.name].keys.include?(rental.company)
         rental.price = rental.price.to_f + Constants::ONEWAYMARKUP[region.name][rental.company].to_f
         rental.save
-      else
-        car_rentals.delete(rental)
+        filtered_rentals << rental
       end
     end
-    return car_rentals
+    return filtered_rentals
   end
 
 end
