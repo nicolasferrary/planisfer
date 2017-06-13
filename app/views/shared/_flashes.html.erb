@@ -4,9 +4,15 @@
     <%= notice %>
   </div>
 <% end %>
+
+
+
 <% if alert%>
-  <div class="alert alert-warning alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <%= alert %>
-  </div>
+  <% if alert == "You need to sign in or sign up before continuing." %>
+  <% else %>
+    <div class="alert alert-warning alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <%= alert %>
+    </div>
+  <% end %>
 <% end %>

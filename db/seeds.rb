@@ -13,7 +13,7 @@ require 'csv'
 # Selection.destroy_all
 
 
-Airport.destroy_all
+# Airport.destroy_all
 # Poi.destroy_all
 # Search.destroy_all
 # Region.destroy_all
@@ -21,20 +21,20 @@ Airport.destroy_all
 
 # Seeding all the airports with IATA codes and coordinates
 
-csv_options = { col_sep: ';', headers: :first_row, encoding: 'ISO-8859-1'}
-filepath = 'db/airports_city.csv'
+# csv_options = { col_sep: ';', headers: :first_row, encoding: 'ISO-8859-1'}
+# filepath = 'db/airports_city.csv'
 
-CSV.foreach(filepath, csv_options) do |row|
-  Airport.create!(
-    name: row['name'],
-    iata: row['iata'],
-    coordinates: row['coordinates'],
-    country: row['parent_name'],
-    category: row['type'],
-    cityname: row['City'],
-    content: "#{row['iata']} #{row['name']}, #{row['parent_name']}"
-    )
-end
+# CSV.foreach(filepath, csv_options) do |row|
+#   Airport.create!(
+#     name: row['name'],
+#     iata: row['iata'],
+#     coordinates: row['coordinates'],
+#     country: row['parent_name'],
+#     category: row['type'],
+#     cityname: row['City'],
+#     content: "#{row['iata']} #{row['name']}, #{row['parent_name']}"
+#     )
+# end
 
 # Seeding all the POIs
 
@@ -72,10 +72,10 @@ end
 # end
 
 # Seeding a first member
-# Member.create!(
-#   email: 'ferraryn@gmail.com',
-#   password: 'Diplomatie85!',
-#   )
+Member.create!(
+  email: 'ferraryn@gmail.com',
+  password: 'Diplomatie85!',
+  )
 
 # city1 = City.create!(name:"Paris")
 # city2 = City.create!(name:"London")

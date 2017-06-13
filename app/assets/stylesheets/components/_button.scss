@@ -18,8 +18,6 @@
   width: 100%;
 }
 
-
-
 .btn-tag {
   border-radius: 50px;
   border: 1px solid $secondary-color;
@@ -212,4 +210,33 @@
 .facebook-link:focus{
   text-decoration: none;
   color: white;
+}
+
+.fb-login-but{
+  width: 324px;
+  height: 40px;
+  background-color: #4267B2;
+  color: white;
+  text-decoration: none;
+  p {
+    position:relative;
+    top: -2px;
+  }
+}
+
+.fb-login-but:hover{
+  text-decoration: none;
+  color: white
+}
+.fb-login-but:visited{
+  text-decoration: none;
+  color: white
+}
+.fb-login-but:active{
+  text-decoration: none;
+  color: white
+}
+.fb-login-but:focus{
+  text-decoration: none;
+  color: white
 }

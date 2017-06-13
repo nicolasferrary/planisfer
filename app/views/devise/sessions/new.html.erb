@@ -3,7 +3,7 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=1369013269801296";
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.9&appId=1694430374184059";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
@@ -86,8 +86,8 @@
           <div class="form-post member-form-post light-opacity text-center <%= 'hidden' if params[:referrer] %>" id = 'sign-in-form'>
 
             <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <%= link_to member_facebook_omniauth_authorize_path do%>
-                <div class="fb-login-button" data-width="324" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="false"></div>
+              <%= link_to member_facebook_omniauth_authorize_path, class: "btn fb-login-but" do%>
+                <p>Continue with facebook</p>
               <% end %>
               <div class = separator_with_text> or</div>
               <div class="form-inputs">
