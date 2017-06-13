@@ -138,10 +138,8 @@ class SelectionsController < ApplicationController
         currency: @currency,
       }
       car_rentals = (Rental::SmartRentalAgent.new(options).obtain_rentals_amadeus)
-
       car_rentals = apply_one_way_markup(car_rentals, region)
       car_rentals
-
     end
   end
 

@@ -18,7 +18,6 @@ class Trip < ApplicationRecord
       trip.search = search
       trip.city = city
       trip.price = round_trip_flight.price
-      trip.car_rental = CarRental.new()
       trip.sku = build_sku(trip)
       arrival_airport = Airport.find_by_iata(round_trip_flight.flight1_destination_airport_iata)
       trip.arrival_city = arrival_airport.cityname

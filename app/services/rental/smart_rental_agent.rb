@@ -10,28 +10,6 @@ module Rental
       @currency = args [:currency]
     end
 
-    def obtain_rentals_sabre
-      # Comment to test without calling API
-
-      json = Rental::RentalRequester.new(
-          pick_up_place: @pick_up_place,
-          drop_off_place: @drop_off_place,
-          pick_up_date_time: @pick_up_date_time,
-          drop_off_date_time: @drop_off_date_time,
-          currency: @currency
-        ).make_request_sabre
-
-      @data_sabre = JSON.parse(json)["OTA_VehAvailRateRS"]["VehAvailRSCore"]
-      @data_rentals_sabre = @data_sabre["VehVendorAvails"]["VehVendorAvail"]
-
-      if @data_rentals_sabre != []
-        car_rentals = create_car_rentals_sabre(@data_sabre, @data_rentals_sabre)
-      else
-        car_rentals = []
-      end
-      @car_rentals = car_rentals
-    end
-
     def obtain_rentals_amadeus
       json = Rental::RentalRequester.new(
           pick_up_place: @pick_up_place,
@@ -51,15 +29,6 @@ module Rental
     end
 
     private
-
-    def create_car_rentals_sabre(data, data_rentals)
-      car_rentals = []
-      data_rentals.each do |data_rental|
-        car_rental = CarRental.create_from_sabre(data, data_rental, @pick_up_date_time, @drop_off_date_time)
-        car_rentals << car_rental
-      end
-      car_rentals
-    end
 
     def create_car_rentals_amadeus(data)
       car_rentals = []
