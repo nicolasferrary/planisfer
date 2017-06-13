@@ -17,13 +17,13 @@
 <div class="container-fluid page-result">
 
   <div class="col-xs-12 <%= 'text-mobile' if !@trip.car_rental.nil?%> <%= 'hidden' if @trip.car_rental.nil? %>">
-    <div id = "recap-zone" class = "<%= 'recap-opacity' if @recap_opacity == 1 %>">
+    <div class = "recap-zone <%= 'recap-opacity' if @recap_opacity == 1 %>">
       <%= render "shared/recap", :payment_page => false%>
     </div>
   </div>
 
   <div class="col-xs-12 col-md-8 car-left-padding">
-    <div id = "car-zone" class = "<%= 'recap-opacity' if @recap_opacity == 0 %>">
+    <div class = "car-zone <%= 'recap-opacity' if @recap_opacity == 0 %>">
 
       <div class = "row">
         <div class = "col-xs-12">
@@ -123,7 +123,7 @@
   </div>
 
   <div class="col-xs-12 col-md-4 <%= 'text-desktop' if !@trip.car_rental.nil?%>">
-    <div id = "recap-zone" class = "<%= 'recap-opacity' if @recap_opacity == 1 %>">
+    <div class = "recap-zone <%= 'recap-opacity' if @recap_opacity == 1 %>">
       <%= render "shared/recap", :payment_page => false%>
     </div>
   </div>
@@ -141,30 +141,6 @@
         $('.selected').removeClass('selected');
       }
     })
-  </script>
-
-  <script>
-    $(document).ready(function() {
-      $('.card').mouseenter(function(e) {
-        e.preventDefault();
-        $('.card.selected').removeClass('selected');
-        $(this).addClass('selected');
-      })
-    });
-
-    $(document).ready(function() {
-      $('#recap-zone').mouseenter(function(e) {
-        e.preventDefault();
-        $(this).removeClass('recap-opacity');
-        $('#car-zone').addClass('recap-opacity');
-      })
-      $('#recap-zone').mouseleave(function(e) {
-        e.preventDefault();
-        $('#car-zone').removeClass('recap-opacity');
-        $(this).addClass('recap-opacity');
-      })
-    });
-
   </script>
 
   <script>
@@ -245,5 +221,23 @@
   });
 
 </script>
+
+  <script>
+
+    $(document).ready(function() {
+      $('.recap-zone').mouseenter(function(e) {
+        e.preventDefault();
+        console.log('test');
+        $(this).removeClass('recap-opacity');
+        $('.car-zone').addClass('recap-opacity');
+      })
+      $('.recap-zone').mouseleave(function(e) {
+        e.preventDefault();
+        $('.car-zone').removeClass('recap-opacity');
+        $(this).addClass('recap-opacity');
+      })
+    });
+
+  </script>
 
 <% end %>
