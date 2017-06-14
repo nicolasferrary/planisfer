@@ -17,7 +17,8 @@ require 'csv'
 # Poi.destroy_all
 # Search.destroy_all
 # Region.destroy_all
-# Member.destroy_all
+Order.destroy_all
+Member.destroy_all
 
 # Seeding all the airports with IATA codes and coordinates
 
