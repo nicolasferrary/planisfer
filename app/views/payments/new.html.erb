@@ -11,9 +11,9 @@
   </div>
   <span class = "booking-status text-desktop">
     <% if @trip.car_rental.nil? %>
-      <%= render 'shared/booking_status', :status => 2 %>
+      <%= render 'shared/booking_status', :status => 1 %>
     <% else %>
-       <%= render 'shared/booking_status', :status => 3 %>
+       <%= render 'shared/booking_status', :status => 2 %>
     <% end %>
   </span>
 </div>
