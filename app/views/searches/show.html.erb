@@ -265,11 +265,13 @@
 
       $('.result-card').mouseleave('click', function(e) {
         e.preventDefault();
-        var tripId = $(this).data('trip-id');
-        handler.removeMarkers(markers);
-        markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
+        setTimeout(function() {
+          var tripId = $(this).data('trip-id');
+          handler.removeMarkers(markers);
+          markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+        }, 1000);
       })
 
       $('#car_wait_modal').on('show.bs.modal', function(e) {
