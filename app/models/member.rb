@@ -21,8 +21,10 @@ class Member < ApplicationRecord
     member = Member.find_by(provider: auth.provider, uid: auth.uid)
     member ||= Member.find_by(email: auth.info.email) # member did a regular sign up in the past.
     if member
+      puts 'member'
       member.update(member_params)
     else
+      puts 'no member'
       member = Member.new(member_params)
       member.password = Devise.friendly_token[0,20]  # Fake password for validation
       member.save
