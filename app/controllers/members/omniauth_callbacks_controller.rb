@@ -19,7 +19,7 @@ class Members::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def failure
     puts 'failure'
-    redirect_to new_member_session_path
+    redirect_to new_member_registration_path
   end
 
 end
