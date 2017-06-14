@@ -2,7 +2,6 @@ class Members::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
 
   def facebook
-    Selection.create()
     @member = Member.from_omniauth(request.env['omniauth.auth'])
     # if @member.nil?
     #   redirect_to new_member_session_path
@@ -19,7 +18,7 @@ class Members::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def failure
     puts 'failure'
-    redirect_to new_member_registration_path
+    redirect_to new_member_session_path
   end
 
 end
