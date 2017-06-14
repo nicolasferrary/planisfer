@@ -48,40 +48,12 @@
             <a class="tab <%= 'active' unless params[:referrer] %>" href="#" id="log-in-tab">
               <h4>Log in</h4>
             </a>
-            <a class="tab <%= 'active' if params[:referrer] %>" href="#" id="sign-up-tab">
+            <%= link_to new_member_registration_path, class: 'tab' do %>
               <h4>Become a member</h4>
-            </a>
+            <% end %>
           </div>
 
             <%= render 'shared/flashes' %>
-
-          <div class = 'form-post referral-form-post light-opacity <%= 'hidden' unless params[:referrer] %>' id = 'referral-form'>
-            <%= form_tag check_referrer_path, method: :get do %>
-              <div class = 'referral-form-text member-input text-center'>
-                <p> Planisfer is a club of travelers who share a passion for exploring the world</p>
-                <p>You need to be referred by an existing member to join</p>
-              </div>
-              <div class="form-inputs referrer-input">
-                <% if flash[:referrer_error] %>
-                  <p class="red-message member-input text-center no-referral"><%= flash[:referrer_error] %></p>
-                <% end %>
-                <%= text_field_tag :email, nil, placeholder: "Your referrer's email", "class" => 'form-control member-input'%>
-              </div>
-
-              <div class="form-actions">
-                <%= submit_tag "Confirm", class: 'btn-brand member-btn referral-btn' %>
-              </div>
-
-              <div class = 'facebook-form-text member-input text-center'>
-                <p>
-                Looking for a referrer? </p>
-                <p>
-                Ask your Facebook friends if they use Planisfer</p>
-                <div class="fb-login-button facebook-button" data-href="http://www.planisfer.space/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore btn-brand facebook-link" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.planisfer.space%2F&amp"><i class="fa fa-facebook facebook-logo" aria-hidden="true"></i>Ask for a referrer</a></div>
-              </div>
-
-            <% end %>
-          </div>
 
           <div class="form-post member-form-post light-opacity text-center <%= 'hidden' if params[:referrer] %>" id = 'sign-in-form'>
 
@@ -218,26 +190,6 @@
     });
   </script>
 
-
-
-  <script>
-     $(document).ready(function() {
-      $('#sign-up-tab').on('click', function(e) {
-        e.preventDefault();
-        $('#log-in-tab').removeClass('active');
-        $(this).addClass('active');
-        $('#referral-form').removeClass('hidden');
-        $('#sign-in-form').addClass('hidden');
-      })
-      $('#log-in-tab').on('click', function(e) {
-        e.preventDefault();
-        $('#sign-up-tab').removeClass('active');
-        $(this).addClass('active');
-        $('#sign-in-form').removeClass('hidden');
-        $('#referral-form').addClass('hidden');
-      })
-     })
-  </script>
 
   <script>
     $(document).ready(function() {
