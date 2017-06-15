@@ -13,14 +13,13 @@ class Member < ApplicationRecord
 
   def self.from_omniauth(auth)
     member_params = auth.slice(:provider, :uid)
-    #I removed e mail from the following line because of issue when creating user
-    member_params.merge! auth.info.slice(:first_name, :last_name)
+    member_params.merge! auth.info.slice(:email, :first_name, :last_name)
     member_params[:facebook_picture_url] = auth.info.image
     member_params[:token] = auth.credentials.token
     member_params[:token_expiry] = Time.at(auth.credentials.expires_at)
     member_params = member_params.to_h
     member = Member.find_by(provider: auth.provider, uid: auth.uid)
-    # member ||= Member.find_by(email: auth.info.email) # member did a regular sign up in the past.
+    member ||= Member.find_by(email: auth.info.email) # member did a regular sign up in the past.
     if member
       member.update(member_params)
     else
