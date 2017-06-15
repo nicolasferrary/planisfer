@@ -58,14 +58,11 @@
 
               <div class = 'referral-conf-text member-input text-center'>
                 <p> Welcome to Planisfer</p>
-                <p>Please create your credentials</p>
               </div>
 
               <div class="form-inputs member-inputs text-center">
                 <%= link_to member_facebook_omniauth_authorize_path, class: "btn fb-login-but" do%>
-                  <p>Continue with Facebook</p>
-
-                  <!-- <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
+                  <span class = "fb-logo"> <%= image_tag 'fb_logo.jpg' %></span> <span>Continue with Facebook</span>
                 <% end %>
 
                 <div class = separator_with_text> or</div>

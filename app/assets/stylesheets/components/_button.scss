@@ -213,6 +213,10 @@
 }
 
 .fb-login-but{
+  display:flex;
+  align-items: center;
+  margin-right: auto;
+  margin-left: auto;
   width: 324px;
   height: 40px;
   background-color: #4267B2;
