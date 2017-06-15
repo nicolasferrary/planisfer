@@ -3,7 +3,7 @@
 Devise.setup do |config|
   config.omniauth :facebook, ENV["FB_ID"], ENV["FB_SECRET"], token_params: { parse: :json },
     scope: 'email',
-    info_fields: 'email, first_name, last_name',
+    info_fields: 'name,email',
     image_size: 'square',  # 50x50, guaranteed ratio
     secure_image_url: true
   # The secret key used by Devise. Devise uses this key to generate
