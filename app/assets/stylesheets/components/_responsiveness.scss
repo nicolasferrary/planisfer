@@ -187,10 +187,10 @@
     .card-description {
       &-item {
         &:nth-child(1) {
-          flex: 0 0 40%;
+          flex: 0 0 37%;
         }
         &:nth-child(3) {
-          flex: 0 0 40%;
+          flex: 0 0 37%;
         }
       }
     }
@@ -200,6 +200,13 @@
     }
     .who-modal{
       width: 95%;
+    }
+    .suitcase-text{
+      font-size: 10px;
+      line-height: 1.8em;
+    }
+    .fa-stack{
+      margin-bottom: 5px;
     }
 }
 
