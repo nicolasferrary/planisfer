@@ -23,7 +23,6 @@ class Member < ApplicationRecord
     if member
       member.update(member_params)
     else
-      raise
       member = Member.new(member_params)
       member.password = Devise.friendly_token[0,20]  # Fake password for validation
       member.save
