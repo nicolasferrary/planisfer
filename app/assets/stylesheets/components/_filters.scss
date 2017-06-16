@@ -25,7 +25,7 @@
 #filters {
   background: rgba($brand-primary, .02);
   padding: 20px;
-  margin:-25px 1% 25px 1%;
+  margin:0px 1% 0px 1%;
   // border-bottom: 1px solid #E6E6E6;
   // border-top: 1px solid #E6E6E6;
 }
@@ -93,5 +93,13 @@
 .airport-filter{
   text-align: center;
   margin-bottom: -5px;
-  margin-top: 25px;
+}
+
+.centered {
+   text-align: center;
+}
+.centered > div {
+   float: none;
+   display: inline-block;
+   text-align: left;
 }

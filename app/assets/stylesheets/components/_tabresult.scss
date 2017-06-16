@@ -178,8 +178,8 @@
 #all-flights p{
   color: $brand-color;
   text-decoration: none;
-  margin: 0 0 30px;
   float: right;
+  margin-bottom:0;
 }
 
 
@@ -218,4 +218,8 @@
 .planning-page{
   padding-left: 50px;
   padding-right: 50px;
+}
+
+.displayTrips{
+  margin-bottom: 50px;
 }

@@ -36,7 +36,7 @@
 
         <div id = "all-flights">
           <%= link_to "javascript:showhide('filters')" do%>
-            <p class="<%= 'hidden' if @status == 'block' %>" id="see-filters"><strong>Change search criteria</strong></p>
+            <p class="<%= 'hidden' if @status == 'block' %>" id="see-filters"><strong>Change flight times</strong></p>
             <p class="<%= 'hidden' if @status == 'none' %>" id="hide-filters"><strong>Hide filters</strong></p>
           <% end  %>
         </div>
@@ -112,38 +112,35 @@
 
                 </div>
 
-
-                <div class = 'row'>
-                  <div class="filter-buttons">
-
-                    <div class = "row">
-                      <h5 class = "airport-filter" > Possible arrival and return <strong>cities </strong></h5>
-                    </div>
-
-                    <div class = "row">
-                      <% @region_airports_cities.each do |airport| %>
-                        <div class = "col-md-3 content-center">
-                          <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city="<%= airport.cityname%>"><%= airport.cityname%></div>
-                        </div>
-                      <% end %>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-              <div class="row">
-                <div class ="text-center filter-apply">
-                  <%= hidden_field_tag 'selected-cities', params['selected-cities'], class: "submit-on-change" %>
-                  <%# submit_tag "Apply filters", class: "btn-brand" %>
-                </div>
               </div>
 
             </div>
+          <% end %>
+        </div>
+      </div>
 
+      <div class="row">
+        <div id="city-filters">
+          <%=form_tag search_path(@search), method: :get, remote: :true, id: "searchForm" do %>
+            <div class = 'row'>
+              <div class="filter-buttons">
+                <div class = "row">
+                  <h5 class = "airport-filter" > Possible arrival and return <strong>cities </strong></h5>
+                </div>
+                <div class = "row centered">
+                  <% @region_airports_cities.each do |airport| %>
+                    <div class = "col-md-3 content-center">
+                      <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city="<%= airport.cityname%>"><%= airport.cityname%></div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
+            <div class ="text-center filter-apply">
+            <%= hidden_field_tag 'selected-cities', params['selected-cities'], class: "submit-on-change" %>
+            <%# submit_tag "Apply filters", class: "btn-brand" %>
+            </div>
           <% end %>
         </div>
       </div>
