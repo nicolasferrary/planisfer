@@ -36,11 +36,10 @@ class OrdersController < ApplicationController
 
     # # Worldia : validate payment
     # worldia_validate_payment(@quote_id)
-    # @trip_airports = define_trip_airports(@trip)
-    # @pois = define_pois(@region)
 
+    @trip_airports = define_trip_airports(@trip)
+    @pois = define_pois(@region)
     @initial_markers = build_markers(@pois, @trip_airports)
-
   end
 
   def update
