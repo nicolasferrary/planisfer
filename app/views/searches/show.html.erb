@@ -271,38 +271,38 @@
         }, 300);
       })
 
-      $('.filtered-city').mouseenter('click', function(e) {
-        e.preventDefault();
-          var airportId = $(this).data('airport-id');
-          console.log(airportId);
-          //
-          $.ajax({
-            type: "GET",
-            url: '/airports/' + airportId + '/highlight_airport',
-            dataType: "json",
-            success: function(result) {
-              console.log(result);
-              for (var i = 0; i < markers.length; i++) {
-                markers[i].setMap(null);
-                handler.removeMarkers(markers);
-              }
-              markers = handler.addMarkers(result);
-            }
-          })
-          handler.bounds.extendWith(markers);
-          handler.fitMapToBounds();
-      })
+      // $('.filtered-city').mouseenter('click', function(e) {
+      //   e.preventDefault();
+      //     var airportId = $(this).data('airport-id');
+      //     console.log(airportId);
+      //     //
+      //     $.ajax({
+      //       type: "GET",
+      //       url: '/airports/' + airportId + '/highlight_airport',
+      //       dataType: "json",
+      //       success: function(result) {
+      //         console.log(result);
+      //         for (var i = 0; i < markers.length; i++) {
+      //           markers[i].setMap(null);
+      //           handler.removeMarkers(markers);
+      //         }
+      //         markers = handler.addMarkers(result);
+      //       }
+      //     })
+      //     handler.bounds.extendWith(markers);
+      //     handler.fitMapToBounds();
+      // })
 
-      $('.filtered-city').mouseleave('click', function(e) {
-        e.preventDefault();
-        setTimeout(function() {
-          var airportId = $(this).data('airport-id');
-          handler.removeMarkers(markers);
-          markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
-          handler.bounds.extendWith(markers);
-          handler.fitMapToBounds();
-        }, 0);
-      })
+      // $('.filtered-city').mouseleave('click', function(e) {
+      //   e.preventDefault();
+      //   setTimeout(function() {
+      //     var airportId = $(this).data('airport-id');
+      //     handler.removeMarkers(markers);
+      //     markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
+      //     handler.bounds.extendWith(markers);
+      //     handler.fitMapToBounds();
+      //   }, 0);
+      // })
 
 
       $('#car_wait_modal').on('show.bs.modal', function(e) {
