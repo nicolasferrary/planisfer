@@ -34,11 +34,11 @@ class OrdersController < ApplicationController
 
     @region = @trip.search.region
 
-    # Worldia : validate payment
-    worldia_validate_payment(@quote_id)
-    @trip_airports = define_trip_airports(@trip)
-    @pois = define_pois(@region)
-    @initial_markers = build_markers(@pois, @trip_airports)
+    # # Worldia : validate payment
+    # worldia_validate_payment(@quote_id)
+    # @trip_airports = define_trip_airports(@trip)
+    # @pois = define_pois(@region)
+    # @initial_markers = build_markers(@pois, @trip_airports)
 
   end
 
@@ -60,13 +60,13 @@ class OrdersController < ApplicationController
     @order.member = current_member
     @order.save
 
-    # Worldia : Add customer to quote
-    @quote_id = params[:quote_id]
-    worldia_add_customer_to_quote(@member, @quote_id)
-    #Worldia : Add passengers to quote
-    worldia_add_passengers_to_quote(@passengers, @quote_id, @nb_travelers)
-    #Worldia : Create payment
-    worldia_create_payment(@quote_id)
+    # # Worldia : Add customer to quote
+    # @quote_id = params[:quote_id]
+    # worldia_add_customer_to_quote(@member, @quote_id)
+    # #Worldia : Add passengers to quote
+    # worldia_add_passengers_to_quote(@passengers, @quote_id, @nb_travelers)
+    # #Worldia : Create payment
+    # worldia_create_payment(@quote_id)
 
      @options = {
       :pick_up_location => params[:pick_up_location],
