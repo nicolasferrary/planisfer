@@ -11,19 +11,17 @@ class OrdersController < ApplicationController
       :drop_off_date_time => params[:drop_off_date_time],
     }
 
-# UNCOMMENT TO LAUNCH WORLDIA CALLS
-
-    # # Create a component for worldia
-    # @component = worldia_create_component(@trip)
-    # # Gather the component's variation
-    # @code = @component["code"]
-    # component_variation = worldia_gather_variation(@code, @trip)
-    # # Create a quote
-    # quote = worldia_create_quote(@trip)
-    # # Add component to quote
-    # @variation_id = component_variation["id"]
-    # @quote_id = quote["id"]
-    # quote_with_comp = worldia_add_component_to_quote(@quote_id, @variation_id)
+    # Create a component for worldia
+    @component = worldia_create_component(@trip)
+    # Gather the component's variation
+    @code = @component["code"]
+    component_variation = worldia_gather_variation(@code, @trip)
+    # Create a quote
+    quote = worldia_create_quote(@trip)
+    # Add component to quote
+    @variation_id = component_variation["id"]
+    @quote_id = quote["id"]
+    quote_with_comp = worldia_add_component_to_quote(@quote_id, @variation_id)
 
     redirect_to new_order_payment_path(@order, trip_id: @trip.id, options: @options, quote_id: @quote_id)
   end
@@ -36,9 +34,8 @@ class OrdersController < ApplicationController
 
     @region = @trip.search.region
 
-# UNCOMMENT TO LAUNCH WORLDIA CALLS
-    # # Worldia : validate payment
-    # worldia_validate_payment(@quote_id)
+    # Worldia : validate payment
+    worldia_validate_payment(@quote_id)
     @trip_airports = define_trip_airports(@trip)
     @pois = define_pois(@region)
     @initial_markers = build_markers(@pois, @trip_airports)
@@ -63,14 +60,13 @@ class OrdersController < ApplicationController
     @order.member = current_member
     @order.save
 
-# UNCOMMENT TO LAUNCH WORLDIA CALLS
-    # # Worldia : Add user to quote
-    # @quote_id = params[:quote_id]
-    # worldia_add_user_to_quote(@member, @quote_id)
-    # #Worldia : Add passengers to quote
-    # worldia_add_passengers_to_quote(@passengers, @quote_id, @nb_travelers)
-    # #Worldia : Create payment
-    # worldia_create_payment(@quote_id)
+    # Worldia : Add customer to quote
+    @quote_id = params[:quote_id]
+    worldia_add_customer_to_quote(@member, @quote_id)
+    #Worldia : Add passengers to quote
+    worldia_add_passengers_to_quote(@passengers, @quote_id, @nb_travelers)
+    #Worldia : Create payment
+    worldia_create_payment(@quote_id)
 
      @options = {
       :pick_up_location => params[:pick_up_location],
