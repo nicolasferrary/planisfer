@@ -60,7 +60,6 @@ class SearchesController < ApplicationController
 # Is this useful?
     @selected_cities = @region_airports
 
-
     params["selected-cities"] == nil if params["selected-cities"] == ""
     if params["selected-cities"] == nil || params["selected-cities"] == ""
       @selected_airports = @region_airports_cities
