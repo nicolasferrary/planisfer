@@ -121,7 +121,7 @@
 
       <div class="row">
         <div id="city-filters">
-          <%=form_tag search_path(@search), method: :get, remote: :true, id: "searchForm" do %>
+          <%=form_tag search_path(@search), method: :get, remote: :true, id: "citysearchForm" do %>
             <div class = 'row'>
               <div class="filter-buttons">
                 <div class = "row">
@@ -195,7 +195,7 @@
 
       $('.filtered-city').on('click', function() {
         setTimeout(function() {
-          $('#searchForm').submit();
+          $('#citysearchForm').submit();
         }, 100)
       })
 
@@ -234,42 +234,42 @@
       );
 
 
-      $('.result-card').mouseenter('click', function(e) {
-        e.preventDefault();
-        $('.cardContainer.selected').removeClass('selected');
-        $(this).children('.cardContainer').addClass('selected');
-        var tripId = $(this).data('trip-id');
-        var colours = $(this).data('colours');
-        //
-        $.ajax({
-          type: "GET",
-          url: '/trips/' + tripId + '/refresh_map',
-          data: {airport_colours: colours},
-          dataType: "json",
-          success: function(result) {
-            console.log(result);
-            for (var i = 0; i < markers.length; i++) {
-              markers[i].setMap(null);
-              handler.removeMarkers(markers);
-            }
-            markers = handler.addMarkers(result);
-          }
-        })
+      // $('.result-card').mouseenter('click', function(e) {
+      //   e.preventDefault();
+      //   $('.cardContainer.selected').removeClass('selected');
+      //   $(this).children('.cardContainer').addClass('selected');
+      //   var tripId = $(this).data('trip-id');
+      //   var colours = $(this).data('colours');
+      //   //
+      //   $.ajax({
+      //     type: "GET",
+      //     url: '/trips/' + tripId + '/refresh_map',
+      //     data: {airport_colours: colours},
+      //     dataType: "json",
+      //     success: function(result) {
+      //       console.log(result);
+      //       for (var i = 0; i < markers.length; i++) {
+      //         markers[i].setMap(null);
+      //         handler.removeMarkers(markers);
+      //       }
+      //       markers = handler.addMarkers(result);
+      //     }
+      //   })
 
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-      })
+      //   handler.bounds.extendWith(markers);
+      //   handler.fitMapToBounds();
+      // })
 
-      $('.result-card').mouseleave('click', function(e) {
-        e.preventDefault();
-        setTimeout(function() {
-          var tripId = $(this).data('trip-id');
-          handler.removeMarkers(markers);
-          markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
-          handler.bounds.extendWith(markers);
-          handler.fitMapToBounds();
-        }, 300);
-      })
+      // $('.result-card').mouseleave('click', function(e) {
+      //   e.preventDefault();
+      //   setTimeout(function() {
+      //     var tripId = $(this).data('trip-id');
+      //     handler.removeMarkers(markers);
+      //     markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
+      //     handler.bounds.extendWith(markers);
+      //     handler.fitMapToBounds();
+      //   }, 300);
+      // })
 
       // $('.filtered-city').mouseenter('click', function(e) {
       //   e.preventDefault();
