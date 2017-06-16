@@ -191,13 +191,13 @@
 
   <script>
     $(document).ready(function() {
+
       $('.slider').on('click', function() {
         $('#searchForm').submit();
       })
 
       $('.filtered-city').on('click', function() {
         setTimeout(function() {
-          console.log(@trip.id);
           $('#searchForm').submit();
         }, 100)
       })
@@ -489,7 +489,6 @@
   </script>
 
 <% end %>
-
 
 
 
