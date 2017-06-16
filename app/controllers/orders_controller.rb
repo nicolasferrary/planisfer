@@ -148,6 +148,44 @@ class OrdersController < ApplicationController
     hash_response = JSON.parse(response.body)
   end
 
+  def worldia_add_user_to_quote(user, quote_id)
+    url = "https://www.worldia.com/api/v1/carts/#{quote_id}"
+    json = {
+    "customerId": user.id
+    }.to_json
+    RestClient.patch(url, json, {:content_type => 'application/json'})
+  end
+
+  def worldia_add_passengers_to_quote(passengers, quote_id, nb_travelers)
+    url = "https://www.worldia.com/api/v1/checkout/#{quote_id}/select_pax"
+
+    request_hash = {
+      "comments": [{"comment":"No comment"}],
+      "pax":[]
+    }
+    for num in (1..nb_travelers)
+      passenger_hash = {
+        "dateOfBirth": "1900-01-01",
+        "title": passengers["#{num}"][:title],
+        "firstName": passengers["#{num}"][:first_name],
+        "lastName": passengers["#{num}"][:name]
+        }
+        request_hash[:pax] << passenger_hash
+    end
+
+    json = request_hash.to_json
+    RestClient.put url, json, {:content_type => 'application/json'}
+  end
+
+  def worldia_create_payment(quote_id)
+    url = "https://www.worldia.com/api/v1/checkout/#{quote_id}/select_options"
+    json = {
+      "insuranceMethod": "NO_INSURANCE",
+      "paymentMethod":"phone"
+      }.to_json
+    RestClient.put(url, json, {:content_type => 'application/json'})
+  end
+
   def worldia_validate_payment(quote_id)
     url = "https://www.worldia.com/api/v1/checkout/#{quote_id}/complete"
     json = {}.to_json
