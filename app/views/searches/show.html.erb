@@ -121,7 +121,7 @@
 
       <div class="row">
         <div id="city-filters">
-          <%=form_tag search_path(@search), method: :get, id: "citysearchForm" do %>
+          <%=form_tag search_path(@search), method: :get, remote: :true, id: "citysearchForm" do %>
             <div class = 'row'>
               <div class="filter-buttons">
                 <div class = "row">
@@ -130,7 +130,7 @@
                 <div class = "row centered">
                   <% @region_airports_cities.each do |airport| %>
                     <div class = "col-md-3 content-center">
-                      <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city = "<%= airport.cityname%>" data-airport-id = "<%= airport.id %>" > <%= airport.cityname%></div>
+                      <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city = "<%= airport.cityname%>" data-airport-id = "<%= airport.id %>" ><%= airport.cityname%></div>
                     </div>
                   <% end %>
                 </div>
