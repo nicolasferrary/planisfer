@@ -61,6 +61,9 @@
               <%= link_to member_facebook_omniauth_authorize_path, class: "btn fb-login-but" do%>
                 <span class = "fb-logo"> <%= image_tag 'fb_logo.jpg' %></span> <span>Continue with Facebook</span>
               <% end %>
+
+              <div class="fb-login-button" data-width="324" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="false"></div>
+
               <div class = separator_with_text> or</div>
               <div class="form-inputs">
                 <%= f.input :email, required: false, autofocus: true, label: false, placeholder: 'Email', :input_html => { :class => 'form-control member-input' } %>
