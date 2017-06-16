@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   end
   resources :round_trip_flights, only: [:create]
   resources :selections, only: [:create, :show]
-  resources :airports
+  resources :airports, only: [:show] do
+    get :highlight_airport, to: "searches#highlight_airport"
+  end
   resources :orders, only: [:show, :create, :update] do
     resources :payments, only: [:new, :create]
   end

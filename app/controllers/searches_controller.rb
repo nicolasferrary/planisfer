@@ -162,6 +162,17 @@ class SearchesController < ApplicationController
         }
         ]).to_json
     end
+
+  end
+
+  def highlight_airport
+    @filtered_airport = Airport.find(params[:airport_id]) unless params[:airport_id].nil?
+
+      render json: [{
+          lat: @filtered_airport.coordinates.gsub(/\:(.*)/, '').to_f,
+          lng: @filtered_airport.coordinates.gsub(/(.*)\:/, '').to_f,
+          picture: { url: view_context.image_url("airport-black.svg"), width: 70, height: 35 }
+        }].to_json
   end
 
   def highlight_poi

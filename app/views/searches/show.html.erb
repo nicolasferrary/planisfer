@@ -130,7 +130,7 @@
                 <div class = "row centered">
                   <% @region_airports_cities.each do |airport| %>
                     <div class = "col-md-3 content-center">
-                      <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city="<%= airport.cityname%>"><%= airport.cityname%></div>
+                      <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city = "<%= airport.cityname%>" data-airport-id = <%= airport.id %> > <%= airport.cityname%></div>
                     </div>
                   <% end %>
                 </div>
@@ -268,8 +268,42 @@
           markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
           handler.bounds.extendWith(markers);
           handler.fitMapToBounds();
-        }, 1000);
+        }, 300);
       })
+
+      $('.filtered-city').mouseenter('click', function(e) {
+        e.preventDefault();
+          var airportId = $(this).data('airport-id');
+          console.log(airportId);
+          //
+          $.ajax({
+            type: "GET",
+            url: '/airports/' + airportId + '/highlight_airport',
+            dataType: "json",
+            success: function(result) {
+              console.log(result);
+              for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+                handler.removeMarkers(markers);
+              }
+              markers = handler.addMarkers(result);
+            }
+          })
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+      })
+
+      $('.filtered-city').mouseleave('click', function(e) {
+        e.preventDefault();
+        setTimeout(function() {
+          var airportId = $(this).data('airport-id');
+          handler.removeMarkers(markers);
+          markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+        }, 0);
+      })
+
 
       $('#car_wait_modal').on('show.bs.modal', function(e) {
         //get data-id attribute of the clicked element
