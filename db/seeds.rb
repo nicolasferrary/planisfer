@@ -17,8 +17,8 @@ require 'csv'
 # Poi.destroy_all
 # Search.destroy_all
 # Region.destroy_all
-Order.destroy_all
-Member.destroy_all
+# Order.destroy_all
+# Member.destroy_all
 
 # Seeding all the airports with IATA codes and coordinates
 
@@ -73,10 +73,10 @@ Member.destroy_all
 # end
 
 # Seeding a first member
-Member.create!(
-  email: 'ferraryn@gmail.com',
-  password: 'Diplomatie85!',
-  )
+# Member.create!(
+#   email: 'ferraryn@gmail.com',
+#   password: 'Diplomatie85!',
+#   )
 
 # city1 = City.create!(name:"Paris")
 # city2 = City.create!(name:"London")
