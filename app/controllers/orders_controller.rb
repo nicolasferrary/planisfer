@@ -10,9 +10,7 @@ class OrdersController < ApplicationController
       :pick_up_date_time => params[:pick_up_date_time],
       :drop_off_date_time => params[:drop_off_date_time],
     }
-
-# UNCOMMENT TO LAUNCH WORLDIA CALLS
-
+# Uncomment for worldia
     # # Create a component for worldia
     # @component = worldia_create_component(@trip)
     # # Gather the component's variation
@@ -36,9 +34,8 @@ class OrdersController < ApplicationController
 
     @region = @trip.search.region
 
-# UNCOMMENT TO LAUNCH WORLDIA CALLS
-    # # Worldia : validate payment
-    # worldia_validate_payment(@quote_id)
+    # Worldia : validate payment
+    worldia_validate_payment(@quote_id)
     @trip_airports = define_trip_airports(@trip)
     @pois = define_pois(@region)
     @initial_markers = build_markers(@pois, @trip_airports)
@@ -63,14 +60,13 @@ class OrdersController < ApplicationController
     @order.member = current_member
     @order.save
 
-# UNCOMMENT TO LAUNCH WORLDIA CALLS
-    # # Worldia : Add user to quote
-    # @quote_id = params[:quote_id]
-    # worldia_add_user_to_quote(@member, @quote_id)
-    # #Worldia : Add passengers to quote
-    # worldia_add_passengers_to_quote(@passengers, @quote_id, @nb_travelers)
-    # #Worldia : Create payment
-    # worldia_create_payment(@quote_id)
+    # Worldia : Add customer to quote
+    @quote_id = params[:quote_id]
+    worldia_add_customer_to_quote(@member, @quote_id)
+    #Worldia : Add passengers to quote
+    worldia_add_passengers_to_quote(@passengers, @quote_id, @nb_travelers)
+    #Worldia : Create payment
+    worldia_create_payment(@quote_id)
 
      @options = {
       :pick_up_location => params[:pick_up_location],
@@ -152,10 +148,49 @@ class OrdersController < ApplicationController
     hash_response = JSON.parse(response.body)
   end
 
+  def worldia_add_customer_to_quote(member, quote_id)
+    url = "https://www.worldia.com/api/v1/carts/#{quote_id}"
+    json = {
+    "customerId": member.id
+    }.to_json
+    RestClient.patch(url, json, {:content_type => 'application/json'})
+  end
+
+  def worldia_add_passengers_to_quote(passengers, quote_id, nb_travelers)
+    url = "https://www.worldia.com/api/v1/checkout/#{quote_id}/select_pax"
+
+    request_hash = {
+      "comments": [{"comment":"No comment"}],
+      "pax":[]
+    }
+    for num in (1..nb_travelers)
+      passenger_hash = {
+        "dateOfBirth": "1900-01-01",
+        "title": passengers["#{num}"][:title],
+        "firstName": passengers["#{num}"][:first_name],
+        "lastName": passengers["#{num}"][:name]
+        }
+        request_hash[:pax] << passenger_hash
+    end
+
+    json = request_hash.to_json
+    RestClient.put url, json, {:content_type => 'application/json'}
+  end
+
+  def worldia_create_payment(quote_id)
+    url = "https://www.worldia.com/api/v1/checkout/#{quote_id}/select_options"
+    json = {
+      "insuranceMethod": "NO_INSURANCE",
+      "paymentMethod":"phone"
+      }.to_json
+    RestClient.put(url, json, {:content_type => 'application/json'})
+  end
+
   def worldia_validate_payment(quote_id)
     url = "https://www.worldia.com/api/v1/checkout/#{quote_id}/complete"
     json = {}.to_json
     response = RestClient.post url, json, {:content_type => 'application/json'}
+    raise
   end
 
   def define_pois(region)
