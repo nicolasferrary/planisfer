@@ -148,10 +148,10 @@ class OrdersController < ApplicationController
     hash_response = JSON.parse(response.body)
   end
 
-  def worldia_add_user_to_quote(user, quote_id)
+  def worldia_add_customer_to_quote(member, quote_id)
     url = "https://www.worldia.com/api/v1/carts/#{quote_id}"
     json = {
-    "customerId": user.id
+    "customerId": member.id
     }.to_json
     RestClient.patch(url, json, {:content_type => 'application/json'})
   end
@@ -190,6 +190,7 @@ class OrdersController < ApplicationController
     url = "https://www.worldia.com/api/v1/checkout/#{quote_id}/complete"
     json = {}.to_json
     response = RestClient.post url, json, {:content_type => 'application/json'}
+    raise
   end
 
   def define_pois(region)
