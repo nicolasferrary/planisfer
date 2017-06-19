@@ -25,7 +25,8 @@
           <p id = "date-recap"> From <strong><%= @starts_on.strftime("%B %e") %></strong> - To <strong><%= @returns_on.strftime("%B %e") %></strong></p>
           <p id = "bagsandprice">
             <span id = "checkedinbags">
-              <%= link_to('' , '', :class => "popover-link bag-popover-link", :rel => "popover", :"data-trigger" => "manual", :"data-content" => "Some companies apply charges to checked-in bags. Select the number of bags you want to check-in") %>
+              <!-- <div class="text-center example-class" data-container="body" data-template='<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>' data-toggle="popover" data-placement="left" data-content="this is a test"> -->
+              <%= link_to('' , '', :class => "popover-link bag-popover-link", :rel => "popover", :"data-template" => '<div class="bag-popover" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>', :"data-trigger" => "manual", :"data-content" => "Some airlines charge checked-in bags. <br /> Select the number of bags you want to check-in") %>
               Checked-in bags
               <span class="fa-stack fa-1x">
                 <i class="fa fa-suitcase suitcase fa-stack-2x"></i>
@@ -532,17 +533,10 @@
   </script>
 
   <script>
-    $(function () {
-      $('[data-toggle="popover"]').popover()
-    })
-    $('.bag-popover-link').mouseenter(function(){
-      $('popover').popover('hide');
-      var _this = this;
-      $(this).popover('show');
-      $(".bag-popover-link").on("mouseleave", function () {
-        $(_this).popover('hide');
-      });
+    $(document).ready(function() {
+      $('.bag-popover-link').popover({ html : true, placement: "right", trigger: "hover"});
     });
+
   </script>
 
 <% end %>
