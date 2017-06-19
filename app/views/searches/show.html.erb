@@ -20,10 +20,20 @@
     <!-- part with tab showing best results by airports -->
     <div class="displayTrips">
       <div class = "row">
-        <div id="TitleShow">
-          <h3>CHEAPEST DIRECT FLIGHTS </h3>
-          <p> From <strong><%= @starts_on.strftime("%B %e") %></strong> - To <strong><%= @returns_on.strftime("%B %e") %></strong></p>
-          <span id="price-for"> Price for <%= @passengers_title %></span>
+        <div id="resultstitle">
+          <h3 id = "flighttitle">CHEAPEST DIRECT FLIGHTS </h3>
+          <p id = "date-recap"> From <strong><%= @starts_on.strftime("%B %e") %></strong> - To <strong><%= @returns_on.strftime("%B %e") %></strong></p>
+          <p id = "bagsandprice">
+            <span id = "checkedinbags">
+              <%= link_to('' , '', :class => "popover-link bag-popover-link", :rel => "popover", :"data-trigger" => "manual", :"data-content" => "Some companies apply charges to checked-in bags. Select the number of bags you want to check-in") %>
+              Checked-in bags
+              <span class="fa-stack fa-1x">
+                <i class="fa fa-suitcase suitcase fa-stack-2x"></i>
+                <strong class="fa-stack-1x suitcase-text">0</strong>
+              </span>
+            </span>
+            <span id="price-for"> Price for <%= @passengers_title %></span>
+          </p>
         </div>
       </div>
 
@@ -519,6 +529,20 @@
       }
     }
 
+  </script>
+
+  <script>
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
+    $('.bag-popover-link').mouseenter(function(){
+      $('popover').popover('hide');
+      var _this = this;
+      $(this).popover('show');
+      $(".bag-popover-link").on("mouseleave", function () {
+        $(_this).popover('hide');
+      });
+    });
   </script>
 
 <% end %>
