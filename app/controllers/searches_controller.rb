@@ -83,7 +83,7 @@ class SearchesController < ApplicationController
     # Apply index filters and select number of trips to be displayed
     apply_index_filters
 
-    @bags = 0
+    @search.bags = params[:bags]
     # @trips = apply_bag_filters(@trips, @bags)
 
     @trips = @trips.sort_by { |trip| trip.price }
