@@ -81,7 +81,8 @@ class SearchesController < ApplicationController
     # Apply index filters and select number of trips to be displayed
     apply_index_filters
 
-    @search.bags = params[:bags]
+    @search.bags = params[:bags] || 0
+    @search.save
     @trips = apply_bag_filters(@trips, @search.bags) if params[:bags]
     @flight_margin = 1.05
     @trips = apply_flight_margin(@trips, @flight_margin)
@@ -388,9 +389,9 @@ class SearchesController < ApplicationController
       marker.infowindow render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => poi})
       # marker.json { :id => poi.id }
       marker.picture({
-                  :url => view_context.image_url("heart-small.png"),
-                  :width   => 39,
-                  :height  => 34,
+                  :url => view_context.image_url("heart-only.png"),
+                  :width   => 20,
+                  :height  => 16,
                  })
     end
     airports_markers = Gmaps4rails.build_markers(airports) do |airport, marker|

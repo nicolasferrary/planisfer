@@ -220,9 +220,9 @@ class OrdersController < ApplicationController
       marker.infowindow render_to_string(:partial => "/shared/poi_infowindow", :locals => { :object => poi})
       # marker.json { :id => poi.id }
       marker.picture({
-                  :url => view_context.image_url("heart-small.png"),
-                  :width   => 39,
-                  :height  => 34,
+                  :url => view_context.image_url("heart-only.png"),
+                  :width   => 20,
+                  :height  => 16,
                  })
     end
     airports_markers = Gmaps4rails.build_markers(airports) do |airport, marker|
