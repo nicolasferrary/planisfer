@@ -155,7 +155,9 @@
               </div>
             </div>
 
-            <div class ="text-center filter-apply">
+            <div class ="text-center filter-apply hidden">
+            <%= hidden_field_tag :flight1_range, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
+            <%= hidden_field_tag :flight2_range, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
             <%= hidden_field_tag 'selected-cities', params['selected-cities'], id: "city-tag"%>
             <%# submit_tag "Apply filters", class: "btn-brand" %>
             </div>
