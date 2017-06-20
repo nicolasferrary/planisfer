@@ -29,8 +29,6 @@ class SearchesController < ApplicationController
     @nb_infants = @search.nb_infants
     @all_region_airports = define_all_airports(@region)
     @trips = get_trips_for(@starts_on, @returns_on, @nb_adults, @nb_children, @nb_infants, @city, @search, @all_region_airports)
-    @flight_margin = 1.05
-    @trips = apply_flight_margin(@trips, @flight_margin)
     redirect_to search_path(@search)
 
   end
@@ -84,9 +82,12 @@ class SearchesController < ApplicationController
     apply_index_filters
 
     @search.bags = params[:bags]
-    # @trips = apply_bag_filters(@trips, @bags)
+    @trips = apply_bag_filters(@trips, @search.bags) if params[:bags]
+    @flight_margin = 1.05
+    @trips = apply_flight_margin(@trips, @flight_margin)
 
     @trips = @trips.sort_by { |trip| trip.price }
+
     @trips_selection = @trips.first(10)
     @round_trips = @trips_selection.map(&:round_trip_flight)
     # Define POIs we want to show on the map
@@ -485,6 +486,20 @@ class SearchesController < ApplicationController
       end
     end
     selected_airport
+  end
+
+  def apply_bag_filters(trips, bags)
+    trips.each do |trip|
+      carrier1 = trip.round_trip_flight.carrier1
+      bag_price1 = Constants::BAGGAGE[carrier1]*100 || 2500
+      carrier2 = trip.round_trip_flight.carrier2
+      bag_price2 = Constants::BAGGAGE[carrier2]*100 || 2500
+      bag_price = (bag_price1 + bag_price2) * bags
+
+      trip.price_cents = trip.round_trip_flight.price_cents + bag_price
+      trip.save
+    end
+    trips
   end
 
 end
