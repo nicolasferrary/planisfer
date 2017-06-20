@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608141728) do
+ActiveRecord::Schema.define(version: 20170619195031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(version: 20170608141728) do
     t.integer  "region_id"
     t.integer  "nb_children"
     t.integer  "nb_infants"
+    t.integer  "bags"
     t.index ["region_id"], name: "index_searches_on_region_id", using: :btree
   end
 

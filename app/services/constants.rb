@@ -567,7 +567,35 @@ module Constants
   'A5' => 'Hop!',
   'FR' => 'Ryanair',
   'U2' => 'easyJet',
-  'TO' => 'Transavia'
+  'TO' => 'Transavia',
+  'MV' => 'Meridiana',
+  'DY' => 'Norwegian',
+  }
+
+  BAGGAGE = {
+    'FR' => 30,
+    'U2' => 20,
+    'VY' => 20,
+    'TO' => 25,
+    'AF' => 25,
+    'UX' => 15,
+    'XK' => 0,
+    'BA' => 25,
+    'OU' => 0,
+    'DY' => 25,
+    'A3' => 25,
+    'EI' => 40,
+    'AZ' => 20,
+    'WX' => 25,
+    'A5' => 20,
+    'IB' => 18,
+    'TP' => 15,
+    'ZI' => 25,
+    '0B' => 45,
+    'RO' =>  0,
+    'MV' => 20,
+    'LH' => 20,
+    'BE' => 30,
   }
 
 
@@ -1333,6 +1361,7 @@ ONEWAYMARKUP = {
     "ADVANTAGE" => 300
   }
 }
+
 
 
 end

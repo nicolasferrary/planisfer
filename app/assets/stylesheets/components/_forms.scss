@@ -126,3 +126,40 @@ textarea.form-control{
 .contact-fom{
   margin-top:0;
 }
+
+.bags-form{
+  border:none;
+  box-shadow:none;
+  width: 12px;
+  padding: 0;
+  background:none;
+  select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      text-indent: 1px;
+      text-overflow: '';
+  }
+}
+
+.bags-form:focus{
+  border:none;
+  box-shadow:none;
+}
+
+.displayTrips select {
+        /*for firefox*/
+        -moz-appearance: none;
+        /*for chrome*/
+        -webkit-appearance:none;
+        text-align-last:center;
+      }
+
+/*for IE10*/
+.displayTrips select::-ms-expand {
+    display: none;
+}
+
+#bag-form-tag{
+  z-index:10;
+}
+

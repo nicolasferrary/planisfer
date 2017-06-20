@@ -20,12 +20,31 @@
     <!-- part with tab showing best results by airports -->
     <div class="displayTrips">
       <div class = "row">
-        <div id="TitleShow">
-          <h3>CHEAPEST DIRECT FLIGHTS </h3>
-          <p> From <strong><%= @starts_on.strftime("%B %e") %></strong> - To <strong><%= @returns_on.strftime("%B %e") %></strong></p>
+        <div id="resultstitle">
+          <h3 id = "flighttitle">CHEAPEST DIRECT FLIGHTS </h3>
+          <p id = "date-recap">
+            From <strong><%= @starts_on.strftime("%B %e") %></strong> - To <strong><%= @returns_on.strftime("%B %e") %></strong>
+          </p>
+          <%=form_tag search_path(@search), method: :get, id: 'bag-form-tag' do %>
+            <span id = "checkedinbags">
+              <span id = "checkinbagstext">
+                Checked-in bags
+                <%= link_to('' , '', :class => "popover-link bag-popover-link", :rel => "popover", :"data-template" => '<div class="bag-popover" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>', :"data-trigger" => "manual", :"data-content" => "Some airlines apply charges to checked-in bags. <br /> Please click on the suitcase to select the number of bags you want to check-in")%>
+              </span>
+
+              <span class="fa-stack fa-1x">
+                <i class="fa fa-suitcase suitcase fa-stack-2x"></i>
+                <strong class="fa-stack-1x suitcase-text">
+                  <%= select_tag :bags, options_for_select((0..@nb_travelers), @search.bags), onchange: "this.form.submit();", class: "bags-form"  %>
+                </strong>
+              </span>
+            </span>
+          <% end %>
+
           <span id="price-for"> Price for <%= @passengers_title %></span>
         </div>
       </div>
+
 
       <!-- Price lists and map-->
       <div id="page-result-container">
@@ -77,7 +96,7 @@
                                   <h3><i class="fa fa-plane"></i> Take-off time</h3>
                                 </li>
                                 <li>
-                                  <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider submit-on-change",
+                                  <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider",
                                   data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
                                 </li>
                               </ul>
@@ -97,7 +116,7 @@
                                 </li>
 
                                 <li>
-                                  <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider submit-on-change",
+                                  <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider",
                                   data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
                                 </li>
                               </ul>
@@ -138,7 +157,7 @@
             </div>
 
             <div class ="text-center filter-apply">
-            <%= hidden_field_tag 'selected-cities', params['selected-cities'], class: "submit-on-change" %>
+            <%= hidden_field_tag 'selected-cities', params['selected-cities']%>
             <%# submit_tag "Apply filters", class: "btn-brand" %>
             </div>
           <% end %>
@@ -518,6 +537,24 @@
         this.div_.style.visibility = "visible";
       }
     }
+
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      $('.bag-popover-link').popover({ html : true, placement: "top", trigger: "click"});
+      $('.bags-form').change(function() {
+        $('#bag-form-tag').submit;
+      })
+      $('#checkedinbags').mouseenter(function() {
+        $('.suitcase').addClass('suitcase-hovered');
+        $('.bag-popover-link').popover('show');
+      })
+      $('#checkedinbags').mouseleave(function() {
+        $('.suitcase').removeClass('suitcase-hovered');
+        $('.bag-popover-link').popover('hide');
+      })
+    });
 
   </script>
 

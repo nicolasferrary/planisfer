@@ -42,11 +42,21 @@
 
 
 
-#TitleShow {
-  margin-bottom: 28px;
+#resultstitle {
   margin-top: -20px;
+  margin-bottom:35px;
   text-align: center;
+  h3{
+    font-size: 23px;
+    color: #333333;
+  }
 }
+
+#checkedinbags {
+  float: left;
+  position: relative;
+}
+
 
 .titlepadding{
   padding-right: 15px;
@@ -58,11 +68,6 @@
 }
 
 #poi-title span{
-  font-size: 23px;
-  color: #333333;
-}
-
-#TitleShow h3{
   font-size: 23px;
   color: #333333;
 }
@@ -158,9 +163,21 @@
   font-weight: light;
 }
 
+#price-for {
+  font-size: 12px;
+}
+
 #price-for{
   float:right;
+}
+
+#checkedinbags{
+  float:left;
   font-size: 12px;
+}
+
+#checkinbagstext{
+  position:relative,
 }
 
 .edit-links{
