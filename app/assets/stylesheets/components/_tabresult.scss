@@ -5,7 +5,7 @@
 
 .page-result{
   // background: #F5F5F5;
-  padding-top: 60px;
+  padding-top: 40px;
 }
 
 .flexbox {
@@ -33,13 +33,6 @@
 }
 
 
-.cardContainer.selected {
-  box-shadow: 1px 1px 1px #5d5d5d;
-  .card-price {
-    background-color: $brand-color;
-  }
-}
-
 
 
 #resultstitle {
@@ -50,6 +43,10 @@
     font-size: 23px;
     color: #333333;
   }
+}
+
+#date-recap {
+  margin-bottom: 5px;
 }
 
 #checkedinbags {

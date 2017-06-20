@@ -196,8 +196,9 @@
       $(this).popover('show');
       $('.car-result-card').mouseenter('click', function(e) {
         e.preventDefault();
-        $('.cardContainer.selected').removeClass('selected');
+        $('.popover-card-container').removeClass('selected');
         $(this).children('.popover-card-container').addClass('selected');
+        console.log('test');
       });
       $('.car-result-card').on('click', function(e) {
         e.preventDefault();

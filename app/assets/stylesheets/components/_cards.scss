@@ -17,8 +17,14 @@
   position: relative;
 }
 
-.popover-card-container{
+.cardContainer.selected {
+  box-shadow: 1px 1px 1px #5d5d5d;
+  .card-price {
+    background-color: $brand-color;
+  }
+}
 
+.popover-card-container{
   color: black;
   border-radius: 5px;
   margin-bottom: 20px;
@@ -29,9 +35,15 @@
   width: 400px;
   margin-bottom: 5px;
   height: 50px;
-}
-.popover-card-container {
   height: auto;
+}
+
+
+.popover-card-container.selected {
+  box-shadow: 1px 1px 1px #5d5d5d;
+  .card-price {
+    background-color: $brand-color;
+  }
 }
 
 .card-description p{
@@ -55,6 +67,12 @@
 .popover-card-price{
   position: relative;
 }
+
+
+.popover-card-price.selected{
+  background-color: $brand-color;
+}
+
 
 .flight-card-price {
   top: 9px;
