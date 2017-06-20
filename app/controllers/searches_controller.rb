@@ -53,7 +53,7 @@ class SearchesController < ApplicationController
     @returns_on = @search.returns_on
 
     #To hide or show the filters
-    @status = "none"
+    @status = "none" unless params[:status] == 'filtered'
 
 # Is this useful?
     @selected_cities = @region_airports
@@ -324,19 +324,16 @@ class SearchesController < ApplicationController
     if params["flight1_range"].present? && params["flight1_range"] != ""
       @filters = @filters.merge("flight1_range" => @flight1_range)
       @trips = filter_by_f1_takeoff(@trips)
-      @status = "block"
     end
 
     if params["flight2_range"].present? && params["flight2_range"] != ""
       @filters = @filters.merge("flight2_range" => @flight2_range)
       @trips = filter_by_f2_takeoff(@trips)
-      @status = "block"
     end
 
     if params["selected-cities"].present? && params["selected-cities"] != ""
       @filters = @filters.merge("selected_airports" => @selected_airports)
       @trips = filter_by_selected_airports(@trips)
-      @status = "block"
     end
   end
 
