@@ -221,7 +221,7 @@
         }, 100)
       })
 
-      var handler = Gmaps.build('Google');
+      var handler = Gmaps.build('Google',{ markers: { clusterer: undefined  } });
 
       handler.buildMap({
         provider: {
@@ -242,7 +242,10 @@
           markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
           handler.bounds.extendWith(markers);
           handler.fitMapToBounds();
-
+          // use the event listener to load the state of map
+          loadMapState();
+          // use the event listener to save the state when zoom changes or drag ends
+          google.maps.event.addListener(handler.getMap(), 'tilesloaded', tilesLoaded);
           for (var i = 0; i < markers.length; i++) {
             var selectedMarker = markers[i];
             //create an options object
@@ -254,7 +257,6 @@
 
         },
       );
-
 
       $('.result-card').mouseenter('click', function(e) {
         e.preventDefault();
@@ -269,7 +271,6 @@
           data: {airport_colours: colours},
           dataType: "json",
           success: function(result) {
-            console.log(result);
             for (var i = 0; i < markers.length; i++) {
               markers[i].setMap(null);
               handler.removeMarkers(markers);
@@ -280,6 +281,7 @@
 
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();
+
       })
 
       $('.result-card').mouseleave('click', function(e) {
@@ -295,24 +297,21 @@
 
       $('.filtered-city').mouseenter('click', function(e) {
         e.preventDefault();
-          var airportId = $(this).data('airport-id');
-          console.log(airportId);
-          //
-          $.ajax({
-            type: "GET",
-            url: '/airports/' + airportId + '/highlight_airport',
-            dataType: "json",
-            success: function(result) {
-              console.log(result);
-              for (var i = 0; i < markers.length; i++) {
-                markers[i].setMap(null);
-                handler.removeMarkers(markers);
-              }
-              markers = handler.addMarkers(result);
+        var airportId = $(this).data('airport-id');
+        $.ajax({
+          type: "GET",
+          url: '/airports/' + airportId + '/highlight_airport',
+          dataType: "json",
+          success: function(result) {
+            for (var i = 0; i < markers.length; i++) {
+              markers[i].setMap(null);
+              handler.removeMarkers(markers);
             }
-          })
-          handler.bounds.extendWith(markers);
-          handler.fitMapToBounds();
+            markers = handler.addMarkers(result);
+          }
+        })
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
       })
 
       $('.filtered-city').mouseleave('click', function(e) {
@@ -364,6 +363,53 @@
         $("#hide-more-flights").toggleClass("hidden");
         $(".the-hidden-results").toggleClass("hidden");
       })
+
+      function tilesLoaded() {
+        google.maps.event.clearListeners(handler.getMap(), 'tilesloaded');
+        google.maps.event.addListener(handler.getMap(), 'zoom_changed', saveMapState);
+        google.maps.event.addListener(handler.getMap(), 'dragend', saveMapState);
+      }
+      // functions below
+      function saveMapState() {
+        var mapZoom=handler.getMap().getZoom();
+        var mapCentre=handler.getMap().getCenter();
+        var mapLat=mapCentre.lat();
+        var mapLng=mapCentre.lng();
+        var cookiestring=mapLat+"_"+mapLng+"_"+mapZoom;
+        setCookie("myMapCookie",cookiestring, 30);
+      }
+      function loadMapState() {
+        var gotCookieString=getCookie("myMapCookie");
+        var splitStr = gotCookieString.split("_");
+        var savedMapLat = parseFloat(splitStr[0]);
+        var savedMapLng = parseFloat(splitStr[1]);
+        var savedMapZoom = parseFloat(splitStr[2]);
+        if ((!isNaN(savedMapLat)) && (!isNaN(savedMapLng)) && (!isNaN(savedMapZoom))) {
+            handler.getMap().setCenter(new google.maps.LatLng(savedMapLat,savedMapLng));
+            handler.getMap().setZoom(savedMapZoom);
+        }
+      }
+      function setCookie(c_name,value,exdays) {
+        var exdate=new Date();
+        exdate.setDate(exdate.getDate() + exdays);
+        var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+        document.cookie=c_name + "=" + c_value;
+      }
+      function getCookie(c_name) {
+        var i,x,y,ARRcookies=document.cookie.split(";");
+        for (i=0;i<ARRcookies.length;i++)
+        {
+          x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+          y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+          x=x.replace(/^\s+|\s+$/g,"");
+          if (x==c_name)
+            {
+            return unescape(y);
+            }
+          }
+        return "";
+      }
+
     });
 
   </script>
@@ -376,7 +422,7 @@
       });
       $(".filtered-city").removeClass("city-selected");
       <% @selected_airports.each do |airport| %>
-      $(".filtered-city[data-city=<%= airport.cityname %>]").addClass("city-selected");
+        $(".filtered-city[data-city=<%= airport.cityname %>]").addClass("city-selected");
       <% end %>
     });
     function update_form_selected_cities() {
@@ -386,7 +432,6 @@
       });
       selected_cities = selected_cities.slice(0,-1); //remove last coma
       $('#city-tag').val(selected_cities);
-      console.log('this test');
     }
   </script>
   <script>
