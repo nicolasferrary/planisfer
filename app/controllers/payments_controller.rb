@@ -3,7 +3,6 @@ require 'rest-client'
 
 class PaymentsController < ApplicationController
   before_action :set_order
-
   def new
     @trip = Trip.find(params[:trip_id])
     @region = @trip.search.region

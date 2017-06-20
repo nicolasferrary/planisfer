@@ -73,6 +73,12 @@
     <% #Beg of icon bootstrap col %>
     <div class = "col-sm-2">
       <%= image_tag "flight.png", height: "30px", width: "auto" %>
+      <span class="fa-stack fa-1x recap-suitcase">
+        <i class="fa fa-suitcase suitcase fa-stack-1x"></i>
+        <strong class="fa-stack-1x suitcase-text recap-suitcase-text">
+          <%= @trip.search.bags %>
+        </strong>
+      </span>
     </div>
     <% #End of icon bootstrap col %>
     <% #Beg of content bootstrap col %>
