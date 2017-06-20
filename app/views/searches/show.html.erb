@@ -96,8 +96,7 @@
                                   <h3><i class="fa fa-plane"></i> Take-off time</h3>
                                 </li>
                                 <li>
-                                  <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider",
-                                  data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
+                                  <%= text_field_tag :flight1_range, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
                                 </li>
                               </ul>
                             </div>
@@ -116,8 +115,7 @@
                                 </li>
 
                                 <li>
-                                  <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider",
-                                  data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
+                                  <%= text_field_tag :flight2_range, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "0,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
                                 </li>
                               </ul>
                             </div>
@@ -134,6 +132,7 @@
               </div>
 
             </div>
+            <%= hidden_field_tag 'selected-cities', params['selected-cities'], id: 'city-tag-in-times'%>
           <% end %>
         </div>
       </div>
@@ -157,7 +156,7 @@
             </div>
 
             <div class ="text-center filter-apply">
-            <%= hidden_field_tag 'selected-cities', params['selected-cities']%>
+            <%= hidden_field_tag 'selected-cities', params['selected-cities'], id: "city-tag"%>
             <%# submit_tag "Apply filters", class: "btn-brand" %>
             </div>
           <% end %>
@@ -383,8 +382,8 @@
         selected_cities = selected_cities + $(this).text() + ",";
       });
       selected_cities = selected_cities.slice(0,-1); //remove last coma
-      $('#selected-cities').val(selected_cities);
-      console.log(selected_cities)
+      $('#city-tag').val(selected_cities);
+      console.log('this test');
     }
   </script>
   <script>
