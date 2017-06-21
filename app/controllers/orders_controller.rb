@@ -45,15 +45,29 @@ class OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     @trip = Trip.find(params[:trip_id])
-    @passengers = {}
+    @quote_id = params[:quote_id]
     @nb_travelers = @trip.nb_adults + @trip.nb_children + @trip.nb_infants
-      for num in (1..@nb_travelers)
-        @passengers["#{num}"] = {
-          title: params[:title_pax]["#{num}"],
-          first_name: params[:first_name_pax]["#{num}"],
-          name: params[:name_pax]["#{num}"]
-        }
-      end
+    @options = {
+      :pick_up_location => params[:pick_up_location],
+      :drop_off_location => params[:drop_off_location],
+      :pick_up_date_time => params[:pick_up_date_time],
+      :drop_off_date_time => params[:drop_off_date_time],
+    }
+
+    form_filled = check_form_filled(@nb_travelers)
+    if form_filled == false
+      flash[:search_error] = "Please fill empty fields"
+      redirect_to new_order_payment_path(@order, trip_id: @trip.id, options: @options, quote_id: @quote_id)
+    end
+
+    @passengers = {}
+    for num in (1..@nb_travelers)
+      @passengers["#{num}"] = {
+        title: params[:title_pax]["#{num}"],
+        first_name: params[:first_name_pax]["#{num}"],
+        name: params[:name_pax]["#{num}"]
+      }
+    end
     @order.passengers = @passengers
     @order.mail = params[:email]
     @order.save
@@ -61,19 +75,12 @@ class OrdersController < ApplicationController
     @order.save
 
     # Worldia : Add customer to quote
-    @quote_id = params[:quote_id]
+
     worldia_add_customer_to_quote(@order.member, @quote_id)
     #Worldia : Add passengers to quote
     worldia_add_passengers_to_quote(@passengers, @quote_id, @nb_travelers)
     #Worldia : Create payment
     worldia_create_payment(@quote_id)
-
-     @options = {
-      :pick_up_location => params[:pick_up_location],
-      :drop_off_location => params[:drop_off_location],
-      :pick_up_date_time => params[:pick_up_date_time],
-      :drop_off_date_time => params[:drop_off_date_time],
-    }
 
     redirect_to new_order_payment_path(@order, trip_id: @trip.id, status: "OK", options: @options, quote_id: @quote_id)
   end
@@ -238,6 +245,23 @@ class OrdersController < ApplicationController
       })
     end
     markers = pois_markers + airports_markers
+  end
+
+  def check_form_filled(nb_travelers)
+    form_filled = true
+    if params["email"] == ""
+      form_filled = false
+    end
+    (1..nb_travelers).each do |i|
+      if params["title_pax"][i.to_s] == ""
+        form_filled = false
+      elsif params["first_name_pax"][i.to_s] == ""
+        form_filled = false
+      elsif params["name_pax"][i.to_s] == ""
+        form_filled = false
+      end
+    end
+    form_filled
   end
 
 end
