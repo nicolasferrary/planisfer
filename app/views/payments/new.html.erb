@@ -30,9 +30,13 @@
           <div class = "row">
             <div class = "col-sm-6">
               <h4 class = "<%= 'light' if @status == 'OK' %>">1. Who is traveling</h4>
+              <% if flash[:search_error] %>
+                <p class="red-message"><%= flash[:search_error] %></p>
+              <% end %>
             </div>
+
             <div class = col-sm-6>
-              <%= link_to new_order_payment_path(:trip_id => @trip.id, :order => @order) do%>
+              <%= link_to new_order_payment_path(:trip_id => @trip.id, :order => @order, options: @options, quote_id: @quote_id) do%>
                 <p class = "edit <%= 'not-displayed' if @status == 'none' %>"> Edit </p>
               <% end %>
             </div>
