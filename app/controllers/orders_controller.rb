@@ -58,31 +58,31 @@ class OrdersController < ApplicationController
     if form_filled == false
       flash[:search_error] = "Please fill empty fields"
       redirect_to new_order_payment_path(@order, trip_id: @trip.id, options: @options, quote_id: @quote_id)
+    else
+      @passengers = {}
+      for num in (1..@nb_travelers)
+        @passengers["#{num}"] = {
+          title: params[:title_pax]["#{num}"],
+          first_name: params[:first_name_pax]["#{num}"],
+          name: params[:name_pax]["#{num}"]
+        }
+      end
+      @order.passengers = @passengers
+      @order.mail = params[:email]
+      @order.save
+      @order.member = current_member
+      @order.save
+
+      # Worldia : Add customer to quote
+
+      worldia_add_customer_to_quote(@order.member, @quote_id)
+      #Worldia : Add passengers to quote
+      worldia_add_passengers_to_quote(@passengers, @quote_id, @nb_travelers)
+      #Worldia : Create payment
+      worldia_create_payment(@quote_id)
+
+      redirect_to new_order_payment_path(@order, trip_id: @trip.id, status: "OK", options: @options, quote_id: @quote_id)
     end
-
-    @passengers = {}
-    for num in (1..@nb_travelers)
-      @passengers["#{num}"] = {
-        title: params[:title_pax]["#{num}"],
-        first_name: params[:first_name_pax]["#{num}"],
-        name: params[:name_pax]["#{num}"]
-      }
-    end
-    @order.passengers = @passengers
-    @order.mail = params[:email]
-    @order.save
-    @order.member = current_member
-    @order.save
-
-    # Worldia : Add customer to quote
-
-    worldia_add_customer_to_quote(@order.member, @quote_id)
-    #Worldia : Add passengers to quote
-    worldia_add_passengers_to_quote(@passengers, @quote_id, @nb_travelers)
-    #Worldia : Create payment
-    worldia_create_payment(@quote_id)
-
-    redirect_to new_order_payment_path(@order, trip_id: @trip.id, status: "OK", options: @options, quote_id: @quote_id)
   end
 
 
