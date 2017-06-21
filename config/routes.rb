@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   resources :pois, only: [:show] do
     get :highlight_poi, to: "searches#highlight_poi"
   end
+  resources :activities, only: [:create]
+  resources :experiences, only: [:create, :new, :show, :update]
+  resources :subexperiences, only: [:create, :new, :show, :update]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

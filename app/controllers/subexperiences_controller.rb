@@ -1,0 +1,2 @@
+class SubexperiencesController < ApplicationController
+end
