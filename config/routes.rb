@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :activities, only: [:create]
   resources :experiences, only: [:create, :new, :show, :update]
   resources :subexperiences, only: [:create, :new, :show, :update]
+  resources :profile, only: [:show]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
