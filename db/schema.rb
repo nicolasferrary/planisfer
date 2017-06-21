@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170621092920) do
+ActiveRecord::Schema.define(version: 20170621155240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string   "name"
+    t.string   "review"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "airports", force: :cascade do |t|
     t.string   "name"
@@ -43,6 +50,20 @@ ActiveRecord::Schema.define(version: 20170621092920) do
     t.string   "category"
     t.string   "car_name"
     t.index ["selection_id"], name: "index_car_rentals_on_selection_id", using: :btree
+  end
+
+  create_table "experiences", force: :cascade do |t|
+    t.integer  "member_id"
+    t.integer  "region_id"
+    t.string   "type"
+    t.integer  "rating"
+    t.integer  "cost"
+    t.integer  "length"
+    t.string   "tip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_experiences_on_member_id", using: :btree
+    t.index ["region_id"], name: "index_experiences_on_region_id", using: :btree
   end
 
   create_table "members", force: :cascade do |t|
@@ -157,6 +178,19 @@ ActiveRecord::Schema.define(version: 20170621092920) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "subexperiences", force: :cascade do |t|
+    t.integer  "experience_id"
+    t.integer  "poi_id"
+    t.integer  "rating"
+    t.string   "review"
+    t.integer  "activity_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["activity_id"], name: "index_subexperiences_on_activity_id", using: :btree
+    t.index ["experience_id"], name: "index_subexperiences_on_experience_id", using: :btree
+    t.index ["poi_id"], name: "index_subexperiences_on_poi_id", using: :btree
+  end
+
   create_table "tokens", force: :cascade do |t|
     t.string   "text"
     t.datetime "created_at", null: false
@@ -187,9 +221,14 @@ ActiveRecord::Schema.define(version: 20170621092920) do
   end
 
   add_foreign_key "car_rentals", "selections"
+  add_foreign_key "experiences", "members"
+  add_foreign_key "experiences", "regions"
   add_foreign_key "orders", "members"
   add_foreign_key "round_trip_flights", "regions"
   add_foreign_key "searches", "regions"
+  add_foreign_key "subexperiences", "activities"
+  add_foreign_key "subexperiences", "experiences"
+  add_foreign_key "subexperiences", "pois"
   add_foreign_key "trips", "car_rentals"
   add_foreign_key "trips", "round_trip_flights"
   add_foreign_key "trips", "searches"

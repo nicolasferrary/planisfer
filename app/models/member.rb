@@ -6,6 +6,7 @@ class Member < ApplicationRecord
          :omniauthable, omniauth_providers: [:facebook]
   serialize :passengers
   has_many :orders
+  has_many :experiences
 
   def email_required?
     false
