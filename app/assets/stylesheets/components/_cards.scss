@@ -487,6 +487,11 @@
   display:flex;
   align-items:center;
   justify-content:space-around;
+  p{
+    text-shadow:none;
+    color: #404040;
+    font-size: 14px;
+  }
 }
 .subexperience-name {
   h2{
@@ -494,4 +499,34 @@
     margin: 0;
     font-size:20px;
   }
+
 }
+
+.reco-box{
+  background-color: #fafafa;
+  position: relative;
+  width: 60%;
+  margin:auto;
+  margin-top:30px;
+   p{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left:0;
+    right:0;
+    margin: auto;
+    width:90%;
+    height: 65%;
+    text-shadow:none;
+    color: #404040;
+    font-size: 14px;
+  }
+}
+
+.reco-box:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+
