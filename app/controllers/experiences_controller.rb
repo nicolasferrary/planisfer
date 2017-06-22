@@ -29,7 +29,10 @@ class ExperiencesController < ApplicationController
   end
 
   def edit
+    @experiences = current_member.experiences.to_a
     @experience = Experience.find(params[:id])
+    @experiences.delete(@experience)
+    @experiences.insert(0, @experience)
     @categories = ["Honeymoon", "Road trip", "Family friendly", "Nature/ Sport", "Cutlural", "Relaxing", "Big fiesta", "Local immersion"]
   end
 

@@ -31,20 +31,20 @@
     <div class = 'row'>
 
       <div class = 'col-xs-12 col-md-3'>
-        <% current_member.experiences.each do |experience| %>
-          <div class = 'row'>
-            <div class = 'col-xs-12'>
-              <a class="block profile-page-block destination">
-                <%= image_tag "countryphoto/#{experience.region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
-                <span class="box">
-                  <span class="text in-box">
-                    <span class="primarytext"><%= experience.region.name %></span>
+        <div class = 'row'>
+          <% @experiences.each_with_index do |experience, index| %>
+              <div class = 'col-xs-12'>
+                <a class="block profile-page-block destination <%= "active" if index == 0 %>">
+                  <%= image_tag "countryphoto/#{experience.region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
+                  <span class="box">
+                    <span class="text in-box">
+                      <span class="primarytext"><%= experience.region.name %></span>
+                    </span>
                   </span>
-                </span>
-              </a>
-            </div>
-          </div>
-        <% end %>
+                </a>
+              </div>
+          <% end %>
+        </div>
       </div>
 
       <div class = 'col-xs-12 col-md-9'>
