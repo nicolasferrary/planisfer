@@ -1,7 +1,7 @@
 class ExperiencesController < ApplicationController
 
   def create_experiences
-    # For each region in params, create an experience
+
     @regions = []
     member_experiences = current_member.experiences.all
     member_regions =[]
@@ -9,15 +9,23 @@ class ExperiencesController < ApplicationController
       member_regions << experience.region
     end
 
-    params[:regions].each_with_index do |region_id, index|
-      if index >=1
-        region = Region.find(region_id.to_i)
-        Experience.create(member: current_member, region: region) unless member_regions.include?(region)
+    new_regions = []
+    params[:regions].each do |region_id|
+      region = Region.find(region_id.to_i)
+      if !member_regions.include?(region)
+        new_regions << region
       end
     end
-    first_region = Region.find(params[:regions].first.to_i)
+
+    new_regions.each_with_index do |region, index|
+      if index >=1
+        Experience.create(member: current_member, region: region)
+      end
+    end
+    first_region = new_regions.first
     @first_experience = Experience.create(member: current_member, region: first_region)
     redirect_to edit_experience_path(@first_experience)
+
   end
 
   def edit
