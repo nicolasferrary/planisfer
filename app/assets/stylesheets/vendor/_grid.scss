@@ -172,18 +172,20 @@
   height: 180px;
   opacity:0.6;
   text-decoration:none;
+  &.entered{
+    opacity:1;
+    border: 2px solid $brand-color
+  }
   &.active{
     opacity:1;
+    border: 10px solid $brand-color;
     .dest-image{
       -webkit-transform:scale(1.1,1.1);
       -ms-transform:scale(1.1,1.1);
       transform:scale(1.1,1.1)
     }
   }
-}
 
-.profile-page-block:hover{
-  opacity:1;
 }
 
 

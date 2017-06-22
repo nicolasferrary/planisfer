@@ -93,11 +93,28 @@
 <%= content_for :after_js do %>
 
   <script>
+
     $(document).ready(function() {
+
+      $('.profile-page-block').mouseenter(function() {
+        $(this).addClass('entered');
+      })
+
+      $('.profile-page-block').mouseleave(function() {
+        $(this).removeClass('entered');
+      })
+
       $('.profile-page-block').click(function() {
-        $(this).addClass('active');
+        if ($(this).hasClass('active')) {
+          $(this).removeClass('active');
+        } else {
+          $(this).addClass('active');
+        }
       })
     })
+
   </script>
 
 <% end %>
+
+
