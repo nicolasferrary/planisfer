@@ -178,7 +178,8 @@
   }
   &.active{
     opacity:1;
-    border: 10px solid $brand-color;
+    outline: 10px solid $brand-color;
+    border: 2px solid white;
     .dest-image{
       -webkit-transform:scale(1.1,1.1);
       -ms-transform:scale(1.1,1.1);
