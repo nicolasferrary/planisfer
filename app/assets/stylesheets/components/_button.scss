@@ -254,3 +254,21 @@
   float: none;
   margin-top: 10px;
 }
+
+.trip-category {
+  width: 145px;
+  padding-right: 5px;
+  padding-left:5px;
+  opacity: 0.6;
+  opacity:1;
+  color: $brand-primary;
+  border: 1px solid $brand-primary;
+  &:hover {
+    opacity: 1;
+    background-color: $brand-primary;
+  }
+  &.active {
+    opacity: 1;
+    background-color: $brand-primary;
+  }
+}
