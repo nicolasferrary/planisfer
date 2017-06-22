@@ -263,12 +263,16 @@
   opacity:1;
   color: $brand-primary;
   border: 1px solid $brand-primary;
-  &:hover {
-    opacity: 1;
+  &.entered {
     background-color: $brand-primary;
+    color: white
   }
-  &.active {
-    opacity: 1;
+  &.category-selected {
     background-color: $brand-primary;
+    color: white
   }
+}
+
+#update-experience-button{
+  margin-top:35px;
 }

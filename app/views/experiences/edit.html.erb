@@ -48,24 +48,67 @@
       </div>
 
       <div class = 'col-xs-12 col-md-9'>
+        <div class = 'category-container'>
+          <div class = 'row'>
+            <div class = 'col-xs-12'>
+              <div class = 'selection-title'>
+                <i class="fa fa-caret-right" aria-hidden="true"></i>
+                <h4>What kind of trip did you have in <%= @experience.region.name %></h4>
+              </div>
+            </div>
+          </div>
 
-        <div class = 'row'>
-          <div class = 'col-xs-12'>
-            <div class = 'selection-title'>
-              <i class="fa fa-caret-right" aria-hidden="true"></i>
-              <h4>What kind of trip did you have in <%= @experience.region.name %></h4>
+          <div class = 'row'>
+            <div class="blocks center-block">
+              <% @categories.each do |category| %>
+                <div class = 'col-xs-6 col-md-3'>
+                  <div class = "btn-tag trip-category" data-category = "<%= category %>" data-airport-id = "<%= category %>"> <%= category %>
+                  </div>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
 
         <div class = 'row'>
-          <div class="blocks center-block">
-            <% @categories.each do |category| %>
-              <div class = 'col-xs-6 col-md-3'>
-                <div class = "btn-tag trip-category" data-category = <%= category %> data-airport-id = <%= category %> > <%= category %>
-                </div>
-              </div>
-            <% end %>
+          <div class = 'col-xs-12 col-md-6'>
+            <div class = 'selection-title'>
+              <i class="fa fa-caret-right" aria-hidden="true"></i>
+              <h4>How long did you stay (days)?</h4>
+            </div>
+          </div>
+
+          <div class = 'col-xs-12 col-md-6' id = "length-slider-padding">
+            <div class = 'experience-slider text-center'>
+              <span></span>
+              <span>
+                <%= text_field_tag :length, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "1", "slider-min" => 1, "slider-max" => 30} %>
+              </span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class = 'row'>
+          <div class = 'col-xs-12 col-md-6'>
+            <div class = 'selection-title'>
+              <i class="fa fa-caret-right" aria-hidden="true"></i>
+              <h4>Would you say your trip was...</h4>
+            </div>
+          </div>
+
+          <div class = 'col-xs-12 col-md-6' id = "price-slider-padding">
+            <div class = 'experience-slider text-center'>
+              <span>Soooo cheap!</span>
+              <span> <%= text_field_tag :cost, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "1", "slider-min" => 1, "slider-max" => 10, "slider-tooltip" => 'hide'} %></span>
+              <span>Super expensive!</span>
+            </div>
+          </div>
+        </div>
+
+        <div class = 'row'>
+          <div class = 'col-xs-12 text-center'>
+            <%= submit_tag "VALIDATE", class: "btn-brand btn-half-size", id: 'update-experience-button'%>
           </div>
         </div>
 
@@ -89,20 +132,20 @@
   <script>
 
     $(document).ready(function() {
-
-      $('.profile-page-block').mouseenter(function() {
+      $('.trip-category').mouseenter(function() {
         $(this).addClass('entered');
       })
 
-      $('.profile-page-block').mouseleave(function() {
+      $('.trip-category').mouseleave(function() {
         $(this).removeClass('entered');
       })
 
-      $('.profile-page-block').click(function() {
-        if ($(this).hasClass('active')) {
-          $(this).removeClass('active');
+      $('.trip-category').click(function() {
+        if ($(this).hasClass('category-selected')) {
+          $(this).removeClass('category-selected');
+          $(this).removeClass('entered');
         } else {
-          $(this).addClass('active');
+          $(this).addClass('category-selected');
         }
       })
     })
