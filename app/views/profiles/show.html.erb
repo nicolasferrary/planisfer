@@ -54,9 +54,10 @@
     <%= form_tag create_experiences_path, method: :get do %>
       <div class = 'row'>
         <div class="blocks center-block">
+          <input type="hidden" name = "regions[]" value = "" >
           <% @regions.each do |region| %>
             <div class = 'col-xs-6 col-md-3'>
-              <input class = "hidden" id= "<%= region.name %>" name="<%= region.name %>" type="checkbox" value="1" />
+              <input class = "hidden" name="regions[]" type="checkbox" id= "<%= region.name %>" value="<%= region.id%>" />
               <label for="<%= region.name %>">
                 <a class="block profile-page-block destination">
                   <%= image_tag "countryphoto/#{region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
@@ -84,7 +85,7 @@
   </div>
 
   <div class="col-xs-12 col-md-3">
-    Right part
+    <%= render 'shared/recommendations' %>
   </div>
 
 </div>

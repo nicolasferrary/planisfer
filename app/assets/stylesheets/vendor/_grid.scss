@@ -170,7 +170,7 @@
 .profile-page-block{
   width: 180px;
   height: 180px;
-  opacity:0.6;
+  opacity:0.5;
   text-decoration:none;
   &.entered{
     opacity:1;
@@ -178,8 +178,8 @@
   }
   &.active{
     opacity:1;
-    outline: 10px solid $brand-color;
-    border: 2px solid white;
+    border: 5px solid $brand-color;
+    box-shadow: 2px 2px 2px $brand-color;
     .dest-image{
       -webkit-transform:scale(1.1,1.1);
       -ms-transform:scale(1.1,1.1);
