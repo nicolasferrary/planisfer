@@ -1,0 +1,103 @@
+<div class="page-banner text-center">
+  <div class="page-banner-title">
+    <div class = "col-md-12 title-col">
+      <span> <%= link_to root_path do %>
+        <%= image_tag "blue_logo_no_word.png", class: "logo"%>
+      <% end %> </span>
+      <span class ="brand-name">Planisfer</span>
+      <div class = "banner2-title-flexbox">
+        <span class = "banner2-title">Build your traveler's profile... </span> </span> <span class = "banner2-title" id = "profile-banner2-title">and get personalized travel suggestions </span>
+      </div>
+    </div>
+  </div>
+  <span class = "booking-status text-desktop">
+    <%= render 'shared/booking_status', :status => 0 %>
+  </span>
+</div>
+
+
+<div class="container-fluid page-result">
+
+  <div class="col-xs-12 col-md-9 right-border">
+
+    <div class = 'row'>
+      <div class = 'col-xs-12 text-center'>
+        <h2 id = "profile-page-build">
+          Build your traveler's profile
+        </h2>
+      </div>
+    </div>
+
+    <div class = 'row'>
+      <div class = 'col-xs-12 text-center'>
+        <div class = 'profile-explaination-text'>
+        <p>Tired of getting the same travel packages as everyone?</p>
+
+        <p><strong>Build your traveler’s profile</strong> and you will only <strong>get fully personalized suggestions</strong> to help you build your next trips.</p>
+
+        <p>To do that, we thought the simplest way was for you <strong>tell us about your favourite travel experience(s)</strong>, what you liked and what you didn't like.</p>
+
+        <p id = "start">So, let’s get started …</p>
+        </div>
+      </div>
+    </div>
+
+    <div class = 'row'>
+      <div class = 'col-xs-12'>
+        <div class = 'selection-title'>
+          <i class="fa fa-caret-right" aria-hidden="true"></i>
+          <h4>Select one or more destinations that you particularly love</h4>
+        </div>
+      </div>
+    </div>
+
+    <%= form_tag create_experiences_path, method: :get do %>
+      <div class = 'row'>
+        <div class="blocks center-block">
+          <% @regions.each do |region| %>
+            <div class = 'col-xs-6 col-md-3'>
+              <input class = "hidden" id= "<%= region.name %>" name="<%= region.name %>" type="checkbox" value="1" />
+              <label for="<%= region.name %>">
+                <a class="block profile-page-block destination">
+                  <%= image_tag "countryphoto/#{region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
+                  <span class="box">
+                    <span class="text in-box">
+                      <span class="primarytext"><%= region.name %></span>
+                    </span>
+                  </span>
+                </a>
+              </label>
+
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class = 'row'>
+        <div class = 'col-xs-12'>
+          <%= submit_tag "VALIDATE", class: "btn-brand btn-big"%>
+        </div>
+      </div>
+
+    <% end %>
+
+  </div>
+
+  <div class="col-xs-12 col-md-3">
+    Right part
+  </div>
+
+</div>
+
+
+<%= content_for :after_js do %>
+
+  <script>
+    $(document).ready(function() {
+      $('.profile-page-block').click(function() {
+        $(this).addClass('active');
+      })
+    })
+  </script>
+
+<% end %>

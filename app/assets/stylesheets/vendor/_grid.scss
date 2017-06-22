@@ -105,6 +105,7 @@
 
 .block:hover .dest-image,
 
+
 .block:focus .dest-image{
   -webkit-transform:scale(1.1,1.1);
   -ms-transform:scale(1.1,1.1);
@@ -164,7 +165,24 @@
   padding-right: 8px;
 }
 
-
+.profile-page-block{
+  width: 180px;
+  height: 180px;
+  opacity:0.6;
+  :hover {
+    text-decoration:none;
+    opacity:1;
+  }
+  &.active{
+    opacity:1;
+    text-decoration:none;
+    .dest-image{
+      -webkit-transform:scale(1.1,1.1);
+      -ms-transform:scale(1.1,1.1);
+      transform:scale(1.1,1.1)
+    }
+  }
+}
 
 
 

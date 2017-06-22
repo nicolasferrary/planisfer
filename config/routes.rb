@@ -20,8 +20,10 @@ Rails.application.routes.draw do
   end
   resources :activities, only: [:create, :update]
   resources :experiences, only: [:create, :update]
+  get :create_experiences, to: "experiences#create_experiences"
   resources :subexperiences, only: [:create, :new, :update]
-  get :profile, to: "profile#show"
+  get :profile, to: "profiles#show"
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
