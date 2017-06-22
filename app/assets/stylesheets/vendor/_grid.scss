@@ -95,12 +95,14 @@
   font-weight:900;
   line-height:1.2;
   letter-spacing:-0.3px;
-  font-size:2em
+  font-size:2em;
+  text-decoration:none;
 }
 
 // hober white
 .block:hover,.block:focus{
-  color:#fff
+  color:#fff;
+  text-decoration:none;
 }
 
 .block:hover .dest-image,
@@ -169,19 +171,19 @@
   width: 180px;
   height: 180px;
   opacity:0.6;
-  :hover {
-    text-decoration:none;
-    opacity:1;
-  }
+  text-decoration:none;
   &.active{
     opacity:1;
-    text-decoration:none;
     .dest-image{
       -webkit-transform:scale(1.1,1.1);
       -ms-transform:scale(1.1,1.1);
       transform:scale(1.1,1.1)
     }
   }
+}
+
+.profile-page-block:hover{
+  opacity:1;
 }
 
 
