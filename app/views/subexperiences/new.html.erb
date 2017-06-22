@@ -1,0 +1,123 @@
+<div class="page-banner text-center">
+  <div class="page-banner-title">
+    <div class = "col-md-12 title-col">
+      <span> <%= link_to root_path do %>
+        <%= image_tag "blue_logo_no_word.png", class: "logo"%>
+      <% end %> </span>
+      <span class ="brand-name">Planisfer</span>
+      <div class = "banner2-title-flexbox">
+        <span class = "banner2-title">Build your traveler's profile... </span> </span> <span class = "banner2-title" id = "profile-banner2-title">and get personalized travel suggestions </span>
+      </div>
+    </div>
+  </div>
+  <span class = "booking-status text-desktop">
+    <%= render 'shared/booking_status', :status => 0 %>
+  </span>
+</div>
+
+
+<div class="container-fluid page-result">
+
+  <div class="col-xs-12 col-md-9 right-border">
+
+    <div class = 'row'>
+      <div class = 'col-xs-12 text-center'>
+        <h2 id = "profile-page-build">
+          Build your traveler's profile
+        </h2>
+      </div>
+    </div>
+
+    <div class = 'row'>
+
+      <div class = 'col-xs-12 col-md-3'>
+        <div class = 'row'>
+          <% @experiences.each_with_index do |experience, index| %>
+              <div class = 'col-xs-12'>
+                <a class="block profile-page-block destination <%= "active" if index == 0 %> <%= "dezoom" unless index == 0 %>">
+                  <%= image_tag "countryphoto/#{experience.region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
+                  <span class="box">
+                    <span class="text in-box">
+                      <span class="primarytext"><%= experience.region.name %></span>
+                    </span>
+                  </span>
+                </a>
+              </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class = 'col-xs-12 col-md-9'>
+
+        <div class = 'row'>
+          <div class = 'col-xs-12'>
+            <div class = 'selection-title'>
+              <i class="fa fa-caret-right" aria-hidden="true"></i>
+              <h4>Last, where have you been in <%= @experience.region.name %>?</h4>
+            </div>
+          </div>
+        </div>
+
+        <div class = 'row'>
+          <% @pois.each_with_index do |poi, index| %>
+            <div class = 'col-xs-12 col-md-3 subexp-card-height'>
+              <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{poi.downcase.gsub(/\ /, '-')}.jpg") %>);" >
+                <div class="subexperience-name text-center">
+                  <h2><%= poi %></h2>
+                </div>
+
+              </div>
+
+            </div>
+
+            <% if index.even? %>
+              <div class = 'col-xs-12 col-md-6'>
+                <div class = 'hidden'>
+                  form
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="col-xs-12 col-md-3">
+    <%= render 'shared/recommendations' %>
+  </div>
+
+</div>
+
+
+<%= content_for :after_js do %>
+
+  <script>
+
+    $(document).ready(function() {
+      $('.trip-category').mouseenter(function() {
+        $(this).addClass('entered');
+      })
+
+      $('.trip-category').mouseleave(function() {
+        $(this).removeClass('entered');
+      })
+
+      $('.trip-category').click(function() {
+        if ($(this).hasClass('category-selected')) {
+          $(this).removeClass('category-selected');
+          $(this).removeClass('entered');
+        } else {
+          $(this).addClass('category-selected');
+        }
+      })
+    })
+
+  </script>
+
+<% end %>
+
+

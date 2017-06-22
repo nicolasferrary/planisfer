@@ -66,6 +66,7 @@
   max-width: 280px;
 }
 
+
 .lg .dest-image{
   width: 100%;
   height: auto;
@@ -186,7 +187,10 @@
       transform:scale(1.1,1.1)
     }
   }
+}
 
+.dezoom{
+  zoom:80%
 }
 
 

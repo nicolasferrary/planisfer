@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :activities, only: [:create, :update]
   resources :experiences, only: [:create, :update, :edit]
   get :create_experiences, to: "experiences#create_experiences"
-  resources :subexperiences, only: [:create, :new, :update]
+  resources :subexperiences, only: [:new, :create, :update]
   get :profile, to: "profiles#show"
 
 
