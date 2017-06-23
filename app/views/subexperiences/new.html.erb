@@ -63,7 +63,7 @@
           <div class = "row">
 
             <div class = 'col-xs-12 col-md-3 subexp-card-height'>
-              <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[index * 2].downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois[index * 2] %> >
+              <div class = "subexperience-card-container <%= 'subexp-opacity' unless index == 0%>" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[index * 2].downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois[index * 2] %> >
                 <div class="subexperience-name text-center">
                   <h2><%= @pois[index * 2] %></h2>
                 </div>
@@ -77,7 +77,7 @@
             </div>
 
             <div class = 'col-xs-12 col-md-3 subexp-card-height'>
-              <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[(index * 2) + 1].downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois[(index * 2) + 1] %> >
+              <div class = "subexperience-card-container subexp-opacity" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[(index * 2) + 1].downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois[(index * 2) + 1] %> >
                 <div class="subexperience-name text-center">
                   <h2><%= @pois[(index * 2) + 1] %></h2>
                 </div>
@@ -91,7 +91,7 @@
 
         <div class = "row">
           <div class = 'col-xs-12 col-md-3 subexp-card-height'>
-            <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[(@nb_rows -1) * 2].downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois[(@nb_rows -1) * 2] %> >
+            <div class = "subexperience-card-container subexp-opacity" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[(@nb_rows -1) * 2].downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois[(@nb_rows -1) * 2] %> >
               <div class="subexperience-name text-center">
                 <h2><%= @pois[(@nb_rows -1) * 2] %></h2>
               </div>
@@ -109,7 +109,7 @@
           <% if @even_pois %>
 
             <div class = 'col-xs-12 col-md-3 subexp-card-height'>
-              <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[(@nb_rows -1) * 2 + 1].downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois[(@nb_rows -1) * 2 + 1] %> >
+              <div class = "subexperience-card-container subexp-opacity" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[(@nb_rows -1) * 2 + 1].downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois[(@nb_rows -1) * 2 + 1] %> >
                 <div class="subexperience-name text-center">
                   <h2><%= @pois[(@nb_rows -1) * 2 +1] %></h2>
                 </div>
@@ -157,10 +157,21 @@
       })
     })
 
+    var firstPoi = '<%= @pois[0] %>';
+    $('#' + firstPoi).removeClass('hidden');
+
     $('.subexperience-card-container').mouseenter(function() {
+      $('.subexperience-card-container').addClass('subexp-opacity');
+      $(this).removeClass('subexp-opacity');
+      $('.feedback-form').addClass('hidden');
       var poiId = $(this).data('poi-id');
       console.log(poiId);
+      $('#' + poiId).removeClass('hidden');
     })
+    // $('.subexperience-card-container').mouseleave(function() {
+    //   var poiId = $(this).data('poi-id');
+    //   $('#' + poiId).addClass('hidden');
+    // })
 
   </script>
 
