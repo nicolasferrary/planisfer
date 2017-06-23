@@ -28,99 +28,98 @@
       </div>
     </div>
 
-    <div class = 'row'>
+    <div class = "feedback-page-container">
+      <div class = 'row'>
 
-      <div class = 'col-xs-12 col-md-3'>
-        <div class = 'row'>
-          <% @experiences.each_with_index do |experience, index| %>
-              <div class = 'col-xs-12'>
-                <a class="block profile-page-block destination <%= "active" if index == 0 %> <%= "dezoom" unless index == 0 %>">
-                  <%= image_tag "countryphoto/#{experience.region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
-                  <span class="box">
-                    <span class="text in-box">
-                      <span class="primarytext"><%= experience.region.name %></span>
+        <div class = 'col-xs-12 col-md-3'>
+          <div class = 'row'>
+            <% @experiences.each_with_index do |experience, index| %>
+                <div class = 'col-xs-12'>
+                  <a class="block profile-page-block destination <%= "active" if index == 0 %> <%= "dezoom" unless index == 0 %>">
+                    <%= image_tag "countryphoto/#{experience.region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
+                    <span class="box">
+                      <span class="text in-box">
+                        <span class="primarytext"><%= experience.region.name %></span>
+                      </span>
                     </span>
-                  </span>
-                </a>
-              </div>
-          <% end %>
+                  </a>
+                </div>
+            <% end %>
+          </div>
         </div>
-      </div>
 
-      <div class = 'col-xs-12 col-md-9'>
+        <div class = 'col-xs-12 col-md-9'>
 
-        <%= form_tag new_subexperience_path, method: :get do %>
-          <div class = 'category-container'>
-            <div class = 'row'>
-              <div class = 'col-xs-12'>
-                <div class = 'selection-title'>
-                  <i class="fa fa-caret-right" aria-hidden="true"></i>
-                  <h4>How would you describe your trip in <%= @experience.region.name %>?</h4>
+          <%= form_tag experience_path(@experience), method: :patch do %>
+            <div class = 'category-container'>
+              <div class = 'row'>
+                <div class = 'col-xs-12'>
+                  <div class = 'selection-title'>
+                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    <h4>How would you describe your trip to <%= @experience.region.name %>?</h4>
+                  </div>
+                </div>
+              </div>
+
+              <div class = 'row'>
+                <div class="blocks center-block">
+                  <% @categories.each do |category| %>
+                    <div class = 'col-xs-6 col-md-3'>
+                      <div class = "btn-tag trip-category" data-category = "<%= category %>" data-airport-id = "<%= category %>"> <%= category %>
+                      </div>
+                    </div>
+                  <% end %>
                 </div>
               </div>
             </div>
 
             <div class = 'row'>
-              <div class="blocks center-block">
-                <% @categories.each do |category| %>
-                  <div class = 'col-xs-6 col-md-3'>
-                    <div class = "btn-tag trip-category" data-category = "<%= category %>" data-airport-id = "<%= category %>"> <%= category %>
-                    </div>
-                  </div>
-                <% end %>
+              <div class = 'col-xs-12 col-md-6'>
+                <div class = 'selection-title'>
+                  <i class="fa fa-caret-right" aria-hidden="true"></i>
+                  <h4>How long did you stay (days)?</h4>
+                </div>
               </div>
-            </div>
-          </div>
 
-          <div class = 'row'>
-            <div class = 'col-xs-12 col-md-6'>
-              <div class = 'selection-title'>
-                <i class="fa fa-caret-right" aria-hidden="true"></i>
-                <h4>How long did you stay (days)?</h4>
-              </div>
-            </div>
-
-            <div class = 'col-xs-12 col-md-6' id = "length-slider-padding">
-              <div class = 'experience-slider text-center'>
-                <span></span>
-                <span>
-                  <%= text_field_tag :length, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "1", "slider-min" => 1, "slider-max" => 30} %>
-                </span>
-                <span></span>
-              </div>
-            </div>
-          </div>
-
-          <div class = 'row'>
-            <div class = 'col-xs-12 col-md-6'>
-              <div class = 'selection-title'>
-                <i class="fa fa-caret-right" aria-hidden="true"></i>
-                <h4>Would you say your trip was...</h4>
+              <div class = 'col-xs-12 col-md-6' id = "length-slider-padding">
+                <div class = 'experience-slider text-center'>
+                  <span></span>
+                  <span>
+                    <%= text_field_tag :length, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "1", "slider-min" => 1, "slider-max" => 30} %>
+                  </span>
+                  <span></span>
+                </div>
               </div>
             </div>
 
-            <div class = 'col-xs-12 col-md-6' id = "price-slider-padding">
-              <div class = 'experience-slider text-center'>
-                <span>Soooo cheap!</span>
-                <span> <%= text_field_tag :cost, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "1", "slider-min" => 1, "slider-max" => 10, "slider-tooltip" => 'hide'} %></span>
-                <span>Super expensive!</span>
+            <div class = 'row'>
+              <div class = 'col-xs-12 col-md-6'>
+                <div class = 'selection-title'>
+                  <i class="fa fa-caret-right" aria-hidden="true"></i>
+                  <h4>Would you say your trip was...</h4>
+                </div>
+              </div>
+
+              <div class = 'col-xs-12 col-md-6' id = "price-slider-padding">
+                <div class = 'experience-slider text-center'>
+                  <span>Soooo cheap!</span>
+                  <span> <%= text_field_tag :cost, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "1", "slider-min" => 1, "slider-max" => 10, "slider-tooltip" => 'hide'} %></span>
+                  <span>Super expensive!</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class = 'row'>
-            <div class = 'col-xs-12 text-center'>
-              <%= hidden_field_tag 'experience_id', @experience.id %>
-              <%= submit_tag "VALIDATE", class: "btn-brand btn-half-size", id: 'update-experience-button'%>
+            <div class = 'row'>
+              <div class = 'col-xs-12 text-center'>
+                <%= hidden_field_tag 'experience_id', @experience.id %>
+                <%= submit_tag "VALIDATE", class: "btn-brand btn-half-size", id: 'update-experience-button'%>
+              </div>
             </div>
-          </div>
 
-        <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
-
-
-
 
   </div>
 

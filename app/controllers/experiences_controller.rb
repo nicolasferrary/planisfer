@@ -36,4 +36,12 @@ class ExperiencesController < ApplicationController
     @categories = ["Honeymoon", "Road trip", "Family friendly", "Nature/ Sport", "Cutlural", "Relaxing", "Big fiesta", "Local immersion"]
   end
 
+  def update
+    @experience = Experience.find(params[:id])
+    @experience.length = params[:length]
+    @experience.cost = params[:cost]
+    @experience.save
+    redirect_to new_experience_subexperience_path(experience_id: @experience.id)
+  end
+
 end
