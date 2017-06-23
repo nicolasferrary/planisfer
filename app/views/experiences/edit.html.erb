@@ -65,8 +65,11 @@
                 <div class="blocks center-block">
                   <% @categories.each do |category| %>
                     <div class = 'col-xs-6 col-md-3'>
-                      <div class = "btn-tag trip-category" data-category = "<%= category %>" data-airport-id = "<%= category %>"> <%= category %>
-                      </div>
+                      <input class = "hidden" name="categories[]" type="checkbox" id= "<%= category %>" value="<%= category%>" />
+                      <label for="<%= category %>">
+                        <div class = "btn-tag trip-category" data-category = "<%= category %>" data-airport-id = "<%= category %>"> <%= category %>
+                        </div>
+                      </label>
                     </div>
                   <% end %>
                 </div>

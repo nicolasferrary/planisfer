@@ -40,6 +40,7 @@ class ExperiencesController < ApplicationController
     @experience = Experience.find(params[:id])
     @experience.length = params[:length]
     @experience.cost = params[:cost]
+    @experience.category = params[:categories]
     @experience.save
     redirect_to new_experience_subexperience_path(experience_id: @experience.id)
   end
