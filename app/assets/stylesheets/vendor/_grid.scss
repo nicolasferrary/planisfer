@@ -186,6 +186,13 @@
       -ms-transform:scale(1.1,1.1);
       transform:scale(1.1,1.1)
     }
+    .photo-check{
+      opacity:1;
+      background-color:white;
+      i {
+        color:$brand-color;
+        }
+    }
   }
 }
 
