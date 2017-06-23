@@ -63,7 +63,7 @@
           <div class = "row">
 
             <div class = 'col-xs-12 col-md-3 subexp-card-height'>
-              <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[index * 2].downcase.gsub(/\ /, '-')}.jpg") %>);" >
+              <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[index * 2].downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois[index * 2] %> >
                 <div class="subexperience-name text-center">
                   <h2><%= @pois[index * 2] %></h2>
                 </div>
@@ -72,13 +72,14 @@
             </div>
 
             <div class = 'col-xs-12 col-md-6'>
-              <%= render 'subexp_feedback_form' %>
+              <%= render 'subexp_feedback_form', poi: @pois[index * 2] %>
+              <%= render 'subexp_feedback_form', poi: @pois[index * 2 +1] %>
             </div>
 
             <div class = 'col-xs-12 col-md-3 subexp-card-height'>
-              <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[index * 2 + 1].downcase.gsub(/\ /, '-')}.jpg") %>);" >
+              <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[(index * 2) + 1].downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois[(index * 2) + 1] %> >
                 <div class="subexperience-name text-center">
-                  <h2><%= @pois[index * 2] %></h2>
+                  <h2><%= @pois[(index * 2) + 1] %></h2>
                 </div>
               </div>
 
@@ -90,7 +91,7 @@
 
         <div class = "row">
           <div class = 'col-xs-12 col-md-3 subexp-card-height'>
-            <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[(@nb_rows -1) * 2].downcase.gsub(/\ /, '-')}.jpg") %>);" >
+            <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[(@nb_rows -1) * 2].downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois[(@nb_rows -1) * 2] %> >
               <div class="subexperience-name text-center">
                 <h2><%= @pois[(@nb_rows -1) * 2] %></h2>
               </div>
@@ -99,14 +100,18 @@
           </div>
 
           <div class = 'col-xs-12 col-md-6'>
-            <%= render 'subexp_feedback_form' %>
+            <%= render 'subexp_feedback_form', poi: @pois[(@nb_rows -1) * 2] %>
+            <% if @even_pois %>
+              <%= render 'subexp_feedback_form', poi: @pois[(@nb_rows -1) * 2 +1]  %>
+            <% end %>
           </div>
 
           <% if @even_pois %>
+
             <div class = 'col-xs-12 col-md-3 subexp-card-height'>
-              <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[(@nb_rows -1) * 2 + 1].downcase.gsub(/\ /, '-')}.jpg") %>);" >
+              <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[(@nb_rows -1) * 2 + 1].downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois[(@nb_rows -1) * 2 + 1] %> >
                 <div class="subexperience-name text-center">
-                  <h2><%= @pois[(@nb_rows -1) * 2] %></h2>
+                  <h2><%= @pois[(@nb_rows -1) * 2 +1] %></h2>
                 </div>
               </div>
 
@@ -115,8 +120,6 @@
           <% end %>
 
         </div>
-
-
 
       </div>
     </div>
@@ -152,6 +155,11 @@
           $(this).addClass('category-selected');
         }
       })
+    })
+
+    $('.subexperience-card-container').mouseenter(function() {
+      var poiId = $(this).data('poi-id');
+      console.log(poiId);
     })
 
   </script>
