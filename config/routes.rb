@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   end
   resources :activities, only: [:create, :update]
   resources :experiences, only: [:create, :edit, :update] do
-    resources :subexperiences, only: [:new, :create, :update]
+    resources :subexperiences, only: [:new, :create]
   end
   get :create_experiences, to: "experiences#create_experiences"
   get :profile, to: "profiles#show"

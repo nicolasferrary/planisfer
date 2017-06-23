@@ -1,3 +1,3 @@
 class Activity < ApplicationRecord
-  has_many :subexperiences
+  belongs_to :subexperiences
 end

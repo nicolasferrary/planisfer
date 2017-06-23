@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170623095044) do
+ActiveRecord::Schema.define(version: 20170623110443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,8 +18,10 @@ ActiveRecord::Schema.define(version: 20170623095044) do
   create_table "activities", force: :cascade do |t|
     t.string   "name"
     t.string   "review"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "subexperience_id"
+    t.index ["subexperience_id"], name: "index_activities_on_subexperience_id", using: :btree
   end
 
   create_table "airports", force: :cascade do |t|
@@ -184,10 +186,8 @@ ActiveRecord::Schema.define(version: 20170623095044) do
     t.integer  "poi_id"
     t.integer  "rating"
     t.string   "review"
-    t.integer  "activity_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["activity_id"], name: "index_subexperiences_on_activity_id", using: :btree
     t.index ["experience_id"], name: "index_subexperiences_on_experience_id", using: :btree
     t.index ["poi_id"], name: "index_subexperiences_on_poi_id", using: :btree
   end
@@ -221,13 +221,13 @@ ActiveRecord::Schema.define(version: 20170623095044) do
     t.index ["search_id"], name: "index_trips_on_search_id", using: :btree
   end
 
+  add_foreign_key "activities", "subexperiences"
   add_foreign_key "car_rentals", "selections"
   add_foreign_key "experiences", "members"
   add_foreign_key "experiences", "regions"
   add_foreign_key "orders", "members"
   add_foreign_key "round_trip_flights", "regions"
   add_foreign_key "searches", "regions"
-  add_foreign_key "subexperiences", "activities"
   add_foreign_key "subexperiences", "experiences"
   add_foreign_key "subexperiences", "pois"
   add_foreign_key "trips", "car_rentals"

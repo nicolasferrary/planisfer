@@ -1,0 +1,45 @@
+<%= form_tag experience_subexperiences_path(experience_id: @experience.id) do %>
+
+  <div class = 'feedback-form'>
+    <div class = 'row'>
+      <div class = 'col-xs-12'>
+        stars
+      </div>
+
+    </div>
+
+    <div class = 'row'>
+      <div class = 'col-xs-12'>
+        <%= text_area_tag :review, nil, placeholder: "Why this rating?", class: "form-control review-field-form"%>
+      </div>
+
+    </div>
+
+    <div class = 'row'>
+      <div class = 'col-xs-12'>
+        <p>Any particular place you loved? (Hotel, activity, restaurant?)
+        </p>
+      </div>
+
+    </div>
+
+    <div class = 'row'>
+      <div class = 'col-xs-12 col-md-6'>
+        <%= text_area_tag :activity_name, nil, placeholder: "Name", class: "form-control review-field-form activity-name-form"%>
+      </div>
+
+      <div class = 'col-xs-12 col-md-6'>
+        <%= text_area_tag :activity_review, nil, placeholder: "Why did you love it so much?", class: "form-control review-field-form"%>
+      </div>
+
+    </div>
+
+    <div class = 'row'>
+      <div class = 'col-xs-12 text-center'>
+        <%= submit_tag "VALIDATE", class: "btn-brand btn-half-size", id: 'update-experience-button'%>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+

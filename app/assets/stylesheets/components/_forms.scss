@@ -108,6 +108,12 @@ textarea.form-control{
   height: 100px;
 }
 
+textarea.review-field-form{
+  height: 60px;
+  width: 100%;
+  font-size:14px;
+}
+
 .separator_with_text{
   font-size: 1em;
   color: $headings-color;
@@ -173,6 +179,14 @@ textarea.form-control{
 
 .feedback-page-container{
   margin-top:35px;
+}
+
+.feedback-form{
+  font-size:14px;
+}
+
+textarea.activity-name-form{
+  height: 30px;
 }
 
 

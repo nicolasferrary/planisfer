@@ -1,5 +1,5 @@
 class Subexperience < ApplicationRecord
   belongs_to :experience
   belongs_to :poi
-  belongs_to :activity
+  has_many :activities
 end

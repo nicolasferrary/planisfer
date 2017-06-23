@@ -8,6 +8,22 @@ class SubexperiencesController < ApplicationController
 
     @region = @experience.region
     @pois = @experience.region.pois
+
+    # params[:id].nil? ? @subexperience = Subexperience.new() : @subexperience = Subexperience.find(params[:id])
+  end
+
+  def create
+    @subexperience = Subexperience.new()
+
+    @experience = Experience.find(params[:experience_id])
+    @subexperience.experience = @experience
+
+    @poi = Poi.last
+    @subexperience.poi = @poi
+
+    @subexperience.review = params[:review]
+
+    @subexperience.save!
   end
 
 end
