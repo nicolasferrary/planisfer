@@ -6,6 +6,7 @@ $(document).ready(function(){
   }
 
   $(".sticky-form").sticky({topSpacing:40});
+  $("#experience-validate").sticky({topSpacing:200});
 });
 
 $.fn.followTo = function (pos) {

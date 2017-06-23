@@ -18,10 +18,6 @@
   width: 100%;
 }
 
-.btn-half-size{
-  width:50%;
-}
-
 .btn-tag {
   border-radius: 50px;
   border: 1px solid $secondary-color;
@@ -275,4 +271,9 @@
 
 #update-experience-button{
   margin-top:35px;
+}
+
+#experience-validate{
+  margin-top:70px;
+  width: inherit !important;
 }

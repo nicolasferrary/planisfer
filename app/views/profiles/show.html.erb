@@ -23,7 +23,7 @@
     <div class = 'row'>
       <div class = 'col-xs-12 text-center'>
         <h2 id = "profile-page-build">
-          Build your traveler's profile
+          Build your traveler's profile and get personalized travel suggestions
         </h2>
       </div>
     </div>
@@ -31,11 +31,8 @@
     <div class = 'row'>
       <div class = 'col-xs-12 text-center'>
         <div class = 'profile-explaination-text'>
-        <p>Tired of getting the same travel packages as everyone?</p>
 
-        <p><strong>Build your traveler’s profile</strong> and you will only <strong>get fully personalized suggestions</strong> to help you build your next trips.</p>
-
-        <p>To do that, we thought the simplest way was for you <strong>tell us about your favourite travel experience(s)</strong>, what you liked and what you didn't like.</p>
+        <p>To do that, we thought the simplest way was for you <strong>tell us about your past travel experience(s)</p>
 
         <p id = "start">So, let’s get started …</p>
         </div>
@@ -46,36 +43,40 @@
       <div class = 'col-xs-12'>
         <div class = 'selection-title'>
           <i class="fa fa-caret-right" aria-hidden="true"></i>
-          <h4>Select one or more destinations that you particularly enjoyed</h4>
+          <h4>Among these destinations, which ones did you love traveling to?</h4>
         </div>
       </div>
     </div>
 
     <%= form_tag create_experiences_path, method: :get do %>
-      <div class = 'row'>
-        <div class="blocks center-block">
-          <% @regions.each do |region| %>
-            <div class = 'col-xs-6 col-md-3'>
-              <input class = "hidden" name="regions[]" type="checkbox" id= "<%= region.name %>" value="<%= region.id%>" />
-              <label for="<%= region.name %>">
-                <a class="block profile-page-block destination">
-                  <%= image_tag "countryphoto/#{region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
-                  <span class="box">
-                    <span class="text in-box">
-                      <span class="primarytext"><%= region.name %></span>
-                    </span>
-                  </span>
-                </a>
-              </label>
 
+      <div class = 'row'>
+
+        <div class = 'col-xs-9'>
+          <div class = 'row'>
+            <div class="blocks center-block">
+              <% @regions.each do |region| %>
+                <div class = 'col-xs-6 col-md-4'>
+                  <input class = "hidden" name="regions[]" type="checkbox" id= "<%= region.name %>" value="<%= region.id%>" />
+                  <label for="<%= region.name %>">
+                    <a class="block profile-page-block destination">
+                      <%= image_tag "countryphoto/#{region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
+                      <span class="box">
+                        <span class="text in-box">
+                          <span class="primarytext"><%= region.name %></span>
+                        </span>
+                      </span>
+                    </a>
+                  </label>
+
+                </div>
+              <% end %>
             </div>
-          <% end %>
+          </div>
         </div>
-      </div>
 
-      <div class = 'row'>
-        <div class = 'col-xs-12 text-center'>
-          <%= submit_tag "VALIDATE", class: "btn-brand btn-half-size"%>
+        <div class = 'col-xs-3'>
+          <%= submit_tag "VALIDATE", class: "btn-brand", id: 'experience-validate'%>
         </div>
       </div>
 
