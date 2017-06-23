@@ -8,6 +8,8 @@ class SubexperiencesController < ApplicationController
 
     @region = @experience.region
     @pois = @experience.region.pois
+    @nb_rows = @pois.count.fdiv(2).round
+    @even_pois = @pois.count.even?
 
     # params[:id].nil? ? @subexperience = Subexperience.new() : @subexperience = Subexperience.find(params[:id])
   end
@@ -21,6 +23,7 @@ class SubexperiencesController < ApplicationController
     @poi = Poi.last
     @subexperience.poi = @poi
 
+    @subexperience.rating = params[:rating]
     @subexperience.review = params[:review]
 
     @subexperience.save!

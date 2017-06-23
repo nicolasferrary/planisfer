@@ -277,3 +277,20 @@
   margin-top:70px;
   width: inherit !important;
 }
+
+.star-btn{
+  border: 1px solid transparent !important;
+  border-radius: 50% !important;
+  widows: 30px !important;
+  height: 30px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 10px;
+
+}
+
+.rating-star{
+  color:$brand-primary;
+}

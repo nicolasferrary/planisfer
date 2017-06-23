@@ -1,24 +1,35 @@
 <%= form_tag experience_subexperiences_path(experience_id: @experience.id) do %>
 
   <div class = 'feedback-form'>
-    <div class = 'row'>
-      <div class = 'col-xs-12'>
-        stars
+
+    <div class = 'rating-container'>
+
+      <div class = 'row'>
+        <div class = 'col-xs-12 rating-area'>
+          <% (1..5).each do |number| %>
+            <div class = "col-xs-2 radio-button-padding">
+              <label class="btn star-btn" id = "<%= number %>" data-number = "<%= number %>">
+                <i class="fa fa-star-o fa-2x rating-star empty-star" aria-hidden="true" id="<%= number %>"></i>
+                <i class="fa fa-star fa-2x rating-star full-star hidden" aria-hidden="true" id="<%= number %>"></i>
+                <input type="radio" class = 'hidden' name="rating" id="input-rating<%= number %>" value="<%= number %>" autocomplete="off">
+              </label>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class = 'row'>
+        <div class = 'col-xs-12'>
+          <%= text_area_tag :review, nil, placeholder: "Why this rating?", class: "form-control review-field-form"%>
+        </div>
       </div>
 
     </div>
 
     <div class = 'row'>
       <div class = 'col-xs-12'>
-        <%= text_area_tag :review, nil, placeholder: "Why this rating?", class: "form-control review-field-form"%>
-      </div>
-
-    </div>
-
-    <div class = 'row'>
-      <div class = 'col-xs-12'>
-        <p>Any particular place you loved? (Hotel, activity, restaurant?)
-        </p>
+        <h5>Any particular place you loved? (Hotel, activity, restaurant?)
+        </h5>
       </div>
 
     </div>
@@ -29,7 +40,7 @@
       </div>
 
       <div class = 'col-xs-12 col-md-6'>
-        <%= text_area_tag :activity_review, nil, placeholder: "Why did you love it so much?", class: "form-control review-field-form"%>
+        <%= text_area_tag :activity_review, nil, placeholder: "Why was it so great?", class: "form-control review-field-form"%>
       </div>
 
     </div>
@@ -43,3 +54,94 @@
 
 <% end %>
 
+<%= content_for :after_js do %>
+
+  <script>
+    $(document).ready(function() {
+
+      $('.star-btn').mouseenter(function(e) {
+        e.preventDefault();
+        var selectedindex = $(this).data('number');
+        // console.log(selectedindex);
+        var lowerarr = [];
+          for(var i=1; i<=selectedindex; i++) {
+             lowerarr.push(i);
+          }
+        lowerarr.forEach(function(ind){
+          // console.log(ind);
+          $('#' + ind).children('.full-star').removeClass('hidden');
+          $('#' + ind).children('.empty-star').addClass('hidden');
+        })
+        var higherarr = [];
+          for(var i=selectedindex+1; i<=5; i++) {
+             higherarr.push(i);
+          }
+        higherarr.forEach(function(ind){
+          // console.log(ind);
+          $('#' + ind).children('.full-star').addClass('hidden');
+          $('#' + ind).children('.empty-star').removeClass('hidden');
+        })
+      })
+
+      $('.rating-area').mouseleave(function(e) {
+        e.preventDefault();
+        $('.full-star').addClass('hidden');
+        $('.empty-star').removeClass('hidden');
+        var selectedindex = $('.rating-selected').data('number');
+        // console.log(selectedindex);
+        var lowerarr = [];
+          for(var i=1; i<=selectedindex; i++) {
+             lowerarr.push(i);
+          }
+        lowerarr.forEach(function(ind){
+          // console.log(ind);
+          $('#' + ind).children('.full-star').removeClass('hidden');
+          $('#' + ind).children('.empty-star').addClass('hidden');
+        })
+        var higherarr = [];
+          for(var i=selectedindex+1; i<=5; i++) {
+             higherarr.push(i);
+          }
+        higherarr.forEach(function(ind){
+          // console.log(ind);
+          $('#' + ind).children('.full-star').addClass('hidden');
+          $('#' + ind).children('.empty-star').removeClass('hidden');
+        })
+      })
+
+      $('.star-btn').click(function(e) {
+        e.preventDefault();
+        if ($(this).hasClass('rating-selected')){
+          $('.full-star').addClass('hidden');
+          $('.empty-star').removeClass('hidden');
+          $(this).removeClass('rating-selected');
+        } else {
+          $('.rating-selected').removeClass('rating-selected');
+          $(this).addClass('rating-selected');
+          var selectedindex = $(this).data('number');
+          // console.log(selectedindex);
+          var lowerarr = [];
+            for(var i=1; i<=selectedindex; i++) {
+               lowerarr.push(i);
+            }
+          lowerarr.forEach(function(ind){
+            // console.log(ind);
+            $('#' + ind).children('.full-star').removeClass('hidden');
+            $('#' + ind).children('.empty-star').addClass('hidden');
+          })
+          var higherarr = [];
+            for(var i=selectedindex+1; i<=5; i++) {
+               higherarr.push(i);
+            }
+          higherarr.forEach(function(ind){
+            // console.log(ind);
+            $('#' + ind).children('.full-star').addClass('hidden');
+            $('#' + ind).children('.empty-star').removeClass('hidden');
+          })
+        }
+      })
+
+    })
+  </script>
+
+<% end %>

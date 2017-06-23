@@ -33,16 +33,16 @@
       <div class = 'col-xs-12 col-md-3'>
         <div class = 'row'>
           <% @experiences.each_with_index do |experience, index| %>
-              <div class = 'col-xs-12'>
-                <a class="block profile-page-block destination <%= "active" if index == 0 %> <%= "dezoom" unless index == 0 %>">
-                  <%= image_tag "countryphoto/#{experience.region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
-                  <span class="box">
-                    <span class="text in-box">
-                      <span class="primarytext"><%= experience.region.name %></span>
-                    </span>
+            <div class = 'col-xs-12'>
+              <a class="block profile-page-block destination <%= "active" if index == 0 %> <%= "dezoom" unless index == 0 %>">
+                <%= image_tag "countryphoto/#{experience.region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext"><%= experience.region.name %></span>
                   </span>
-                </a>
-              </div>
+                </span>
+              </a>
+            </div>
           <% end %>
         </div>
       </div>
@@ -53,32 +53,70 @@
           <div class = 'col-xs-12'>
             <div class = 'selection-title'>
               <i class="fa fa-caret-right" aria-hidden="true"></i>
-              <h4>Last, where have you been in <%= @experience.region.name %>?</h4>
+              <h4>Which cities did you like/ did not like?</h4>
             </div>
           </div>
         </div>
 
-        <div class = 'row'>
-          <% @pois.each_with_index do |poi, index| %>
-            <div class = 'col-xs-12 col-md-3 subexp-card-height'>
-              <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{poi.downcase.gsub(/\ /, '-')}.jpg") %>);" >
-                <div class="subexperience-name text-center">
-                  <h2><%= poi %></h2>
-                </div>
+        <% (0..@nb_rows - 2).each do |index| %>
 
+          <div class = "row">
+
+            <div class = 'col-xs-12 col-md-3 subexp-card-height'>
+              <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[index * 2].downcase.gsub(/\ /, '-')}.jpg") %>);" >
+                <div class="subexperience-name text-center">
+                  <h2><%= @pois[index * 2] %></h2>
+                </div>
               </div>
 
             </div>
 
-            <% if index.even? %>
-              <div class = 'col-xs-12 col-md-6'>
-                <div class = ''>
-                  <%= render 'subexp_feedback_form' %>
+            <div class = 'col-xs-12 col-md-6'>
+              <%= render 'subexp_feedback_form' %>
+            </div>
+
+            <div class = 'col-xs-12 col-md-3 subexp-card-height'>
+              <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[index * 2 + 1].downcase.gsub(/\ /, '-')}.jpg") %>);" >
+                <div class="subexperience-name text-center">
+                  <h2><%= @pois[index * 2] %></h2>
                 </div>
               </div>
-            <% end %>
+
+            </div>
+
+          </div>
+
+        <% end %>
+
+        <div class = "row">
+          <div class = 'col-xs-12 col-md-3 subexp-card-height'>
+            <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[(@nb_rows -1) * 2].downcase.gsub(/\ /, '-')}.jpg") %>);" >
+              <div class="subexperience-name text-center">
+                <h2><%= @pois[(@nb_rows -1) * 2] %></h2>
+              </div>
+            </div>
+
+          </div>
+
+          <div class = 'col-xs-12 col-md-6'>
+            <%= render 'subexp_feedback_form' %>
+          </div>
+
+          <% if @even_pois %>
+            <div class = 'col-xs-12 col-md-3 subexp-card-height'>
+              <div class = "subexperience-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[(@nb_rows -1) * 2 + 1].downcase.gsub(/\ /, '-')}.jpg") %>);" >
+                <div class="subexperience-name text-center">
+                  <h2><%= @pois[(@nb_rows -1) * 2] %></h2>
+                </div>
+              </div>
+
+            </div>
+
           <% end %>
+
         </div>
+
+
 
       </div>
     </div>
