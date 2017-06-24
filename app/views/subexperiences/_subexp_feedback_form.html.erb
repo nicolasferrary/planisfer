@@ -13,7 +13,7 @@
         <div class = 'col-xs-12 rating-area'>
           <% (1..5).each do |number| %>
             <div class = "col-xs-2 radio-button-padding">
-              <label class="btn star-btn" id = "<%= poi_id %>-<%= number %>" data-number = "<%= number %>" data-poi = "<%= poi_id %>">
+              <label class="btn star-btn <%= 'rating-selected' if @rating_status[poi_id.to_s][number.to_s] %>" id = "<%= poi_id %>-<%= number %>" data-number = "<%= number %>" data-poi = "<%= poi_id %>">
                 <i class="fa fa-star-o fa-2x rating-star empty-star" aria-hidden="true" id="<%= number %>"></i>
                 <i class="fa fa-star fa-2x rating-star full-star hidden" aria-hidden="true" id="<%= number %>"></i>
                 <input type="radio" class = 'hidden' name="rating" id="input-rating<%= number %>" value="<%= number %>" autocomplete="off" checked = "<%= 'checked' if @rating_status[poi_id.to_s][number.to_s] %>">

@@ -139,8 +139,35 @@
   <script>
 
     $(document).ready(function() {
+
       var firstPoiId = '<%= @pois_hash[0][0].id %>';
       $('#' + firstPoiId).removeClass('hidden');
+
+      if ($('.star-btn').hasClass('rating-selected')){
+        var _this = $('.rating-selected');
+        var selectedindex = $(_this).data('number');
+        console.log(selectedindex);
+        var lowerarr = [];
+          for(var i=1; i<=selectedindex; i++) {
+             lowerarr.push(i);
+          }
+        var poiId = $(this).data('poi');
+        lowerarr.forEach(function(ind){
+          // console.log(ind);
+          $('#' + poiId + '-' + ind).children('.full-star').removeClass('hidden');
+          $('#' + poiId + '-' + ind).children('.empty-star').addClass('hidden');
+        })
+        var higherarr = [];
+          for(var i=selectedindex+1; i<=5; i++) {
+             higherarr.push(i);
+          }
+        higherarr.forEach(function(ind){
+          $('#' + poiId + '-' + ind).children('.full-star').addClass('hidden');
+          $('#' + poiId + '-' + ind).children('.empty-star').removeClass('hidden');
+        })
+        $(this).find('input[type="radio"]')[0].checked = true;
+      }
+
 
       $('.subexperience-card-container').mouseenter(function() {
         $('.subexperience-card-container').addClass('subexp-opacity');
@@ -279,7 +306,7 @@
           })
           $(this).find('input[type="radio"]')[0].checked = true;
         }
-        var poiId = $(this).data('poi');
+        // var poiId = $(this).data('poi');
         // $('#feedbackForm-' + poiId).submit();
       })
 
