@@ -25,7 +25,6 @@ class ExperiencesController < ApplicationController
     first_region = new_regions.first
     @first_experience = Experience.create(member: current_member, region: first_region)
     redirect_to edit_experience_path(@first_experience)
-
   end
 
   def edit

@@ -148,7 +148,7 @@
         $('.feedback-form').addClass('hidden');
         var poiId = $(this).data('poi-id');
         $('#' + poiId).removeClass('hidden');
-        $('.button-row').addClass('hidden');
+        // $('.button-row').addClass('hidden');
 
         // (function($){
         //   $.fn.extend({
@@ -194,6 +194,129 @@
 
     })
 
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      // console.log('hesqde');
+      $('.star-btn').mouseenter(function(e) {
+        e.preventDefault();
+        var selectedindex = $(this).data('number');
+        var lowerarr = [];
+          for(var i=1; i<=selectedindex; i++) {
+             lowerarr.push(i);
+          }
+        var poiId = $(this).data('poi');
+        lowerarr.forEach(function(ind){
+          $('#' + poiId + '-' + ind).children('.full-star').removeClass('hidden');
+          $('#' + poiId + '-' + ind).children('.empty-star').addClass('hidden');
+        })
+        var higherarr = [];
+          for(var i=selectedindex+1; i<=5; i++) {
+             higherarr.push(i);
+          }
+        higherarr.forEach(function(ind){
+          // console.log(ind);
+          $('#' + poiId + '-' + ind).children('.full-star').addClass('hidden');
+          $('#' + poiId + '-' + ind).children('.empty-star').removeClass('hidden');
+        })
+      })
+
+      $('.rating-area').mouseleave(function(e) {
+        e.preventDefault();
+        $('.full-star').addClass('hidden');
+        $('.empty-star').removeClass('hidden');
+        var selectedindex = $('.rating-selected').data('number');
+        console.log(selectedindex);
+        var lowerarr = [];
+          for(var i=1; i<=selectedindex; i++) {
+             lowerarr.push(i);
+          }
+        var poiId = $('.rating-selected').data('poi');
+        console.log(poiId);
+        lowerarr.forEach(function(ind){
+          $('#' + poiId + '-' + ind).children('.full-star').removeClass('hidden');
+          $('#' + poiId + '-' + ind).children('.empty-star').addClass('hidden');
+        })
+        // var higherarr = [];
+        //   for(var i=selectedindex+1; i<=5; i++) {
+        //      higherarr.push(i);
+        //   }
+        // higherarr.forEach(function(ind){
+        //   $('#' + poiId + '-' + ind).children('.full-star').addClass('hidden');
+        //   $('#' + poiId + '-' + ind).children('.empty-star').removeClass('hidden');
+        // })
+      })
+
+      $('.star-btn').click(function(e) {
+        e.preventDefault();
+        if ($(this).hasClass('rating-selected')){
+          $('.full-star').addClass('hidden');
+          $('.empty-star').removeClass('hidden');
+          $(this).removeClass('rating-selected');
+        } else {
+          $('.rating-selected').removeClass('rating-selected');
+          $(this).addClass('rating-selected');
+          var selectedindex = $(this).data('number');
+          // console.log(selectedindex);
+          var lowerarr = [];
+            for(var i=1; i<=selectedindex; i++) {
+               lowerarr.push(i);
+            }
+          var poiId = $(this).data('poi');
+          lowerarr.forEach(function(ind){
+            // console.log(ind);
+            $('#' + poiId + '-' + ind).children('.full-star').removeClass('hidden');
+            $('#' + poiId + '-' + ind).children('.empty-star').addClass('hidden');
+          })
+          var higherarr = [];
+            for(var i=selectedindex+1; i<=5; i++) {
+               higherarr.push(i);
+            }
+          higherarr.forEach(function(ind){
+            $('#' + poiId + '-' + ind).children('.full-star').addClass('hidden');
+            $('#' + poiId + '-' + ind).children('.empty-star').removeClass('hidden');
+          })
+          $(this).find('input[type="radio"]')[0].checked = true;
+        }
+        var poiId = $(this).data('poi');
+        // $('#feedbackForm-' + poiId).submit();
+      })
+
+    })
+  </script>
+
+  <script>
+    // bind to retrieve old status
+    $(".star-btn").mousedown(function() {
+          var radio = $(this).find('input[type="radio"]')[0]
+          var label = $(this)
+        // if it was checked before
+        if(radio.checked) {
+          // bind event to reset state after click is completed
+          $(this).mouseup(function() {
+
+              // bind param, because "this" will point somewhere else in setTimeout
+              // apparently if you do it immediatelly, it will be overriden, hence wait a tiny bit
+              setTimeout(function() {
+                // console.log(this)
+                radio.checked = false;
+                console.log(radio);
+                label.removeClass("active")
+              }, 5);
+              // don't handle mouseup anymore unless bound again
+              $(this).unbind('mouseup');
+          });
+        }
+    });
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      $('.text-zone').click(function(){
+        $(this).parents('.feedback-form').children('.button-row').removeClass('hidden');
+      })
+    })
   </script>
 
 <% end %>
