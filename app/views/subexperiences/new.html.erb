@@ -144,12 +144,10 @@
       $('#' + firstPoiId).removeClass('hidden');
 
       $('.subexperience-card-container').mouseenter(function() {
-        console.log('test');
         $('.subexperience-card-container').addClass('subexp-opacity');
         $(this).removeClass('subexp-opacity');
         $('.feedback-form').addClass('hidden');
         var poiId = $(this).data('poi-id');
-        console.log(poiId);
         $('#' + poiId).removeClass('hidden');
       })
       // $('.subexperience-card-container').mouseleave(function() {
