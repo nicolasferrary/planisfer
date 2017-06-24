@@ -4,6 +4,12 @@
     <div class = 'rating-container'>
 
       <div class = 'row'>
+        <div class = 'col-xs-12'>
+         <h5>Loved <%= Poi.find(poi_id).name %>?</h5>
+        </div>
+      </div>
+
+      <div class = 'row'>
         <div class = 'col-xs-12 rating-area'>
           <% (1..5).each do |number| %>
             <div class = "col-xs-2 radio-button-padding">
@@ -109,7 +115,6 @@
       })
 
       $('.star-btn').click(function(e) {
-        e.preventDefault();
         if ($(this).hasClass('rating-selected')){
           $('.full-star').addClass('hidden');
           $('.empty-star').removeClass('hidden');

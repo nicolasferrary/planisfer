@@ -28,7 +28,6 @@ class SubexperiencesController < ApplicationController
 
     @subexperience.rating = params[:rating]
     @subexperience.review = params[:review]
-
     @subexperience.save!
   end
 
