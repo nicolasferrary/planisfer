@@ -487,6 +487,7 @@
   display:flex;
   align-items:center;
   justify-content:space-around;
+  box-shadow: 2px 2px 2px #c7c7c7;
   p{
     text-shadow:none;
     color: #404040;
@@ -503,6 +504,7 @@
 
 .subexp-opacity{
   opacity:0.5;
+  box-shadow: none;
 }
 
 .reco-box{

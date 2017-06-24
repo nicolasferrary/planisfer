@@ -63,23 +63,23 @@
           <div class = "row">
 
             <div class = 'col-xs-12 col-md-3 subexp-card-height'>
-              <div class = "subexperience-card-container <%= 'subexp-opacity' unless index == 0%>" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[index * 2].downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois[index * 2] %> >
+              <div class = "subexperience-card-container <%= 'subexp-opacity' unless index == 0%>" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois_hash[index][0].name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois_hash[index][0].id %> >
                 <div class="subexperience-name text-center">
-                  <h2><%= @pois[index * 2] %></h2>
+                  <h2><%= @pois_hash[index][0].name %></h2>
                 </div>
               </div>
 
             </div>
 
             <div class = 'col-xs-12 col-md-6'>
-              <%= render 'subexp_feedback_form', poi: @pois[index * 2] %>
-              <%= render 'subexp_feedback_form', poi: @pois[index * 2 +1] %>
+              <%= render 'subexp_feedback_form', poi_id: @pois_hash[index][0].id %>
+              <%= render 'subexp_feedback_form', poi_id: @pois_hash[index][1].id %>
             </div>
 
             <div class = 'col-xs-12 col-md-3 subexp-card-height'>
-              <div class = "subexperience-card-container subexp-opacity" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[(index * 2) + 1].downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois[(index * 2) + 1] %> >
+              <div class = "subexperience-card-container subexp-opacity" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois_hash[index][1].name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois_hash[index][1].id %> >
                 <div class="subexperience-name text-center">
-                  <h2><%= @pois[(index * 2) + 1] %></h2>
+                  <h2><%= @pois_hash[index][1].name %></h2>
                 </div>
               </div>
 
@@ -91,27 +91,27 @@
 
         <div class = "row">
           <div class = 'col-xs-12 col-md-3 subexp-card-height'>
-            <div class = "subexperience-card-container subexp-opacity" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[(@nb_rows -1) * 2].downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois[(@nb_rows -1) * 2] %> >
+            <div class = "subexperience-card-container subexp-opacity" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois_hash[@nb_rows-1][0].name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois_hash[@nb_rows-1][0].id %> >
               <div class="subexperience-name text-center">
-                <h2><%= @pois[(@nb_rows -1) * 2] %></h2>
+                <h2><%= @pois_hash[@nb_rows-1][0].name %></h2>
               </div>
             </div>
 
           </div>
 
           <div class = 'col-xs-12 col-md-6'>
-            <%= render 'subexp_feedback_form', poi: @pois[(@nb_rows -1) * 2] %>
+            <%= render 'subexp_feedback_form', poi_id: @pois_hash[@nb_rows-1][0].id %>
             <% if @even_pois %>
-              <%= render 'subexp_feedback_form', poi: @pois[(@nb_rows -1) * 2 +1]  %>
+              <%= render 'subexp_feedback_form', poi_id: @pois_hash[@nb_rows-1][1].id  %>
             <% end %>
           </div>
 
           <% if @even_pois %>
 
             <div class = 'col-xs-12 col-md-3 subexp-card-height'>
-              <div class = "subexperience-card-container subexp-opacity" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois[(@nb_rows -1) * 2 + 1].downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois[(@nb_rows -1) * 2 + 1] %> >
+              <div class = "subexperience-card-container subexp-opacity" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois_hash[@nb_rows-1][1].name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois_hash[@nb_rows-1][1].id %> >
                 <div class="subexperience-name text-center">
-                  <h2><%= @pois[(@nb_rows -1) * 2 +1] %></h2>
+                  <h2><%= @pois_hash[@nb_rows-1][1].name %></h2>
                 </div>
               </div>
 
@@ -139,39 +139,24 @@
   <script>
 
     $(document).ready(function() {
-      $('.trip-category').mouseenter(function() {
-        $(this).addClass('entered');
-      })
+      var firstPoiId = '<%= @pois_hash[0][0].id %>';
+      console.log(firstPoiId);
+      $('#' + firstPoiId).removeClass('hidden');
 
-      $('.trip-category').mouseleave(function() {
-        $(this).removeClass('entered');
+      $('.subexperience-card-container').mouseenter(function() {
+        console.log('test');
+        $('.subexperience-card-container').addClass('subexp-opacity');
+        $(this).removeClass('subexp-opacity');
+        $('.feedback-form').addClass('hidden');
+        var poiId = $(this).data('poi-id');
+        console.log(poiId);
+        $('#' + poiId).removeClass('hidden');
       })
-
-      $('.trip-category').click(function() {
-        if ($(this).hasClass('category-selected')) {
-          $(this).removeClass('category-selected');
-          $(this).removeClass('entered');
-        } else {
-          $(this).addClass('category-selected');
-        }
-      })
+      // $('.subexperience-card-container').mouseleave(function() {
+      //   var poiId = $(this).data('poi-id');
+      //   $('#' + poiId).addClass('hidden');
+      // })
     })
-
-    var firstPoi = '<%= @pois[0] %>';
-    $('#' + firstPoi).removeClass('hidden');
-
-    $('.subexperience-card-container').mouseenter(function() {
-      $('.subexperience-card-container').addClass('subexp-opacity');
-      $(this).removeClass('subexp-opacity');
-      $('.feedback-form').addClass('hidden');
-      var poiId = $(this).data('poi-id');
-      console.log(poiId);
-      $('#' + poiId).removeClass('hidden');
-    })
-    // $('.subexperience-card-container').mouseleave(function() {
-    //   var poiId = $(this).data('poi-id');
-    //   $('#' + poiId).addClass('hidden');
-    // })
 
   </script>
 

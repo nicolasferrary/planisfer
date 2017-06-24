@@ -7,11 +7,14 @@ class SubexperiencesController < ApplicationController
     @experiences.insert(0, @experience)
 
     @region = @experience.region
-    @pois = @experience.region.pois
+    @pois =[]
+    @experience.region.pois.each do |poi_string|
+      @pois << Poi.find_by_name(poi_string)
+    end
+
     @nb_rows = @pois.count.fdiv(2).round
     @even_pois = @pois.count.even?
-
-    # params[:id].nil? ? @subexperience = Subexperience.new() : @subexperience = Subexperience.find(params[:id])
+    @pois_hash = define_pois_hash(@pois, @nb_rows, @even_pois)
   end
 
   def create
@@ -27,6 +30,19 @@ class SubexperiencesController < ApplicationController
     @subexperience.review = params[:review]
 
     @subexperience.save!
+  end
+
+  def define_pois_hash(pois, nb_rows, boolean)
+    pois_hash = {}
+    (0..(nb_rows-2)).each do |number|
+      pois_hash[number] = [pois[number*2], pois[number*2+1]]
+    end
+    if boolean
+      pois_hash[nb_rows-1] = [pois[(nb_rows-1)*2], pois[(nb_rows-1)*2+1]]
+    else
+      pois_hash[nb_rows-1] = [pois[(nb_rows-1)*2]]
+    end
+    pois_hash
   end
 
 end
