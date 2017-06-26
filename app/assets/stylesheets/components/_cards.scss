@@ -474,13 +474,13 @@
   right: 5px;
 }
 
-.subexp-card-height{
-  height:150px;
+.small-subexp-card-col{
+  padding:2px;
 }
 
 .subexperience-card-container{
   width:100%;
-  height: 123px;
+  height: 84px;
   text-shadow: 0 1px 3px rgba(0,0,0,0.6);
   background-size: cover !important;
   color: white;
@@ -494,6 +494,11 @@
     font-size: 14px;
   }
 }
+
+.main-subexp-card-container{
+  height: 265px;
+}
+
 .subexperience-name {
   h2{
     color: white;

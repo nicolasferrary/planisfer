@@ -5,57 +5,65 @@
 
       <div class = 'row'>
         <div class = 'col-xs-12'>
-         <h5>Loved <%= Poi.find(poi_id).name %>?</h5>
+          <div class = 'selection-title'>
+            <i class="fa fa-caret-right" aria-hidden="true"></i>
+            <h4>What did you think of <%= Poi.find(poi_id).name %>?</h4>
+          </div>
         </div>
       </div>
 
-      <div class = 'row'>
-        <div class = 'col-xs-12 rating-area'>
-          <% (1..5).each do |number| %>
-            <div class = "col-xs-2 radio-button-padding">
-              <label class="btn star-btn <%= 'rating-selected' if @rating_status[poi_id.to_s][number.to_s] %>" id = "<%= poi_id %>-<%= number %>" data-number = "<%= number %>" data-poi = "<%= poi_id %>">
-                <i class="fa fa-star-o fa-2x rating-star empty-star <%= 'hidden' if @star_full_hash[poi_id.to_s][number.to_s]%>" aria-hidden="true" id="<%= number %>"></i>
-                <i class="fa fa-star fa-2x rating-star full-star <%= 'hidden' unless @star_full_hash[poi_id.to_s][number.to_s]%>" aria-hidden="true" id="<%= number %>"></i>
-                <input type="radio" class = 'hidden' name="rating" id="input-rating<%= number %>" value="<%= number %>" autocomplete="off" checked = "<%= 'checked' if @rating_status[poi_id.to_s][number.to_s] %>">
-              </label>
+      <div class = 'row equal-col-size'>
+        <div class = 'col-xs-12 col-md-9'>
+
+          <div class = 'row reviewing-container'>
+            <div class = 'col-xs-6 rating-area'>
+              <% (1..5).each do |number| %>
+                <div class = "radio-button-padding">
+                  <label class="btn star-btn <%= 'rating-selected' if @rating_status[poi_id.to_s][number.to_s] %>" id = "<%= poi_id %>-<%= number %>" data-number = "<%= number %>" data-poi = "<%= poi_id %>">
+                    <i class="fa fa-star-o fa-2x rating-star empty-star <%= 'hidden' if @star_full_hash[poi_id.to_s][number.to_s]%>" aria-hidden="true" id="<%= number %>"></i>
+                    <i class="fa fa-star fa-2x rating-star full-star <%= 'hidden' unless @star_full_hash[poi_id.to_s][number.to_s]%>" aria-hidden="true" id="<%= number %>"></i>
+                    <input type="radio" class = 'hidden' name="rating" id="input-rating<%= number %>" value="<%= number %>" autocomplete="off" checked = "<%= 'checked' if @rating_status[poi_id.to_s][number.to_s] %>">
+                  </label>
+                </div>
+              <% end %>
             </div>
-          <% end %>
+
+            <div class = 'col-xs-6'>
+              <%= text_area_tag :review, @reviews[poi_id.to_s], placeholder: "Why this rating?", class: "form-control review-field-form text-zone", id: "review-#{ poi_id}" %>
+            </div>
+          </div>
+
+           <div class = 'row'>
+            <div class = 'col-xs-12'>
+              <h5>Any particular place you loved? (Hotel, activity, restaurant?)
+              </h5>
+            </div>
+
+          </div>
+
+          <div class = 'row'>
+
+            <div class = 'col-xs-12 col-md-6'>
+              <%= text_area_tag :activity_name, @activities[poi_id.to_s], placeholder: "Name", class: "form-control review-field-form activity-name-form text-zone"%>
+            </div>
+
+            <div class = 'col-xs-12 col-md-6'>
+              <%= text_area_tag :activity_review, @activity_reviews[poi_id.to_s], placeholder: "Why was it so great?", class: "form-control review-field-form  text-zone"%>
+            </div>
+
+          </div>
+
         </div>
-      </div>
 
-      <div class = 'row'>
-        <div class = 'col-xs-12'>
-          <%= text_area_tag :review, @reviews[poi_id.to_s], placeholder: "Why this rating?", class: "form-control review-field-form text-zone", id: "review-#{ poi_id}" %>
+        <div class = 'col-xs-12 col-md-3 button-col'>
+          <%= hidden_field_tag 'poi_id', poi_id %>
+          <%= submit_tag "SAVE FEEDBACK", class: "btn-brand feedback-btn", id: 'update-experience-button'%>
         </div>
+
       </div>
 
     </div>
 
-    <div class = 'row'>
-      <div class = 'col-xs-12'>
-        <h5>Any particular place you loved? (Hotel, activity, restaurant?)
-        </h5>
-      </div>
-
-    </div>
-
-    <div class = 'row'>
-      <div class = 'col-xs-12 col-md-6'>
-        <%= text_area_tag :activity_name, @activities[poi_id.to_s], placeholder: "Name", class: "form-control review-field-form activity-name-form text-zone"%>
-      </div>
-
-      <div class = 'col-xs-12 col-md-6'>
-        <%= text_area_tag :activity_review, @activity_reviews[poi_id.to_s], placeholder: "Why was it so great?", class: "form-control review-field-form  text-zone"%>
-      </div>
-
-    </div>
-
-    <div class = 'row button-row'>
-      <div class = 'col-xs-12'>
-        <%= hidden_field_tag 'poi_id', poi_id %>
-        <%= submit_tag "SAVE FEEDBACK", class: "btn-brand", id: 'update-experience-button'%>
-      </div>
-    </div>
   </div>
 
 <% end %>
