@@ -80,6 +80,18 @@
                 <% end %>
               <% end %>
 
+              <div class = 'col-xs-6 col-md-3 small-subexp-card-col'>
+                <div class = "subexperience-card-container subexp-opacity" id = "somewhere-else"  data-unreviewed = <%= true %> >
+                  <div class= "subexperience-name text-center" >
+                    <h2 class = 'hidden'>Somewhere else...</h2>
+                    <%= form_tag experience_create_poi_path(experience_id: @experience.id ), method: :get, class: 'text-center' do %>
+                      <%= text_field_tag :newpoiname, nil, placeholder: "Name", class: "form-control"%>
+                      <%= submit_tag "Save", class: "btn-brand very-small-btn", id: "save_poi_button" %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
           </div>

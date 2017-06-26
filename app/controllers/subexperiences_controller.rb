@@ -196,4 +196,8 @@ class SubexperiencesController < ApplicationController
     end
   end
 
+  def create_new_poi
+
+  end
+
 end
