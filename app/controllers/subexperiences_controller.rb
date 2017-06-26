@@ -55,7 +55,12 @@ class SubexperiencesController < ApplicationController
   def update_subexp(subexperience, params)
     subexperience.rating = params[:rating]
     subexperience.review = params[:review]
-    update_activity(subexperience, params) unless subexperience.activities == []
+    if subexperience.activities != []
+      update_activity(subexperience, params)
+    elsif params [:activity_name] != ""
+      create_activity(@subexperience, params)
+    end
+
     subexperience.save
   end
 
