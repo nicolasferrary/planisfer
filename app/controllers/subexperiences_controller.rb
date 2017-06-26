@@ -25,8 +25,6 @@ class SubexperiencesController < ApplicationController
   def create
     @poi = Poi.find(params[:poi_id])
     @experience = Experience.find(params[:experience_id])
-    @rating = params[:rating]
-    @review = params[:review]
 
     pois = []
     @experience.subexperiences.each do |subexp|
@@ -35,26 +33,28 @@ class SubexperiencesController < ApplicationController
 
     if pois.include?(@poi)
       @subexperience = Subexperience.find_by_poi_id(@poi.id)
-      update_subexp(@subexperience, @rating, @review)
+      update_subexp(@subexperience, params)
     else
-      create_new_subexp(@experience, @poi, @rating, @review)
+      create_new_subexp(@experience, @poi, params)
     end
 
     redirect_to new_experience_subexperience_path(experience_id: @experience.id)
   end
 
-  def create_new_subexp(experience, poi, rating, review)
-    subexperience = Subexperience.new()
-    subexperience.experience = experience
-    subexperience.poi = poi
-    subexperience.rating = rating
-    subexperience.review = review
-    subexperience.save
+  def create_new_subexp(experience, poi, params)
+    @subexperience = Subexperience.new()
+    @subexperience.experience = experience
+    @subexperience.poi = poi
+    @subexperience.rating = params[:rating]
+    @subexperience.review = params[:review]
+    create_activity(@subexperience, params)
+    @subexperience.save
   end
 
-  def update_subexp(subexperience, rating, review)
-    subexperience.rating = rating
-    subexperience.review = review
+  def update_subexp(subexperience, params)
+    subexperience.rating = params[:rating]
+    subexperience.review = params[:review]
+    update_activity(subexperience, params)
     subexperience.save
   end
 
@@ -95,6 +95,21 @@ class SubexperiencesController < ApplicationController
       end
     end
     rating_status
+  end
+
+  def create_activity(subexperience, params)
+    activity = Activity.new()
+    activity.name = params[:activity_name]
+    activity.review = params[:activity_review]
+    activity.subexperience = subexperience
+    activity.save
+  end
+
+  def update_activity(subexperience, params)
+    activity = Activity.find_by_subexperience_id(subexperience.id)
+    activity.name = params[:activity_name]
+    activity.review = params[:activity_review]
+    activity.save
   end
 
 end

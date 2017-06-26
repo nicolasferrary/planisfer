@@ -1,3 +1,3 @@
 class Activity < ApplicationRecord
-  belongs_to :subexperiences
+  belongs_to :subexperience
 end
