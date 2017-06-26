@@ -23,6 +23,8 @@ class SubexperiencesController < ApplicationController
     @reviews = update_reviews(@subexperiences)
     @activities = update_activities(@subexperiences)
     @activity_reviews = update_activity_reviews(@subexperiences)
+
+    @focused_poi = define_focused_poi(@pois, @subexperiences)
   end
 
   def create
@@ -50,7 +52,7 @@ class SubexperiencesController < ApplicationController
     @subexperience.poi = poi
     @subexperience.rating = params[:rating]
     @subexperience.review = params[:review]
-    create_activity(@subexperience, params)
+    create_activity(@subexperience, params) unless params [:activity_name] == ""
     @subexperience.save
   end
 
@@ -147,7 +149,12 @@ class SubexperiencesController < ApplicationController
     activities = {}
     subexperiences.each do |subexp|
       poi = subexp.poi
-      activities[poi.id.to_s] = Activity.find_by_subexperience_id(subexp.id).name
+      activity = Activity.find_by_subexperience_id(subexp.id)
+      if !activity.nil?
+        activities[poi.id.to_s] = activity.name
+      else
+        activities[poi.id.to_s] = ""
+      end
     end
     activities
   end
@@ -156,9 +163,22 @@ class SubexperiencesController < ApplicationController
     activity_review = {}
     subexperiences.each do |subexp|
       poi = subexp.poi
-      activity_review[poi.id.to_s] = Activity.find_by_subexperience_id(subexp.id).review
+      activity = Activity.find_by_subexperience_id(subexp.id)
+      if !activity.nil?
+        activity_review[poi.id.to_s] = activity.review
+      else
+        activity_review[poi.id.to_s] = ""
+      end
     end
     activity_review
+  end
+
+  def define_focused_poi(pois, subexperiences)
+    no_feedback_pois = pois
+    subexperiences.each do |subexp|
+      no_feedback_pois.delete(subexp.poi)
+    end
+    focused_poi = no_feedback_pois.first
   end
 
 end
