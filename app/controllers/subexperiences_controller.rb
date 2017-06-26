@@ -19,6 +19,7 @@ class SubexperiencesController < ApplicationController
     @subexperiences = @experience.subexperiences
     @saved_subexp = build_subexp_hash(@subexperiences)
     @rating_status = update_rating_status(@pois, @subexperiences)
+    @star_full_hash = update_star_full_hash(@pois, @rating_status)
       # build a hash with pois and numbers
   end
 
@@ -95,6 +96,25 @@ class SubexperiencesController < ApplicationController
       end
     end
     rating_status
+  end
+
+  def update_star_full_hash(pois, rating_status)
+    star_full_hash = {}
+    pois.each do |poi|
+      star_full_hash[poi.id.to_s] = {}
+      selected_nb = rating_status[poi.id.to_s].key(true).to_i
+      if !selected_nb.nil?
+        (1..selected_nb).each do |nb|
+          star_full_hash[poi.id.to_s][nb.to_s] = true
+        end
+        if selected_nb < 5
+          ((selected_nb+1)..5).each do |nb|
+            star_full_hash[poi.id.to_s][nb.to_s] = false
+          end
+        end
+      end
+    end
+    star_full_hash
   end
 
   def create_activity(subexperience, params)
