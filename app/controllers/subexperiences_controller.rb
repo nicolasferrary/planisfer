@@ -22,7 +22,7 @@ class SubexperiencesController < ApplicationController
     @star_full_hash = update_star_full_hash(@pois, @rating_status)
     @reviews = update_reviews(@subexperiences)
     @activities = update_activities(@subexperiences)
-    @activity_reviews = update_reviews(@subexperiences)
+    @activity_reviews = update_activity_reviews(@subexperiences)
   end
 
   def create

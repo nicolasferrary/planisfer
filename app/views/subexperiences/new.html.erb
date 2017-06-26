@@ -251,15 +251,15 @@
 
       $('.rating-area').mouseleave(function(e) {
         e.preventDefault();
-        $('.full-star').addClass('hidden');
-        $('.empty-star').removeClass('hidden');
-        var selectedindex = $(this).children().children('.rating-selected').data('number');
+        $(this).find('.full-star').addClass('hidden');
+        $(this).find('.empty-star').removeClass('hidden');
+        var selectedindex = $(this).find('.rating-selected').data('number');
         console.log(selectedindex);
         var lowerarr = [];
           for(var i=1; i<=selectedindex; i++) {
              lowerarr.push(i);
           }
-        var poiId = $(this).children().children('.rating-selected').data('poi');
+        var poiId = $(this).find('.rating-selected').data('poi');
         console.log(poiId);
         lowerarr.forEach(function(ind){
           $('#' + poiId + '-' + ind).children('.full-star').removeClass('hidden');
@@ -278,11 +278,11 @@
       $('.star-btn').click(function(e) {
         e.preventDefault();
         if ($(this).hasClass('rating-selected')){
-          $('.full-star').addClass('hidden');
-          $('.empty-star').removeClass('hidden');
+          $(this).find('.full-star').addClass('hidden');
+          $(this).find('.empty-star').removeClass('hidden');
           $(this).removeClass('rating-selected');
         } else {
-          $('.rating-selected').removeClass('rating-selected');
+          $(this).find('.rating-selected').removeClass('rating-selected');
           $(this).addClass('rating-selected');
           var selectedindex = $(this).data('number');
           // console.log(selectedindex);
