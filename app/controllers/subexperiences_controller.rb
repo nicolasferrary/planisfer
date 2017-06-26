@@ -20,7 +20,9 @@ class SubexperiencesController < ApplicationController
     @saved_subexp = build_subexp_hash(@subexperiences)
     @rating_status = update_rating_status(@pois, @subexperiences)
     @star_full_hash = update_star_full_hash(@pois, @rating_status)
-      # build a hash with pois and numbers
+    @reviews = update_reviews(@subexperiences)
+    @activities = update_activities(@subexperiences)
+    @activity_reviews = update_reviews(@subexperiences)
   end
 
   def create
@@ -130,6 +132,33 @@ class SubexperiencesController < ApplicationController
     activity.name = params[:activity_name]
     activity.review = params[:activity_review]
     activity.save
+  end
+
+  def update_reviews(subexperiences)
+    reviews = {}
+    subexperiences.each do |subexp|
+      poi = subexp.poi
+      reviews[poi.id.to_s] = subexp.review
+    end
+    reviews
+  end
+
+  def update_activities(subexperiences)
+    activities = {}
+    subexperiences.each do |subexp|
+      poi = subexp.poi
+      activities[poi.id.to_s] = Activity.find_by_subexperience_id(subexp.id).name
+    end
+    activities
+  end
+
+  def update_activity_reviews(subexperiences)
+    activity_review = {}
+    subexperiences.each do |subexp|
+      poi = subexp.poi
+      activity_review[poi.id.to_s] = Activity.find_by_subexperience_id(subexp.id).review
+    end
+    activity_review
   end
 
 end

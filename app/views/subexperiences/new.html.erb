@@ -253,13 +253,13 @@
         e.preventDefault();
         $('.full-star').addClass('hidden');
         $('.empty-star').removeClass('hidden');
-        var selectedindex = $('.rating-selected').data('number');
+        var selectedindex = $(this).children().children('.rating-selected').data('number');
         console.log(selectedindex);
         var lowerarr = [];
           for(var i=1; i<=selectedindex; i++) {
              lowerarr.push(i);
           }
-        var poiId = $('.rating-selected').data('poi');
+        var poiId = $(this).children().children('.rating-selected').data('poi');
         console.log(poiId);
         lowerarr.forEach(function(ind){
           $('#' + poiId + '-' + ind).children('.full-star').removeClass('hidden');

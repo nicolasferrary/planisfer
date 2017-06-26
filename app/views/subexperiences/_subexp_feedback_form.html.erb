@@ -25,7 +25,7 @@
 
       <div class = 'row'>
         <div class = 'col-xs-12'>
-          <%= text_area_tag :review, nil, placeholder: "Why this rating?", class: "form-control review-field-form text-zone", id: "review-#{ poi_id}" %>
+          <%= text_area_tag :review, @reviews[poi_id.to_s], placeholder: "Why this rating?", class: "form-control review-field-form text-zone", id: "review-#{ poi_id}" %>
         </div>
       </div>
 
@@ -41,11 +41,11 @@
 
     <div class = 'row'>
       <div class = 'col-xs-12 col-md-6'>
-        <%= text_area_tag :activity_name, nil, placeholder: "Name", class: "form-control review-field-form activity-name-form text-zone"%>
+        <%= text_area_tag :activity_name, @activities[poi_id.to_s], placeholder: "Name", class: "form-control review-field-form activity-name-form text-zone"%>
       </div>
 
       <div class = 'col-xs-12 col-md-6'>
-        <%= text_area_tag :activity_review, nil, placeholder: "Why was it so great?", class: "form-control review-field-form  text-zone"%>
+        <%= text_area_tag :activity_review, @activity_reviews[poi_id.to_s], placeholder: "Why was it so great?", class: "form-control review-field-form  text-zone"%>
       </div>
 
     </div>
