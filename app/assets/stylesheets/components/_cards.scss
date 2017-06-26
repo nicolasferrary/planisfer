@@ -493,6 +493,14 @@
     color: #404040;
     font-size: 14px;
   }
+  .photo-check{
+    opacity: 1;
+    background-color: white;
+    i{
+      color: $brand-primary;
+      text-shadow: none;
+    }
+  }
 }
 
 .main-subexp-card-container{
@@ -503,7 +511,12 @@
   h2{
     color: white;
     margin: 0;
-    font-size:20px;
+    font-size:16px;
+  }
+}
+.main-subexp-name{
+  h2{
+    font-size: 20px;
   }
 }
 

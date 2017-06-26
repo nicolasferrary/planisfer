@@ -12,19 +12,15 @@ class SubexperiencesController < ApplicationController
       @pois << Poi.find_by_name(poi_string)
     end
 
-    @nb_rows = @pois.count.fdiv(2).round
-    @even_pois = @pois.count.even?
-    @pois_hash = define_pois_hash(@pois, @nb_rows, @even_pois)
-
     @subexperiences = @experience.subexperiences
     @saved_subexp = build_subexp_hash(@subexperiences)
-    @rating_status = update_rating_status(@pois, @subexperiences)
+    @rating_status = update_rating_status(@pois, @saved_subexp)
     @star_full_hash = update_star_full_hash(@pois, @rating_status)
     @reviews = update_reviews(@subexperiences)
     @activities = update_activities(@subexperiences)
     @activity_reviews = update_activity_reviews(@subexperiences)
-
-    @focused_poi = define_focused_poi(@pois, @subexperiences)
+    @reviewed_pois = define_reviewed_pois(@pois, @subexperiences)
+    @focused_poi = define_focused_poi(@pois, @reviewed_pois)
   end
 
   def create
@@ -59,22 +55,22 @@ class SubexperiencesController < ApplicationController
   def update_subexp(subexperience, params)
     subexperience.rating = params[:rating]
     subexperience.review = params[:review]
-    update_activity(subexperience, params)
+    update_activity(subexperience, params) unless subexperience.activities == []
     subexperience.save
   end
 
-  def define_pois_hash(pois, nb_rows, boolean)
-    pois_hash = {}
-    (0..(nb_rows-2)).each do |number|
-      pois_hash[number] = [pois[number*2], pois[number*2+1]]
-    end
-    if boolean
-      pois_hash[nb_rows-1] = [pois[(nb_rows-1)*2], pois[(nb_rows-1)*2+1]]
-    else
-      pois_hash[nb_rows-1] = [pois[(nb_rows-1)*2]]
-    end
-    pois_hash
-  end
+  # def define_pois_hash(pois, nb_rows, boolean)
+  #   pois_hash = {}
+  #   (0..(nb_rows-2)).each do |number|
+  #     pois_hash[number] = [pois[number*2], pois[number*2+1]]
+  #   end
+  #   if boolean
+  #     pois_hash[nb_rows-1] = [pois[(nb_rows-1)*2], pois[(nb_rows-1)*2+1]]
+  #   else
+  #     pois_hash[nb_rows-1] = [pois[(nb_rows-1)*2]]
+  #   end
+  #   pois_hash
+  # end
 
   def build_subexp_hash(subexperiences)
     subexp_hash = {}
@@ -173,12 +169,26 @@ class SubexperiencesController < ApplicationController
     activity_review
   end
 
-  def define_focused_poi(pois, subexperiences)
-    no_feedback_pois = pois
+  def  define_reviewed_pois(pois, subexperiences)
+    reviewed_pois = []
     subexperiences.each do |subexp|
-      no_feedback_pois.delete(subexp.poi)
+      reviewed_pois << subexp.poi
     end
-    focused_poi = no_feedback_pois.first
+    reviewed_pois
+  end
+
+  def define_focused_poi(pois, reviewed_pois)
+    #take the one clicked (in the params)
+    if !params[:poi_id].nil?
+      focused_poi = Poi.find(params[:poi_id])
+    # if there are some subexp already, (ie some pois are already given fedback), take the first one without feedback
+    elsif reviewed_pois != []
+      not_reviewed_pois = pois - reviewed_pois
+      focused_poi = not_reviewed_pois.first
+    #else, take the first poi
+    else
+      focused_poi = pois.first
+    end
   end
 
 end

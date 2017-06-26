@@ -49,7 +49,7 @@
 
       <div class = 'col-xs-12 col-md-9'>
 
-        <div class = 'row'>
+        <div class = 'row title-container'>
           <div class = 'col-xs-12 text-center'>
             <h2 id = "profile-page-build">
               Which cities did you like / did not like?
@@ -62,25 +62,29 @@
 
           <div class = 'col-xs-12 col-md-6 no-padding'>
             <div class = 'col-xs-12'>
-              <div class = "subexperience-card-container main-subexp-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@pois.first.name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @pois.first.id %> >
-                  <div class="subexperience-name text-center">
-                    <h2><%= @pois.first.name %></h2>
-                  </div>
+              <div class = "subexperience-card-container main-subexp-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@focused_poi.name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @focused_poi.id %> >
+                <div class="subexperience-name text-center main-subexp-name">
+                  <h2><%= @focused_poi.name %></h2>
                 </div>
+              </div>
             </div>
           </div>
 
           <div class = 'col-xs-12 col-md-6'>
             <div class = 'row'>
-
               <% @pois.each do |poi| %>
-                <div class = 'col-xs-6 col-md-3 small-subexp-card-col'>
-                  <div class = "subexperience-card-container subexp-opacity" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{poi.name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= poi.id %> >
-                    <div class="subexperience-name text-center">
-                      <h2><%= poi.name %></h2>
+                <%= link_to new_experience_subexperience_path(experience_id: @experience.id, poi_id: poi.id) do%>
+                  <div class = 'col-xs-6 col-md-3 small-subexp-card-col'>
+                    <div class = "subexperience-card-container <%= 'subexp-opacity' unless @reviewed_pois.include?(poi)%>" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%=image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{poi.name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= poi.id %> data-unreviewed = <%= true unless @reviewed_pois.include?(poi) %> >
+                      <div class="subexperience-name text-center">
+                        <h2><%= poi.name %></h2>
+                      </div>
+                      <span class ="photo-check text-center <%= 'hidden' unless @reviewed_pois.include?(poi)%> %>">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                      </span>
                     </div>
                   </div>
-                </div>
+                <% end %>
               <% end %>
 
             </div>
@@ -91,7 +95,7 @@
 
         <div class = 'row'>
           <div class = 'col-xs-12'>
-            <%= render 'subexp_feedback_form', poi_id: @pois.first.id %>
+            <%= render 'subexp_feedback_form', poi_id: @focused_poi.id %>
           </div>
         </div>
 
@@ -113,14 +117,12 @@
   <script>
 
     $(document).ready(function() {
-
-      var firstPoiId = '<%= @pois_hash[0][0].id %>';
-      $('#' + firstPoiId).removeClass('hidden');
+      var focusedPoiId = '<%= @focused_poi.id %>';
+      $('#' + focusedPoiId).removeClass('hidden');
 
       if ($('.star-btn').hasClass('rating-selected')){
         var _this = $('.rating-selected');
         var selectedindex = $(_this).data('number');
-        console.log(selectedindex);
         var lowerarr = [];
           for(var i=1; i<=selectedindex; i++) {
              lowerarr.push(i);
@@ -144,53 +146,13 @@
 
 
       $('.subexperience-card-container').mouseenter(function() {
-        $('.subexperience-card-container').addClass('subexp-opacity');
         $(this).removeClass('subexp-opacity');
-        $('.feedback-form').addClass('hidden');
-        var poiId = $(this).data('poi-id');
-        $('#' + poiId).removeClass('hidden');
-        // $('.button-col').addClass('hidden');
+      })
 
-        // (function($){
-        //   $.fn.extend({
-        //       donetyping: function(callback,timeout){
-        //           timeout = timeout || 1e3; // 1 second default timeout
-        //           var timeoutReference,
-        //               doneTyping = function(el){
-        //                   if (!timeoutReference) return;
-        //                   timeoutReference = null;
-        //                   callback.call(el);
-        //               };
-        //           return this.each(function(i,el){
-        //               var $el = $(el);
-        //               // Chrome Fix (Use keyup over keypress to detect backspace)
-        //               // thank you @palerdot
-        //               $el.is(':input') && $el.on('keyup keypress paste',function(e){
-        //                   // This catches the backspace button in chrome, but also prevents
-        //                   // the event from triggering too preemptively. Without this line,
-        //                   // using tab/shift+tab will make the focused element fire the callback.
-        //                   if (e.type=='keyup' && e.keyCode!=8) return;
-
-        //                   // Check if timeout has been set. If it has, "reset" the clock and
-        //                   // start over again.
-        //                   if (timeoutReference) clearTimeout(timeoutReference);
-        //                   timeoutReference = setTimeout(function(){
-        //                       // if we made it here, our timeout has elapsed. Fire the
-        //                       // callback
-        //                       doneTyping(el);
-        //                   }, timeout);
-        //               }).on('blur',function(){
-        //                   // If we can, fire the event since we're leaving the field
-        //                   doneTyping(el);
-        //               });
-        //           });
-        //       }
-        //   });
-        // })(jQuery);
-        // $('#review-' + poiId).donetyping(function(){
-        //   console.log(poiId);
-        //   $('#review-' + poiId).text('Event last fired @ ' + (new Date().toUTCString()));
-        // });
+      $('.subexperience-card-container').mouseleave(function() {
+        if ($(this).data('unreviewed')) {
+          $(this).addClass('subexp-opacity');
+        }
       })
 
     })
@@ -228,13 +190,11 @@
         $(this).find('.full-star').addClass('hidden');
         $(this).find('.empty-star').removeClass('hidden');
         var selectedindex = $(this).find('.rating-selected').data('number');
-        console.log(selectedindex);
         var lowerarr = [];
           for(var i=1; i<=selectedindex; i++) {
              lowerarr.push(i);
           }
         var poiId = $(this).find('.rating-selected').data('poi');
-        console.log(poiId);
         lowerarr.forEach(function(ind){
           $('#' + poiId + '-' + ind).children('.full-star').removeClass('hidden');
           $('#' + poiId + '-' + ind).children('.empty-star').addClass('hidden');
@@ -252,11 +212,11 @@
       $('.star-btn').click(function(e) {
         e.preventDefault();
         if ($(this).hasClass('rating-selected')){
-          $(this).find('.full-star').addClass('hidden');
-          $(this).find('.empty-star').removeClass('hidden');
+          $(this).parent().parent().find('.full-star').addClass('hidden');
+          $(this).parent().parent().find('.empty-star').removeClass('hidden');
           $(this).removeClass('rating-selected');
         } else {
-          $(this).find('.rating-selected').removeClass('rating-selected');
+          $(this).parents().find('.rating-selected').removeClass(('rating-selected'))
           $(this).addClass('rating-selected');
           var selectedindex = $(this).data('number');
           // console.log(selectedindex);
@@ -285,31 +245,6 @@
       })
 
     })
-  </script>
-
-  <script>
-    // bind to retrieve old status
-    $(".star-btn").mousedown(function() {
-          var radio = $(this).find('input[type="radio"]')[0]
-          var label = $(this)
-        // if it was checked before
-        if(radio.checked) {
-          // bind event to reset state after click is completed
-          $(this).mouseup(function() {
-
-              // bind param, because "this" will point somewhere else in setTimeout
-              // apparently if you do it immediatelly, it will be overriden, hence wait a tiny bit
-              setTimeout(function() {
-                // console.log(this)
-                radio.checked = false;
-                console.log(radio);
-                label.removeClass("active")
-              }, 5);
-              // don't handle mouseup anymore unless bound again
-              $(this).unbind('mouseup');
-          });
-        }
-    });
   </script>
 
   <script>
