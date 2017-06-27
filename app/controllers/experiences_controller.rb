@@ -33,6 +33,7 @@ class ExperiencesController < ApplicationController
     @experience = define_focused_experience(@non_reviewed_experiences, @clicked_exp_id, @experiences.first)
     put_first_exp_first_in_array(@experience, @experiences)
     @categories = ["Honeymoon", "Road trip", "Family friendly", "Nature/ Sport", "Cultural", "Relaxing", "Big fiesta", "Local immersion"]
+    @checked_categories = define_checked_cat(@experience, @categories)
 
   end
 
@@ -69,6 +70,16 @@ class ExperiencesController < ApplicationController
   def put_first_exp_first_in_array(experience, experiences)
     experiences.delete(experience)
     experiences = experiences.insert(0,experience)
+  end
+
+  def define_checked_cat(experience, categories)
+    checked_categories = []
+    if !experience.category.nil?
+      experience.category.each do |cat|
+        checked_categories << cat
+      end
+    end
+    checked_categories
   end
 
 end

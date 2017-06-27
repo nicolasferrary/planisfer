@@ -72,9 +72,9 @@
                 <div class="blocks center-block">
                   <% @categories.each do |category| %>
                     <div class = 'col-xs-6 col-md-3'>
-                      <input class = "hidden" name="categories[]" type="checkbox" id= "<%= category %>" value="<%= category%>" />
+                      <input class = "hidden <%= 'cat-selected' if @checked_categories.include?(category) %>" name="categories[]" type="checkbox" id= "<%= category %>" value="<%= category%>">
                       <label for="<%= category %>">
-                        <div class = "btn-tag trip-category" data-category = "<%= category %>" data-airport-id = "<%= category %>"> <%= category %>
+                        <div class = "btn-tag trip-category <%= 'category-selected' if @checked_categories.include?(category) %>" data-category = "<%= category %>" data-airport-id = "<%= category %>"> <%= category %>
                         </div>
                       </label>
                     </div>
@@ -161,6 +161,16 @@
         }
       })
     })
+
+  </script>
+
+  <script>
+
+    $(document).ready(function() {
+      console.log('ergsfg');
+      $(".cat-selected").prop("checked", true);
+    })
+
 
   </script>
 
