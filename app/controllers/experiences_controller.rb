@@ -85,7 +85,7 @@ class ExperiencesController < ApplicationController
 
   def define_title(reviewed_experiences, experiences, experience)
     if reviewed_experiences.count == experiences.count
-      "You have completed feedback for all the countries you selected"
+      "You have completed feedbacks for all the countries you selected"
     elsif reviewed_experiences ==[]
       "Let's start with #{experience.region.name}"
     else

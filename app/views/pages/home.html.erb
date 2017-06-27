@@ -13,12 +13,22 @@
           <div class = "text-desktop">
             <% avatar_url = current_member.facebook_picture_url || "http://placehold.it/30x30" %>
             <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" unless current_member.facebook_picture_url.nil? %>
+            <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+              <li>
+                <%= link_to profile_path, class: 'avatar-text' do %>
+                  <span> <%= image_tag "traveler.svg", class: 'traveler-icon' %></span>  Build my traveler profile
+                <% end %>
+              </li>
+              <li>
+                <%= link_to destroy_member_session_path, method: :delete, class: 'avatar-text' do %>
+                  <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+                <% end %>
+              </li>
+            </ul>
             <%= link_to profile_path, class: 'avatar-text' do %>
-              <i class="fa fa-sign-out"></i>  Build my traveler profile
+              <span> <%= image_tag "traveler.svg", class: 'traveler-icon' %></span>  Build my traveler profile
             <% end %>
-            <!--<%= link_to destroy_member_session_path, method: :delete, class: 'avatar-text' do %>
-              <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-            <% end %> -->
+
           </div>
         <% end %>
       </div>

@@ -187,13 +187,13 @@
     </div>
 
     <div class = 'col-md-4'>
-      <a class="block sm destination" id = "more-to-come">
+      <%= link_to profile_path, class: "block sm destination", id: "more-to-come" do %>
         <span class="box">
           <span class="text in-box">
-            <span class="primarytext"> <p>Stay tuned! </p> <p>More destinations to come soon ...</p></span>
+            <span class="primarytext"> <p>Stay tuned! </p> <p>More destinations to come soon ...</p> <p>In the meantime, click here to build your traveler profile</p></span>
           </span>
         </span>
-      </a>
+      <% end %>
     </div>
 
   </div> <!-- fin du blocks -->
