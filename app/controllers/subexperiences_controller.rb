@@ -18,6 +18,7 @@ class SubexperiencesController < ApplicationController
     @activity_reviews = update_activity_reviews(@subexperiences)
     @reviewed_pois = define_reviewed_pois(@pois, @subexperiences)
     @focused_poi = define_focused_poi(@pois, @reviewed_pois)
+    @confirmable = true if @reviewed_pois[:rating_ok] != []
   end
 
   def create

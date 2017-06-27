@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     get :highlight_poi, to: "searches#highlight_poi"
   end
   resources :activities, only: [:create, :update]
-  resources :experiences, only: [:create, :edit, :update] do
+  resources :experiences, only: [:create, :index, :update] do
     resources :subexperiences, only: [:new, :create]
   end
   get :create_experiences, to: "experiences#create_experiences"

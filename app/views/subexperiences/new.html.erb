@@ -113,8 +113,15 @@
 
   </div>
 
-  <div class="col-xs-12 col-md-3">
-    <%= render 'shared/recommendations' %>
+  <div class="col-xs-12 col-md-3 full-height">
+    <% if @confirmable %>
+      <%= link_to experiences_path, class: "btn-brand validate-feedbacks-btn" do %>
+        Validate my feedbacks
+      <% end %>
+    <% else %>
+      <div class= "btn-brand validate-feedbacks-btn subexp-opacity" id = "non-clickable-validate" data-toggle="popover" data-content="Please fill at least one feedback" data-placement="top" data-trigger="hover">Validate my feedbacks</div>
+    <% end %>
+
   </div>
 
 </div>
@@ -256,6 +263,15 @@
         $(this).children().children('#newpoitext').removeClass('hidden');
       })
     })
+  </script>
+
+  <script>
+  $(document).ready(function() {
+    $('#non-clickable-validate').popover();
+    $('#non-clickable-validate').mouseenter(function(){
+      $('#non-clickable-validate').popover('show');
+    })
+  })
   </script>
 
 <% end %>

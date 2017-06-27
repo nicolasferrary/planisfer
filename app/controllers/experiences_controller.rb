@@ -24,14 +24,12 @@ class ExperiencesController < ApplicationController
     end
     first_region = new_regions.first
     @first_experience = Experience.create(member: current_member, region: first_region)
-    redirect_to edit_experience_path(@first_experience)
+    redirect_to experiences_path
   end
 
-  def edit
+  def index
     @experiences = current_member.experiences.to_a
-    @experience = Experience.find(params[:id])
-    @experiences.delete(@experience)
-    @experiences.insert(0, @experience)
+    @experience = Experience.first
     @categories = ["Honeymoon", "Road trip", "Family friendly", "Nature/ Sport", "Cultural", "Relaxing", "Big fiesta", "Local immersion"]
   end
 
