@@ -62,7 +62,7 @@
                   <div class = 'col-xs-6 col-md-4'>
                     <input class = "hidden" name="regions[]" type="checkbox" id= "<%= region.name %>" value="<%= region.id%>" />
                     <label for="<%= region.name %>">
-                      <a class="block profile-page-block destination">
+                      <a class="block profile-page-block destination <%= 'active' if @selected_regions.include?(region) %>">
                         <span class="image-opacity destination-opacity">
                           <%= image_tag "countryphoto/#{region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
                           <span class="box">
