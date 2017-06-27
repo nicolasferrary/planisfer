@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   end
   get :create_experiences, to: "experiences#create_experiences"
   get :profile, to: "profiles#show"
+  patch :update_member_recos, to: "experiences#update_recos"
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -119,11 +119,11 @@
 
     <div class="col-xs-12 col-md-3 full-height">
       <% if @confirmable %>
-        <%= link_to experiences_path, class: "btn-brand validate-feedbacks-btn" do %>
-          <span>Validate my feedbacks</span>
+        <%= link_to update_member_recos_path, method: :patch,  class: "btn-brand validate-feedbacks-btn text-center" do %>
+          <span>Save my feedbacks for <%= @region.name %></span>
         <% end %>
       <% else %>
-        <div class= "btn-brand validate-feedbacks-btn subexp-opacity" id = "non-clickable-validate" data-toggle="popover" data-content="Please fill at least one feedback" data-placement="top" data-trigger="hover">Validate my feedbacks</div>
+        <div class= "btn-brand validate-feedbacks-btn subexp-opacity text-center" id = "non-clickable-validate" data-toggle="popover" data-content="Please fill at least one feedback" data-placement="top" data-trigger="hover">Save my feedbacks for <%= @region.name %></div
       <% end %>
 
     </div>

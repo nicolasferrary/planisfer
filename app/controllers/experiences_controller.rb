@@ -35,7 +35,10 @@ class ExperiencesController < ApplicationController
     @categories = ["Honeymoon", "Road trip", "Family friendly", "Nature/ Sport", "Cultural", "Relaxing", "Big fiesta", "Local immersion"]
     @checked_categories = define_checked_cat(@experience, @categories)
     @profile_title = define_title(@reviewed_experiences, @experiences, @experience)
-
+    @recos = []
+    current_member.recos.each do |reco|
+      @recos << Region.find_by_name(reco)
+    end
   end
 
   def update
@@ -90,6 +93,47 @@ class ExperiencesController < ApplicationController
       "Let's start with #{experience.region.name}"
     else
       "Let's continue with #{experience.region.name}"
+    end
+  end
+
+  def update_recos
+    @experiences = current_member.experiences.to_a
+    @reviewed_experiences = create_reviewed_exp_array(@experiences)
+    @recos = get_recos(@reviewed_experiences)
+    current_member.recos = @recos.first(4)
+    current_member.save
+    redirect_to experiences_path
+  end
+
+  def get_recos(reviewed_experiences)
+
+    classification = {'Croatia' => "sun", 'South of France' => "sun", 'Corsica' => "sun", 'Sardinia' => "sun", 'Sicily' => "sun",
+      'Greece' => "sunandvisits", 'Portugal' => "sunandvisits", 'North of Italy' => "sunandvisits", 'Northern Spain' => "sunandvisits", 'South of Italy' => "sunandvisits",
+      'Ireland' => "roadtrip", 'Scotland' => "roadtrip", 'Romania' => "roadtrip", 'Andalucia' => "roadtrip"
+    }
+
+    named_reviewed_experiences = []
+    reviewed_categories = Set.new []
+    reviewed_experiences.each do |exp|
+      named_reviewed_experiences << exp.region.name
+      reviewed_categories << classification[exp.region.name]
+    end
+
+    reviewed_categories.to_a
+    gross_recos = []
+
+    reviewed_categories.each do |category|
+      gross_recos << classification.map{ |k,v| v==category ? k : nil }.compact
+    end
+    gross_recos = gross_recos.flatten
+    named_recos = gross_recos.delete_if {|reco| named_reviewed_experiences.include?(reco)}
+    named_recos
+  end
+
+  def get_names(reviewed_experiences)
+    names = []
+    reviewed_experiences.each do |exp|
+      names << exp.region.name
     end
   end
 

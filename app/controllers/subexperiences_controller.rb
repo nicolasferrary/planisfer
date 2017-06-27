@@ -237,4 +237,6 @@ class SubexperiencesController < ApplicationController
     true if pois.include?(name)
   end
 
+
+
 end
