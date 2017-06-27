@@ -138,7 +138,6 @@ class SubexperiencesController < ApplicationController
     activity.review = params[:activity_review]
     activity.subexperience = subexperience
     activity.save
-    raise
   end
 
   def update_activity(subexperience, params)

@@ -34,6 +34,7 @@ class ExperiencesController < ApplicationController
     put_first_exp_first_in_array(@experience, @experiences)
     @categories = ["Honeymoon", "Road trip", "Family friendly", "Nature/ Sport", "Cultural", "Relaxing", "Big fiesta", "Local immersion"]
     @checked_categories = define_checked_cat(@experience, @categories)
+    @profile_title = define_title(@reviewed_experiences, @experiences, @experience)
 
   end
 
@@ -47,11 +48,11 @@ class ExperiencesController < ApplicationController
   end
 
   def create_reviewed_exp_array(experiences)
-      reviewed_exp = []
-      experiences.each do |exp|
-        reviewed_exp << exp if exp.subexperiences != []
-      end
-      reviewed_exp
+    reviewed_exp = []
+    experiences.each do |exp|
+      reviewed_exp << exp if exp.subexperiences != []
+    end
+    reviewed_exp
   end
 
   def define_focused_experience(non_reviewed_experiences, clicked_exp_id, first_experience)
@@ -80,6 +81,16 @@ class ExperiencesController < ApplicationController
       end
     end
     checked_categories
+  end
+
+  def define_title(reviewed_experiences, experiences, experience)
+    if reviewed_experiences.count == experiences.count
+      "You have completed feedback for all the countries you selected"
+    elsif reviewed_experiences ==[]
+      "Let's start with #{experience.region.name}"
+    else
+      "Let's continue with #{experience.region.name}"
+    end
   end
 
 end
