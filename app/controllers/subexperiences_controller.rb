@@ -57,7 +57,7 @@ class SubexperiencesController < ApplicationController
     @subexperience.poi = poi
     @subexperience.rating = params[:rating]
     @subexperience.review = params[:review]
-    create_activity(@subexperience, params) unless params [:activity_name] == ""
+    create_activity(@subexperience, params) unless params [:activity_name] == "" || params [:activity_name].nil?
     @subexperience.save
   end
 
@@ -137,6 +137,7 @@ class SubexperiencesController < ApplicationController
     activity.review = params[:activity_review]
     activity.subexperience = subexperience
     activity.save
+    raise
   end
 
   def update_activity(subexperience, params)
