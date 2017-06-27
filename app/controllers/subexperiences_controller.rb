@@ -21,28 +21,34 @@ class SubexperiencesController < ApplicationController
   end
 
   def create
-    if params[:newpoiname]
-      @poi = Poi.create(name: params[:newpoiname])
-    else
-      @poi = Poi.find(params[:poi_id])
-    end
-
-
     @experience = Experience.find(params[:experience_id])
 
-    pois = []
-    @experience.subexperiences.each do |subexp|
-      pois << subexp.poi
-    end
+    if check_name(params[:newpoiname], @experience)
+      flash[:name_error] = "This destination already exists"
 
-    if pois.include?(@poi)
-      @subexperience = Subexperience.find_by_poi_id(@poi.id)
-      update_subexp(@subexperience, params)
     else
-      create_new_subexp(@experience, @poi, params)
+      if params[:newpoiname]
+        @poi = Poi.create(name: params[:newpoiname])
+      else
+        @poi = Poi.find(params[:poi_id])
+      end
+
+      pois = []
+      @experience.subexperiences.each do |subexp|
+        pois << subexp.poi
+      end
+
+      if pois.include?(@poi)
+        @subexperience = Subexperience.find_by_poi_id(@poi.id)
+        update_subexp(@subexperience, params)
+      else
+        create_new_subexp(@experience, @poi, params)
+      end
+
     end
 
     redirect_to new_experience_subexperience_path(experience_id: @experience.id)
+
   end
 
   def create_new_subexp(experience, poi, params)
@@ -195,7 +201,7 @@ class SubexperiencesController < ApplicationController
       focused_poi = Poi.find(params[:poi_id])
     #if there are some subexp that don't have any feedback, focus on the last one create without any feedback
     elsif reviewed_pois[:no_rating] != []
-      focused_poi = reviewed_pois[:no_rating].first
+      focused_poi = reviewed_pois[:no_rating].last
     # if there are some subexp already and they all have feedback, take the first one without feedback
     elsif reviewed_pois[:rating_ok] != []
       not_reviewed_pois = pois - reviewed_pois[:rating_ok]
@@ -221,6 +227,13 @@ class SubexperiencesController < ApplicationController
       pois << subexp.poi
     end
     pois.to_a
+  end
+
+  def check_name(name, experience)
+    subexperiences = experience.subexperiences
+    pois = define_pois_array(experience, subexperiences)
+    pois = pois.map { |poi| poi.name }
+    true if pois.include?(name)
   end
 
 end
