@@ -5,14 +5,11 @@ class SubexperiencesController < ApplicationController
     @experience = Experience.find(params[:experience_id])
     @experiences.delete(@experience)
     @experiences.insert(0, @experience)
+    @subexperiences = @experience.subexperiences
 
     @region = @experience.region
-    @pois =[]
-    @experience.region.pois.each do |poi_string|
-      @pois << Poi.find_by_name(poi_string)
-    end
+    @pois = define_pois_array(@experience, @subexperiences)
 
-    @subexperiences = @experience.subexperiences
     @saved_subexp = build_subexp_hash(@subexperiences)
     @rating_status = update_rating_status(@pois, @saved_subexp)
     @star_full_hash = update_star_full_hash(@pois, @rating_status)
@@ -24,7 +21,13 @@ class SubexperiencesController < ApplicationController
   end
 
   def create
-    @poi = Poi.find(params[:poi_id])
+    if params[:newpoiname]
+      @poi = Poi.create(name: params[:newpoiname])
+    else
+      @poi = Poi.find(params[:poi_id])
+    end
+
+
     @experience = Experience.find(params[:experience_id])
 
     pois = []
@@ -175,9 +178,13 @@ class SubexperiencesController < ApplicationController
   end
 
   def  define_reviewed_pois(pois, subexperiences)
-    reviewed_pois = []
+    reviewed_pois = {:rating_ok => [], :no_rating => []}
     subexperiences.each do |subexp|
-      reviewed_pois << subexp.poi
+      if subexp.rating.nil?
+        reviewed_pois[:no_rating] << subexp.poi
+      else
+        reviewed_pois[:rating_ok] << subexp.poi
+      end
     end
     reviewed_pois
   end
@@ -186,9 +193,12 @@ class SubexperiencesController < ApplicationController
     #take the one clicked (in the params)
     if !params[:poi_id].nil?
       focused_poi = Poi.find(params[:poi_id])
-    # if there are some subexp already, (ie some pois are already given fedback), take the first one without feedback
-    elsif reviewed_pois != []
-      not_reviewed_pois = pois - reviewed_pois
+    #if there are some subexp that don't have any feedback, focus on the last one create without any feedback
+    elsif reviewed_pois[:no_rating] != []
+      focused_poi = reviewed_pois[:no_rating].first
+    # if there are some subexp already and they all have feedback, take the first one without feedback
+    elsif reviewed_pois[:rating_ok] != []
+      not_reviewed_pois = pois - reviewed_pois[:rating_ok]
       focused_poi = not_reviewed_pois.first
     #else, take the first poi
     else
@@ -197,7 +207,20 @@ class SubexperiencesController < ApplicationController
   end
 
   def create_new_poi
+    poi = POI.new()
+    poi.name = params[:newpoiname]
+    poi.save
+  end
 
+  def define_pois_array(experience, subexperiences)
+    pois = Set.new []
+    experience.region.pois.each do |poi_string|
+      pois << Poi.find_by_name(poi_string)
+    end
+    subexperiences.each do |subexp|
+      pois << subexp.poi
+    end
+    pois.to_a
   end
 
 end
