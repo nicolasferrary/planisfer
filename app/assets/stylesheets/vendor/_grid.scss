@@ -171,20 +171,20 @@
 .profile-page-block{
   width: 180px;
   height: 180px;
-  opacity:0.5;
   text-decoration:none;
   &.entered{
-    opacity:1;
     border: 2px solid $brand-color
   }
   &.active{
-    opacity:1;
     border: 5px solid $brand-color;
     box-shadow: 2px 2px 2px $brand-color;
     .dest-image{
       -webkit-transform:scale(1.1,1.1);
       -ms-transform:scale(1.1,1.1);
       transform:scale(1.1,1.1)
+    }
+    .destination-opacity{
+      opacity: 1;
     }
     .photo-check{
       opacity:1;
@@ -200,7 +200,17 @@
   zoom:80%
 }
 
+.destination-opacity{
+  opacity: 0.5;
+}
 
+.blured-photo-check{
+  background-color: rgba(227, 229, 230, .5);
+  opacity: 0.5;
+  i {
+    color: transparent;
+  }
+}
 
 
 
