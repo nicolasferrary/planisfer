@@ -310,5 +310,16 @@
   padding: 60px 10px;
   margin-top: -150px;
 }
+.validate-feedbacks-btn:hover{
+  text-decoration: none !important;
+  span {
+    color: white;
+  }
+}
+.validate-feedbacks-btn:visited{
+  span {
+    color: white;
+  }
+}
 
 
