@@ -68,11 +68,11 @@
               <% @pois.each do |poi| %>
                 <%= link_to new_experience_subexperience_path(experience_id: @experience.id, poi_id: poi.id) do%>
                   <div class = 'col-xs-6 col-md-3 small-subexp-card-col'>
-                    <div class = "subexperience-card-container <%= 'subexp-opacity' unless @reviewed_pois.include?(poi)%>" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%=image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{poi.name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= poi.id %> data-unreviewed = <%= true unless @reviewed_pois.include?(poi) %> >
+                    <div class = "subexperience-card-container <%= 'subexp-opacity' unless @reviewed_pois[:rating_ok].include?(poi)%>" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%=image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{poi.name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= poi.id %> data-unreviewed = <%= true unless @reviewed_pois[:rating_ok].include?(poi) %> >
                       <div class="subexperience-name text-center">
                         <h2><%= poi.name %></h2>
                       </div>
-                      <span class ="photo-check text-center <%= 'hidden' unless @reviewed_pois.include?(poi)%> %>">
+                      <span class ="photo-check text-center <%= 'hidden' unless @reviewed_pois[:rating_ok].include?(poi)%> %>">
                         <i class="fa fa-check" aria-hidden="true"></i>
                       </span>
                     </div>
