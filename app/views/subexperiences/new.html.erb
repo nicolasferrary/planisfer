@@ -217,6 +217,7 @@
           $(this).parent().parent().find('.full-star').addClass('hidden');
           $(this).parent().parent().find('.empty-star').removeClass('hidden');
           $(this).removeClass('rating-selected');
+          $(this).parents().parents().find('input[type="radio"]')[0].checked = false;
         } else {
           $(this).parents().find('.rating-selected').removeClass(('rating-selected'))
           $(this).addClass('rating-selected');

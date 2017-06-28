@@ -23,7 +23,8 @@
                   <label class="btn star-btn <%= 'rating-selected' if @rating_status[poi_id.to_s][number.to_s] %>" id = "<%= poi_id %>-<%= number %>" data-number = "<%= number %>" data-poi = "<%= poi_id %>">
                     <i class="fa fa-star-o fa-2x rating-star empty-star <%= 'hidden' if @star_full_hash[poi_id.to_s][number.to_s]%>" aria-hidden="true" id="<%= number %>"></i>
                     <i class="fa fa-star fa-2x rating-star full-star <%= 'hidden' unless @star_full_hash[poi_id.to_s][number.to_s]%>" aria-hidden="true" id="<%= number %>"></i>
-                    <input type="radio" class = 'hidden' name="rating" id="input-rating<%= number %>" value="<%= number %>" autocomplete="off" checked = "<%= 'checked' if @rating_status[poi_id.to_s][number.to_s] %>">
+                    <input type="radio" class = 'hidden' name="rating" id="input-rating<%= number %>" value="<%= number %>" autocomplete="off">
+
                   </label>
                 </div>
               <% end %>
@@ -81,10 +82,5 @@
     </div>
 
   </div>
-
-<% end %>
-
-<%= content_for :after_js do %>
-
 
 <% end %>

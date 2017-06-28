@@ -30,6 +30,7 @@ class SubexperiencesController < ApplicationController
     else
       if params[:newpoiname]
         @poi = Poi.create(name: params[:newpoiname])
+        #elsif tous les params sont vides, alors je détruis la subexperience
       else
         @poi = Poi.find(params[:poi_id])
       end
@@ -235,6 +236,14 @@ class SubexperiencesController < ApplicationController
     pois = define_pois_array(experience, subexperiences)
     pois = pois.map { |poi| poi.name }
     true if pois.include?(name)
+  end
+
+  def destroy
+    @poi = Poi.find(params[:poi_id])
+    @subexperience = Subexperience.find_by_poi_id(@poi.id)
+    @subexperience.delete
+    @experience = Experience.find(params[:experience_id])
+    redirect_to new_experience_subexperience_path(experience_id: @experience.id)
   end
 
 
