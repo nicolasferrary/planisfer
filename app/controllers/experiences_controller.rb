@@ -25,7 +25,6 @@ class ExperiencesController < ApplicationController
   end
 
   def index
-
     @experiences = current_member.experiences.to_a
     @reviewed_experiences = create_reviewed_exp_array(@experiences)
     @non_reviewed_experiences = @experiences - @reviewed_experiences

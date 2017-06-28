@@ -17,12 +17,20 @@
 
 
 <div class="container-fluid page-result page-profile">
+  <%= render 'shared/progress_bar', :progress => 50 %>
+
+  <div class = 'row title-container'>
+    <div class = 'col-xs-12 text-center'>
+      <h2 id = "profile-page-build">
+        Which cities did you like / did not like?
+      </h2>
+    </div>
+  </div>
 
   <div class = 'row'>
 
-    <div class="col-xs-12 col-md-9 right-border">
+    <div class="col-xs-12 col-md-8 right-border">
 
-      <%= render 'shared/progress_bar', :progress => 50 %>
 
       <div class = 'row'>
 
@@ -45,33 +53,14 @@
 
         <div class = 'col-xs-12 col-md-9'>
 
-          <div class = 'row title-container'>
-            <div class = 'col-xs-12 text-center'>
-              <h2 id = "profile-page-build">
-                Which cities did you like / did not like?
-              </h2>
-            </div>
-          </div>
-
-
           <div class = "row">
-
-            <div class = 'col-xs-12 col-md-6 no-padding'>
-              <div class = 'col-xs-12'>
-                <div class = "subexperience-card-container main-subexp-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@focused_poi.name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @focused_poi.id %> >
-                  <div class="subexperience-name text-center main-subexp-name">
-                    <h2><%= @focused_poi.name %></h2>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <div class = 'col-xs-12 col-md-6'>
               <div class = 'row'>
 
                 <% @pois.each do |poi| %>
                   <%= link_to new_experience_subexperience_path(experience_id: @experience.id, poi_id: poi.id) do%>
-                    <div class = 'col-xs-6 col-md-3 small-subexp-card-col'>
+                    <div class = 'col-xs-6 col-md-4 small-subexp-card-col'>
                       <div class = "subexperience-card-container <%= 'subexp-opacity' unless @reviewed_pois[:rating_ok].include?(poi)%>" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%=image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{poi.name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= poi.id %> data-unreviewed = <%= true unless @reviewed_pois[:rating_ok].include?(poi) %> >
                         <div class="subexperience-name text-center">
                           <h2><%= poi.name %></h2>
@@ -84,7 +73,7 @@
                   <% end %>
                 <% end %>
 
-                <div class = 'col-xs-6 col-md-3 small-subexp-card-col'>
+                <div class = 'col-xs-6 col-md-4 small-subexp-card-col'>
                   <% if flash[:name_error] %>
                     <p class="red-message"><%= flash[:name_error] %></p>
                   <% end %>
@@ -103,12 +92,16 @@
 
             </div>
 
-          </div>
-
-          <div class = 'row'>
-            <div class = 'col-xs-12'>
-              <%= render 'subexp_feedback_form', poi_id: @focused_poi.id %>
+            <div class = 'col-xs-12 col-md-6 no-padding'>
+              <div class = 'col-xs-12'>
+                <div class = "subexperience-card-container main-subexp-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@focused_poi.name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @focused_poi.id %> >
+                  <div class="subexperience-name text-center main-subexp-name">
+                    <h2><%= @focused_poi.name %></h2>
+                  </div>
+                </div>
+              </div>
             </div>
+
           </div>
 
         </div>
@@ -117,14 +110,12 @@
 
     </div>
 
-    <div class="col-xs-12 col-md-3 full-height">
-      <% if @confirmable %>
-        <%= link_to update_member_recos_path, method: :patch,  class: "btn-brand validate-feedbacks-btn text-center" do %>
-          <span>Save my feedbacks for <%= @region.name %></span>
-        <% end %>
-      <% else %>
-        <div class= "btn-brand validate-feedbacks-btn subexp-opacity text-center" id = "non-clickable-validate" data-toggle="popover" data-content="Please fill at least one feedback" data-placement="top" data-trigger="hover">Save my feedbacks for <%= @region.name %></div
-      <% end %>
+    <div class="col-xs-12 col-md-4">
+       <div class = 'row'>
+        <div class = 'col-xs-12'>
+          <%= render 'subexp_feedback_form', poi_id: @focused_poi.id %>
+        </div>
+      </div>
 
     </div>
 

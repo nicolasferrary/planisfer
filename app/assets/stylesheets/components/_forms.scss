@@ -183,7 +183,6 @@ textarea.review-field-form{
 
 .feedback-form{
   font-size:14px;
-  margin-top: 20px;
   margin-bottom: 20px;
 }
 
@@ -199,10 +198,16 @@ textarea.activity-name-form{
   display:flex;
   justify-content: space-around;
   margin-top:10px;
+  padding-left: 10%;
 }
 
 .reviewing-container{
   margin-bottom: 10px;
+}
+
+.reviewing-box{
+  display: flex;
+
 }
 
 .equal-col-size {
@@ -219,3 +224,6 @@ textarea.activity-name-form{
   margin-right: auto;
 }
 
+.save-feedback-row{
+  margin-top: 20px;
+}

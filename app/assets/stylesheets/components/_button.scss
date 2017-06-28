@@ -287,7 +287,7 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  margin:5px;
+  margin:3px;
 }
 
 .rating-star{
@@ -296,6 +296,8 @@
 
 .feedback-btn{
   padding: 10px 5px;
+  height: 77px;
+  white-space: normal;
 }
 
 .very-small-btn{
@@ -307,9 +309,9 @@
 }
 
 .validate-feedbacks-btn{
-  padding: 60px 10px;
-  margin-top: -150px;
+  background-color: $orange;
 }
+
 .validate-feedbacks-btn:hover{
   text-decoration: none !important;
   span {
@@ -320,6 +322,10 @@
   span {
     color: white;
   }
+}
+
+.button-opacity{
+  opacity: 0.2
 }
 
 
