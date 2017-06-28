@@ -65,7 +65,7 @@
             <div class= 'col-xs-6'>
               <% if @confirmable %>
                 <%= link_to update_member_recos_path, method: :patch,  class: "btn-brand feedback-btn validate-feedbacks-btn text-center" do %>
-                  <span>SAVE ALL MY FEEDBACKS FOR <%= @region.name.upcase %></span>
+                  SAVE ALL MY FEEDBACKS FOR <%= @region.name.upcase %>
                 <% end %>
               <% else %>
                 <div class= "btn-brand feedback-btn validate-feedbacks-btn button-opacity text-center" id = "non-clickable-validate" data-toggle="popover" data-content="Please fill at least one feedback" data-placement="top" data-trigger="hover">SAVE ALL MY FEEDBACKS FOR <%= @region.name.upcase %></div
