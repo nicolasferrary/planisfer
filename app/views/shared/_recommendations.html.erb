@@ -17,22 +17,23 @@
     </div>
 
   <% else %>
-
-    <div class="blocks center-block">
-      <% @recos.each do |region| %>
-        <div class = 'col-xs-12 col-md-6'>
-          <%= link_to root_path do%>
-            <span class="block profile-page-block destination dezoom">
-              <%= image_tag "countryphoto/#{region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
-              <span class="box">
-                <span class="text in-box">
-                  <span class="primarytext"><%= region.name %></span>
+    <div class = 'col-xs-12'>
+      <div class="blocks center-block">
+        <% @recos.each do |region| %>
+          <div class = 'col-xs-12 col-md-6 recos-padding'>
+            <%= link_to root_path do%>
+              <span class="block profile-page-block destination low-dezoom">
+                <%= image_tag "countryphoto/#{region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext"><%= region.name %></span>
+                  </span>
                 </span>
               </span>
-            </span>
-          <% end %>
-        </div>
-      <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
 
   <% end %>

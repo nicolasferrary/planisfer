@@ -18,10 +18,10 @@
   <span class="how-to-badge booking-status-badge">1</span>
   <p>Build your traveler profile</p>
 </span>
-<span class = "booking-status-item <%= 'opacity' if status == 1 %> <%= 'underline' if status == 2 %>">
+<a class = "no-decoration booking-status-item <%= 'opacity' if status == 1 %> <%= 'underline' if status == 2 %>" href="/" >
   <span class="how-to-badge booking-status-badge">2</span>
   <p>Book your flights</p>
-</span>
+</a>
 <span class = "booking-status-item <%= 'opacity' if status <= 2 %> <%= 'underline' if status == 3 %>">
   <span class="how-to-badge booking-status-badge">3</span>
   <p>Book your car</p>
