@@ -21,14 +21,16 @@
     <div class="blocks center-block">
       <% @recos.each do |region| %>
         <div class = 'col-xs-12 col-md-6'>
-          <span class="block profile-page-block destination active dezoom">
-            <%= image_tag "countryphoto/#{region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
-            <span class="box">
-              <span class="text in-box">
-                <span class="primarytext"><%= region.name %></span>
+          <%= link_to root_path do%>
+            <span class="block profile-page-block destination dezoom">
+              <%= image_tag "countryphoto/#{region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
+              <span class="box">
+                <span class="text in-box">
+                  <span class="primarytext"><%= region.name %></span>
+                </span>
               </span>
             </span>
-          </span>
+          <% end %>
         </div>
       <% end %>
     </div>
