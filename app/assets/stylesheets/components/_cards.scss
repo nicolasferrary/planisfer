@@ -557,4 +557,12 @@
   background-color: #BABABA;
 }
 
+.incomplete_feedback_text{
+  position: absolute;
+  bottom: 5px;
+  right: 30px;
+  color: $orange;
+  font-size: 12px;
+  display: none;
+}
 

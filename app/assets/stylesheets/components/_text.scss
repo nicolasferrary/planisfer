@@ -73,17 +73,27 @@
 
 .no-decoration{
   text-decoration: none;
+  color:inherit;
 }
 .no-decoration:hover{
   text-decoration: none;
+  color:inherit;
 }
 .no-decoration:visited{
   text-decoration: none;
+  color:inherit;
 }
 .no-decoration:active{
   text-decoration: none;
+  color:inherit;
 }
 .no-decoration:focus{
   text-decoration: none;
+  color:inherit;
+}
+
+#status-subtitle{
+  font-size: 12px;
+  margin-top: -11px;
 }
 

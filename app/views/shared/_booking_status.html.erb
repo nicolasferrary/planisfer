@@ -4,7 +4,8 @@
   <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
     <li>
       <%= link_to profile_path, class: 'avatar-text' do %>
-        <span> <%= image_tag "traveler.svg", class: 'traveler-icon' %></span>  Build my traveler profile
+        <span> <%= image_tag "traveler.svg", class: 'traveler-icon' %></span>
+        <%= current_member.profile_status == 0 ? "Build my traveler profile" : "See my traveler profile" %>
       <% end %>
     </li>
     <li>
@@ -14,10 +15,10 @@
     </li>
   </ul>
 </span>
-<span class = "booking-status-item <%= 'underline' if status == 1 %>">
+<a class = "no-decoration booking-status-item <%= 'underline' if status == 1 %>" href="/profile">
   <span class="how-to-badge booking-status-badge">1</span>
-  <p>Build your traveler profile</p>
-</span>
+  <p>Build my traveler profile</p>
+</a>
 <a class = "no-decoration booking-status-item <%= 'opacity' if status == 1 %> <%= 'underline' if status == 2 %>" href="/" >
   <span class="how-to-badge booking-status-badge">2</span>
   <p>Book your flights</p>

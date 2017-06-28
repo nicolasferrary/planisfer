@@ -1,6 +1,7 @@
 class SubexperiencesController < ApplicationController
 
   def new
+    update_member_status
     @experiences = current_member.experiences.to_a
     @experience = Experience.find(params[:experience_id])
     @experiences.delete(@experience)

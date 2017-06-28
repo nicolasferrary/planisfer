@@ -23,6 +23,7 @@ class ExperiencesController < ApplicationController
   end
 
   def index
+    update_member_status
     update_recos
     @experiences = current_member.experiences.to_a
     @reviewed_experiences = create_reviewed_exp_array(@experiences)

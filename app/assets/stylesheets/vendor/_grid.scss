@@ -173,7 +173,7 @@
   height: 180px;
   text-decoration:none;
   &.entered{
-    border: 2px solid $brand-color
+    border: 2px solid $brand-color;
   }
   &.active{
     border: 5px solid $brand-color;
@@ -192,6 +192,21 @@
       i {
         color:$brand-color;
         }
+    }
+  }
+  &.reviewed{
+
+  }
+  &.created{
+    border: 5px solid $orange;
+    box-shadow: 2px 2px 2px $orange;
+    .photo-check{
+      i {
+        color:$orange;
+      }
+    }
+    .incomplete_feedback_text{
+      display: inherit
     }
   }
 }

@@ -16,7 +16,7 @@
             <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
               <li>
                 <%= link_to profile_path, class: 'avatar-text' do %>
-                  <span> <%= image_tag "traveler.svg", class: 'traveler-icon' %></span>  Build my traveler profile
+                  <span> <%= image_tag "traveler.svg", class: 'traveler-icon' %></span>  <%= current_member.profile_status == 0 ? "Build my traveler profile" : "See my traveler profile" %>
                 <% end %>
               </li>
               <li>
@@ -26,7 +26,7 @@
               </li>
             </ul>
             <%= link_to profile_path, class: 'avatar-text' do %>
-              <span> <%= image_tag "traveler.svg", class: 'traveler-icon' %></span>  Build my traveler profile
+              <span> <%= image_tag "traveler.svg", class: 'traveler-icon' %></span>  <%= current_member.profile_status == 0 ? "Build my traveler profile" : "See my traveler profile" %>
             <% end %>
 
           </div>
@@ -169,10 +169,13 @@
         <div class = "col-xs-10 col-xs-offset-1">
           <div class = "how-icons" id="how">
             <div class = "row">
-              <div class = "col-md-3 text-center">
-                <p class="how-to-badge">1</p>
-                <p><strong>Build your traveler profile</strong></p>
-              </div>
+              <a href="/profile" class = "no-decoration">
+                <div class = "col-md-3 text-center">
+                  <p class="how-to-badge">1</p>
+                  <p><strong><%= @step1_title %></strong></p>
+                  <p id = 'status-subtitle'><%= @step1_subtitle %></p>
+                </div>
+              </a>
               <div class = "col-md-3 text-center">
                 <p class="how-to-badge">2</p>
                 <p><strong>Book your flights (return or multi-destination)</strong></p>
