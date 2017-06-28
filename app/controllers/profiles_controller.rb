@@ -9,6 +9,7 @@ class ProfilesController < ApplicationController
     current_member.recos.each do |reco|
       @recos << Region.find_by_name(reco)
     end
+    @title_text = build_title_text(@reviewed_experiences)
   end
 
   def define_selected_regions(member)
@@ -25,6 +26,22 @@ class ProfilesController < ApplicationController
       reviewed_exp << exp if exp.subexperiences != []
     end
     reviewed_exp
+  end
+
+  def build_title_text(reviewed_experiences)
+    if reviewed_experiences == []
+      title_text = {
+        :text1 => "Build your traveler profile",
+        :text2 => "Tell us which countries you loved and we'll tell you where to go next!",
+        :text3 => "Let’s get started …",
+      }
+    else
+      title_text = {
+        :text1 => "Fill feedbacks for more destinations",
+        :text2 => "The more feedbacks you fill, the more recommendations will be accurate",
+        :text3 => "Your profile is 75% completed",
+      }
+    end
   end
 
 end
