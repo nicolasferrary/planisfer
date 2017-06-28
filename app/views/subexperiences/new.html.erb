@@ -1,0 +1,285 @@
+<div class="page-banner text-center">
+  <div class="page-banner-title">
+    <div class = "col-md-12 title-col">
+      <span> <%= link_to root_path do %>
+        <%= image_tag "blue_logo_no_word.png", class: "logo"%>
+      <% end %> </span>
+      <span class ="brand-name">Planisfer</span>
+      <div class = "banner2-title-flexbox">
+        <span class = "banner2-title">Build your traveler profile... </span> </span> <span class = "banner2-title" id = "profile-banner2-title">and get personalized travel suggestions </span>
+      </div>
+    </div>
+  </div>
+  <span class = "booking-status text-desktop">
+    <%= render 'shared/booking_status', :status => 1 %>
+  </span>
+</div>
+
+
+<div class="container-fluid page-result page-profile">
+
+  <div class = 'row'>
+
+    <div class="col-xs-12 col-md-9 right-border">
+
+      <%= render 'shared/progress_bar', :progress => 50 %>
+
+      <div class = 'row'>
+
+        <div class = 'col-xs-12 col-md-3'>
+          <div class = 'row'>
+            <% @experiences.each_with_index do |experience, index| %>
+              <div class = 'col-xs-12'>
+                <a class="block profile-page-block destination <%= "active" if index == 0 %> <%= "dezoom" unless index == 0 %>">
+                  <%= image_tag "countryphoto/#{experience.region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
+                  <span class="box">
+                    <span class="text in-box">
+                      <span class="primarytext"><%= experience.region.name %></span>
+                    </span>
+                  </span>
+                </a>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class = 'col-xs-12 col-md-9'>
+
+          <div class = 'row title-container'>
+            <div class = 'col-xs-12 text-center'>
+              <h2 id = "profile-page-build">
+                Which cities did you like / did not like?
+              </h2>
+            </div>
+          </div>
+
+
+          <div class = "row">
+
+            <div class = 'col-xs-12 col-md-6 no-padding'>
+              <div class = 'col-xs-12'>
+                <div class = "subexperience-card-container main-subexp-card-container" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{@focused_poi.name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= @focused_poi.id %> >
+                  <div class="subexperience-name text-center main-subexp-name">
+                    <h2><%= @focused_poi.name %></h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class = 'col-xs-12 col-md-6'>
+              <div class = 'row'>
+
+                <% @pois.each do |poi| %>
+                  <%= link_to new_experience_subexperience_path(experience_id: @experience.id, poi_id: poi.id) do%>
+                    <div class = 'col-xs-6 col-md-3 small-subexp-card-col'>
+                      <div class = "subexperience-card-container <%= 'subexp-opacity' unless @reviewed_pois[:rating_ok].include?(poi)%>" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%=image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{poi.name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= poi.id %> data-unreviewed = <%= true unless @reviewed_pois[:rating_ok].include?(poi) %> >
+                        <div class="subexperience-name text-center">
+                          <h2><%= poi.name %></h2>
+                        </div>
+                        <span class ="photo-check text-center <%= 'hidden' unless @reviewed_pois[:rating_ok].include?(poi)%> %>">
+                          <i class="fa fa-check" aria-hidden="true"></i>
+                        </span>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
+
+                <div class = 'col-xs-6 col-md-3 small-subexp-card-col'>
+                  <% if flash[:name_error] %>
+                    <p class="red-message"><%= flash[:name_error] %></p>
+                  <% end %>
+                  <div class = "subexperience-card-container subexp-opacity" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2))" id = "somewhere-else"  data-unreviewed = <%= true %> >
+                    <div class= "subexperience-name text-center" >
+                      <h2 id= 'newpoitext'>Somewhere else...</h2>
+                      <%= form_tag experience_subexperiences_path(experience_id: @experience.id ), class: 'text-center hidden', id: 'newpoiform' do %>
+                        <%= text_field_tag :newpoiname, nil, placeholder: "Name", class: "form-control"%>
+                        <%= submit_tag "Save", class: "btn-brand very-small-btn", id: "save_poi_button" %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class = 'row'>
+            <div class = 'col-xs-12'>
+              <%= render 'subexp_feedback_form', poi_id: @focused_poi.id %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="col-xs-12 col-md-3 full-height">
+      <% if @confirmable %>
+        <%= link_to update_member_recos_path, method: :patch,  class: "btn-brand validate-feedbacks-btn text-center" do %>
+          <span>Save my feedbacks for <%= @region.name %></span>
+        <% end %>
+      <% else %>
+        <div class= "btn-brand validate-feedbacks-btn subexp-opacity text-center" id = "non-clickable-validate" data-toggle="popover" data-content="Please fill at least one feedback" data-placement="top" data-trigger="hover">Save my feedbacks for <%= @region.name %></div
+      <% end %>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<%= content_for :after_js do %>
+
+  <script>
+
+    $(document).ready(function() {
+      var focusedPoiId = '<%= @focused_poi.id %>';
+      $('#' + focusedPoiId).removeClass('hidden');
+
+      if ($('.star-btn').hasClass('rating-selected')){
+        var _this = $('.rating-selected');
+        var selectedindex = $(_this).data('number');
+        var lowerarr = [];
+          for(var i=1; i<=selectedindex; i++) {
+             lowerarr.push(i);
+          }
+        var poiId = $(this).data('poi');
+        lowerarr.forEach(function(ind){
+          // console.log(ind);
+          $('#' + poiId + '-' + ind).children('.full-star').removeClass('hidden');
+          $('#' + poiId + '-' + ind).children('.empty-star').addClass('hidden');
+        })
+        var higherarr = [];
+          for(var i=selectedindex+1; i<=5; i++) {
+             higherarr.push(i);
+          }
+        higherarr.forEach(function(ind){
+          $('#' + poiId + '-' + ind).children('.full-star').addClass('hidden');
+          $('#' + poiId + '-' + ind).children('.empty-star').removeClass('hidden');
+        })
+        $(this).find('input[type="radio"]')[0].checked = true;
+      }
+
+
+      $('.subexperience-card-container').mouseenter(function() {
+        $(this).removeClass('subexp-opacity');
+      })
+
+      $('.subexperience-card-container').mouseleave(function() {
+        if ($(this).data('unreviewed')) {
+          $(this).addClass('subexp-opacity');
+        }
+      })
+
+    })
+
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      $('.star-btn').mouseenter(function(e) {
+        e.preventDefault();
+        var selectedindex = $(this).data('number');
+        var lowerarr = [];
+          for(var i=1; i<=selectedindex; i++) {
+             lowerarr.push(i);
+          }
+        var poiId = $(this).data('poi');
+        lowerarr.forEach(function(ind){
+          $('#' + poiId + '-' + ind).children('.full-star').removeClass('hidden');
+          $('#' + poiId + '-' + ind).children('.empty-star').addClass('hidden');
+        })
+        var higherarr = [];
+          for(var i=selectedindex+1; i<=5; i++) {
+             higherarr.push(i);
+          }
+        higherarr.forEach(function(ind){
+          $('#' + poiId + '-' + ind).children('.full-star').addClass('hidden');
+          $('#' + poiId + '-' + ind).children('.empty-star').removeClass('hidden');
+        })
+      })
+
+      $('.rating-area').mouseleave(function(e) {
+        e.preventDefault();
+        $(this).find('.full-star').addClass('hidden');
+        $(this).find('.empty-star').removeClass('hidden');
+        var selectedindex = $(this).find('.rating-selected').data('number');
+        var lowerarr = [];
+          for(var i=1; i<=selectedindex; i++) {
+             lowerarr.push(i);
+          }
+        var poiId = $(this).find('.rating-selected').data('poi');
+        lowerarr.forEach(function(ind){
+          $('#' + poiId + '-' + ind).children('.full-star').removeClass('hidden');
+          $('#' + poiId + '-' + ind).children('.empty-star').addClass('hidden');
+        })
+      })
+
+      $('.star-btn').click(function(e) {
+        e.preventDefault();
+        if ($(this).hasClass('rating-selected')){
+          $(this).parent().parent().find('.full-star').addClass('hidden');
+          $(this).parent().parent().find('.empty-star').removeClass('hidden');
+          $(this).removeClass('rating-selected');
+        } else {
+          $(this).parents().find('.rating-selected').removeClass(('rating-selected'))
+          $(this).addClass('rating-selected');
+          var selectedindex = $(this).data('number');
+          // console.log(selectedindex);
+          var lowerarr = [];
+            for(var i=1; i<=selectedindex; i++) {
+               lowerarr.push(i);
+            }
+          var poiId = $(this).data('poi');
+          lowerarr.forEach(function(ind){
+            // console.log(ind);
+            $('#' + poiId + '-' + ind).children('.full-star').removeClass('hidden');
+            $('#' + poiId + '-' + ind).children('.empty-star').addClass('hidden');
+          })
+          var higherarr = [];
+            for(var i=selectedindex+1; i<=5; i++) {
+               higherarr.push(i);
+            }
+          higherarr.forEach(function(ind){
+            $('#' + poiId + '-' + ind).children('.full-star').addClass('hidden');
+            $('#' + poiId + '-' + ind).children('.empty-star').removeClass('hidden');
+          })
+          $(this).find('input[type="radio"]')[0].checked = true;
+        }
+        // var poiId = $(this).data('poi');
+        // $('#feedbackForm-' + poiId).submit();
+      })
+
+    })
+  </script>
+
+  <script>
+    $(document).ready(function() {
+      $('#somewhere-else').mouseenter(function(){
+        $(this).children().children('#newpoiform').removeClass('hidden');
+        $(this).children().children('#newpoitext').addClass('hidden');
+      })
+      $('#somewhere-else').mouseleave(function(){
+        $(this).children().children('#newpoiform').addClass('hidden');
+        $(this).children().children('#newpoitext').removeClass('hidden');
+      })
+    })
+  </script>
+
+  <script>
+  $(document).ready(function() {
+    $('#non-clickable-validate').popover();
+    $('#non-clickable-validate').mouseenter(function(){
+      $('#non-clickable-validate').popover('show');
+    })
+  })
+  </script>
+
+<% end %>
+
+

@@ -1,0 +1,40 @@
+<div class = 'row'>
+  <div class = 'col-xs-12 text-center'>
+    <h2 id = "profile-page-build">
+    Personalized recommendations
+    </h2>
+  </div>
+</div>
+
+
+<div class = 'row'>
+
+  <% if @recos == [] || @recos.nil? %>
+    <div class = 'col-xs-12'>
+      <div class = "reco-box text-center">
+        <p> Once you have completed your traveler profile, recommendations will appear in this section</p>
+      </div>
+    </div>
+
+  <% else %>
+
+    <div class="blocks center-block">
+      <% @recos.each do |region| %>
+        <div class = 'col-xs-12 col-md-6'>
+          <%= link_to root_path do%>
+            <span class="block profile-page-block destination dezoom">
+              <%= image_tag "countryphoto/#{region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
+              <span class="box">
+                <span class="text in-box">
+                  <span class="primarytext"><%= region.name %></span>
+                </span>
+              </span>
+            </span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+  <% end %>
+
+</div>

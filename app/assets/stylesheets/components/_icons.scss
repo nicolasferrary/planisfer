@@ -147,4 +147,38 @@
   font-size:10px;
 }
 
+// .photo-check{
+//   width: 20px;
+//   height: 20px;
+//   border: 1px solid white;
+//   border-radius:50%;
+//   background-color: rgba(227, 229, 230, .5);
+//   position:absolute;
+//   bottom: 5px;
+//   right: 5px;
+//   i {
+//     color: transparent;
+//   }
+// }
+.photo-check{
+  width: 20px;
+  height: 20px;
+  border: 1px solid white;
+  border-radius:50%;
+  position:absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color:white;
+  i {
+    color: $brand-color;
+  }
+}
+
+.traveler-icon{
+  width: 30px;
+}
+
+.avatar-icon{
+  height:100%;
+}
 

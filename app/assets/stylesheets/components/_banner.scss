@@ -72,6 +72,12 @@ a {
   transition: all 300ms ease;
 }
 
+
+.banner2-title-flexbox{
+  display:flex;
+  flex-wrap: wrap;
+}
+
 .banner2 {
   height: 100vh;
   padding-top: 85px;
@@ -86,7 +92,7 @@ a {
   padding-left: 20px;
   color: #404040;
   flex: 1 1 auto;
-  text-align: right;
+  text-align: left;
 }
 
 .home-text{
@@ -231,17 +237,28 @@ a {
   height: 70px;
 }
 
-.log-out{
-  text-decoration: none;
-  font-size: 14px;
-  margin-left: 5px;
-}
-.log-out:hover{
-  text-decoration: none;
-}
+
 
 .bottom-row{
   position: absolute;
   bottom: 10px;
   margin-left:25%;
+}
+
+#profile-banner2-title{
+  font-size: 17px;
+  position: relative;
+  top:5px;
+}
+
+.full-height{
+  height: 100vh;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.page-profile{
+  padding-right: 40px;
+  padding-left: 40px;
 }

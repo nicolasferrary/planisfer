@@ -21,4 +21,29 @@
   background-image: none;
 }
 
-
+.experience-slider{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  span {
+    &:nth-child(1) {
+      flex: 0 0 15%;
+    }
+    &:nth-child(2) {
+      flex: 0 0 70%;
+    }
+    &:nth-child(3) {
+      flex: 0 0 15%;
+    }
+  }
+}
+.slider.slider-horizontal{
+  width:90%;
+}
+#length-slider-padding{
+  padding-top:16px;
+}
+#price-slider-padding{
+  padding-top:10px;
+}

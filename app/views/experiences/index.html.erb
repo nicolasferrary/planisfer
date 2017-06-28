@@ -1,0 +1,183 @@
+<div class="page-banner text-center">
+  <div class="page-banner-title">
+    <div class = "col-md-12 title-col">
+      <span> <%= link_to root_path do %>
+        <%= image_tag "blue_logo_no_word.png", class: "logo"%>
+      <% end %> </span>
+      <span class ="brand-name">Planisfer</span>
+      <div class = "banner2-title-flexbox">
+        <span class = "banner2-title">Build your traveler profile... </span> </span> <span class = "banner2-title" id = "profile-banner2-title">and get personalized travel suggestions </span>
+      </div>
+    </div>
+  </div>
+  <span class = "booking-status text-desktop">
+    <%= render 'shared/booking_status', :status => 1 %>
+  </span>
+</div>
+
+
+<div class="container-fluid page-result">
+  <div class = 'row'>
+    <div class="col-xs-12 col-md-9 right-border">
+
+      <%= render 'shared/progress_bar', :progress => @reviewed_experiences == [] ? 25 : 75 %>
+
+      <div class = 'row'>
+        <div class = 'col-xs-12 text-center'>
+          <h2 id = "profile-page-build">
+            <%= @profile_title %>
+          </h2>
+
+        </div>
+      </div>
+
+      <div class = "feedback-page-container">
+        <div class = 'row'>
+
+          <div class = 'col-xs-12 col-md-3'>
+            <div class = 'row'>
+              <% @experiences.each do |experience| %>
+                <%= link_to experiences_path(:clicked => experience.id) do%>
+                  <div class = 'col-xs-12'>
+                    <span class="block profile-page-block destination <%= "active" if experience == @experience %> <%= "dezoom" unless experience == @experience %>">
+                      <span class="<%= "destination-opacity" unless experience == @experience %>">
+                        <%= image_tag "countryphoto/#{experience.region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
+                        <span class="box">
+                          <span class="text in-box">
+                            <span class="primarytext"><%= experience.region.name %></span>
+                          </span>
+                        </span>
+                      </span>
+                      <span class ="photo-check text-center <%= 'hidden' unless @reviewed_experiences.include?(experience)%> %>">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                      </span>
+                    </span>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div class = 'col-xs-12 col-md-9'>
+
+            <%= form_tag experience_path(@experience), method: :patch do %>
+              <div class = 'category-container'>
+                <div class = 'row'>
+                  <div class = 'col-xs-12'>
+                    <div class = 'selection-title'>
+                      <i class="fa fa-caret-right" aria-hidden="true"></i>
+                      <h4>How would you describe your trip to <%= @experience.region.name %>?</h4>
+                    </div>
+                  </div>
+                </div>
+
+                <div class = 'row'>
+                  <div class="blocks center-block">
+                    <% @categories.each do |category| %>
+                      <div class = 'col-xs-6 col-md-3'>
+                        <input class = "hidden <%= 'cat-selected' if @checked_categories.include?(category) %>" name="categories[]" type="checkbox" id= "<%= category %>" value="<%= category%>">
+                        <label for="<%= category %>">
+                          <div class = "btn-tag trip-category <%= 'category-selected' if @checked_categories.include?(category) %>" data-category = "<%= category %>" data-airport-id = "<%= category %>"> <%= category %>
+                          </div>
+                        </label>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+
+              <div class = 'row'>
+                <div class = 'col-xs-12 col-md-6'>
+                  <div class = 'selection-title'>
+                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    <h4>How long did you stay (days)?</h4>
+                  </div>
+                </div>
+
+                <div class = 'col-xs-12 col-md-6' id = "length-slider-padding">
+                  <div class = 'experience-slider text-center'>
+                    <span></span>
+                    <span>
+                      <%= text_field_tag :length, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "#{@experience.length}" || "1", "slider-min" => 1, "slider-max" => 30} %>
+                    </span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class = 'row'>
+                <div class = 'col-xs-12 col-md-6'>
+                  <div class = 'selection-title'>
+                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    <h4>Would you say your trip was...</h4>
+                  </div>
+                </div>
+
+                <div class = 'col-xs-12 col-md-6' id = "price-slider-padding">
+                  <div class = 'experience-slider text-center'>
+                    <span>Soooo cheap!</span>
+                    <span> <%= text_field_tag :cost, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "#{@experience.cost}" || "1", "slider-min" => 1, "slider-max" => 10, "slider-tooltip" => 'hide'} %></span>
+                    <span>Super expensive!</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class = 'row'>
+                <div class = 'col-xs-12 text-center'>
+                  <%= submit_tag "VALIDATE", class: "btn-brand btn-half-size", id: 'update-experience-button'%>
+                </div>
+              </div>
+
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-xs-12 col-md-3">
+      <%= render 'shared/recommendations' %>
+    </div>
+
+  </div>
+
+</div>
+
+
+<%= content_for :after_js do %>
+
+  <script>
+
+    $(document).ready(function() {
+      $('.trip-category').mouseenter(function() {
+        $(this).addClass('entered');
+      })
+
+      $('.trip-category').mouseleave(function() {
+        $(this).removeClass('entered');
+      })
+
+      $('.trip-category').click(function() {
+        if ($(this).hasClass('category-selected')) {
+          $(this).removeClass('category-selected');
+          $(this).removeClass('entered');
+        } else {
+          $(this).addClass('category-selected');
+        }
+      })
+    })
+
+  </script>
+
+  <script>
+
+    $(document).ready(function() {
+      console.log('ergsfg');
+      $(".cat-selected").prop("checked", true);
+    })
+
+  </script>
+
+<% end %>
+
+

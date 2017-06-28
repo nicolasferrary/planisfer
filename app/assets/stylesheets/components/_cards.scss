@@ -473,3 +473,88 @@
   position: absolute;
   right: 5px;
 }
+
+.small-subexp-card-col{
+  padding:2px;
+}
+
+.subexperience-card-container{
+  width:100%;
+  height: 84px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  background-color: #BABABA;
+  background-size: cover !important;
+  color: white;
+  display:flex;
+  align-items:center;
+  justify-content:space-around;
+  box-shadow: 2px 2px 2px #c7c7c7;
+  p{
+    text-shadow:none;
+    color: #404040;
+    font-size: 14px;
+  }
+  .photo-check{
+    opacity: 1;
+    background-color: white;
+    i{
+      color: $brand-primary;
+      text-shadow: none;
+    }
+  }
+}
+
+.main-subexp-card-container{
+  height: 265px;
+}
+
+.subexperience-name {
+  h2{
+    color: white;
+    margin: 0;
+    font-size:16px;
+  }
+}
+.main-subexp-name{
+  h2{
+    font-size: 20px;
+  }
+}
+
+.subexp-opacity{
+  opacity:0.5;
+  box-shadow: none;
+}
+
+.reco-box{
+  background-color: #fafafa;
+  position: relative;
+  width: 60%;
+  margin:auto;
+  margin-top:30px;
+   p{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left:0;
+    right:0;
+    margin: auto;
+    width:90%;
+    height: 65%;
+    text-shadow:none;
+    color: #404040;
+    font-size: 14px;
+  }
+}
+
+.reco-box:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+#somewhere-else{
+  background-color: #BABABA;
+}
+
+

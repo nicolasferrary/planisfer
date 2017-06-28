@@ -108,6 +108,12 @@ textarea.form-control{
   height: 100px;
 }
 
+textarea.review-field-form{
+  height: 60px;
+  width: 100%;
+  font-size:14px;
+}
+
 .separator_with_text{
   font-size: 1em;
   color: $headings-color;
@@ -161,5 +167,55 @@ textarea.form-control{
 
 #bag-form-tag{
   z-index:10;
+}
+
+.right-border{
+  border-right: 1px solid #E3E5E6
+}
+
+.category-container{
+  margin-bottom:50px
+}
+
+.feedback-page-container{
+  margin-top:35px;
+}
+
+.feedback-form{
+  font-size:14px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+textarea.activity-name-form{
+  height: 30px;
+}
+
+.rating-container{
+  margin-bottom:5px;
+}
+
+.rating-area{
+  display:flex;
+  justify-content: space-around;
+  margin-top:10px;
+}
+
+.reviewing-container{
+  margin-bottom: 10px;
+}
+
+.equal-col-size {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+}
+
+
+#newpoiform{
+  margin-top:10px;
+  width:95%;
+  margin-left:auto;
+  margin-right: auto;
 }
 

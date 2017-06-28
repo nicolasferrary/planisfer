@@ -3,6 +3,7 @@ class Region < ApplicationRecord
  has_many :round_trip_flights
  has_many :trips, through: :round_trip_flights, dependent: :destroy
  has_many :searches
+ has_many :experiences
 
 
 
