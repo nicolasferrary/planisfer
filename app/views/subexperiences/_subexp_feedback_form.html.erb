@@ -65,13 +65,11 @@
 
             <div class= 'col-xs-6'>
               <% if @confirmable %>
-            <!--     <%= link_to update_member_recos_path, method: :patch, class: "no-decoration" do %> -->
                   <div class= "btn-brand feedback-btn validate-feedbacks-btn text-center light-button-opacity" data-toggle="modal" data-target="#myModal" data-region = "<%= @region.name %>">
-                    SAVE ALL MY FEEDBACKS FOR <%= @region.name.upcase %>
+                    NOTHING MORE TO SAY ABOUT <%= @region.name.upcase %>
                   </div>
-   <!--              <% end %> -->
               <% else %>
-                <div class= "btn-brand feedback-btn validate-feedbacks-btn button-opacity text-center" id = "non-clickable-validate" data-toggle="popover" data-content="Please fill at least one feedback" data-placement="top" data-trigger="hover">SAVE ALL MY FEEDBACKS FOR <%= @region.name.upcase %></div
+                <div class= "btn-brand feedback-btn validate-feedbacks-btn button-opacity text-center" id = "non-clickable-validate" data-toggle="popover" data-content="Please fill at least one feedback" data-placement="top" data-trigger="hover">NOTHING MORE TO SAY ABOUT <%= @region.name.upcase %></div
               <% end %>
             </div>
           </div>
@@ -99,7 +97,7 @@
 
       </div>
       <div class="modal-footer">
-        <%= link_to update_member_recos_path, method: :patch do%>
+        <%= link_to experiences_path do%>
           <button type="button" class="btn btn-primary">See recommendations</button>
         <% end %>
       </div>

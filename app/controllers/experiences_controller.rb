@@ -1,7 +1,6 @@
 class ExperiencesController < ApplicationController
 
   def create_experiences
-
     @regions = []
     member_experiences = current_member.experiences.all
     member_regions =[]
@@ -20,11 +19,11 @@ class ExperiencesController < ApplicationController
     new_regions.each_with_index do |region, index|
       Experience.create(member: current_member, region: region)
     end
-
     redirect_to experiences_path
   end
 
   def index
+    update_recos
     @experiences = current_member.experiences.to_a
     @reviewed_experiences = create_reviewed_exp_array(@experiences)
     @non_reviewed_experiences = @experiences - @reviewed_experiences
@@ -97,11 +96,9 @@ class ExperiencesController < ApplicationController
 
   def update_recos
     @experiences = current_member.experiences.to_a
-    @reviewed_experiences = create_reviewed_exp_array(@experiences)
-    @recos = get_recos(@reviewed_experiences)
+    @recos = get_recos(@experiences)
     current_member.recos = @recos.first(4)
     current_member.save
-    redirect_to experiences_path
   end
 
   def get_recos(reviewed_experiences)

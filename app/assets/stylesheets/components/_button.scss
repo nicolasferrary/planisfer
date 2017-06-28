@@ -311,6 +311,8 @@
 .validate-feedbacks-btn{
   background-color: $orange;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .validate-feedbacks-btn:hover{
