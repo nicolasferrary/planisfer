@@ -5,6 +5,10 @@ class ProfilesController < ApplicationController
     @selected_regions = define_selected_regions(@member)
     @experiences = current_member.experiences.to_a
     @reviewed_experiences = create_reviewed_exp_array(@experiences)
+    @recos = []
+    current_member.recos.each do |reco|
+      @recos << Region.find_by_name(reco)
+    end
   end
 
   def define_selected_regions(member)
