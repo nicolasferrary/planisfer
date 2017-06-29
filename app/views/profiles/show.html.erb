@@ -90,8 +90,8 @@
           </div>
 
           <div class = 'col-xs-3'>
-              <span class = "clickable-validate <%='hidden' unless @confirmable %>"><%= submit_tag "VALIDATE", class: "btn-brand", id: 'experience-validate'%></span>
-              <div class = "btn btn-brand no-decoration white zero-radius button opacity non-clickable-validate <%= 'hidden' if @confirmable %>" id =  'experience-validate' data-toggle="popover" data-content="Please select at least one destination" data-placement="top" data-trigger="hover">VALIDATE</div>
+              <span class = "clickable-validate <%='hidden' unless @confirmable %>" id = 'experience-validate'><%= submit_tag "VALIDATE", class: "btn-brand"%></span>
+              <div class = "btn btn-brand no-decoration white zero-radius button opacity non-clickable-validate <%= 'hidden' if @confirmable %>" id =  'non-clickable-experience-validate' data-toggle="popover" data-content="Please select at least one destination" data-placement="top" data-trigger="hover">VALIDATE</div>
           </div>
         </div>
 

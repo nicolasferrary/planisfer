@@ -276,6 +276,14 @@
 #experience-validate{
   margin-top:70px;
   width: inherit !important;
+  bottom: none !important;
+  position:relative;
+}
+
+#non-clickable-experience-validate {
+  margin-top:0px;
+  margin-left:0px;
+  width: 157px !important;
 }
 
 .star-btn{
