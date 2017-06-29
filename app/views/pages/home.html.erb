@@ -55,7 +55,7 @@
 
       <div class="sticky-form home-sticky-form">
         <div class="form-post">
-          <h1>Start building your trip</h1>
+          <h1 class = "margin-top-ten">Start building your trip</h1>
           <% if flash[:search_error] %>
             <p class="red-message"><%= flash[:search_error] %></p>
           <% end %>
@@ -389,11 +389,11 @@
 
   function showhide(id) {
     var e = document.getElementById(id);
-    $("#children-link").addClass('hidden')
-    $(".with-children").removeClass('hidden')
-    $(".no-children").addClass('hidden')
+    $("#children-link").addClass('hidden');
+    $(".with-children").removeClass('hidden');
+    $(".no-children").addClass('hidden');
     $('#' + e.id).slideDown('slow');
-    $('#' + e.id).removeClass('hidden')
+    $('#' + e.id).removeClass('hidden');
   };
 
 </script>

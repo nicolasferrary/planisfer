@@ -5,6 +5,10 @@ $(document).ready(function(){
     $('.sticky-form').removeClass('sticky-form');
   }
 
+  // if($(".no-children").hasClass('hidden')){
+  //   $('.sticky-form').removeClass('sticky-form');
+  // }
+
   $(".sticky-form").sticky({topSpacing:40});
   $("#experience-validate").sticky({topSpacing:200});
   $("#non-clickable-experience-validate").sticky({topSpacing:270});
