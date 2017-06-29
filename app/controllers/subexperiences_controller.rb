@@ -21,6 +21,8 @@ class SubexperiencesController < ApplicationController
     @last_created = params[:last_created] || nil
     @focused_poi = define_focused_poi(@pois, @reviewed_pois, @last_created)
     @confirmable = true if @reviewed_pois[:rating_ok] != []
+    @last_to_be_reviewed = true if @experiences.count == @reviewed_pois[:rating_ok].count + @reviewed_pois[:no_rating].count
+    @last_to_be_reviewed = true if @experiences.count == @reviewed_pois[:rating_ok].count + @reviewed_pois[:no_rating].count + 1
   end
 
   def create
