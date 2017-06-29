@@ -7,6 +7,7 @@ class PagesController < ApplicationController
     @destination = Region.find_by_name(@destination_name) if !@destination_name.nil?
     @main_title = build_main_title(@destination_name)
     @step1_title = build_title(@status)
+    @step1_link = build_link(@status)
     @step1_subtitle = build_subtitle(@status)
     @recos = current_member.recos || []
 
@@ -27,6 +28,14 @@ class PagesController < ApplicationController
     else
       "Complete your profile"
     end
+  end
+
+  def build_link(status)
+    if status == 100
+      '/recommendations'
+    else
+     '/profile'
+   end
   end
 
   def build_subtitle(status)
