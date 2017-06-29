@@ -1,0 +1,19 @@
+<div class="container-fluid text-center">
+  <p class = 'home-destination-description'><%= destination.description %></p>
+
+
+  <div class = "row margin-bottom-sixty">
+    <% for num in (0..destination.pois.count - 1) %>
+      <div class = "col-md-6">
+        <div class = "center-block slider-img-container">
+          <h5> <%= destination.pois[num] %> </h5>
+          <div style='background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), url(<%= image_path("#{destination.name.downcase.gsub(/\ /, '-')}/#{destination.pois[num].downcase.gsub(/\ /, '-')}.jpg") %>)'; class = "img-slider reduced-photo-height">
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- End of the slider -->
+
+</div> <!-- end of modal header -->

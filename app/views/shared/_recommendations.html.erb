@@ -25,7 +25,7 @@
       <div class="blocks center-block">
         <% @recos.each do |region| %>
           <div class = 'col-xs-12 col-md-6 recos-padding'>
-            <%= link_to root_path do%>
+            <%= link_to root_path(destination: region.name) do%>
               <span class="block profile-page-block destination low-dezoom">
                 <%= image_tag "countryphoto/#{region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
                 <span class="box">
