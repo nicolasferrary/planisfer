@@ -5,7 +5,7 @@
         <%= image_tag "blue_logo_no_word.png", class: "logo"%>
       <% end %> </span>
       <span class ="brand-name">Planisfer</span>
-      <div class = "banner2-title-flexbox">
+      <div class = "banner2-title-flexbox text-desktop">
         <span class = "banner2-title">Build your traveler profile... </span> </span> <span class = "banner2-title" id = "profile-banner2-title">and get personalized travel suggestions </span>
       </div>
     </div>
@@ -53,47 +53,37 @@
 
       <%= form_tag create_experiences_path, method: :get do %>
 
-        <div class = 'row'>
+        <div class = 'row text-desktop'>
 
           <div class = 'col-xs-9'>
             <div class = 'row'>
-              <div class="blocks center-block">
-                <% @regions.each do |region| %>
-                  <div class = 'col-xs-6 col-md-4'>
-                    <input class = "hidden" name="regions[]" type="checkbox" id= "<%= region.name %>" value="<%= region.id%>" />
-                    <label for="<%= region.name %>">
-                      <a class="block profile-page-block destination <%=  'created' if @created_regions.include?(region) %> <%= 'reviewed' if @reviewed_regions.include?(region) %>" >
-                        <span class="image-opacity destination-opacity">
-                          <%= image_tag "countryphoto/#{region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
-                          <span class="box">
-                            <span class="text in-box">
-                              <span class="primarytext"><%= region.name %></span>
-                            </span>
-                          </span>
-                        </span>
-                        <span class = 'incomplete_feedback_text'>
-                          Incomplete feedback
-                        </span>
-                        <span class = 'complete_feedback_text'>
-                          Feedback completed
-                        </span>
-                        <span class ="photo-check blured-photo-check">
-                          <i class="fa fa-check" aria-hidden="true"></i>
-                        </span>
-                      </a>
-                    </label>
-
-                  </div>
-                <% end %>
-              </div>
+              <%= render 'dest_cards' %>
             </div>
           </div>
 
           <div class = 'col-xs-3'>
-              <span class = "clickable-validate <%='hidden' unless @confirmable %>" id = 'experience-validate'><%= submit_tag "VALIDATE", class: "btn-brand"%></span>
-              <div class = "btn btn-brand no-decoration white zero-radius button opacity non-clickable-validate <%= 'hidden' if @confirmable %>" id =  'non-clickable-experience-validate' data-toggle="popover" data-content="Please select at least one destination" data-placement="top" data-trigger="hover">VALIDATE</div>
+            <%= render 'validate_btn' %>
+          </div>
+
+        </div>
+
+        <div class = 'row text-mobile'>
+
+          <div class = 'col-xs-12'>
+            <div class = 'row'>
+              <%= render 'dest_cards' %>
+            </div>
+          </div>
+
+        </div>
+
+        <div class = 'row text-mobile'>
+          <div class = 'col-xs-12 text-center'>
+            <%= render 'validate_btn' %>
           </div>
         </div>
+
+
 
       <% end %>
 
@@ -148,6 +138,14 @@
     $('.non-clickable-validate').mouseenter(function(){
       $('.non-clickable-validate').popover('show');
     })
+  })
+  </script>
+
+  <script>
+  $(document).ready(function() {
+    if($(window).width() <= 1024){
+      $('.profile-page-block').addClass('dezoom');
+    }
   })
   </script>
 
