@@ -1,38 +1,39 @@
 class ExperiencesController < ApplicationController
 
   def create_experiences
+    if !params[:regions].nil?
+      @regions = []
+      member_experiences = current_member.experiences.all
+      member_regions =[]
+      member_experiences.each do |experience|
+        member_regions << experience.region
+      end
 
-    @regions = []
-    member_experiences = current_member.experiences.all
-    member_regions =[]
-    member_experiences.each do |experience|
-      member_regions << experience.region
-    end
+      new_regions = []
+      params[:regions].each do |region_id|
+        region = Region.find(region_id.to_i)
+        if !member_regions.include?(region)
+          new_regions << region
+        end
+      end
 
-    new_regions = []
-    params[:regions].each do |region_id|
-      region = Region.find(region_id.to_i)
-      if !member_regions.include?(region)
-        new_regions << region
+      new_regions.each_with_index do |region, index|
+        Experience.create(member: current_member, region: region)
       end
     end
-
-    new_regions.each_with_index do |region, index|
-      Experience.create(member: current_member, region: region)
-    end
-
     redirect_to experiences_path
   end
 
   def index
-
+    update_member_status
+    update_recos
     @experiences = current_member.experiences.to_a
     @reviewed_experiences = create_reviewed_exp_array(@experiences)
     @non_reviewed_experiences = @experiences - @reviewed_experiences
     @clicked_exp_id = params[:clicked] || nil
     @experience = define_focused_experience(@non_reviewed_experiences, @clicked_exp_id, @experiences.first)
     put_first_exp_first_in_array(@experience, @experiences)
-    @categories = ["Honeymoon", "Road trip", "Family friendly", "Nature/ Sport", "Cultural", "Relaxing", "Big fiesta", "Local immersion"]
+    @categories = ["Romantic", "Road trip", "Family friendly", "Nature/ Sport", "Cultural", "Relaxing", "Big fiesta", "Local immersion"]
     @checked_categories = define_checked_cat(@experience, @categories)
     @profile_title = define_title(@reviewed_experiences, @experiences, @experience)
     @recos = []
@@ -87,22 +88,20 @@ class ExperiencesController < ApplicationController
   end
 
   def define_title(reviewed_experiences, experiences, experience)
-    if reviewed_experiences.count == experiences.count
+    if reviewed_experiences.include?(experience)
+      "Your feedback for #{experience.region.name} is saved. You can update it of you want."
+    elsif reviewed_experiences.count == experiences.count
       "You have completed feedbacks for all the countries you selected"
-    elsif reviewed_experiences ==[]
-      "Let's start with #{experience.region.name}"
     else
-      "Let's continue with #{experience.region.name}"
+      "Let's talk about #{experience.region.name}"
     end
   end
 
   def update_recos
     @experiences = current_member.experiences.to_a
-    @reviewed_experiences = create_reviewed_exp_array(@experiences)
-    @recos = get_recos(@reviewed_experiences)
+    @recos = get_recos(@experiences)
     current_member.recos = @recos.first(4)
     current_member.save
-    redirect_to experiences_path
   end
 
   def get_recos(reviewed_experiences)

@@ -1,0 +1,66 @@
+ <div class="page-banner text-center">
+  <div class="page-banner-title">
+    <div class = "col-md-12 title-col">
+      <span> <%= link_to root_path do %>
+        <%= image_tag "blue_logo_no_word.png", class: "logo"%>
+      <% end %> </span>
+      <span class ="brand-name">Planisfer</span>
+      <div class = "banner2-title-flexbox">
+        <span class = "banner2-title">Build your traveler profile... </span> </span> <span class = "banner2-title" id = "profile-banner2-title">and get personalized travel suggestions </span>
+      </div>
+    </div>
+  </div>
+  <span class = "booking-status text-desktop">
+    <%= render 'shared/booking_status', :status => 1 %>
+  </span>
+</div>
+
+
+<div class="container-fluid page-result page-profile">
+
+  <div class = 'row'>
+    <div class = 'col-xs-12 col-md-4 text-center vertical-center-in-col' id = 'eighty-height'>
+      <span>
+        <h2>
+          You will love exploring these destinations
+        </h2>
+        <h5>
+          Selected, based on the feedbacks you gave for previous trips
+        </h5>
+      </span>
+    </div>
+
+    <div class = 'col-xs-12 col-md-8 left-border'>
+
+      <% @recos.each do |reco|%>
+        <div class = 'col-xs-12 col-md-6'>
+
+          <div class = 'row'>
+            <div class = 'col-xs-12'>
+              <a href="/?destination=<%= reco.name %>" class="block reco-page-block destination center-block" >
+                <%= image_tag "countryphoto/#{reco.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
+                <span class="box">
+                  <span class="text in-box">
+                    <span class="primarytext"><%= reco.name %></span>
+                  </span>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div class = 'row'>
+            <div class = 'col-xs-12'>
+              <h5 class = 'reco-page-reco-desc text-center'> <%= reco.description %> </h5>
+            </div>
+          </div>
+
+        </div>
+      <% end %>
+
+    </div>
+
+  </div>
+
+</div>
+
+

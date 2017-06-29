@@ -1,8 +1,6 @@
 .progress {
   width: 150px;
-  float: right;
-  margin-top: -30px;
-  margin-bottom: 5px;
+  margin-bottom: 0;
 }
 
 .brand-color{
@@ -12,4 +10,13 @@
 
 .progress-text{
   float: right;
+  color: $brand-color;
+  margin-right: 5px;
+}
+
+.progress-container{
+  float: right;
+  display: flex;
+  align-items: center;
+  margin-top: -30px;
 }

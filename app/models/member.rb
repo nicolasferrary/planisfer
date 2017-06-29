@@ -7,6 +7,8 @@ class Member < ApplicationRecord
   serialize :passengers
   has_many :orders
   has_many :experiences
+  has_many :subexperiences, through: :experiences
+  after_initialize :init
 
   def email_required?
     false
@@ -37,6 +39,10 @@ class Member < ApplicationRecord
         member.email = data["email"] if member.email.blank?
       end
     end
+  end
+
+  def init
+    self.profile_status ||= 0
   end
 
 end

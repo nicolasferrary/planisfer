@@ -480,7 +480,7 @@
 
 .subexperience-card-container{
   width:100%;
-  height: 84px;
+  height: 98px;
   text-shadow: 0 1px 3px rgba(0,0,0,0.6);
   background-color: #BABABA;
   background-size: cover !important;
@@ -557,4 +557,24 @@
   background-color: #BABABA;
 }
 
+.incomplete_feedback_text{
+  position: absolute;
+  bottom: 5px;
+  right: 30px;
+  color: $orange;
+  font-size: 12px;
+  display: none;
+}
+.complete_feedback_text{
+  position: absolute;
+  bottom: 5px;
+  right: 30px;
+  color: $brand-color;
+  font-size: 12px;
+  display: none;
+}
+
+.reduced-photo-height{
+  height: 250px !important;
+}
 

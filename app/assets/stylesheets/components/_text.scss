@@ -45,7 +45,15 @@
     margin-top: 14px;
     margin-left: 7px;
   }
+  h5 {
+    margin-top: 14px;
+    margin-left: 7px;
+  }
+  #place-title {
+    margin-bottom:0px;
+  }
 }
+
 #first-title{
   margin-top:0px;
 }
@@ -63,4 +71,56 @@
   text-decoration: none;
 }
 
+.no-decoration{
+  text-decoration: none;
+  color:inherit;
+}
+.no-decoration:hover{
+  text-decoration: none;
+  color:inherit;
+}
+.no-decoration:visited{
+  text-decoration: none;
+  color:inherit;
+}
+.no-decoration:active{
+  text-decoration: none;
+  color:inherit;
+}
+.no-decoration:focus{
+  text-decoration: none;
+  color:inherit;
+}
 
+#status-subtitle{
+  font-size: 12px;
+  margin-top: -11px;
+}
+
+.reco-page-reco-desc {
+  height:100px;
+}
+
+.white {
+  color:white;
+}
+.white:hover {
+  color:white;
+}
+
+.title-with-destination{
+  margin-bottom:0;
+}
+
+.home-destination-description{
+  margin-top:0;
+  margin-bottom: 40px;
+}
+
+.home-main-title-destination{
+  margin-bottom:0;
+}
+
+.margin-top-ten{
+  margin-top: 10px;
+}

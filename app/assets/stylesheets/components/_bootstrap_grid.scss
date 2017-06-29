@@ -1,0 +1,16 @@
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.vertical-center-in-col{
+  display: flex;
+  align-items: center;
+}
+
+#eighty-height{
+  height: 80vh;
+}
+

@@ -276,6 +276,14 @@
 #experience-validate{
   margin-top:70px;
   width: inherit !important;
+  bottom: none !important;
+  position:relative;
+}
+
+#non-clickable-experience-validate {
+  margin-top:0px;
+  margin-left:0px;
+  width: 157px !important;
 }
 
 .star-btn{
@@ -287,7 +295,7 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  margin:5px;
+  margin:3px;
 }
 
 .rating-star{
@@ -296,6 +304,8 @@
 
 .feedback-btn{
   padding: 10px 5px;
+  height: 85px;
+  white-space: normal;
 }
 
 .very-small-btn{
@@ -307,9 +317,12 @@
 }
 
 .validate-feedbacks-btn{
-  padding: 60px 10px;
-  margin-top: -150px;
+  background-color: $orange;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
+
 .validate-feedbacks-btn:hover{
   text-decoration: none !important;
   span {
@@ -322,4 +335,14 @@
   }
 }
 
+.button-opacity{
+  opacity: 0.2
+}
 
+.light-button-opacity{
+  opacity: 0.7
+}
+
+.zero-radius{
+  border-radius: 0 !important;
+}

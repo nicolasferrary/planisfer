@@ -16,7 +16,12 @@
             <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
               <li>
                 <%= link_to profile_path, class: 'avatar-text' do %>
-                  <span> <%= image_tag "traveler.svg", class: 'traveler-icon' %></span>  Build my traveler profile
+                  <span> <%= image_tag "traveler.svg", class: 'traveler-icon' %></span>  <%= current_member.profile_status == 0 ? "Build my traveler profile" : "My traveler profile" %>
+                <% end %>
+              </li>
+              <li>
+                <%= link_to recommendations_path, class: 'avatar-text' do %>
+                  <i class="fa fa-sign-out a"></i>  Personalized recommendations
                 <% end %>
               </li>
               <li>
@@ -26,7 +31,7 @@
               </li>
             </ul>
             <%= link_to profile_path, class: 'avatar-text' do %>
-              <span> <%= image_tag "traveler.svg", class: 'traveler-icon' %></span>  Build my traveler profile
+              <span> <%= image_tag "traveler.svg", class: 'traveler-icon' %></span>  <%= current_member.profile_status == 0 ? "Build my traveler profile" : "My traveler profile" %>
             <% end %>
 
           </div>
@@ -38,13 +43,19 @@
   <div class = "row">
 
     <div class = "col-md-4 col-md-push-8">
-      <div class = "home-text text-mobile">
-        <h2 class="home-main-title"><strong>Prepare and book fully customized trips</strong></h2>
+      <div class = "home-text text-mobile <%= 'title-with-destination' if @destination_name %>">
+        <h2 class="home-main-title <%= 'home-main-title-destination' if @destination_name %>"><strong><%= @main_title %></strong></h2>
       </div>
+
+      <% if !@destination_name.nil? %>
+        <div class = "row text-mobile">
+          <%= render 'region_description', :destination => @destination %>
+        </div>
+      <% end %>
 
       <div class="sticky-form home-sticky-form">
         <div class="form-post">
-          <h1>Start building your trip</h1>
+          <h1 class = "margin-top-ten">Start building your trip</h1>
           <% if flash[:search_error] %>
             <p class="red-message"><%= flash[:search_error] %></p>
           <% end %>
@@ -58,7 +69,7 @@
 
             <div class="row">
               <div class="col-xs-12">
-                <%= select_tag  :region, options_from_collection_for_select(Region.all.order('name ASC'), :name, :name), id: 'regions', class: "input-lg form-control", prompt: "To" %>
+                <%= select_tag  :region, options_from_collection_for_select(Region.all.order('name ASC'), :name, :name, @destination_name), id: 'regions', class: "input-lg form-control", prompt: "To" %>
               </div>
             </div>
 
@@ -161,18 +172,28 @@
     </div>
 
     <div class = "col-md-8 col-md-pull-4">
-      <div class = "home-text text-desktop">
-        <h2 class="home-main-title"><strong>Prepare and book fully customized trips</strong></h2>
+      <div class = "home-text text-desktop <%= 'title-with-destination' if @destination_name %>">
+        <h2 class="home-main-title <%= 'home-main-title-destination' if @destination_name %>"><strong><%= @main_title  %></strong></h2>
       </div>
-      <div class = "row text-desktop">
+
+      <% if !@destination_name.nil? %>
+        <div class = "row text-desktop">
+          <%= render 'region_description', :destination => @destination %>
+        </div>
+      <% end %>
+
+      <div class = "row text-desktop <%= 'hidden' if @destination_name %>">
 
         <div class = "col-xs-10 col-xs-offset-1">
           <div class = "how-icons" id="how">
             <div class = "row">
-              <div class = "col-md-3 text-center">
-                <p class="how-to-badge">1</p>
-                <p><strong>Build your traveler profile</strong></p>
-              </div>
+              <a href="<%= @step1_link %>" class = "no-decoration">
+                <div class = "col-md-3 text-center">
+                  <p class="how-to-badge">1</p>
+                  <p><strong><%= @step1_title %></strong></p>
+                  <p id = 'status-subtitle'><%= @step1_subtitle %></p>
+                </div>
+              </a>
               <div class = "col-md-3 text-center">
                 <p class="how-to-badge">2</p>
                 <p><strong>Book your flights (return or multi-destination)</strong></p>
@@ -190,6 +211,14 @@
         </div>
       </div>
 
+      <% if !@destination_name.nil? %>
+        <div class = 'row'>
+          <div class = 'col-xs-12 text-center'>
+            <h4>Other destinations recommended by Planisfer community members</h4>
+          </div>
+
+        </div>
+      <% end %>
 
       <div class = "row">
         <div class="col-md-12">
@@ -197,7 +226,7 @@
         </div> <!-- fin du 2e col-xs-12 principal -->
       </div>
 
-      <div class = "row text-mobile">
+      <div class = "row text-mobile <%= 'hidden' if @destination_name %>">
 
         <div class = "col-xs-10 col-xs-offset-1">
           <div class = "how-icons" id="how">
@@ -360,11 +389,11 @@
 
   function showhide(id) {
     var e = document.getElementById(id);
-    $("#children-link").addClass('hidden')
-    $(".with-children").removeClass('hidden')
-    $(".no-children").addClass('hidden')
+    $("#children-link").addClass('hidden');
+    $(".with-children").removeClass('hidden');
+    $(".no-children").addClass('hidden');
     $('#' + e.id).slideDown('slow');
-    $('#' + e.id).removeClass('hidden')
+    $('#' + e.id).removeClass('hidden');
   };
 
 </script>
