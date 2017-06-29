@@ -21,7 +21,7 @@
               </li>
               <li>
                 <%= link_to recommendations_path, class: 'avatar-text' do %>
-                  <i class="fa fa-sign-out a"></i>  Personalized recommendations
+                  <span > <%= image_tag "heart-only.png", class: 'favourite-heart' %></span>  Personalized recommendations
                 <% end %>
               </li>
               <li>
@@ -55,7 +55,7 @@
 
       <div class="sticky-form home-sticky-form">
         <div class="form-post">
-          <h1 class = "margin-top-ten">Start building your trip</h1>
+          <h1>Start building your trip</h1>
           <% if flash[:search_error] %>
             <p class="red-message"><%= flash[:search_error] %></p>
           <% end %>
@@ -214,7 +214,7 @@
       <% if !@destination_name.nil? %>
         <div class = 'row'>
           <div class = 'col-xs-12 text-center'>
-            <h4>Other destinations recommended by Planisfer community members</h4>
+            <h2 class = 'margin-bottom-fifty'>Other destinations recommended by Planisfer community members</h2>
           </div>
 
         </div>
