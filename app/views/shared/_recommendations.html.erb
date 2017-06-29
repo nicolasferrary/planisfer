@@ -1,7 +1,11 @@
 <div class = 'row'>
   <div class = 'col-xs-12 text-center'>
     <h2 id = "profile-page-build">
-    Personalized recommendations
+      <% if @reviewed_experiences == [] || @reviewed_experiences.nil? %>
+        Personalized recommendations
+      <% else %>
+        You will love exploring these countries
+      <% end %>
     </h2>
   </div>
 </div>

@@ -5,7 +5,12 @@
     <li>
       <%= link_to profile_path, class: 'avatar-text' do %>
         <span> <%= image_tag "traveler.svg", class: 'traveler-icon' %></span>
-        <%= current_member.profile_status == 0 ? "Build my traveler profile" : "See my traveler profile" %>
+        <%= current_member.profile_status == 0 ? "Build my traveler profile" : "My traveler profile" %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to recommendations_path, class: 'avatar-text' do %>
+        <i class="fa fa-sign-out a"></i>  Personalized recommendations
       <% end %>
     </li>
     <li>
