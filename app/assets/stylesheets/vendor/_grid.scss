@@ -195,19 +195,48 @@
     }
   }
   &.reviewed{
-
+    box-shadow: 1px 1px 1px #c7c7c7;;
+    .dest-image{
+      -webkit-transform:scale(1.1,1.1);
+      -ms-transform:scale(1.1,1.1);
+      transform:scale(1.1,1.1)
+    }
+    .destination-opacity{
+      opacity: 1;
+    }
+    .photo-check{
+      opacity:1;
+      background-color:white;
+      i {
+        color:$brand-color;
+        }
+    }
+    .complete_feedback_text{
+      display: inherit
+    }
   }
   &.created{
-    border: 5px solid $orange;
-    box-shadow: 2px 2px 2px $orange;
+    box-shadow: 1px 1px 1px #c7c7c7;;
+    .dest-image{
+      -webkit-transform:scale(1.1,1.1);
+      -ms-transform:scale(1.1,1.1);
+      transform:scale(1.1,1.1)
+    }
     .photo-check{
+      background-color:white;
       i {
         color:$orange;
-      }
+        }
     }
     .incomplete_feedback_text{
       display: inherit
     }
+  }
+}
+
+.complete_feedback_text {
+  &.display{
+    display:inherit
   }
 }
 

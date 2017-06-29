@@ -18,13 +18,13 @@ class SubexperiencesController < ApplicationController
     @activities = update_activities(@subexperiences)
     @activity_reviews = update_activity_reviews(@subexperiences)
     @reviewed_pois = define_reviewed_pois(@pois, @subexperiences)
-    @focused_poi = define_focused_poi(@pois, @reviewed_pois)
+    @last_created = params[:last_created] || nil
+    @focused_poi = define_focused_poi(@pois, @reviewed_pois, @last_created)
     @confirmable = true if @reviewed_pois[:rating_ok] != []
   end
 
   def create
     @experience = Experience.find(params[:experience_id])
-
     if check_name(params[:newpoiname], @experience)
       flash[:name_error] = "This destination already exists"
 
@@ -49,8 +49,7 @@ class SubexperiencesController < ApplicationController
       end
 
     end
-
-    redirect_to new_experience_subexperience_path(experience_id: @experience.id)
+    redirect_to new_experience_subexperience_path(experience_id: @experience.id, last_created: @poi.id)
 
   end
 
@@ -198,11 +197,14 @@ class SubexperiencesController < ApplicationController
     reviewed_pois
   end
 
-  def define_focused_poi(pois, reviewed_pois)
+  def define_focused_poi(pois, reviewed_pois, last_created)
     #take the one clicked (in the params)
     if !params[:poi_id].nil?
       focused_poi = Poi.find(params[:poi_id])
-    #if there are some subexp that don't have any feedback, focus on the last one create without any feedback
+    # if there is last_created (ie one subexp has just been saved), take the next one
+    elsif !last_created.nil?
+      identify_next_poi(pois, last_created)
+    #if there are some subexp that don't have any feedback, focus on the last one created without any feedback
     elsif reviewed_pois[:no_rating] != []
       focused_poi = reviewed_pois[:no_rating].last
     # if there are some subexp already and they all have feedback, take the first one without feedback
@@ -212,6 +214,14 @@ class SubexperiencesController < ApplicationController
     #else, take the first poi
     else
       focused_poi = pois.first
+    end
+  end
+
+  def identify_next_poi(pois, poi_id)
+    if pois.last.id == poi_id
+      focused_poi = @pois.first
+    else
+      focused_poi = Poi.find(poi_id.to_i + 1)
     end
   end
 

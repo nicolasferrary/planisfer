@@ -48,6 +48,9 @@
                           </span>
                         </span>
                       </span>
+                      <span class = "complete_feedback_text <%= 'display' if @reviewed_experiences.include?(experience) %>">
+                        Feedback completed
+                      </span>
                       <span class ="photo-check text-center <%= 'hidden' unless @reviewed_experiences.include?(experience)%> %>">
                         <i class="fa fa-check" aria-hidden="true"></i>
                       </span>
