@@ -8,6 +8,8 @@ class PagesController < ApplicationController
     @main_title = build_main_title(@destination_name)
     @step1_title = build_title(@status)
     @step1_subtitle = build_subtitle(@status)
+    @recos = current_member.recos || []
+
     respond_to do |format|
       format.html {}
       format.js {}

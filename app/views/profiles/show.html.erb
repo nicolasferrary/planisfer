@@ -90,7 +90,8 @@
           </div>
 
           <div class = 'col-xs-3'>
-            <%= submit_tag "VALIDATE", class: "btn-brand", id: 'experience-validate'%>
+              <span class = "clickable-validate <%='hidden' unless @confirmable %>"><%= submit_tag "VALIDATE", class: "btn-brand", id: 'experience-validate'%></span>
+              <div class = "btn btn-brand no-decoration white zero-radius button opacity non-clickable-validate <%= 'hidden' if @confirmable %>" id =  'experience-validate' data-toggle="popover" data-content="Please select at least one destination" data-placement="top" data-trigger="hover">VALIDATE</div>
           </div>
         </div>
 
@@ -128,10 +129,26 @@
         } else {
           $(this).addClass('active');
         }
+        if ($('.profile-page-block').hasClass('active')) {
+          $('.clickable-validate').removeClass('hidden');
+          $('.non-clickable-validate').addClass('hidden');
+        } else {
+          $('.clickable-validate').addClass('hidden');
+          $('.non-clickable-validate').removeClass('hidden');
+        }
       })
 
     })
 
+  </script>
+
+  <script>
+  $(document).ready(function() {
+    $('.non-clickable-validate').popover();
+    $('.non-clickable-validate').mouseenter(function(){
+      $('.non-clickable-validate').popover('show');
+    })
+  })
   </script>
 
 <% end %>

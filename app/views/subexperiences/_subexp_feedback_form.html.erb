@@ -70,7 +70,7 @@
                   </div>
               <% else %>
                 <div class= "btn-brand feedback-btn validate-feedbacks-btn button-opacity text-center" id = "non-clickable-validate" data-toggle="popover" data-content="Please fill at least one feedback" data-placement="top" data-trigger="hover">SAVE FEEDBACKS FOR <%= @region.name.upcase %> AND SEE PERSONALIZED RECOMMENDATIONS
-                </div
+                </div>
               <% end %>
             </div>
           </div>
@@ -122,7 +122,6 @@
   <script>
 
     $(document).ready(function() {
-      console.log('free');
       $('.validate-feedbacks-btn').click(function(){
         if ($(this).hasClass('last_to_be_reviewed')){
           $('#button-link').html('<a href="/recommendations" class = "no-decoration"><button type="button" class="btn btn-brand no-decoration white">See recommendations</button></a>')

@@ -3,6 +3,10 @@
     <div class = 'col-md-4'>
       <a class="block sm destination" data-toggle="modal" data-target="#modal_2">
         <%= image_tag "countryphoto/croatia.jpg", class:"dest-image"%>
+        <div class = "favourite <%= 'hidden' unless @recos.include?('Croatia')%>">
+          <%= image_tag "heart-only.png", class:"favourite-heart heart-padded" %>
+          <span> You will love this</span>
+        </div>
         <span class="box">
           <span class="text in-box">
             <span class="primarytext">Croatia</span>
@@ -14,9 +18,9 @@
     <div class = 'col-md-8'>
       <a class="block lg destination" data-toggle="modal" data-target="#modal_1">
         <%= image_tag "countryphoto/greece.jpg", class:"dest-image"%>
-        <div class = "favourite">
-          <%= image_tag "heart.png", class:"favourite-heart heart-padded" %>
-          <span> Members' favourite</span>
+        <div class = "favourite <%= 'hidden' unless @recos.include?('Greece')%>">
+          <%= image_tag "heart-only.png", class:"favourite-heart heart-padded" %>
+          <span> You will love this</span>
         </div>
         <span class="box">
           <span class="text in-box">
@@ -29,9 +33,9 @@
     <div class = 'col-md-4'>
       <a class="block sm destination" data-toggle="modal" data-target="#modal_7">
         <%= image_tag "countryphoto/ireland.jpg", class:"dest-image"%>
-        <div class = "favourite">
-          <%= image_tag "heart.png", class:"favourite-heart heart-padded" %>
-          <span> Members' favourite</span>
+        <div class = "favourite <%= 'hidden' unless @recos.include?('Ireland')%>">
+          <%= image_tag "heart-only.png", class:"favourite-heart heart-padded" %>
+          <span> You will love this</span>
         </div>
         <span class="box">
           <span class="text in-box">
@@ -44,9 +48,9 @@
     <div class = 'col-md-4'>
       <a class="block sm destination" data-toggle="modal" data-target="#modal_4">
         <%= image_tag "countryphoto/southoffrance.jpg", class:"dest-image"%>
-        <div class = "favourite">
-          <%= image_tag "heart.png", class:"favourite-heart heart-padded" %>
-          <span> Members' favourite</span>
+        <div class = "favourite <%= 'hidden' unless @recos.include?('South of France')%>">
+          <%= image_tag "heart-only.png", class:"favourite-heart heart-padded" %>
+          <span> You will love this</span>
         </div>
         <span class="box">
           <span class="text in-box">
@@ -59,9 +63,9 @@
     <div class = 'col-md-4'>
       <a class="block sm destination" data-toggle="modal" data-target="#modal_5">
         <%= image_tag "countryphoto/corsica.jpg", class:"dest-image"%>
-        <div class = "favourite">
-          <%= image_tag "heart.png", class:"favourite-heart heart-padded" %>
-          <span> Members' favourite</span>
+        <div class = "favourite <%= 'hidden' unless @recos.include?('Corsica')%>">
+          <%= image_tag "heart-only.png", class:"favourite-heart heart-padded" %>
+          <span> You will love this</span>
         </div>
         <span class="box">
           <span class="text in-box">
@@ -74,6 +78,10 @@
     <div class = 'col-md-8'>
       <a class="block lg destination" data-toggle="modal" data-target="#modal_6">
         <%= image_tag "countryphoto/portugal.jpg", class:"dest-image"%>
+        <div class = "favourite <%= 'hidden' unless @recos.include?('Portugal')%>">
+          <%= image_tag "heart-only.png", class:"favourite-heart heart-padded" %>
+          <span> You will love this</span>
+        </div>
         <span class="box">
           <span class="text in-box">
             <span class="primarytext">Portugal</span>
@@ -85,6 +93,10 @@
     <div class = 'col-md-4'>
       <a class="block sm destination" data-toggle="modal" data-target="#modal_8">
         <%= image_tag "countryphoto/scotland.jpg", class:"dest-image"%>
+        <div class = "favourite <%= 'hidden' unless @recos.include?('Scotland')%>">
+          <%= image_tag "heart-only.png", class:"favourite-heart heart-padded" %>
+          <span> You will love this</span>
+        </div>
         <span class="box">
           <span class="text in-box">
             <span class="primarytext">Scotland</span>
@@ -96,6 +108,10 @@
     <div class = 'col-md-4'>
       <a class="block sm destination" data-toggle="modal" data-target="#modal_3">
         <%= image_tag "countryphoto/romania.jpg", class:"dest-image"%>
+        <div class = "favourite <%= 'hidden' unless @recos.include?('Romania')%>">
+          <%= image_tag "heart-only.png", class:"favourite-heart heart-padded" %>
+          <span> You will love this</span>
+        </div>
         <span class="box">
           <span class="text in-box">
             <span class="primarytext">Romania</span>
@@ -107,9 +123,9 @@
     <div class = 'col-md-4'>
       <a class="block sm destination" data-toggle="modal" data-target="#modal_10">
         <%= image_tag "countryphoto/andalucia.jpg", class:"dest-image"%>
-        <div class = "favourite">
-          <%= image_tag "heart.png", class:"favourite-heart heart-padded" %>
-          <span> Members' favourite</span>
+        <div class = "favourite <%= 'hidden' unless @recos.include?('Andalucia')%>">
+          <%= image_tag "heart-only.png", class:"favourite-heart heart-padded" %>
+          <span> You will love this</span>
         </div>
         <span class="box">
           <span class="text in-box">
@@ -122,9 +138,9 @@
     <div class = 'col-md-4'>
       <a class="block sm destination" data-toggle="modal" data-target="#modal_12">
         <%= image_tag "countryphoto/northofitaly.jpg", class:"dest-image"%>
-        <div class = "favourite">
-          <%= image_tag "heart.png", class:"favourite-heart heart-padded" %>
-          <span> Members' favourite</span>
+        <div class = "favourite <%= 'hidden' unless @recos.include?('North of Italy')%>">
+          <%= image_tag "heart-only.png", class:"favourite-heart heart-padded" %>
+          <span> You will love this</span>
         </div>
         <span class="box">
           <span class="text in-box">
@@ -137,6 +153,10 @@
     <div class = 'col-md-4'>
       <a class="block sm destination" data-toggle="modal" data-target="#modal_9">
         <%= image_tag "countryphoto/northernspain.jpg", class:"dest-image"%>
+        <div class = "favourite <%= 'hidden' unless @recos.include?('Northern Spain')%>">
+          <%= image_tag "heart-only.png", class:"favourite-heart heart-padded" %>
+          <span> You will love this</span>
+        </div>
         <span class="box">
           <span class="text in-box">
             <span class="primarytext">Northern Spain</span>
@@ -148,6 +168,10 @@
     <div class = 'col-md-8'>
       <a class="block lg destination" data-toggle="modal" data-target="#modal_14">
         <%= image_tag "countryphoto/sardinia.jpg", class:"dest-image"%>
+        <div class = "favourite <%= 'hidden' unless @recos.include?('Sardinia')%>">
+          <%= image_tag "heart-only.png", class:"favourite-heart heart-padded" %>
+          <span> You will love this</span>
+        </div>
         <span class="box">
           <span class="text in-box">
             <span class="primarytext">Sardinia</span>
@@ -159,9 +183,9 @@
     <div class = 'col-md-4'>
       <a class="block sm destination" data-toggle="modal" data-target="#modal_13">
         <%= image_tag "countryphoto/sicily.jpg", class:"dest-image"%>
-        <div class = "favourite">
-          <%= image_tag "heart.png", class:"favourite-heart heart-padded" %>
-          <span> Members' favourite</span>
+        <div class = "favourite <%= 'hidden' unless @recos.include?('Sicily')%>">
+          <%= image_tag "heart-only.png", class:"favourite-heart heart-padded" %>
+          <span> You will love this</span>
         </div>
         <span class="box">
           <span class="text in-box">
@@ -174,9 +198,9 @@
     <div class = 'col-md-4'>
       <a class="block sm destination" data-toggle="modal" data-target="#modal_11">
         <%= image_tag "countryphoto/southofitaly.jpg", class:"dest-image"%>
-        <div class = "favourite">
-          <%= image_tag "heart.png", class:"favourite-heart heart-padded" %>
-          <span> Members' favourite</span>
+        <div class = "favourite <%= 'hidden' unless @recos.include?('South of Italy')%>">
+          <%= image_tag "heart-only.png", class:"favourite-heart heart-padded" %>
+          <span> You will love this</span>
         </div>
         <span class="box">
           <span class="text in-box">

@@ -13,6 +13,7 @@ class ProfilesController < ApplicationController
       @recos << Region.find_by_name(reco)
     end
     @title_text = build_title_text(@reviewed_experiences)
+    @confirmable = true if @experiences != []
   end
 
   def create_reviewed_exp_array(experiences)
