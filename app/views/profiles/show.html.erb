@@ -5,9 +5,10 @@
         <%= image_tag "blue_logo_no_word.png", class: "logo"%>
       <% end %> </span>
       <span class ="brand-name">Planisfer</span>
-        <span class = "banner2-title">Build your traveler profile and get personalized suggestions...</span>
+        <span class = "banner2-title text-desktop">Build your traveler profile and get personalized suggestions...</span>
+        <span class = "banner2-title text-mobile">Build your profile & get personalized suggestions</span>
 
-      <span class = "booking-status text-desktop">
+      <span class = "booking-status">
     <%= render 'shared/booking_status', :status => 1 %>
   </span>
     </div>
@@ -31,7 +32,7 @@
       </div>
 
       <div class = 'row'>
-        <div class = 'col-xs-12 text-center'>
+        <div class = 'col-xs-12 text-center text-desktop'>
           <div class = 'profile-explaination-text'>
 
           <p><%= @title_text[:text2] %></p>
@@ -55,7 +56,7 @@
         <div class = 'row text-desktop'>
 
           <div class = 'col-xs-9'>
-            <div class = 'row'>
+            <div class = 'row left-adjustment'>
               <%= render 'dest_cards' %>
             </div>
           </div>
@@ -145,6 +146,8 @@
   $(document).ready(function() {
     if($(window).width() <= 1024){
       $('.profile-page-block').addClass('dezoom');
+      $('.selection-title').addClass('text-center');
+      $('.dezoom').addClass('low-dezoom');
     }
   })
   </script>

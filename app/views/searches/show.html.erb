@@ -6,7 +6,7 @@
       <% end %> </span>
       <span class ="brand-name">Planisfer</span>
       <span class = "banner2-title text-desktop">Welcome to <%= @region.name %>!</span>
-      <span class = "banner2-title">Let's first book your flights</span>
+      <span class = "banner2-title ">Let's first book your flights</span>
 
       <span class = "booking-status">
         <%= render 'shared/booking_status', :status => 2 %>
@@ -147,16 +147,18 @@
         <div id="city-filters">
           <%=form_tag search_path(@search), method: :get, id: "citysearchForm" do %>
             <div class = 'row'>
-              <div class="filter-buttons">
-                <div class = "row">
-                  <h5 class = "airport-filter" > Possible arrival and return <strong>cities </strong></h5>
-                </div>
-                <div class = "row centered">
-                  <% @region_airports_cities.each do |airport| %>
-                    <div class = "col-md-3 content-center">
-                      <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city = "<%= airport.cityname%>" data-airport-id = "<%= airport.id %>" ><%= airport.cityname%></div>
-                    </div>
-                  <% end %>
+              <div class = 'col-xs-12'>
+                <div class="filter-buttons">
+                  <div class = "row">
+                    <h5 class = "airport-filter" > Possible arrival and return <strong>cities </strong></h5>
+                  </div>
+                  <div class = "row centered">
+                    <% @region_airports_cities.each do |airport| %>
+                      <div class = "col-md-3">
+                        <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city = "<%= airport.cityname%>" data-airport-id = "<%= airport.id %>" ><%= airport.cityname%></div>
+                      </div>
+                    <% end %>
+                  </div>
                 </div>
               </div>
             </div>

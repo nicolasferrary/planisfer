@@ -169,8 +169,8 @@
 }
 
 .profile-page-block{
-  width: 180px;
-  height: 180px;
+  max-width: 240px;
+  height: 240px;
   text-decoration:none;
   &.entered{
     border: 2px solid $brand-color;
@@ -241,8 +241,8 @@
 }
 
 .reco-page-block{
-  width: 250px;
-  height: 200px;
+  width: 350px;
+  height: 300px;
   text-decoration:none;
   float:none;
   margin-bottom:0;

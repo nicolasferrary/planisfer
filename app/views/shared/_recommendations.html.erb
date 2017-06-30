@@ -26,7 +26,7 @@
         <div class="blocks center-block">
           <% @recos.each do |region| %>
             <div class = 'col-xs-12 col-md-6 foat-center'>
-              <a href = "/?destination=<%= region.name%>" class="block profile-page-block destination low-dezoom" >
+              <a href = "/?destination=<%= region.name%>" class="block profile-page-block destination" >
                 <%= image_tag "countryphoto/#{region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
                 <span class="box">
                   <span class="text in-box">

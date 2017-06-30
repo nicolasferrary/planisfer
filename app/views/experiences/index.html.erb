@@ -30,7 +30,7 @@
           </div>
 
           <div class = 'col-xs-6 text-center text-mobile vertical-center-in-col'>
-            <h2 id = "profile-page-build">
+            <h2 class = "smaller-for-mobile" id = "profile-page-build">
               <%= @profile_title %>
             </h2>
           </div>
@@ -183,7 +183,8 @@
       if($(window).width() <= 1024){
         $('#profile-page-build').removeAttr('id');
         $('.selection-title').addClass('text-center');
-        $('.flexbox-for-mobile').addClass('flexbox-col-center')
+        $('.flexbox-for-mobile').addClass('flexbox-col-center');
+        $('.experience-cards').addClass('dezoom');
       }
     })
   </script>
