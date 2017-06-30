@@ -226,7 +226,7 @@
       border-right: none;
     }
     .progress-container {
-      margin-top: -50px;
+      margin-top: 5px;
     }
     #update-experience-button {
       margin-top: 30px;
@@ -255,6 +255,18 @@
     .home-destination-description{
       margin-top: 40px;
     }
+
+    .avatar-icon{
+      position: relative;
+      top: 0px;
+      margin-right: 0px;
+    }
+
+    .title-col{
+      padding-right: 3px;
+      padding-left: 3px;
+    }
+
 }
 
 @media only screen and (min-width: 1025px) {

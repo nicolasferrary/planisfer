@@ -1,16 +1,19 @@
-<div class="page-banner text-center">
-  <div class="page-banner-title">
+<div class = 'row'>
+  <div class="page-banner">
     <div class = "col-md-12 title-col">
       <span> <%= link_to root_path do %>
         <%= image_tag "blue_logo_no_word.png", class: "logo"%>
       <% end %> </span>
       <span class ="brand-name">Planisfer</span>
-      <span class = "banner2-title">Explore <%= @region.name %> your own way!</span> <span class = "banner2-title">Choose your car </span>
+      <span class = "banner2-title text-desktop">Explore <%= @region.name %> your own way!</span>
+        <span class = "banner2-title">Choose your car </span>
+
+      <span class = "booking-status">
+        <%= render 'shared/booking_status', :status => 3 %>
+      </span>
+
     </div>
   </div>
-  <span class = "booking-status text-desktop">
-    <%= render 'shared/booking_status', :status => 3 %>
-  </span>
 </div>
 
 

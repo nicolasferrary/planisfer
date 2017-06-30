@@ -1,4 +1,4 @@
-<span class = "avatar-icon text-desktop">
+<span class = "avatar-icon">
   <% avatar_url = current_member.facebook_picture_url || "http://placehold.it/30x30" %>
   <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
   <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
@@ -20,19 +20,20 @@
     </li>
   </ul>
 </span>
-<a class = "no-decoration booking-status-item <%= 'underline' if status == 1 %>" href="/profile">
+
+<a class = "no-decoration booking-status-item text-desktop <%= 'underline' if status == 1 %>" href="/profile">
   <span class="how-to-badge booking-status-badge">1</span>
   <p>Build my traveler profile</p>
 </a>
-<a class = "no-decoration booking-status-item <%= 'opacity' if status == 1 %> <%= 'underline' if status == 2 %>" href="/" >
+<a class = "no-decoration booking-status-item text-desktop <%= 'opacity' if status == 1 %> <%= 'underline' if status == 2 %>" href="/" >
   <span class="how-to-badge booking-status-badge">2</span>
   <p>Book your flights</p>
 </a>
-<span class = "booking-status-item <%= 'opacity' if status <= 2 %> <%= 'underline' if status == 3 %>">
+<span class = "booking-status-item text-desktop <%= 'opacity' if status <= 2 %> <%= 'underline' if status == 3 %>">
   <span class="how-to-badge booking-status-badge">3</span>
   <p>Book your car</p>
 </span>
-<span class = "booking-status-item <%= 'opacity' if status <= 3 %> <%= 'underline' if status == 4 %>">
+<span class = "booking-status-item text-desktop <%= 'opacity' if status <= 3 %> <%= 'underline' if status == 4 %>">
   <span class="how-to-badge booking-status-badge">4</span>
   <p>Personalize your trip</p>
 </span>
