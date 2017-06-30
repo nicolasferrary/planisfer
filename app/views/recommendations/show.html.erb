@@ -5,7 +5,7 @@
         <%= image_tag "blue_logo_no_word.png", class: "logo"%>
       <% end %> </span>
       <span class ="brand-name">Planisfer</span>
-      <div class = "banner2-title-flexbox">
+      <div class = "banner2-title-flexbox text-desktop">
         <span class = "banner2-title">Build your traveler profile... </span> </span> <span class = "banner2-title" id = "profile-banner2-title">and get personalized travel suggestions </span>
       </div>
     </div>
@@ -19,9 +19,9 @@
 <div class="container-fluid page-result page-profile">
 
   <div class = 'row'>
-    <div class = 'col-xs-12 col-md-4 text-center vertical-center-in-col' id = 'eighty-height'>
+    <div class = 'col-xs-12 col-md-4 text-center vertical-center-in-col' id = 'recos-titles'>
       <span>
-        <h2>
+        <h2 id = "reco-main-title">
           You will love exploring these destinations
         </h2>
         <h5>
@@ -63,4 +63,16 @@
 
 </div>
 
+<%= content_for :after_js do %>
+
+  <script>
+    $(document).ready(function() {
+      if($(window).width() <= 1024){
+        $('#eighty-height').removeClass('vertical-center-in-col');
+        $('#eighty-height').removeAttr('id');
+      }
+    })
+  </script>
+
+<% end %>
 

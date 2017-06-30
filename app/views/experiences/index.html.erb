@@ -5,7 +5,7 @@
         <%= image_tag "blue_logo_no_word.png", class: "logo"%>
       <% end %> </span>
       <span class ="brand-name">Planisfer</span>
-      <div class = "banner2-title-flexbox">
+      <div class = "banner2-title-flexbox text-desktop">
         <span class = "banner2-title">Build your traveler profile... </span> </span> <span class = "banner2-title" id = "profile-banner2-title">and get personalized travel suggestions </span>
       </div>
     </div>
@@ -23,39 +23,33 @@
       <%= render 'shared/progress_bar', :progress => current_member.profile_status %>
 
       <div class = 'row'>
-        <div class = 'col-xs-12 text-center'>
+        <div class = 'col-xs-6 text-mobile'>
+          <div class = 'row'>
+            <%= render 'experience_cards', :experience => @experience %>
+          </div>
+        </div>
+
+        <div class = 'col-xs-6 text-center text-mobile vertical-center-in-col'>
           <h2 id = "profile-page-build">
             <%= @profile_title %>
           </h2>
+        </div>
 
+        <div class = 'col-xs-12 text-center text-desktop'>
+          <h2 id = "profile-page-build">
+            <%= @profile_title %>
+          </h2>
         </div>
       </div>
 
       <div class = "feedback-page-container">
         <div class = 'row'>
 
-          <div class = 'col-xs-12 col-md-3'>
+          <div class = 'col-xs-12 col-md-3 text-desktop'>
             <div class = 'row'>
               <% @experiences.each do |experience| %>
                 <%= link_to experiences_path(:clicked => experience.id) do%>
-                  <div class = 'col-xs-12'>
-                    <span class="block profile-page-block destination <%= "active" if experience == @experience %> <%= "dezoom" unless experience == @experience %>">
-                      <span class="<%= "destination-opacity" unless experience == @experience %>">
-                        <%= image_tag "countryphoto/#{experience.region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
-                        <span class="box">
-                          <span class="text in-box">
-                            <span class="primarytext"><%= experience.region.name %></span>
-                          </span>
-                        </span>
-                      </span>
-                      <span class = "complete_feedback_text <%= 'display' if @reviewed_experiences.include?(experience) %>">
-                        Feedback completed
-                      </span>
-                      <span class ="photo-check text-center <%= 'hidden' unless @reviewed_experiences.include?(experience)%> %>">
-                        <i class="fa fa-check" aria-hidden="true"></i>
-                      </span>
-                    </span>
-                  </div>
+                  <%= render 'experience_cards', :experience => experience %>
                 <% end %>
               <% end %>
             </div>
@@ -68,14 +62,14 @@
                 <div class = 'row'>
                   <div class = 'col-xs-12'>
                     <div class = 'selection-title'>
-                      <i class="fa fa-caret-right" aria-hidden="true"></i>
+                      <i class="fa fa-caret-right text-desktop" aria-hidden="true"></i>
                       <h4>How would you describe your trip to <%= @experience.region.name %>?</h4>
                     </div>
                   </div>
                 </div>
 
                 <div class = 'row'>
-                  <div class="blocks center-block">
+                  <div class="blocks center-block text-center">
                     <% @categories.each do |category| %>
                       <div class = 'col-xs-6 col-md-3'>
                         <input class = "hidden <%= 'cat-selected' if @checked_categories.include?(category) %>" name="categories[]" type="checkbox" id= "<%= category %>" value="<%= category%>">
@@ -90,9 +84,9 @@
               </div>
 
               <div class = 'row'>
-                <div class = 'col-xs-12 col-md-6'>
+                <div class = 'col-xs-12 col-md-6 flexbox-for-mobile'>
                   <div class = 'selection-title'>
-                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    <i class="fa fa-caret-right text-desktop" aria-hidden="true"></i>
                     <h4>How long did you stay (days)?</h4>
                   </div>
                 </div>
@@ -109,9 +103,9 @@
               </div>
 
               <div class = 'row'>
-                <div class = 'col-xs-12 col-md-6'>
+                <div class = 'col-xs-12 col-md-6 flexbox-for-mobile'>
                   <div class = 'selection-title'>
-                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    <i class="fa fa-caret-right text-desktop" aria-hidden="true"></i>
                     <h4>Would you say your trip was...</h4>
                   </div>
                 </div>
@@ -137,6 +131,10 @@
       </div>
 
     </div>
+
+    <div class = 'col-xs-12 empty-row text-mobile'>
+    </div>
+
 
     <div class="col-xs-12 col-md-3">
       <%= render 'shared/recommendations' %>
@@ -181,6 +179,17 @@
 
   </script>
 
+  <script>
+    $(document).ready(function() {
+      if($(window).width() <= 1024){
+        $('#profile-page-build').removeAttr('id');
+        $('.selection-title').addClass('text-center');
+        $('.flexbox-for-mobile').addClass('flexbox-col-center')
+      }
+    })
+  </script>
+
 <% end %>
+
 
 
