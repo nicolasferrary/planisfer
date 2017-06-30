@@ -35,7 +35,6 @@ class ProfilesController < ApplicationController
       title_text = {
         :text1 => "Fill feedbacks for more destinations",
         :text2 => "The more feedbacks you fill, the more recommendations will be accurate",
-        :text3 => "Your profile is 75% completed",
       }
     end
   end

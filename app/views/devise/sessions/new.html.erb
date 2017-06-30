@@ -84,6 +84,15 @@
 
 </div>
 
+<div class = 'container-fluid text-desktop'>
+  <div class = 'row'>
+    <div class = 'col-xs-12 col-md-7'>
+      <%= render 'shared/destinations' %>
+    </div>
+  </div>
+</div>
+
+
   <% for num in (0..Region.count - 1) %>
     <%= render 'pages/slider', this_region: Region.all[num], modal_name: "modal_#{num +1}" %>
   <% end %>
