@@ -308,6 +308,10 @@
   white-space: normal;
 }
 
+.small-btn{
+  padding: 15px 10px;
+}
+
 .very-small-btn{
   padding: 3px 10px;
 }
@@ -345,6 +349,13 @@
 
 .zero-radius{
   border-radius: 0 !important;
+}
+
+#no-car-button{
+  position:absolute;
+  right:0px;
+  margin-bottom: -50px;
+  z-index:3;
 }
 
 

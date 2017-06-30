@@ -27,7 +27,7 @@
 
   <div class="col-xs-12 col-md-8 car-left-padding">
     <div class = "car-zone <%= 'recap-opacity' if @recap_opacity == 0 %>">
-
+      <button class = ' text-desktop btn-brand opacity small-btn' id = "no-car-button">I don't need a car</button>
       <div class = "row">
         <div class = "col-xs-12">
           <div id = "main-car-container" class = "center-block">
@@ -231,7 +231,6 @@
     $(document).ready(function() {
       $('.recap-zone').mouseenter(function(e) {
         e.preventDefault();
-        console.log('test');
         $(this).removeClass('recap-opacity');
         $('.car-zone').addClass('recap-opacity');
       })
@@ -239,6 +238,11 @@
         e.preventDefault();
         $('.car-zone').removeClass('recap-opacity');
         $(this).addClass('recap-opacity');
+      })
+      $('#no-car-button').click(function(e) {
+        e.preventDefault();
+        $('.recap-zone').removeClass('recap-opacity');
+        $('.car-zone').addClass('recap-opacity');
       })
     });
 
