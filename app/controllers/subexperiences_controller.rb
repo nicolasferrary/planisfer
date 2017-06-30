@@ -27,7 +27,10 @@ class SubexperiencesController < ApplicationController
 
   def create
     @experience = Experience.find(params[:experience_id])
-    if check_name(params[:newpoiname], @experience)
+    if params[:newpoiname] == ""
+      flash[:name_error] = "Please provide a name"
+      redirect_to new_experience_subexperience_path(experience_id: @experience.id)
+    elsif check_name(params[:newpoiname], @experience)
       flash[:name_error] = "This destination already exists"
       redirect_to new_experience_subexperience_path(experience_id: @experience.id)
 
