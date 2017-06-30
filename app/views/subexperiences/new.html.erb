@@ -37,7 +37,7 @@
           <div class = 'row'>
             <% @experiences.each_with_index do |experience, index| %>
               <div class = 'col-xs-12'>
-                <a class="block profile-page-block destination <%= "active" if index == 0 %> <%= "dezoom" unless index == 0 %>">
+                <a class="block profile-page-block destination <%= "active" if index == 0 %> dezoom <%= "very-low-dezoom" unless index == 0 %> <%= "subexp-opacity" unless index == 0 %>">
                   <%= image_tag "countryphoto/#{experience.region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
                   <span class="box">
                     <span class="text in-box">
