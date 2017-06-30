@@ -1,24 +1,23 @@
-<% # bandeau du haut %>
-<div class="page-banner text-center">
-  <div class="page-banner-title">
+<div class = 'row'>
+  <div class="page-banner">
     <div class = "col-md-12 title-col">
       <span> <%= link_to root_path do %>
         <%= image_tag "blue_logo_no_word.png", class: "logo"%>
       <% end %> </span>
       <span class ="brand-name">Planisfer</span>
       <span class = "banner2-title">Let's finalize your trip to <%= @region.name %></span>
+
+      <span class = "booking-status">
+        <% if @trip.car_rental.nil? %>
+          <%= render 'shared/booking_status', :status => 2 %>
+        <% else %>
+           <%= render 'shared/booking_status', :status => 3 %>
+        <% end %>
+      </span>
     </div>
   </div>
-  <span class = "booking-status text-desktop">
-    <% if @trip.car_rental.nil? %>
-      <%= render 'shared/booking_status', :status => 2 %>
-    <% else %>
-       <%= render 'shared/booking_status', :status => 3 %>
-    <% end %>
-  </span>
 </div>
 
-<% # Fin du bandeau du haut %>
 
 <div class="container-fluid page-result">
 

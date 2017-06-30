@@ -10,7 +10,22 @@
   align-items: center;
 }
 
-#eighty-height{
+#recos-titles{
   height: 80vh;
+}
+
+.empty-row{
+  height: 50px;
+  border-top: 1px solid #E6E6E6;
+  margin-top:20px;
+}
+
+.flexbox-col-center{
+  display:flex;
+  justify-content: space-around;
+}
+
+.foat-center{
+  float: none;
 }
 

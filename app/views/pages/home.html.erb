@@ -10,7 +10,7 @@
         <span class ="brand-name">Planisfer</span>
         <span class = "banner2-title">Explore the world your own way</span>
         <% if member_signed_in? %>
-          <div class = "text-desktop">
+          <div>
             <% avatar_url = current_member.facebook_picture_url || "http://placehold.it/30x30" %>
             <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" unless current_member.facebook_picture_url.nil? %>
             <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
@@ -30,7 +30,7 @@
                 <% end %>
               </li>
             </ul>
-            <%= link_to profile_path, class: 'avatar-text' do %>
+            <%= link_to profile_path, class: 'avatar-text text-desktop' do %>
               <span> <%= image_tag "traveler.svg", class: 'traveler-icon' %></span>  <%= current_member.profile_status == 0 ? "Build my traveler profile" : "My traveler profile" %>
             <% end %>
 
@@ -43,15 +43,10 @@
   <div class = "row">
 
     <div class = "col-md-4 col-md-push-8">
+
       <div class = "home-text text-mobile <%= 'title-with-destination' if @destination_name %>">
         <h2 class="home-main-title <%= 'home-main-title-destination' if @destination_name %>"><strong><%= @main_title %></strong></h2>
       </div>
-
-      <% if !@destination_name.nil? %>
-        <div class = "row text-mobile">
-          <%= render 'region_description', :destination => @destination %>
-        </div>
-      <% end %>
 
       <div class="sticky-form home-sticky-form">
         <div class="form-post">
@@ -169,6 +164,13 @@
           <%end%>
         </div> <!-- fin du form-post -->
       </div> <!-- fin de sticky-form -->
+
+      <% if !@destination_name.nil? %>
+        <div class = "row text-mobile">
+          <%= render 'region_description', :destination => @destination %>
+        </div>
+      <% end %>
+
     </div>
 
     <div class = "col-md-8 col-md-pull-4">

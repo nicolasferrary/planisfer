@@ -2,10 +2,13 @@
   <div class = progress-text>
     Profile completed at:
   </div>
-  <div class="progress">
+  <div class="progress text-desktop">
     <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= progress %>%;">
       <span class = "<%= 'brand-color' if progress < 25 %>">  <%= "#{progress}%" %> </span>
     </div>
+  </div>
+  <div class="text-mobile brand-color">
+    <%= "#{progress}%" %>
   </div>
 </div>
 
