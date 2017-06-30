@@ -20,7 +20,7 @@
     <h4>Congrats! Your transports are booked. You will soon receive your travel details from us.</h4>
   </div>
   <div class = "row" id = "planning-page-subtitle">
-    <h4>Check hereunder for suggestions coming from the Planisfer community and don't hesiate to contact us </h4>
+    <h4>Check hereunder for suggestions coming from the Planisfer community and don't hesitate to contact us </h4>
   </div>
 
   <div class = 'row'>
@@ -92,110 +92,20 @@
 
     <div class = 'col-md-8 col-md-pull-4'>
 
-<!--       <div id="poi-title">
-        <h3>MOST UPVOTED TRIPS IN <%= @region.name.upcase%> </h3>
+      <div class = 'row'>
+        <%= render 'shared/favourites', :region => @region %>
       </div>
-
-      <div class = 'row upvoted-trips'>
-
-        <div class = 'col-md-6'>
-          <div class = 'traveler-card'>
-
-            <div class="trip-card">
-              <div class="card trip-card">
-                <div class="trip-length">Nicolas' trip - 10 days</div>
-                <div class="trip-map">
-                  <span class = 'itinerary'> <%= image_tag 'road.png', class: 'road-image' %></span>
-                  <span class = "itinerary-cities">
-                    <p>Ronda <span class = "plus-minus">++</span></p>
-                    <p>White villages <span class = "plus-minus">++</span></p>
-                    <p>Jerez <span class = "plus-minus">--</span></p>
-                    <p>Cadiz <span class = "plus-minus">--</span></p>
-                    <p>Granada <span class = "plus-minus">++</span></p>
-                  </span>
-                </div>
-
-                <div class = "trip-card-content">
-                  <h5>My tips (hotels, activities...)</h5>
-                  <ul>
-                  <li class = 'trip-content'>
-                    Alhambra palace in Granada
-                  </li>
-                  <li class = 'trip-content'>
-                    Spend time in the White villages
-                  </li>
-                  <li class = 'trip-content'>
-                    Hotel Molino close to Ronda
-                  </li>
-                  </ul>
-                </div>
-                <%= image_tag 'nicolas.jpg', class: "card-user avatar"%>
-                <div class='product-upvote'>
-                  <span class="product-arrow"></span>
-                  <span class='product-count'> <span style= "font-weight: bold">37</span> travelers</span>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class = 'col-md-6'>
-          <div class = 'traveler-card'>
-            <div class="trip-card">
-              <div class="card trip-card">
-                <div class="trip-length">Marine's trip - 8 days</div>
-                <div class="trip-map">
-                  <span class = 'itinerary'> <%= image_tag 'road.png', class: 'road-image' %></span>
-                  <span class = "itinerary-cities">
-                    <p>x <span class = "plus-minus">++</span></p>
-                    <p>x <span class = "plus-minus">++</span></p>
-                    <p>x <span class = "plus-minus">--</span></p>
-                    <p>x <span class = "plus-minus">--</span></p>
-                    <p>x <span class = "plus-minus">++</span></p>
-                  </span>
-                </div>
-
-                <div class = "trip-card-content">
-                  <h5>My tips (hotels, activities...)</h5>
-                  <ul>
-                  <li class = 'trip-content'>
-                    xx
-                  </li>
-                  <li class = 'trip-content'>
-                    xx
-                  </li>
-                  <li class = 'trip-content'>
-                    xx
-                  </li>
-                  </ul>
-                </div>
-                <%= image_tag 'marine.jpg', class: "card-user avatar"%>
-                <div class='product-upvote'>
-                  <span class="product-arrow"></span>
-                  <span class='product-count'> <span style= "font-weight: bold">95</span> travelers</span>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
 
       <div class = "legends">
         <img><%= image_tag "heart-only.png", class: "legend_highlight"%> Planisfer travelers' favourite destinations </img>
         <img><%= image_tag "airport-black.svg", class: "legend_airport" %> Your airport(s) </img>
       </div>
 
-      <div class = "planning-page-map" id="map", style="width: 100%; height: 500px;"></div>
-
-
-
-      <div class = 'row'>
-        <%= render 'shared/favourites', :region => @region %>
+      <div class = "planning-page-map" id="map", style="width: 100%; height: 500px;">
       </div>
+
     </div>
+
 
   </div>
 </div>

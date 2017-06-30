@@ -30,32 +30,34 @@
     </div>
 
     <div class = 'col-xs-12 col-md-8 left-border'>
+      <div class = 'row'>
 
-      <% @recos.each do |reco|%>
-        <div class = 'col-xs-12 col-md-6'>
+        <% @recos.each do |reco|%>
+          <div class = 'col-xs-12 col-md-6'>
 
-          <div class = 'row'>
-            <div class = 'col-xs-12'>
-              <a href="/?destination=<%= reco.name %>" class="block reco-page-block destination center-block" >
-                <%= image_tag "countryphoto/#{reco.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
-                <span class="box">
-                  <span class="text in-box">
-                    <span class="primarytext"><%= reco.name %></span>
+            <div class = 'row'>
+              <div class = 'col-xs-12'>
+                <a href="/?destination=<%= reco.name %>" class="block reco-page-block destination center-block" >
+                  <%= image_tag "countryphoto/#{reco.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
+                  <span class="box">
+                    <span class="text in-box">
+                      <span class="primarytext"><%= reco.name %></span>
+                    </span>
                   </span>
-                </span>
-              </a>
+                </a>
+              </div>
             </div>
-          </div>
 
-          <div class = 'row'>
-            <div class = 'col-xs-12'>
-              <h5 class = 'reco-page-reco-desc text-center'> <%= reco.description %> </h5>
+            <div class = 'row'>
+              <div class = 'col-xs-12'>
+                <h5 class = 'reco-page-reco-desc text-center'> <%= reco.description %> </h5>
+              </div>
             </div>
+
           </div>
+        <% end %>
 
-        </div>
-      <% end %>
-
+      </div>
     </div>
 
   </div>

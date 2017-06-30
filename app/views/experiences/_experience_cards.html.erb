@@ -1,5 +1,5 @@
 <div class = 'col-xs-12'>
-  <span class="block profile-page-block destination <%= "active" if experience == @experience %> <%= "dezoom" unless experience == @experience %>">
+  <span class="block profile-page-block destination <%= "active" if experience == @experience %> <%= "dezoom" unless experience == @experience %> experience-cards">
     <span class="<%= "destination-opacity" unless experience == @experience %>">
       <%= image_tag "countryphoto/#{experience.region.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
       <span class="box">
