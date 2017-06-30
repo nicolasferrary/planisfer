@@ -29,6 +29,7 @@ class SubexperiencesController < ApplicationController
     @experience = Experience.find(params[:experience_id])
     if check_name(params[:newpoiname], @experience)
       flash[:name_error] = "This destination already exists"
+      redirect_to new_experience_subexperience_path(experience_id: @experience.id)
 
     else
       if params[:newpoiname]
@@ -37,7 +38,6 @@ class SubexperiencesController < ApplicationController
       else
         @poi = Poi.find(params[:poi_id])
       end
-
       pois = []
       @experience.subexperiences.each do |subexp|
         pois << subexp.poi
@@ -49,9 +49,8 @@ class SubexperiencesController < ApplicationController
       else
         create_new_subexp(@experience, @poi, params)
       end
-
+      redirect_to new_experience_subexperience_path(experience_id: @experience.id, last_created: @poi.id)
     end
-    redirect_to new_experience_subexperience_path(experience_id: @experience.id, last_created: @poi.id)
 
   end
 
@@ -220,7 +219,7 @@ class SubexperiencesController < ApplicationController
   end
 
   def identify_next_poi(pois, poi_id)
-    if pois.last.id == poi_id
+    if pois.last.id == poi_id.to_i
       focused_poi = @pois.first
     else
       focused_poi = Poi.find(poi_id.to_i + 1)
