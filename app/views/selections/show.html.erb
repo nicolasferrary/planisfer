@@ -241,8 +241,15 @@
       })
       $('#no-car-button').click(function(e) {
         e.preventDefault();
-        $('.recap-zone').removeClass('recap-opacity');
-        $('.car-zone').addClass('recap-opacity');
+        if ($(this).hasClass('clicked')) {
+          $('.recap-zone').addClass('recap-opacity');
+          $('.car-zone').removeClass('recap-opacity');
+          $(this).removeClass('clicked');
+        } else {
+          $('.recap-zone').removeClass('recap-opacity');
+          $('.car-zone').addClass('recap-opacity');
+          $(this).addClass('clicked');
+        }
       })
     });
 
