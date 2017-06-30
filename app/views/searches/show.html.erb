@@ -253,10 +253,10 @@
           markers = handler.addMarkers( <%= raw @initial_markers.to_json %> );
           handler.bounds.extendWith(markers);
           handler.fitMapToBounds();
-          // use the event listener to load the state of map
-          loadMapState();
-          // use the event listener to save the state when zoom changes or drag ends
-          google.maps.event.addListener(handler.getMap(), 'tilesloaded', tilesLoaded);
+          // // use the event listener to load the state of map
+          // loadMapState();
+          // // use the event listener to save the state when zoom changes or drag ends
+          // google.maps.event.addListener(handler.getMap(), 'tilesloaded', tilesLoaded);
           for (var i = 0; i < markers.length; i++) {
             var selectedMarker = markers[i];
             //create an options object
@@ -375,51 +375,51 @@
         $(".the-hidden-results").toggleClass("hidden");
       })
 
-      function tilesLoaded() {
-        google.maps.event.clearListeners(handler.getMap(), 'tilesloaded');
-        google.maps.event.addListener(handler.getMap(), 'zoom_changed', saveMapState);
-        google.maps.event.addListener(handler.getMap(), 'dragend', saveMapState);
-      }
-      // functions below
-      function saveMapState() {
-        var mapZoom=handler.getMap().getZoom();
-        var mapCentre=handler.getMap().getCenter();
-        var mapLat=mapCentre.lat();
-        var mapLng=mapCentre.lng();
-        var cookiestring=mapLat+"_"+mapLng+"_"+mapZoom;
-        setCookie("myMapCookie",cookiestring, 30);
-      }
-      function loadMapState() {
-        var gotCookieString=getCookie("myMapCookie");
-        var splitStr = gotCookieString.split("_");
-        var savedMapLat = parseFloat(splitStr[0]);
-        var savedMapLng = parseFloat(splitStr[1]);
-        var savedMapZoom = parseFloat(splitStr[2]);
-        if ((!isNaN(savedMapLat)) && (!isNaN(savedMapLng)) && (!isNaN(savedMapZoom))) {
-            handler.getMap().setCenter(new google.maps.LatLng(savedMapLat,savedMapLng));
-            handler.getMap().setZoom(savedMapZoom);
-        }
-      }
-      function setCookie(c_name,value,exdays) {
-        var exdate=new Date();
-        exdate.setDate(exdate.getDate() + exdays);
-        var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-        document.cookie=c_name + "=" + c_value;
-      }
-      function getCookie(c_name) {
-        var i,x,y,ARRcookies=document.cookie.split(";");
-        for (i=0;i<ARRcookies.length;i++)
-        {
-          x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
-          y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
-          x=x.replace(/^\s+|\s+$/g,"");
-          if (x==c_name)
-            {
-            return unescape(y);
-            }
-          }
-        return "";
-      }
+      // function tilesLoaded() {
+      //   google.maps.event.clearListeners(handler.getMap(), 'tilesloaded');
+      //   google.maps.event.addListener(handler.getMap(), 'zoom_changed', saveMapState);
+      //   google.maps.event.addListener(handler.getMap(), 'dragend', saveMapState);
+      // }
+      // // functions below
+      // function saveMapState() {
+      //   var mapZoom=handler.getMap().getZoom();
+      //   var mapCentre=handler.getMap().getCenter();
+      //   var mapLat=mapCentre.lat();
+      //   var mapLng=mapCentre.lng();
+      //   var cookiestring=mapLat+"_"+mapLng+"_"+mapZoom;
+      //   setCookie("myMapCookie",cookiestring, 30);
+      // }
+      // function loadMapState() {
+      //   var gotCookieString=getCookie("myMapCookie");
+      //   var splitStr = gotCookieString.split("_");
+      //   var savedMapLat = parseFloat(splitStr[0]);
+      //   var savedMapLng = parseFloat(splitStr[1]);
+      //   var savedMapZoom = parseFloat(splitStr[2]);
+      //   if ((!isNaN(savedMapLat)) && (!isNaN(savedMapLng)) && (!isNaN(savedMapZoom))) {
+      //       handler.getMap().setCenter(new google.maps.LatLng(savedMapLat,savedMapLng));
+      //       handler.getMap().setZoom(savedMapZoom);
+      //   }
+      // }
+      // function setCookie(c_name,value,exdays) {
+      //   var exdate=new Date();
+      //   exdate.setDate(exdate.getDate() + exdays);
+      //   var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+      //   document.cookie=c_name + "=" + c_value;
+      // }
+      // function getCookie(c_name) {
+      //   var i,x,y,ARRcookies=document.cookie.split(";");
+      //   for (i=0;i<ARRcookies.length;i++)
+      //   {
+      //     x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+      //     y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+      //     x=x.replace(/^\s+|\s+$/g,"");
+      //     if (x==c_name)
+      //       {
+      //       return unescape(y);
+      //       }
+      //     }
+      //   return "";
+      // }
 
     });
 
