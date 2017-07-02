@@ -3,7 +3,7 @@
   <div class = "row">
     <div class = "recap-title">
       <div class = "col-xs-8">
-        <h4>Your roadtrip in <%= @trip.round_trip_flight.region.name %></h4>
+        <h4>Your trip to <%= @trip.round_trip_flight.region.name %></h4>
       </div>
       <div class = "col-xs-4" id = "number-travelers">
        <%= @nb_travelers%> traveler<%='s' unless @nb_travelers == 1%>
@@ -155,7 +155,7 @@
     <div class = "col-sm-10">
       <% if @trip.car_rental.nil? %>
         <% if payment_page == false %>
-          <p class = "select-car-text">Click on a car to add it to your roadtrip</p>
+          <p class = "select-car-text">Click on a car to add it to your trip</p>
         <% else %>
           <%= link_to selections_path(:trip_id => @trip.id), 'data-toggle' => "modal", 'data-target' => '#car_wait_modal', method: :post, id: 'to-car-link' do %>
             <p class = "select-car-text">Click here to add a car</p>

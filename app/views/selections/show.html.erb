@@ -27,7 +27,8 @@
 
   <div class="col-xs-12 col-md-8 car-left-padding">
     <div class = "car-zone <%= 'recap-opacity' if @recap_opacity == 0 %>">
-      <button class = ' text-desktop btn-brand opacity small-btn' id = "no-car-button">I don't need a car</button>
+      <button class = ' text-desktop btn-brand opacity small-btn no-car-btn' id = "no-car-button">I don't need a car</button>
+      <button class = ' text-desktop btn-brand opacity small-btn no-car-btn hidden' id = "with-car-button">I need a car</button>
       <div class = "row">
         <div class = "col-xs-12">
           <div id = "main-car-container" class = "center-block">
@@ -229,27 +230,31 @@
   <script>
 
     $(document).ready(function() {
-      $('.recap-zone').mouseenter(function(e) {
-        e.preventDefault();
-        $(this).removeClass('recap-opacity');
-        $('.car-zone').addClass('recap-opacity');
-      })
-      $('.recap-zone').mouseleave(function(e) {
-        e.preventDefault();
-        $('.car-zone').removeClass('recap-opacity');
-        $(this).addClass('recap-opacity');
-      })
+      setTimeout(function() {
+        $('.recap-zone').mouseenter(function(e) {
+          e.preventDefault();
+          $(this).removeClass('recap-opacity');
+          $('.car-zone').addClass('recap-opacity');
+        })
+        $('.recap-zone').mouseleave(function(e) {
+          e.preventDefault();
+          $('.car-zone').removeClass('recap-opacity');
+          $(this).addClass('recap-opacity');
+        })
+      }, 1000)
       $('#no-car-button').click(function(e) {
         e.preventDefault();
-        if ($(this).hasClass('clicked')) {
-          $('.recap-zone').addClass('recap-opacity');
-          $('.car-zone').removeClass('recap-opacity');
-          $(this).removeClass('clicked');
-        } else {
-          $('.recap-zone').removeClass('recap-opacity');
-          $('.car-zone').addClass('recap-opacity');
-          $(this).addClass('clicked');
-        }
+        $('.recap-zone').removeClass('recap-opacity');
+        $('.car-zone').addClass('recap-opacity');
+        $(this).addClass('hidden');
+        $('#with-car-button').removeClass('hidden');
+      })
+      $('#with-car-button').click(function(e) {
+        e.preventDefault();
+        $('.recap-zone').addClass('recap-opacity');
+        $('.car-zone').removeClass('recap-opacity');
+        $(this).addClass('hidden');
+        $('#no-car-button').removeClass('hidden');
       })
     });
 

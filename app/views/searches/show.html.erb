@@ -24,6 +24,7 @@
   <div class="col-xs-12 col-md-6">
     <!-- part with tab showing best results by airports -->
     <div class="displayTrips">
+
       <div class = "row">
         <div id="resultstitle">
           <h3 id = "flighttitle">CHEAPEST DIRECT FLIGHTS </h3>
@@ -70,6 +71,36 @@
           <span class="hidden" id="hide-more-flights"><strong>See less flights</strong></span>
         </div>
 
+      </div>
+
+      <div class="row">
+        <div id="city-filters">
+
+          <%=form_tag search_path(@search), method: :get, id: "citysearchForm" do %>
+
+            <div class = 'col-xs-12'>
+              <div class="filter-buttons">
+                <div class = "row">
+                  <h5 class = "airport-filter" > Airports with direct flights with <%= @city_real_name %></h5>
+                </div>
+                <div class = "row centered">
+                  <% @region_airports_cities.each do |airport| %>
+                    <div class = "col-md-3">
+                      <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city = "<%= airport.cityname%>" data-airport-id = "<%= airport.id %>" ><%= airport.cityname%></div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
+            <div class ="text-center filter-apply hidden">
+            <%= hidden_field_tag :flight1_range, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
+            <%= hidden_field_tag :flight2_range, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
+            <%= hidden_field_tag 'selected-cities', params['selected-cities'], id: "city-tag"%>
+            <%# submit_tag "Apply filters", class: "btn-brand" %>
+            </div>
+          <% end %>
+        </div>
       </div>
 
 
@@ -143,35 +174,7 @@
         </div>
       </div>
 
-      <div class="row">
-        <div id="city-filters">
-          <%=form_tag search_path(@search), method: :get, id: "citysearchForm" do %>
-            <div class = 'row'>
-              <div class = 'col-xs-12'>
-                <div class="filter-buttons">
-                  <div class = "row">
-                    <h5 class = "airport-filter" > Possible arrival and return <strong>cities </strong></h5>
-                  </div>
-                  <div class = "row centered">
-                    <% @region_airports_cities.each do |airport| %>
-                      <div class = "col-md-3">
-                        <div class = "btn-tag filtered-city <%= 'city-selected' if @selected_airports.include?(airport)%>" data-city = "<%= airport.cityname%>" data-airport-id = "<%= airport.id %>" ><%= airport.cityname%></div>
-                      </div>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div class ="text-center filter-apply hidden">
-            <%= hidden_field_tag :flight1_range, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "[#{params[:flight1_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
-            <%= hidden_field_tag :flight2_range, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "[#{params[:flight2_range] || "4,23" }]", "slider-min" => 4, "slider-max" => 23, "slider-tooltip_split" => true } %>
-            <%= hidden_field_tag 'selected-cities', params['selected-cities'], id: "city-tag"%>
-            <%# submit_tag "Apply filters", class: "btn-brand" %>
-            </div>
-          <% end %>
-        </div>
-      </div>
 
     </div> <!-- fin du displaytrips -->
 

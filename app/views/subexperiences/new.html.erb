@@ -60,7 +60,7 @@
                 <% @pois.each do |poi| %>
                   <%= link_to new_experience_subexperience_path(experience_id: @experience.id, poi_id: poi.id) do%>
                     <div class = 'col-xs-6 col-md-4 small-subexp-card-col'>
-                      <div class = "subexperience-card-container <%= 'subexp-opacity' unless @focused_poi.id == poi.id%>" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%=image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{poi.name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= poi.id %> data-unreviewed = <%= true unless @reviewed_pois[:rating_ok].include?(poi) %> >
+                      <div class = "subexperience-card-container <%= 'subexp-opacity' unless @focused_poi.id == poi.id%>" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%=image_path("#{@region.name.downcase.gsub(/\ /, '-')}/#{poi.name.downcase.gsub(/\ /, '-')}.jpg") %>);" data-poi-id = <%= poi.id %> data-nonfocused = <%= true unless @focused_poi.id == poi.id %> >
                         <div class="subexperience-name text-center">
                           <h2><%= poi.name %></h2>
                         </div>
@@ -76,7 +76,7 @@
                   <% if flash[:name_error] %>
                     <p class="red-message"><%= flash[:name_error] %></p>
                   <% end %>
-                  <div class = "subexperience-card-container subexp-opacity" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2))" id = "somewhere-else"  data-unreviewed = <%= true %> >
+                  <div class = "subexperience-card-container subexp-opacity" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2))" id = "somewhere-else" >
                     <div class= "subexperience-name text-center" >
                       <h2 id= 'newpoitext'>Somewhere else...</h2>
                       <%= form_tag experience_subexperiences_path(experience_id: @experience.id ), class: 'text-center hidden', id: 'newpoiform' do %>
@@ -99,6 +99,19 @@
                   </div>
                 </div>
               </div>
+
+              <div class= 'col-xs-12'>
+              <% if @confirmable %>
+                  <div class= "btn-brand feedback-btn validate-feedbacks-btn text-center light-button-opacity <%= 'last_to_be_reviewed' if @last_experience_to_be_reviewed %>" data-toggle="modal" data-target="#toReco" data-region = "<%= @region.name %>">
+                    END FEEDBACKS FOR <%= @region.name.upcase %> AND SEE PERSONALIZED RECOMMENDATIONS
+                  </div>
+              <% else %>
+                <div class= "btn-brand feedback-btn validate-feedbacks-btn button-opacity text-center" id = "non-clickable-validate" data-toggle="popover" data-content="Please fill at least one feedback" data-placement="top" data-trigger="hover">END FEEDBACKS FOR <%= @region.name.upcase %> AND SEE PERSONALIZED RECOMMENDATIONS
+                </div>
+              <% end %>
+
+            </div>
+
             </div>
 
           </div>
@@ -161,7 +174,7 @@
       })
 
       $('.subexperience-card-container').mouseleave(function() {
-        if ($(this).data('unreviewed')) {
+        if ($(this).data('nonfocused')) {
           $(this).addClass('subexp-opacity');
         }
       })
@@ -278,6 +291,31 @@
         $('.selection-title').addClass('text-center');
         $('.flexbox-for-mobile').addClass('flexbox-col-center')
       }
+    })
+  </script>
+
+  <script>
+
+    $(document).ready(function() {
+      $('.validate-feedbacks-btn').click(function(){
+        console.log('fr');
+        var myRegion = $(this).data('region');
+        $("#toRecoLabel").html('Your feedback for ' + myRegion +' is saved');
+      })
+    })
+
+  </script>
+
+  <script>
+
+    $(document).ready(function() {
+      $('.validate-feedbacks-btn').click(function(){
+        if ($(this).hasClass('last_to_be_reviewed')){
+          $('#button-link').html('<a href="/recommendations" class = "no-decoration"><button type="button" class="btn btn-brand no-decoration white">See recommendations</button></a>')
+        } else {
+          $('#button-link').html('<a href="/experiences" class = "no-decoration"><button type="button" class="btn btn-brand no-decoration white">See recommendations</button></a>')
+        }
+      })
     })
   </script>
 

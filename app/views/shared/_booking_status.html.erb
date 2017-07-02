@@ -1,6 +1,10 @@
 <span class = "avatar-icon">
-  <% avatar_url = current_member.facebook_picture_url || "http://placehold.it/30x30" %>
-  <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+  <% if current_member.facebook_picture_url %>
+    <% avatar_url = current_member.facebook_picture_url %>
+    <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+    <% else %>
+    <i class="fa fa-user-circle-o user-icon user-icon-bookstatus avatar dropdown-toggle" aria-hidden="true" id = "navbar-wagon-menu" data-toggle = "dropdown"></i>
+  <% end %>
   <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
     <li>
       <%= link_to profile_path, class: 'avatar-text' do %>
