@@ -230,16 +230,18 @@
   <script>
 
     $(document).ready(function() {
-      $('.recap-zone').mouseenter(function(e) {
-        e.preventDefault();
-        $(this).removeClass('recap-opacity');
-        $('.car-zone').addClass('recap-opacity');
-      })
-      $('.recap-zone').mouseleave(function(e) {
-        e.preventDefault();
-        $('.car-zone').removeClass('recap-opacity');
-        $(this).addClass('recap-opacity');
-      })
+      setTimeout(function() {
+        $('.recap-zone').mouseenter(function(e) {
+          e.preventDefault();
+          $(this).removeClass('recap-opacity');
+          $('.car-zone').addClass('recap-opacity');
+        })
+        $('.recap-zone').mouseleave(function(e) {
+          e.preventDefault();
+          $('.car-zone').removeClass('recap-opacity');
+          $(this).addClass('recap-opacity');
+        })
+      }, 1000)
       $('#no-car-button').click(function(e) {
         e.preventDefault();
         $('.recap-zone').removeClass('recap-opacity');
