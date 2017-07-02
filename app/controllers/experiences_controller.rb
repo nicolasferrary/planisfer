@@ -33,7 +33,7 @@ class ExperiencesController < ApplicationController
     @clicked_exp_id = params[:clicked] || nil
     @experience = define_focused_experience(@non_reviewed_experiences, @clicked_exp_id, @experiences.first)
     put_first_exp_first_in_array(@experience, @experiences)
-    @categories = ["Romantic", "Road trip", "Family friendly", "Nature/ Sport", "Cultural", "Relaxing", "Big fiesta", "Local immersion"]
+    @categories = ["Romantic", "Road trip", "Family", "Nature/ Sport", "Cultural", "Relaxing", "Big fiesta", "Local immersion"]
     @checked_categories = define_checked_cat(@experience, @categories)
     @profile_title = define_title(@reviewed_experiences, @experiences, @experience)
     @recos = []
