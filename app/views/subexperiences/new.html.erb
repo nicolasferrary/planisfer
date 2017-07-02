@@ -99,6 +99,19 @@
                   </div>
                 </div>
               </div>
+
+              <div class= 'col-xs-12'>
+              <% if @confirmable %>
+                  <div class= "btn-brand feedback-btn validate-feedbacks-btn text-center light-button-opacity <%= 'last_to_be_reviewed' if @last_experience_to_be_reviewed %>" data-toggle="modal" data-target="#toReco" data-region = "<%= @region.name %>">
+                    END FEEDBACKS FOR <%= @region.name.upcase %> AND SEE PERSONALIZED RECOMMENDATIONS
+                  </div>
+              <% else %>
+                <div class= "btn-brand feedback-btn validate-feedbacks-btn button-opacity text-center" id = "non-clickable-validate" data-toggle="popover" data-content="Please fill at least one feedback" data-placement="top" data-trigger="hover">END FEEDBACKS FOR <%= @region.name.upcase %> AND SEE PERSONALIZED RECOMMENDATIONS
+                </div>
+              <% end %>
+
+            </div>
+
             </div>
 
           </div>
@@ -278,6 +291,31 @@
         $('.selection-title').addClass('text-center');
         $('.flexbox-for-mobile').addClass('flexbox-col-center')
       }
+    })
+  </script>
+
+  <script>
+
+    $(document).ready(function() {
+      $('.validate-feedbacks-btn').click(function(){
+        console.log('fr');
+        var myRegion = $(this).data('region');
+        $("#toRecoLabel").html('Your feedback for ' + myRegion +' is saved');
+      })
+    })
+
+  </script>
+
+  <script>
+
+    $(document).ready(function() {
+      $('.validate-feedbacks-btn').click(function(){
+        if ($(this).hasClass('last_to_be_reviewed')){
+          $('#button-link').html('<a href="/recommendations" class = "no-decoration"><button type="button" class="btn btn-brand no-decoration white">See recommendations</button></a>')
+        } else {
+          $('#button-link').html('<a href="/experiences" class = "no-decoration"><button type="button" class="btn btn-brand no-decoration white">See recommendations</button></a>')
+        }
+      })
     })
   </script>
 

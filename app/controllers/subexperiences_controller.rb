@@ -21,8 +21,9 @@ class SubexperiencesController < ApplicationController
     @last_created = params[:last_created] || nil
     @focused_poi = define_focused_poi(@pois, @reviewed_pois, @last_created)
     @confirmable = true if @reviewed_pois[:rating_ok] != []
-    @last_to_be_reviewed = true if @experiences.count == @reviewed_pois[:rating_ok].count + @reviewed_pois[:no_rating].count
-    @last_to_be_reviewed = true if @experiences.count == @reviewed_pois[:rating_ok].count + @reviewed_pois[:no_rating].count + 1
+
+    @reviewed_experiences = create_reviewed_exp_array(@experiences)
+    @last_experience_to_be_reviewed = true if @reviewed_experiences.count == @experiences.count
   end
 
   def create
@@ -259,6 +260,15 @@ class SubexperiencesController < ApplicationController
     @subexperience.delete
     @experience = Experience.find(params[:experience_id])
     redirect_to new_experience_subexperience_path(experience_id: @experience.id)
+  end
+
+
+  def create_reviewed_exp_array(experiences)
+    reviewed_exp = []
+    experiences.each do |exp|
+      reviewed_exp << exp if exp.subexperiences != []
+    end
+    reviewed_exp
   end
 
 
