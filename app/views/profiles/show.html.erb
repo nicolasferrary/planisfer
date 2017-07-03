@@ -20,8 +20,10 @@
 
   <div class = 'row'>
     <div class="col-xs-12 col-md-9 right-border">
+      <% if current_member.profile_status != 0 %>
+        <%= render 'shared/progress_bar', :progress => current_member.profile_status %>
+      <% end %>
 
-       <%= render 'shared/progress_bar', :progress => current_member.profile_status %>
 
       <div class = 'row'>
         <div class = 'col-xs-12 text-center'>
