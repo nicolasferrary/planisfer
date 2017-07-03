@@ -8,95 +8,75 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
 
-<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url(<%= image_path("background.jpg") %>);">
+<div class = "container">
 
   <div class = "row">
-    <div class="non-logged-banner-title">
-      <div class = 'container'>
-        <div class = "col-xs-12 title-col">
-          <span> <%= link_to root_path do %>
-            <%= image_tag "logo_no_word.png", class: "logo"%>
-          <% end %> </span>
-          <span class ="brand-name white">Planisfer</span>
-          <span class = "banner2-title white">Explore the world your own way</span>
-          <% if member_signed_in? %>
+    <%= render 'shared/home_banner_title' %>
+  </div>
 
-            <%= link_to destroy_member_session_path, method: :delete, class: 'log-out white' do %>
-              <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-            <% end %>
+  <div class = "row">
+
+    <div class = "col-md-4 col-md-push-8">
+
+      <div class = "home-text text-mobile">
+        <h2 class="home-main-title"><strong>Log in and start exploring the world</strong></h2>
+      </div>
+
+      <div class="sticky-form" id = "member-form">
+        <div class="tabs">
+          <a class="tab <%= 'active' unless params[:referrer] %>" href="#" id="log-in-tab">
+            <h4>Log in</h4>
+          </a>
+          <%= link_to new_member_registration_path, class: 'tab' do %>
+            <h4>Become a member</h4>
           <% end %>
         </div>
-      </div>
-    </div>
-  </div>
 
+          <%= render 'shared/flashes' %>
 
+        <div class="form-post member-form-post light-opacity text-center <%= 'hidden' if params[:referrer] %>" id = 'sign-in-form'>
 
-
-  <div class = "container">
-
-    <div class = "row">
-
-      <div class = "col-md-7">
-        <%= render 'devise/shared/membership_main_text' %>
-      </div>
-
-      <div class = "col-md-4 col-md-offset-1">
-
-        <div class="sticky-form" id = "member-form">
-          <div class="tabs">
-            <a class="tab <%= 'active' unless params[:referrer] %>" href="#" id="log-in-tab">
-              <h4>Log in</h4>
-            </a>
-            <%= link_to new_member_registration_path, class: 'tab' do %>
-              <h4>Become a member</h4>
+          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <%= link_to member_facebook_omniauth_authorize_path, class: "btn fb-login-but" do%>
+              <span class = "fb-logo"> <%= image_tag 'fb_logo.jpg' %></span> <span>Continue with Facebook</span>
             <% end %>
-          </div>
 
-            <%= render 'shared/flashes' %>
+           <!--  <div class="fb-login-button" data-width="324" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
 
-          <div class="form-post member-form-post light-opacity text-center <%= 'hidden' if params[:referrer] %>" id = 'sign-in-form'>
+            <div class = separator_with_text> or</div>
+            <div class="form-inputs">
+              <%= f.input :email, required: false, autofocus: true, label: false, placeholder: 'Email', :input_html => { :class => 'form-control member-input' } %>
+              <%= f.input :password, required: false, label: false, placeholder: 'Password', :input_html => { :class => 'form-control member-input' } %>
+            </div>
 
-            <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <%= link_to member_facebook_omniauth_authorize_path, class: "btn fb-login-but" do%>
-                <span class = "fb-logo"> <%= image_tag 'fb_logo.jpg' %></span> <span>Continue with Facebook</span>
-              <% end %>
+            <div class="form-actions">
+              <%= f.submit "Log in", class: 'btn-brand member-btn' %>
+            </div>
+          <% end %>
+        </div> <!-- fin du form-post -->
 
-             <!--  <div class="fb-login-button" data-width="324" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
-
-              <div class = separator_with_text> or</div>
-              <div class="form-inputs">
-                <%= f.input :email, required: false, autofocus: true, label: false, placeholder: 'Email', :input_html => { :class => 'form-control member-input' } %>
-                <%= f.input :password, required: false, label: false, placeholder: 'Password', :input_html => { :class => 'form-control member-input' } %>
-              </div>
-
-              <div class="form-actions">
-                <%= f.submit "Log in", class: 'btn-brand member-btn' %>
-              </div>
-            <% end %>
-          </div> <!-- fin du form-post -->
-
-        </div> <!-- fin de sticky-form -->
       </div>
+
     </div>
 
-  </div>
+    <%= render 'shared/sign_up_page_left_part' %>
 
-</div>
-
-<div class = 'container-fluid text-desktop'>
-  <div class = 'row'>
-    <div class = 'col-xs-12 col-md-7'>
-      <%= render 'shared/destinations' %>
-    </div>
   </div>
 </div>
 
+  <!-- CALLS OF MODALS -->
 
   <% for num in (0..Region.count - 1) %>
-    <%= render 'pages/slider', this_region: Region.all[num], modal_name: "modal_#{num +1}" %>
+    <%= render 'shared/slider', this_region: Region.all[num], modal_name: "modal_#{num +1}" %>
   <% end %>
 
+
+  <!-- END OF MODALS  -->
+
+  <%= render 'shared/who_are_we' %>
+</div> <!-- fin du row principal -->
+
+<%= render 'shared/who_modal' %>
 
 
 <% content_for(:after_js) do %>
