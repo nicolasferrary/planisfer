@@ -44,9 +44,9 @@ class PagesController < ApplicationController
 
   def build_main_title(destination)
     if destination.nil?
-      main_title = "Prepare and book fully customized trips"
+      main_title = "Prepare and book fully personalized trips"
     else
-      main_title = "Prepare and book a fully customized trip to #{destination}"
+      main_title = "Prepare and book a fully personalized trip to #{destination}"
     end
   end
 

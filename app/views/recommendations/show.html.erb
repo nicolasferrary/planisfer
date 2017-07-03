@@ -40,8 +40,8 @@
                 <a href="/?destination=<%= reco.name %>" class="block reco-page-block destination center-block" >
                   <%= image_tag "countryphoto/#{reco.name.downcase.delete(' ')}.jpg", class:"dest-image"%>
                   <span class="box">
-                    <span class="text in-box">
-                      <span class="primarytext"><%= reco.name %></span>
+                    <span class="text in-box recotext">
+                      <h5 class="primarytext"><%= reco.name %></h5>
                     </span>
                   </span>
                 </a>
