@@ -88,6 +88,9 @@
   -ms-flex-pack:center;
   justify-content:center
 }
+.block .recotext{
+  justify-content: inherit;
+}
 
 
 // Size of text
@@ -98,6 +101,7 @@
   letter-spacing:-0.3px;
   font-size:2em;
   text-decoration:none;
+  color:white;
 }
 
 // hober white
@@ -242,7 +246,7 @@
 
 .reco-page-block{
   width: 350px;
-  height: 300px;
+  height: 250px;
   text-decoration:none;
   float:none;
   margin-bottom:0;
