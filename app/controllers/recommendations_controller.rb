@@ -3,6 +3,7 @@ class RecommendationsController < ApplicationController
     update_member_status
     @recos_names = current_member.recos
     @recos = identify_regions(@recos_names)
+    redirect_to profile_path if @recos == []
   end
 
   def identify_regions(recos_names)

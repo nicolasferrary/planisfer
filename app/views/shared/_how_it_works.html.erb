@@ -3,8 +3,12 @@
   <a href="<%= @step1_link %>" class = "no-decoration">
     <div class = "col-xs-6 col-md-3 text-center">
       <p class="how-to-badge">1</p>
-      <p><strong><%= @step1_title %></strong></p>
-      <p id = 'status-subtitle'><%= @step1_subtitle %></p>
+      <% if @step1_title.nil? %>
+        <p><strong>Build your traveler profile</strong></p>
+       <% else %>
+        <p><strong><%= @step1_title %></strong></p>
+        <p id = 'status-subtitle'><%= @step1_subtitle %></p>
+      <% end %>
     </div>
   </a>
   <div class = "col-xs-6 col-md-3 text-center">
