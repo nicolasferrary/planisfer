@@ -10,18 +10,18 @@ class OrdersController < ApplicationController
       :pick_up_date_time => params[:pick_up_date_time],
       :drop_off_date_time => params[:drop_off_date_time],
     }
-# # Uncomment for worldia
-#     # Create a component for worldia
-#     @component = worldia_create_component(@trip)
-#     # Gather the component's variation
-#     @code = @component["code"]
-#     component_variation = worldia_gather_variation(@code, @trip)
-#     # Create a quote
-#     quote = worldia_create_quote(@trip)
-#     # Add component to quote
-#     @variation_id = component_variation["id"]
-#     @quote_id = quote["id"]
-#     quote_with_comp = worldia_add_component_to_quote(@quote_id, @variation_id)
+# Uncomment for worldia
+    # Create a component for worldia
+    @component = worldia_create_component(@trip)
+    # Gather the component's variation
+    @code = @component["code"]
+    component_variation = worldia_gather_variation(@code, @trip)
+    # Create a quote
+    quote = worldia_create_quote(@trip)
+    # Add component to quote
+    @variation_id = component_variation["id"]
+    @quote_id = quote["id"]
+    quote_with_comp = worldia_add_component_to_quote(@quote_id, @variation_id)
 
     redirect_to new_order_payment_path(@order, trip_id: @trip.id, options: @options, quote_id: @quote_id)
   end
@@ -34,8 +34,8 @@ class OrdersController < ApplicationController
 
     @region = @trip.search.region
 
-    # # Worldia : validate payment
-    # worldia_validate_payment(@quote_id, @order) unless @order.worldiapaymentvalidation == true
+    # Worldia : validate payment
+    worldia_validate_payment(@quote_id, @order) unless @order.worldiapaymentvalidation == true
 
     @trip_airports = define_trip_airports(@trip)
     @pois = define_pois(@region)
@@ -73,13 +73,13 @@ class OrdersController < ApplicationController
       @order.member = current_member
       @order.save
 
-      # # Worldia : Add customer to quote
+      # Worldia : Add customer to quote
 
-      # worldia_add_customer_to_quote(@order.member, @quote_id)
-      # #Worldia : Add passengers to quote
-      # worldia_add_passengers_to_quote(@passengers, @quote_id, @nb_travelers)
-      # #Worldia : Create payment
-      # worldia_create_payment(@quote_id)
+      worldia_add_customer_to_quote(@order.member, @quote_id)
+      #Worldia : Add passengers to quote
+      worldia_add_passengers_to_quote(@passengers, @quote_id, @nb_travelers)
+      #Worldia : Create payment
+      worldia_create_payment(@quote_id)
 
       redirect_to new_order_payment_path(@order, trip_id: @trip.id, status: "OK", options: @options, quote_id: @quote_id)
     end
