@@ -46,57 +46,7 @@
 
   <div class = "row">
 
-    <!--     <div class = "col-md-8 col-md-pull-4"> -->
-      <div class = "home-text text-desktop <%= 'title-with-destination' if @destination_name %>">
-        <h2 class="home-main-title <%= 'home-main-title-destination' if @destination_name %>"><strong><%= @main_title  %></strong></h2>
-      </div>
-
-      <% if !@destination_name.nil? %>
-        <div class = "row text-desktop">
-          <%= render 'region_description', :destination => @destination %>
-        </div>
-      <% end %>
-
-      <div class = "row text-desktop <%= 'hidden' if @destination_name %>">
-
-        <div class = "col-xs-10 col-xs-offset-1">
-          <div class = "how-icons" id="how">
-            <%= render 'shared/how_it_works' %>
-          </div>
-        </div>
-      </div>
-
-      <% if !@destination_name.nil? %>
-        <div class = 'row'>
-          <div class = 'col-xs-12 text-center'>
-            <h2 class = 'margin-bottom-fifty'>Other destinations recommended by Planisfer community members</h2>
-          </div>
-
-        </div>
-      <% end %>
-
-      <div class = "row">
-        <div class="col-md-12">
-          <%= render 'shared/destinations' %>
-        </div> <!-- fin du 2e col-xs-12 principal -->
-      </div>
-
-      <div class = "row text-mobile <%= 'hidden' if @destination_name %>">
-
-        <div class = "col-xs-10 col-xs-offset-1">
-          <div class = "how-icons" id="how">
-            <h4 class = "row text-center">
-              How it works
-            </h4>
-            <%= render 'shared/how_it_works' %>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-<!--     <div class = "col-md-4 col-md-push-8"> -->
-    <div class = "col-md-4">
+    <div class = "col-md-4 col-md-push-8">
 
       <div class = "home-text text-mobile <%= 'title-with-destination' if @destination_name %>">
         <h2 class="home-main-title <%= 'home-main-title-destination' if @destination_name %>"><strong><%= @main_title %></strong></h2>
@@ -227,6 +177,55 @@
           <%= render 'region_description', :destination => @destination %>
         </div>
       <% end %>
+
+    </div>
+
+    <div class = "col-md-8 col-md-pull-4">
+      <div class = "home-text text-desktop <%= 'title-with-destination' if @destination_name %>">
+        <h2 class="home-main-title <%= 'home-main-title-destination' if @destination_name %>"><strong><%= @main_title  %></strong></h2>
+      </div>
+
+      <% if !@destination_name.nil? %>
+        <div class = "row text-desktop">
+          <%= render 'region_description', :destination => @destination %>
+        </div>
+      <% end %>
+
+      <div class = "row text-desktop <%= 'hidden' if @destination_name %>">
+
+        <div class = "col-xs-10 col-xs-offset-1">
+          <div class = "how-icons" id="how">
+            <%= render 'shared/how_it_works' %>
+          </div>
+        </div>
+      </div>
+
+      <% if !@destination_name.nil? %>
+        <div class = 'row'>
+          <div class = 'col-xs-12 text-center'>
+            <h2 class = 'margin-bottom-fifty'>Other destinations recommended by Planisfer community members</h2>
+          </div>
+
+        </div>
+      <% end %>
+
+      <div class = "row">
+        <div class="col-md-12">
+          <%= render 'shared/destinations' %>
+        </div> <!-- fin du 2e col-xs-12 principal -->
+      </div>
+
+      <div class = "row text-mobile <%= 'hidden' if @destination_name %>">
+
+        <div class = "col-xs-10 col-xs-offset-1">
+          <div class = "how-icons" id="how">
+            <h4 class = "row text-center">
+              How it works
+            </h4>
+            <%= render 'shared/how_it_works' %>
+          </div>
+        </div>
+      </div>
 
     </div>
 
