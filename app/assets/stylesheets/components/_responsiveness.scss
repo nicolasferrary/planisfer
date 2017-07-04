@@ -117,6 +117,7 @@
 
     .recommendation-box{
       padding:5px;
+      margin-bottom: 0px;
     }
     .price-and-book{
       bottom:0px;
@@ -236,10 +237,13 @@
     }
     .reviewing-container{
       margin-top:10px;
+      margin-bottom: 20px;
     }
     #what-you-think-title{
       margin-bottom:0px;
-      margin-top:20px;
+      margin-top:40px;
+      margin-left:auto;
+      margin-right: auto;
     }
     #reco-main-title{
       margin-top:0px;
@@ -281,6 +285,11 @@
 
     .user-icon-bookstatus{
       top:5px;
+    }
+    .no-car-btn{
+      margin-top:15px;
+      margin-bottom:15px;
+      position:relative;
     }
 
 }

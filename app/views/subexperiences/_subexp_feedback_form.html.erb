@@ -17,7 +17,7 @@
 
           <div class = 'row reviewing-container'>
 
-            <div class = 'col-xs-6 rating-area'>
+            <div class = 'col-xs-12 col-md-6 rating-area'>
               <% (1..5).each do |number| %>
                 <div class = "radio-button-padding">
                   <label class="btn star-btn <%= 'rating-selected' if @rating_status[poi_id.to_s][number.to_s] %>" id = "<%= poi_id %>-<%= number %>" data-number = "<%= number %>" data-poi = "<%= poi_id %>">
@@ -30,13 +30,13 @@
               <% end %>
             </div>
 
-            <div class = 'col-xs-6'>
+            <div class = 'col-xs-12 col-md-6'>
               <%= text_area_tag :review, @reviews[poi_id.to_s], placeholder: "Why this rating?", class: "form-control review-field-form", id: "review-#{ poi_id}" %>
             </div>
 
           </div>
 
-          <div class = 'row'>
+          <div class = 'row text-desktop'>
             <div class = 'col-xs-12 flexbox-for-mobile'>
               <div class = 'selection-title'>
                 <i class="fa fa-caret-right text-desktop" aria-hidden="true"></i>
@@ -49,11 +49,12 @@
 
           <div class = 'row reviewing-container'>
             <div class = 'col-xs-12 col-md-4'>
-              <%= text_area_tag :activity_name, @activities[poi_id.to_s], placeholder: "Name", class: "form-control review-field-form activity-name-form "%>
+              <%= text_area_tag :activity_name, @activities[poi_id.to_s], placeholder: "1 place you particularly loved (hotel, restaurant, activity)?", class: "form-control review-field-form text-mobile"%>
+              <%= text_area_tag :activity_name, @activities[poi_id.to_s], placeholder: "Name", class: "form-control review-field-form text-desktop"%>
             </div>
 
             <div class = 'col-xs-12 col-md-8'>
-              <%= text_area_tag :activity_review, @activity_reviews[poi_id.to_s], placeholder: "Why was it so great?", class: "form-control review-field-form"%>
+              <%= text_area_tag :activity_review, @activity_reviews[poi_id.to_s], placeholder: "Why was this place so great?", class: "form-control review-field-form"%>
             </div>
           </div>
 

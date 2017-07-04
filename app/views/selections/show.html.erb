@@ -19,7 +19,7 @@
 
 <div class="container-fluid page-result">
 
-  <div class="col-xs-12 <%= 'text-mobile' if !@trip.car_rental.nil?%> <%= 'hidden' if @trip.car_rental.nil? %>">
+  <div class="col-xs-12 targetslide <%= 'text-mobile' if !@trip.car_rental.nil?%> <%= 'hidden' if @trip.car_rental.nil? %>">
     <div class = "recap-zone <%= 'recap-opacity' if @recap_opacity == 1 %>">
       <%= render "shared/recap", :payment_page => false%>
     </div>
@@ -73,7 +73,8 @@
                     </div>
                   </div>
                 </div>
-                </div>
+
+              </div>
 
               <div class = "row recommendation-box selected text-desktop">
                 <div class = "col-md-6 no-relative-position">
@@ -97,6 +98,12 @@
               </div>
             <% end %>
           </div>
+        </div>
+      </div>
+
+      <div class = "row text-mobile">
+        <div class = 'col-xs-12 text-center'>
+          <button class = 'btn-brand opacity small-btn no-car-btn mobile-no-car-btn' id = "no-car-button">I don't need a car</button>
         </div>
       </div>
 
@@ -164,68 +171,68 @@
     });
   </script>
 
-<script>
-  $(function () {
-    $('#datetimepicker').datetimepicker({
-        format: 'MMM DD [-] hh a',
-        sideBySide: true
+  <script>
+    $(function () {
+      $('#datetimepicker').datetimepicker({
+          format: 'MMM DD [-] hh a',
+          sideBySide: true
+      });
+      $('#datetimepicker2').datetimepicker({
+          format: 'MMM DD [-] hh a',
+          sideBySide: true
+      });
     });
-    $('#datetimepicker2').datetimepicker({
-        format: 'MMM DD [-] hh a',
-        sideBySide: true
-    });
-  });
-  function showhide(id) {
-    var e = document.getElementById(id);
-    if ($('#' + e.id).hasClass('not-displayed')) {
-      $('#' + e.id).slideDown('slow');
-      $('#' + e.id).removeClass('not-displayed')
-      // $("#see-filters").addClass("hidden");
-      // $("#hide-filters").removeClass("hidden");
-    } else {
-      $('#' + e.id).slideUp('slow');
-      $('#' + e.id).addClass('not-displayed')
-      // $("#see-filters").removeClass("hidden");
-      // $("#hide-filters").addClass("hidden");
+    function showhide(id) {
+      var e = document.getElementById(id);
+      if ($('#' + e.id).hasClass('not-displayed')) {
+        $('#' + e.id).slideDown('slow');
+        $('#' + e.id).removeClass('not-displayed')
+        // $("#see-filters").addClass("hidden");
+        // $("#hide-filters").removeClass("hidden");
+      } else {
+        $('#' + e.id).slideUp('slow');
+        $('#' + e.id).addClass('not-displayed')
+        // $("#see-filters").removeClass("hidden");
+        // $("#hide-filters").addClass("hidden");
+      };
     };
-  };
-</script>
+  </script>
 
-<script>
-  $(document).ready(function() {
-    $('.popover-link').popover({ html : true, placement: "top"});
-    $('.popover-link').mouseenter(function(){
-      $('popover').popover('hide');
-      var _this = this;
-      $(this).popover('show');
-      $('.car-result-card').mouseenter('click', function(e) {
-        e.preventDefault();
-        $('.popover-card-container').removeClass('selected');
-        $(this).children('.popover-card-container').addClass('selected');
-        console.log('test');
+  <script>
+    $(document).ready(function() {
+      $('.popover-link').popover({ html : true, placement: "top"});
+      $('.popover-link').mouseenter(function(){
+        $('popover').popover('hide');
+        var _this = this;
+        $(this).popover('show');
+        $('.car-result-card').mouseenter('click', function(e) {
+          e.preventDefault();
+          $('.popover-card-container').removeClass('selected');
+          $(this).children('.popover-card-container').addClass('selected');
+          console.log('test');
+        });
+        $('.car-result-card').on('click', function(e) {
+          e.preventDefault();
+          $('.popover-card-container').addClass('hidden');
+          $(this).children('.popover-card-container').removeClass('hidden');
+          $(this).children('.popover-card-container').addClass('highcontainer');
+          $(this).children('.popover-card-container').children('.popover-card-link').removeClass('hidden');
+        });
+        $(".popover").on("mouseleave", function () {
+          $(_this).popover('hide');
+        });
       });
-      $('.car-result-card').on('click', function(e) {
-        e.preventDefault();
-        $('.popover-card-container').addClass('hidden');
-        $(this).children('.popover-card-container').removeClass('hidden');
-        $(this).children('.popover-card-container').addClass('highcontainer');
-        $(this).children('.popover-card-container').children('.popover-card-link').removeClass('hidden');
-      });
-      $(".popover").on("mouseleave", function () {
-        $(_this).popover('hide');
+      $('.popover-link').mouseleave(function(){
+        var _this = this;
+        setTimeout(function () {
+          if (!$(".popover:hover").length) {
+              $(_this).popover("hide");
+          }
+        }, 50);
       });
     });
-    $('.popover-link').mouseleave(function(){
-      var _this = this;
-      setTimeout(function () {
-        if (!$(".popover:hover").length) {
-            $(_this).popover("hide");
-        }
-      }, 50);
-    });
-  });
 
-</script>
+  </script>
 
   <script>
 
@@ -259,5 +266,22 @@
     });
 
   </script>
+
+  <script>
+
+  $(document).ready(function() {
+    $('.mobile-no-car-btn').click(function(event) {
+      // Preventing default action of the event
+      event.preventDefault();
+      // Getting the height of the document
+      var n = $(document).height();
+      $('html, body').animate({ scrollTop: n }, 'slow');
+    });
+  })
+
+
+</script>
+
+
 
 <% end %>

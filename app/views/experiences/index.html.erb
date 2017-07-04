@@ -94,7 +94,7 @@
                   <div class = 'experience-slider text-center'>
                     <span></span>
                     <span>
-                      <%= text_field_tag :length, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "#{@experience.length}" || "1", "slider-min" => 1, "slider-max" => 30} %>
+                      <%= text_field_tag :length, nil, class: "bootstrap_slider", data: { provide: :slider, "slider-value" => "#{@experience.length}" || "1", "slider-min" => 1, "slider-max" => 30}, id: "length" %>
                     </span>
                     <span></span>
                   </div>
@@ -187,6 +187,15 @@
         $('.experience-cards').addClass('dezoom');
       }
     })
+  </script>
+
+  <script>
+  $(document).ready(function() {
+    $("#length").slider({
+      console.log('tool');
+      tooltip: 'always';
+    });
+  });
   </script>
 
 <% end %>
