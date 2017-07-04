@@ -24,14 +24,12 @@
 .slider-img-container{
   margin-bottom: 25px;
   display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   justify-content: space-around;
   h5{
-    position: absolute;
     color: white;
     font-size: 30px;
-    text-align: center;
+    text-decoration:none;
   }
 }
 
