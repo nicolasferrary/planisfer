@@ -52,125 +52,124 @@
         <h2 class="home-main-title <%= 'home-main-title-destination' if @destination_name %>"><strong><%= @main_title %></strong></h2>
       </div>
 
-      <%=form_tag searches_path, :controller => 'searches', method: :post, id: "new_result" do %>
-        <div class="sticky-form home-sticky-form">
-          <div class="form-post">
-            <h1>Start building your trip</h1>
-            <% if flash[:search_error] %>
-              <p class="red-message"><%= flash[:search_error] %></p>
-            <% end %>
+      <div class="sticky-form home-sticky-form">
+        <div class="form-post">
+          <h1>Start building your trip</h1>
+          <% if flash[:search_error] %>
+            <p class="red-message"><%= flash[:search_error] %></p>
+          <% end %>
 
-
-              <div class="row">
-                <div class="col-xs-12">
-                <%= select_tag :city, options_from_collection_for_select(Airport.where(category: "city"),:iata, :content), class: "js-airports-list input-lg form-control", :prompt => "From" %>
-                </div>
+          <%=form_tag searches_path, :controller => 'searches', method: :post, id: "new_result" do %>
+            <div class="row">
+              <div class="col-xs-12">
+              <%= select_tag :city, options_from_collection_for_select(Airport.where(category: "city"),:iata, :content), class: "js-airports-list input-lg form-control", :prompt => "From" %>
               </div>
+            </div>
 
-              <div class="row">
-                <div class="col-xs-12">
-                  <%= select_tag  :region, options_from_collection_for_select(Region.all.order('name ASC'), :name, :name, @destination_name), id: 'regions', class: "input-lg form-control", prompt: "To" %>
-                </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <%= select_tag  :region, options_from_collection_for_select(Region.all.order('name ASC'), :name, :name, @destination_name), id: 'regions', class: "input-lg form-control", prompt: "To" %>
               </div>
+            </div>
 
-              <div class="row">
-                <div class="col-xs-6">
-                  <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'input-lg form-control datepicker text-center'%>
-                </div>
-                <div class="col-xs-6">
-                  <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => ' input-lg form-control datepicker text-center' %>
-                </div>
+            <div class="row">
+              <div class="col-xs-6">
+                <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'input-lg form-control datepicker text-center'%>
               </div>
+              <div class="col-xs-6">
+                <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => ' input-lg form-control datepicker text-center' %>
+              </div>
+            </div>
 
-              <div class="row">
-                <div class="col-xs-12 padding-travelers-box">
-                  <div class = "row">
-                    <h3 class = "text-center no-children">Number of travelers</h3>
-                    <h3 class = "text-center hidden with-children">Adults</h3>
-                  </div>
+            <div class="row">
+              <div class="col-xs-12 padding-travelers-box">
+                <div class = "row">
+                  <h3 class = "text-center no-children">Number of travelers</h3>
+                  <h3 class = "text-center hidden with-children">Adults</h3>
+                </div>
 
-                  <div class = "row">
-                    <div class="group" data-toggle="buttons">
-                      <div class="travelers-btn-container">
-                        <% Constants::TRAVELERS.each do |number, text| %>
-                          <div class = "col-xs-2 radio-button-padding">
-                            <label class="btn btn-circle radio-b">
-                              <input type="radio" class = 'radio-butt' name="nb_adults" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
-                            </label>
-                          </div>
-                        <% end %>
-                      </div> <!-- fin travelers-btn-container -->
-                    </div> <!-- fin de group -->
-                  </div>
+                <div class = "row">
+                  <div class="group" data-toggle="buttons">
+                    <div class="travelers-btn-container">
+                      <% Constants::TRAVELERS.each do |number, text| %>
+                        <div class = "col-xs-2 radio-button-padding">
+                          <label class="btn btn-circle radio-b">
+                            <input type="radio" class = 'radio-butt' name="nb_adults" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
+                          </label>
+                        </div>
+                      <% end %>
+                    </div> <!-- fin travelers-btn-container -->
+                  </div> <!-- fin de group -->
+                </div>
 
-                  <div class = "raw with-children hidden" id = "children-form">
+                <div class = "raw with-children hidden" id = "children-form">
 
-                    <div class = "col-md-6 children-padding">
+                  <div class = "col-md-6 children-padding">
 
-                      <div class = "row">
-                        <h3 class = "text-center">Children <span style= "font-weight: lighter"> (2-11) </span> </h3>
-                      </div>
-
-                      <div class = "row">
-                        <div class="group" data-toggle="buttons">
-                          <div class="travelers-btn-container">
-                            <% Constants::TRAVELERS.each do |number, text| %>
-                              <div class = "col-xs-4 radio-button-padding">
-                                <label class="btn btn-circle-small radio-b">
-                                  <input type="radio" name="nb_children" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
-                                </label>
-                              </div>
-                            <% end %>
-                          </div> <!-- fin travelers-btn-container -->
-                        </div> <!-- fin de group -->
-                      </div>
-
+                    <div class = "row">
+                      <h3 class = "text-center">Children <span style= "font-weight: lighter"> (2-11) </span> </h3>
                     </div>
 
-                    <div class = "col-md-6 infant-padding">
-
-                      <div class = "row">
-                        <h3 class = "text-center">Infants <span style= "font-weight: lighter"> (<%= "<2" %>) </span> </h3>
-                      </div>
-
-                      <div class = "row">
-                        <div class="group" data-toggle="buttons">
-                          <div class="travelers-btn-container">
-                            <% Constants::TRAVELERS.each do |number, text| %>
-                              <div class = "col-xs-4 radio-button-padding">
-                                <label class="btn btn-circle-small radio-b">
-                                  <input type="radio" name="nb_infants" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
-                                </label>
-                              </div>
-                            <% end %>
-                          </div> <!-- fin travelers-btn-container -->
-                        </div> <!-- fin de group -->
-                      </div>
-
+                    <div class = "row">
+                      <div class="group" data-toggle="buttons">
+                        <div class="travelers-btn-container">
+                          <% Constants::TRAVELERS.each do |number, text| %>
+                            <div class = "col-xs-4 radio-button-padding">
+                              <label class="btn btn-circle-small radio-b">
+                                <input type="radio" name="nb_children" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
+                              </label>
+                            </div>
+                          <% end %>
+                        </div> <!-- fin travelers-btn-container -->
+                      </div> <!-- fin de group -->
                     </div>
 
                   </div>
 
-                  <div class = "row">
-                    <%= link_to "javascript:showhide('children-form')" do%>
-                      <h4 id = "children-link">Children under 12?</h4>
-                    <% end %>
+                  <div class = "col-md-6 infant-padding">
+
+                    <div class = "row">
+                      <h3 class = "text-center">Infants <span style= "font-weight: lighter"> (<%= "<2" %>) </span> </h3>
+                    </div>
+
+                    <div class = "row">
+                      <div class="group" data-toggle="buttons">
+                        <div class="travelers-btn-container">
+                          <% Constants::TRAVELERS.each do |number, text| %>
+                            <div class = "col-xs-4 radio-button-padding">
+                              <label class="btn btn-circle-small radio-b">
+                                <input type="radio" name="nb_infants" id="option<%= number %>" value="<%= number %>" autocomplete="off"> <%= text %>
+                              </label>
+                            </div>
+                          <% end %>
+                        </div> <!-- fin travelers-btn-container -->
+                      </div> <!-- fin de group -->
+                    </div>
+
                   </div>
 
                 </div>
 
+                <div class = "row">
+                  <%= link_to "javascript:showhide('children-form')" do%>
+                    <h4 id = "children-link">Children under 12?</h4>
+                  <% end %>
+                </div>
+
               </div>
 
-              <div class = "row">
-                <div class="col-xs-12">
-                  <%= submit_tag "SEARCH", href: "", class: "btn-brand btn-big", id: "search-button", 'data-toggle' => "modal", 'data-target' => '#wait_modal' %>
-                </div> <!-- fin du col -->
+            </div>
 
-              </div>
+            <div class = "row">
+              <div class="col-xs-12">
+                <%= submit_tag "SEARCH", href: "", class: "btn-brand btn-big", id: "search-button", 'data-toggle' => "modal", 'data-target' => '#wait_modal' %>
+              </div> <!-- fin du col -->
 
-          </div> <!-- fin du form-post -->
-        </div> <!-- fin de sticky-form -->
-      <%end%>
+            </div>
+          <%end%>
+        </div> <!-- fin du form-post -->
+      </div> <!-- fin de sticky-form -->
+
 
       <% if !@destination_name.nil? %>
         <div class = "row text-mobile">
