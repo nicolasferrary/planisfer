@@ -4,7 +4,7 @@
     <% Region.all.each_with_index do |region, index| %>
       <div class = "col-md-6">
         <a data-toggle="modal" data-target="#modal_<%= index +1 %>">
-          <div class = "center-block slider-img-container">
+          <div class = "slider-img-container">
             <h5> <%= region.name %> </h5>
             <div style='background-image: linear-gradient(rgba(0,101,168,0.1), rgba(0,36,61,0.1)), url(<%= image_path("countryphoto/#{region.name.downcase.gsub(/\ /, '')}.jpg") %>)'; class = "img-slider reduced-photo-height">
             </div>
