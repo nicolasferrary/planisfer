@@ -1,4 +1,4 @@
-<div class="modal fade" id="wait_modal" tabindex="-1" role="dialog" aria-labelledby="wait_modal">
+<div class="modal" id="wait_modal" tabindex="-1" role="dialog" aria-labelledby="wait_modal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -24,8 +24,11 @@
               <span class = "light" id = "text2">Filtering direct flights only</span>
             </div>
             <div class = "col-md-2">
-              <div id = "wait2"><%= render 'shared/modal_checkbox' %></div>
-              <div class = "modal-checkbox hidden", id = "checked2"><i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i></div>
+              <div id = "wait2"><%= render 'shared/modal_checkbox' %>
+              </div>
+              <div class = "modal-checkbox hidden" id = "checked2">
+                <i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i>
+              </div>
             </div>
           </div>
         </div>
@@ -46,8 +49,12 @@
             </div>
 
             <div class = "col-md-2">
-              <div id = "wait3"><%= render 'shared/modal_checkbox' %></div>
-              <div class = "modal-checkbox sub-checkbox hidden", id = "checked3"><i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i></div>
+              <div id = "wait3">
+                <%= render 'shared/modal_checkbox' %>
+              </div>
+              <div class = "modal-checkbox sub-checkbox hidden" id = "checked3">
+                <i class="fa fa-check-square-o fa-2x" aria-hidden="true"></i>
+              </div>
             </div>
 
           </div>
