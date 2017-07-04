@@ -24,12 +24,13 @@
 
       <div class="row">
         <div class="col-xs-6">
-          <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'input-lg form-control datepicker text-center'%>
+          <%= text_field_tag :starts_on, nil, placeholder: "Departure", "class" => 'input-lg form-control datepicker text-center', "id" => "starts_on"%>
         </div>
         <div class="col-xs-6">
-          <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => ' input-lg form-control datepicker text-center' %>
+          <%= text_field_tag :returns_on, nil, placeholder: "Return", "class" => ' input-lg form-control datepicker text-center', "id" => "returns_on" %>
         </div>
       </div>
+
 
       <div class="row">
         <div class="col-xs-12 padding-travelers-box">
@@ -111,8 +112,10 @@
       </div>
 
       <div class = "row">
-        <div class="col-xs-12">
-          <%= submit_tag "SEARCH", class: "btn-brand btn-big", id: "search-button", 'data-toggle' => "modal", 'data-target' => '#wait_modal' %>
+        <div class="col-xs-12 text-center">
+          <div type = 'button' class= "btn-brand btn-big" id= "search-button"  >SEARCH
+          </div>
+
         </div> <!-- fin du col -->
       </div>
     <%end%>
