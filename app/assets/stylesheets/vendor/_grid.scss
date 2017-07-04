@@ -253,14 +253,17 @@
 }
 
 .dezoom{
-  zoom:80%
+  zoom:80%;
+  -moz-transform: scale(0.8);
 }
 
 .low-dezoom{
-  zoom:68%
+  zoom:68%;
+  -moz-transform: scale(0.68);
 }
 .very-low-dezoom{
-  zoom:50%
+  zoom:50%;
+  -moz-transform: scale(0.5);
 }
 
 .destination-opacity{
