@@ -12,7 +12,7 @@
               <%= image_tag "#{region.name.downcase.gsub(/\ /, '-')}/#{poi.downcase.gsub(/\ /, '-')}.jpg", class:"dest-image"%>
               <span class="box poi-card" data-poi = "<%= Poi.find_by_name(poi.strip).id %>"  data-region = "<%= region.id %>">
                 <span class="text in-box">
-                  <span class="primarytext"> <%= poi %></span>
+                  <span class="primarytext favtext"> <%= poi %></span>
                 </span>
               </span>
             </span>

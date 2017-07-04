@@ -41,8 +41,8 @@
                     <% for num in (0..this_region.pois.count - 1) %>
                       <div class = "col-md-6">
                         <div class = "center-block slider-img-container">
-                          <h5> <%= this_region.pois[num] %> </h5>
                           <div style='background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), url(<%= image_path("#{this_region.name.downcase.gsub(/\ /, '-')}/#{this_region.pois[num].downcase.gsub(/\ /, '-')}.jpg") %>)'; class = "img-slider">
+                            <h5> <%= this_region.pois[num] %> </h5>
                           </div>
                         </div>
                       </div>
