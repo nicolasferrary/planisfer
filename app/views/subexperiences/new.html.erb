@@ -182,27 +182,27 @@
 
   <script>
     $(document).ready(function() {
-      $('.star-btn').mouseenter(function(e) {
-        e.preventDefault();
-        var selectedindex = $(this).data('number');
-        var lowerarr = [];
-          for(var i=1; i<=selectedindex; i++) {
-             lowerarr.push(i);
-          }
-        var poiId = $(this).data('poi');
-        lowerarr.forEach(function(ind){
-          $('#' + poiId + '-' + ind).children('.full-star').removeClass('hidden');
-          $('#' + poiId + '-' + ind).children('.empty-star').addClass('hidden');
-        })
-        var higherarr = [];
-          for(var i=selectedindex+1; i<=5; i++) {
-             higherarr.push(i);
-          }
-        higherarr.forEach(function(ind){
-          $('#' + poiId + '-' + ind).children('.full-star').addClass('hidden');
-          $('#' + poiId + '-' + ind).children('.empty-star').removeClass('hidden');
-        })
-      })
+      // $('.star-btn').mouseenter(function(e) {
+      //   e.preventDefault();
+      //   var selectedindex = $(this).data('number');
+      //   var lowerarr = [];
+      //     for(var i=1; i<=selectedindex; i++) {
+      //        lowerarr.push(i);
+      //     }
+      //   var poiId = $(this).data('poi');
+      //   lowerarr.forEach(function(ind){
+      //     $('#' + poiId + '-' + ind).children('.full-star').removeClass('hidden');
+      //     $('#' + poiId + '-' + ind).children('.empty-star').addClass('hidden');
+      //   })
+      //   var higherarr = [];
+      //   for(var i=selectedindex+1; i<=5; i++) {
+      //      higherarr.push(i);
+      //   }
+      //   higherarr.forEach(function(ind){
+      //     $('#' + poiId + '-' + ind).children('.full-star').addClass('hidden');
+      //     $('#' + poiId + '-' + ind).children('.empty-star').removeClass('hidden');
+      //   })
+      // })
 
       $('.rating-area').mouseleave(function(e) {
         e.preventDefault();
