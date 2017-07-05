@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   def create
     @trip = Trip.find(params[:trip_id])
     @options = params[:options]
-    @order  = Order.create!(trip_sku: @trip.sku, amount: @trip.price, state: 'pending')
+    @order  = Order.create!(trip_sku: @trip.sku, amount: @trip.price, member: current_member, state: 'pending')
     @options = {
       :trip_id => @trip.id,
       :pick_up_location => params[:pick_up_location],
