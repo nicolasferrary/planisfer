@@ -222,7 +222,6 @@
 
       $('.star-btn').css('cursor','pointer');
       $(document).on('click', '.star-btn',  function(event) {
-        event.preventDefault()
         if ($(this).hasClass('rating-selected')){
           $(this).parent().parent().find('.full-star').addClass('hidden');
           $(this).parent().parent().find('.empty-star').removeClass('hidden');
